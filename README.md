@@ -203,8 +203,12 @@ proteins (i.e. in `protein.faa` and `genomic.gff`) compare against protein
 found by Needle.
 
 ```
-PYTHONPATH=. python3 scripts/compare-gff-with-match.py K00024 GCF_002042975.1 data/m00009_results/matches.tsv
+PYTHONPATH=. python3 scripts/compare-gff-with-match.py K00024 GCF_002042975.1 data/m00009_results/matches.tsv --output-file <filename>
 ```
+
+The script above outputs a TSV file that can be joined with outputs of the
+clustering step, on the "Member Accession" column, to assess potential
+classifications of clusters.
 
 
 ### Web Summaries of Modules and Orthologs
