@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# arguments, in order:
+#   - module ID (i.e. mNNN)
+#   - genome accession
+
+mkdir -p data/$1_results/blast
+
+if [ -f "data/$1_results/blast/$1_$2_blast_results.tsv" ]; then
+  echo "Found existing blast results for $2"
+else
+  python3 scripts/blast-genome.py data/$1_query.faa $2 data/$1_results/blast/$1_$2_blast_results.tsv --min-word-size 2
+fi
+
+echo "Collating search results for $2"
+PYTHONPATH=. python3 scripts/export-protein-results.py data/$1_query.faa data/$1_results/blast/$1_$2_blast_results.tsv $2 data/$1_results

@@ -1,0 +1,7 @@
+#!/bin/bash
+# takes protein .fasta file and output file name as inputs
+
+docker run --rm \
+  -v $PWD:/work \
+  ghcr.io/soedinglab/mmseqs2 \
+  easy-cluster /work/$1 /work/$2 /tmp

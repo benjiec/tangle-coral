@@ -1,0 +1,5 @@
+.venv
+swissprot-downloads
+__pycache__
+.*.swp
+tmp
