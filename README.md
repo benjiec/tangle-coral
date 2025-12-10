@@ -1,11 +1,13 @@
 # Needle
 
-Tools to search and curate protein sequences in a genome, brute force, starting
-with protein sequences and raw genomic DNA data. Designed to work with novel
-genomes with cryptic gene structures, unconventional intron models, etc. For
-example, for some coral and many symbiodinium species, training gene prediction
-models suffers from insufficient gold-set data, and conducting RNAseq
-experiments is diffuclt.
+Needle is a suite of tools to curate and compare sequences of proteins by
+pathway, for understudied organisms. Cryptic gene structures, unconventional
+splicing models, unfinished genomes, understudied proteomes, are some of the
+challenges that make applying traditional workflows (e.g. gene prediction and
+classification) difficult and/or unreliable. Needle focuses on working around
+these challenges to detect presence of proteins for key pathways, and curates
+information in a phylogentic aware manner to enable comparative analysis within
+and across species.
 
 
 ## Setup
@@ -100,6 +102,7 @@ Put all the HMM profiles under `kegg-downloads/profiles`. E.g.
 `kegg-downloads/profiles/K00030.hmm` should exist. A couple of the scripts
 below depends on this directory.
 
+
 ### Prepare List of Genomes
 
 There is a list of Coral genomes in `data/genomes_coral.txt`, and a list of
@@ -116,16 +119,13 @@ PYTHONPATH=. python3 scripts/fetch-genomes.py data/genomes_coral.txt
 
 The general workflow looks like the following
 
-  * Select a module to use
-  * Generate "Blast Results" TSV (see header definitions in `needle/blast.py`) against interested genome accessions
-  * Collate the blast results to "Ortholog Hits" database, consists of
-    * A TSV of protein hit ID, ortholog ID, target genome accession, full protein hit stats
-    * An accompanying TSV of protein hits broken down by fragments (likely exons)
-      * Each row lists protein hit ID, fragment coordinate, contig coordinates and strand
-    * FASTA files of detected protein sequences, split by Ortholog ID
-  * Align detected protein sequences to create an MSA for each ortholog
-    * Optionally add in protein sequences from SwissProt
-  * Generate HTML+JS assets for visualizing the final data
+  * Select a module to use; e.g. a module can be a pathway
+  * Detect Proteins: tblastn+HMM based refinement
+  * Cluster Proteins: MMSeqs2
+  * Generate MSAs: Muscle and HMMalign
+  * Finish Protein Sequences
+  * Classify Proteins
+  * Curate Phylogentic-aware Ortholog Profiles
 
 
 Always activate the virtualenv first
@@ -156,16 +156,26 @@ Or if you have a list of genome accessions in a file, e.g. `genomes.txt`, then d
 ./scripts/search-genomes m00009 genomes.txt
 ```
 
+### Cluster Proteins
+
+Run the following script to cluster all the results from `search-genomes`
+
+```
+./scripts/cluster-ko m00009
+```
+
 ### Generating MSAs
 
-To generate MSAs and their visuals, run the following command for each module.
-This command runs the four commands below this, for each KO number.
+To generate MSAs and PNGs that visualize the MSAs, run the following script
+for each module. This script runs the four sub-scripts below this, for each KO
+number. If `cluster-ko` already ran, then the following script will also run
+the two Muscle scripts for each of the clusters.
 
 ```
 ./scripts/generate-msas m00009
 ```
 
-To generate MSAs, for a module and a KO, use the following commands. Each
+To generate MSAs, for a module and a KO, use the following scripts. Each
 script puts a MSA in FASTA format in `data/m00009_results/m00009-alignments`
 
 ```
@@ -178,13 +188,24 @@ replacing them with Zs, then run MUSCLE, then replace Zs from the output of
 MUSCLE back to *s.
 
 SVG files (which can be opened via Chrome and other browsers) visualizing the
-MSAs can generated with the following commands. In this example, the SVG files
-are in `data/m00009_results/m00009-msas`
+MSAs can generated with the following scripts.
 
 ```
 ./scripts/mk-msa-vis m00009 K00030 muscle
 ./scripts/mk-msa-vis m00009 K00030 hmmalign
 ```
+
+
+### Compare / Sanity check Annotated Proteins against Needle Hits
+
+Use the following script to compare, for a given HMM model, how NCBI annotated
+proteins (i.e. in `protein.faa` and `genomic.gff`) compare against protein
+found by Needle.
+
+```
+PYTHONPATH=. python3 scripts/compare-gff-with-match.py K00024 GCF_002042975.1 data/m00009_results/matches.tsv
+```
+
 
 ### Web Summaries of Modules and Orthologs
 
@@ -199,17 +220,6 @@ and visit `localhost:8080/pages/`.
 
 Or, commit any changes, merge into the "pages" branch, and push to github, and
 then visit `https://benjiec.github.io/needle/pages/`.
-
-
-### Compare / Sanity check Annotated Proteins against Needle Hits
-
-Use the following script to compare, for a given HMM model, how NCBI annotated
-proteins (i.e. in `protein.faa` and `genomic.gff`) compare against protein
-found by Needle.
-
-```
-PYTHONPATH=. python3 scripts/compare-gff-with-match.py K00024 GCF_002042975.1 data/m00009_results/matches.tsv
-```
 
 
 ### Search in SwissProt for related proteins
