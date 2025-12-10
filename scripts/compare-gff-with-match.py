@@ -183,7 +183,7 @@ def compare(hmm_model, hmm_name, genome_accession, gff_proteins, protein_seq_nam
             print_comparison(protein_name, status, hmm_rows, gff_hit, None)
             if output_f:
                 output_f.write(f"{hmm_model}\t{hmm_name}\t{genome_accession}\t{protein_name}\t{protein_acc}\t{status}\t"+\
-                               f"{hmm_len}\t{hmm_perc}\t{protein_len}\t{protein_perc}\t{hmm_eval}\t{name_score}\n")
+                               f"{hmm_len}\t{hmm_perc}\t{protein_len}\t{protein_perc}\t{hmm_eval}\t{name_score}\t\n")
 
         else:
             keyf = lambda row: row["protein_hit_id"]
@@ -221,7 +221,7 @@ def compare(hmm_model, hmm_name, genome_accession, gff_proteins, protein_seq_nam
                     print_comparison(protein_name, status, hmm_rows, gff_hit, needle_rows_for_hit)
                     if output_f:
                         output_f.write(f"{hmm_model}\t{hmm_name}\t{genome_accession}\t{protein_name}\t{protein_acc}\t{status}\t"+\
-                                       f"{hmm_len}\t{hmm_perc}\t{protein_len}\t{protein_perc}\t{hmm_eval}\t{name_score}\n")
+                                       f"{hmm_len}\t{hmm_perc}\t{protein_len}\t{protein_perc}\t{hmm_eval}\t{name_score}\t{needle_protein_hit_id}\n")
 
     if output_f:
         output_f.flush()
@@ -268,7 +268,7 @@ if __name__ == "__main__":
     if args.output_file:
         output_f = open(args.output_file, "w")
         output_f.write("hmm\thmm name\tgenome\tprotein name\tprotein accession\tstatus\t"+\
-                       "hmm len\thmmscan hmm match perc\tprotein len\thmmscan protein match perc\thmmscan evalue\tname score\n")
+                       "hmm len\thmmscan hmm match perc\tprotein len\thmmscan protein match perc\thmmscan evalue\tname score\tneedle protein id\n")
 
     if args.hmm_model.upper().startswith("M"):
         hmm_models = module_hmm_models(args.hmm_model.upper())
