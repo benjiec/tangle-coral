@@ -3,7 +3,7 @@ import argparse
 import subprocess
 from defaults import DefaultPath
 from needle.ortholog import load_modules
-from needle.hmm import parse_hmmsearch_domtbl
+from needle.hmm import hmmscan_file
 
 parser = argparse.ArgumentParser(
     description="Generate FASTA file for KEGG module"
@@ -35,12 +35,9 @@ print("Curating KO consensus sequences")
 module.create_consensus_aa_fasta(module_ko_faa_fn)
 
 print("Scanning against Pfam")
-cmd = ["hmmscan", "--cut_ga", "--domtblout", domtbl_path, DefaultPath.pfam_hmm(), module_ko_faa_fn]
-subprocess.run(cmd, check=True, capture_output=True)
-
-hmmscan_rows = parse_hmmsearch_domtbl(domtbl_path)
+hmmscan_rows = hmmscan_file(DefaultPath.pfam_hmm(), module_ko_faa_fn)
 pfam_accessions = [row["target_accession"] for row in hmmscan_rows]
-pfam_accessions = list(set(pfam_accessions))
+pfam_accessions = sorted(list(set(pfam_accessions)))
 
 with open(pfam_id_file, "w") as f:
     for acc in pfam_accessions:
@@ -85,5 +82,4 @@ with open(module_faa_fn, "w") as f:
 
 print("Cleanup")
 os.remove(module_ko_faa_fn)
-os.remove(domtbl_path)
 os.remove(pfam_id_file)

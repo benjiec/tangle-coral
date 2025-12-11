@@ -73,6 +73,14 @@ def hmmsearch(hmm_file_name, sequences):
         with open(fasta_path, "w") as f:
             for i, cand in enumerate(sequences):
                 f.write(f">cand_{i}\n{cand}\n")
-        cmd = ["hmmsearch", "--domtblout", domtbl_path, hmm_file_name, fasta_path]
+        cmd = ["hmmsearch", "--cut_ga", "--domtblout", domtbl_path, hmm_file_name, fasta_path]
+        run_command(cmd)
+        return parse_hmmsearch_domtbl(domtbl_path)
+
+
+def hmmscan_file(hmm_file_name, fasta_path):
+    with tempfile.TemporaryDirectory() as tmpdir:
+        domtbl_path = os.path.join(tmpdir, "out.domtbl")
+        cmd = ["hmmscan", "--cut_ga", "--domtblout", domtbl_path, hmm_file_name, fasta_path]
         run_command(cmd)
         return parse_hmmsearch_domtbl(domtbl_path)
