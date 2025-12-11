@@ -160,7 +160,7 @@ Or if you have a list of genome accessions in a file, e.g. `genomes.txt`, then d
 Run the following script to cluster all the results from `search-genomes`
 
 ```
-./scripts/cluster-ko m00009
+./scripts/cluster-dir m00009
 ```
 
 ### Generating MSAs
@@ -178,8 +178,8 @@ To generate MSAs, for a module and a KO, use the following scripts. Each
 script puts a MSA in FASTA format in `data/m00009_results/m00009-alignments`
 
 ```
-./scripts/muscle-ko m00009 K00030
-./scripts/hmmalign-ko m00009 K00030
+./scripts/muscle-ko m00009 <faa file prefix>
+./scripts/hmmalign-ko m00009 <faa file prefix>
 ```
 
 Note: *s (STOP codons) from BLAST search are preserved through MUSCLE by first
@@ -190,8 +190,8 @@ SVG files (which can be opened via Chrome and other browsers) visualizing the
 MSAs can generated with the following scripts.
 
 ```
-./scripts/mk-msa-vis m00009 K00030 muscle
-./scripts/mk-msa-vis m00009 K00030 hmmalign
+./scripts/mk-msa-vis m00009 <faa file prefix> muscle
+./scripts/mk-msa-vis m00009 <faa file prefix> hmmalign
 ```
 
 

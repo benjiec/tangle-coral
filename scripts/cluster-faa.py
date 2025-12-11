@@ -14,6 +14,7 @@ COL_REP_ACC = "Representative Accession"
 COL_MEM_ACC = "Member Accession"
 TSV_FIELDS = [COL_PARENT, COL_CLUSTER_ID, COL_REP_ACC, COL_MEM_ACC]
 
+
 def create_cluster_tsv(tsv_fn):
 
     if os.path.exists(tsv_fn):
@@ -27,7 +28,7 @@ def create_cluster_tsv(tsv_fn):
 def format_cluster_tsv_row(faa_file, rep_acc, mem_acc):
 
     faa_name = Path(faa_file).stem
-    cluster_id = faa_name+"_"+str(hashlib.sha1(rep_acc.encode()).hexdigest())[:8]
+    cluster_id = str(hashlib.sha1((faa_name+"_"+rep_acc).encode()).hexdigest())[:8]
 
     return {
         COL_PARENT: faa_name,
@@ -68,7 +69,7 @@ def append_to_cluster_tsv(faa_file, output_result_prefix, cluster_tsv_fn):
         for member in members:
             d = format_cluster_tsv_row(faa_file, rep, member)
             data.append(d)
-            cluster_ids.setdefault(d[COL_CLUSTER_ID], []).append(member)
+            cluster_ids.setdefault(d[COL_CLUSTER_ID], []).append(d)
 
     with open(cluster_tsv_fn, 'a', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=TSV_FIELDS, delimiter='\t')
@@ -83,11 +84,11 @@ def create_cluster_faa_files(faa_file, cluster_ids):
 
     for cluster_id, members in cluster_ids.items():
         p = Path(faa_file)
-        fn = str(p.parent)+'/'+cluster_id+".faa"
+        fn = str(p.parent)+'/'+p.stem+"."+cluster_id+".cluster.faa"
         with open(fn, "w") as f:
             for member in members:
-                member_seq = sequences[member]
-                f.write(">"+member+"\n"+member_seq+"\n")
+                member_seq = sequences[member[COL_MEM_ACC]]
+                f.write(">"+member[COL_MEM_ACC]+"\n"+member_seq+"\n")
 
 
 def cleanup_mmseqs_outputs(output_result_prefix):

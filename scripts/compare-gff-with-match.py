@@ -33,12 +33,9 @@ def protein_enzyme_equality_score(enzyme_name, protein_name):
     return score
 
 
-def module_hmm_models(module_id):
-    with open("data/module_ko.tsv", "r") as f:
-      for raw_line in f:
-         if raw_line and raw_line.strip().startswith(module_id):
-             return raw_line.strip().split("\t")[1].split(",")
-    return []
+def load_accessions(fasta_path):
+    d = read_fasta_as_dict(fasta_path)
+    return list(d.keys())
 
 
 def read_ko_names(path: str) -> Dict[str, str]:
@@ -107,9 +104,7 @@ def print_comparison(protein_name, status, hmm_rows, gff_hit, needle_rows):
             print("    gff match", m.target_start, m.target_end)
 
 
-def compare(hmm_model, hmm_name, genome_accession, gff_proteins, protein_seq_names, genomic_fasta, needle_rows, output_f):
-
-    hmm_file = DefaultPath.kegg_hmm(hmm_model)
+def compare(hmm_file, query_accession, genome_accession, gff_proteins, protein_seq_names, genomic_fasta, needle_rows, output_f):
 
     # Run hmmscan producing domtblout
     with tempfile.TemporaryDirectory() as tmpdir:
@@ -126,7 +121,7 @@ def compare(hmm_model, hmm_name, genome_accession, gff_proteins, protein_seq_nam
         hmmscan_rows = parse_hmmsearch_domtbl(domtbl_path)
         hmmscan_rows = [row for row in hmmscan_rows if row["evalue"] < 1e-3]
 
-    print(hmm_model, hmm_name)
+    print(hmm_file)
     print("received", len(hmmscan_rows), "matches from hmmscan")
     queries_from_hmmscan = list(set([m["query_name"] for m in hmmscan_rows]))
 
@@ -140,8 +135,8 @@ def compare(hmm_model, hmm_name, genome_accession, gff_proteins, protein_seq_nam
         for m in pm.matches:
             m.target_sequence = extract_subsequence_strand_sensitive(genomic_fasta[m.target_accession], m.target_start, m.target_end)
 
-    needle_rows = [row for row in needle_rows if row["protein_hit_id"].startswith(hmm_model) and row["target_accession"] in target_accessions]
-    print("needle results matching", hmm_model, "on same target accessions", len(needle_rows))
+    needle_rows = [row for row in needle_rows if row["protein_hit_id"].startswith(query_accession) and row["target_accession"] in target_accessions]
+    print("needle results matching", query_accession, "on same target accessions", len(needle_rows))
 
     def sorter(gff_hit):
         hmm_rows = [row for row in hmmscan_rows if row["query_name"] == gff_hit.query_accession]
@@ -182,7 +177,7 @@ def compare(hmm_model, hmm_name, genome_accession, gff_proteins, protein_seq_nam
             status = "NOT FOUND"
             print_comparison(protein_name, status, hmm_rows, gff_hit, None)
             if output_f:
-                output_f.write(f"{hmm_model}\t{hmm_name}\t{genome_accession}\t{protein_name}\t{protein_acc}\t{status}\t"+\
+                output_f.write(f"{query_accession}\t{genome_accession}\t{protein_name}\t{protein_acc}\t{status}\t"+\
                                f"{hmm_len}\t{hmm_perc}\t{protein_len}\t{protein_perc}\t{hmm_eval}\t{name_score}\t\n")
 
         else:
@@ -220,7 +215,7 @@ def compare(hmm_model, hmm_name, genome_accession, gff_proteins, protein_seq_nam
 
                     print_comparison(protein_name, status, hmm_rows, gff_hit, needle_rows_for_hit)
                     if output_f:
-                        output_f.write(f"{hmm_model}\t{hmm_name}\t{genome_accession}\t{protein_name}\t{protein_acc}\t{status}\t"+\
+                        output_f.write(f"{query_accession}\t{genome_accession}\t{protein_name}\t{protein_acc}\t{status}\t"+\
                                        f"{hmm_len}\t{hmm_perc}\t{protein_len}\t{protein_perc}\t{hmm_eval}\t{name_score}\t{needle_protein_hit_id}\n")
 
     if output_f:
@@ -230,13 +225,11 @@ def compare(hmm_model, hmm_name, genome_accession, gff_proteins, protein_seq_nam
 if __name__ == "__main__":
 
     ap = argparse.ArgumentParser(description="Join hmmscan domtblout with GFF-derived proteins.")
-    ap.add_argument("hmm_model", help="HMM database file or module M number")
+    ap.add_argument("query_fasta", help="Query fasta used for searching")
     ap.add_argument("genome_accession")
     ap.add_argument("needle_match_file")
     ap.add_argument("--output-file", default=None)
     args = ap.parse_args()
-
-    ko_names = read_ko_names("data/ko.tsv")
 
     genome_accession = args.genome_accession
     ncbi_download_dir = DefaultPath.ncbi_genome_dir(genome_accession)
@@ -267,17 +260,17 @@ if __name__ == "__main__":
     output_f = None
     if args.output_file:
         output_f = open(args.output_file, "w")
-        output_f.write("hmm\thmm name\tgenome\tprotein name\tprotein accession\tstatus\t"+\
+        output_f.write("query\tgenome\tprotein name\tprotein accession\tstatus\t"+\
                        "hmm len\thmmscan hmm match perc\tprotein len\thmmscan protein match perc\thmmscan evalue\tname score\tneedle protein id\n")
 
-    if args.hmm_model.upper().startswith("M"):
-        hmm_models = module_hmm_models(args.hmm_model.upper())
-        print("module", args.hmm_model, hmm_models)
-    else:
-        hmm_models = [args.hmm_model]
+    accessions = load_accessions(args.query_fasta)
+    print("accessions", accessions)
+    hmm_collection = HMMCollection(DefaultPath.pfam_hmm(), accessions)
 
-    for hmm_model in hmm_models:
-        compare(hmm_model, ko_names[hmm_model], genome_accession, gff_proteins, protein_seq_names, genomic_fasta, needle_rows, output_f)
+    for acc in accessions:
+        compare(hmm_collection.get(acc), acc, genome_accession, gff_proteins, protein_seq_names, genomic_fasta, needle_rows, output_f)
+
+    hmm_collection.clean()
 
     if output_f:
         output_f.close()

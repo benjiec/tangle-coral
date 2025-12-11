@@ -11,7 +11,7 @@ dir="data/${module_id}_results/faa"
 cluster_tsv="data/${module_id}_results/cluster.tsv"
 
 rm -f "$cluster_tsv"
-rm -f $dir/K*_*.faa
+rm -f $dir/*.cluster.faa
 
 if [[ ! -d "$dir" ]]; then
   echo "Directory not found: $dir" >&2
