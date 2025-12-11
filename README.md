@@ -202,27 +202,12 @@ proteins (i.e. in `protein.faa` and `genomic.gff`) compare against protein
 found by Needle.
 
 ```
-PYTHONPATH=. python3 scripts/compare-gff-with-match.py K00024 GCF_002042975.1 data/m00009_results/matches.tsv --output-file <filename>
+PYTHONPATH=. python3 scripts/compare-gff-with-match.py data/m00009_query.faa GCF_002042975.1 data/m00009_results/matches.tsv --output-file <filename>
 ```
 
 The script above outputs a TSV file that can be joined with outputs of the
 clustering step, on the "Member Accession" column, to assess potential
 classifications of clusters.
-
-
-### Web Summaries of Modules and Orthologs
-
-Put the module IDs to be shown in `pages/modules.tsv`, then either start a
-local server at the root of the repository working directory, e.g.
-
-```
-python3 -m http.server 8080
-```
-
-and visit `localhost:8080/pages/`. 
-
-Or, commit any changes, merge into the "pages" branch, and push to github, and
-then visit `https://benjiec.github.io/needle/pages/`.
 
 
 ### Search in SwissProt for related proteins

@@ -3,14 +3,14 @@ import os
 import re
 import sys
 import csv
-import argparse
-import subprocess
-import itertools
 import tempfile
+import argparse
+import itertools
+import subprocess
 from typing import List, Dict, Set
 
 from needle.match import extract_subsequence_strand_sensitive, read_fasta_as_dict
-from needle.hmm import parse_hmmsearch_domtbl
+from needle.hmm import hmmscan_file, HMMCollection
 from needle.gff import parse_gff_to_hits
 from needle.io import export_protein_hits
 from defaults import DefaultPath
@@ -110,16 +110,7 @@ def compare(hmm_file, query_accession, genome_accession, gff_proteins, protein_s
     with tempfile.TemporaryDirectory() as tmpdir:
         cmd = ["hmmpress", "-f", hmm_file]
         run_cmd(cmd)
-
-        domtbl_path = os.path.join(tmpdir, "out.domtbl")
-        out_path = os.path.join(tmpdir, "out.txt")
-        cmd = ["hmmscan", "--domtblout", domtbl_path, "-o", out_path, hmm_file, faa_file]
-        run_cmd(cmd)
-
-        # Parse domtbl into rows for TSV
-        # hmmSCAN: scan proteins against HMM, so proteins are query, HMM is target
-        hmmscan_rows = parse_hmmsearch_domtbl(domtbl_path)
-        hmmscan_rows = [row for row in hmmscan_rows if row["evalue"] < 1e-3]
+        hmmscan_rows = hmmscan_file(hmm_file, faa_file)
 
     print(hmm_file)
     print("received", len(hmmscan_rows), "matches from hmmscan")
@@ -171,14 +162,13 @@ def compare(hmm_file, query_accession, genome_accession, gff_proteins, protein_s
         protein_acc = gff_hit.query_accession
 
         needle_rows_on_target = [row for row in needle_rows if row["target_accession"] == gff_hit.target_accession]
-        name_score = protein_enzyme_equality_score(hmm_name, protein_name)
 
         if len(needle_rows_on_target) == 0:
             status = "NOT FOUND"
             print_comparison(protein_name, status, hmm_rows, gff_hit, None)
             if output_f:
                 output_f.write(f"{query_accession}\t{genome_accession}\t{protein_name}\t{protein_acc}\t{status}\t"+\
-                               f"{hmm_len}\t{hmm_perc}\t{protein_len}\t{protein_perc}\t{hmm_eval}\t{name_score}\t\n")
+                               f"{hmm_len}\t{hmm_perc}\t{protein_len}\t{protein_perc}\t{hmm_eval}\t\n")
 
         else:
             keyf = lambda row: row["protein_hit_id"]
@@ -216,7 +206,7 @@ def compare(hmm_file, query_accession, genome_accession, gff_proteins, protein_s
                     print_comparison(protein_name, status, hmm_rows, gff_hit, needle_rows_for_hit)
                     if output_f:
                         output_f.write(f"{query_accession}\t{genome_accession}\t{protein_name}\t{protein_acc}\t{status}\t"+\
-                                       f"{hmm_len}\t{hmm_perc}\t{protein_len}\t{protein_perc}\t{hmm_eval}\t{name_score}\t{needle_protein_hit_id}\n")
+                                       f"{hmm_len}\t{hmm_perc}\t{protein_len}\t{protein_perc}\t{hmm_eval}\t{needle_protein_hit_id}\n")
 
     if output_f:
         output_f.flush()
@@ -261,7 +251,7 @@ if __name__ == "__main__":
     if args.output_file:
         output_f = open(args.output_file, "w")
         output_f.write("query\tgenome\tprotein name\tprotein accession\tstatus\t"+\
-                       "hmm len\thmmscan hmm match perc\tprotein len\thmmscan protein match perc\thmmscan evalue\tname score\tneedle protein id\n")
+                       "hmm len\thmmscan hmm match perc\tprotein len\thmmscan protein match perc\thmmscan evalue\tneedle protein id\n")
 
     accessions = load_accessions(args.query_fasta)
     print("accessions", accessions)
