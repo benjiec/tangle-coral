@@ -31,9 +31,5 @@ class DefaultPath(object):
         return fna_file
 
     @staticmethod
-    def kegg_hmm_dir():
-        return "kegg-downloads/profiles"
-
-    @staticmethod
-    def kegg_hmm(hmm_model):
-        return os.path.join(DefaultPath.kegg_hmm_dir(), hmm_model+".hmm")
+    def pfam_hmm():
+        return "pfam-downloads/Pfam-A.hmm"

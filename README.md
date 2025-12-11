@@ -71,16 +71,6 @@ The following creates `data/module_ko.tsv`
 python3 scripts/fetch-kegg-module-ko.py
 ```
 
-### Define custom modules
-
-Add custom modules, with KO numbers, using the following approach. Define the
-modules first in the custom files, then add them to master lists.
-
-```
-cat custom_module_ko.tsv >> module_ko.tsv 
-cat custom_modules.tsv >> modules.tsv  
-```
-
 ### Create list of consensus protein sequences for all the KO numbers
 
 Download the HMM profiles from `https://www.genome.jp/ftp/db/kofam/`. The
@@ -98,10 +88,16 @@ Generate consensus protein sequence as a FASTA file, with
 /opt/homebrew/Cellar/hmmer/3.4/bin/hmmemit -c ko_full.hmm > ko.fasta
 ```
 
-Put all the HMM profiles under `kegg-downloads/profiles`. E.g.
-`kegg-downloads/profiles/K00030.hmm` should exist. A couple of the scripts
-below depends on this directory.
+### Download HMM profiles from Pfam
 
+Download
+`https://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/Pfam-A.hmm.gz`. After
+uncompress into `pfam-downloads` directory, run the following to create a
+searchable HMM database
+
+```
+hmmpress pfam-downloads/Pfam-A.hmm
+```
 
 ### Prepare List of Genomes
 
@@ -125,7 +121,7 @@ The general workflow looks like the following
   * Generate MSAs: Muscle and HMMalign
   * Finish Protein Sequences
   * Classify Proteins
-  * Curate Phylogentic-aware Ortholog Profiles
+  * Improve Phylogene-aware family profiles
 
 
 Always activate the virtualenv first
@@ -136,13 +132,16 @@ source .venv/bin/activate
 
 ### Generating Query .faa for a KEGG Module
 
-See below. The first argument is the module ID. The second argument is the FASTA file path. E.g.
+Use the following command to generate a query .faa file for a module. This
+script a) finds list of KO#s for the module, b) scans Pfam HMM database against
+KO consensus sequences, and c) generates a .faa file containing consensus
+sequences of matching Pfam families.
 
 ```
 PYTHONPATH=. python3 scripts/generate-module-fasta.py m00009
 ```
 
-### Generate Ortholog Hits Database against a Genome Accession
+### Generate Pfam Hits Database against a Genome Accession
 
 The following script puts outputs in `data/m0009_results` directory
 

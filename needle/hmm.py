@@ -11,6 +11,7 @@ def run_command(cmd: str):
 def parse_hmmsearch_domtbl(domtbl_path):
     expected_header = "# target name  accession  tlen  query name  accession  qlen  E-value  score  bias  #  of  c-Evalue  i-Evalue  score  bias  from  to  from  to"
     idx_target = 0
+    idx_target_acc = 1
     idx_t_len = 2
     idx_query = 3
     idx_q_len = 5
@@ -26,6 +27,7 @@ def parse_hmmsearch_domtbl(domtbl_path):
     assert expected_header_parts[idx_eval] == "E-value"
     assert expected_header_parts[idx_score] == "score"
     assert expected_header_parts[idx_target] == "# target name"
+    assert expected_header_parts[idx_target_acc] == "accession"
     assert expected_header_parts[idx_t_len] == "tlen"
     assert expected_header_parts[idx_query] == "query name"
     assert expected_header_parts[idx_q_len] == "qlen"
@@ -47,6 +49,7 @@ def parse_hmmsearch_domtbl(domtbl_path):
             parts = line.strip().split()
             match = dict(
                 target_name = parts[idx_target],
+                target_accession = parts[idx_target_acc],
                 query_name = parts[idx_query],
                 evalue = float(parts[idx_eval]),
                 score = float(parts[idx_score]),
