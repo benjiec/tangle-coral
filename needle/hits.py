@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 from Bio.Seq import Seq
 from .match import Match, ProteinHit, order_matches_for_junctions, extract_subsequence, extract_subsequence_strand_sensitive
-from .hmm import hmmsearch
+from .hmm import hmmsearch, hmmfetch, HMMCollection
 
 
 @dataclass
@@ -255,17 +255,13 @@ def hmm_clean_protein(
     return cleaned_pm
 
 
-def hmm_clean(protein_hits: List[ProteinHit], hmm_dir: str, overlap_flanking_len: int = 20) -> List[ProteinHit]:
+def hmm_clean(protein_hits: List[ProteinHit], hmm_collection: HMMCollection, overlap_flanking_len: int = 20) -> List[ProteinHit]:
 
     cleaned: Dict[ProteinHit] = {}
 
     for pm in protein_hits:
-        hmm_path = os.path.join(hmm_dir, f"{pm.query_accession}.hmm")
-        if os.path.exists(hmm_path):
-            new_pm = hmm_clean_protein(pm, hmm_path, overlap_flanking_len)
-            cleaned[new_pm.protein_hit_id] = new_pm
-        else:
-            cleaned[pm.protein_hit_id] = pm
+        new_pm = hmm_clean_protein(pm, hmm_collection.get(pm.query_accession), overlap_flanking_len)
+        cleaned[new_pm.protein_hit_id] = new_pm
 
     return list(cleaned.values())
 
@@ -446,7 +442,7 @@ def hmm_find_protein_around_locus(protein_hit, results, hmm_file):
     return new_pm
 
 
-def hmm_find_proteins(protein_hits, results, hmm_dir):
+def hmm_find_proteins(protein_hits, results, hmm_collection):
     new_protein_hits = {}
 
     for pm in protein_hits:
@@ -455,8 +451,7 @@ def hmm_find_proteins(protein_hits, results, hmm_dir):
         print(pm.protein_hit_id)
         """
 
-        hmm_path = os.path.join(hmm_dir, f"{pm.query_accession}.hmm")
-        new_pm = hmm_find_protein_around_locus(pm, results, hmm_path)
+        new_pm = hmm_find_protein_around_locus(pm, results, hmm_collection.get(pm.query_accession))
         new_protein_hits[new_pm.protein_hit_id] = new_pm
 
     return list(new_protein_hits.values())

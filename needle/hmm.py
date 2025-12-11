@@ -84,3 +84,31 @@ def hmmscan_file(hmm_file_name, fasta_path):
         cmd = ["hmmscan", "--cut_ga", "--domtblout", domtbl_path, hmm_file_name, fasta_path]
         run_command(cmd)
         return parse_hmmsearch_domtbl(domtbl_path)
+
+
+def hmmfetch(hmm_file_name, acc, output_file_name):
+    cmd = ["hmmfetch", "-o", output_file_name, hmm_file_name, acc]
+    run_command(cmd)
+
+
+class HMMCollection(object):
+
+    def __init__(self, big_hmm_file, accession_ids):
+        self.__by_accession = {}
+
+        accession_ids = list(set(accession_ids))
+        for acc in accession_ids:
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".hmm") as tmpf:
+                tmpf.close()
+                print("fetching hmm into temp file", tmpf.name)
+                hmmfetch(big_hmm_file, acc, tmpf.name)
+                self.__by_accession[acc] = tmpf.name
+
+    def get(self, accession):
+        return self.__by_accession[accession]
+
+
+    def clean(self):
+        for fn in self.__by_accession.values():
+            os.remove(fn)
+        self.__by_accession = None

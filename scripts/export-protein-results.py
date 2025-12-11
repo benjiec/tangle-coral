@@ -5,6 +5,7 @@ from needle.blast import Results
 from needle.match import group_matches
 from needle.hits import hmm_find_proteins, hmm_clean
 from needle.io import export_protein_hits
+from needle.hmm import HMMCollection
 from defaults import DefaultPath
 
 def main():
@@ -16,16 +17,18 @@ def main():
     args = parser.parse_args()
 
     target_fasta = DefaultPath.ncbi_genome_fna(args.genome_accession)
-    hmm_dir = DefaultPath.kegg_hmm_dir()
 
     res = Results(args.results_tsv, query_fasta_path=args.query_fasta, target_fasta_path=target_fasta)
     protein_matches = group_matches(res.matches())
+    accession_ids = [pm.query_accession for pm in protein_matches]
+
+    hmm_collection = HMMCollection(DefaultPath.pfam_hmm(), accession_ids)
 
     # use HMM to find more fragments
-    protein_matches = hmm_find_proteins(protein_matches, res, hmm_dir)
+    protein_matches = hmm_find_proteins(protein_matches, res, hmm_collection)
 
     protein_matches = [m for m in protein_matches if m.can_collate()]
-    cleaned_protein_matches = hmm_clean(protein_matches, hmm_dir)
+    cleaned_protein_matches = hmm_clean(protein_matches, hmm_collection)
 
     export_protein_hits(
         args.genome_accession,
@@ -34,6 +37,8 @@ def main():
         args.output_dir+"/matches.tsv",
         args.output_dir+"/faa"
     )
+
+    hmm_collection.clean()
 
 if __name__ == "__main__":
     main()
