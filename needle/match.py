@@ -222,14 +222,17 @@ def group_matches(all_matches, max_intron_length: int = 10_000, max_overlap_len:
         current_right: Optional[int] = None
         current_query = None
 
+        # print("grouping", query_id, "on", target_id, "rev", on_reverse_strand)
         for m in group_sorted_by_target:
             left_t, right_t = target_interval(m)
+            # print("  left", left_t, "right", right_t, "current query", current_query, "match", m.query_start, m.query_end)
 
             # New cluster
             if not current_cluster:
                 current_cluster = [m]
                 current_right = right_t
                 current_query = (m.query_start, m.query_end)
+                # print("    start new cluster")
 
             else:
                 distance = left_t - (current_right or left_t)
@@ -239,23 +242,37 @@ def group_matches(all_matches, max_intron_length: int = 10_000, max_overlap_len:
                     current_cluster = [m]
                     current_right = right_t
                     current_query = (m.query_start, m.query_end)
+                    # print("    too far on target, start new cluster")
+
+                elif distance < 0:  # overlap on the genome, we can't distinguish the overlapping copies so just group them together for now
+                    current_cluster.append(m)
+                    current_right = max(current_right or right_t, right_t)
+                    current_query = (m.query_start, m.query_end)
+                    # print("    overlap on genome, add to current cluster")
 
                 # Query rewound, start new cluster
-                elif (on_reverse_strand is False and \
-                      m.query_start < current_query[1] and \
-                      (current_query[1] - m.query_start + 1) > max_overlap_len) or \
-                     (on_reverse_strand is True and \
-                      m.query_end > current_query[0] and \
-                      (m.query_end - current_query[0] + 1) > max_overlap_len):
+                # Criteria here is:
+                #    There is overlap on query and not overlap on target, and
+                #      Too long overlap or
+                #      Completely rewond (e.g. repeat)
+                elif (on_reverse_strand is False and m.query_start < current_query[1] and \
+                      ((current_query[1] - m.query_start + 1) > max_overlap_len or \
+                       m.query_start <= current_query[0])) \
+                    or \
+                     (on_reverse_strand is True and m.query_end > current_query[0] and \
+                      ((m.query_end - current_query[0] + 1) > max_overlap_len or \
+                       m.query_start >= current_query[0])):
                     clusters.append(current_cluster)
                     current_cluster = [m]
                     current_query = (m.query_start, m.query_end)
+                    # print("    query rewound, start new cluster")
 
                 # Add to cluster
                 else:
                     current_cluster.append(m)
                     current_right = max(current_right or right_t, right_t)
                     current_query = (m.query_start, m.query_end)
+                    # print("    add to current cluster")
 
         if current_cluster:
             clusters.append(current_cluster)

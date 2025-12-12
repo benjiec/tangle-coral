@@ -172,7 +172,7 @@ class TestOrderGroupMatches(unittest.TestCase):
         self.assertEqual(pms[1].target_start, 1220)
         self.assertEqual(pms[1].target_end, 1201)
 
-    def test_group_matches_separate_closely_placed_tandems(self):
+    def test_group_matches_separate_overlapped_tandems(self):
 
         m1 = self.makeM( 5, 18, 1001, 1020, "Q", "S1")
         m2 = self.makeM(15, 28, 1101, 1120, "Q", "S1")
@@ -201,7 +201,52 @@ class TestOrderGroupMatches(unittest.TestCase):
         self.assertEqual(pms[1].target_start, 1301)
         self.assertEqual(pms[1].target_end, 1520)
 
-    def test_group_matches_separate_closely_placed_tandems_on_reverse_strand(self):
+    def test_group_matches_separate_complete_repeat_even_if_smaller_than_overlap_threshold(self):
+
+        m1 = self.makeM( 5, 18, 1001, 1020, "Q", "S1")
+        m2 = self.makeM(15, 28, 1101, 1120, "Q", "S1")
+        m3 = self.makeM(25, 38, 1201, 1220, "Q", "S1")
+        m4 = self.makeM(25, 48, 1301, 1520, "Q", "S1")
+
+        matches = [m1, m2, m3, m4]
+        random.shuffle(matches)
+
+	# overlap between m4 and m3 is smaller than max_overlap_len, but this
+	# is a complete repeat, so separate them
+        pms = group_matches(matches, max_overlap_len=100)
+        pms = sorted(pms, key=lambda p: (p.target_accession, p.query_start))
+
+        self.assertEqual(len(pms), 2)
+        self.assertEqual(pms[0].target_accession, "S1")
+        self.assertEqual(pms[0].query_start, 5)
+        self.assertEqual(pms[0].query_end, 38)
+        self.assertEqual(pms[0].target_start, 1001)
+        self.assertEqual(pms[0].target_end, 1220)
+        self.assertEqual(pms[1].target_accession, "S1")
+        self.assertEqual(pms[1].query_start, 25)
+        self.assertEqual(pms[1].query_end, 48)
+        self.assertEqual(pms[1].target_start, 1301)
+        self.assertEqual(pms[1].target_end, 1520)
+
+    def test_group_matches_will_not_separate_complete_repeat_if_overlap_on_target(self):
+
+        m1 = self.makeM( 5, 18, 1001, 1020, "Q", "S1")
+        m2 = self.makeM(15, 28, 1101, 1120, "Q", "S1")
+        m3 = self.makeM(25, 38, 1201, 1220, "Q", "S1")
+        m4 = self.makeM(25, 48, 1310, 1520, "Q", "S1")
+
+        matches = [m1, m2, m3, m4]
+        random.shuffle(matches)
+        pms = group_matches(matches, max_overlap_len=100)
+        self.assertEqual(len(pms), 2)
+
+        m4 = self.makeM(25, 48, 1210, 1520, "Q", "S1")
+        matches = [m1, m2, m3, m4]
+        random.shuffle(matches)
+        pms = group_matches(matches, max_overlap_len=100)
+        self.assertEqual(len(pms), 1)
+
+    def test_group_matches_separate_overlapping_tandems_on_reverse_strand(self):
 
         m1 = self.makeM(34, 48, 1101, 1020, "Q", "S1")
         m2 = self.makeM(25, 38, 1201, 1120, "Q", "S1")
@@ -229,6 +274,49 @@ class TestOrderGroupMatches(unittest.TestCase):
         self.assertEqual(pms[1].query_end, 48)
         self.assertEqual(pms[1].target_start, 1101)
         self.assertEqual(pms[1].target_end, 1020)
+
+    def test_group_matches_separate_complete_repeat_even_if_smaller_than_overlap_threshold_on_reverse_strand(self):
+
+        m1 = self.makeM(25, 48, 1101, 1020, "Q", "S1")
+        m2 = self.makeM(25, 38, 1201, 1120, "Q", "S1")
+        m3 = self.makeM(15, 28, 1301, 1220, "Q", "S1")
+        m4 = self.makeM( 5, 18, 1601, 1520, "Q", "S1")
+
+        matches = [m1, m2, m3, m4]
+        random.shuffle(matches)
+
+        pms = group_matches(matches, max_overlap_len=100)
+        pms = sorted(pms, key=lambda p: (p.target_accession, p.query_start))
+
+        self.assertEqual(len(pms), 2)
+        self.assertEqual(pms[0].target_accession, "S1")
+        self.assertEqual(pms[0].query_start, 5)
+        self.assertEqual(pms[0].query_end, 38)
+        self.assertEqual(pms[0].target_start, 1601)
+        self.assertEqual(pms[0].target_end, 1120)
+        self.assertEqual(pms[1].target_accession, "S1")
+        self.assertEqual(pms[1].query_start, 25)
+        self.assertEqual(pms[1].query_end, 48)
+        self.assertEqual(pms[1].target_start, 1101)
+        self.assertEqual(pms[1].target_end, 1020)
+
+    def test_group_matches_will_not_separate_complete_repeat_if_overlap_on_target_on_reverse_strand(self):
+
+        m1 = self.makeM(25, 48, 1101, 1020, "Q", "S1")
+        m2 = self.makeM(25, 38, 1201, 1120, "Q", "S1")
+        m3 = self.makeM(15, 28, 1301, 1220, "Q", "S1")
+        m4 = self.makeM( 5, 18, 1601, 1520, "Q", "S1")
+
+        matches = [m1, m2, m3, m4]
+        random.shuffle(matches)
+        pms = group_matches(matches, max_overlap_len=4)
+        self.assertEqual(len(pms), 2)
+
+        m1 = self.makeM(25, 48, 1121, 1020, "Q", "S1")
+        matches = [m1, m2, m3, m4]
+        random.shuffle(matches)
+        pms = group_matches(matches, max_overlap_len=4)
+        self.assertEqual(len(pms), 1)
 
     def test_protein_hit_id_deterministic_and_changes_when_inputs_change(self):
         # Two identical ProteinHit objects should have the same ID
