@@ -167,7 +167,7 @@ def compare(hmm_file, query_accession, genome_accession, gff_proteins, protein_s
             print_comparison(protein_name, status, hmm_rows, gff_hit, None)
             if output_f:
                 output_f.write(f"{query_accession}\t{genome_accession}\t{protein_name}\t{protein_acc}\t{status}\t"+\
-                               f"{hmm_len}\t{hmm_perc}\t{protein_len}\t{protein_perc}\t{hmm_eval}\t\n")
+                               f"{hmm_len}\t{hmm_perc}\t{protein_len}\t{protein_perc}\t{hmm_eval}\t\t\t\n")
 
         else:
             keyf = lambda row: row["protein_hit_id"]
@@ -205,7 +205,7 @@ def compare(hmm_file, query_accession, genome_accession, gff_proteins, protein_s
                     print_comparison(protein_name, status, hmm_rows, gff_hit, needle_rows_for_hit)
                     if output_f:
                         output_f.write(f"{query_accession}\t{genome_accession}\t{protein_name}\t{protein_acc}\t{status}\t"+\
-                                       f"{hmm_len}\t{hmm_perc}\t{protein_len}\t{protein_perc}\t{hmm_eval}\t{needle_protein_hit_id}\n")
+                                       f"{hmm_len}\t{hmm_perc}\t{protein_len}\t{protein_perc}\t{hmm_eval}\t{needle_protein_hit_id}\t{needle_aa_len}\t{hmm_aa_matched}\n")
 
     if output_f:
         output_f.flush()
@@ -250,7 +250,7 @@ if __name__ == "__main__":
     if args.output_file:
         output_f = open(args.output_file, "w")
         output_f.write("query\tgenome\tprotein name\tprotein accession\tstatus\t"+\
-                       "hmm len\thmmscan hmm match perc\tprotein len\thmmscan protein match perc\thmmscan evalue\tneedle protein id\n")
+                       "hmm len\thmmscan hmm match perc\tprotein len\thmmscan protein match perc\thmmscan evalue\tneedle protein id\tneedle aa matched\thmm aa matched\n")
 
     accessions = load_accessions(args.query_fasta)
     print("accessions", accessions)

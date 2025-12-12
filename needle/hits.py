@@ -62,7 +62,7 @@ def generate_transition_candidates(
 
 
 def hmmsearch_find_best_candidate(hmm_file_name, sequences):
-    matches = hmmsearch(hmm_file_name, sequences)
+    matches = hmmsearch(hmm_file_name, sequences, cutoff=False)
 
     best_idx = None
     best_score = float("-inf")
@@ -270,10 +270,7 @@ def hmmsearch_to_dna_coords(hmm_file, three_frame_translations):
     assert len(three_frame_translations) == 3
 
     sequences = [aa for dna_start, dna_end, aa in three_frame_translations]
-    hmm_matches = hmmsearch(hmm_file, sequences)
-
-    for m in hmm_matches:
-        frame = int(m["target_name"][len("cand_"):])
+    hmm_matches = hmmsearch(hmm_file, sequences, cutoff=False)
 
     to_return = []
     for hmm_match in hmm_matches:

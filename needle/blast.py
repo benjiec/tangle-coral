@@ -156,42 +156,37 @@ class Results:
         return {k: v for k, v in mapping.items() if v is not None}
 
     def _row_to_match(self, row: List[str], header_index: Dict[str, int]) -> Optional[Match]:
-        try:
-            qacc = row[header_index[self.H_QSEQID]].strip()
-            sacc = row[header_index[self.H_SSEQID]].strip()
-            evalue_str = row[header_index[self.H_EVALUE]].strip()
-            pident_str = row[header_index[self.H_PIDENT]].strip()
-            qstart_str = row[header_index[self.H_QSTART]].strip()
-            qend_str = row[header_index[self.H_QEND]].strip()
-            sstart_str = row[header_index[self.H_SSTART]].strip()
-            send_str = row[header_index[self.H_SEND]].strip()
+        qacc = row[header_index[self.H_QSEQID]].strip()
+        sacc = row[header_index[self.H_SSEQID]].strip()
+        evalue_str = row[header_index[self.H_EVALUE]].strip()
+        pident_str = row[header_index[self.H_PIDENT]].strip()
+        qstart_str = row[header_index[self.H_QSTART]].strip()
+        qend_str = row[header_index[self.H_QEND]].strip()
+        sstart_str = row[header_index[self.H_SSTART]].strip()
+        send_str = row[header_index[self.H_SEND]].strip()
 
-            matched_seq = None
-            if self.H_SSEQ in header_index and header_index[self.H_SSEQ] < len(row):
-                cell = row[header_index[self.H_SSEQ]].strip()
-                matched_seq = cell if cell != "" else None
+        matched_seq = None
+        if self.H_SSEQ in header_index and header_index[self.H_SSEQ] < len(row):
+            cell = row[header_index[self.H_SSEQ]].strip()
+            matched_seq = cell if cell != "" else None
 
-            qstart = int(qstart_str)
-            qend = int(qend_str)
-            if qstart > qend:
-                raise ValueError(f"qstart ({qstart}) must be <= qend ({qend}) in results TSV row: {row}")
+        qstart = int(qstart_str)
+        qend = int(qend_str)
+        if qstart > qend:
+            raise ValueError(f"qstart ({qstart}) must be <= qend ({qend}) in results TSV row: {row}")
 
-            sstart = int(sstart_str)
-            send = int(send_str)
+        sstart = int(sstart_str)
+        send = int(send_str)
 
-            match = Match(
-                query_accession=qacc,
-                target_accession=sacc,
-                query_start=qstart,
-                query_end=qend,
-                target_start=sstart,
-                target_end=send,
-                e_value=float(evalue_str.replace(",", "")),
-                identity=float(pident_str.replace(",", "")),
-                matched_sequence=matched_seq,
-            )
-            return match
-        except (IndexError, ValueError) as exc:
-            # Skip malformed rows; callers generally prefer partial results over failure
-            # Narrow exception types only
-            raise ValueError(f"Malformed row in results TSV: {row}") from exc
+        match = Match(
+            query_accession=qacc,
+            target_accession=sacc,
+            query_start=qstart,
+            query_end=qend,
+            target_start=sstart,
+            target_end=send,
+            e_value=float(evalue_str.replace(",", "")) if evalue_str else None,
+            identity=float(pident_str.replace(",", "")) if pident_str else None,
+            matched_sequence=matched_seq,
+        )
+        return match
