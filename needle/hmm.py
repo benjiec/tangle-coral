@@ -1,5 +1,6 @@
 import re
 import os
+import shutil
 import subprocess
 import tempfile
 
@@ -97,12 +98,14 @@ class HMMCollection(object):
         self.__by_accession = {}
 
         accession_ids = list(set(accession_ids))
-        for acc in accession_ids:
-            with tempfile.NamedTemporaryFile(delete=False, suffix=".hmm") as tmpf:
-                tmpf.close()
-                print("fetching hmm into temp file", tmpf.name)
-                hmmfetch(big_hmm_file, acc, tmpf.name)
-                self.__by_accession[acc] = tmpf.name
+        with tempfile.TemporaryDirectory(delete=False) as temp_dir:
+            self.__temp_dir = temp_dir
+            for acc in accession_ids:
+                with tempfile.NamedTemporaryFile(dir=temp_dir, delete=False, suffix=".hmm") as tmpf:
+                    tmpf.close()
+                    print("fetching hmm into temp file", tmpf.name)
+                    hmmfetch(big_hmm_file, acc, tmpf.name)
+                    self.__by_accession[acc] = tmpf.name
 
     def get(self, accession):
         return self.__by_accession[accession]
@@ -110,5 +113,9 @@ class HMMCollection(object):
 
     def clean(self):
         for fn in self.__by_accession.values():
+            print("removing", fn)
             os.remove(fn)
+        print("removing", self.__temp_dir)
+        shutil.rmtree(self.__temp_dir)
         self.__by_accession = None
+        self.__temp_dir = None

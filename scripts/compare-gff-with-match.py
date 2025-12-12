@@ -85,14 +85,13 @@ def print_comparison(protein_name, status, hmm_rows, gff_hit, needle_rows):
     protein_aa_len = 0
     protein_len = 0
     for row in hmm_rows:
-        # hmm rows: target is HMM, query is protein
         protein_aa_len += (abs(row["ali_to"] - row["ali_from"]) + 1)
         protein_len = row["query_length"]
 
     print("    found by hmmscan, on", gff_hit.target_accession, gff_hit.target_start, gff_hit.target_end,
           round(protein_aa_len * 100 / protein_len, 1), "% of", gff_hit.query_accession)
     for row in hmm_rows:
-        print("    hmm model", row["hmm_from"], row["hmm_to"], "matches", gff_hit.query_accession, row["ali_from"], row["ali_to"],
+        print("    hmm model", row["target_name"], row["target_accession"], row["hmm_from"], row["hmm_to"], "matches", gff_hit.query_accession, row["ali_from"], row["ali_to"],
               "of", row["query_length"], row["evalue"])
 
     if not needle_rows:
@@ -257,10 +256,11 @@ if __name__ == "__main__":
     print("accessions", accessions)
     hmm_collection = HMMCollection(DefaultPath.pfam_hmm(), accessions)
 
-    for acc in accessions:
-        compare(hmm_collection.get(acc), acc, genome_accession, gff_proteins, protein_seq_names, genomic_fasta, needle_rows, output_f)
-
-    hmm_collection.clean()
+    try:
+        for acc in accessions:
+            compare(hmm_collection.get(acc), acc, genome_accession, gff_proteins, protein_seq_names, genomic_fasta, needle_rows, output_f)
+    finally:
+        hmm_collection.clean()
 
     if output_f:
         output_f.close()
