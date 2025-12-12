@@ -162,12 +162,17 @@ def compare(hmm_file, query_accession, genome_accession, gff_proteins, protein_s
 
         needle_rows_on_target = [row for row in needle_rows if row["target_accession"] == gff_hit.target_accession]
 
+        gff_total_len = 0
+        for m in gff_hit.matches:
+            gff_total_len += abs(m.target_end-m.target_start)+1
+        gff_avg_exon_len = round(gff_total_len / len(gff_hit.matches), 1)
+
         if len(needle_rows_on_target) == 0:
             status = "NOT FOUND"
             print_comparison(protein_name, status, hmm_rows, gff_hit, None)
             if output_f:
                 output_f.write(f"{query_accession}\t{genome_accession}\t{protein_name}\t{protein_acc}\t{status}\t"+\
-                               f"{hmm_len}\t{hmm_perc}\t{protein_len}\t{protein_perc}\t{hmm_eval}\t\t\t\n")
+                               f"{hmm_len}\t{hmm_perc}\t{protein_len}\t{gff_avg_exon_len}\t{protein_perc}\t{hmm_eval}\t\t\t\n")
 
         else:
             keyf = lambda row: row["protein_hit_id"]
@@ -205,7 +210,8 @@ def compare(hmm_file, query_accession, genome_accession, gff_proteins, protein_s
                     print_comparison(protein_name, status, hmm_rows, gff_hit, needle_rows_for_hit)
                     if output_f:
                         output_f.write(f"{query_accession}\t{genome_accession}\t{protein_name}\t{protein_acc}\t{status}\t"+\
-                                       f"{hmm_len}\t{hmm_perc}\t{protein_len}\t{protein_perc}\t{hmm_eval}\t{needle_protein_hit_id}\t{needle_aa_len}\t{hmm_aa_matched}\n")
+                                       f"{hmm_len}\t{hmm_perc}\t{protein_len}\t{gff_avg_exon_len}\t{protein_perc}\t{hmm_eval}\t"+\
+                                       f"{needle_protein_hit_id}\t{needle_aa_len}\t{hmm_aa_matched}\n")
 
     if output_f:
         output_f.flush()
@@ -250,7 +256,8 @@ if __name__ == "__main__":
     if args.output_file:
         output_f = open(args.output_file, "w")
         output_f.write("query\tgenome\tprotein name\tprotein accession\tstatus\t"+\
-                       "hmm len\thmmscan hmm match perc\tprotein len\thmmscan protein match perc\thmmscan evalue\tneedle protein id\tneedle aa matched\thmm aa matched\n")
+                       "hmm len\thmmscan hmm match perc\tprotein len\texon avg len\thmmscan protein match perc\thmmscan evalue\t"+\
+                       "needle protein id\tneedle aa matched\thmm aa matched\n")
 
     accessions = load_accessions(args.query_fasta)
     print("accessions", accessions)

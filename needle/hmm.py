@@ -67,19 +67,32 @@ def parse_hmmsearch_domtbl(domtbl_path):
     return matches
 
 
-def hmmsearch(hmm_file_name, sequences, cutoff=True):
+def hmmsearch_file(hmm_file_name, fasta_path, cutoff=False):
     with tempfile.TemporaryDirectory() as tmpdir:
-        fasta_path = os.path.join(tmpdir, "cands.faa")
         domtbl_path = os.path.join(tmpdir, "out.domtbl")
-        with open(fasta_path, "w") as f:
-            for i, cand in enumerate(sequences):
-                f.write(f">cand_{i}\n{cand}\n")
         if cutoff:
             cmd = ["hmmsearch", "--cut_ga", "--domtblout", domtbl_path, hmm_file_name, fasta_path]
         else:
             cmd = ["hmmsearch", "--domtblout", domtbl_path, hmm_file_name, fasta_path]
         run_command(cmd)
         return parse_hmmsearch_domtbl(domtbl_path)
+
+
+def hmmsearch(hmm_file_name, sequences, cutoff=False):
+    with tempfile.TemporaryDirectory() as tmpdir:
+        fasta_path = os.path.join(tmpdir, "cands.faa")
+        with open(fasta_path, "w") as f:
+            for i, cand in enumerate(sequences):
+                f.write(f">cand_{i}\n{cand}\n")
+        return hmmsearch_file(hmm_file_name, fasta_path, cutoff=cutoff)
+
+
+def hmmsearch_sequence_dict(hmm_file_name, fasta_dict, cutoff=False):
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".faa", mode="w") as tmpf:
+        for acc, sequence in fasta_dict.items():
+            tmpf.write(f">{acc}\n{sequence}\n")
+        tmpf.close()
+        return hmmsearch_file(hmm_file_name, tmpf.name, cutoff=cutoff)
 
 
 def hmmscan_file(hmm_file_name, fasta_path, cutoff=True):
@@ -91,14 +104,6 @@ def hmmscan_file(hmm_file_name, fasta_path, cutoff=True):
             cmd = ["hmmscan", "--domtblout", domtbl_path, hmm_file_name, fasta_path]
         run_command(cmd)
         return parse_hmmsearch_domtbl(domtbl_path)
-
-
-def hmmscan_sequence_dict(hmm_file_name, fasta_dict, cutoff=True):
-    with tempfile.NamedTemporaryFile(delete=False, suffix=".faa", mode="w") as tmpf:
-        for acc, sequence in fasta_dict.items():
-            tmpf.write(f">{acc}\n{sequence}\n")
-        tmpf.close()
-        return hmmscan_file(hmm_file_name, tmpf.name, cutoff=cutoff)
 
 
 def hmmfetch(hmm_file_name, acc, output_file_name):
