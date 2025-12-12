@@ -103,7 +103,7 @@ class HMMCollection(object):
             for acc in accession_ids:
                 with tempfile.NamedTemporaryFile(dir=temp_dir, delete=False, suffix=".hmm") as tmpf:
                     tmpf.close()
-                    print("fetching hmm into temp file", tmpf.name)
+                    # print("fetching hmm into temp file", tmpf.name)
                     hmmfetch(big_hmm_file, acc, tmpf.name)
                     self.__by_accession[acc] = tmpf.name
 
@@ -113,9 +113,9 @@ class HMMCollection(object):
 
     def clean(self):
         for fn in self.__by_accession.values():
-            print("removing", fn)
+            # print("removing", fn)
             os.remove(fn)
-        print("removing", self.__temp_dir)
+        # print("removing", self.__temp_dir)
         shutil.rmtree(self.__temp_dir)
         self.__by_accession = None
         self.__temp_dir = None

@@ -24,21 +24,24 @@ def main():
 
     hmm_collection = HMMCollection(DefaultPath.pfam_hmm(), accession_ids)
 
-    # use HMM to find more fragments
-    protein_matches = hmm_find_proteins(protein_matches, res, hmm_collection)
+    try:
+        # use HMM to find more fragments
+        protein_matches = hmm_find_proteins(protein_matches, res, hmm_collection)
 
-    protein_matches = [m for m in protein_matches if m.can_collate()]
-    cleaned_protein_matches = hmm_clean(protein_matches, hmm_collection)
+        protein_matches = [m for m in protein_matches if m.can_collate()]
+        cleaned_protein_matches = hmm_clean(protein_matches, hmm_collection)
 
-    export_protein_hits(
-        args.genome_accession,
-        cleaned_protein_matches,
-        args.output_dir+"/proteins.tsv",
-        args.output_dir+"/matches.tsv",
-        args.output_dir+"/faa"
-    )
+        export_protein_hits(
+            args.genome_accession,
+            cleaned_protein_matches,
+            args.output_dir+"/proteins.tsv",
+            args.output_dir+"/matches.tsv",
+            args.output_dir+"/faa"
+        )
 
-    hmm_collection.clean()
+    finally:
+        hmm_collection.clean()
+
 
 if __name__ == "__main__":
     main()
