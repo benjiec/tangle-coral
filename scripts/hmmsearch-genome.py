@@ -80,7 +80,7 @@ for acc, genome_sequence in genomic_fasta.items():
             contig_accession = row["target_name"][:-6]
 
             out = [
-              row["query_name"],
+              row["query_accession"],
               contig_accession,
               str(row["evalue"]),
               "",

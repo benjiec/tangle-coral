@@ -15,6 +15,7 @@ def parse_hmmsearch_domtbl(domtbl_path):
     idx_target_acc = 1
     idx_t_len = 2
     idx_query = 3
+    idx_query_acc = 4
     idx_q_len = 5
     idx_eval = 6
     idx_score = 7
@@ -31,6 +32,7 @@ def parse_hmmsearch_domtbl(domtbl_path):
     assert expected_header_parts[idx_target_acc] == "accession"
     assert expected_header_parts[idx_t_len] == "tlen"
     assert expected_header_parts[idx_query] == "query name"
+    assert expected_header_parts[idx_query_acc] == "accession"
     assert expected_header_parts[idx_q_len] == "qlen"
     assert expected_header_parts[idx_h_from] == "from"
     assert expected_header_parts[idx_h_to] == "to"
@@ -52,6 +54,7 @@ def parse_hmmsearch_domtbl(domtbl_path):
                 target_name = parts[idx_target],
                 target_accession = parts[idx_target_acc],
                 query_name = parts[idx_query],
+                query_accession = parts[idx_query_acc],
                 evalue = float(parts[idx_eval]),
                 score = float(parts[idx_score]),
                 query_length = int(parts[idx_q_len]),
