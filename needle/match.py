@@ -225,6 +225,8 @@ def group_matches(all_matches, max_intron_length: int = 10_000, max_overlap_len:
         # print("grouping", query_id, "on", target_id, "rev", on_reverse_strand)
         for m in group_sorted_by_target:
             left_t, right_t = target_interval(m)
+            fragment_len = m.query_end - m.query_start + 1
+
             # print("  left", left_t, "right", right_t, "current query", current_query, "match", m.query_start, m.query_end)
 
             # New cluster
@@ -254,13 +256,16 @@ def group_matches(all_matches, max_intron_length: int = 10_000, max_overlap_len:
                 # Criteria here is:
                 #    There is overlap on query and not overlap on target, and
                 #      Too long overlap or
+                #      Overlap is >50% of fragment
                 #      Completely rewond (e.g. repeat)
                 elif (on_reverse_strand is False and m.query_start < current_query[1] and \
                       ((current_query[1] - m.query_start + 1) > max_overlap_len or \
+                       (current_query[1] - m.query_start + 1) / fragment_len > 0.5 or \
                        m.query_start <= current_query[0])) \
                     or \
                      (on_reverse_strand is True and m.query_end > current_query[0] and \
                       ((m.query_end - current_query[0] + 1) > max_overlap_len or \
+                       (m.query_end - current_query[0] + 1) / fragment_len > 0.5 or \
                        m.query_start >= current_query[0])):
                     clusters.append(current_cluster)
                     current_cluster = [m]

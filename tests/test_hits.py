@@ -293,7 +293,7 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
         ]
 
         try:
-            hits_mod.hmmsearch = lambda h,s: fake_matches
+            hits_mod.hmmsearch = lambda h,s,cutoff: fake_matches
 
             translations = [
               (101, 199, "A"*33),
@@ -348,7 +348,7 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
         ]
 
         try:
-            hits_mod.hmmsearch = lambda h,s: fake_matches
+            hits_mod.hmmsearch = lambda h,s,cutoff: fake_matches
 
             translations = [
               (199, 101, "A"*33),
@@ -404,7 +404,7 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
         ]
 
         try:
-            hits_mod.hmmsearch = lambda h,s: fake_matches
+            hits_mod.hmmsearch = lambda h,s,cutoff: fake_matches
 
             translations = [
               (199, 101, "A"*33),

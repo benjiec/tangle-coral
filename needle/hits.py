@@ -27,6 +27,9 @@ def generate_transition_candidates(
 
     left_len = len(left_aa)
     right_len = len(right_aa)
+    # have to add this here to deal with deletions in sequences - i.e. missing bps from query/profile
+    overlap_len = min(left_len, right_len, overlap_len)
+
     assert left_len >= overlap_len
     assert right_len >= overlap_len
     assert overlap_len == 0 or gap_len == 0
@@ -238,6 +241,11 @@ def hmm_clean_protein(
         new_matches.append(new_left)
         current_left = new_right
     new_matches.append(current_left)
+
+    if not ProteinHit.can_collate_from_matches(new_matches):
+        print("Cleaned matches cannot be collated, revert")
+        print(protein_hit.collated_protein_sequence)
+        return protein_hit
 
     cleaned_pm = ProteinHit(
         matches=new_matches,

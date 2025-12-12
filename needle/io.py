@@ -70,6 +70,7 @@ def export_protein_hits(
     proteins_tsv_path: str,
     nucmatches_tsv_path: str,
     proteins_fasta_dir: str,
+    requires_score = True
 ) -> None:
     filtered = [pm for pm in protein_hits if pm.can_produce_single_sequence()]
     protein_header = [
@@ -102,18 +103,22 @@ def export_protein_hits(
             os.makedirs(proteins_fasta_dir, exist_ok=True)
 
     with open(proteins_tsv_path, "a") as f_prot, open(nucmatches_tsv_path, "a") as f_nuc:
+        score_filtered = []
         for pm in filtered:
             evalue: Optional[float] = None
             score: Optional[float] = None
             if pm.hmm_file:
                 score, evalue = hmmsearch_score(pm.hmm_file, pm.collated_protein_sequence)
+                if evalue is None and requires_score:
+                    continue
+            score_filtered.append(pm)
             write_protein_row(f_prot, genome_accession, pm, evalue, score)
             write_nucmatch_rows(f_nuc, pm)
 
         if proteins_fasta_dir:
             # Write protein FASTA records grouped by query_accession into per-query files
             by_query: Dict[str, List[ProteinHit]] = {}
-            for pm in filtered:
+            for pm in score_filtered:
                 qa = pm.query_accession
                 by_query.setdefault(qa, []).append(pm)
             for query_accession, pms in by_query.items():
