@@ -104,32 +104,37 @@ def parse_hmmsearch_domtbl(domtbl_path):
     return matches
 
 
-def hmmsearch_file(hmm_file_name, fasta_path, cutoff=False):
+def hmmsearch_file(hmm_file_name, fasta_path, cutoff=False, domE=None):
+    if domE is None:
+        domE = 0.001
+    else:
+        assert cutoff is False
+
     with tempfile.TemporaryDirectory() as tmpdir:
         domtbl_path = os.path.join(tmpdir, "out.domtbl")
         if cutoff:
             cmd = ["hmmsearch", "--cut_ga", "--domtblout", domtbl_path, hmm_file_name, fasta_path]
         else:
-            cmd = ["hmmsearch", "--domtblout", domtbl_path, hmm_file_name, fasta_path]
+            cmd = ["hmmsearch", "--domE", str(domE), "--domtblout", domtbl_path, hmm_file_name, fasta_path]
         run_command(cmd)
         return parse_hmmsearch_domtbl(domtbl_path)
 
 
-def hmmsearch(hmm_file_name, sequences, cutoff=False):
+def hmmsearch(hmm_file_name, sequences, cutoff=False, domE=None):
     with tempfile.TemporaryDirectory() as tmpdir:
         fasta_path = os.path.join(tmpdir, "cands.faa")
         with open(fasta_path, "w") as f:
             for i, cand in enumerate(sequences):
                 f.write(f">cand_{i}\n{cand}\n")
-        return hmmsearch_file(hmm_file_name, fasta_path, cutoff=cutoff)
+        return hmmsearch_file(hmm_file_name, fasta_path, cutoff=cutoff, domE=domE)
 
 
-def hmmsearch_sequence_dict(hmm_file_name, fasta_dict, cutoff=False):
+def hmmsearch_sequence_dict(hmm_file_name, fasta_dict, cutoff=False, domE=None):
     with tempfile.NamedTemporaryFile(delete=False, suffix=".faa", mode="w") as tmpf:
         for acc, sequence in fasta_dict.items():
             tmpf.write(f">{acc}\n{sequence}\n")
         tmpf.close()
-        return hmmsearch_file(hmm_file_name, tmpf.name, cutoff=cutoff)
+        return hmmsearch_file(hmm_file_name, tmpf.name, cutoff=cutoff, domE=domE)
 
 
 def hmmscan_file(hmm_file_name, fasta_path, cutoff=True):

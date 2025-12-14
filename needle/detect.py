@@ -3,7 +3,7 @@ from typing import Dict, List, Optional
 from Bio.Seq import Seq
 
 from .match import Match
-from .seq import extract_subsequence_strand_sensitive, read_fasta_as_dict
+from .seq import extract_subsequence, extract_subsequence_strand_sensitive, read_fasta_as_dict
 from .seq import to_dna_coordinate, compute_three_frame_translations
 from .hmm import hmmsearch_sequence_dict
 
@@ -220,6 +220,10 @@ def hmm_search_genome_sequence(
         hmm_rows = hmmsearch_sequence_dict(hmm_file, translated_fasta)
 
         for row in hmm_rows:
+            query_accession = row["query_accession"]
+            if not query_accession or query_accession.strip() == "-":
+                query_accession = row["query_name"]
+
             frame = int(row["target_name"][-1])
             if "_fwd_" in row["target_name"]:
                 frame_dna_start = translations_fwd[frame][0]
@@ -235,7 +239,7 @@ def hmm_search_genome_sequence(
             dna_ali_from, dna_ali_to = to_dna_coordinate(frame_dna_start+win_i, frame_dna_end+win_i, row["ali_from"], row["ali_to"])
 
             out = [
-              row["query_accession"],
+              query_accession,
               target_accession,
               row["evalue"],
               '',
