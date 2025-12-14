@@ -13,6 +13,7 @@ from needle.match import extract_subsequence_strand_sensitive, read_fasta_as_dic
 from needle.hmm import hmmscan_file, HMMCollection
 from needle.gff import parse_gff_to_hits
 from needle.io import export_protein_hits
+from needle.hits import compute_three_frame_translations
 from defaults import DefaultPath
 
 
@@ -96,6 +97,8 @@ def print_comparison(protein_name, status, hmm_rows, gff_hit, needle_rows):
 
     if not needle_rows:
         print("    DID NOT FIND NEEDLE RESULT")
+        for m in gff_hit.matches:
+            print("    gff match", m.target_start, m.target_end, abs(m.target_start-m.target_end)+1)
     else:
         for row in needle_rows:
             print("    needle dna match", row["protein_hit_id"], row["target_start"], row["target_end"], "covering hmm model", row["query_start"], row["query_end"]) 
@@ -103,7 +106,7 @@ def print_comparison(protein_name, status, hmm_rows, gff_hit, needle_rows):
             print("    gff match", m.target_start, m.target_end)
 
 
-def compare(hmm_file, query_accession, genome_accession, gff_proteins, protein_seq_names, genomic_fasta, needle_rows, output_f):
+def compare(hmm_file, query_accession, genome_accession, gff_proteins, protein_seq_names, genomic_fasta, needle_rows, output_f, not_found_f):
 
     # Run hmmscan producing domtblout
     with tempfile.TemporaryDirectory() as tmpdir:
@@ -133,6 +136,8 @@ def compare(hmm_file, query_accession, genome_accession, gff_proteins, protein_s
         return max([row["hmm_to"] for row in hmm_rows]) - \
                min([row["hmm_from"] for row in hmm_rows])
     filtered_hits = sorted(filtered_hits, key=sorter, reverse=True)
+
+    not_found_hits = []
 
     for gff_hit in filtered_hits:
         hmm_aa_matched = 0
@@ -173,6 +178,7 @@ def compare(hmm_file, query_accession, genome_accession, gff_proteins, protein_s
             if output_f:
                 output_f.write(f"{query_accession}\t{genome_accession}\t{protein_name}\t{protein_acc}\t{status}\t"+\
                                f"{hmm_len}\t{hmm_perc}\t{protein_len}\t{gff_avg_exon_len}\t{protein_perc}\t{hmm_eval}\t\t\t\n")
+            not_found_hits.append(gff_hit)
 
         else:
             keyf = lambda row: row["protein_hit_id"]
@@ -216,6 +222,14 @@ def compare(hmm_file, query_accession, genome_accession, gff_proteins, protein_s
     if output_f:
         output_f.flush()
 
+    if not_found_f:
+        for gff_hit in not_found_hits:
+            for m in gff_hit.matches:
+                x3f = compute_three_frame_translations(m.target_sequence, 1, len(m.target_sequence))
+                for frame_start, _2, aa in x3f:
+                  not_found_f.write(f">{gff_hit.protein_hit_id}_{m.target_start}_{frame_start}\n{aa}\n")
+        not_found_f.flush()
+
 
 if __name__ == "__main__":
 
@@ -224,6 +238,7 @@ if __name__ == "__main__":
     ap.add_argument("genome_accession")
     ap.add_argument("needle_match_file")
     ap.add_argument("--output-file", default=None)
+    ap.add_argument("--not-found-file", default=None)
     args = ap.parse_args()
 
     genome_accession = args.genome_accession
@@ -233,13 +248,12 @@ if __name__ == "__main__":
     gff_file = DefaultPath.ncbi_genome_gff(genome_accession)
     fna_file = DefaultPath.ncbi_genome_fna(genome_accession)
     assert fna_file
+    protein_seq_names = read_fasta_sequence_names(faa_file)
+    genomic_fasta = read_fasta_as_dict(fna_file)
 
     # Parse GFF -> ProteinHit list
-    gff_proteins = parse_gff_to_hits(gff_file, protein_id_attr="protein_id")
+    gff_proteins = parse_gff_to_hits(gff_file, protein_id_attr="protein_id", genomic_sequences=genomic_fasta)
     print("parsed protein hits from GFF, total", len(gff_proteins))
-    protein_seq_names = read_fasta_sequence_names(faa_file)
-
-    genomic_fasta = read_fasta_as_dict(fna_file)
 
     needle_rows = []
     with open(args.needle_match_file, newline='') as f:
@@ -259,15 +273,21 @@ if __name__ == "__main__":
                        "hmm len\thmmscan hmm match perc\tprotein len\texon avg len\thmmscan protein match perc\thmmscan evalue\t"+\
                        "needle protein id\tneedle aa matched\thmm aa matched\n")
 
+    not_found_f = None
+    if args.not_found_file:
+        not_found_f = open(args.not_found_file, "w")
+
     accessions = load_accessions(args.query_fasta)
-    print("accessions", accessions)
+    accessions = [a for a in accessions if a == "PF07992.21"]
     hmm_collection = HMMCollection(DefaultPath.pfam_hmm(), accessions)
 
     try:
         for acc in accessions:
-            compare(hmm_collection.get(acc), acc, genome_accession, gff_proteins, protein_seq_names, genomic_fasta, needle_rows, output_f)
+            compare(hmm_collection.get(acc), acc, genome_accession, gff_proteins, protein_seq_names, genomic_fasta, needle_rows, output_f, not_found_f)
     finally:
         hmm_collection.clean()
 
     if output_f:
         output_f.close()
+    if not_found_f:
+        not_found_f.close()

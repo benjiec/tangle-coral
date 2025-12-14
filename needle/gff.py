@@ -1,6 +1,6 @@
 from typing import Any, Dict, Iterable, List, Tuple
 from BCBio import GFF
-from .match import Match, ProteinHit
+from .match import Match, ProteinHit, extract_subsequence_strand_sensitive
 
 
 def _cds_transcript_order_key(strand: str):
@@ -123,13 +123,17 @@ def _parse_with_bcbb(gff_path: str) -> Iterable[Tuple[Any, Any]]:
         records = parser.parse(in_handle)
         return list(_flatten_features_from_bcbb_records(records))
 
-def parse_gff_to_hits(gff_path: str, protein_id_attr: str = "protein_id") -> List[ProteinHit]:
+
+def parse_gff_to_hits(gff_path: str, protein_id_attr = None, genomic_sequences = None) -> List[ProteinHit]:
     """
     Parse a GFF (GFF3 preferred) file and convert CDS features into Match objects,
     grouped by the same attribute 'protein_id' into ProteinHit objects.
     Uses chapmanb/bcbb (BCBio.GFF) parser exclusively.
     """
+
     records_and_feats: Iterable[Tuple[Any, Any]] = _parse_with_bcbb(gff_path)
+    if protein_id_attr is None:
+        protein_id_attr = "protein_id"
 
     def _group(records_feats: Iterable[Tuple[Any, Any]]) -> Tuple[Dict[str, List[Tuple[Any, Any]]], Dict[str, str], Dict[str, str]]:
         cds_by_protein: Dict[str, List[Tuple[Any, Any]]] = {}
@@ -195,6 +199,9 @@ def parse_gff_to_hits(gff_path: str, protein_id_attr: str = "protein_id") -> Lis
                 t_start, t_end = start, end
             else:
                 t_start, t_end = end, start  # 5'->3' of gene: start > end on reverse
+            target_sequence = None
+            if genomic_sequences:
+                target_sequence = extract_subsequence_strand_sensitive(genomic_sequences[seqid], t_start, t_end)
 
             matches.append(
                 Match(
@@ -206,6 +213,7 @@ def parse_gff_to_hits(gff_path: str, protein_id_attr: str = "protein_id") -> Lis
                     target_end=t_end,
                     e_value=0.0,
                     identity=0.0,
+                    target_sequence=target_sequence
                 )
             )
 

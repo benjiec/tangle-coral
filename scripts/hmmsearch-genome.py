@@ -57,7 +57,9 @@ for acc, genome_sequence in genomic_fasta.items():
         translated_fasta[f"{acc}_rev_0"] = translations_rev[0][2]
         translated_fasta[f"{acc}_rev_1"] = translations_rev[1][2]
         translated_fasta[f"{acc}_rev_2"] = translations_rev[2][2]
-        # print(translated_fasta)
+        for k,v in translated_fasta.items():
+            # print(f">{k}\n{v}")
+            pass
 
         t0 = time.time()
         hmm_rows = hmmsearch_sequence_dict(args.hmm_file, translated_fasta)
