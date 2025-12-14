@@ -10,10 +10,10 @@ import subprocess
 from typing import List, Dict, Set
 
 from needle.match import extract_subsequence_strand_sensitive, read_fasta_as_dict
+from needle.match import compute_three_frame_translations
 from needle.hmm import hmmscan_file, HMMCollection
 from needle.gff import parse_gff_to_hits
 from needle.io import export_protein_hits
-from needle.hits import compute_three_frame_translations
 from defaults import DefaultPath
 
 

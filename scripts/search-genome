@@ -4,13 +4,13 @@
 #   - module ID (i.e. mNNN)
 #   - genome accession
 
-mkdir -p data/$1_results/blast
+mkdir -p data/$1_results/detected
 
-if [ -f "data/$1_results/blast/$1_$2_blast_results.tsv" ]; then
-  echo "Found existing blast results for $2"
+if [ -f "data/$1_results/detected/$1_$2.tsv" ]; then
+  echo "Found existing detection results for $2"
 else
-  PYTHONPATH=. python3 scripts/blast-genome.py data/$1_query.faa $2 data/$1_results/blast/$1_$2_blast_results.tsv --min-word-size 2
+  PYTHONPATH=. python3 scripts/hmmsearch-genome.py data/$1_query.hmm $2 data/$1_results/detected/$1_$2.tsv
 fi
 
 echo "Collating search results for $2"
-PYTHONPATH=. python3 scripts/export-protein-results.py data/$1_query.faa data/$1_results/blast/$1_$2_blast_results.tsv $2 data/$1_results
+PYTHONPATH=. python3 scripts/export-protein-results.py data/$1_results/detected/$1_$2.tsv $2 data/$1_results

@@ -17,8 +17,6 @@ class Match:  # does not support matches across circular boundary
     e_value: float
     identity: float
     matched_sequence: Optional[str] = None
-
-    query_sequence: Optional[str] = None   # 5' to 3'
     target_sequence: Optional[str] = None  # 5' to 3'
 
     @property
@@ -362,3 +360,26 @@ def read_fasta_as_dict(path: str) -> Dict[str, str]:
             sequences_by_accession[current_acc] = "".join(current_seq_parts)
 
     return sequences_by_accession
+
+
+def compute_three_frame_translations(full_seq, start, end):
+    target_sequence = extract_subsequence_strand_sensitive(full_seq, start, end)
+    if target_sequence is None:
+        print("Cannot extract sequence using", len(full_seq), start, end)
+
+    translations = []
+    for frame in range(3):
+        trim_right = (len(target_sequence)-frame)%3
+        if trim_right > 0:
+          frame_sequence = target_sequence[frame:-trim_right]
+        else:
+          frame_sequence = target_sequence[frame:]
+        assert len(frame_sequence) % 3 == 0
+        aa = Seq(frame_sequence).translate(to_stop=False) # Translate entire sequence, including stops
+
+        if end > start:  # fwd strand
+            translations.append((start+frame, end-trim_right, str(aa)))
+        else:  # rev strand
+            translations.append((start-frame, end+trim_right, str(aa)))
+
+    return translations

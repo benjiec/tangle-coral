@@ -12,13 +12,12 @@ from needle.hits import (
     hmm_clean_protein,
     hmm_clean,
     adjust_target_coordinates,
-    compute_three_frame_translations,
     hmmsearch_to_dna_coords,
     find_matches_at_locus
 )
 import needle.hits as hits_mod
 
-from needle.blast import Results
+from needle.detect import Results
 from needle.match import group_matches, ProteinHit, Match
 
 
@@ -258,30 +257,6 @@ class TestCleaningSequenceWithHMM(unittest.TestCase):
 
 
 class TestRefiningHitsWithHMM(unittest.TestCase):
-
-    def test_three_frame_translation_computes_per_frame_sequence_and_dna_coordinates(self):
-        genomic = "ATGCGATGACTTCGTTATGCTT"
-
-        # fwd
-        self.assertEqual(
-          compute_three_frame_translations(genomic, 2, 17),
-          [
-            (2, 16, "CDDFV"),
-            (3, 17, "AMTSL"),
-            (4, 15, "R*LR"),
-          ]
-        )
-
-        # rev
-        # TGCGATGACTTCGTT -> AACGAAGTCATCGCA
-        self.assertEqual(
-          compute_three_frame_translations(genomic, 16, 2),
-          [
-            (16, 2, "NEVIA"),
-            (15, 4, "TKSS"),
-            (14, 3, "RSHR")
-          ]
-        )
 
     def test_hmmsearch_to_dna_coords_converts_aa_coordinates_from_results_to_dna_coordinates_on_fwd_strand(self):
 

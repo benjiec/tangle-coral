@@ -9,6 +9,40 @@ def run_command(cmd: str):
     subprocess.run(cmd, check=True, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 
+def hmmfetch(hmm_file_name, acc, output_file_name):
+    cmd = ["hmmfetch", "-o", output_file_name, hmm_file_name, acc]
+    run_command(cmd)
+
+
+class HMMCollection(object):
+
+    def __init__(self, big_hmm_file, accession_ids):
+        self.__by_accession = {}
+
+        accession_ids = list(set(accession_ids))
+        with tempfile.TemporaryDirectory(delete=False) as temp_dir:
+            self.__temp_dir = temp_dir
+            for acc in accession_ids:
+                with tempfile.NamedTemporaryFile(dir=temp_dir, delete=False, suffix=".hmm") as tmpf:
+                    tmpf.close()
+                    # print("fetching hmm into temp file", tmpf.name)
+                    hmmfetch(big_hmm_file, acc, tmpf.name)
+                    self.__by_accession[acc] = tmpf.name
+
+    def get(self, accession):
+        return self.__by_accession[accession]
+
+
+    def clean(self):
+        for fn in self.__by_accession.values():
+            # print("removing", fn)
+            os.remove(fn)
+        # print("removing", self.__temp_dir)
+        shutil.rmtree(self.__temp_dir)
+        self.__by_accession = None
+        self.__temp_dir = None
+
+
 def parse_hmmsearch_domtbl(domtbl_path):
     expected_header = "# target name  accession  tlen  query name  accession  qlen  E-value  score  bias  #  of  c-Evalue  i-Evalue  score  bias  from  to  from  to"
     idx_target = 0
@@ -107,37 +141,3 @@ def hmmscan_file(hmm_file_name, fasta_path, cutoff=True):
             cmd = ["hmmscan", "--domtblout", domtbl_path, hmm_file_name, fasta_path]
         run_command(cmd)
         return parse_hmmsearch_domtbl(domtbl_path)
-
-
-def hmmfetch(hmm_file_name, acc, output_file_name):
-    cmd = ["hmmfetch", "-o", output_file_name, hmm_file_name, acc]
-    run_command(cmd)
-
-
-class HMMCollection(object):
-
-    def __init__(self, big_hmm_file, accession_ids):
-        self.__by_accession = {}
-
-        accession_ids = list(set(accession_ids))
-        with tempfile.TemporaryDirectory(delete=False) as temp_dir:
-            self.__temp_dir = temp_dir
-            for acc in accession_ids:
-                with tempfile.NamedTemporaryFile(dir=temp_dir, delete=False, suffix=".hmm") as tmpf:
-                    tmpf.close()
-                    # print("fetching hmm into temp file", tmpf.name)
-                    hmmfetch(big_hmm_file, acc, tmpf.name)
-                    self.__by_accession[acc] = tmpf.name
-
-    def get(self, accession):
-        return self.__by_accession[accession]
-
-
-    def clean(self):
-        for fn in self.__by_accession.values():
-            # print("removing", fn)
-            os.remove(fn)
-        # print("removing", self.__temp_dir)
-        shutil.rmtree(self.__temp_dir)
-        self.__by_accession = None
-        self.__temp_dir = None

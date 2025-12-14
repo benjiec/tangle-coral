@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 
-from needle.blast import Results
+from needle.detect import Results
 from needle.match import group_matches
 from needle.hits import hmm_find_proteins, hmm_clean
 from needle.io import export_protein_hits
@@ -9,16 +9,15 @@ from needle.hmm import HMMCollection
 from defaults import DefaultPath
 
 def main():
-    parser = argparse.ArgumentParser(description="Export protein matches from BLAST TSV.")
-    parser.add_argument("query_fasta", help="Path to query protein FASTA")
-    parser.add_argument("results_tsv", help="BLAST results TSV (NCBI headers)")
+    parser = argparse.ArgumentParser(description="Export protein matches from detection results TSV.")
+    parser.add_argument("results_tsv", help="Detection results TSV (Results.PRODUCER headers)")
     parser.add_argument("genome_accession", help="Genome accession")
     parser.add_argument("output_dir", help="Path of output directory")
     args = parser.parse_args()
 
     target_fasta = DefaultPath.ncbi_genome_fna(args.genome_accession)
 
-    res = Results(args.results_tsv, query_fasta_path=args.query_fasta, target_fasta_path=target_fasta)
+    res = Results(args.results_tsv, target_fasta_path=target_fasta)
     protein_matches = group_matches(res.matches())
     accession_ids = [pm.query_accession for pm in protein_matches]
 

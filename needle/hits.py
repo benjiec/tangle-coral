@@ -2,7 +2,7 @@ import os
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 from Bio.Seq import Seq
-from .match import Match, ProteinHit, order_matches_for_junctions, extract_subsequence, extract_subsequence_strand_sensitive
+from .match import Match, ProteinHit, order_matches_for_junctions, extract_subsequence, extract_subsequence_strand_sensitive, compute_three_frame_translations
 from .hmm import hmmsearch, hmmfetch, HMMCollection
 
 
@@ -146,7 +146,6 @@ def _clone(m: Match) -> Match:
         e_value=m.e_value,
         identity=m.identity,
         matched_sequence=m.matched_sequence,
-        query_sequence=m.query_sequence,
         target_sequence=m.target_sequence,
     )
 
@@ -311,29 +310,6 @@ def hmmsearch_to_dna_coords(hmm_file, three_frame_translations):
         # print("converted to dna coords", hmm_match)
 
     return to_return
-
-
-def compute_three_frame_translations(full_seq, start, end):
-    target_sequence = extract_subsequence_strand_sensitive(full_seq, start, end)
-    if target_sequence is None:
-        print("Cannot extract sequence using", len(full_seq), start, end)
-
-    translations = []
-    for frame in range(3):
-        trim_right = (len(target_sequence)-frame)%3
-        if trim_right > 0:
-          frame_sequence = target_sequence[frame:-trim_right]
-        else:
-          frame_sequence = target_sequence[frame:]
-        assert len(frame_sequence) % 3 == 0
-        aa = Seq(frame_sequence).translate(to_stop=False) # Translate entire sequence, including stops
-
-        if end > start:  # fwd strand
-            translations.append((start+frame, end-trim_right, str(aa)))
-        else:  # rev strand
-            translations.append((start-frame, end+trim_right, str(aa)))
-
-    return translations
 
 
 def find_matches_at_locus(old_matches, full_seq, start, end, hmm_file, step=2000, max_search_distance=10000, force_extend=False):

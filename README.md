@@ -130,20 +130,20 @@ Always activate the virtualenv first
 source .venv/bin/activate
 ```
 
-### Generating Query .faa for a KEGG Module
+### Generating Query .hmm for a KEGG Module
 
-Use the following command to generate a query .faa file for a module. This
-script a) finds list of KO#s for the module, b) scans Pfam HMM database against
-KO consensus sequences, and c) generates a .faa file containing consensus
-sequences of matching Pfam families.
+Use `hmmfetch`, working with either `kegg-downloads/ko.hmm` or
+`pfam-downloads/Pfam-A.hmm`, generate a smaller HMM file containing the HMMs to
+search, for the module.
 
-```
-PYTHONPATH=. python3 scripts/generate-module-fasta.py m00009
-```
+Name the smaller HMM file as `data/m00009_ko.hmm` or `data/m00009_pfam.hmm`,
+then create a symlink from `data/m00009_query.hmm` to the HMM file to use by
+default. Change the module ID as needed.
+
 
 ### Generate Pfam Hits Database against a Genome Accession
 
-The following script puts outputs in `data/m0009_results` directory
+The following script puts outputs in `data/m00009_results` directory
 
 ```
 ./scripts/search-genome m00009 GCF_002042975.1
