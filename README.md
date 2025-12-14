@@ -79,13 +79,13 @@ Download the HMM profiles from `https://www.genome.jp/ftp/db/kofam/`. The
 Concatenate all the .hmm files together, e.g.
 
 ```
-cat profiles/*.hmm > ko_full.hmm
+cat profiles/*.hmm > kegg_downloads/ko.hmm
 ```
 
 Generate consensus protein sequence as a FASTA file, with
 
 ```
-/opt/homebrew/Cellar/hmmer/3.4/bin/hmmemit -c ko_full.hmm > ko.fasta
+/opt/homebrew/Cellar/hmmer/3.4/bin/hmmemit -c kegg_downloads/ko.hmm > ko.fasta
 ```
 
 ### Download HMM profiles from Pfam
@@ -202,7 +202,8 @@ proteins (i.e. in `protein.faa` and `genomic.gff`) compare against protein
 found by Needle.
 
 ```
-PYTHONPATH=. python3 scripts/compare-gff-with-match.py data/m00009_query.faa GCF_002042975.1 data/m00009_results/matches.tsv --output-file <filename>
+PYTHONPATH=. python3 scripts/compare-gff-with-match.py data/m00009_query.faa GCF_002042975.1 data/m00009_results/matches.tsv \
+  --output-file <filename> --not-found-file <filename>
 ```
 
 The script above outputs a TSV file that can be joined with outputs of the

@@ -89,21 +89,20 @@ def print_comparison(protein_name, status, hmm_rows, gff_hit, needle_rows):
         protein_aa_len += (abs(row["ali_to"] - row["ali_from"]) + 1)
         protein_len = row["query_length"]
 
-    print("    found by hmmscan, on", gff_hit.target_accession, gff_hit.target_start, gff_hit.target_end,
-          round(protein_aa_len * 100 / protein_len, 1), "% of", gff_hit.query_accession)
+    print("    found by hmmscan, on", gff_hit.target_accession, gff_hit.target_start, gff_hit.target_end, "of", gff_hit.query_accession)
     for row in hmm_rows:
         print("    hmm model", row["target_name"], row["target_accession"], row["hmm_from"], row["hmm_to"], "matches", gff_hit.query_accession, row["ali_from"], row["ali_to"],
-              "of", row["query_length"], row["evalue"])
+              "of", row["query_length"], row["evalue"], row["score"])
 
     if not needle_rows:
         print("    DID NOT FIND NEEDLE RESULT")
         for m in gff_hit.matches:
-            print("    gff match", m.target_start, m.target_end, abs(m.target_start-m.target_end)+1)
+            print("    gff match", m.target_start, m.target_end, m.query_start, m.query_end)
     else:
         for row in needle_rows:
             print("    needle dna match", row["protein_hit_id"], row["target_start"], row["target_end"], "covering hmm model", row["query_start"], row["query_end"]) 
         for m in gff_hit.matches:
-            print("    gff match", m.target_start, m.target_end)
+            print("    gff match", m.target_start, m.target_end, m.query_start, m.query_end)
 
 
 def compare(hmm_file, query_accession, genome_accession, gff_proteins, protein_seq_names, genomic_fasta, needle_rows, output_f, not_found_f):
@@ -113,6 +112,10 @@ def compare(hmm_file, query_accession, genome_accession, gff_proteins, protein_s
         cmd = ["hmmpress", "-f", hmm_file]
         run_cmd(cmd)
         hmmscan_rows = hmmscan_file(hmm_file, faa_file)
+
+    # gff_proteins: query = protein accession, target = contig accession
+    # hmm rows: query = protein, target = hmm name
+    # needle rows: query = hmm name, target = contig accession
 
     print(hmm_file)
     print("received", len(hmmscan_rows), "matches from hmmscan")
@@ -140,19 +143,36 @@ def compare(hmm_file, query_accession, genome_accession, gff_proteins, protein_s
     not_found_hits = []
 
     for gff_hit in filtered_hits:
-        hmm_aa_matched = 0
-        hmm_len = 0
-        hmm_eval = None
-        protein_aa_matched = 0
-        protein_len = 0
         hmm_rows = [row for row in hmmscan_rows if row["query_name"] == gff_hit.query_accession]
+        hmm_len = hmm_rows[0]["target_length"]
+        hmm_eval = hmm_rows[0]["evalue"]
+        protein_len = hmm_rows[0]["query_length"]
+
+        hmm_aa_matched = [0 for i in range(0, hmm_len)]
+        protein_aa_matched = [0 for i in range(0, protein_len)]
         for row in hmm_rows:
-            # hmm rows: target is HMM, query is protein
-            hmm_aa_matched += (row["hmm_to"] - row["hmm_from"] + 1)
-            hmm_len = row["target_length"]
-            hmm_eval = row["evalue"]
-            protein_aa_matched += (abs(row["ali_to"] - row["ali_from"]) + 1)
-            protein_len = row["query_length"]
+            for hmm_i in range(row["hmm_from"]-1, row["hmm_to"]):
+                hmm_aa_matched[hmm_i] = 1
+            if row["ali_from"] < row["ali_to"]:
+                for protein_i in range(row["ali_from"]-1, row["ali_to"]):
+                    protein_aa_matched[protein_i] = 1
+            else:
+                for protein_i in range(row["ali_to"]-1, row["ali_from"]):
+                    protein_aa_matched[protein_i] = 0
+
+        # compute the exon length where hmm matched
+        matched_exons = []
+        for m in gff_hit.matches:
+            fragment_matched_by_hmm = False
+            for i in range(m.query_start-1, m.query_end):
+                if i < len(protein_aa_matched) and protein_aa_matched[i] > 0:
+                    fragment_matched_by_hmm = True
+            if fragment_matched_by_hmm:
+                matched_exons.append(abs(m.target_end-m.target_start)+1)
+        matched_exon_len = round(sum(matched_exons) / len(matched_exons), 1)
+
+        hmm_aa_matched = sum(hmm_aa_matched)
+        protein_aa_matched = sum(protein_aa_matched)
         protein_perc = round(protein_aa_matched * 100 / protein_len, 1)
         hmm_perc = round(hmm_aa_matched * 100 / hmm_len, 1)
 
@@ -167,17 +187,12 @@ def compare(hmm_file, query_accession, genome_accession, gff_proteins, protein_s
 
         needle_rows_on_target = [row for row in needle_rows if row["target_accession"] == gff_hit.target_accession]
 
-        gff_total_len = 0
-        for m in gff_hit.matches:
-            gff_total_len += abs(m.target_end-m.target_start)+1
-        gff_avg_exon_len = round(gff_total_len / len(gff_hit.matches), 1)
-
         if len(needle_rows_on_target) == 0:
             status = "NOT FOUND"
             print_comparison(protein_name, status, hmm_rows, gff_hit, None)
             if output_f:
                 output_f.write(f"{query_accession}\t{genome_accession}\t{protein_name}\t{protein_acc}\t{status}\t"+\
-                               f"{hmm_len}\t{hmm_perc}\t{protein_len}\t{gff_avg_exon_len}\t{protein_perc}\t{hmm_eval}\t\t\t\n")
+                               f"{hmm_len}\t{hmm_perc}\t{protein_len}\t{protein_perc}\t{matched_exon_len}\t{hmm_eval}\t\t0\t{hmm_aa_matched}\n")
             not_found_hits.append(gff_hit)
 
         else:
@@ -200,15 +215,17 @@ def compare(hmm_file, query_accession, genome_accession, gff_proteins, protein_s
 		    # by hmmscan
 
                 else:
-                    needle_aa_len = 0
+                    needle_aa_matched_hmm = [0 for i in range(0, hmm_len)]
                     needle_dna_len = 0
                     for row in needle_rows_for_hit:
-                        needle_aa_len += (row["query_end"] - row["query_start"] + 1)
+                        for i in range(row["query_start"]-1, row["query_end"]):
+                            needle_aa_matched_hmm[i] = 1
                         needle_dna_len += (abs(row["target_start"] - row["target_end"]) + 1)
+                    needle_aa_matched = sum(needle_aa_matched_hmm)
 
                     status = "FOUND"
                     substatus = []
-                    if float(abs(needle_aa_len - hmm_aa_matched) / hmm_aa_matched) > 0.1:
+                    if float(abs(needle_aa_matched - hmm_aa_matched) / hmm_aa_matched) > 0.1:
                         substatus.append("LEN DIFF HMMSCAN")
                     if len(substatus):
                         status += " ("+", ".join(substatus)+")"
@@ -216,8 +233,8 @@ def compare(hmm_file, query_accession, genome_accession, gff_proteins, protein_s
                     print_comparison(protein_name, status, hmm_rows, gff_hit, needle_rows_for_hit)
                     if output_f:
                         output_f.write(f"{query_accession}\t{genome_accession}\t{protein_name}\t{protein_acc}\t{status}\t"+\
-                                       f"{hmm_len}\t{hmm_perc}\t{protein_len}\t{gff_avg_exon_len}\t{protein_perc}\t{hmm_eval}\t"+\
-                                       f"{needle_protein_hit_id}\t{needle_aa_len}\t{hmm_aa_matched}\n")
+                                       f"{hmm_len}\t{hmm_perc}\t{protein_len}\t{protein_perc}\t{matched_exon_len}\t{hmm_eval}\t"+\
+                                       f"{needle_protein_hit_id}\t{needle_aa_matched}\t{hmm_aa_matched}\n")
 
     if output_f:
         output_f.flush()
@@ -270,7 +287,7 @@ if __name__ == "__main__":
     if args.output_file:
         output_f = open(args.output_file, "w")
         output_f.write("query\tgenome\tprotein name\tprotein accession\tstatus\t"+\
-                       "hmm len\thmmscan hmm match perc\tprotein len\texon avg len\thmmscan protein match perc\thmmscan evalue\t"+\
+                       "hmm len\thmm match perc\tprotein len\tprotein match perc\texon avg len\thmmscan evalue\t"+\
                        "needle protein id\tneedle aa matched\thmm aa matched\n")
 
     not_found_f = None
@@ -278,7 +295,6 @@ if __name__ == "__main__":
         not_found_f = open(args.not_found_file, "w")
 
     accessions = load_accessions(args.query_fasta)
-    accessions = [a for a in accessions if a == "PF07992.21"]
     hmm_collection = HMMCollection(DefaultPath.pfam_hmm(), accessions)
 
     try:

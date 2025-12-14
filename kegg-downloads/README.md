@@ -1,5 +1,1 @@
-HMM profiles from KEGG should be downloaded into this directory, under `profiles`. E.g.
-
-```
-ls profiles/K00024.hmm
-```
+HMM profiles from KEGG should be downloaded into this directory and combined into one giant HMM file `ko.hmm`
