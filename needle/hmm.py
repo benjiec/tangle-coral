@@ -112,7 +112,7 @@ def removable_gap_starts_here(query_sequence, hit_sequence, pos, gap_tolerated, 
     seen_star_on_hit = False
     for i in range(pos, len(query_sequence)):
         if query_sequence[i] in ".-":
-            if hit_sequence[i] == "*":
+            if always_remove_gap_with_star and hit_sequence[i] == "*":
                 seen_star_on_hit = True
         else:
             if i-gap_started > gap_tolerated or \
