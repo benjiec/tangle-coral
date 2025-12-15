@@ -186,36 +186,44 @@ class Results:
 def hmm_search_genome_sequence(
     hmm_file, target_accession, target_sequence,
     win, win_overlap,
-    contig_start = None, contig_end = None
+    contig_left_0b = None, contig_right_excl_0b = None
 ):
     """
     Returns array of lists, each list has values in Results.PRODUCER_HEADER order
     """
 
-    if contig_start is None:
-        contig_start = 0
-    if contig_end is None:
-        contig_end = len(target_sequence)
+    if contig_left_0b is None:
+        contig_left_0b = 0
+    if contig_right_excl_0b is None:
+        contig_right_excl_0b = len(target_sequence)
 
     detected = []
 
-    for win_i in range(contig_start, contig_end, win):
+    for win_i in range(contig_left_0b, contig_right_excl_0b, win):
         translated_fasta = {}
 
-        subs = target_sequence[win_i:win_i+win+win_overlap]
+        subs = target_sequence[win_i:min(win_i+win+win_overlap, contig_right_excl_0b)]
         translations_fwd = compute_three_frame_translations(subs, 1, len(subs))
         translations_rev = compute_three_frame_translations(subs, len(subs), 1)
 
-        translated_fasta[f"{target_accession}_fwd_0"] = translations_fwd[0][2]
-        translated_fasta[f"{target_accession}_fwd_1"] = translations_fwd[1][2]
-        translated_fasta[f"{target_accession}_fwd_2"] = translations_fwd[2][2]
-        translated_fasta[f"{target_accession}_rev_0"] = translations_rev[0][2]
-        translated_fasta[f"{target_accession}_rev_1"] = translations_rev[1][2]
-        translated_fasta[f"{target_accession}_rev_2"] = translations_rev[2][2]
+        if translations_fwd[0][2]:
+            translated_fasta[f"{target_accession}_fwd_0"] = translations_fwd[0][2]
+        if translations_fwd[1][2]:
+            translated_fasta[f"{target_accession}_fwd_1"] = translations_fwd[1][2]
+        if translations_fwd[2][2]:
+            translated_fasta[f"{target_accession}_fwd_2"] = translations_fwd[2][2]
+        if translations_rev[0][2]:
+            translated_fasta[f"{target_accession}_rev_0"] = translations_rev[0][2]
+        if translations_rev[1][2]:
+            translated_fasta[f"{target_accession}_rev_1"] = translations_rev[1][2]
+        if translations_rev[2][2]:
+            translated_fasta[f"{target_accession}_rev_2"] = translations_rev[2][2]
         
         for k,v in translated_fasta.items():
             # print(f">{k}\n{v}")
             pass
+        if len(translated_fasta.keys()) == 0:
+            continue
 
         hmm_rows = hmmsearch_sequence_dict(hmm_file, translated_fasta)
 

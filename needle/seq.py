@@ -76,14 +76,11 @@ def compute_three_frame_translations(full_seq, start, end):
     return translations
 
 
-def to_dna_coordinate(frame_dna_start, frame_dna_end, ali_from, ali_to):
+def to_dna_coordinate(frame_dna_start, frame_dna_end, aa_from, aa_to):
     if frame_dna_end > frame_dna_start: # fwd strand
-        dna_ali_from = frame_dna_start+(ali_from-1)*3
-        dna_ali_to = frame_dna_start+ali_to*3-1
+        dna_aa_from = frame_dna_start+(aa_from-1)*3
+        dna_aa_to = frame_dna_start+aa_to*3-1
     else: # rev strand 
-        dna_ali_from = frame_dna_start-(ali_from-1)*3
-        dna_ali_to = frame_dna_start-ali_to*3+1
-    return dna_ali_from, dna_ali_to
-
-
-
+        dna_aa_from = frame_dna_start-(aa_from-1)*3
+        dna_aa_to = frame_dna_start-aa_to*3+1
+    return dna_aa_from, dna_aa_to

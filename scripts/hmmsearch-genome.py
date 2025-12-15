@@ -25,18 +25,18 @@ for acc, genome_sequence in genomic_fasta.items():
         continue
 
     if args.target_left:
-        contig_start = args.target_left - 1
+        contig_left_0b = args.target_left - 1
     else:
-        contig_start = None
+        contig_left_0b = None
     if args.target_right:
-        contig_end = args.target_right
+        contig_right_excl_0b = args.target_right
     else:
-        contig_end = None
+        contig_right_excl_0b = None
 
     detected.extend(hmm_search_genome_sequence(
         args.hmm_file, acc, genome_sequence, win, win_overlap,
-        contig_start=contig_start,
-        contig_end=contig_end
+        contig_left_0b=contig_left_0b,
+        contig_right_excl_0b=contig_right_excl_0b
     ))
 
 with open(args.output_file, "w") as f:
