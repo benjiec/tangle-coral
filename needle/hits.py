@@ -406,10 +406,6 @@ def hmm_find_protein_around_locus(protein_hit, results, hmm_file):
     if new_matches is None:
         return protein_hit
 
-    query_sequence = results._query_sequences_by_accession.get(protein_hit.query_accession, None)
-    for match in new_matches:
-        match.query_sequence = extract_subsequence(query_sequence, match.query_start, match.query_end)
-
     new_pm = ProteinHit(
         matches=new_matches,
         query_start=min(m.query_start for m in new_matches),

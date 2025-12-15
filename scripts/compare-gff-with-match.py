@@ -254,6 +254,7 @@ if __name__ == "__main__":
     ap.add_argument("query_fasta", help="Query fasta used for searching")
     ap.add_argument("genome_accession")
     ap.add_argument("needle_match_file")
+    ap.add_argument("hmm_collection", help="HMM collection, either ko or pfam", choices=['ko', 'pfam'])
     ap.add_argument("--output-file", default=None)
     ap.add_argument("--not-found-file", default=None)
     args = ap.parse_args()
@@ -295,7 +296,10 @@ if __name__ == "__main__":
         not_found_f = open(args.not_found_file, "w")
 
     accessions = load_accessions(args.query_fasta)
-    hmm_collection = HMMCollection(DefaultPath.pfam_hmm(), accessions)
+    if args.hmm_collection == "ko":
+        hmm_collection = HMMCollection(DefaultPath.ko_hmm(), accessions)
+    else:
+        hmm_collection = HMMCollection(DefaultPath.pfam_hmm(), accessions)
 
     try:
         for acc in accessions:

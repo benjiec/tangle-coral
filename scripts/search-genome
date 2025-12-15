@@ -3,14 +3,15 @@
 # arguments, in order:
 #   - module ID (i.e. mNNN)
 #   - genome accession
+#   - hmm collection
 
 mkdir -p data/$1_results/detected
 
 if [ -f "data/$1_results/detected/$1_$2.tsv" ]; then
   echo "Found existing detection results for $2"
 else
-  PYTHONPATH=. python3 scripts/hmmsearch-genome.py data/$1_query.hmm $2 data/$1_results/detected/$1_$2.tsv
+  PYTHONPATH=. python3 scripts/hmmsearch-genome.py data/$1_$3.hmm $2 data/$1_results/detected/$1_$2.tsv
 fi
 
 echo "Collating search results for $2"
-PYTHONPATH=. python3 scripts/export-protein-results.py data/$1_results/detected/$1_$2.tsv $2 data/$1_results
+PYTHONPATH=. python3 scripts/export-protein-results.py data/$1_results/detected/$1_$2.tsv $2 $3 data/$1_results

@@ -136,9 +136,8 @@ Use `hmmfetch`, working with either `kegg-downloads/ko.hmm` or
 `pfam-downloads/Pfam-A.hmm`, generate a smaller HMM file containing the HMMs to
 search, for the module.
 
-Name the smaller HMM file as `data/m00009_ko.hmm` or `data/m00009_pfam.hmm`,
-then create a symlink from `data/m00009_query.hmm` to the HMM file to use by
-default. Change the module ID as needed.
+Name the smaller HMM file as `data/m00009_ko.hmm` or `data/m00009_pfam.hmm`.
+Change the module ID as needed.
 
 
 ### Generate Pfam Hits Database against a Genome Accession
@@ -146,13 +145,17 @@ default. Change the module ID as needed.
 The following script puts outputs in `data/m00009_results` directory
 
 ```
-./scripts/search-genome m00009 GCF_002042975.1
+./scripts/search-genome m00009 GCF_002042975.1 ko
 ```
+
+The last argument can be either "ko" or "pfam", and would result in the program
+using the HMM file with that name, e.g. `data/m00009_ko.hmm`.
+
 
 Or if you have a list of genome accessions in a file, e.g. `genomes.txt`, then do
 
 ```
-./scripts/search-genomes m00009 genomes.txt
+./scripts/search-genomes m00009 genomes.txt ko
 ```
 
 ### Cluster Proteins

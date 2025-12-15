@@ -12,6 +12,7 @@ def main():
     parser = argparse.ArgumentParser(description="Export protein matches from detection results TSV.")
     parser.add_argument("results_tsv", help="Detection results TSV (Results.PRODUCER headers)")
     parser.add_argument("genome_accession", help="Genome accession")
+    parser.add_argument("hmm_collection", help="HMM collection, either ko or pfam", choices=['ko', 'pfam'])
     parser.add_argument("output_dir", help="Path of output directory")
     args = parser.parse_args()
 
@@ -21,7 +22,10 @@ def main():
     protein_matches = group_matches(res.matches())
     accession_ids = [pm.query_accession for pm in protein_matches]
 
-    hmm_collection = HMMCollection(DefaultPath.pfam_hmm(), accession_ids)
+    if args.hmm_collection == "ko":
+        hmm_collection = HMMCollection(DefaultPath.ko_hmm(), accession_ids)
+    else:
+        hmm_collection = HMMCollection(DefaultPath.pfam_hmm(), accession_ids)
 
     try:
         # use HMM to find more fragments

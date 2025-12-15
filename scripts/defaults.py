@@ -33,3 +33,7 @@ class DefaultPath(object):
     @staticmethod
     def pfam_hmm():
         return "pfam-downloads/Pfam-A.hmm"
+
+    @staticmethod
+    def ko_hmm():
+        return "kegg-downloads/ko.hmm"
