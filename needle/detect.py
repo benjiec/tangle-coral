@@ -226,6 +226,7 @@ def hmm_search_genome_sequence(
             continue
 
         hmm_rows = hmmsearch_sequence_dict(hmm_file, translated_fasta)
+        hmm_rows = [row for row in hmm_rows if row["evalue"] <= 0.001]
 
         for row in hmm_rows:
             query_accession = row["query_accession"]

@@ -66,6 +66,7 @@ def generate_transition_candidates(
 
 def hmmsearch_find_best_candidate(hmm_file_name, sequences):
     matches = hmmsearch(hmm_file_name, sequences, cutoff=False)
+    matches = [row for row in matches if row["evalue"] < 0.01]
 
     best_idx = None
     best_score = float("-inf")

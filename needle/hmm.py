@@ -3,6 +3,9 @@ import os
 import shutil
 import subprocess
 import tempfile
+from dataclasses import dataclass
+from typing import List
+from Bio import SearchIO
 
 
 def run_command(cmd: str):
@@ -104,37 +107,197 @@ def parse_hmmsearch_domtbl(domtbl_path):
     return matches
 
 
-def hmmsearch_file(hmm_file_name, fasta_path, cutoff=False, domE=None):
-    if domE is None:
-        domE = 0.001
-    else:
-        assert cutoff is False
-
-    with tempfile.TemporaryDirectory() as tmpdir:
-        domtbl_path = os.path.join(tmpdir, "out.domtbl")
-        if cutoff:
-            cmd = ["hmmsearch", "--cut_ga", "--domtblout", domtbl_path, hmm_file_name, fasta_path]
+def removable_gap_starts_here(query_sequence, hit_sequence, pos, gap_tolerated, always_remove_gap_with_star):
+    gap_started = pos
+    seen_star_on_hit = False
+    for i in range(pos, len(query_sequence)):
+        if query_sequence[i] in ".-":
+            if hit_sequence[i] == "*":
+                seen_star_on_hit = True
         else:
-            cmd = ["hmmsearch", "--domE", str(domE), "--domtblout", domtbl_path, hmm_file_name, fasta_path]
-        run_command(cmd)
-        return parse_hmmsearch_domtbl(domtbl_path)
+            if i-gap_started > gap_tolerated or \
+               (i-gap_started > 1 and seen_star_on_hit):
+                return i
+            return None
+    return len(query_sequence)
 
 
-def hmmsearch(hmm_file_name, sequences, cutoff=False, domE=None):
+@dataclass
+class Aligned(object):
+    query_result_id: str
+    query_length: int
+    hit_id: str
+    full_aligned_evalue: float
+    full_aligned_bitscore: float
+    query_sequence: List[str]
+    query_positions_1b: List[int]
+    hit_sequence: List[str]
+    hit_positions_1b: List[int]
+
+    def match_row(self):
+        return dict(
+            target_name = self.hit_id,
+            target_accession = self.hit_id,
+            query_name = self.query_result_id,
+            query_accession = self.query_result_id,
+            evalue = self.full_aligned_evalue,
+            score = self.full_aligned_bitscore,
+            query_length = self.query_length,
+            hmm_from = self.query_positions_1b[0],
+            hmm_to = self.query_positions_1b[-1],
+            target_length = None,
+            ali_from = self.hit_positions_1b[0],
+            ali_to = self.hit_positions_1b[-1],
+        )
+
+    @staticmethod
+    def from_hsp(query_result_id, query_length, hit_id, hsp):
+        assert len(hsp.query.seq) == len(hsp.hit.seq)
+
+        query_sequence = []
+        hit_sequence = []
+        query_positions_1b = []
+        hit_positions_1b = []
+
+        if hsp.query_start <= hsp.query_end:
+            _query_incr = 1
+        else:
+            _query_incr = -1
+        if hsp.hit_start <= hsp.hit_end:
+            _hit_incr = 1
+        else:
+            _hit_incr = -1
+
+        # we are recording 1-based positions, BioPython convention is [start..end) and 0 based
+        next_query_pos = hsp.query_start+1
+        next_hit_pos = hsp.hit_start+1
+
+        for i,(q,t) in enumerate(zip(str(hsp.query.seq), str(hsp.hit.seq))):
+           query_sequence.append(q)
+           hit_sequence.append(t)
+           query_positions_1b.append(next_query_pos)
+           hit_positions_1b.append(next_hit_pos)
+
+           if q in "-.":  # there is an insertion on target sequence
+               pass       # query position does not advance
+           else:
+               next_query_pos += _query_incr
+
+           if t in "-.":  # there is a deletion on target sequence
+               pass       # target position does not advance
+           else:
+               next_hit_pos += _hit_incr
+
+        # comparing 1based with 0based+1
+        assert query_positions_1b[-1] == hsp.query_end
+        assert hit_positions_1b[-1] == hsp.hit_end
+
+        return Aligned(
+            query_result_id = query_result_id,
+            query_length = query_length,
+            hit_id = hit_id,
+            full_aligned_evalue = hsp.evalue,
+            full_aligned_bitscore = hsp.bitscore,
+            query_sequence = query_sequence,
+            query_positions_1b = query_positions_1b,
+            hit_sequence = hit_sequence,
+            hit_positions_1b = hit_positions_1b
+        )
+
+    def query_gap_removed(self, gap_tolerated=8, always_remove_gap_with_star=True):
+       
+        aligned = []
+
+        last_boundary_i = 0
+        i = 0
+        while i < len(self.query_sequence):
+            pos_after_gap = removable_gap_starts_here(self.query_sequence, self.hit_sequence, i, gap_tolerated, always_remove_gap_with_star)
+            if pos_after_gap is not None:
+                aligned.append(Aligned(
+                    query_result_id = self.query_result_id,
+                    query_length = self.query_length,
+                    hit_id = self.hit_id,
+                    full_aligned_evalue = self.full_aligned_evalue,
+                    full_aligned_bitscore = self.full_aligned_bitscore,
+                    query_sequence = self.query_sequence[last_boundary_i:i],
+                    query_positions_1b = self.query_positions_1b[last_boundary_i:i],
+                    hit_sequence = self.hit_sequence[last_boundary_i:i],
+                    hit_positions_1b = self.hit_positions_1b[last_boundary_i:i]
+                ))
+                last_boundary_i = pos_after_gap
+                i = pos_after_gap
+            else:
+                i += 1
+
+        if i > last_boundary_i:
+            aligned.append(Aligned(
+                query_result_id = self.query_result_id,
+                query_length = self.query_length,
+                hit_id = self.hit_id,
+                full_aligned_evalue = self.full_aligned_evalue,
+                full_aligned_bitscore = self.full_aligned_bitscore,
+                query_sequence = self.query_sequence[last_boundary_i:i],
+                query_positions_1b = self.query_positions_1b[last_boundary_i:i],
+                hit_sequence = self.hit_sequence[last_boundary_i:i],
+                hit_positions_1b = self.hit_positions_1b[last_boundary_i:i]
+            ))
+
+        return aligned
+
+
+def parse_hmmsearch_output(output_path):
+    alignments = []
+    with open(output_path, "r") as handle:
+        for query_result in SearchIO.parse(handle, "hmmer3-text"):
+            for hit in query_result.hits:
+                for hsp in hit.hsps:
+                    full_alignment = Aligned.from_hsp(query_result.id, query_result.seq_len, hit.id, hsp)
+                    alignments.extend(full_alignment.query_gap_removed())
+    return [x.match_row() for x in alignments]
+
+
+def hmmsearch_file(hmm_file_name, fasta_path, cutoff=False, gap_removal=True):
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".domtbl", mode="w") as domtbl_f:
+        domtbl_f.close()
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".txt", mode="w") as out_f:
+            out_f.close()
+            cmd = ["hmmsearch"]
+            if cutoff:
+                cmd.append("--cut_ga")
+            cmd.extend(["-o", out_f.name, "--domtblout", domtbl_f.name, hmm_file_name, fasta_path])
+
+            print(" ".join(cmd))
+            run_command(cmd)
+
+            if gap_removal:
+		# parse the alignments and return alignments w/o gaps on query,
+		# as those may be introns
+                res = parse_hmmsearch_output(out_f.name)
+            else:
+                res = parse_hmmsearch_domtbl(domtbl_f.name)
+
+            os.remove(domtbl_f.name)
+            os.remove(out_f.name)
+            return res
+
+
+def hmmsearch(hmm_file_name, sequences, cutoff=False, gap_removal=True):
     with tempfile.TemporaryDirectory() as tmpdir:
         fasta_path = os.path.join(tmpdir, "cands.faa")
         with open(fasta_path, "w") as f:
             for i, cand in enumerate(sequences):
                 f.write(f">cand_{i}\n{cand}\n")
-        return hmmsearch_file(hmm_file_name, fasta_path, cutoff=cutoff, domE=domE)
+        return hmmsearch_file(hmm_file_name, fasta_path, cutoff=cutoff, gap_removal=gap_removal)
 
 
-def hmmsearch_sequence_dict(hmm_file_name, fasta_dict, cutoff=False, domE=None):
+def hmmsearch_sequence_dict(hmm_file_name, fasta_dict, cutoff=False, gap_removal=True):
     with tempfile.NamedTemporaryFile(delete=False, suffix=".faa", mode="w") as tmpf:
         for acc, sequence in fasta_dict.items():
             tmpf.write(f">{acc}\n{sequence}\n")
         tmpf.close()
-        return hmmsearch_file(hmm_file_name, tmpf.name, cutoff=cutoff, domE=domE)
+        res = hmmsearch_file(hmm_file_name, tmpf.name, cutoff=cutoff, gap_removal=gap_removal)
+        os.remove(tmpf.name)
+        return res
 
 
 def hmmscan_file(hmm_file_name, fasta_path, cutoff=True):
