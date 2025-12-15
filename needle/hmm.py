@@ -54,8 +54,8 @@ def parse_hmmsearch_domtbl(domtbl_path):
     idx_query = 3
     idx_query_acc = 4
     idx_q_len = 5
-    idx_eval = 6
-    idx_score = 7
+    idx_eval = 12
+    idx_score = 13
     idx_h_from = 15
     idx_h_to = 16
     idx_a_from = 17
@@ -63,7 +63,7 @@ def parse_hmmsearch_domtbl(domtbl_path):
 
     # first, sanity check these indices
     expected_header_parts = re.split(r'\s\s+', expected_header)
-    assert expected_header_parts[idx_eval] == "E-value"
+    assert expected_header_parts[idx_eval] == "i-Evalue"
     assert expected_header_parts[idx_score] == "score"
     assert expected_header_parts[idx_target] == "# target name"
     assert expected_header_parts[idx_target_acc] == "accession"
