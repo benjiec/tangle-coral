@@ -266,7 +266,7 @@ def hmmsearch_file(hmm_file_name, fasta_path, cutoff=False, gap_removal=True):
                 cmd.append("--cut_ga")
             cmd.extend(["-o", out_f.name, "--domtblout", domtbl_f.name, hmm_file_name, fasta_path])
 
-            print(" ".join(cmd))
+            # print(" ".join(cmd))
             run_command(cmd)
 
             if gap_removal:
