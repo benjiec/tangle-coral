@@ -21,7 +21,7 @@ def generate_transition_candidates(
     right_aa: str,
     overlap_len: int,
     gap_len: int,
-    overlap_flanking_len: int = 20,
+    overlap_flanking_len: int = 40,
 ) -> List[Candidate]:
 
     candidates: List[Candidate] = []
@@ -98,7 +98,7 @@ def score_and_select_best_transition(
     sequences = [c.window_seq for c in candidates]
     best_idx, _1, _2 = hmmsearch_find_best_candidate(hmm_file_name, sequences)
     if best_idx is None:
-        print("WARNING: cannot determine best candidate using hmmsearch, default to first transition")
+        print("Cannot determine best candidate using hmmsearch, default to first transition")
         # print("candidates were", sequences)
         return candidates[0]
     return candidates[best_idx]
@@ -190,7 +190,7 @@ def adjust_target_coordinates(left: Match, right: Match, cand: Candidate) -> Tup
 def hmm_clean_protein(
     protein_hit: ProteinHit,
     hmm_file_name: str,
-    overlap_flanking_len: int = 20,
+    overlap_flanking_len: int = 40,
     min_query_match_len: int = 4
 ) -> ProteinHit:
 
@@ -242,7 +242,7 @@ def hmm_clean_protein(
         cands = generate_transition_candidates(
             aa_map[id(left)], aa_map[id(right)], overlap_len, gap_len, overlap_flanking_len
         )
-        # print("choosing candidate for", left.query_start, left.query_end, " and ", right.query_start, right.query_end)
+        # print("choosing candidate for", left.query_start, left.query_end, "and", right.query_start, right.query_end)
         best = cands[0] if len(cands) <= 1 else score_and_select_best_transition(cands, hmm_file_name)
         selected[idx] = best
         # print("  chose", best)
@@ -281,7 +281,7 @@ def hmm_clean_protein(
     return cleaned_pm
 
 
-def hmm_clean(protein_hits: List[ProteinHit], hmm_collection: HMMCollection, overlap_flanking_len: int = 20) -> List[ProteinHit]:
+def hmm_clean(protein_hits: List[ProteinHit], hmm_collection: HMMCollection, overlap_flanking_len: int = 40) -> List[ProteinHit]:
 
     cleaned: Dict[ProteinHit] = {}
 
