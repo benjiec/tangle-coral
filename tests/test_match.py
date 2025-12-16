@@ -38,6 +38,16 @@ class TestOrderGroupMatches(unittest.TestCase):
         with self.assertRaises(NonlinearMatchException):
             pairs = order_matches_for_junctions([m1, m3, m2])  # input not in order
 
+    def test_order_throws_error_on_if_target_coordinates_contained_but_query_not(self):
+        # aaaaaaaaa
+        #      bbb
+
+        m1 = self.makeM(1, 10, 1, 10)
+        m2 = self.makeM(6, 11,  6, 9)
+
+        with self.assertRaises(NonlinearMatchException):
+            pairs = order_matches_for_junctions([m1, m2])
+
     def test_order_throws_error_on_contained_match(self):
         # aaaaaaaaa
         #      bbbbbbbbbbb

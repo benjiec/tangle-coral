@@ -1,7 +1,7 @@
 import os
 import errno
 from .match import ProteinHit
-from .hits import hmmsearch_score
+from .hmm import hmmsearch
 from typing import Dict, List, Optional
 
 
@@ -108,7 +108,10 @@ def export_protein_hits(
             evalue: Optional[float] = None
             score: Optional[float] = None
             if pm.hmm_file:
-                score, evalue = hmmsearch_score(pm.hmm_file, pm.collated_protein_sequence)
+                hmm_rows = hmmsearch(pm.hmm_file, [pm.collated_protein_sequence], gap_removal=False)
+                if len(hmm_rows):
+                    evalue = hmm_rows[0]["seq_evalue"]
+                    score = hmm_rows[0]["seq_score"]
                 if evalue is None and requires_score:
                     continue
             score_filtered.append(pm)

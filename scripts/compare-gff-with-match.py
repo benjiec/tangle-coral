@@ -92,7 +92,7 @@ def print_comparison(protein_name, status, hmm_rows, gff_hit, needle_rows):
     print("    found by hmmscan, on", gff_hit.target_accession, gff_hit.target_start, gff_hit.target_end, "of", gff_hit.query_accession)
     for row in hmm_rows:
         print("    hmm model", row["target_name"], row["target_accession"], row["hmm_from"], row["hmm_to"], "matches", gff_hit.query_accession, row["ali_from"], row["ali_to"],
-              "of", row["query_length"], row["evalue"], row["score"])
+              "of", row["query_length"], row["dom_evalue"], row["dom_score"])
 
     if not needle_rows:
         print("    DID NOT FIND NEEDLE RESULT")
@@ -145,7 +145,7 @@ def compare(hmm_file, query_accession, genome_accession, gff_proteins, protein_s
     for gff_hit in filtered_hits:
         hmm_rows = [row for row in hmmscan_rows if row["query_name"] == gff_hit.query_accession]
         hmm_len = hmm_rows[0]["target_length"]
-        hmm_eval = hmm_rows[0]["evalue"]
+        hmm_eval = hmm_rows[0]["seq_evalue"]
         protein_len = hmm_rows[0]["query_length"]
 
         hmm_aa_matched = [0 for i in range(0, hmm_len)]

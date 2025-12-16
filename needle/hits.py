@@ -3,6 +3,7 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 from Bio.Seq import Seq
 from .match import Match, ProteinHit, order_matches_for_junctions, extract_subsequence, extract_subsequence_strand_sensitive, compute_three_frame_translations
+from .detect import DOM_EVALUE_LIMIT
 from .hmm import hmmsearch, hmmfetch, HMMCollection
 
 
@@ -65,8 +66,8 @@ def generate_transition_candidates(
 
 
 def hmmsearch_find_best_candidate(hmm_file_name, sequences):
-    matches = hmmsearch(hmm_file_name, sequences, cutoff=False)
-    matches = [row for row in matches if row["evalue"] < 0.01]
+    matches = hmmsearch(hmm_file_name, sequences, cutoff=False, gap_removal=False)
+    matches = [row for row in matches if row["seq_evalue"] <= 0.01]
 
     best_idx = None
     best_score = float("-inf")
@@ -74,8 +75,8 @@ def hmmsearch_find_best_candidate(hmm_file_name, sequences):
 
     for match in matches:
         name = match["target_name"]
-        score = match["score"]
-        evalue = match["evalue"]
+        score = match["seq_score"]
+        evalue = match["seq_evalue"]
 
         if name.startswith("cand_"):
             idx = int(name.split("_")[1])
@@ -103,14 +104,6 @@ def score_and_select_best_transition(
     return candidates[best_idx]
 
 
-def hmmsearch_score(hmm_file: str, protein_seq: str) -> Tuple[Optional[float], Optional[float]]:
-    if not hmm_file or not protein_seq:
-        return None, None
-    sequences = [protein_seq]
-    _, score, eval = hmmsearch_find_best_candidate(hmm_file, sequences)
-    return score, eval
-
-
 def aa_by_match(matches: List[Match]) -> Dict[int, str]:
     mapping: Dict[int, str] = {}
     for m in matches:
@@ -129,9 +122,12 @@ def stitch_cleaned_sequence(
     for idx, (left, _right, _overlap, _gap) in enumerate(ordered_pairs):
         cand = best_candidates_by_pair_index[idx]
         if idx == 0:
+            # print("stitch, add", cand.stitched)
             result += cand.stitched
         else:
+            # print("stitch, trim", cand.left_trimmed)
             result = result[: len(result)-cand.left_trimmed]
+            # print("stitch, add", cand.right_kept)
             result += cand.right_kept
     return result
 
@@ -176,6 +172,8 @@ def adjust_target_coordinates(left: Match, right: Match, cand: Candidate) -> Tup
     # Gap: leave as-is
     if cand.assigned_overlap_to_left is None:
         return nl, nr
+
+    # print("adjusting target coordinates, left", -cand.left_trimmed, "right", cand.assigned_overlap_to_left)
 
     nl.query_end -= cand.left_trimmed
     nl.target_end -= 3 * cand.left_trimmed
@@ -227,6 +225,7 @@ def hmm_clean_protein(
         # print("choosing candidate for", left.query_start, left.query_end, " and ", right.query_start, right.query_end)
         best = cands[0] if len(cands) <= 1 else score_and_select_best_transition(cands, hmm_file_name)
         selected[idx] = best
+        # print("chose", best)
 
     # Stitch the final AA from original matches and chosen splits
     cleaned_aa = stitch_cleaned_sequence(pairs, selected, aa_map)
@@ -279,6 +278,7 @@ def hmmsearch_to_dna_coords(hmm_file, three_frame_translations):
 
     sequences = [aa for dna_start, dna_end, aa in three_frame_translations]
     hmm_matches = hmmsearch(hmm_file, sequences, cutoff=False)
+    hmm_matches = [row for row in hmm_matches if row["dom_evalue"] <= DOM_EVALUE_LIMIT]
 
     to_return = []
     for hmm_match in hmm_matches:
@@ -331,13 +331,19 @@ def find_matches_at_locus(old_matches, full_seq, start, end, hmm_file, step=2000
             query_end=hmm_match["hmm_to"],
             target_start=hmm_match["ali_from"],
             target_end=hmm_match["ali_to"],
-            e_value=hmm_match["evalue"],
+            e_value=hmm_match["dom_evalue"],
             identity=None,
             target_sequence=target_sequence,
             matched_sequence=hmm_match["matched_sequence"]
         )
         assert match.matched_sequence == match.target_sequence_translated()
         new_matches.append(match)
+
+    """
+    print("Found")
+    for nm in sorted(new_matches, key=lambda m: m.target_start):
+        print("    ", nm.target_start, nm.target_end, nm.query_start, nm.query_end)
+    """
 
     if not new_matches:
         # print("no new matches, stop searching")
@@ -376,9 +382,7 @@ def find_matches_at_locus(old_matches, full_seq, start, end, hmm_file, step=2000
     """
     print("Using HMM, continue to search", new_matches[0].target_accession, new_matches[0].query_accession)
     print("Before", old_query_start, old_query_end, old_nmatches)
-    print("Now", new_query_start, new_query_end, new_nmatches)
-    for nm in sorted(new_matches, key=lambda m: m.target_start):
-        print("    ", nm.target_start, nm.target_end, nm.query_start, nm.query_end)
+    print("Now", new_query_start, new_query_end, new_nmatches, "collatable?", ProteinHit.can_collate_from_matches(new_matches))
     """
 
     if end > start:
@@ -427,6 +431,8 @@ def hmm_find_proteins(protein_hits, results, hmm_collection):
         """
         print()
         print(pm.protein_hit_id)
+        for nm in sorted(pm.matches, key=lambda m: m.target_start):
+            print("    ", nm.target_start, nm.target_end, nm.query_start, nm.query_end)
         """
 
         new_pm = hmm_find_protein_around_locus(pm, results, hmm_collection.get(pm.query_accession))

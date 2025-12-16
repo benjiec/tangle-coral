@@ -8,6 +8,9 @@ from .seq import to_dna_coordinate, compute_three_frame_translations
 from .hmm import hmmsearch_sequence_dict
 
 
+DOM_EVALUE_LIMIT = 0.001
+
+
 class Results:
     # NCBI-style canonical headers (preferred)
     H_QSEQID = "qseqid"
@@ -226,7 +229,7 @@ def hmm_search_genome_sequence(
             continue
 
         hmm_rows = hmmsearch_sequence_dict(hmm_file, translated_fasta)
-        hmm_rows = [row for row in hmm_rows if row["evalue"] <= 0.001]
+        hmm_rows = [row for row in hmm_rows if row["dom_evalue"] <= DOM_EVALUE_LIMIT]
 
         for row in hmm_rows:
             query_accession = row["query_accession"]
@@ -250,7 +253,7 @@ def hmm_search_genome_sequence(
             out = [
               query_accession,
               target_accession,
-              row["evalue"],
+              row["dom_evalue"],
               '',
               row["hmm_from"],
               row["hmm_to"],

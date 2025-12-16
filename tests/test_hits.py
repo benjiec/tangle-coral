@@ -41,6 +41,16 @@ class TestCleaningSequenceWithHMM(unittest.TestCase):
             ],
         )
         self.assertEqual(
+            [c.assigned_overlap_to_left for c in cands],
+            [
+                0,     # k=0: left trims 4, right trims 0
+                1,     # k=1: left trims 3, right trims 1
+                2,     # k=2: left trims 2, right trims 2
+                3,     # k=3: left trims 1, right trims 3
+                4,     # k=4: left trims 0, right trims 4
+            ],
+        )
+        self.assertEqual(
             [c.stitched for c in cands],
             [
                 "ABCyefghij",     # k=0: left trims 4, right trims 0
@@ -262,9 +272,9 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
 
         orig = hits_mod.hmmsearch
         fake_matches = [
-            dict(target_name="cand_0", score=100, evalue=0.1, hmm_from=5, hmm_to=10, ali_from=2, ali_to=7),
-            dict(target_name="cand_1", score=100, evalue=0.2, hmm_from=9, hmm_to=15, ali_from=7, ali_to=13),
-            dict(target_name="cand_2", score=100, evalue=0.3, hmm_from=16, hmm_to=20, ali_from=16, ali_to=20)
+            dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=2, ali_to=7),
+            dict(target_name="cand_1", dom_score=100, dom_evalue=0.0002, hmm_from=9, hmm_to=15, ali_from=7, ali_to=13),
+            dict(target_name="cand_2", dom_score=100, dom_evalue=0.0003, hmm_from=16, hmm_to=20, ali_from=16, ali_to=20)
         ]
 
         try:
@@ -287,7 +297,7 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
             self.assertEqual(matches[0]["ali_from"], 104)
             # frame 0, target at 7 which is dna 19-21, so adjusted coordinate is 121
             self.assertEqual(matches[0]["ali_to"], 121)
-            self.assertEqual(matches[0]["evalue"], 0.1)
+            self.assertEqual(matches[0]["dom_evalue"], 0.0001)
             self.assertEqual(matches[0]["matched_sequence"], "A"*6)
 
             self.assertEqual(matches[1]["target_name"], "cand_1")
@@ -297,7 +307,7 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
             self.assertEqual(matches[1]["ali_from"], 120)
             # frame 1, target at 13 which is dna 37-39, so adjusted coordinate from 102 is 140
             self.assertEqual(matches[1]["ali_to"], 140)
-            self.assertEqual(matches[1]["evalue"], 0.2)
+            self.assertEqual(matches[1]["dom_evalue"], 0.0002)
             self.assertEqual(matches[1]["matched_sequence"], "L"*7)
 
             self.assertEqual(matches[2]["target_name"], "cand_2")
@@ -307,7 +317,7 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
             self.assertEqual(matches[2]["ali_from"], 148)
             # frame 2, target at 20 which is dna 58-60, so adjusted coordinate from 103 is 162
             self.assertEqual(matches[2]["ali_to"], 162)
-            self.assertEqual(matches[2]["evalue"], 0.3)
+            self.assertEqual(matches[2]["dom_evalue"], 0.0003)
             self.assertEqual(matches[2]["matched_sequence"], "C"*5)
 
         finally:
@@ -317,9 +327,9 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
 
         orig = hits_mod.hmmsearch
         fake_matches = [
-            dict(target_name="cand_0", score=100, evalue=0.1, hmm_from=5, hmm_to=10, ali_from=2, ali_to=7),
-            dict(target_name="cand_1", score=100, evalue=0.2, hmm_from=9, hmm_to=15, ali_from=7, ali_to=13),
-            dict(target_name="cand_2", score=100, evalue=0.3, hmm_from=16, hmm_to=20, ali_from=16, ali_to=20)
+            dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=2, ali_to=7),
+            dict(target_name="cand_1", dom_score=100, dom_evalue=0.0002, hmm_from=9, hmm_to=15, ali_from=7, ali_to=13),
+            dict(target_name="cand_2", dom_score=100, dom_evalue=0.0003, hmm_from=16, hmm_to=20, ali_from=16, ali_to=20)
         ]
 
         try:
@@ -342,7 +352,7 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
             self.assertEqual(matches[0]["ali_from"], 196)
             # frame 0, target at 7 which is dna 19-21, so adjusted coordinate from 199 decreasing is 179
             self.assertEqual(matches[0]["ali_to"], 179)
-            self.assertEqual(matches[0]["evalue"], 0.1)
+            self.assertEqual(matches[0]["dom_evalue"], 0.0001)
             self.assertEqual(matches[0]["matched_sequence"], "A"*6)
 
             self.assertEqual(matches[1]["target_name"], "cand_1")
@@ -352,7 +362,7 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
             self.assertEqual(matches[1]["ali_from"], 180)
             # frame 1, target at 13 which is dna 37-39, so adjusted coordinate from 198 decreasing is 160
             self.assertEqual(matches[1]["ali_to"], 160)
-            self.assertEqual(matches[1]["evalue"], 0.2)
+            self.assertEqual(matches[1]["dom_evalue"], 0.0002)
             self.assertEqual(matches[1]["matched_sequence"], "L"*7)
 
             self.assertEqual(matches[2]["target_name"], "cand_2")
@@ -362,7 +372,7 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
             self.assertEqual(matches[2]["ali_from"], 152)
             # frame 2, target at 20 which is dna 58-60, so adjusted coordinate from 197 decreasing is 138
             self.assertEqual(matches[2]["ali_to"], 138)
-            self.assertEqual(matches[2]["evalue"], 0.3)
+            self.assertEqual(matches[2]["dom_evalue"], 0.0003)
             self.assertEqual(matches[2]["matched_sequence"], "C"*5)
 
         finally:
@@ -372,10 +382,10 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
 
         orig = hits_mod.hmmsearch
         fake_matches = [
-            dict(target_name="cand_0", score=100, evalue=0.1, hmm_from=5, hmm_to=10, ali_from=2, ali_to=5),
-            dict(target_name="cand_0", score=100, evalue=0.1, hmm_from=5, hmm_to=10, ali_from=8, ali_to=5),
-            dict(target_name="cand_1", score=100, evalue=0.2, hmm_from=9, hmm_to=15, ali_from=7, ali_to=13),
-            dict(target_name="cand_2", score=100, evalue=0.3, hmm_from=16, hmm_to=20, ali_from=16, ali_to=20)
+            dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=2, ali_to=5),
+            dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=8, ali_to=5),
+            dict(target_name="cand_1", dom_score=100, dom_evalue=0.0002, hmm_from=9, hmm_to=15, ali_from=7, ali_to=13),
+            dict(target_name="cand_2", dom_score=100, dom_evalue=0.0003, hmm_from=16, hmm_to=20, ali_from=16, ali_to=20)
         ]
 
         try:
@@ -412,16 +422,16 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
 
         def fake_hmmsearch_to_dna_coords(_, translations):
             first_match = [
-                dict(target_name="cand_0", score=100, evalue=0.1, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence="F"*6),
-                dict(target_name="cand_1", score=100, evalue=0.2, hmm_from=9, hmm_to=15, ali_from=11021, ali_to=11041, matched_sequence="F"*7),
-                dict(target_name="cand_2", score=100, evalue=0.3, hmm_from=16, hmm_to=20, ali_from=11051, ali_to=11065, matched_sequence="F"*5)
+                dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence="F"*6),
+                dict(target_name="cand_1", dom_score=100, dom_evalue=0.0002, hmm_from=9, hmm_to=15, ali_from=11021, ali_to=11041, matched_sequence="F"*7),
+                dict(target_name="cand_2", dom_score=100, dom_evalue=0.0003, hmm_from=16, hmm_to=20, ali_from=11051, ali_to=11065, matched_sequence="F"*5)
             ]
             second_match = [
                 # add a new match
-                dict(target_name="cand_0", score=100, evalue=0.1, hmm_from=1, hmm_to=4, ali_from=9001, ali_to=9012, matched_sequence="F"*4),
-                dict(target_name="cand_0", score=100, evalue=0.1, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence="F"*6),
-                dict(target_name="cand_1", score=100, evalue=0.2, hmm_from=9, hmm_to=15, ali_from=11021, ali_to=11041, matched_sequence="F"*7),
-                dict(target_name="cand_2", score=100, evalue=0.3, hmm_from=16, hmm_to=20, ali_from=11051, ali_to=11065, matched_sequence="F"*5)
+                dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=1, hmm_to=4, ali_from=9001, ali_to=9012, matched_sequence="F"*4),
+                dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence="F"*6),
+                dict(target_name="cand_1", dom_score=100, dom_evalue=0.0002, hmm_from=9, hmm_to=15, ali_from=11021, ali_to=11041, matched_sequence="F"*7),
+                dict(target_name="cand_2", dom_score=100, dom_evalue=0.0003, hmm_from=16, hmm_to=20, ali_from=11051, ali_to=11065, matched_sequence="F"*5)
             ]
 
             searched.append((translations[0][0], translations[0][1]))
@@ -483,16 +493,16 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
         searched = []
         def fake_hmmsearch_to_dna_coords(_, translations):
             first_match = [
-                dict(target_name="cand_0", score=100, evalue=0.1, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence="F"*6),
-                dict(target_name="cand_1", score=100, evalue=0.2, hmm_from=9, hmm_to=15, ali_from=11021, ali_to=11041, matched_sequence="F"*7),
-                dict(target_name="cand_2", score=100, evalue=0.3, hmm_from=16, hmm_to=20, ali_from=11051, ali_to=11065, matched_sequence="F"*5)
+                dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence="F"*6),
+                dict(target_name="cand_1", dom_score=100, dom_evalue=0.0002, hmm_from=9, hmm_to=15, ali_from=11021, ali_to=11041, matched_sequence="F"*7),
+                dict(target_name="cand_2", dom_score=100, dom_evalue=0.0003, hmm_from=16, hmm_to=20, ali_from=11051, ali_to=11065, matched_sequence="F"*5)
             ]
 
             second_match = [
-                dict(target_name="cand_0", score=100, evalue=0.1, hmm_from=7, hmm_to=8, ali_from=9000, ali_to=9018, matched_sequence="F"*6),
-                dict(target_name="cand_0", score=100, evalue=0.1, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence="F"*6),
-                dict(target_name="cand_1", score=100, evalue=0.2, hmm_from=9, hmm_to=15, ali_from=11021, ali_to=11041, matched_sequence="F"*7),
-                dict(target_name="cand_2", score=100, evalue=0.3, hmm_from=16, hmm_to=20, ali_from=11051, ali_to=11065, matched_sequence="F"*5)
+                dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=7, hmm_to=8, ali_from=9000, ali_to=9018, matched_sequence="F"*6),
+                dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence="F"*6),
+                dict(target_name="cand_1", dom_score=100, dom_evalue=0.0002, hmm_from=9, hmm_to=15, ali_from=11021, ali_to=11041, matched_sequence="F"*7),
+                dict(target_name="cand_2", dom_score=100, dom_evalue=0.0003, hmm_from=16, hmm_to=20, ali_from=11051, ali_to=11065, matched_sequence="F"*5)
             ]
 
             searched.append((translations[0][0], translations[0][1]))
@@ -530,9 +540,9 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
         searched = []
         def fake_hmmsearch_to_dna_coords(_, translations):
             first_match = [
-                dict(target_name="cand_0", score=100, evalue=0.1, hmm_from=5, hmm_to=10, ali_from=11018, ali_to=11001, matched_sequence="F"*6),
-                dict(target_name="cand_1", score=100, evalue=0.2, hmm_from=9, hmm_to=15, ali_from=10841, ali_to=10821, matched_sequence="F"*7),
-                dict(target_name="cand_2", score=100, evalue=0.3, hmm_from=16, hmm_to=20, ali_from=10065, ali_to=10051, matched_sequence="F"*5)
+                dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=11018, ali_to=11001, matched_sequence="F"*6),
+                dict(target_name="cand_1", dom_score=100, dom_evalue=0.0002, hmm_from=9, hmm_to=15, ali_from=10841, ali_to=10821, matched_sequence="F"*7),
+                dict(target_name="cand_2", dom_score=100, dom_evalue=0.0003, hmm_from=16, hmm_to=20, ali_from=10065, ali_to=10051, matched_sequence="F"*5)
             ]
 
             searched.append((translations[0][0], translations[0][1]))
@@ -570,7 +580,7 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
 
         def fake_hmmsearch_to_dna_coords(_, translations):
             first_match = [
-                dict(target_name="cand_0", score=100, evalue=0.1, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence=expected_aa)
+                dict(target_name="cand_0", dom_score=100, dom_evalue=0.1, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence=expected_aa)
             ]
             return first_match
 
@@ -609,16 +619,16 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
         searched = []
         def fake_hmmsearch_to_dna_coords(_, translations):
             first_match = [
-                dict(target_name="cand_0", score=100, evalue=0.1, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence="F"*6),
-                dict(target_name="cand_1", score=100, evalue=0.2, hmm_from=9, hmm_to=15, ali_from=11021, ali_to=11041, matched_sequence="F"*7),
-                dict(target_name="cand_2", score=100, evalue=0.3, hmm_from=16, hmm_to=20, ali_from=11051, ali_to=11065, matched_sequence="F"*5)
+                dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence="F"*6),
+                dict(target_name="cand_1", dom_score=100, dom_evalue=0.0002, hmm_from=9, hmm_to=15, ali_from=11021, ali_to=11041, matched_sequence="F"*7),
+                dict(target_name="cand_2", dom_score=100, dom_evalue=0.0003, hmm_from=16, hmm_to=20, ali_from=11051, ali_to=11065, matched_sequence="F"*5)
             ]
             second_match = [
                 # add a new match
-                dict(target_name="cand_0", score=100, evalue=0.1, hmm_from=1, hmm_to=4, ali_from=9001, ali_to=9012, matched_sequence="F"*4),
-                dict(target_name="cand_0", score=100, evalue=0.1, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence="F"*6),
-                dict(target_name="cand_1", score=100, evalue=0.2, hmm_from=9, hmm_to=15, ali_from=11021, ali_to=11041, matched_sequence="F"*7),
-                dict(target_name="cand_2", score=100, evalue=0.3, hmm_from=16, hmm_to=20, ali_from=11051, ali_to=11065, matched_sequence="F"*5)
+                dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=1, hmm_to=4, ali_from=9001, ali_to=9012, matched_sequence="F"*4),
+                dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence="F"*6),
+                dict(target_name="cand_1", dom_score=100, dom_evalue=0.0002, hmm_from=9, hmm_to=15, ali_from=11021, ali_to=11041, matched_sequence="F"*7),
+                dict(target_name="cand_2", dom_score=100, dom_evalue=0.0003, hmm_from=16, hmm_to=20, ali_from=11051, ali_to=11065, matched_sequence="F"*5)
             ]
 
             searched.append((translations[0][0], translations[0][1]))

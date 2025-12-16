@@ -54,6 +54,26 @@ def order_matches_for_junctions(matches: List[Match], max_overlap_len: int = MAX
            right.query_start <= left.query_start:
             raise NonlinearMatchException("Found contained match")
 
+        if right.target_start <= right.target_end and \
+           right.target_start >= left.target_start and \
+           right.target_end <= left.target_end:
+            raise NonlinearMatchException("Found matches containining each other on DNA")
+
+        if right.target_start > right.target_end and \
+           right.target_start <= left.target_start and \
+           right.target_end >= left.target_end:
+            raise NonlinearMatchException("Found matches containining each other on DNA")
+
+        if left.target_start <= left.target_end and \
+           left.target_start >= right.target_start and \
+           left.target_end <= right.target_end:
+            raise NonlinearMatchException("Found matches containining each other on DNA")
+
+        if left.target_start > left.target_end and \
+           left.target_start <= right.target_start and \
+           left.target_end >= right.target_end:
+            raise NonlinearMatchException("Found matches containining each other on DNA")
+
         if left.on_reverse_strand != right.on_reverse_strand:
             raise NonlinearMatchException("Found fragments on different strands")
 

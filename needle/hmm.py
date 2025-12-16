@@ -54,8 +54,10 @@ def parse_hmmsearch_domtbl(domtbl_path):
     idx_query = 3
     idx_query_acc = 4
     idx_q_len = 5
-    idx_eval = 12
-    idx_score = 13
+    idx_seq_eval = 6
+    idx_seq_score = 7
+    idx_dom_eval = 12
+    idx_dom_score = 13
     idx_h_from = 15
     idx_h_to = 16
     idx_a_from = 17
@@ -63,14 +65,16 @@ def parse_hmmsearch_domtbl(domtbl_path):
 
     # first, sanity check these indices
     expected_header_parts = re.split(r'\s\s+', expected_header)
-    assert expected_header_parts[idx_eval] == "i-Evalue"
-    assert expected_header_parts[idx_score] == "score"
     assert expected_header_parts[idx_target] == "# target name"
     assert expected_header_parts[idx_target_acc] == "accession"
     assert expected_header_parts[idx_t_len] == "tlen"
     assert expected_header_parts[idx_query] == "query name"
     assert expected_header_parts[idx_query_acc] == "accession"
     assert expected_header_parts[idx_q_len] == "qlen"
+    assert expected_header_parts[idx_seq_eval] == "E-value"
+    assert expected_header_parts[idx_seq_score] == "score"
+    assert expected_header_parts[idx_dom_eval] == "i-Evalue"
+    assert expected_header_parts[idx_dom_score] == "score"
     assert expected_header_parts[idx_h_from] == "from"
     assert expected_header_parts[idx_h_to] == "to"
     assert expected_header_parts[idx_a_from] == "from"
@@ -92,8 +96,10 @@ def parse_hmmsearch_domtbl(domtbl_path):
                 target_accession = parts[idx_target_acc],
                 query_name = parts[idx_query],
                 query_accession = parts[idx_query_acc],
-                evalue = float(parts[idx_eval]),
-                score = float(parts[idx_score]),
+                seq_evalue = float(parts[idx_seq_eval]),
+                seq_score = float(parts[idx_seq_score]),
+                dom_evalue = float(parts[idx_dom_eval]),
+                dom_score = float(parts[idx_dom_score]),
                 query_length = int(parts[idx_q_len]),
                 hmm_from = int(parts[idx_h_from]),
                 hmm_to = int(parts[idx_h_to]),
@@ -140,8 +146,10 @@ class Aligned(object):
             target_accession = self.hit_id,
             query_name = self.query_result_id,
             query_accession = self.query_result_id,
-            evalue = self.full_aligned_evalue,
-            score = self.full_aligned_bitscore,
+            seq_evalue = None,
+            seq_score = None,
+            dom_evalue = self.full_aligned_evalue,
+            dom_score = self.full_aligned_evalue,
             query_length = self.query_length,
             hmm_from = self.query_positions_1b[0],
             hmm_to = self.query_positions_1b[-1],
