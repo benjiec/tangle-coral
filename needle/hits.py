@@ -173,8 +173,6 @@ def adjust_target_coordinates(left: Match, right: Match, cand: Candidate) -> Tup
     if cand.assigned_overlap_to_left is None:
         return nl, nr
 
-    # print("adjusting target coordinates, left", -cand.left_trimmed, "right", cand.assigned_overlap_to_left)
-
     nl.query_end -= cand.left_trimmed
     nl.target_end -= 3 * cand.left_trimmed
     nl.target_sequence = _trim_dna_back(nl.target_sequence, cand.left_trimmed)
@@ -183,6 +181,9 @@ def adjust_target_coordinates(left: Match, right: Match, cand: Candidate) -> Tup
     nr.target_start += 3 * cand.assigned_overlap_to_left
     nr.target_sequence = _trim_dna_front(nr.target_sequence, cand.assigned_overlap_to_left)
 
+    # print("adjusting target coordinates, left", -cand.left_trimmed, "right", cand.assigned_overlap_to_left)
+    # print("now left", nl.query_start, nl.query_end, "right", nr.query_start, nr.query_end)
+
     return nl, nr
 
 
@@ -190,6 +191,7 @@ def hmm_clean_protein(
     protein_hit: ProteinHit,
     hmm_file_name: str,
     overlap_flanking_len: int = 20,
+    min_query_match_len: int = 4
 ) -> ProteinHit:
 
     if len(protein_hit.matches) < 2:
@@ -208,9 +210,27 @@ def hmm_clean_protein(
     print("cleaning", protein_hit.protein_hit_id, protein_hit.query_accession)
     """
 
+    old_matches = protein_hit.matches
+
+    # remove very small AA matches
+    old_matches = [m for m in old_matches if m.query_end-m.query_start+1 >= min_query_match_len]
+
+    if len(old_matches) < 1:
+        return None
+    elif len(old_matches) == 1:
+        cleaned_pm = ProteinHit(
+            matches=old_matches,
+            query_start=min(m.query_start for m in old_matches),
+            query_end=max(m.query_end for m in old_matches),
+            target_start=protein_hit.target_start,
+            target_end=protein_hit.target_end,
+            hmm_file=hmm_file_name
+        )
+        return cleaned_pm
+
     # Compute AA per match and junction candidates
-    aa_map = aa_by_match(protein_hit.matches)
-    pairs = order_matches_for_junctions(protein_hit.matches)
+    aa_map = aa_by_match(old_matches)
+    pairs = order_matches_for_junctions(old_matches)
 
     selected: Dict[int, Candidate] = {}
     for idx, (left, right, overlap_len, gap_len) in enumerate(pairs):
@@ -225,14 +245,13 @@ def hmm_clean_protein(
         # print("choosing candidate for", left.query_start, left.query_end, " and ", right.query_start, right.query_end)
         best = cands[0] if len(cands) <= 1 else score_and_select_best_transition(cands, hmm_file_name)
         selected[idx] = best
-        # print("chose", best)
+        # print("  chose", best)
 
     # Stitch the final AA from original matches and chosen splits
     cleaned_aa = stitch_cleaned_sequence(pairs, selected, aa_map)
 
     # Create new Match objects
     new_matches: List[Match] = []
-    assert protein_hit.matches
     current_left = pairs[0][0]
     for idx, (_left, right, _1, _2) in enumerate(pairs):
         selected_candidate = selected[idx]
@@ -268,7 +287,8 @@ def hmm_clean(protein_hits: List[ProteinHit], hmm_collection: HMMCollection, ove
 
     for pm in protein_hits:
         new_pm = hmm_clean_protein(pm, hmm_collection.get(pm.query_accession), overlap_flanking_len)
-        cleaned[new_pm.protein_hit_id] = new_pm
+        if new_pm:
+            cleaned[new_pm.protein_hit_id] = new_pm
 
     return list(cleaned.values())
 

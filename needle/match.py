@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 from Bio.Seq import Seq
 
-MAX_MATCH_OVERLAP = 100
+MAX_AA_OVERLAP = 15
 
 
 @dataclass
@@ -38,7 +38,7 @@ class NonlinearMatchException(Exception):
     pass
 
 
-def order_matches_for_junctions(matches: List[Match], max_overlap_len: int = MAX_MATCH_OVERLAP) -> List[Tuple[Match, Match, int, int]]:
+def order_matches_for_junctions(matches: List[Match], max_overlap_len: int = MAX_AA_OVERLAP) -> List[Tuple[Match, Match, int, int]]:
     if not matches:
         return []
 
@@ -49,48 +49,40 @@ def order_matches_for_junctions(matches: List[Match], max_overlap_len: int = MAX
     for i in range(len(ordered) - 1):
         left = ordered[i]
         right = ordered[i + 1]
+        assert right.query_start >= left.query_start  # sort condition
 
-        if right.query_end <= left.query_end or \
-           right.query_start <= left.query_start:
-            raise NonlinearMatchException("Found contained match")
-
-        if right.target_start <= right.target_end and \
-           right.target_start >= left.target_start and \
-           right.target_end <= left.target_end:
-            raise NonlinearMatchException("Found matches containining each other on DNA")
-
-        if right.target_start > right.target_end and \
-           right.target_start <= left.target_start and \
-           right.target_end >= left.target_end:
-            raise NonlinearMatchException("Found matches containining each other on DNA")
-
-        if left.target_start <= left.target_end and \
-           left.target_start >= right.target_start and \
-           left.target_end <= right.target_end:
-            raise NonlinearMatchException("Found matches containining each other on DNA")
-
-        if left.target_start > left.target_end and \
-           left.target_start <= right.target_start and \
-           left.target_end >= right.target_end:
-            raise NonlinearMatchException("Found matches containining each other on DNA")
-
+        # matches should be on same strand
         if left.on_reverse_strand != right.on_reverse_strand:
-            raise NonlinearMatchException("Found fragments on different strands")
+            raise NonlinearMatchException("Matches are on different strands")
 
-        if left.on_reverse_strand is False and \
-           left.target_start > right.target_start:
-            raise NonlinearMatchException("Consecutive protein fragments are reversed on the source DNA")
+        # query cannot contain each other 
+        if right.query_end <= left.query_end:
+            raise NonlinearMatchException("Matching queries contain each other")
 
-        if left.on_reverse_strand is True and \
-           left.target_start < right.target_start:
-            raise NonlinearMatchException("Consecutive protein fragments are reversed on the source DNA")
+        # ordered correctly on the target as well
+        if (left.on_reverse_strand is False and left.target_start > right.target_start) or \
+           (left.on_reverse_strand is True and left.target_start < right.target_start):
+            raise NonlinearMatchException("Consecutive query matches are reversed on DNA")
 
-        overlap_len = max(0, left.query_end - right.query_start + 1)
-        if overlap_len > max_overlap_len:
+	# left cannot contain right on target - we already checked the
+	# target_left coordinates are correct above
+        if (left.on_reverse_strand is False and right.target_end < left.target_end) or \
+           (left.on_reverse_strand is True and right.target_end > left.target_end):
+            raise NonlinearMatchException("DNA matches contain each other")
+
+        query_overlap_len = max(0, left.query_end - right.query_start + 1)
+
+        # query overlap not too large 
+        if query_overlap_len > max_overlap_len:
             raise NonlinearMatchException("Overlap too large, likely a different copy of the protein")
 
+        # query overlap not bigger than either left or right sequence
+        if query_overlap_len > len(left.target_sequence_translated()) or \
+           query_overlap_len > len(right.target_sequence_translated()):
+            raise NonlinearMatchException("Overlap larger than matched sequence")
+
         gap_len = max(0, right.query_start - left.query_end - 1)
-        pairs.append((left, right, overlap_len, gap_len))
+        pairs.append((left, right, query_overlap_len, gap_len))
         if gap_len:
             junctions.append((left.query_end, right.query_start))
         else:
@@ -128,7 +120,7 @@ class ProteinHit:
     def can_collate_from_matches(matches) -> bool:
         try:
             pairs = order_matches_for_junctions(matches)
-        except NonlinearMatchException:
+        except NonlinearMatchException as e:
             return False
         return True
 
@@ -209,7 +201,7 @@ class ProteinHit:
         return first.target_accession
 
 
-def group_matches(all_matches, max_intron_length: int = 10_000, max_overlap_len: int = MAX_MATCH_OVERLAP) -> List[ProteinHit]:
+def group_matches(all_matches, max_intron_length: int = 10_000, max_overlap_len: int = MAX_AA_OVERLAP) -> List[ProteinHit]:
     """
     Group Match objects into ProteinHit objects.
     - Groups by (query_accession, target_accession)

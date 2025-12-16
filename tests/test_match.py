@@ -13,13 +13,14 @@ class TestOrderGroupMatches(unittest.TestCase):
         return Match(
             query_accession=query_accession, target_accession=target_accession,
             e_value=0, identity=None,
-            query_start=query_start, query_end=query_end, target_start=target_start, target_end=target_end
+            query_start=query_start, query_end=query_end, target_start=target_start, target_end=target_end,
+            target_sequence="A"*(abs(target_end-target_start)+1)
         )
 
     def test_order_matches_for_junctions_overlap_and_gap(self):
-        m1 = self.makeM(1, 10, 1, 10)
-        m2 = self.makeM(8, 15, 8, 15)
-        m3 = self.makeM(18, 20, 18, 20)
+        m1 = self.makeM(1, 10, 1, 30)
+        m2 = self.makeM(8, 15, 24, 45)
+        m3 = self.makeM(18, 20, 60, 66)
 
         pairs = order_matches_for_junctions([m1, m3, m2])  # input not in order
         self.assertEqual(len(pairs), 2)
@@ -31,21 +32,33 @@ class TestOrderGroupMatches(unittest.TestCase):
         #      bbbbbb
         #        cccccccc
 
-        m1 = self.makeM(1, 8, 1, 8)
-        m2 = self.makeM(6, 12, 6, 12)
-        m3 = self.makeM(8, 16, 8, 16)
+        m1 = self.makeM(1, 8,  1, 24)
+        m2 = self.makeM(6, 12, 16, 36)
+        m3 = self.makeM(8, 16, 22, 48)
 
-        with self.assertRaises(NonlinearMatchException):
+        with self.assertRaisesRegex(NonlinearMatchException, "Junctions overlap"):
             pairs = order_matches_for_junctions([m1, m3, m2])  # input not in order
 
     def test_order_throws_error_on_if_target_coordinates_contained_but_query_not(self):
         # aaaaaaaaa
         #      bbb
 
-        m1 = self.makeM(1, 10, 1, 10)
-        m2 = self.makeM(6, 11,  6, 9)
+        m1 = self.makeM(1, 10, 30, 60)
+        m2 = self.makeM(6, 11, 33, 65)
+        pairs = order_matches_for_junctions([m1, m2])
 
-        with self.assertRaises(NonlinearMatchException):
+        m2 = self.makeM(6, 11, 33, 45)
+        with self.assertRaisesRegex(NonlinearMatchException, "DNA matches contain each other"):
+            pairs = order_matches_for_junctions([m1, m2])
+
+    def test_order_throws_error_on_if_target_coordinates_contained_on_reverse_strand_but_query_not(self):
+        # aaaaaaaaa
+        #      bbb
+
+        m1 = self.makeM(1, 10, 60, 31)
+        m2 = self.makeM(6, 11, 59, 43)
+
+        with self.assertRaisesRegex(NonlinearMatchException, "DNA matches contain each other"):
             pairs = order_matches_for_junctions([m1, m2])
 
     def test_order_throws_error_on_contained_match(self):
@@ -54,38 +67,50 @@ class TestOrderGroupMatches(unittest.TestCase):
         #            ccc
         #                ddd
 
-        m1 = self.makeM(1, 10, 1, 10)
-        m2 = self.makeM(6, 16, 6, 16)
-        m3 = self.makeM(12, 14, 12, 14)
-        m4 = self.makeM(16, 18, 16, 18)
+        m1 = self.makeM(1, 10, 1, 30)
+        m2 = self.makeM(6, 16, 16, 48)
+        m3 = self.makeM(12, 14, 34, 42)
+        m4 = self.makeM(16, 18, 46, 54)
 
-        with self.assertRaises(NonlinearMatchException):
+        with self.assertRaisesRegex(NonlinearMatchException, "Matching queries contain each other"):
             pairs = order_matches_for_junctions([m1, m4, m3, m2])  # input not in order
 
     def test_order_throws_error_if_query_coordinates_do_not_align_with_target_coordinates(self):
 
-        m1 = self.makeM(1, 10, 1, 10)
-        m2 = self.makeM(6, 16, 16, 10)
+        m1 = self.makeM(1, 10, 1, 30)
+        m2 = self.makeM(6, 16, 48, 30)
 
-        with self.assertRaises(NonlinearMatchException):
+        with self.assertRaisesRegex(NonlinearMatchException, "Matches are on different strands"):
             pairs = order_matches_for_junctions([m1, m2])
 
     def test_order_throws_error_if_query_order_is_not_same_as_target_order(self):
 
-        m1 = self.makeM(1, 10, 12, 18)
-        m2 = self.makeM(6, 16, 1, 10)
+        m1 = self.makeM(1, 10, 31, 60)
+        m2 = self.makeM(6, 16, 1, 30)
 
-        with self.assertRaises(NonlinearMatchException):
+        with self.assertRaisesRegex(NonlinearMatchException, "Consecutive query matches are reversed"):
             pairs = order_matches_for_junctions([m1, m2])
 
     def test_order_throws_error_if_query_overlap_is_too_large(self):
 
-        m1 = self.makeM(6, 16, 1, 10)
-        m2 = self.makeM(10, 20, 12, 22)
+        m1 = self.makeM(6, 16, 1, 30)
+        m2 = self.makeM(10, 20, 15, 40)
 
         pairs = order_matches_for_junctions([m1, m2], max_overlap_len=10)
-        with self.assertRaises(NonlinearMatchException):
+        with self.assertRaisesRegex(NonlinearMatchException, "Overlap too large"):
             pairs = order_matches_for_junctions([m1, m2], max_overlap_len=4)
+
+    def test_order_throws_error_if_query_overlap_is_larger_than_left_or_right_sequence(self):
+
+        m1 = self.makeM(6, 16, 1, 10)   # there are deletions of query aa on DNA
+        m2 = self.makeM(10, 20, 15, 40)
+        with self.assertRaisesRegex(NonlinearMatchException, "Overlap larger than matched"):
+            pairs = order_matches_for_junctions([m1, m2], max_overlap_len=10)
+
+        m1 = self.makeM(6, 16, 1, 30)
+        m2 = self.makeM(10, 20, 15, 33)  # there are deletions of query aa on DNA
+        with self.assertRaisesRegex(NonlinearMatchException, "Overlap larger than matched"):
+            pairs = order_matches_for_junctions([m1, m2], max_overlap_len=10)
 
     def test_group_matches_separate_matches_by_contig_and_distance(self):
 

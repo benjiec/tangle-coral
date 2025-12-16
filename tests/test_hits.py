@@ -142,11 +142,12 @@ class TestCleaningSequenceWithHMM(unittest.TestCase):
     def makeM(query_start, query_end, target_start, target_end):
         return Match(
             query_accession=None, target_accession=None, e_value=0, identity=None,
-            query_start=query_start, query_end=query_end, target_start=target_start, target_end=target_end)
+            query_start=query_start, query_end=query_end, target_start=target_start, target_end=target_end,
+            target_sequence="A"*(abs(target_start-target_end)+1))
 
     def test_stitch_cleaned_sequence_basic(self):
-        left = self.makeM(1, 5, 1, 5)
-        right = self.makeM(4, 8, 4, 8)
+        left = self.makeM(1, 5, 1, 15)
+        right = self.makeM(4, 8, 10, 24)
         aa_map = {id(left):"ABCDE", id(right):"DEFGH"}
 
         pairs = order_matches_for_junctions([left, right])  # type: ignore
@@ -156,9 +157,9 @@ class TestCleaningSequenceWithHMM(unittest.TestCase):
         self.assertEqual(stitched, "ABCDEFGH")
 
     def test_stitch_cleaned_sequence_multiple_blocks_mixed(self):
-        a = self.makeM(1, 5, 1, 5)
-        b = self.makeM(4, 9, 4, 9)
-        c = self.makeM(13, 15, 13, 15)
+        a = self.makeM(1, 5, 1, 15)
+        b = self.makeM(4, 9, 10, 27)
+        c = self.makeM(13, 15, 37, 45)
         aa_map = {id(a):"ABCDE", id(b):"DEFGHI", id(c):"KLM"}
 
         pairs = order_matches_for_junctions([a,b,c])  # type: ignore
@@ -182,7 +183,7 @@ class TestCleaningSequenceWithHMM(unittest.TestCase):
             return cands[0]
         try:
             hits_mod.score_and_select_best_transition = _fake
-            cleaned_pm = hmm_clean_protein(pm, "dummy.hmm", overlap_flanking_len=5)
+            cleaned_pm = hmm_clean_protein(pm, "dummy.hmm", overlap_flanking_len=5, min_query_match_len=0)
             cleaned = cleaned_pm.collated_protein_sequence
         finally:
             hits_mod.score_and_select_best_transition = orig
@@ -194,8 +195,8 @@ class TestCleaningSequenceWithHMM(unittest.TestCase):
 
         a = Match("Q","T",1,5,1,15,0.0,100.0,False); a.target_sequence="ATG"*5         # 'M'*5
         b = Match("Q","T",4,9,16,33,0.0,100.0,False); b.target_sequence="GAA"*6        # 'E'*6
-        c = Match("Q","T",13,15,40,48,0.0,100.0,False); c.target_sequence="ATG"*3      # 'M'*3
-        pm = ProteinHit([a,b,c],1,15,1,48)
+        c = Match("Q","T",13,17,40,51,0.0,100.0,False); c.target_sequence="ATG"*5      # 'M'*5
+        pm = ProteinHit([a,b,c],1,15,1,51)
 
         orig = hits_mod.score_and_select_best_transition
         def _fake(cands, hmm):
@@ -219,7 +220,7 @@ class TestCleaningSequenceWithHMM(unittest.TestCase):
         self.assertEqual(nm[1].query_end, 9)
         # c unchanged (no shifting of downstream matches)
         self.assertEqual(nm[2].query_start, 13)
-        self.assertEqual(nm[2].query_end, 15)
+        self.assertEqual(nm[2].query_end, 17)
 
     def test_adjust_target_coordinates_gap_keeps_blocks(self):
         # query acc, target acc, query start, query end, target start, target end
