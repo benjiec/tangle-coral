@@ -56,7 +56,7 @@ def parse_hmmsearch_domtbl(domtbl_path):
     idx_q_len = 5
     idx_seq_eval = 6
     idx_seq_score = 7
-    idx_dom_eval = 12
+    idx_dom_eval = 11
     idx_dom_score = 13
     idx_h_from = 15
     idx_h_to = 16
@@ -73,7 +73,7 @@ def parse_hmmsearch_domtbl(domtbl_path):
     assert expected_header_parts[idx_q_len] == "qlen"
     assert expected_header_parts[idx_seq_eval] == "E-value"
     assert expected_header_parts[idx_seq_score] == "score"
-    assert expected_header_parts[idx_dom_eval] == "i-Evalue"
+    assert expected_header_parts[idx_dom_eval] == "c-Evalue"
     assert expected_header_parts[idx_dom_score] == "score"
     assert expected_header_parts[idx_h_from] == "from"
     assert expected_header_parts[idx_h_to] == "to"
@@ -204,7 +204,10 @@ class Aligned(object):
             query_result_id = query_result_id,
             query_length = query_length,
             hit_id = hit_id,
-            full_aligned_evalue = hsp.evalue,
+	    # use evalue_cond which is the c-Evalue from hmmsearch rather than
+	    # i-Evalue - this matters when there are lots of potential queries
+	    # to search through
+            full_aligned_evalue = hsp.evalue_cond,
             full_aligned_bitscore = hsp.bitscore,
             query_sequence = query_sequence,
             query_positions_1b = query_positions_1b,
@@ -213,7 +216,7 @@ class Aligned(object):
         )
 
     def query_gap_removed(self, gap_tolerated=8, always_remove_gap_with_star=True):
-       
+
         aligned = []
 
         last_boundary_i = 0
@@ -274,8 +277,8 @@ def hmmsearch_file(hmm_file_name, fasta_path, cutoff=False, gap_removal=True):
                 cmd.append("--cut_ga")
             cmd.extend(["-o", out_f.name, "--domtblout", domtbl_f.name, hmm_file_name, fasta_path])
 
-            # print(" ".join(cmd))
             run_command(cmd)
+            print(cmd)
 
             if gap_removal:
 		# parse the alignments and return alignments w/o gaps on query,
@@ -285,7 +288,7 @@ def hmmsearch_file(hmm_file_name, fasta_path, cutoff=False, gap_removal=True):
                 res = parse_hmmsearch_domtbl(domtbl_f.name)
 
             os.remove(domtbl_f.name)
-            os.remove(out_f.name)
+            # XXX os.remove(out_f.name)
             return res
 
 

@@ -186,82 +186,102 @@ class Results:
         return match
 
 
-def hmm_search_genome_sequence(
-    hmm_file, target_accession, target_sequence,
-    win, win_overlap,
-    contig_left_0b = None, contig_right_excl_0b = None
-):
-    """
-    Returns array of lists, each list has values in Results.PRODUCER_HEADER order
-    """
+def extract_fragments(target_accession, dna_start, dna_end, seq):
+    fragments = []
+    current_start = 0
 
-    if contig_left_0b is None:
-        contig_left_0b = 0
-    if contig_right_excl_0b is None:
-        contig_right_excl_0b = len(target_sequence)
+    seq += "*"
+    for i in range(0, len(seq)):
+        if seq[i] == "*":
+            if i > current_start:
+                start, end = to_dna_coordinate(dna_start, dna_end, current_start+1, i)
+                fragments.append((target_accession, start, end, seq[current_start:i]))
+            current_start = i+1
 
-    detected = []
+    return fragments
 
-    for win_i in range(contig_left_0b, contig_right_excl_0b, win):
-        translated_fasta = {}
 
-        subs = target_sequence[win_i:min(win_i+win+win_overlap, contig_right_excl_0b)]
+def get_aa_sequences(target_accession, target_sequence, target_start = None, target_end = None, win=50000, win_overlap=10000):
+
+    # target_start and target_end are 1b, if provided
+    if target_start is None:
+        target_start = 1
+    if target_end is None:
+        target_end = len(target_sequence)
+
+    coords = {}
+
+    for win_i in range(target_start-1, target_end, win):
+        # print(target_accession, target_start, target_end, "win", win_i+1, "+", win_overlap)
+
+        subs = target_sequence[win_i:min(win_i+win+win_overlap, target_end)]
         translations_fwd = compute_three_frame_translations(subs, 1, len(subs))
         translations_rev = compute_three_frame_translations(subs, len(subs), 1)
 
-        if translations_fwd[0][2]:
-            translated_fasta[f"{target_accession}_fwd_0"] = translations_fwd[0][2]
-        if translations_fwd[1][2]:
-            translated_fasta[f"{target_accession}_fwd_1"] = translations_fwd[1][2]
-        if translations_fwd[2][2]:
-            translated_fasta[f"{target_accession}_fwd_2"] = translations_fwd[2][2]
-        if translations_rev[0][2]:
-            translated_fasta[f"{target_accession}_rev_0"] = translations_rev[0][2]
-        if translations_rev[1][2]:
-            translated_fasta[f"{target_accession}_rev_1"] = translations_rev[1][2]
-        if translations_rev[2][2]:
-            translated_fasta[f"{target_accession}_rev_2"] = translations_rev[2][2]
-        
-        for k,v in translated_fasta.items():
-            # print(f">{k}\n{v}")
-            pass
-        if len(translated_fasta.keys()) == 0:
+        for translation in translations_fwd+translations_rev:
+            frame_dna_start = translation[0]+win_i
+            frame_dna_end = translation[1]+win_i
+
+            for f in extract_fragments(target_accession, frame_dna_start, frame_dna_end, translation[2]):
+                acc, start, end, seq = f
+                k = (start, end)
+                # print(k, f)
+                coords[k] = f
+
+    return list(coords.values())
+
+
+def hmm_search_genome(hmm_file, genome_accession, genomic_fasta_dict, min_aa_length = 10,
+                      target_accession = None, target_left = None, target_right = None):
+
+    fragments = []
+    for acc, genome_sequence in genomic_fasta_dict.items():
+        if target_accession and acc != target_accession:
             continue
+        fragments.extend(get_aa_sequences(acc, genome_sequence, target_left, target_right))
 
-        hmm_rows = hmmsearch_sequence_dict(hmm_file, translated_fasta)
-        hmm_rows = [row for row in hmm_rows if row["dom_evalue"] <= DOM_EVALUE_LIMIT]
+    fragments = [x for x in fragments if len(x[3]) >= min_aa_length]
+    fragments = [x for x in fragments if (x[3].count('X') / len(x[3])) < 0.1]
+    print(genome_accession, "total aa fragments", len(fragments))
 
-        for row in hmm_rows:
-            query_accession = row["query_accession"]
-            if not query_accession or query_accession.strip() == "-":
-                query_accession = row["query_name"]
+    translated_fasta = {}
+    name_to_coordinates = {}
+    for target_accession, target_start, target_end, seq in fragments:
+        target_name = f"{target_accession}_{target_start}_{target_end}"
+        translated_fasta[target_name] = seq
+        name_to_coordinates[target_name] = (target_accession, target_start, target_end)
 
-            frame = int(row["target_name"][-1])
-            if "_fwd_" in row["target_name"]:
-                frame_dna_start = translations_fwd[frame][0]
-                frame_dna_end = translations_fwd[frame][1]
-                aa_seq = extract_subsequence(translations_fwd[frame][2], row["ali_from"], row["ali_to"])
-            else:
-                frame_dna_start = translations_rev[frame][0]
-                frame_dna_end = translations_rev[frame][1]
-                aa_seq = extract_subsequence(translations_rev[frame][2], row["ali_from"], row["ali_to"])
+    hmm_rows = hmmsearch_sequence_dict(hmm_file, translated_fasta)
+    hmm_rows = [row for row in hmm_rows if row["dom_evalue"] <= DOM_EVALUE_LIMIT]
+    print(genome_accession, "total hmm rows", len(hmm_rows))
 
-            assert (abs(frame_dna_end-frame_dna_start)+1)%3 == 0
+    detected = []
 
-            dna_ali_from, dna_ali_to = to_dna_coordinate(frame_dna_start+win_i, frame_dna_end+win_i, row["ali_from"], row["ali_to"])
+    for row in hmm_rows:
 
-            out = [
-              query_accession,
-              target_accession,
-              row["dom_evalue"],
-              '',
-              row["hmm_from"],
-              row["hmm_to"],
-              dna_ali_from,
-              dna_ali_to,
-              aa_seq
-            ]
+        # hmmsearch: query = hmm, target = protein
+        hmm_name = row["query_accession"]
+        if not hmm_name or hmm_name.strip() == "-":
+            hmm_name = row["query_name"]
+        target_name = row["target_name"]
 
-            detected.append(out)
+        target_accession, target_start, target_end = name_to_coordinates[target_name]
+        dna_ali_from, dna_ali_to = to_dna_coordinate(target_start, target_end, row["ali_from"], row["ali_to"])
+        full_aa_seq = translated_fasta[target_name]
+        aa_seq = extract_subsequence(full_aa_seq, row["ali_from"], row["ali_to"])
+
+        out = (
+          hmm_name,
+          target_accession,
+          row["dom_evalue"],
+          '',
+          row["hmm_from"],
+          row["hmm_to"],
+          dna_ali_from,
+          dna_ali_to,
+          aa_seq
+        )
+
+        detected.append(out)
 
     return detected

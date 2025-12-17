@@ -14,8 +14,8 @@ class TestHMMSearch(unittest.TestCase):
             temp_file_path = os.path.join(temp_dir, 'domtbl.txt')
             with open(temp_file_path, 'w') as f:
                 f.write("# target name  accession  tlen  query name  accession  qlen  E-value  score  bias  #  of  c-Evalue  i-Evalue  score  bias  from  to  from  to\n")
-                f.write("cand_0 _ 81 _ _ 5 0.1 100 _ _ _ _ 0.05 201 _ 11 12 13 14\n")
-                f.write("cand_0 _ 82 _ _ 6 0.2 101 _ _ _ _ 0.04 202 _ 21 22 23 24\n")
+                f.write("cand_0 _ 81 _ _ 5 0.1 100 _ _ _ 0.005 0.05 201 _ 11 12 13 14\n")
+                f.write("cand_0 _ 82 _ _ 6 0.2 101 _ _ _ 0.004 0.04 202 _ 21 22 23 24\n")
                 f.close()
 
             matches = parse_hmmsearch_domtbl(temp_file_path)
@@ -24,7 +24,7 @@ class TestHMMSearch(unittest.TestCase):
             self.assertEqual(matches[0]["target_length"], 81)
             self.assertEqual(matches[0]["seq_evalue"], 0.1)
             self.assertEqual(matches[0]["seq_score"], 100)
-            self.assertEqual(matches[0]["dom_evalue"], 0.05)
+            self.assertEqual(matches[0]["dom_evalue"], 0.005) # using c-Evalue, not i-Evalue
             self.assertEqual(matches[0]["dom_score"], 201)
             self.assertEqual(matches[0]["query_length"], 5)
             self.assertEqual(matches[0]["hmm_from"], 11)
@@ -35,7 +35,7 @@ class TestHMMSearch(unittest.TestCase):
             self.assertEqual(matches[1]["target_length"], 82)
             self.assertEqual(matches[1]["seq_evalue"], 0.2)
             self.assertEqual(matches[1]["seq_score"], 101)
-            self.assertEqual(matches[1]["dom_evalue"], 0.04)
+            self.assertEqual(matches[1]["dom_evalue"], 0.004) # using c-Evalue, not i-Evalue
             self.assertEqual(matches[1]["dom_score"], 202)
             self.assertEqual(matches[1]["query_length"], 6)
             self.assertEqual(matches[1]["hmm_from"], 21)

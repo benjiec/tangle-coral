@@ -1,7 +1,7 @@
 import os
 import tempfile
 import unittest
-from needle.detect import Results, hmm_search_genome_sequence
+from needle.detect import Results, extract_fragments, get_aa_sequences
 import needle.detect as detect_mod
 
 
@@ -76,7 +76,7 @@ class TestParseDetectResults(unittest.TestCase):
             self.assertEqual(m.matched_sequence, "MEF")
 
 
-class TestHMMSearchGenomeSequence(unittest.TestCase):
+class TestHMMSearchGenome(unittest.TestCase):
 
     def setUp(self):
         self.orig = detect_mod.hmmsearch_sequence_dict
@@ -107,97 +107,120 @@ class TestHMMSearchGenomeSequence(unittest.TestCase):
     def tearDown(self):
         detect_mod.hmmsearch_sequence_dict = self.orig
 
-    def test_hmm_search_genome_sequence_windows_correctly_and_returns_right_coordinates(self):
-        target_accession = "t1"
-        target_sequence = "A"*20+"T"*20+"G"*20
-        win = 20
-        win_overlap = 3
-        contig_start = None
-        contig_end = None
+    def test_extract_fragments_splits_by_star_and_reports_dna_coordinates_correctly_fwd_strand(self):
 
-        detected = hmm_search_genome_sequence(None, target_accession, target_sequence, win, win_overlap, contig_start, contig_end)
+        seq = "F"*10+"*"+"G"*5+"*"+"L"
+        fragments = extract_fragments("t1", 123, 345, seq)
+        self.assertEqual(len(fragments), 3)
+        self.assertEqual(fragments[0][0], "t1")
+        self.assertEqual(fragments[0][1], 123)
+        self.assertEqual(fragments[0][2], 123+10*3-1)
+        self.assertEqual(fragments[0][3], "F"*10)
+        self.assertEqual(fragments[1][0], "t1")
+        self.assertEqual(fragments[1][1], 123+11*3)
+        self.assertEqual(fragments[1][2], 123+(11+5)*3-1)
+        self.assertEqual(fragments[1][3], "G"*5)
+        self.assertEqual(fragments[2][0], "t1")
+        self.assertEqual(fragments[2][1], 123+(11+6)*3)
+        self.assertEqual(fragments[2][2], 123+(11+6+1)*3-1)
+        self.assertEqual(fragments[2][3], "L")
 
-        # calls hmmsearch_sequence_dict once for every window, there are 3 windows, each with 6 translations
-        self.assertEqual(len(self.hmmsearch_calls_translated), 3)
-        self.assertEqual(len(self.hmmsearch_calls_translated[0]), 6)
-        self.assertEqual(len(self.hmmsearch_calls_translated[1]), 6)
-        self.assertEqual(len(self.hmmsearch_calls_translated[2]), 6)
+    def test_extract_fragments_splits_handles_starting_star(self):
 
-        # translations are correct
-        # 3 windows: 1..20+3, 21..40+3, 41..60
-        self.assertEqual(self.hmmsearch_calls_translated[0]["t1_fwd_0"], "KKKKKKN")
-        self.assertEqual(self.hmmsearch_calls_translated[0]["t1_fwd_1"], "KKKKKKI")
-        self.assertEqual(self.hmmsearch_calls_translated[0]["t1_fwd_2"], "KKKKKKF")
-        self.assertEqual(self.hmmsearch_calls_translated[0]["t1_rev_0"], "KFFFFFF")
-        self.assertEqual(self.hmmsearch_calls_translated[0]["t1_rev_1"], "NFFFFFF")
-        self.assertEqual(self.hmmsearch_calls_translated[0]["t1_rev_2"], "IFFFFFF")
-        # check other two windows are correct at first frame
-        self.assertEqual(self.hmmsearch_calls_translated[1]["t1_fwd_0"], "FFFFFFL")
-        self.assertEqual(self.hmmsearch_calls_translated[2]["t1_fwd_0"], "GGGGGG")
+        seq = "*"+"F"*10+"*"+"G"*5+"*"+"L"
+        fragments = extract_fragments("t1", 120, 345, seq)
+        self.assertEqual(len(fragments), 3)
+        self.assertEqual(fragments[0][0], "t1")
+        self.assertEqual(fragments[0][1], 123)
+        self.assertEqual(fragments[0][2], 123+10*3-1)
+        self.assertEqual(fragments[0][3], "F"*10)
+        self.assertEqual(fragments[1][0], "t1")
+        self.assertEqual(fragments[1][1], 123+11*3)
+        self.assertEqual(fragments[1][2], 123+(11+5)*3-1)
+        self.assertEqual(fragments[1][3], "G"*5)
+        self.assertEqual(fragments[2][0], "t1")
+        self.assertEqual(fragments[2][1], 123+(11+6)*3)
+        self.assertEqual(fragments[2][2], 123+(11+6+1)*3-1)
+        self.assertEqual(fragments[2][3], "L")
 
-        # converted returned coordinates to dna coordinates by each frame, and uses Results.PRODUCER_HEADER format
-        # 3 windows: 1..20+3, 21..40+3, 41..60
-        self.assertEqual(len(detected), 6*3)
-        # window 1..20+3, frame 0 - see setUp(): matched query start and end is 3..6, ali is 2..5
-        # ali coordinate 2..5 is aa coordinate, and should be translated to dna coordinate based on frame+window
-        self.assertEqual(detected[0][Results.PRODUCER_HEADER.index(Results.H_QSEQID)], "q1")
-        self.assertEqual(detected[0][Results.PRODUCER_HEADER.index(Results.H_SSEQID)], "t1")
-        self.assertEqual(detected[0][Results.PRODUCER_HEADER.index(Results.H_EVALUE)], 0.001) 
-        self.assertEqual(detected[0][Results.PRODUCER_HEADER.index(Results.H_QSTART)], 3)
-        self.assertEqual(detected[0][Results.PRODUCER_HEADER.index(Results.H_QEND)], 6)
-        self.assertEqual(detected[0][Results.PRODUCER_HEADER.index(Results.H_SSTART)], 4)
-        self.assertEqual(detected[0][Results.PRODUCER_HEADER.index(Results.H_SEND)], 15)
-        # two more forward frames
-        self.assertEqual(detected[1][Results.PRODUCER_HEADER.index(Results.H_QSEQID)], "q1")
-        self.assertEqual(detected[1][Results.PRODUCER_HEADER.index(Results.H_SSEQID)], "t1")
-        self.assertEqual(detected[1][Results.PRODUCER_HEADER.index(Results.H_EVALUE)], 0.001) 
-        self.assertEqual(detected[1][Results.PRODUCER_HEADER.index(Results.H_QSTART)], 3)
-        self.assertEqual(detected[1][Results.PRODUCER_HEADER.index(Results.H_QEND)], 6)
-        self.assertEqual(detected[1][Results.PRODUCER_HEADER.index(Results.H_SSTART)], 5)
-        self.assertEqual(detected[1][Results.PRODUCER_HEADER.index(Results.H_SEND)], 16)
-        self.assertEqual(detected[2][Results.PRODUCER_HEADER.index(Results.H_SSTART)], 6)
-        self.assertEqual(detected[2][Results.PRODUCER_HEADER.index(Results.H_SEND)], 17)
-        # three reverse frames, starting at 23
-        self.assertEqual(detected[3][Results.PRODUCER_HEADER.index(Results.H_SSTART)], 20)
-        self.assertEqual(detected[3][Results.PRODUCER_HEADER.index(Results.H_SEND)], 9)
-        self.assertEqual(detected[4][Results.PRODUCER_HEADER.index(Results.H_SSTART)], 19)
-        self.assertEqual(detected[4][Results.PRODUCER_HEADER.index(Results.H_SEND)], 8)
-        self.assertEqual(detected[5][Results.PRODUCER_HEADER.index(Results.H_SSTART)], 18)
-        self.assertEqual(detected[5][Results.PRODUCER_HEADER.index(Results.H_SEND)], 7)
-        # next window, fwd
-        self.assertEqual(detected[6][Results.PRODUCER_HEADER.index(Results.H_SSTART)], 24)
-        self.assertEqual(detected[6][Results.PRODUCER_HEADER.index(Results.H_SEND)], 35)
-        self.assertEqual(detected[7][Results.PRODUCER_HEADER.index(Results.H_SSTART)], 25)
-        self.assertEqual(detected[7][Results.PRODUCER_HEADER.index(Results.H_SEND)], 36)
-        self.assertEqual(detected[8][Results.PRODUCER_HEADER.index(Results.H_SSTART)], 26)
-        self.assertEqual(detected[8][Results.PRODUCER_HEADER.index(Results.H_SEND)], 37)
+    def test_get_aa_sequences_returns_fragments_using_six_frames(self):
 
-    def test_hmm_search_genome_sequence_windows_honest_contig_coord_window(self):
-        target_accession = "t1"
-        target_sequence = "A"*20+"T"*20+"G"*20
-        win = 20
-        win_overlap = 3
-        contig_left_0b = 1
-        contig_right_excl_0b = 23
+        seq = "ATAA"*4  # this will have a lot of TAAs in some frames
+        # fwd: ATAAATAAATAAATAA  1..16
+        #  f0: ataAATaaaTAAata   => 2
+        #  f1:  taaATAaatAAAtaa  => 1
+        #  f2:   aaaTAAataAAT    => 2
+        # rev: TTATTTATTTATTTAT  16..1
+        #  r0: ttaTTTattTATtta   => 1
+        #  r1:  TATttaTTTattTAT  => 1
+        #  r2:   ATTtatTTAttt    => 1
 
-        detected = hmm_search_genome_sequence(None, target_accession, target_sequence, win, win_overlap, contig_left_0b, contig_right_excl_0b)
+        fragments = get_aa_sequences("t1", seq)
 
-        # full contig is 2..23 (or 1..22 in 0b space)
-        # 3 windows: 2..min(21+3,23), 22..23
-        # calls hmmsearch_sequence_dict once for every window, there are 2 windows, but second window is not big enough so no translations
-        self.assertEqual(len(self.hmmsearch_calls_translated), 1)
-        self.assertEqual(len(self.hmmsearch_calls_translated[0]), 6)
+        self.assertEqual(len(fragments), 2+1+2+1+1+1)
+        # f0.1
+        self.assertEqual(fragments[0][1], 1)
+        self.assertEqual(fragments[0][2], 9)
+        # f0.2
+        self.assertEqual(fragments[1][1], 13)
+        self.assertEqual(fragments[1][2], 15)
+        # f1.1
+        self.assertEqual(fragments[2][1], 5)
+        self.assertEqual(fragments[2][2], 13)
+        # f2.1
+        self.assertEqual(fragments[3][1], 3)
+        self.assertEqual(fragments[3][2], 5)
+        # f2.2
+        self.assertEqual(fragments[4][1], 9)
+        self.assertEqual(fragments[4][2], 14)
+        # r0.1
+        self.assertEqual(fragments[5][1], 16)
+        self.assertEqual(fragments[5][2], 2)
+        # r1.1
+        self.assertEqual(fragments[6][1], 15)
+        self.assertEqual(fragments[6][2], 1)
+        # r2.1
+        self.assertEqual(fragments[7][1], 14)
+        self.assertEqual(fragments[7][2], 3)
 
-        # translations are correct
-        # 2..min(21+3,23) or 2..23, last codon is 20..22
-        self.assertEqual(self.hmmsearch_calls_translated[0]["t1_fwd_0"], "KKKKKKI")
-        # 3..23, last codon is 21..23
-        self.assertEqual(self.hmmsearch_calls_translated[0]["t1_fwd_1"], "KKKKKKF")
-        # 4..23, last codon is 19..21
-        self.assertEqual(self.hmmsearch_calls_translated[0]["t1_fwd_2"], "KKKKKN")
-        # on rev, first codon is 23..21
-        self.assertEqual(self.hmmsearch_calls_translated[0]["t1_rev_0"], "KFFFFFF")
-        # on rev, first codon is 22..20
-        self.assertEqual(self.hmmsearch_calls_translated[0]["t1_rev_1"], "NFFFFFF")
-        # on rev, first codon is 21..19
-        self.assertEqual(self.hmmsearch_calls_translated[0]["t1_rev_2"], "IFFFFF")
+    def test_get_aa_sequences_returns_fragments_correctly_even_when_windowing(self):
+
+        seq = "ATAA"*4  # this will have a lot of TAAs in some frames
+        fragments = get_aa_sequences("t1", seq, win=8, win_overlap=4)
+
+        # first window, 1..12
+        # fwd: ATAAATAAATAA 1..12
+        #  f0: ataAATaaaTAA      => 1
+        #  f1:  taaATAaat        => 1
+        #  f2:   aaaTAAata       => 2
+        # rev: TTATTTATTTAT 12..1
+        #  r0: ttaTTTattTAT      => 1
+        #  r1:  TATttaTTT        => 1
+        #  r2:   ATTtatTTA       => 1
+
+        # second window, 9..16
+        # fwd: ATAAATAA     9..16
+        #  f0: ataAAT            => 1
+        #  f1:  taaATA           => 1
+        #  f2:   aaaTAA          => 1
+        # rev: TTATTTAT     16..9
+        #  r0: ttaTTT            => 1
+        #  r1:  TATtta           => 1
+        #  r2:   ATTtat          => 1
+
+        self.assertEqual(len(fragments), 1+1+2+ 1+1+1+ 1+1+1+ 1+1+1)
+        # w1 f0.1
+        self.assertEqual(fragments[0][1], 1)
+        self.assertEqual(fragments[0][2], 9)
+        # w1 f1.1
+        self.assertEqual(fragments[1][1], 5)
+        self.assertEqual(fragments[1][2], 10)
+        # w1 r0.1
+        self.assertEqual(fragments[4][1], 12)
+        self.assertEqual(fragments[4][2], 1)
+        # w2 f0.1
+        self.assertEqual(fragments[7][1], 9)
+        self.assertEqual(fragments[7][2], 14)
+        # w2 r0.1
+        self.assertEqual(fragments[10][1], 16)
+        self.assertEqual(fragments[10][2], 11)
