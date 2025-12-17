@@ -64,7 +64,7 @@ if __name__ == "__main__":
 
         protein_hmm_rows = list(group)
         hmm_len = protein_hmm_rows[0]["target_length"]
-        hmm_eval = protein_hmm_rows[0]["seq_evalue"]
+        hmm_eval = min([x["dom_evalue"] for x in protein_hmm_rows])
         protein_len = protein_hmm_rows[0]["query_length"]
 
         hmm_aa_matched = [0 for i in range(0, hmm_len)]
@@ -83,6 +83,8 @@ if __name__ == "__main__":
         protein_aa_matched = sum(protein_aa_matched)
         protein_perc = round(protein_aa_matched * 100 / protein_len, 1)
         hmm_perc = round(hmm_aa_matched * 100 / hmm_len, 1)
+        hmm_from = min([x["hmm_from"] for x in protein_hmm_rows])
+        hmm_to = max([x["hmm_to"] for x in protein_hmm_rows])
 
         out = []
         out.append(genome_accession)
@@ -96,6 +98,8 @@ if __name__ == "__main__":
         out.append(hmm_eval)
         out.append(hmm_aa_matched)
         out.append(hmm_perc)
+        out.append(hmm_from)
+        out.append(hmm_to)
         out.append(protein_aa_matched)
         out.append(protein_perc)
 
@@ -133,6 +137,8 @@ if __name__ == "__main__":
                         needle_aa_matched_hmm[i] = 1
                 needle_aa_matched = sum(needle_aa_matched_hmm)
                 needle_aa_perc = round(needle_aa_matched * 100 / hmm_len, 1)
+                needle_hmm_from = min([row["query_start"] for row in needle_rows])
+                needle_hmm_to = max([row["query_end"] for row in needle_rows])
 
                 status = "FOUND"
                 substatus = []
@@ -144,14 +150,17 @@ if __name__ == "__main__":
                 out.append(status)
                 out.append(needle_aa_matched)
                 out.append(needle_aa_perc)
-                out.append(hmm_perc)
+                out.append(needle_hmm_from)
+                out.append(needle_hmm_to)
 
         out_rows.append(out)
 
     if args.output_file:
         output_f = open(args.output_file, "w")
         output_f.write("genome\tprotein accession\ttarget accession\ttarget start\ttarget end\tprotein len\t"+\
-                       "hmm name\thmm len\thmm evalue\thmm matched aa\thmm perc\tprotein matched aa\tprotein perc\tstatus\tneedle aa to hmm\tneedle matched perc\thmm perc\n")
+                       "hmm name\thmm len\thmm evalue\thmm matched aa\thmm perc\t\thmm from\thmm to\t"+\
+                       "protein matched aa\tprotein perc\t"+\
+                       "status\tneedle aa to hmm\tneedle matched perc\tneedle hmm from\tneedle hmm to\n")
         for out in out_rows:
             output_f.write("\t".join([str(x) for x in out])+"\n")
         output_f.close()

@@ -56,7 +56,7 @@ def parse_hmmsearch_domtbl(domtbl_path):
     idx_q_len = 5
     idx_seq_eval = 6
     idx_seq_score = 7
-    idx_dom_eval = 11
+    idx_dom_eval = 12
     idx_dom_score = 13
     idx_h_from = 15
     idx_h_to = 16
@@ -73,7 +73,7 @@ def parse_hmmsearch_domtbl(domtbl_path):
     assert expected_header_parts[idx_q_len] == "qlen"
     assert expected_header_parts[idx_seq_eval] == "E-value"
     assert expected_header_parts[idx_seq_score] == "score"
-    assert expected_header_parts[idx_dom_eval] == "c-Evalue"
+    assert expected_header_parts[idx_dom_eval] == "i-Evalue"
     assert expected_header_parts[idx_dom_score] == "score"
     assert expected_header_parts[idx_h_from] == "from"
     assert expected_header_parts[idx_h_to] == "to"
@@ -204,9 +204,12 @@ class Aligned(object):
             query_result_id = query_result_id,
             query_length = query_length,
             hit_id = hit_id,
-	    # use evalue_cond which is the c-Evalue from hmmsearch rather than
-	    # i-Evalue - this matters when there are lots of potential queries
-	    # to search through
+
+	    # use evalue which is the i-Evalue from hmmsearch rather than
+	    # c-Evalue - note that this value changes depends on the number of
+	    # query sequences since significance of match is dependent on
+	    # whatelse may be matched
+
             full_aligned_evalue = hsp.evalue_cond,
             full_aligned_bitscore = hsp.bitscore,
             query_sequence = query_sequence,

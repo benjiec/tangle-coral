@@ -262,6 +262,13 @@ def group_matches(all_matches, max_intron_length: int = 10_000, max_overlap_len:
                     current_query = (m.query_start, m.query_end)
                     # print("    overlap on genome, add to current cluster")
 
+                elif current_right > right_t:  # this one is contained in the last match, start new cluster
+                    clusters.append(current_cluster)
+                    current_cluster = [m]
+                    current_right = right_t
+                    current_query = (m.query_start, m.query_end)
+                    # print("    contained match? start new cluster")
+
                 # Query rewound, start new cluster
                 # Criteria here is:
                 #    There is overlap on query and not overlap on target, and
