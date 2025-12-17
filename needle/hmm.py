@@ -278,7 +278,6 @@ def hmmsearch_file(hmm_file_name, fasta_path, cutoff=False, gap_removal=True):
             cmd.extend(["-o", out_f.name, "--domtblout", domtbl_f.name, hmm_file_name, fasta_path])
 
             run_command(cmd)
-            print(cmd)
 
             if gap_removal:
 		# parse the alignments and return alignments w/o gaps on query,
@@ -288,7 +287,7 @@ def hmmsearch_file(hmm_file_name, fasta_path, cutoff=False, gap_removal=True):
                 res = parse_hmmsearch_domtbl(domtbl_f.name)
 
             os.remove(domtbl_f.name)
-            # XXX os.remove(out_f.name)
+            os.remove(out_f.name)
             return res
 
 
