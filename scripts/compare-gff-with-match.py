@@ -9,6 +9,7 @@ import itertools
 import subprocess
 from typing import List, Dict, Set
 
+from needle.detect import DOM_EVALUE_LIMIT
 from needle.match import extract_subsequence_strand_sensitive, read_fasta_as_dict
 from needle.hmm import hmmscan_file
 from needle.gff import parse_gff_to_hits
@@ -17,7 +18,7 @@ from defaults import DefaultPath
 
 if __name__ == "__main__":
     # gff_proteins: query = protein accession, target = contig accession
-    # hmm rows: query = protein, target = hmm name
+    # hmm scan rows: query = protein, target = hmm name
     # needle rows: query = hmm name, target = contig accession
 
     ap = argparse.ArgumentParser(description="Join hmmscan domtblout with GFF-derived proteins.")
@@ -36,7 +37,7 @@ if __name__ == "__main__":
     gff_proteins = parse_gff_to_hits(gff_file, protein_id_attr="protein_id", genomic_sequences=genomic_fasta)
     print("parsed GFF protein hits", len(gff_proteins))
 
-    needle_rows = []
+    all_needle_rows = []
     with open(args.needle_match_file, newline='') as f:
         reader = csv.DictReader(f, delimiter='\t')
         for row in reader:
@@ -44,21 +45,17 @@ if __name__ == "__main__":
            row["query_end"] = int(row["query_end"])
            row["target_start"] = int(row["target_start"])
            row["target_end"] = int(row["target_end"])
-           needle_rows.append(row)
-    print("total Needle rows", len(needle_rows))
+           all_needle_rows.append(row)
+    print("total Needle rows", len(all_needle_rows))
 
     hmmscan_rows = hmmscan_file(args.hmm_file, faa_file, cutoff=False)
+    hmmscan_rows = [row for row in hmmscan_rows if row["dom_evalue"] < DOM_EVALUE_LIMIT]
     print("hmmscan", len(hmmscan_rows), "matches")
-
-    output_f = None
-    if args.output_file:
-        output_f = open(args.output_file, "w")
-        output_f.write("genome\tprotein accession\ttarget accession\ttarget start\ttarget end\tprotein len\t"+\
-                       "hmm name\thmm len\thmm evalue\thmm aa\thmm perc\tprotein aa\tprotein perc\tstatus\tneedle aa\n")
 
     keyf = lambda hmm_row: (hmm_row["target_name"], hmm_row["query_name"])
     hmmscan_rows = sorted(hmmscan_rows, key=keyf)
 
+    out_rows = []
     for (hmm_name, hmm_query_protein_name), group in itertools.groupby(hmmscan_rows, key=keyf):
 
         gff_protein = [p for p in gff_proteins if p.query_accession == hmm_query_protein_name]
@@ -102,25 +99,26 @@ if __name__ == "__main__":
         out.append(protein_aa_matched)
         out.append(protein_perc)
 
-        matched_needle_rows = [row for row in needle_rows if row["protein_hit_id"].startswith(hmm_name) and row["target_accession"] == gff_protein.target_accession]
+        needle_rows = [row for row in all_needle_rows \
+                       if row["protein_hit_id"].startswith(hmm_name) and row["target_accession"] == gff_protein.target_accession]
 
-        print(hmm_query_protein_name, "hmm", hmm_name, len(protein_hmm_rows), "needle", len(matched_needle_rows))
+        print(hmm_query_protein_name, "hmm", hmm_name, hmm_eval, len(protein_hmm_rows), "needle", len(needle_rows))
         for row in protein_hmm_rows:
-            print("    hmm", row["target_name"], row["target_accession"], row["hmm_from"], row["hmm_to"], "matches", gff_protein.query_accession, row["ali_from"], row["ali_to"],
-                  "of", row["query_length"], row["dom_evalue"], row["dom_score"])
+            print("    hmm", row["target_name"], row["hmm_from"], row["hmm_to"], "matches", gff_protein.query_accession, row["ali_from"], row["ali_to"],
+                  "of", row["query_length"], row["dom_evalue"])
         for m in gff_protein.matches:
-            print("    gff", m.target_start, m.target_end, m.query_start, m.query_end)
+            print("    gff", m.target_start, m.target_end, "=> protein", m.query_start, m.query_end)
 
-        for row in matched_needle_rows:
-            print(" needle", row["protein_hit_id"], row["target_start"], row["target_end"], "covering hmm model", row["query_start"], row["query_end"])
+        for row in needle_rows:
+            print(" needle", row["protein_hit_id"], row["target_start"], row["target_end"], "=> hmm model", row["query_start"], row["query_end"])
 
-        if len(matched_needle_rows) == 0:
+        if len(needle_rows) == 0:
             status = "NOT FOUND"
             out.append(status)
 
         else:
-            needle_target_left = min([min(row["target_start"], row["target_end"]) for row in matched_needle_rows])
-            needle_target_right = max([max(row["target_start"], row["target_end"]) for row in matched_needle_rows])
+            needle_target_left = min([min(row["target_start"], row["target_end"]) for row in needle_rows])
+            needle_target_right = max([max(row["target_start"], row["target_end"]) for row in needle_rows])
             gff_target_left = min(gff_protein.target_start, gff_protein.target_end)
             gff_target_right = max(gff_protein.target_start, gff_protein.target_end)
 
@@ -130,10 +128,11 @@ if __name__ == "__main__":
 
             else:
                 needle_aa_matched_hmm = [0 for i in range(0, hmm_len)]
-                for row in matched_needle_rows:
+                for row in needle_rows:
                     for i in range(row["query_start"]-1, row["query_end"]):
                         needle_aa_matched_hmm[i] = 1
                 needle_aa_matched = sum(needle_aa_matched_hmm)
+                needle_aa_perc = round(needle_aa_matched * 100 / hmm_len, 1)
 
                 status = "FOUND"
                 substatus = []
@@ -144,9 +143,15 @@ if __name__ == "__main__":
 
                 out.append(status)
                 out.append(needle_aa_matched)
+                out.append(needle_aa_perc)
+                out.append(hmm_perc)
 
-        if output_f:
+        out_rows.append(out)
+
+    if args.output_file:
+        output_f = open(args.output_file, "w")
+        output_f.write("genome\tprotein accession\ttarget accession\ttarget start\ttarget end\tprotein len\t"+\
+                       "hmm name\thmm len\thmm evalue\thmm matched aa\thmm perc\tprotein matched aa\tprotein perc\tstatus\tneedle aa to hmm\tneedle matched perc\thmm perc\n")
+        for out in out_rows:
             output_f.write("\t".join([str(x) for x in out])+"\n")
-
-    if output_f:
         output_f.close()
