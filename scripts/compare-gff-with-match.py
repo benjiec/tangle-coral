@@ -158,7 +158,7 @@ if __name__ == "__main__":
     if args.output_file:
         output_f = open(args.output_file, "w")
         output_f.write("genome\tprotein accession\ttarget accession\ttarget start\ttarget end\tprotein len\t"+\
-                       "hmm name\thmm len\thmm evalue\thmm matched aa\thmm perc\t\thmm from\thmm to\t"+\
+                       "hmm name\thmm len\thmm evalue\thmm matched aa\thmm perc\thmm from\thmm to\t"+\
                        "protein matched aa\tprotein perc\t"+\
                        "status\tneedle aa to hmm\tneedle matched perc\tneedle hmm from\tneedle hmm to\n")
         for out in out_rows:
