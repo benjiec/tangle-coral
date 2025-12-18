@@ -56,6 +56,7 @@ def parse_hmmsearch_domtbl(domtbl_path):
     idx_q_len = 5
     idx_seq_eval = 6
     idx_seq_score = 7
+    idx_dom_eval_cond = 11
     idx_dom_eval = 12
     idx_dom_score = 13
     idx_h_from = 15
@@ -73,6 +74,7 @@ def parse_hmmsearch_domtbl(domtbl_path):
     assert expected_header_parts[idx_q_len] == "qlen"
     assert expected_header_parts[idx_seq_eval] == "E-value"
     assert expected_header_parts[idx_seq_score] == "score"
+    assert expected_header_parts[idx_dom_eval_cond] == "c-Evalue"
     assert expected_header_parts[idx_dom_eval] == "i-Evalue"
     assert expected_header_parts[idx_dom_score] == "score"
     assert expected_header_parts[idx_h_from] == "from"
@@ -99,6 +101,7 @@ def parse_hmmsearch_domtbl(domtbl_path):
                 seq_evalue = float(parts[idx_seq_eval]),
                 seq_score = float(parts[idx_seq_score]),
                 dom_evalue = float(parts[idx_dom_eval]),
+                dom_evalue_cond = float(parts[idx_dom_eval_cond]),
                 dom_score = float(parts[idx_dom_score]),
                 query_length = int(parts[idx_q_len]),
                 hmm_from = int(parts[idx_h_from]),

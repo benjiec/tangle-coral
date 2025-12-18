@@ -16,12 +16,27 @@ genome_accession = args.genome_accession
 fna_file = DefaultPath.ncbi_genome_fna(genome_accession)
 genomic_fasta = read_fasta_as_dict(fna_file)
 
-detected = hmm_search_genome(
+hmm_rows = hmm_search_genome(
     args.hmm_file, genome_accession, genomic_fasta,
     target_accession = args.target_accession,
     target_left = args.target_left,
     target_right = args.target_right
 )
+
+detected = []
+for row in hmm_rows:
+    out = (
+      row["query_accession"],
+      row["target_accession"],
+      row["dom_evalue"],
+      '',
+      row["hmm_from"],
+      row["hmm_to"],
+      row["ali_from"],
+      row["ali_to"],
+      row["matched_sequence"]
+    )
+    detected.append(out)
 
 with open(args.output_file, "w") as f:
     f.write("\t".join(Results.PRODUCER_HEADER)+"\n")

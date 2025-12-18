@@ -25,14 +25,11 @@ def main():
 
     try:
 
-        """
-        # If we are using BLAST as the main "detection" method, the following
-        # may find more matches, but we are now using hmmsearch on all AA
-        # fragments, so the following is likely not adding much
-
-        # use HMM to find more fragments
+        # use HMM to refine protein search at detected locus
+	# this step helps because we are using conditinoal e-value rather than
+	# independent e-value, for matches, which would be more sensitive given
+	# we already decided the locus is where protein is
         protein_matches = hmm_find_proteins(protein_matches, res, hmm_collection)
-        """
 
         pre_filter = len(protein_matches)
         protein_matches = [m for m in protein_matches if m.can_collate()]

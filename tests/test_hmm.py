@@ -25,6 +25,7 @@ class TestHMMSearch(unittest.TestCase):
             self.assertEqual(matches[0]["seq_evalue"], 0.1)
             self.assertEqual(matches[0]["seq_score"], 100)
             self.assertEqual(matches[0]["dom_evalue"], 0.05) # using i-Evalue, not c-Evalue
+            self.assertEqual(matches[0]["dom_evalue_cond"], 0.005)
             self.assertEqual(matches[0]["dom_score"], 201)
             self.assertEqual(matches[0]["query_length"], 5)
             self.assertEqual(matches[0]["hmm_from"], 11)
@@ -36,6 +37,7 @@ class TestHMMSearch(unittest.TestCase):
             self.assertEqual(matches[1]["seq_evalue"], 0.2)
             self.assertEqual(matches[1]["seq_score"], 101)
             self.assertEqual(matches[1]["dom_evalue"], 0.04) # using i-Evalue, not c-Evalue
+            self.assertEqual(matches[1]["dom_evalue_cond"], 0.004)
             self.assertEqual(matches[1]["dom_score"], 202)
             self.assertEqual(matches[1]["query_length"], 6)
             self.assertEqual(matches[1]["hmm_from"], 21)

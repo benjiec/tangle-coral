@@ -12,7 +12,6 @@ from needle.hits import (
     hmm_clean_protein,
     hmm_clean,
     adjust_target_coordinates,
-    hmmsearch_to_dna_coords,
     find_matches_at_locus
 )
 import needle.hits as hits_mod
@@ -269,159 +268,13 @@ class TestCleaningSequenceWithHMM(unittest.TestCase):
 
 class TestRefiningHitsWithHMM(unittest.TestCase):
 
-    def test_hmmsearch_to_dna_coords_converts_aa_coordinates_from_results_to_dna_coordinates_on_fwd_strand(self):
-
-        orig = hits_mod.hmmsearch
-        fake_matches = [
-            dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=2, ali_to=7),
-            dict(target_name="cand_1", dom_score=100, dom_evalue=0.0002, hmm_from=9, hmm_to=15, ali_from=7, ali_to=13),
-            dict(target_name="cand_2", dom_score=100, dom_evalue=0.0003, hmm_from=16, hmm_to=20, ali_from=16, ali_to=20)
-        ]
-
-        try:
-            hits_mod.hmmsearch = lambda h,s,cutoff: fake_matches
-
-            translations = [
-              (101, 199, "A"*33),
-              (102, 197, "L"*32),
-              (103, 198, "C"*32),
-            ]
-
-            matches = hmmsearch_to_dna_coords("hmmfile", translations)
-
-            self.assertEqual(len(matches), 3)
-
-            self.assertEqual(matches[0]["target_name"], "cand_0")
-            self.assertEqual(matches[0]["hmm_from"], 5)
-            self.assertEqual(matches[0]["hmm_to"], 10)
-            # frame 0, target at 2 which is dna 4-6, so adjusted coordinate is 104
-            self.assertEqual(matches[0]["ali_from"], 104)
-            # frame 0, target at 7 which is dna 19-21, so adjusted coordinate is 121
-            self.assertEqual(matches[0]["ali_to"], 121)
-            self.assertEqual(matches[0]["dom_evalue"], 0.0001)
-            self.assertEqual(matches[0]["matched_sequence"], "A"*6)
-
-            self.assertEqual(matches[1]["target_name"], "cand_1")
-            self.assertEqual(matches[1]["hmm_from"], 9)
-            self.assertEqual(matches[1]["hmm_to"], 15)
-            # frame 1, target at 7 which is dna 19-21, so adjusted coordinate from 102 is 120
-            self.assertEqual(matches[1]["ali_from"], 120)
-            # frame 1, target at 13 which is dna 37-39, so adjusted coordinate from 102 is 140
-            self.assertEqual(matches[1]["ali_to"], 140)
-            self.assertEqual(matches[1]["dom_evalue"], 0.0002)
-            self.assertEqual(matches[1]["matched_sequence"], "L"*7)
-
-            self.assertEqual(matches[2]["target_name"], "cand_2")
-            self.assertEqual(matches[2]["hmm_from"], 16)
-            self.assertEqual(matches[2]["hmm_to"], 20)
-            # frame 2, target at 16 which is dna 46-48, so adjusted coordinate from 103 is 148
-            self.assertEqual(matches[2]["ali_from"], 148)
-            # frame 2, target at 20 which is dna 58-60, so adjusted coordinate from 103 is 162
-            self.assertEqual(matches[2]["ali_to"], 162)
-            self.assertEqual(matches[2]["dom_evalue"], 0.0003)
-            self.assertEqual(matches[2]["matched_sequence"], "C"*5)
-
-        finally:
-            hits_mod.hmmsearch = orig
-
-    def test_hmmsearch_to_dna_coords_converts_aa_coordinates_from_results_to_dna_coordinates_on_rev_strand(self):
-
-        orig = hits_mod.hmmsearch
-        fake_matches = [
-            dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=2, ali_to=7),
-            dict(target_name="cand_1", dom_score=100, dom_evalue=0.0002, hmm_from=9, hmm_to=15, ali_from=7, ali_to=13),
-            dict(target_name="cand_2", dom_score=100, dom_evalue=0.0003, hmm_from=16, hmm_to=20, ali_from=16, ali_to=20)
-        ]
-
-        try:
-            hits_mod.hmmsearch = lambda h,s,cutoff: fake_matches
-
-            translations = [
-              (199, 101, "A"*33),
-              (198, 103, "L"*32),
-              (197, 102, "C"*32),
-            ]
-
-            matches = hmmsearch_to_dna_coords("hmmfile", translations)
-
-            self.assertEqual(len(matches), 3)
-
-            self.assertEqual(matches[0]["target_name"], "cand_0")
-            self.assertEqual(matches[0]["hmm_from"], 5)
-            self.assertEqual(matches[0]["hmm_to"], 10)
-            # frame 0, target at 2 which is dna 4-6, so adjusted coordinate from 199 decreasing is 196
-            self.assertEqual(matches[0]["ali_from"], 196)
-            # frame 0, target at 7 which is dna 19-21, so adjusted coordinate from 199 decreasing is 179
-            self.assertEqual(matches[0]["ali_to"], 179)
-            self.assertEqual(matches[0]["dom_evalue"], 0.0001)
-            self.assertEqual(matches[0]["matched_sequence"], "A"*6)
-
-            self.assertEqual(matches[1]["target_name"], "cand_1")
-            self.assertEqual(matches[1]["hmm_from"], 9)
-            self.assertEqual(matches[1]["hmm_to"], 15)
-            # frame 1, target at 7 which is dna 19-21, so adjusted coordinate from 198 decreasing is 180
-            self.assertEqual(matches[1]["ali_from"], 180)
-            # frame 1, target at 13 which is dna 37-39, so adjusted coordinate from 198 decreasing is 160
-            self.assertEqual(matches[1]["ali_to"], 160)
-            self.assertEqual(matches[1]["dom_evalue"], 0.0002)
-            self.assertEqual(matches[1]["matched_sequence"], "L"*7)
-
-            self.assertEqual(matches[2]["target_name"], "cand_2")
-            self.assertEqual(matches[2]["hmm_from"], 16)
-            self.assertEqual(matches[2]["hmm_to"], 20)
-            # frame 2, target at 16 which is dna 46-48, so adjusted coordinate from 197 decreasing is 152
-            self.assertEqual(matches[2]["ali_from"], 152)
-            # frame 2, target at 20 which is dna 58-60, so adjusted coordinate from 197 decreasing is 138
-            self.assertEqual(matches[2]["ali_to"], 138)
-            self.assertEqual(matches[2]["dom_evalue"], 0.0003)
-            self.assertEqual(matches[2]["matched_sequence"], "C"*5)
-
-        finally:
-            hits_mod.hmmsearch = orig
-
-    def test_hmmsearch_to_dna_coords_ignores_hmmsearch_result_not_on_fwd_strand(self):
-
-        orig = hits_mod.hmmsearch
-        fake_matches = [
-            dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=2, ali_to=5),
-            dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=8, ali_to=5),
-            dict(target_name="cand_1", dom_score=100, dom_evalue=0.0002, hmm_from=9, hmm_to=15, ali_from=7, ali_to=13),
-            dict(target_name="cand_2", dom_score=100, dom_evalue=0.0003, hmm_from=16, hmm_to=20, ali_from=16, ali_to=20)
-        ]
-
-        try:
-            hits_mod.hmmsearch = lambda h,s,cutoff: fake_matches
-
-            translations = [
-              (199, 101, "A"*33),
-              (198, 103, "L"*32),
-              (197, 102, "C"*32),
-            ]
-
-            matches = hmmsearch_to_dna_coords("hmmfile", translations)
-
-            self.assertEqual(len(matches), 3)
-
-            self.assertEqual(matches[0]["target_name"], "cand_0")
-            self.assertEqual(matches[0]["hmm_from"], 5)
-            self.assertEqual(matches[0]["hmm_to"], 10)
-            self.assertEqual(matches[1]["target_name"], "cand_1")
-            self.assertEqual(matches[1]["hmm_from"], 9)
-            self.assertEqual(matches[1]["hmm_to"], 15)
-            self.assertEqual(matches[2]["target_name"], "cand_2")
-            self.assertEqual(matches[2]["hmm_from"], 16)
-            self.assertEqual(matches[2]["hmm_to"], 20)
-
-        finally:
-            hits_mod.hmmsearch = orig
-
     def test_find_matches_at_locus_incrementally_search_for_more_matches_to_specified_range_beyond_last_position(self):
 
-        orig = hits_mod.hmmsearch_to_dna_coords
+        orig = hits_mod.hmm_search_genome
 
         searched = []
 
-        def fake_hmmsearch_to_dna_coords(_, translations):
+        def fake_hmm_search_genome(_hmm_file, _ga, _gs, target_accession, target_left, target_right, conditional):
             first_match = [
                 dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence="F"*6),
                 dict(target_name="cand_1", dom_score=100, dom_evalue=0.0002, hmm_from=9, hmm_to=15, ali_from=11021, ali_to=11041, matched_sequence="F"*7),
@@ -435,15 +288,15 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
                 dict(target_name="cand_2", dom_score=100, dom_evalue=0.0003, hmm_from=16, hmm_to=20, ali_from=11051, ali_to=11065, matched_sequence="F"*5)
             ]
 
-            searched.append((translations[0][0], translations[0][1]))
+            searched.append((target_left, target_right))
 
-            if translations[0][0] == 10001: # initial
+            if target_left == 10001: # initial
                 return first_match
-            elif translations[0][0] < 10001:
+            elif target_left < 10001:
                 return second_match
 
         try:
-            hits_mod.hmmsearch_to_dna_coords = fake_hmmsearch_to_dna_coords
+            hits_mod.hmm_search_genome = fake_hmm_search_genome
           
             old_matches = [
                 Match(query_accession="Q", target_accession="T", query_start=5, query_end=10, target_start=10001, target_end=10018, e_value=0.1, identity=None)
@@ -452,14 +305,14 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
             new_matches = find_matches_at_locus(
                 old_matches,
                 "T"*15000,
-                10001, 12001, "hmmfile", step=2000, max_search_distance=6000
+                10001, 12000, "hmmfile", step=2000, max_search_distance=6000
             )
 
             self.assertNotEqual(new_matches, None)
             self.assertEqual(len(new_matches), 4)
 
             # last found match is at 9001, so we can search to 3001
-            self.assertEqual(searched, [(10001, 12001), (8001, 14000), (6001, 15000), (4001, 14998), (2001, 14999)])
+            self.assertEqual(searched, [(10001, 12000), (8001, 14000), (6001, 15000), (4001, 15000), (2001, 15000)])
 
             self.assertEqual(new_matches[0].query_accession, "Q")
             self.assertEqual(new_matches[0].target_accession, "T")
@@ -485,14 +338,14 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
             self.assertEqual(new_matches[3].target_end, 11065)
 
         finally:
-            hits_mod.hmmsearch_to_dna_coords = orig
+            hits_mod.hmm_search_genome = orig
 
     def test_find_matches_at_locus_stops_searching_if_found_nonlinear_overlap(self):
 
-        orig = hits_mod.hmmsearch_to_dna_coords
+        orig = hits_mod.hmm_search_genome
 
         searched = []
-        def fake_hmmsearch_to_dna_coords(_, translations):
+        def fake_hmm_search_genome(_hmm_file, _ga, _gs, target_accession, target_left, target_right, conditional):
             first_match = [
                 dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence="F"*6),
                 dict(target_name="cand_1", dom_score=100, dom_evalue=0.0002, hmm_from=9, hmm_to=15, ali_from=11021, ali_to=11041, matched_sequence="F"*7),
@@ -506,15 +359,15 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
                 dict(target_name="cand_2", dom_score=100, dom_evalue=0.0003, hmm_from=16, hmm_to=20, ali_from=11051, ali_to=11065, matched_sequence="F"*5)
             ]
 
-            searched.append((translations[0][0], translations[0][1]))
+            searched.append((target_left, target_right))
 
-            if translations[0][0] == 10001: # initial
+            if target_left == 10001: # initial
                 return first_match
-            elif translations[0][0] < 10001:
+            elif target_left < 10001:
                 return second_match
 
         try:
-            hits_mod.hmmsearch_to_dna_coords = fake_hmmsearch_to_dna_coords
+            hits_mod.hmm_search_genome = fake_hmm_search_genome
           
             old_matches = [
                 Match(query_accession="Q", target_accession="T", query_start=5, query_end=10, target_start=10001, target_end=10018, e_value=0.1, identity=None)
@@ -523,38 +376,38 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
             new_matches = find_matches_at_locus(
                 old_matches,
                 "T"*20000,
-                10001, 12001, "hmmfile", step=2000, max_search_distance=6000
+                10001, 12000, "hmmfile", step=2000, max_search_distance=6000
             )
 
             self.assertNotEqual(new_matches, None)
             self.assertEqual(len(new_matches), 3)
             # stopped because non-linear match found
-            self.assertEqual(searched, [(10001, 12001), (8001, 14000)])
+            self.assertEqual(searched, [(10001, 12000), (8001, 14000)])
 
         finally:
-            hits_mod.hmmsearch_to_dna_coords = orig
+            hits_mod.hmm_search_genome = orig
 
     def test_find_matches_at_locus_incrementally_search_on_rev_strand_as_well(self):
 
-        orig = hits_mod.hmmsearch_to_dna_coords
+        orig = hits_mod.hmm_search_genome
 
         searched = []
-        def fake_hmmsearch_to_dna_coords(_, translations):
+        def fake_hmm_search_genome(_hmm_file, _ga, _gs, target_accession, target_left, target_right, conditional):
             first_match = [
                 dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=11018, ali_to=11001, matched_sequence="F"*6),
                 dict(target_name="cand_1", dom_score=100, dom_evalue=0.0002, hmm_from=9, hmm_to=15, ali_from=10841, ali_to=10821, matched_sequence="F"*7),
                 dict(target_name="cand_2", dom_score=100, dom_evalue=0.0003, hmm_from=16, hmm_to=20, ali_from=10065, ali_to=10051, matched_sequence="F"*5)
             ]
 
-            searched.append((translations[0][0], translations[0][1]))
+            searched.append((target_left, target_right))
 
-            if translations[0][0] == 12001: # initial
+            if target_right == 12000: # initial
                 return first_match
-            elif translations[0][0] > 12001:
+            elif target_right > 12000:
                 return first_match
 
         try:
-            hits_mod.hmmsearch_to_dna_coords = fake_hmmsearch_to_dna_coords
+            hits_mod.hmm_search_genome = fake_hmm_search_genome
           
             old_matches = [
                 Match(query_accession="Q", target_accession="T", query_start=5, query_end=10, target_start=10018, target_end=10001, e_value=0.1, identity=None)
@@ -563,30 +416,30 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
             new_matches = find_matches_at_locus(
                 old_matches,
                 "A"*25000,
-                12001, 10001, "hmmfile", step=2000, max_search_distance=6000
+                12000, 10001, "hmmfile", step=2000, max_search_distance=6000
             )
 
             self.assertNotEqual(new_matches, None)
             self.assertEqual(len(new_matches), 3)
             # last match is 11018, so can go to 17018
-            self.assertEqual(searched, [(12001, 10001), (14001, 8002), (16001, 6003), (18001, 4001)])
+            self.assertEqual(searched, [(10001, 12000), (8001, 14000), (6001, 16000), (4001, 18000)])
 
         finally:
-            hits_mod.hmmsearch_to_dna_coords = orig
+            hits_mod.hmm_search_genome = orig
 
     def test_find_matches_at_locus_ensures_hmm_matched_sequence_matches_translated_sequence(self):
 
-        orig = hits_mod.hmmsearch_to_dna_coords
+        orig = hits_mod.hmm_search_genome
         expected_aa = "F"*6
 
-        def fake_hmmsearch_to_dna_coords(_, translations):
+        def fake_hmm_search_genome(_hmm_file, _ga, _gs, target_accession, target_left, target_right, conditional):
             first_match = [
                 dict(target_name="cand_0", dom_score=100, dom_evalue=0.1, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence=expected_aa)
             ]
             return first_match
 
         try:
-            hits_mod.hmmsearch_to_dna_coords = fake_hmmsearch_to_dna_coords
+            hits_mod.hmm_search_genome = fake_hmm_search_genome
           
             old_matches = [
                 Match(query_accession="Q", target_accession="T", query_start=5, query_end=10, target_start=10001, target_end=10018, e_value=0.1, identity=None)
@@ -611,14 +464,14 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
                 )
 
         finally:
-            hits_mod.hmmsearch_to_dna_coords = orig
+            hits_mod.hmm_search_genome = orig
 
     def test_find_matches_at_locus_stops_searching_at_boundaries(self):
 
-        orig = hits_mod.hmmsearch_to_dna_coords
+        orig = hits_mod.hmm_search_genome
 
         searched = []
-        def fake_hmmsearch_to_dna_coords(_, translations):
+        def fake_hmm_search_genome(_hmm_file, _ga, _gs, target_accession, target_left, target_right, conditional):
             first_match = [
                 dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence="F"*6),
                 dict(target_name="cand_1", dom_score=100, dom_evalue=0.0002, hmm_from=9, hmm_to=15, ali_from=11021, ali_to=11041, matched_sequence="F"*7),
@@ -632,15 +485,15 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
                 dict(target_name="cand_2", dom_score=100, dom_evalue=0.0003, hmm_from=16, hmm_to=20, ali_from=11051, ali_to=11065, matched_sequence="F"*5)
             ]
 
-            searched.append((translations[0][0], translations[0][1]))
+            searched.append((target_left, target_right))
 
-            if translations[0][0] == 10001: # initial
+            if target_left == 10001: # initial
                 return first_match
-            elif translations[0][0] < 10001:
+            elif target_left < 10001:
                 return second_match
 
         try:
-            hits_mod.hmmsearch_to_dna_coords = fake_hmmsearch_to_dna_coords
+            hits_mod.hmm_search_genome = fake_hmm_search_genome
           
             old_matches = [
                 Match(query_accession="Q", target_accession="T", query_start=5, query_end=10, target_start=10001, target_end=10018, e_value=0.1, identity=None)
@@ -649,13 +502,13 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
             new_matches = find_matches_at_locus(
                 old_matches,
                 "T"*25000,
-                10001, 12001, "hmmfile", step=6000, max_search_distance=15000
+                10001, 12000, "hmmfile", step=6000, max_search_distance=15000
             )
 
-            self.assertEqual(searched, [(10001, 12001), (4001, 18001), (1, 24000), (1, 24999)])
+            self.assertEqual(searched, [(10001, 12000), (4001, 18000), (1, 24000), (1, 25000)])
 
         finally:
-            hits_mod.hmmsearch_to_dna_coords = orig
+            hits_mod.hmm_search_genome = orig
 
 
 if __name__ == "__main__":

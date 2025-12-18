@@ -2,9 +2,10 @@ import os
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 from Bio.Seq import Seq
-from .match import Match, ProteinHit, order_matches_for_junctions, extract_subsequence, extract_subsequence_strand_sensitive, compute_three_frame_translations
-from .detect import DOM_EVALUE_LIMIT
-from .hmm import hmmsearch, hmmfetch, HMMCollection
+from .seq import extract_subsequence, extract_subsequence_strand_sensitive, compute_three_frame_translations
+from .match import Match, ProteinHit, order_matches_for_junctions
+from .detect import DOM_EVALUE_LIMIT, hmm_search_genome
+from .hmm import hmmsearch, HMMCollection
 
 
 @dataclass
@@ -293,68 +294,32 @@ def hmm_clean(protein_hits: List[ProteinHit], hmm_collection: HMMCollection, ove
     return list(cleaned.values())
 
 
-def hmmsearch_to_dna_coords(hmm_file, three_frame_translations):
-    assert len(three_frame_translations) == 3
-
-    sequences = [aa for dna_start, dna_end, aa in three_frame_translations]
-    hmm_matches = hmmsearch(hmm_file, sequences, cutoff=False)
-    hmm_matches = [row for row in hmm_matches if row["dom_evalue"] <= DOM_EVALUE_LIMIT]
-
-    to_return = []
-    for hmm_match in hmm_matches:
-        assert hmm_match["target_name"].startswith("cand_")
-        frame = int(hmm_match["target_name"][len("cand_"):])
-        frame_dna_start = three_frame_translations[frame][0]
-        frame_dna_end = three_frame_translations[frame][1]
-        assert (abs(frame_dna_end-frame_dna_start)+1)%3 == 0
-
-        aa_start = hmm_match["ali_from"]
-        aa_end = hmm_match["ali_to"]
-        aa = extract_subsequence(three_frame_translations[frame][2], aa_start, aa_end)
-        hmm_match["matched_sequence"] = aa
-        # print(hmm_match)
-
-        # HMM hit must be in fwd direction
-        if aa_end < aa_start:
-            continue
-
-        if frame_dna_end > frame_dna_start: # fwd strand
-            hmm_match["ali_from"] = frame_dna_start+(aa_start-1)*3
-            hmm_match["ali_to"] = frame_dna_start+aa_end*3-1
-            to_return.append(hmm_match)
-
-        else: # rev strand 
-            hmm_match["ali_from"] = frame_dna_start-(aa_start-1)*3
-            hmm_match["ali_to"] = frame_dna_start-aa_end*3+1
-            to_return.append(hmm_match)
-
-        # print("converted to dna coords", hmm_match)
-
-    return to_return
-
-
 def find_matches_at_locus(old_matches, full_seq, start, end, hmm_file, step=2000, max_search_distance=10000, force_extend=False):
 
     # print("HMM search space", start, end)
 
-    translations = compute_three_frame_translations(full_seq, start, end)
-    hmm_matches = hmmsearch_to_dna_coords(hmm_file, translations)
+    target_accession = old_matches[0].target_accession
+    hmm_rows = hmm_search_genome(
+        hmm_file, None, {target_accession: full_seq},
+        target_accession = target_accession, target_left = min(start, end), target_right = max(start, end),
+        conditional = True
+    )
 
     new_matches = []
-    for hmm_match in hmm_matches:
-        target_sequence = extract_subsequence_strand_sensitive(full_seq, hmm_match["ali_from"], hmm_match["ali_to"])
+    for hmm_row in hmm_rows:
+        target_sequence = extract_subsequence_strand_sensitive(full_seq, hmm_row["ali_from"], hmm_row["ali_to"])
 
         match = Match(
             query_accession=old_matches[0].query_accession,
             target_accession=old_matches[0].target_accession,
-            query_start=hmm_match["hmm_from"],
-            query_end=hmm_match["hmm_to"],
-            target_start=hmm_match["ali_from"],
-            target_end=hmm_match["ali_to"],
-            e_value=hmm_match["dom_evalue"],
+            query_start=hmm_row["hmm_from"],
+            query_end=hmm_row["hmm_to"],
+            target_start=hmm_row["ali_from"],
+            target_end=hmm_row["ali_to"],
+            e_value=hmm_row["dom_evalue"],
             identity=None,
             target_sequence=target_sequence,
-            matched_sequence=hmm_match["matched_sequence"]
+            matched_sequence=hmm_row["matched_sequence"]
         )
         assert match.matched_sequence == match.target_sequence_translated()
         new_matches.append(match)

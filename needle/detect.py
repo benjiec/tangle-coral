@@ -232,7 +232,8 @@ def get_aa_sequences(target_accession, target_sequence, target_start = None, tar
 
 
 def hmm_search_genome(hmm_file, genome_accession, genomic_fasta_dict, min_aa_length = 10,
-                      target_accession = None, target_left = None, target_right = None):
+                      target_accession = None, target_left = None, target_right = None,
+                      conditional=False):
 
     fragments = []
     for acc, genome_sequence in genomic_fasta_dict.items():
@@ -242,7 +243,7 @@ def hmm_search_genome(hmm_file, genome_accession, genomic_fasta_dict, min_aa_len
 
     fragments = [x for x in fragments if len(x[3]) >= min_aa_length]
     fragments = [x for x in fragments if (x[3].count('X') / len(x[3])) < 0.1]
-    print(genome_accession, "total aa fragments", len(fragments))
+    # print(genome_accession, "total aa fragments", len(fragments))
 
     translated_fasta = {}
     name_to_coordinates = {}
@@ -252,10 +253,11 @@ def hmm_search_genome(hmm_file, genome_accession, genomic_fasta_dict, min_aa_len
         name_to_coordinates[target_name] = (target_accession, target_start, target_end)
 
     hmm_rows = hmmsearch_sequence_dict(hmm_file, translated_fasta)
-    hmm_rows = [row for row in hmm_rows if row["dom_evalue"] <= DOM_EVALUE_LIMIT]
-    print(genome_accession, "total hmm rows", len(hmm_rows))
-
-    detected = []
+    if conditional:
+        hmm_rows = [row for row in hmm_rows if row["dom_evalue_cond"] <= DOM_EVALUE_LIMIT]
+    else:
+        hmm_rows = [row for row in hmm_rows if row["dom_evalue"] <= DOM_EVALUE_LIMIT]
+    # print(genome_accession, "total hmm rows", len(hmm_rows))
 
     for row in hmm_rows:
 
@@ -270,18 +272,10 @@ def hmm_search_genome(hmm_file, genome_accession, genomic_fasta_dict, min_aa_len
         full_aa_seq = translated_fasta[target_name]
         aa_seq = extract_subsequence(full_aa_seq, row["ali_from"], row["ali_to"])
 
-        out = (
-          hmm_name,
-          target_accession,
-          row["dom_evalue"],
-          '',
-          row["hmm_from"],
-          row["hmm_to"],
-          dna_ali_from,
-          dna_ali_to,
-          aa_seq
-        )
+        row["query_accession"] = hmm_name
+        row["target_accession"] = target_accession
+        row["ali_from"] = dna_ali_from
+        row["ali_to"] = dna_ali_to
+        row["matched_sequence"] = aa_seq
 
-        detected.append(out)
-
-    return detected
+    return hmm_rows
