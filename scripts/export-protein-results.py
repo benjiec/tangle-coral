@@ -3,7 +3,7 @@ import argparse
 
 from needle.detect import Results
 from needle.match import group_matches
-from needle.hits import hmm_find_proteins, hmm_clean
+from needle.hits import hmm_expand, hmm_clean
 from needle.io import export_protein_hits
 from needle.hmm import HMMCollection
 from defaults import DefaultPath
@@ -29,7 +29,7 @@ def main():
 	# this step helps because we are using conditinoal e-value rather than
 	# independent e-value, for matches, which would be more sensitive given
 	# we already decided the locus is where protein is
-        protein_matches = hmm_find_proteins(protein_matches, res, hmm_collection)
+        protein_matches = hmm_expand(protein_matches, res._target_sequences_by_accession, hmm_collection)
 
         pre_filter = len(protein_matches)
         protein_matches = [m for m in protein_matches if m.can_collate()]

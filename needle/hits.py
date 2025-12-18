@@ -302,6 +302,7 @@ def find_matches_at_locus(old_matches, full_seq, start, end, hmm_file, step=2000
     hmm_rows = hmm_search_genome(
         hmm_file, None, {target_accession: full_seq},
         target_accession = target_accession, target_left = min(start, end), target_right = max(start, end),
+        strand = -1 if old_matches[0].on_reverse_strand else 1,
         conditional = True
     )
 
@@ -384,13 +385,12 @@ def find_matches_at_locus(old_matches, full_seq, start, end, hmm_file, step=2000
     return new_matches
 
 
-def hmm_find_protein_around_locus(protein_hit, results, hmm_file):
+def hmm_expand_protein(protein_hit, genomic_sequence_dict, hmm_file):
     """
     Further refine protein match using hmmsearch, at the genomic locus
     """
 
-    target_full_sequence = results._target_sequences_by_accession.get(protein_hit.target_accession, None)
-    assert target_full_sequence is not None
+    target_full_sequence = genomic_sequence_dict[protein_hit.target_accession]
 
     new_matches = find_matches_at_locus(protein_hit.matches, target_full_sequence, protein_hit.target_start, protein_hit.target_end, hmm_file, force_extend=True)
     if new_matches is None:
@@ -405,11 +405,10 @@ def hmm_find_protein_around_locus(protein_hit, results, hmm_file):
         hmm_file=hmm_file
     )
 
-
     return new_pm
 
 
-def hmm_find_proteins(protein_hits, results, hmm_collection):
+def hmm_expand(protein_hits, genomic_sequence_dict, hmm_collection):
     new_protein_hits = {}
 
     for pm in protein_hits:
@@ -420,7 +419,7 @@ def hmm_find_proteins(protein_hits, results, hmm_collection):
             print("    ", nm.target_start, nm.target_end, nm.query_start, nm.query_end)
         """
 
-        new_pm = hmm_find_protein_around_locus(pm, results, hmm_collection.get(pm.query_accession))
+        new_pm = hmm_expand_protein(pm, genomic_sequence_dict, hmm_collection.get(pm.query_accession))
         new_protein_hits[new_pm.protein_hit_id] = new_pm
 
     return list(new_protein_hits.values())

@@ -201,24 +201,27 @@ def extract_fragments(target_accession, dna_start, dna_end, seq):
     return fragments
 
 
-def get_aa_sequences(target_accession, target_sequence, target_start = None, target_end = None, win=50000, win_overlap=10000):
+def get_aa_sequences(target_accession, target_sequence, target_left = None, target_right = None, strand = None, win=50000, win_overlap=10000):
 
-    # target_start and target_end are 1b, if provided
-    if target_start is None:
-        target_start = 1
-    if target_end is None:
-        target_end = len(target_sequence)
+    # target_left and target_right are 1b, if provided
+    if target_left is None:
+        target_left = 1
+    if target_right is None:
+        target_right = len(target_sequence)
 
     coords = {}
 
-    for win_i in range(target_start-1, target_end, win):
-        # print(target_accession, target_start, target_end, "win", win_i+1, "+", win_overlap)
+    for win_i in range(target_left-1, target_right, win):
+        # print(target_accession, target_left, target_right, "win", win_i+1, "+", win_overlap)
 
-        subs = target_sequence[win_i:min(win_i+win+win_overlap, target_end)]
-        translations_fwd = compute_three_frame_translations(subs, 1, len(subs))
-        translations_rev = compute_three_frame_translations(subs, len(subs), 1)
+        subs = target_sequence[win_i:min(win_i+win+win_overlap, target_right)]
+        translations = []
+        if strand is None or strand == 1:
+            translations.extend(compute_three_frame_translations(subs, 1, len(subs)))
+        if strand is None or strand == -1:
+            translations.extend(compute_three_frame_translations(subs, len(subs), 1))
 
-        for translation in translations_fwd+translations_rev:
+        for translation in translations:
             frame_dna_start = translation[0]+win_i
             frame_dna_end = translation[1]+win_i
 
@@ -233,13 +236,13 @@ def get_aa_sequences(target_accession, target_sequence, target_start = None, tar
 
 def hmm_search_genome(hmm_file, genome_accession, genomic_fasta_dict, min_aa_length = 8,
                       target_accession = None, target_left = None, target_right = None,
-                      conditional=False):
+                      strand = None, conditional=False):
 
     fragments = []
     for acc, genome_sequence in genomic_fasta_dict.items():
         if target_accession and acc != target_accession:
             continue
-        fragments.extend(get_aa_sequences(acc, genome_sequence, target_left, target_right))
+        fragments.extend(get_aa_sequences(acc, genome_sequence, target_left=target_left, target_right=target_right, strand=strand))
 
     fragments = [x for x in fragments if len(x[3]) >= min_aa_length]
     fragments = [x for x in fragments if (x[3].count('X') / len(x[3])) < 0.1]

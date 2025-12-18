@@ -274,7 +274,7 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
 
         searched = []
 
-        def fake_hmm_search_genome(_hmm_file, _ga, _gs, target_accession, target_left, target_right, conditional):
+        def fake_hmm_search_genome(_hmm_file, _ga, _gs, target_accession, target_left, target_right, strand, conditional):
             first_match = [
                 dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence="F"*6),
                 dict(target_name="cand_1", dom_score=100, dom_evalue=0.0002, hmm_from=9, hmm_to=15, ali_from=11021, ali_to=11041, matched_sequence="F"*7),
@@ -345,7 +345,7 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
         orig = hits_mod.hmm_search_genome
 
         searched = []
-        def fake_hmm_search_genome(_hmm_file, _ga, _gs, target_accession, target_left, target_right, conditional):
+        def fake_hmm_search_genome(_hmm_file, _ga, _gs, target_accession, target_left, target_right, strand, conditional):
             first_match = [
                 dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence="F"*6),
                 dict(target_name="cand_1", dom_score=100, dom_evalue=0.0002, hmm_from=9, hmm_to=15, ali_from=11021, ali_to=11041, matched_sequence="F"*7),
@@ -392,7 +392,7 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
         orig = hits_mod.hmm_search_genome
 
         searched = []
-        def fake_hmm_search_genome(_hmm_file, _ga, _gs, target_accession, target_left, target_right, conditional):
+        def fake_hmm_search_genome(_hmm_file, _ga, _gs, target_accession, target_left, target_right, strand, conditional):
             first_match = [
                 dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=11018, ali_to=11001, matched_sequence="F"*6),
                 dict(target_name="cand_1", dom_score=100, dom_evalue=0.0002, hmm_from=9, hmm_to=15, ali_from=10841, ali_to=10821, matched_sequence="F"*7),
@@ -432,7 +432,7 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
         orig = hits_mod.hmm_search_genome
         expected_aa = "F"*6
 
-        def fake_hmm_search_genome(_hmm_file, _ga, _gs, target_accession, target_left, target_right, conditional):
+        def fake_hmm_search_genome(_hmm_file, _ga, _gs, target_accession, target_left, target_right, strand, conditional):
             first_match = [
                 dict(target_name="cand_0", dom_score=100, dom_evalue=0.1, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence=expected_aa)
             ]
@@ -471,7 +471,7 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
         orig = hits_mod.hmm_search_genome
 
         searched = []
-        def fake_hmm_search_genome(_hmm_file, _ga, _gs, target_accession, target_left, target_right, conditional):
+        def fake_hmm_search_genome(_hmm_file, _ga, _gs, target_accession, target_left, target_right, strand, conditional):
             first_match = [
                 dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence="F"*6),
                 dict(target_name="cand_1", dom_score=100, dom_evalue=0.0002, hmm_from=9, hmm_to=15, ali_from=11021, ali_to=11041, matched_sequence="F"*7),
