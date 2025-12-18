@@ -205,8 +205,8 @@ proteins (i.e. in `protein.faa` and `genomic.gff`) compare against protein
 found by Needle.
 
 ```
-PYTHONPATH=. python3 scripts/compare-gff-with-match.py data/m00009_query.faa GCF_002042975.1 data/m00009_results/matches.tsv \
-  --output-file <filename> --not-found-file <filename>
+PYTHONPATH=. python3 scripts/compare-gff-with-match.py --best-hmm data/m00009_ko.hmm GCF_002042975.1 data/m00009_results/matches.tsv \
+  --output-file <filename>
 ```
 
 The script above outputs a TSV file that can be joined with outputs of the

@@ -25,6 +25,7 @@ if __name__ == "__main__":
     ap.add_argument("hmm_file", help="Query HMM file")
     ap.add_argument("genome_accession")
     ap.add_argument("needle_match_file")
+    ap.add_argument("--best-hmm", action='store_true', default=False)
     ap.add_argument("--output-file", default=None)
     args = ap.parse_args()
 
@@ -55,6 +56,21 @@ if __name__ == "__main__":
     keyf = lambda hmm_row: (hmm_row["target_name"], hmm_row["query_name"])
     hmmscan_rows = sorted(hmmscan_rows, key=keyf)
 
+    if args.best_hmm:
+        # for each protein, find the hmm that has the best match
+        protein_scores = {}
+
+        for (hmm_name, hmm_query_protein_name), group in itertools.groupby(hmmscan_rows, key=keyf):
+            protein_hmm_rows = list(group)
+            hmm_eval = min([x["seq_evalue"] for x in protein_hmm_rows])
+            if hmm_query_protein_name not in protein_scores:
+                protein_scores[hmm_query_protein_name] = (hmm_name, hmm_eval)
+            elif hmm_eval < protein_scores[hmm_query_protein_name][1]:
+                protein_scores[hmm_query_protein_name] = (hmm_name, hmm_eval)
+  
+        hmmscan_rows = [row for row in hmmscan_rows if protein_scores[row["query_name"]][0] == row["target_name"]]
+        hmmscan_rows = sorted(hmmscan_rows, key=keyf)
+
     out_rows = []
     for (hmm_name, hmm_query_protein_name), group in itertools.groupby(hmmscan_rows, key=keyf):
 
@@ -64,7 +80,7 @@ if __name__ == "__main__":
 
         protein_hmm_rows = list(group)
         hmm_len = protein_hmm_rows[0]["target_length"]
-        hmm_eval = min([x["dom_evalue"] for x in protein_hmm_rows])
+        hmm_eval = min([x["seq_evalue"] for x in protein_hmm_rows])
         protein_len = protein_hmm_rows[0]["query_length"]
 
         hmm_aa_matched = [0 for i in range(0, hmm_len)]
