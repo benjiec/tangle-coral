@@ -136,8 +136,9 @@ class Aligned(object):
     query_result_id: str
     query_length: int
     hit_id: str
-    full_aligned_evalue: float
-    full_aligned_bitscore: float
+    evalue: float
+    evalue_cond: float
+    bitscore: float
     query_sequence: List[str]
     query_positions_1b: List[int]
     hit_sequence: List[str]
@@ -151,8 +152,9 @@ class Aligned(object):
             query_accession = self.query_result_id,
             seq_evalue = None,
             seq_score = None,
-            dom_evalue = self.full_aligned_evalue,
-            dom_score = self.full_aligned_evalue,
+            dom_evalue = self.evalue,
+            dom_evalue_cond = self.evalue_cond,
+            dom_score = self.bitscore,
             query_length = self.query_length,
             hmm_from = self.query_positions_1b[0],
             hmm_to = self.query_positions_1b[-1],
@@ -207,14 +209,9 @@ class Aligned(object):
             query_result_id = query_result_id,
             query_length = query_length,
             hit_id = hit_id,
-
-	    # use evalue which is the i-Evalue from hmmsearch rather than
-	    # c-Evalue - note that this value changes depends on the number of
-	    # query sequences since significance of match is dependent on
-	    # whatelse may be matched
-
-            full_aligned_evalue = hsp.evalue_cond,
-            full_aligned_bitscore = hsp.bitscore,
+            evalue = hsp.evalue,
+            evalue_cond = hsp.evalue_cond,
+            bitscore = hsp.bitscore,
             query_sequence = query_sequence,
             query_positions_1b = query_positions_1b,
             hit_sequence = hit_sequence,
@@ -234,8 +231,9 @@ class Aligned(object):
                     query_result_id = self.query_result_id,
                     query_length = self.query_length,
                     hit_id = self.hit_id,
-                    full_aligned_evalue = self.full_aligned_evalue,
-                    full_aligned_bitscore = self.full_aligned_bitscore,
+                    evalue = self.evalue,
+                    evalue_cond = self.evalue_cond,
+                    bitscore = self.bitscore,
                     query_sequence = self.query_sequence[last_boundary_i:i],
                     query_positions_1b = self.query_positions_1b[last_boundary_i:i],
                     hit_sequence = self.hit_sequence[last_boundary_i:i],
@@ -251,8 +249,9 @@ class Aligned(object):
                 query_result_id = self.query_result_id,
                 query_length = self.query_length,
                 hit_id = self.hit_id,
-                full_aligned_evalue = self.full_aligned_evalue,
-                full_aligned_bitscore = self.full_aligned_bitscore,
+                evalue = self.evalue,
+                evalue_cond = self.evalue_cond,
+                bitscore = self.bitscore,
                 query_sequence = self.query_sequence[last_boundary_i:i],
                 query_positions_1b = self.query_positions_1b[last_boundary_i:i],
                 hit_sequence = self.hit_sequence[last_boundary_i:i],

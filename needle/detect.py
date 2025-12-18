@@ -231,7 +231,7 @@ def get_aa_sequences(target_accession, target_sequence, target_start = None, tar
     return list(coords.values())
 
 
-def hmm_search_genome(hmm_file, genome_accession, genomic_fasta_dict, min_aa_length = 10,
+def hmm_search_genome(hmm_file, genome_accession, genomic_fasta_dict, min_aa_length = 8,
                       target_accession = None, target_left = None, target_right = None,
                       conditional=False):
 
@@ -259,23 +259,27 @@ def hmm_search_genome(hmm_file, genome_accession, genomic_fasta_dict, min_aa_len
         hmm_rows = [row for row in hmm_rows if row["dom_evalue"] <= DOM_EVALUE_LIMIT]
     # print(genome_accession, "total hmm rows", len(hmm_rows))
 
+    filtered_rows = []
     for row in hmm_rows:
-
         # hmmsearch: query = hmm, target = protein
         hmm_name = row["query_accession"]
         if not hmm_name or hmm_name.strip() == "-":
             hmm_name = row["query_name"]
         target_name = row["target_name"]
 
-        target_accession, target_start, target_end = name_to_coordinates[target_name]
-        dna_ali_from, dna_ali_to = to_dna_coordinate(target_start, target_end, row["ali_from"], row["ali_to"])
         full_aa_seq = translated_fasta[target_name]
         aa_seq = extract_subsequence(full_aa_seq, row["ali_from"], row["ali_to"])
+        if len(aa_seq) < min_aa_length:
+            continue
+
+        target_accession, target_start, target_end = name_to_coordinates[target_name]
+        dna_ali_from, dna_ali_to = to_dna_coordinate(target_start, target_end, row["ali_from"], row["ali_to"])
 
         row["query_accession"] = hmm_name
         row["target_accession"] = target_accession
         row["ali_from"] = dna_ali_from
         row["ali_to"] = dna_ali_to
         row["matched_sequence"] = aa_seq
+        filtered_rows.append(row)
 
-    return hmm_rows
+    return filtered_rows
