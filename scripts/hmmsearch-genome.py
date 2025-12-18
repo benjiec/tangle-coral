@@ -21,7 +21,7 @@ hmm_rows = hmm_search_genome(
     target_accession = args.target_accession,
     target_left = args.target_left,
     target_right = args.target_right,
-    conditional = False
+    conditional = True  # setting this argument to true, so we can use c-Evalue, which is more permissive
 )
 
 detected = []
