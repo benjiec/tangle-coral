@@ -86,8 +86,9 @@ Concatenate all the .hmm files together, e.g.
 cat profiles/*.hmm > kegg_downloads/ko.hmm
 ```
 
-Also, download the `ko_list.gz` file into `data/ko_list.gz`. This file contains
-scoring criteria for using the HMMs.
+Also, download the `ko_list.gz` file from the above location into
+`data/ko_thresholds.gz`. This file contains scoring criteria for using the
+HMMs.
 
 ### Download HMM profiles from Pfam
 
@@ -124,6 +125,9 @@ The general workflow looks like the following
   * Finish Protein Sequences
   * Improve Phylogene-aware family profiles
 
+The following instructions use M00009 KEGG module, describing the TCA cycle, as
+an example. Replace this number with other module IDs as appropriate.
+
 
 ### Generating Query .hmm for a KEGG Module
 
@@ -146,7 +150,6 @@ Or if you have a list of genome accessions in a file, e.g. `genomes.txt`, then d
 ./scripts/search-genomes m00009 genomes.txt
 ```
 
-
 ### Compare / Sanity check NCBI proteins against Needle detected proteins
 
 Use the following script to compare, for a given HMM model, how NCBI annotated
@@ -160,6 +163,19 @@ PYTHONPATH=. python3 scripts/compare-gff-with-match.py --best-hmm data/m00009_ko
 
 ### Classify Proteins
 
+The following two commands will classify detected proteins first by KEGG ortholog, then Pfam domains.
+
+```
+PYTHONPATH=. python3 scripts/classify.py --disable-cutoff-ga data/m00009_ko.hmm m00009
+PYTHONPATH=. python3 scripts/classify.py pfam-downloads/Pfam-A.hmm m00009
+```
+
+The output files are TSVs, in
+
+```
+data/m00009_results/classify_m00009_ko.tsv
+data/m00009_results/classify_Pfam-A.tsv
+```
 
 ### Cluster Proteins
 

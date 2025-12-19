@@ -392,7 +392,6 @@ class ProteinsTSV(object):
             reader = csv.DictReader(f, delimiter='\t')
             for row in reader:
                 row = {k: row[k] for k in ProteinsTSV.HEADERS}
-                print(row)
                 row["query_start"] = int(row["query_start"])
                 row["query_end"] = int(row["query_end"])
                 row["target_start"] = int(row["target_start"])
