@@ -5,30 +5,20 @@ from .hmm import hmmsearch
 from typing import Dict, List, Optional
 
 
-def write_protein_row(f, genome_accession: str, pm: ProteinHit, evalue: Optional[float], score: Optional[float]) -> None:
-    pid = pm.protein_hit_id
-    row = [
-        pid,
-        pm.query_accession,
-        pm.target_accession,
-        genome_accession,
-        "" if evalue is None else f"{evalue}",
-        "" if score is None else f"{score}",
-        pm.collated_protein_sequence,
-    ]
-    f.write("\t".join(row) + "\n")
-
-
-def write_nucmatch_rows(f, pm: ProteinHit) -> None:
+def write_nucmatch_rows(f, pm: ProteinHit, genome_accession: str, evalue: float, score: float) -> None:
     pid = pm.protein_hit_id
     for m in pm.matches:
         row = [
             pid,
+            genome_accession,
             m.target_accession,
             str(m.target_start),
             str(m.target_end),
+            pm.query_accession,
             str(m.query_start),
             str(m.query_end),
+            str(evalue),
+            str(score),
             str(m.target_sequence_translated())
         ]
         f.write("\t".join(row) + "\n")
@@ -67,34 +57,29 @@ def assert_tsv_header(tsv_path: str, header_columns: List[str]) -> None:
 def export_protein_hits(
     genome_accession: str,
     protein_hits: List[ProteinHit],
-    proteins_tsv_path: str,
+    proteins_aa_path: str,
     nucmatches_tsv_path: str,
     proteins_fasta_dir: str,
     requires_score = True
 ) -> None:
+
     filtered = [pm for pm in protein_hits if pm.can_produce_single_sequence()]
-    protein_header = [
-        "protein_hit_id",
-        "query_accession",
-        "target_accession",
-        "target_genome_accession",
-        "hmmsearch_evalue",
-        "hmmsearch_score",
-        "collated_protein_sequence",
-    ]
+
     nucmatch_header = [
         "protein_hit_id",
+        "genome_accession",
         "target_accession",
         "target_start",
         "target_end",
+        "query_accession",
         "query_start",
         "query_end",
-        "target_sequence"
+        "hmmsearch_evalue",
+        "hmmsearch_score",
+        "matched_sequence"
     ]
 
-    create_tsv_if_missing_with_header(proteins_tsv_path, protein_header)
     create_tsv_if_missing_with_header(nucmatches_tsv_path, nucmatch_header)
-    assert_tsv_header(proteins_tsv_path, protein_header)
     assert_tsv_header(nucmatches_tsv_path, nucmatch_header)
 
     if proteins_fasta_dir:
@@ -102,7 +87,7 @@ def export_protein_hits(
         if not os.path.exists(proteins_fasta_dir):
             os.makedirs(proteins_fasta_dir, exist_ok=True)
 
-    with open(proteins_tsv_path, "a") as f_prot, open(nucmatches_tsv_path, "a") as f_nuc:
+    with open(proteins_aa_path, "a") as f_prot, open(nucmatches_tsv_path, "a") as f_nuc:
         score_filtered = []
         for pm in filtered:
             evalue: Optional[float] = None
@@ -115,8 +100,8 @@ def export_protein_hits(
                 if evalue is None and requires_score:
                     continue
             score_filtered.append(pm)
-            write_protein_row(f_prot, genome_accession, pm, evalue, score)
-            write_nucmatch_rows(f_nuc, pm)
+            write_fasta_record(f_prot, pm)
+            write_nucmatch_rows(f_nuc, pm, genome_accession, evalue, score)
 
         if proteins_fasta_dir:
             # Write protein FASTA records grouped by query_accession into per-query files
