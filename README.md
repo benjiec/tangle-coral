@@ -82,11 +82,9 @@ Concatenate all the .hmm files together, e.g.
 cat profiles/*.hmm > kegg_downloads/ko.hmm
 ```
 
-Generate consensus protein sequence as a FASTA file, with
+Also, download the `ko_list.gz` file into `data/ko_list.gz`. This file contains
+scoring criteria for using the HMMs.
 
-```
-/opt/homebrew/Cellar/hmmer/3.4/bin/hmmemit -c kegg_downloads/ko.hmm > ko.fasta
-```
 
 ### Download HMM profiles from Pfam
 
