@@ -2,9 +2,8 @@
 import argparse
 
 from needle.detect import Results
-from needle.match import group_matches
+from needle.match import group_matches, export_protein_hits
 from needle.hits import hmm_expand, hmm_clean
-from needle.io import export_protein_hits
 from needle.hmm import HMMCollection
 from defaults import DefaultPath
 
@@ -40,8 +39,7 @@ def main():
             args.genome_accession,
             cleaned_protein_matches,
             args.output_dir+"/proteins.faa",
-            args.output_dir+"/proteins.tsv",
-            args.output_dir+"/faa"
+            args.output_dir+"/proteins.tsv"
         )
 
     finally:

@@ -1,3 +1,6 @@
+import os
+import csv
+import errno
 import hashlib
 from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
@@ -330,75 +333,85 @@ def group_matches(all_matches, max_intron_length: int = 10_000, max_overlap_len:
     return protein_hits
 
 
-def extract_subsequence(full_sequence: Optional[str], start_1_based: int, end_1_based: int) -> Optional[str]:
-    if full_sequence is None:
-        return None
-    if start_1_based <= 0 or end_1_based <= 0:
-        return None
-    # coordinates are 1-based inclusive; order can be reversed depending on alignment direction
-    left = min(start_1_based, end_1_based)
-    right = max(start_1_based, end_1_based)
-    if left > len(full_sequence):
-        return None
-    # slice is exclusive of end; adjust for 1-based inclusive
-    return full_sequence[left - 1 : min(right, len(full_sequence))]
+def write_fasta_record(f, pm: ProteinHit) -> None:
+    pid = pm.protein_hit_id
+    seq = pm.collated_protein_sequence
+    f.write(f">{pid}\n")
+    f.write(seq + "\n")
 
 
-def extract_subsequence_strand_sensitive(full_sequence: Optional[str], start_1_based: int, end_1_based: int) -> Optional[str]:
-    subs = extract_subsequence(full_sequence, start_1_based, end_1_based)
-    if start_1_based > end_1_based:
-        return str(Seq(subs).reverse_complement())
-    return subs
+class ProteinsTSV(object):
+
+    HEADERS = [
+        "protein_hit_id",
+        "genome_accession",
+        "target_accession",
+        "target_start",
+        "target_end",
+        "query_accession",
+        "query_start",
+        "query_end",
+        "matched_sequence"
+    ]
+
+    @staticmethod
+    def match_dict(protein_hit_id, genome_accession, match):
+        return {
+            ProteinsTSV.HEADERS[0]: protein_hit_id,
+            ProteinsTSV.HEADERS[1]: genome_accession,
+            ProteinsTSV.HEADERS[2]: match.target_accession,
+            ProteinsTSV.HEADERS[3]: match.target_start,
+            ProteinsTSV.HEADERS[4]: match.target_end,
+            ProteinsTSV.HEADERS[5]: match.query_accession,
+            ProteinsTSV.HEADERS[6]: match.query_start,
+            ProteinsTSV.HEADERS[7]: match.query_end,
+            ProteinsTSV.HEADERS[8]: match.target_sequence_translated()
+        }
+            
+    @staticmethod
+    def write_protein_hit(writer, pm: ProteinHit, genome_accession: str) -> None:
+        for m in pm.matches:
+            writer.writerow(ProteinsTSV.match_dict(pm.protein_hit_id, genome_accession, m))
+
+    @staticmethod
+    def append_to_tsv(tsv_path, protein_hits, genome_accession):
+        if not os.path.exists(tsv_path):
+            with open(tsv_path, "w") as f:
+                writer = csv.DictWriter(f, fieldnames=ProteinsTSV.HEADERS, delimiter='\t')
+                writer.writeheader()
+
+        with open(tsv_path, "a") as f:
+            writer = csv.DictWriter(f, fieldnames=ProteinsTSV.HEADERS, delimiter='\t')
+            for pm in protein_hits:
+                ProteinsTSV.write_protein_hit(writer, pm, genome_accession)
+
+    @staticmethod
+    def from_tsv_to_rows(tsv_path):
+        rows = []
+        with open(tsv_path, "r") as f:
+            reader = csv.DictReader(f, delimiter='\t')
+            for row in reader:
+                row = {k: row[k] for k in ProteinsTSV.HEADERS}
+                print(row)
+                row["query_start"] = int(row["query_start"])
+                row["query_end"] = int(row["query_end"])
+                row["target_start"] = int(row["target_start"])
+                row["target_end"] = int(row["target_end"])
+                rows.append(row)
+        return rows
 
 
-def read_fasta_as_dict(path: str) -> Dict[str, str]:
-    sequences_by_accession: Dict[str, str] = {}
-    current_acc: Optional[str] = None
-    current_seq_parts: List[str] = []
+def export_protein_hits(
+    genome_accession: str,
+    protein_hits: List[ProteinHit],
+    proteins_aa_path: str,
+    proteins_tsv_path: str
+) -> None:
 
-    with open(path, "r") as f:
-        for raw_line in f:
-            if not raw_line:
-                continue
-            line = raw_line.rstrip("\n")
-            if not line:
-                continue
-            if line.startswith(">"):
-                # Flush previous
-                if current_acc is not None:
-                    sequences_by_accession[current_acc] = "".join(current_seq_parts)
-                header_content = line[1:].strip()
-                # Accession is the first whitespace-delimited token
-                accession = header_content.split(None, 1)[0]
-                current_acc = accession
-                current_seq_parts = []
-            else:
-                current_seq_parts.append(line.strip())
-        # Flush final
-        if current_acc is not None:
-            sequences_by_accession[current_acc] = "".join(current_seq_parts)
+    protein_hits = [pm for pm in protein_hits if pm.can_produce_single_sequence()]
 
-    return sequences_by_accession
+    with open(proteins_aa_path, "a") as f_prot:
+        for pm in protein_hits:
+            write_fasta_record(f_prot, pm)
 
-
-def compute_three_frame_translations(full_seq, start, end):
-    target_sequence = extract_subsequence_strand_sensitive(full_seq, start, end)
-    if target_sequence is None:
-        print("Cannot extract sequence using", len(full_seq), start, end)
-
-    translations = []
-    for frame in range(3):
-        trim_right = (len(target_sequence)-frame)%3
-        if trim_right > 0:
-          frame_sequence = target_sequence[frame:-trim_right]
-        else:
-          frame_sequence = target_sequence[frame:]
-        assert len(frame_sequence) % 3 == 0
-        aa = Seq(frame_sequence).translate(to_stop=False) # Translate entire sequence, including stops
-
-        if end > start:  # fwd strand
-            translations.append((start+frame, end-trim_right, str(aa)))
-        else:  # rev strand
-            translations.append((start-frame, end+trim_right, str(aa)))
-
-    return translations
+    ProteinsTSV.append_to_tsv(proteins_tsv_path, protein_hits, genome_accession)

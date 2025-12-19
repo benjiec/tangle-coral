@@ -1,6 +1,7 @@
 from typing import Any, Dict, Iterable, List, Tuple
 from BCBio import GFF
-from .match import Match, ProteinHit, extract_subsequence_strand_sensitive
+from .match import Match, ProteinHit
+from .seq import extract_subsequence_strand_sensitive
 
 
 def _cds_transcript_order_key(strand: str):

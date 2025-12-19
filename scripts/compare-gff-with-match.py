@@ -10,7 +10,8 @@ import subprocess
 from typing import List, Dict, Set
 
 from needle.detect import DOM_EVALUE_LIMIT
-from needle.match import extract_subsequence_strand_sensitive, read_fasta_as_dict
+from needle.seq import extract_subsequence_strand_sensitive, read_fasta_as_dict
+from needle.match import ProteinsTSV
 from needle.hmm import hmmscan_file
 from needle.gff import parse_gff_to_hits
 from defaults import DefaultPath
@@ -38,15 +39,7 @@ if __name__ == "__main__":
     gff_proteins = parse_gff_to_hits(gff_file, protein_id_attr="protein_id", genomic_sequences=genomic_fasta)
     print("parsed GFF protein hits", len(gff_proteins))
 
-    all_needle_rows = []
-    with open(args.needle_match_file, newline='') as f:
-        reader = csv.DictReader(f, delimiter='\t')
-        for row in reader:
-           row["query_start"] = int(row["query_start"])
-           row["query_end"] = int(row["query_end"])
-           row["target_start"] = int(row["target_start"])
-           row["target_end"] = int(row["target_end"])
-           all_needle_rows.append(row)
+    all_needle_rows = ProteinsTSV.from_tsv_to_rows(args.needle_match_file)
     print("total Needle rows", len(all_needle_rows))
 
     hmmscan_rows = hmmscan_file(args.hmm_file, faa_file, cutoff=False)

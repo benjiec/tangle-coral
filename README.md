@@ -41,11 +41,15 @@ Install `HMMer` package. E.g. on MacOS run `brew install hmmer`.
 Create Python virtualenv
 
 ```
-python3 -v venv .venv
+python3 -m venv .venv
+source .venv/bin/activate
 pip3 install -r requirements.txt
 ```
 
-## Prepare Initial Data
+## Initial Data
+
+There are some initial data already in `data` directory. Below are instructions
+to re-create them.
 
 ### Download a list of KO (KEGG Ortholog) numbers and names
 
@@ -71,7 +75,7 @@ The following creates `data/module_ko.tsv`
 python3 scripts/fetch-kegg-module-ko.py
 ```
 
-### Create list of consensus protein sequences for all the KO numbers
+### Download KEGG KO profile HMMs
 
 Download the HMM profiles from `https://www.genome.jp/ftp/db/kofam/`. The
 `profiles.tar.gz` file is large, so this may take awhile.
@@ -84,7 +88,6 @@ cat profiles/*.hmm > kegg_downloads/ko.hmm
 
 Also, download the `ko_list.gz` file into `data/ko_list.gz`. This file contains
 scoring criteria for using the HMMs.
-
 
 ### Download HMM profiles from Pfam
 
@@ -114,47 +117,49 @@ PYTHONPATH=. python3 scripts/fetch-genomes.py data/genomes_coral.txt
 The general workflow looks like the following
 
   * Select a module to use; e.g. a module can be a pathway
-  * Detect Proteins: tblastn+HMM based refinement
+  * Detect Proteins using ortholog profile HMMs: tblastn+HMM based refinement
+  * Classify Proteins: hmmscan
   * Cluster Proteins: MMSeqs2
-  * Generate MSAs: Muscle and HMMalign
+  * Generate MSAs: Muscle and hmmalign
   * Finish Protein Sequences
-  * Classify Proteins
   * Improve Phylogene-aware family profiles
 
 
-Always activate the virtualenv first
-
-```
-source .venv/bin/activate
-```
-
 ### Generating Query .hmm for a KEGG Module
 
-Use `hmmfetch`, working with either `kegg-downloads/ko.hmm` or
-`pfam-downloads/Pfam-A.hmm`, generate a smaller HMM file containing the HMMs to
-search, for the module.
-
-Name the smaller HMM file as `data/m00009_ko.hmm` or `data/m00009_pfam.hmm`.
-Change the module ID as needed.
+Use `hmmfetch` to create a smaller HMM database for the KOs of a module. Use
+the following naming convention but change the module ID: `data/m00009_ko.hmm`.
 
 
-### Generate Pfam Hits Database against a Genome Accession
+### Detect Orthologs from Genomes
 
 The following script puts outputs in `data/m00009_results` directory
 
 ```
-./scripts/search-genome m00009 GCF_002042975.1 ko
+./scripts/search-genome m00009 GCF_002042975.1
 ```
-
-The last argument can be either "ko" or "pfam", and would result in the program
-using the HMM file with that name, e.g. `data/m00009_ko.hmm`.
 
 
 Or if you have a list of genome accessions in a file, e.g. `genomes.txt`, then do
 
 ```
-./scripts/search-genomes m00009 genomes.txt ko
+./scripts/search-genomes m00009 genomes.txt
 ```
+
+
+### Compare / Sanity check NCBI proteins against Needle detected proteins
+
+Use the following script to compare, for a given HMM model, how NCBI annotated
+proteins (i.e. in `protein.faa` and `genomic.gff`) compare against protein
+found by Needle.
+
+```
+PYTHONPATH=. python3 scripts/compare-gff-with-match.py --best-hmm data/m00009_ko.hmm GCF_002042975.1 data/m00009_results/proteins.tsv \
+  --output-file <filename>
+```
+
+### Classify Proteins
+
 
 ### Cluster Proteins
 
@@ -194,22 +199,6 @@ MSAs can generated with the following scripts.
 ./scripts/mk-msa-vis m00009 <faa file prefix> muscle
 ./scripts/mk-msa-vis m00009 <faa file prefix> hmmalign
 ```
-
-
-### Compare / Sanity check Annotated Proteins against Needle Hits
-
-Use the following script to compare, for a given HMM model, how NCBI annotated
-proteins (i.e. in `protein.faa` and `genomic.gff`) compare against protein
-found by Needle.
-
-```
-PYTHONPATH=. python3 scripts/compare-gff-with-match.py --best-hmm data/m00009_ko.hmm GCF_002042975.1 data/m00009_results/matches.tsv \
-  --output-file <filename>
-```
-
-The script above outputs a TSV file that can be joined with outputs of the
-clustering step, on the "Member Accession" column, to assess potential
-classifications of clusters.
 
 
 ### Search in SwissProt for related proteins
