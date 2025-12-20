@@ -3,3 +3,4 @@ swissprot-downloads
 __pycache__
 .*.swp
 tmp
+.*.twbr
