@@ -31,7 +31,8 @@ class ClassifyTSV(object):
 
         # hmmscan (not hmmsearch): target is hmm profile, query is protein ID
 
-        qacf = lambda row: row["query_accession"] if row["query_accession"] != "-" else row["query_name"]
+        tacf = lambda row: row["target_accession"].strip() if row["target_accession"].strip() and row["target_accession"].strip() != "-" else row["target_name"].strip()
+        qacf = lambda row: row["query_accession"].strip() if row["query_accession"].strip() and row["query_accession"].strip() != "-" else row["query_name"].strip()
         sorted_eval_for_protein = {}
         hmm_rows = sorted(hmm_rows, key=qacf)
         for protein_accession, group in itertools.groupby(hmm_rows, key=qacf):
@@ -45,7 +46,7 @@ class ClassifyTSV(object):
             for row in hmm_rows:
                 protein_accession = qacf(row)
                 genome_accession = protein_defs[protein_accession]["genome_accession"]
-                hmm_accession = row["target_accession"] if row["target_accession"] != "-" else row["target_name"]
+                hmm_accession = tacf(row)
                 score_threshold = "" if score_threshold_dict is None or hmm_accession not in score_threshold_dict else score_threshold_dict[hmm_accession]
 
                 data = {
