@@ -23,7 +23,7 @@ import uuid
 from pathlib import Path
 
 from needle.ncbi import download_and_extract_by_accession
-from needle.blast import Results
+from needle.detect import Results
 from defaults import DefaultPath
 
 
