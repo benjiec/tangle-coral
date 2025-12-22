@@ -21,27 +21,20 @@ class TestClassifyTSV(unittest.TestCase):
 
         classify_mod.hmmscan_file = _fake_hmmscan
 
-        with tempfile.NamedTemporaryFile(delete=False, suffix=".tsv", mode="w") as tmpf:
-            tmpf.close()
-            os.remove(tmpf.name) # need to remove so we write the headers on first call to append_to_ts
-            m1 = Match(query_accession="q1", target_accession="t1",
-                       query_start=2, query_end=5, target_start=10001, target_end=10012,
-                       e_value=1e-5, identity=0.9, target_sequence="A"*12)
-            p1 = ProteinHit(matches=[m1], query_start=2, query_end=5, target_start=10001, target_end=10012)
-            ProteinsTSV.append_to_tsv(tmpf.name, [p1], "g1")
-            m2 = Match(query_accession="q2", target_accession="t2",
-                       query_start=2, query_end=5, target_start=10001, target_end=10012,
-                       e_value=1e-5, identity=0.9, target_sequence="A"*12)
-            p2 = ProteinHit(matches=[m2], query_start=2, query_end=5, target_start=10001, target_end=10012)
-            ProteinsTSV.append_to_tsv(tmpf.name, [p2], "g2")
-            self.proteins_tsv = tmpf.name
-            self.proteins = [p1, p2]
-
+        m1 = Match(query_accession="q1", target_accession="t1",
+                   query_start=2, query_end=5, target_start=10001, target_end=10012,
+                   e_value=1e-5, identity=0.9, target_sequence="A"*12)
+        p1 = ProteinHit(matches=[m1], query_start=2, query_end=5, target_start=10001, target_end=10012)
+        m2 = Match(query_accession="q2", target_accession="t2",
+                   query_start=2, query_end=5, target_start=10001, target_end=10012,
+                   e_value=1e-5, identity=0.9, target_sequence="A"*12)
+        p2 = ProteinHit(matches=[m2], query_start=2, query_end=5, target_start=10001, target_end=10012)
+        self.proteins = [p1, p2]
+        self.protein_genome_accession_dict = { p1.protein_hit_id: "g1", p2.protein_hit_id: "g2" }
         self.set_default_fake_hmm_rows()
 
     def tearDown(self):
         classify_mod.hmmscan_file = self.orig_hmmscan_file
-        os.remove(self.proteins_tsv)
 
     def set_default_fake_hmm_rows(self):
         assert len(self.proteins) == 2
@@ -99,9 +92,9 @@ class TestClassifyTSV(unittest.TestCase):
     def test_classify_calls_hmmscan_correctly(self):
         with tempfile.NamedTemporaryFile(delete=False, suffix=".tsv", mode="w") as tmpf:
             tmpf.close()
-            classify("fake_hmm_file_name", "fake_proteins_faa_name", self.proteins_tsv, True, tmpf.name, None)
+            classify("fake_hmm_file_name", "fake_proteins_faa_name", True, tmpf.name, self.protein_genome_accession_dict, None)
             self.assertEqual(self.hmmscan_called_args[0], ["fake_hmm_file_name", "fake_proteins_faa_name", {"cutoff": True}])
-            classify("fake_hmm_file_name", "fake_proteins_faa_name", self.proteins_tsv, False, tmpf.name, None)
+            classify("fake_hmm_file_name", "fake_proteins_faa_name", False, tmpf.name, self.protein_genome_accession_dict, None)
             self.assertEqual(self.hmmscan_called_args[1], ["fake_hmm_file_name", "fake_proteins_faa_name", {"cutoff": False}])
             os.remove(tmpf.name)
 
@@ -115,7 +108,7 @@ class TestClassifyTSV(unittest.TestCase):
         with tempfile.NamedTemporaryFile(delete=False, suffix=".tsv", mode="w") as tmpf:
             tmpf.close()
 
-            classify("fake_hmm_file_name", "fake_proteins_faa_name", self.proteins_tsv, True, tmpf.name, None)
+            classify("fake_hmm_file_name", "fake_proteins_faa_name", True, tmpf.name, self.protein_genome_accession_dict, None)
             rows = self.read_classify_tsv_outputs(tmpf.name)
             self.assertEqual(len(rows), 3)
 
@@ -128,13 +121,27 @@ class TestClassifyTSV(unittest.TestCase):
 
             os.remove(tmpf.name)
 
+    def test_classify_tsv_appends_to_output_file(self):
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".tsv", mode="w") as tmpf:
+            tmpf.close()
+
+            classify("fake_hmm_file_name", "fake_proteins_faa_name", True, tmpf.name, self.protein_genome_accession_dict, None)
+            rows = self.read_classify_tsv_outputs(tmpf.name)
+            self.assertEqual(len(rows), 3)
+
+            classify("fake_hmm_file_name", "fake_proteins_faa_name", True, tmpf.name, self.protein_genome_accession_dict, None)
+            rows = self.read_classify_tsv_outputs(tmpf.name)
+            self.assertEqual(len(rows), 6)
+
+            os.remove(tmpf.name)
+
     def test_includes_evalue_from_hmmscan_and_sets_target_and_query_correctly(self):
         # hmmscan returns both accession and name
 
         with tempfile.NamedTemporaryFile(delete=False, suffix=".tsv", mode="w") as tmpf:
             tmpf.close()
 
-            classify("fake_hmm_file_name", "fake_proteins_faa_name", self.proteins_tsv, True, tmpf.name, None)
+            classify("fake_hmm_file_name", "fake_proteins_faa_name", True, tmpf.name, self.protein_genome_accession_dict, None)
             rows = self.read_classify_tsv_outputs(tmpf.name)
             self.assertEqual(len(rows), 3)
 
@@ -181,7 +188,7 @@ class TestClassifyTSV(unittest.TestCase):
         with tempfile.NamedTemporaryFile(delete=False, suffix=".tsv", mode="w") as tmpf:
             tmpf.close()
 
-            classify("fake_hmm_file_name", "fake_proteins_faa_name", self.proteins_tsv, True, tmpf.name, None)
+            classify("fake_hmm_file_name", "fake_proteins_faa_name", True, tmpf.name, self.protein_genome_accession_dict, None)
             rows = self.read_classify_tsv_outputs(tmpf.name)
             self.assertEqual(len(rows), 3)
 
@@ -200,7 +207,7 @@ class TestClassifyTSV(unittest.TestCase):
         with tempfile.NamedTemporaryFile(delete=False, suffix=".tsv", mode="w") as tmpf:
             tmpf.close()
 
-            classify("fake_hmm_file_name", "fake_proteins_faa_name", self.proteins_tsv, True, tmpf.name, scoring_threshold)
+            classify("fake_hmm_file_name", "fake_proteins_faa_name", True, tmpf.name, self.protein_genome_accession_dict, scoring_threshold)
             rows = self.read_classify_tsv_outputs(tmpf.name)
             self.assertEqual(len(rows), 3)
 
@@ -214,7 +221,7 @@ class TestClassifyTSV(unittest.TestCase):
         with tempfile.NamedTemporaryFile(delete=False, suffix=".tsv", mode="w") as tmpf:
             tmpf.close()
 
-            classify("fake_hmm_file_name", "fake_proteins_faa_name", self.proteins_tsv, True, tmpf.name, None)
+            classify("fake_hmm_file_name", "fake_proteins_faa_name", True, tmpf.name, self.protein_genome_accession_dict, None)
             rows = self.read_classify_tsv_outputs(tmpf.name)
             self.assertEqual(len(rows), 3)
 

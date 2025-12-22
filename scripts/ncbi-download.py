@@ -12,8 +12,8 @@ import os
 import sys
 import time
 from pathlib import Path
-
-from ncbi import download_and_extract_by_accession, FILE_TYPE_PATTERNS
+from defaults import DefaultPath
+from needle.ncbi import download_and_extract_by_accession, FILE_TYPE_PATTERNS
 
 def print_status(message: str, level: str = "INFO"):
     """Print a timestamped status message with color coding."""
@@ -166,7 +166,7 @@ def main():
         add_help=False  # We'll handle help manually to match the bash script
     )
     
-    parser.add_argument("-o", "--output", default="ncbi-downloads",
+    parser.add_argument("-o", "--output", default=DefaultPath.ncbi_download_dir(),
                        help="Output directory (default: ncbi-downloads)")
     parser.add_argument("-d", "--delay", type=float, default=1.0,
                        help="Delay between requests in seconds (default: 1)")

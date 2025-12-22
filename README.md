@@ -166,16 +166,19 @@ PYTHONPATH=. python3 scripts/compare-gff-with-match.py --best-hmm data/m00009_ko
 The following two commands will classify detected proteins first by KEGG ortholog, then Pfam domains.
 
 ```
-PYTHONPATH=. python3 scripts/classify.py --disable-cutoff-ga data/m00009_ko.hmm m00009
-PYTHONPATH=. python3 scripts/classify.py pfam-downloads/Pfam-A.hmm m00009
+PYTHONPATH=. python3 scripts/classify.py --disable-cutoff-ga data/m00009_ko.hmm m00009 data/m00009_results/classify.tsv
+PYTHONPATH=. python3 scripts/classify.py pfam-downloads/Pfam-A.hmm m00009 data/m00009_results/classify.tsv
 ```
 
-The output files are TSVs, in
+Classifications of annotated proteins submitted to NBCI can be classified in
+the same way, and added to the same output TSV, using the following two
+commands.
 
 ```
-data/m00009_results/classify_m00009_ko.tsv
-data/m00009_results/classify_Pfam-A.tsv
+PYTHONPATH=. python3 scripts/classify-ncbi.py --disable-cutoff-ga data/m00009_ko.hmm GCF_932526225.1 data/m00009_results/classify.tsv
+PYTHONPATH=. python3 scripts/classify-ncbi.py pfam-downloads/Pfam-A.hmm GCF_932526225.1 data/m00009_results/classify.tsv
 ```
+
 
 ### Cluster Proteins
 
@@ -217,8 +220,17 @@ MSAs can generated with the following scripts.
 ```
 
 
-### Search in SwissProt for related proteins
+### Other Scripts
+
+Search in SwissProt for related proteins
 
 ```
 scripts/mmseqs-swissprot-search proteins.faa results.tsv
 ```
+
+Download files from NCBI
+
+```
+PYTHONPATH=. python3 scripts/ncbi-download.py GCF_932526225.1
+```
+

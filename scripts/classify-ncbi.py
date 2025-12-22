@@ -1,14 +1,14 @@
 import csv
 import gzip
-from pathlib import Path
-from needle.match import ProteinsTSV
+from defaults import DefaultPath
+from needle.seq import read_fasta_as_dict
 from needle.classify import classify
 
 import argparse
 
 ap = argparse.ArgumentParser()
 ap.add_argument("hmm_file")
-ap.add_argument("module_id")
+ap.add_argument("genome_accession")
 ap.add_argument("output_tsv")
 ap.add_argument("--disable-cutoff-ga", action="store_true", default=False)
 args = ap.parse_args()
@@ -25,14 +25,8 @@ with gzip.open("data/ko_thresholds.gz", mode='rt') as f:
     reader = csv.DictReader(f, delimiter='\t')
     score_threshold_dict = {row['knum']: row['threshold'] for row in reader}
 
-hmm_file_stem = Path(args.hmm_file).stem
-proteins_faa = f"data/{args.module_id}_results/proteins.faa"
-proteins_tsv = f"data/{args.module_id}_results/proteins.tsv"
-
-protein_match_rows = ProteinsTSV.from_tsv_to_rows(proteins_tsv)
-protein_genome_accession_dict = {
-  row["protein_hit_id"]: row["genome_accession"]
-  for row in protein_match_rows
-}
+proteins_faa = DefaultPath.ncbi_genome_protein_faa(args.genome_accession)
+proteins_fasta = read_fasta_as_dict(proteins_faa)
+protein_genome_accession_dict = { k: args.genome_accession for k in proteins_fasta.keys() }
 
 classify(args.hmm_file, proteins_faa, cutoff_ga, args.output_tsv, protein_genome_accession_dict, score_threshold_dict)

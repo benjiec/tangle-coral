@@ -13,7 +13,7 @@ class DefaultPath(object):
         return os.path.join(DefaultPath.ncbi_download_dir(), "ncbi_dataset/data", genome_accession)
 
     @staticmethod
-    def ncbi_genome_faa(genome_accession):
+    def ncbi_genome_protein_faa(genome_accession):
         return os.path.join(DefaultPath.ncbi_genome_dir(genome_accession), "protein.faa")
 
     @staticmethod

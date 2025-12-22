@@ -31,7 +31,7 @@ if __name__ == "__main__":
     args = ap.parse_args()
 
     genome_accession = args.genome_accession
-    faa_file = DefaultPath.ncbi_genome_faa(genome_accession)
+    faa_file = DefaultPath.ncbi_genome_protein_faa(genome_accession)
     gff_file = DefaultPath.ncbi_genome_gff(genome_accession)
     fna_file = DefaultPath.ncbi_genome_fna(genome_accession)
     genomic_fasta = read_fasta_as_dict(fna_file)
