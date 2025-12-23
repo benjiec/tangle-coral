@@ -1,6 +1,10 @@
+import os
 import unittest
+import tempfile
 
-from needle.seq import extract_subsequence, extract_subsequence_strand_sensitive, compute_three_frame_translations, to_dna_coordinate
+from needle.seq import extract_subsequence, extract_subsequence_strand_sensitive
+from needle.seq import compute_three_frame_translations, to_dna_coordinate
+from needle.seq import read_fasta_as_dict, write_fasta_from_dict
 
 
 class TestExtractSubsequence(unittest.TestCase):
@@ -91,3 +95,22 @@ class TestProteinToDNACoordinateConverstion(unittest.TestCase):
         self.assertEqual(to_dna_coordinate( 99, 1, 3, 6), (93, 82))
         self.assertEqual(to_dna_coordinate( 98, 1, 3, 6), (92, 81))
         self.assertEqual(to_dna_coordinate( 97, 1, 3, 6), (91, 80))
+
+
+class TestReadWriteFasta(unittest.TestCase):
+
+    def test_read_write_append_consistently(self):
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".fa", mode="w") as tmpf:
+            tmpf.close()
+
+            fasta_1 = dict(a="a", g="gg", c="ccc")
+            write_fasta_from_dict(fasta_1, tmpf.name)
+            fasta_2 = read_fasta_as_dict(tmpf.name)
+            self.assertEqual(fasta_1, fasta_2)
+
+            fasta_3 = dict(t="tttt")
+            write_fasta_from_dict(fasta_3, tmpf.name, append=True)
+            fasta_4 = read_fasta_as_dict(tmpf.name)
+            self.assertEqual(fasta_1 | fasta_3, fasta_4)
+
+            os.remove(tmpf.name)

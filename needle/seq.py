@@ -53,6 +53,16 @@ def read_fasta_as_dict(path: str) -> Dict[str, str]:
     return sequences_by_accession
 
 
+def write_fasta_from_dict(fasta_dict: Dict[str, str], path: str, append = False):
+    mode = "w"
+    if append is True:
+        mode = "a"
+
+    with open(path, mode) as f:
+        for k,v in fasta_dict.items():
+            f.write(f">{k}\n{v}\n")
+
+
 def compute_three_frame_translations(full_seq, start, end):
     target_sequence = extract_subsequence_strand_sensitive(full_seq, start, end)
     if target_sequence is None:

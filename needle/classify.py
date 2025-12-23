@@ -28,6 +28,26 @@ class ClassifyTSV(object):
     ]
 
     @staticmethod
+    def from_tsv_to_rows(tsv_path):
+        rows = []
+        with open(tsv_path, "r") as f:
+            reader = csv.DictReader(f, delimiter='\t')
+            for row in reader:
+                row = {k: row[k] for k in ClassifyTSV.HEADERS}
+                row["hmm_start"] = int(row["hmm_start"])
+                row["hmm_end"] = int(row["hmm_end"])
+                row["protein_start"] = int(row["protein_start"])
+                row["protein_end"] = int(row["protein_end"])
+                row["dom_evalue_cond"] = float(row["dom_evalue_cond"])
+                row["dom_evalue"] = float(row["dom_evalue"])
+                row["dom_score"] = float(row["dom_score"])
+                row["score_threshold"] = float(row["score_threshold"]) if row["score_threshold"] else None
+                row["dom_rank_for_protein"] = int(row["dom_rank_for_protein"])
+                rows.append(row)
+
+        return rows
+
+    @staticmethod
     def to_tsv_from_hmmscan_rows(hmm_db_name, tsv_path, hmm_rows, protein_genome_accession_dict, score_threshold_dict):
 
         # hmmscan (not hmmsearch): target is hmm profile, query is protein ID

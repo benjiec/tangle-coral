@@ -166,18 +166,24 @@ PYTHONPATH=. python3 scripts/compare-gff-with-match.py --best-hmm data/m00009_ko
 The following two commands will classify detected proteins first by KEGG ortholog, then Pfam domains.
 
 ```
-PYTHONPATH=. python3 scripts/classify.py --disable-cutoff-ga data/m00009_ko.hmm m00009 data/m00009_results/classify.tsv
-PYTHONPATH=. python3 scripts/classify.py pfam-downloads/Pfam-A.hmm m00009 data/m00009_results/classify.tsv
+PYTHONPATH=. python3 scripts/classify.py --disable-cutoff-ga data/m00009_ko.hmm m00009
+PYTHONPATH=. python3 scripts/classify.py pfam-downloads/Pfam-A.hmm m00009
 ```
 
-Classifications of annotated proteins submitted to NBCI can be classified in
-the same way, and added to the same output TSV, using the following two
-commands.
+Classification outputs appear in `data/m00009_results/classify.tsv`.
+
+Annotated proteins submitted to NBCI can be classified in the same way, and
+added to the same output TSV, using the following two commands.
 
 ```
-PYTHONPATH=. python3 scripts/classify-ncbi.py --disable-cutoff-ga data/m00009_ko.hmm GCF_932526225.1 data/m00009_results/classify.tsv
-PYTHONPATH=. python3 scripts/classify-ncbi.py pfam-downloads/Pfam-A.hmm GCF_932526225.1 data/m00009_results/classify.tsv
+PYTHONPATH=. python3 scripts/classify.py --disable-cutoff-ga --genome-accession GCF_932526225.1 data/m00009_ko.hmm m00009
+PYTHONPATH=. python3 scripts/classify.py --filter-by-prev-output --genome-accession GCF_932526225.1 pfam-downloads/Pfam-A.hmm m00009
 ```
+
+The `--filter-by-prev-output` argument first filters the curated proteins to
+remove those that do not appear in the `data/m00009_results/classify.tsv` file;
+only those proteins matching one or more KEGG orthologs are further classified
+using Pfam.
 
 
 ### Cluster Proteins
