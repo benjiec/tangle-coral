@@ -212,38 +212,22 @@ For each KO, run the following script to cluster assigned sequences further
 ```
 
 Cluster outputs are summarized in `data/m00009_results/cluster.tsv`, and
-clustered FAA files are in `data/m00009_results/cluster`.
+clustered FAA files are in `data/m00009_results/clusters`.
 
 
 
 ### Generating Multi-Sequence Alignments
 
-To generate MSAs and PNGs that visualize the MSAs, run the following script for
-each module. This script runs the four sub-scripts below this, for each KO
-number. If `cluster-ko` already ran, then the following script will also run
-the two Muscle scripts for each of the clusters.
+To generate MSAs and PNGs that visualize the MSAs, run the following script.
+The `faa_dir` argument can be either the `data/m00009_results/faa` dir, or the
+`data/m00009_results/clusters` dir.
 
 ```
-./scripts/align/generate-msas m00009
+./scripts/align/generate-msas m00009 <faa_dir>
 ```
 
-To generate MSAs, for a module and a KO, use the following scripts. Each
-script puts a MSA in FASTA format in `data/m00009_results/m00009-alignments`
-
-```
-./scripts/align/muscle-ko m00009 <faa file prefix>
-```
-
-Note: *s (STOP codons) from BLAST search are preserved through MUSCLE by first
-replacing them with Zs, then run MUSCLE, then replace Zs from the output of
-MUSCLE back to *s.
-
-SVG files (which can be opened via Chrome and other browsers) visualizing the
-MSAs can generated with the following scripts.
-
-```
-./scripts/align/mk-msa-vis m00009 <faa file prefix> muscle
-```
+This script creates the `data/m00009_results/alignments` dir with both MSA
+FASTA and PNG files.
 
 
 ### Other Scripts

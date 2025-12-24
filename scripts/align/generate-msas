@@ -1,36 +1,27 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-if [[ $# -ne 1 ]]; then
-  echo "Usage: $0 <module_id>" >&2
+if [[ $# -ne 2 ]]; then
+  echo "Usage: $0 <module_id> <faa_dir>" >&2
   exit 1
 fi
 
 module_id="$(printf "%s" "$1" | tr '[:upper:]' '[:lower:]')"
-dir="data/${module_id}_results/faa"
+faa_dir=$2
+output_dir="data/${module_id}_results/alignments"
+mkdir -p $output_dir
 
-if [[ ! -d "$dir" ]]; then
-  echo "Directory not found: $dir" >&2
+if [[ ! -d "$faa_dir" ]]; then
+  echo "Directory not found: $faa_dir" >&2
   exit 1
 fi
 
-found=0
-for faa_path in "$dir"/*.faa; do
+for faa_path in "$faa_dir"/*.faa; do
   [ -e "$faa_path" ] || continue
-  found=1
-  ko_id="$(basename "$faa_path" .faa)"
-  echo "generating MSA for $ko_id"
-  if [ -f "kegg-downloads/profiles/${ko_id}.hmm" ]; then
-    scripts/align/hmmalign-ko "$module_id" "$ko_id"
-    scripts/align/mk-msa-vis "$module_id" "$ko_id" hmmalign
-  fi
-  scripts/align/muscle-ko "$module_id" "$ko_id"
-  scripts/align/mk-msa-vis "$module_id" "$ko_id" muscle
+
+  filename=$(basename -- "$faa_path")
+  stem="${filename%.*}"
+
+  scripts/align/muscle $faa_path "${output_dir}/$stem.faa"
+  scripts/align/mk-msa-vis "${output_dir}/$stem.faa" "${output_dir}/$stem.png"
 done
-
-if [[ $found -eq 0 ]]; then
-  echo "No .faa files found in $dir" >&2
-  exit 1
-fi
-
-
