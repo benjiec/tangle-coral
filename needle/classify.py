@@ -6,25 +6,35 @@ import os
 import csv
 import itertools
 from pathlib import Path
+from .seq import read_fasta_as_dict, write_fasta_from_dict
 from .hmm import hmmscan_file
 
 
 class ClassifyTSV(object):
 
+    HDR_PROTEIN_ACCESSION = "protein_accession"
+    HDR_HMM_DB = "hmm_db"
+    HDR_HMM_ACCESSION = "hmm_accession"
+    HDR_PROTEIN_START = "protein_start"
+    HDR_PROTEIN_END = "protein_end"
+    HDR_DOM_SCORE = "dom_score"
+    HDR_SCORE_THRESHOLD = "score_threshold"
+    HDR_DOM_RANK = "dom_rank_for_protein"
+
     HEADERS = [
-        "protein_accession",     # 0
+        HDR_PROTEIN_ACCESSION,   # 0
         "genome_accession",      # 1
-        "hmm_db",                # 2
-        "hmm_accession",         # 3
+        HDR_HMM_DB,              # 2
+        HDR_HMM_ACCESSION,       # 3
         "hmm_start",             # 4
         "hmm_end",               # 5
-        "protein_start",         # 6
-        "protein_end",           # 7
+        HDR_PROTEIN_START,       # 6
+        HDR_PROTEIN_END,         # 7
         "dom_evalue_cond",       # 8
         "dom_evalue",            # 9
-        "dom_score",             # 10
-        "score_threshold",       # 11
-        "dom_rank_for_protein"   # 12
+        HDR_DOM_SCORE,           # 10
+        HDR_SCORE_THRESHOLD,     # 11
+        HDR_DOM_RANK,            # 12
     ]
 
     @staticmethod
@@ -98,3 +108,53 @@ def classify(hmm_file, proteins_faa, cutoff_ga, output_tsv_path, protein_genome_
     if hmm_db_name is None:
         hmm_db_name = Path(hmm_file).stem
     ClassifyTSV.to_tsv_from_hmmscan_rows(hmm_db_name, output_tsv_path, hmm_rows, protein_genome_accession_dict, score_threshold_dict)
+
+
+def group_by_assignment(classify_rows, ortholog_hmm_db_name, ko_score_to_threshold_ratio):
+
+    # assignment criteria
+    # hmm_db == <ortholog_hmm_db_name> AND
+    # dom_rank_for_protein == 1 AND
+    # dom_score / score_threshold >= <ko_score_to_threshold_ratio>
+
+    assignment_rows = [row for row in classify_rows if row[ClassifyTSV.HDR_HMM_DB] == ortholog_hmm_db_name and \
+                                                       row[ClassifyTSV.HDR_DOM_RANK] == 1 and \
+                                                       row[ClassifyTSV.HDR_DOM_SCORE] / row[ClassifyTSV.HDR_SCORE_THRESHOLD] >= score_threshold_dict]
+                 
+    assignments = {row[ClassifyTSV.HDR_PROTEIN_ACCESSION]: row[ClassifyTSV.HDR_HMM_ACCESSION] for row in assignment_rows}
+    assigned_rows = [row for row in classify_rows if row[ClassifyTSV.HDR_HMM_DB] != ortholog_hmm_db_name and \
+                                                     row[ClassifyTSV.HDR_PROTEIN_ACCESSION] in assignments]
+
+    keyf = lambda row: assignments[row[ClassifyTSV.HDR_PROTEIN_ACCESSION]]
+    assigned_rows = sorted(assigned_rows, key=keyf)
+    return itertools.groupby(assigned_rows, keyf)
+
+
+def assign_ko(classify_rows, ortholog_hmm_db_name, proteins_faa, output_dir, domain_hmm_db_name = None, ko_score_to_threshold_ratio = 0.75):
+
+    assignments = group_by_assignment(classify_rows, ortholog_hmm_db_name, ko_score_to_threshold_ratio)
+    proteins_seq_dict = read_fasta_as_dict(proteins_faa)
+
+    for ko_id, ko_rows in assignments:
+        ko_fasta_prefix = os.path.join(output_dir, ko_id)
+        protein_ids = set([row[ClassifyTSV.HDR_PROTEIN_ACCESSION] for row in ko_rows])
+
+        # protein fasta - just protein sequences assigned to KO
+        ko_proteins = {k:v for k,v in proteins_seq_dict.items() if k in protein_ids}
+        write_fasta_from_dict(ko_proteins, ko_fasta_prefix+".faa")
+
+        if domain_hmm_db_name is not None:
+            domain_rows = [row for row in ko_rows if row[ClassifyTSV.HDR_HMM_DB] == domain_hmm_db_name]
+            keyf = lambda row: row[ClassifyTSV.HDR_HMM_ACCESSION]
+            domain_rows = sorted(domain_rows, key=keyf)
+
+            for domain_accession, group in itertools.groupby(domain_rows, keyf):
+                domain_seqs = {}
+                for domain_row in group:
+                    protein_id = domain_row[ClassifyTSV.HDR_PROTEIN_ACCESSION]
+                    protein_start = domain_row[ClassifyTSV.HDR_PROTEIN_START]
+                    protein_end = domain_row[ClassifyTSV.HDR_PROTEIN_END]
+                    seq = extract_subsequence(proteins_seq_dict[protein_id], protein_start, protein_end)
+                    domain_seq_accession = f"{protein_id}_{protein_start}_{protein_end}_{domain_accession}"
+                    domain_seqs[domain_seq_accession] = seq
+                write_fasta_from_dict(domain_seqs, ko_fasta_prefix+"_domain_accession.faa")

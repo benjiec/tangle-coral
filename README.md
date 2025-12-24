@@ -104,6 +104,8 @@ searchable HMM database
 hmmpress pfam-downloads/Pfam-A.hmm
 ```
 
+Also, download the `Pfam-A.clans.tsv` file into data directory.
+
 ### Prepare List of Genomes
 
 There is a list of Coral genomes in `data/genomes_coral.txt`, and a list of
@@ -185,6 +187,12 @@ The `--filter-by-prev-output` argument first filters the curated proteins to
 remove those that do not appear in the `data/m00009_results/classify.tsv` file;
 only those proteins matching one or more KEGG orthologs are further classified
 using Pfam.
+
+Classification results -- i.e. how detected proteins match against KO HMM
+profiles and how Pfam domains map onto those proteins assigned to a KO -- can
+be visualized using Tableau. A template workbook that uses the classification
+output TSV and several downloaded data files (e.g. `genomes.tsv`, `ko.tsv`, and
+`Pfam-A.clans.tsv`), is `data/Protein Classification.twb`.
 
 
 ### Generating Multi-Sequence Alignments
