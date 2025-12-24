@@ -14,7 +14,7 @@ from needle.seq import extract_subsequence_strand_sensitive, read_fasta_as_dict
 from needle.match import ProteinsTSV
 from needle.hmm import hmmscan_file
 from needle.gff import parse_gff_to_hits
-from defaults import DefaultPath
+from scripts.defaults import DefaultPath
 
 
 if __name__ == "__main__":

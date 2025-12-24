@@ -1,5 +1,5 @@
 import argparse
-from defaults import DefaultPath
+from scripts.defaults import DefaultPath
 from needle.match import read_fasta_as_dict
 from needle.detect import hmm_search_genome, Results
 

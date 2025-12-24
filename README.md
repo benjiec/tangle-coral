@@ -27,7 +27,7 @@ docker pull ghcr.io/soedinglab/mmseqs2
 Setup SwissProt DB for MMSeqs2
 
 ```
-scripts/mmseqs-swissprot-setup
+scripts/data/mmseqs-swissprot-setup
 ```
 
 Install Muscle Docker image
@@ -75,7 +75,7 @@ rm data/modules.txt
 The following creates `data/module_ko.tsv`
 
 ```
-python3 scripts/fetch-kegg-module-ko.py
+python3 scripts/data/fetch-kegg-module-ko.py
 ```
 
 ### Download KEGG KO profile HMMs
@@ -112,7 +112,7 @@ command to generate `data/genomes.tsv`, which includes genome name and taxonomy
 information.
 
 ```
-PYTHONPATH=. python3 scripts/fetch-genomes.py data/genomes_coral.txt
+PYTHONPATH=. python3 scripts/data/fetch-genomes.py data/genomes_coral.txt
 ```
 
 
@@ -143,24 +143,22 @@ the following naming convention but change the module ID: `data/m00009_ko.hmm`.
 The following script puts outputs in `data/m00009_results` directory
 
 ```
-./scripts/search-genome m00009 GCF_002042975.1
+./scripts/detect/search-genome m00009 GCF_002042975.1
 ```
 
 
 Or if you have a list of genome accessions in a file, e.g. `genomes.txt`, then do
 
 ```
-./scripts/search-genomes m00009 genomes.txt
+./scripts/detect/search-genomes m00009 genomes.txt
 ```
-
-### Compare / Sanity check NCBI proteins against Needle detected proteins
 
 Use the following script to compare, for a given HMM model, how NCBI annotated
 proteins (i.e. in `protein.faa` and `genomic.gff`) compare against protein
 found by Needle.
 
 ```
-PYTHONPATH=. python3 scripts/compare-gff-with-match.py --best-hmm data/m00009_ko.hmm GCF_002042975.1 data/m00009_results/proteins.tsv \
+PYTHONPATH=. python3 scripts/detect/compare-gff-with-match.py --best-hmm data/m00009_ko.hmm GCF_002042975.1 data/m00009_results/proteins.tsv \
   --output-file <filename>
 ```
 
@@ -169,8 +167,8 @@ PYTHONPATH=. python3 scripts/compare-gff-with-match.py --best-hmm data/m00009_ko
 The following two commands will classify detected proteins first by KEGG ortholog, then Pfam domains.
 
 ```
-PYTHONPATH=. python3 scripts/classify.py --disable-cutoff-ga data/m00009_ko.hmm m00009
-PYTHONPATH=. python3 scripts/classify.py pfam-downloads/Pfam-A.hmm m00009
+PYTHONPATH=. python3 scripts/classify/classify.py --disable-cutoff-ga data/m00009_ko.hmm m00009
+PYTHONPATH=. python3 scripts/classify/classify.py pfam-downloads/Pfam-A.hmm m00009
 ```
 
 Classification outputs appear in `data/m00009_results/classify.tsv`.
@@ -179,8 +177,8 @@ Annotated proteins submitted to NBCI can be classified in the same way, and
 added to the same output TSV, using the following two commands.
 
 ```
-PYTHONPATH=. python3 scripts/classify.py --disable-cutoff-ga --genome-accession GCF_932526225.1 data/m00009_ko.hmm m00009
-PYTHONPATH=. python3 scripts/classify.py --filter-by-prev-output --genome-accession GCF_932526225.1 pfam-downloads/Pfam-A.hmm m00009
+PYTHONPATH=. python3 scripts/classify/classify.py --disable-cutoff-ga --genome-accession GCF_932526225.1 data/m00009_ko.hmm m00009
+PYTHONPATH=. python3 scripts/classify/classify.py --filter-by-prev-output --genome-accession GCF_932526225.1 pfam-downloads/Pfam-A.hmm m00009
 ```
 
 The `--filter-by-prev-output` argument first filters the curated proteins to
@@ -189,31 +187,29 @@ only those proteins matching one or more KEGG orthologs are further classified
 using Pfam.
 
 
-### Cluster Proteins
+### Generating Multi-Sequence Alignments
 
-Run the following script to cluster all the results from `search-genomes`
+For each KO, run the following script to cluster proteins further
 
 ```
-./scripts/cluster-dir m00009
+./scripts/align/cluster-dir m00009
 ```
 
-### Generating MSAs
-
-To generate MSAs and PNGs that visualize the MSAs, run the following script
-for each module. This script runs the four sub-scripts below this, for each KO
+To generate MSAs and PNGs that visualize the MSAs, run the following script for
+each module. This script runs the four sub-scripts below this, for each KO
 number. If `cluster-ko` already ran, then the following script will also run
 the two Muscle scripts for each of the clusters.
 
 ```
-./scripts/generate-msas m00009
+./scripts/align/generate-msas m00009
 ```
 
 To generate MSAs, for a module and a KO, use the following scripts. Each
 script puts a MSA in FASTA format in `data/m00009_results/m00009-alignments`
 
 ```
-./scripts/muscle-ko m00009 <faa file prefix>
-./scripts/hmmalign-ko m00009 <faa file prefix>
+./scripts/align/muscle-ko m00009 <faa file prefix>
+./scripts/align/hmmalign-ko m00009 <faa file prefix>
 ```
 
 Note: *s (STOP codons) from BLAST search are preserved through MUSCLE by first
@@ -224,8 +220,8 @@ SVG files (which can be opened via Chrome and other browsers) visualizing the
 MSAs can generated with the following scripts.
 
 ```
-./scripts/mk-msa-vis m00009 <faa file prefix> muscle
-./scripts/mk-msa-vis m00009 <faa file prefix> hmmalign
+./scripts/align/mk-msa-vis m00009 <faa file prefix> muscle
+./scripts/align/mk-msa-vis m00009 <faa file prefix> hmmalign
 ```
 
 

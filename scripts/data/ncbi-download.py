@@ -12,7 +12,7 @@ import os
 import sys
 import time
 from pathlib import Path
-from defaults import DefaultPath
+from scripts.defaults import DefaultPath
 from needle.ncbi import download_and_extract_by_accession, FILE_TYPE_PATTERNS
 
 def print_status(message: str, level: str = "INFO"):

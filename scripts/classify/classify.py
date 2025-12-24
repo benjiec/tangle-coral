@@ -3,7 +3,7 @@ import csv
 import gzip
 import tempfile
 from pathlib import Path
-from defaults import DefaultPath
+from scripts.defaults import DefaultPath
 from needle.seq import read_fasta_as_dict, write_fasta_from_dict
 from needle.match import ProteinsTSV
 from needle.classify import ClassifyTSV, classify

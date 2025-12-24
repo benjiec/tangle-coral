@@ -5,7 +5,7 @@ from needle.detect import Results
 from needle.match import group_matches, export_protein_hits
 from needle.hits import hmm_expand, hmm_clean
 from needle.hmm import HMMCollection
-from defaults import DefaultPath
+from scripts.defaults import DefaultPath
 
 def main():
     parser = argparse.ArgumentParser(description="Export protein matches from detection results TSV.")

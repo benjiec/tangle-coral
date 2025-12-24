@@ -24,7 +24,7 @@ from pathlib import Path
 
 from needle.ncbi import download_and_extract_by_accession
 from needle.detect import Results
-from defaults import DefaultPath
+from scripts.defaults import DefaultPath
 
 
 def detect_query_type(fasta_file):
