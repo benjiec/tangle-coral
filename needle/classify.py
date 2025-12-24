@@ -6,32 +6,37 @@ import os
 import csv
 import itertools
 from pathlib import Path
-from .seq import read_fasta_as_dict, write_fasta_from_dict
+from .seq import read_fasta_as_dict, write_fasta_from_dict, extract_subsequence
 from .hmm import hmmscan_file
 
 
 class ClassifyTSV(object):
 
     HDR_PROTEIN_ACCESSION = "protein_accession"
+    HDR_GENOME_ACCESSION = "genome_accession"
     HDR_HMM_DB = "hmm_db"
     HDR_HMM_ACCESSION = "hmm_accession"
+    HDR_HMM_START = "hmm_start"
+    HDR_HMM_END = "hmm_end"
     HDR_PROTEIN_START = "protein_start"
     HDR_PROTEIN_END = "protein_end"
+    HDR_DOM_EVALUE_COND = "dom_evalue_cond"
+    HDR_DOM_EVALUE = "dom_evalue"
     HDR_DOM_SCORE = "dom_score"
     HDR_SCORE_THRESHOLD = "score_threshold"
     HDR_DOM_RANK = "dom_rank_for_protein"
 
     HEADERS = [
         HDR_PROTEIN_ACCESSION,   # 0
-        "genome_accession",      # 1
+        HDR_GENOME_ACCESSION,    # 1
         HDR_HMM_DB,              # 2
         HDR_HMM_ACCESSION,       # 3
-        "hmm_start",             # 4
-        "hmm_end",               # 5
+        HDR_HMM_START,           # 4
+        HDR_HMM_END,             # 5
         HDR_PROTEIN_START,       # 6
         HDR_PROTEIN_END,         # 7
-        "dom_evalue_cond",       # 8
-        "dom_evalue",            # 9
+        HDR_DOM_EVALUE_COND,     # 8
+        HDR_DOM_EVALUE,          # 9
         HDR_DOM_SCORE,           # 10
         HDR_SCORE_THRESHOLD,     # 11
         HDR_DOM_RANK,            # 12
@@ -44,15 +49,15 @@ class ClassifyTSV(object):
             reader = csv.DictReader(f, delimiter='\t')
             for row in reader:
                 row = {k: row[k] for k in ClassifyTSV.HEADERS}
-                row["hmm_start"] = int(row["hmm_start"])
-                row["hmm_end"] = int(row["hmm_end"])
-                row["protein_start"] = int(row["protein_start"])
-                row["protein_end"] = int(row["protein_end"])
-                row["dom_evalue_cond"] = float(row["dom_evalue_cond"])
-                row["dom_evalue"] = float(row["dom_evalue"])
-                row["dom_score"] = float(row["dom_score"])
-                row["score_threshold"] = float(row["score_threshold"]) if row["score_threshold"] else None
-                row["dom_rank_for_protein"] = int(row["dom_rank_for_protein"])
+                row[ClassifyTSV.HDR_HMM_START] = int(row[ClassifyTSV.HDR_HMM_START])
+                row[ClassifyTSV.HDR_HMM_END] = int(row[ClassifyTSV.HDR_HMM_END])
+                row[ClassifyTSV.HDR_PROTEIN_START] = int(row[ClassifyTSV.HDR_PROTEIN_START])
+                row[ClassifyTSV.HDR_PROTEIN_END] = int(row[ClassifyTSV.HDR_PROTEIN_END])
+                row[ClassifyTSV.HDR_DOM_EVALUE_COND] = float(row[ClassifyTSV.HDR_DOM_EVALUE_COND])
+                row[ClassifyTSV.HDR_DOM_EVALUE] = float(row[ClassifyTSV.HDR_DOM_EVALUE])
+                row[ClassifyTSV.HDR_DOM_SCORE] = float(row[ClassifyTSV.HDR_DOM_SCORE])
+                row[ClassifyTSV.HDR_SCORE_THRESHOLD] = float(row[ClassifyTSV.HDR_SCORE_THRESHOLD]) if row[ClassifyTSV.HDR_SCORE_THRESHOLD] else None
+                row[ClassifyTSV.HDR_DOM_RANK] = int(row[ClassifyTSV.HDR_DOM_RANK])
                 rows.append(row)
 
         return rows
@@ -85,19 +90,19 @@ class ClassifyTSV(object):
                 score_threshold = "" if score_threshold_dict is None or hmm_accession not in score_threshold_dict else score_threshold_dict[hmm_accession]
 
                 data = {
-                    ClassifyTSV.HEADERS[0]:  protein_accession,
-                    ClassifyTSV.HEADERS[1]:  genome_accession,
-                    ClassifyTSV.HEADERS[2]:  hmm_db_name,
-                    ClassifyTSV.HEADERS[3]:  hmm_accession,
-                    ClassifyTSV.HEADERS[4]:  row["hmm_from"],
-                    ClassifyTSV.HEADERS[5]:  row["hmm_to"],
-                    ClassifyTSV.HEADERS[6]:  row["ali_from"],
-                    ClassifyTSV.HEADERS[7]:  row["ali_to"],
-                    ClassifyTSV.HEADERS[8]:  row["dom_evalue_cond"],
-                    ClassifyTSV.HEADERS[9]:  row["dom_evalue"],
-                    ClassifyTSV.HEADERS[10]:  row["dom_score"],
-                    ClassifyTSV.HEADERS[11]: score_threshold,
-                    ClassifyTSV.HEADERS[12]: sorted_eval_for_protein[protein_accession].index(row["dom_evalue"])+1
+                    ClassifyTSV.HDR_PROTEIN_ACCESSION:  protein_accession,
+                    ClassifyTSV.HDR_GENOME_ACCESSION:  genome_accession,
+                    ClassifyTSV.HDR_HMM_DB:  hmm_db_name,
+                    ClassifyTSV.HDR_HMM_ACCESSION:  hmm_accession,
+                    ClassifyTSV.HDR_HMM_START:  row["hmm_from"],
+                    ClassifyTSV.HDR_HMM_END:  row["hmm_to"],
+                    ClassifyTSV.HDR_PROTEIN_START:  row["ali_from"],
+                    ClassifyTSV.HDR_PROTEIN_END:  row["ali_to"],
+                    ClassifyTSV.HDR_DOM_EVALUE_COND:  row["dom_evalue_cond"],
+                    ClassifyTSV.HDR_DOM_EVALUE:  row["dom_evalue"],
+                    ClassifyTSV.HDR_DOM_SCORE:  row["dom_score"],
+                    ClassifyTSV.HDR_SCORE_THRESHOLD: score_threshold,
+                    ClassifyTSV.HDR_DOM_RANK: sorted_eval_for_protein[protein_accession].index(row["dom_evalue"])+1
                 }
                 writer.writerow(data)
 
@@ -110,32 +115,42 @@ def classify(hmm_file, proteins_faa, cutoff_ga, output_tsv_path, protein_genome_
     ClassifyTSV.to_tsv_from_hmmscan_rows(hmm_db_name, output_tsv_path, hmm_rows, protein_genome_accession_dict, score_threshold_dict)
 
 
-def group_by_assignment(classify_rows, ortholog_hmm_db_name, ko_score_to_threshold_ratio):
+def group_by_assignment(classify_rows, ortholog_hmm_db_name, score_to_threshold_ratio):
 
     # assignment criteria
     # hmm_db == <ortholog_hmm_db_name> AND
     # dom_rank_for_protein == 1 AND
-    # dom_score / score_threshold >= <ko_score_to_threshold_ratio>
+    # dom_score / score_threshold >= <score_to_threshold_ratio>
 
     assignment_rows = [row for row in classify_rows if row[ClassifyTSV.HDR_HMM_DB] == ortholog_hmm_db_name and \
                                                        row[ClassifyTSV.HDR_DOM_RANK] == 1 and \
-                                                       row[ClassifyTSV.HDR_DOM_SCORE] / row[ClassifyTSV.HDR_SCORE_THRESHOLD] >= score_threshold_dict]
+                                                       row[ClassifyTSV.HDR_DOM_SCORE] / row[ClassifyTSV.HDR_SCORE_THRESHOLD] >= score_to_threshold_ratio]
                  
     assignments = {row[ClassifyTSV.HDR_PROTEIN_ACCESSION]: row[ClassifyTSV.HDR_HMM_ACCESSION] for row in assignment_rows}
-    assigned_rows = [row for row in classify_rows if row[ClassifyTSV.HDR_HMM_DB] != ortholog_hmm_db_name and \
-                                                     row[ClassifyTSV.HDR_PROTEIN_ACCESSION] in assignments]
+    assigned_rows = [row for row in classify_rows if (row[ClassifyTSV.HDR_HMM_DB] != ortholog_hmm_db_name and \
+                                                      row[ClassifyTSV.HDR_PROTEIN_ACCESSION] in assignments) or \
+                                                     (row[ClassifyTSV.HDR_HMM_DB] == ortholog_hmm_db_name and \
+                                                      row[ClassifyTSV.HDR_PROTEIN_ACCESSION] in assignments and \
+                                                      row[ClassifyTSV.HDR_HMM_ACCESSION] == assignments[row[ClassifyTSV.HDR_PROTEIN_ACCESSION]])]
 
     keyf = lambda row: assignments[row[ClassifyTSV.HDR_PROTEIN_ACCESSION]]
     assigned_rows = sorted(assigned_rows, key=keyf)
     return itertools.groupby(assigned_rows, keyf)
 
 
-def assign_ko(classify_rows, ortholog_hmm_db_name, proteins_faa, output_dir, domain_hmm_db_name = None, ko_score_to_threshold_ratio = 0.75):
+def assign_ko(classify_rows, ortholog_hmm_db_name, proteins_faa, output_dir, domain_hmm_db_name = None, score_to_threshold_ratio = 0.75):
 
-    assignments = group_by_assignment(classify_rows, ortholog_hmm_db_name, ko_score_to_threshold_ratio)
-    proteins_seq_dict = read_fasta_as_dict(proteins_faa)
+    assignments = group_by_assignment(classify_rows, ortholog_hmm_db_name, score_to_threshold_ratio)
+
+    if type(proteins_faa) == type(""):
+        proteins_faa = [proteins_faa]
+
+    proteins_seq_dict = {}
+    for faa_file in proteins_faa:
+        proteins_seq_dict |= read_fasta_as_dict(faa_file)
 
     for ko_id, ko_rows in assignments:
+        ko_rows = list(ko_rows)
         ko_fasta_prefix = os.path.join(output_dir, ko_id)
         protein_ids = set([row[ClassifyTSV.HDR_PROTEIN_ACCESSION] for row in ko_rows])
 
@@ -157,4 +172,4 @@ def assign_ko(classify_rows, ortholog_hmm_db_name, proteins_faa, output_dir, dom
                     seq = extract_subsequence(proteins_seq_dict[protein_id], protein_start, protein_end)
                     domain_seq_accession = f"{protein_id}_{protein_start}_{protein_end}_{domain_accession}"
                     domain_seqs[domain_seq_accession] = seq
-                write_fasta_from_dict(domain_seqs, ko_fasta_prefix+"_domain_accession.faa")
+                write_fasta_from_dict(domain_seqs, ko_fasta_prefix+"_"+domain_accession+".faa")

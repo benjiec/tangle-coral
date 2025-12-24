@@ -194,6 +194,14 @@ be visualized using Tableau. A template workbook that uses the classification
 output TSV and several downloaded data files (e.g. `genomes.tsv`, `ko.tsv`, and
 `Pfam-A.clans.tsv`), is `data/Protein Classification.twb`.
 
+Use the following script to create FASTA files for orthologs, and domains for
+each ortholog, based on classification results. The FASTA files are in
+`data/m00009_results/faa` directory.
+
+```
+PYTHONPATH=. python3 scripts/classify/assign.py data/m00009_ko.hmm pfam-downloads/Pfam-A.hmm m00009 --additional-genome-accession GCF_932526225.1
+```
+
 
 ### Generating Multi-Sequence Alignments
 

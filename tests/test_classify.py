@@ -3,8 +3,9 @@ import csv
 import tempfile
 import unittest
 
-from needle.classify import ClassifyTSV, classify
+from needle.classify import ClassifyTSV, classify, group_by_assignment, assign_ko
 from needle.match import ProteinHit, Match, ProteinsTSV
+from needle.seq import write_fasta_from_dict, read_fasta_as_dict
 import needle.classify as classify_mod
 
 
@@ -230,3 +231,105 @@ class TestClassifyTSV(unittest.TestCase):
             self.assertEqual(rows[2]["dom_rank_for_protein"], "1")
 
             os.remove(tmpf.name)
+
+
+class TestAssignment(unittest.TestCase):
+
+    def _classify_row(self, protein_id, hmm_db, hmm_acc, dom_score, score_threshold, dom_rank, protein_start = None, protein_end = None):
+        return {
+            ClassifyTSV.HDR_PROTEIN_ACCESSION: protein_id,
+            ClassifyTSV.HDR_HMM_DB: hmm_db,
+            ClassifyTSV.HDR_HMM_ACCESSION: hmm_acc,
+            ClassifyTSV.HDR_HMM_START: 1,
+            ClassifyTSV.HDR_HMM_END: 20,
+            ClassifyTSV.HDR_PROTEIN_START: protein_start if protein_start else 1,
+            ClassifyTSV.HDR_PROTEIN_END: protein_end if protein_end else 20,
+            ClassifyTSV.HDR_DOM_SCORE: dom_score,
+            ClassifyTSV.HDR_SCORE_THRESHOLD: score_threshold,
+            ClassifyTSV.HDR_DOM_RANK: dom_rank
+        }
+
+    def test_group_by_assignment_groups_by_score_threshold(self):
+        rows = [
+            self._classify_row("p1", "ko", "k1", 10, 100, 2),    # excluded, rank != 1
+            self._classify_row("p1", "ko", "k2", 11, 100, 1),    # excluded, score too low
+            self._classify_row("p1", "ko", "k3", 11, 100, 1),    # excluded, score too low
+            self._classify_row("p1", "pf", "pf1", 100, 100, 1),  # excluded, hmm db does not match
+            self._classify_row("p2", "ko", "k1", 75, 100, 1),    # assigns k1 to p2
+            self._classify_row("p2", "ko", "k2", 90, 100, 2),    # higher score, but rank != 1
+            self._classify_row("p2", "pf0", "pf1", 100, 100, 1), # returned
+            self._classify_row("p2", "pf0", "pf2", 10, 100, 2),  # returned
+            self._classify_row("p3", "ko", "k2", 90, 100, 1),    # assigns k2 to p3
+            self._classify_row("p4", "ko", "k1", 100, 100, 1),   # assigns k1 to p4
+            self._classify_row("p4", "pf", "pf1", 100, 100, 1),  # returned
+        ]
+
+        assignments = group_by_assignment(rows, "ko", 0.75)
+        assignments = {hmm_acc: list(group) for hmm_acc, group in assignments}
+
+        # nothing assigned to k3, returns assigned KO#s
+        self.assertEqual(sorted(list(assignments.keys())), ["k1", "k2"])
+
+        self.assertEqual([(row["protein_accession"], row["hmm_accession"]) for row in assignments["k1"]],
+                         [("p2", "k1"),
+                          ("p2", "pf1"),
+                          ("p2", "pf2"),
+                          ("p4", "k1"),
+                          ("p4", "pf1")])
+        # even though p3 is assigned, no additional rows are returned
+        self.assertEqual([(row["protein_accession"], row["hmm_accession"]) for row in assignments["k2"]],
+                         [("p3", "k2")])
+
+    def test_creates_protein_fasta(self):
+        rows = [
+            self._classify_row("p1", "ko", "k1", 10, 100, 2),    # excluded, rank != 1
+            self._classify_row("p1", "ko", "k2", 11, 100, 1),    # excluded, score too low
+            self._classify_row("p1", "ko", "k3", 11, 100, 1),    # excluded, score too low
+            self._classify_row("p1", "pf", "pf1", 100, 100, 1),  # excluded, hmm db does not match
+            self._classify_row("p2", "ko", "k1", 75, 100, 1),    # assigns k1 to p2
+            self._classify_row("p2", "ko", "k2", 90, 100, 2),    # higher score, but rank != 1
+            self._classify_row("p2", "pf0", "pf1", 100, 100, 1), # returned
+            self._classify_row("p2", "pf0", "pf2", 10, 100, 2),  # returned
+            self._classify_row("p3", "ko", "k2", 90, 100, 1),    # assigns k2 to p3
+            self._classify_row("p4", "ko", "k1", 100, 100, 1),   # assigns k1 to p4
+            self._classify_row("p4", "pf", "pf1", 100, 100, 1, 2, 18),  # returned
+        ]
+
+        proteins = {
+            "p1": "A"*20,
+            "p2": "K"*20,
+            "p3": "L"*20,
+            "p4": "LMK"*20,
+        }
+
+        # creates protein fasta
+        with tempfile.TemporaryDirectory() as tmpdir:
+            proteins_faa = tmpdir+"/proteins.faa"
+            write_fasta_from_dict(proteins, proteins_faa)
+            assign_ko(rows, "ko", proteins_faa, tmpdir)
+            self.assertEqual(os.path.exists(tmpdir+"/k1.faa"), True)
+            self.assertEqual(os.path.exists(tmpdir+"/k2.faa"), True)
+            self.assertEqual(os.path.exists(tmpdir+"/k3.faa"), False)
+
+            k1_seqs = read_fasta_as_dict(tmpdir+"/k1.faa")
+            self.assertEqual(list(k1_seqs.keys()), ["p2", "p4"]) 
+            self.assertEqual(k1_seqs["p2"], "K"*20)
+            self.assertEqual(k1_seqs["p4"], "LMK"*20)
+
+            k1_seqs = read_fasta_as_dict(tmpdir+"/k2.faa")
+            self.assertEqual(list(k1_seqs.keys()), ["p3"])
+            self.assertEqual(k1_seqs["p3"], "L"*20)
+
+        # creates domain fasta with subsequence, and only from specified hmm db
+        with tempfile.TemporaryDirectory() as tmpdir:
+            proteins_faa = tmpdir+"/proteins.faa"
+            write_fasta_from_dict(proteins, proteins_faa)
+            assign_ko(rows, "ko", proteins_faa, tmpdir, "pf")
+            self.assertEqual(os.path.exists(tmpdir+"/k1_pf1.faa"), True)
+            self.assertEqual(os.path.exists(tmpdir+"/k1_pf2.faa"), False)
+            self.assertEqual(os.path.exists(tmpdir+"/k2_pf1.faa"), False)
+            self.assertEqual(os.path.exists(tmpdir+"/k2_pf2.faa"), False)
+
+            k1_seqs = read_fasta_as_dict(tmpdir+"/k1_pf1.faa")
+            self.assertEqual(list(k1_seqs.keys()), ["p4_2_18_pf1"])
+            self.assertEqual(k1_seqs["p4_2_18_pf1"], "MKLMKLMKLMKLMKLMK")
