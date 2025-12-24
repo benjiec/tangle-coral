@@ -120,18 +120,18 @@ PYTHONPATH=. python3 scripts/data/fetch-genomes.py data/genomes_coral.txt
 
 ## Workflow and Scripts
 
-The general workflow looks like the following
+The general workflow looks like the following, starting with a KEGG pathway
+module and the HMM profiles for orthologs for that module
 
-  * Select a module to use; e.g. a module can be a pathway
-  * Detect Proteins using ortholog profile HMMs: tblastn+HMM based refinement
+  * Detect Proteins using ortholog profile HMMs: HMM search plus refinement
   * Classify Proteins: hmmscan
   * Cluster Proteins: MMSeqs2
-  * Generate MSAs: Muscle and hmmalign
+  * Generate MSAs: Muscle
   * Finish Protein Sequences
-  * Improve Phylogene-aware family profiles
 
-The following instructions use M00009 KEGG module, describing the TCA cycle, as
-an example. Replace this number with other module IDs as appropriate.
+The following instructions use "m00009", which is the KEGG module M00009
+describing the TCA cycle. Replace this number with other module IDs as
+appropriate.
 
 
 ### Generating Query .hmm for a KEGG Module
@@ -160,7 +160,9 @@ proteins (i.e. in `protein.faa` and `genomic.gff`) compare against protein
 found by Needle.
 
 ```
-PYTHONPATH=. python3 scripts/detect/compare-gff-with-match.py --best-hmm data/m00009_ko.hmm GCF_002042975.1 data/m00009_results/proteins.tsv \
+PYTHONPATH=. python3 scripts/detect/compare-gff-with-match.py \
+  --best-hmm \
+  data/m00009_ko.hmm GCF_002042975.1 data/m00009_results/proteins.tsv \
   --output-file <filename>
 ```
 
@@ -169,7 +171,9 @@ PYTHONPATH=. python3 scripts/detect/compare-gff-with-match.py --best-hmm data/m0
 The following two commands will classify detected proteins first by KEGG ortholog, then Pfam domains.
 
 ```
-PYTHONPATH=. python3 scripts/classify/classify.py --disable-cutoff-ga data/m00009_ko.hmm m00009
+PYTHONPATH=. python3 scripts/classify/classify.py \
+  --disable-cutoff-ga \
+  data/m00009_ko.hmm m00009
 PYTHONPATH=. python3 scripts/classify/classify.py pfam-downloads/Pfam-A.hmm m00009
 ```
 
@@ -179,8 +183,14 @@ Annotated proteins submitted to NBCI can be classified in the same way, and
 added to the same output TSV, using the following two commands.
 
 ```
-PYTHONPATH=. python3 scripts/classify/classify.py --disable-cutoff-ga --genome-accession GCF_932526225.1 data/m00009_ko.hmm m00009
-PYTHONPATH=. python3 scripts/classify/classify.py --filter-by-prev-output --genome-accession GCF_932526225.1 pfam-downloads/Pfam-A.hmm m00009
+PYTHONPATH=. python3 scripts/classify/classify.py \
+  --disable-cutoff-ga \
+  --genome-accession GCF_932526225.1 \
+  data/m00009_ko.hmm m00009
+PYTHONPATH=. python3 scripts/classify/classify.py \
+  --filter-by-prev-output \
+  --genome-accession GCF_932526225.1 \
+  pfam-downloads/Pfam-A.hmm m00009
 ```
 
 The `--filter-by-prev-output` argument first filters the curated proteins to
@@ -188,18 +198,14 @@ remove those that do not appear in the `data/m00009_results/classify.tsv` file;
 only those proteins matching one or more KEGG orthologs are further classified
 using Pfam.
 
-Classification results -- i.e. how detected proteins match against KO HMM
-profiles and how Pfam domains map onto those proteins assigned to a KO -- can
-be visualized using Tableau. A template workbook that uses the classification
-output TSV and several downloaded data files (e.g. `genomes.tsv`, `ko.tsv`, and
-`Pfam-A.clans.tsv`), is `data/Protein Classification.twb`.
-
 Use the following script to create FASTA files for orthologs, and domains for
 each ortholog, based on classification results. The FASTA files are in
 `data/m00009_results/faa` directory.
 
 ```
-PYTHONPATH=. python3 scripts/classify/assign.py data/m00009_ko.hmm pfam-downloads/Pfam-A.hmm m00009 --additional-genome-accession GCF_932526225.1
+PYTHONPATH=. python3 scripts/classify/assign.py \
+  data/m00009_ko.hmm pfam-downloads/Pfam-A.hmm m00009 \
+  --additional-genome-accession GCF_932526225.1
 ```
 
 
@@ -214,6 +220,12 @@ For each KO, run the following script to cluster assigned sequences further
 Cluster outputs are summarized in `data/m00009_results/cluster.tsv`, and
 clustered FAA files are in `data/m00009_results/clusters`.
 
+Classification and clustering results -- i.e. how detected proteins match
+against KO HMM profiles and how Pfam domains map onto those proteins assigned
+to a KO -- can be visualized using Tableau. A template workbook that uses the
+classification output TSV and several downloaded data files (e.g.
+`genomes.tsv`, `ko.tsv`, and `Pfam-A.clans.tsv`), is `data/Protein
+Classification.twb`.
 
 
 ### Generating Multi-Sequence Alignments
