@@ -21,11 +21,11 @@ for faa_path in "$dir"/*.faa; do
   ko_id="$(basename "$faa_path" .faa)"
   echo "generating MSA for $ko_id"
   if [ -f "kegg-downloads/profiles/${ko_id}.hmm" ]; then
-    scripts/hmmalign-ko "$module_id" "$ko_id"
-    scripts/mk-msa-vis "$module_id" "$ko_id" hmmalign
+    scripts/align/hmmalign-ko "$module_id" "$ko_id"
+    scripts/align/mk-msa-vis "$module_id" "$ko_id" hmmalign
   fi
-  scripts/muscle-ko "$module_id" "$ko_id"
-  scripts/mk-msa-vis "$module_id" "$ko_id" muscle
+  scripts/align/muscle-ko "$module_id" "$ko_id"
+  scripts/align/mk-msa-vis "$module_id" "$ko_id" muscle
 done
 
 if [[ $found -eq 0 ]]; then

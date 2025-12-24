@@ -8,5 +8,5 @@ mkdir -p data/$1_results
 
 # Loop through each line of the file
 while IFS= read -r line; do
-  scripts/search-genome $1 "$line"
+  scripts/detect/search-genome $1 "$line"
 done < $2

@@ -40,7 +40,7 @@ def format_cluster_tsv_row(faa_file, rep_acc, mem_acc):
 
 def run_mmseqs_cluster(faa_file, output_result_prefix):
 
-    cmd = ["scripts/mmseqs-cluster", faa_file, output_result_prefix]
+    cmd = ["scripts/align/mmseqs-cluster", faa_file, output_result_prefix]
     result = subprocess.run(cmd, capture_output=True, text=True)
     return result
 
