@@ -59,6 +59,9 @@ echo "Ortholog ID\tOrtholog Name" | cat - data/ko.txt > data/ko.tsv
 rm data/ko.txt
 ```
 
+To load this TSV file into Tableau, remove `"` and replace them with `''`.
+
+
 ### Download a list of KEGG modules
 
 ```
