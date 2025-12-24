@@ -203,13 +203,20 @@ PYTHONPATH=. python3 scripts/classify/assign.py data/m00009_ko.hmm pfam-download
 ```
 
 
+### Clustering (Optional)
+
+For each KO, run the following script to cluster assigned sequences further
+
+```
+./scripts/cluster/cluster m00009
+```
+
+Cluster outputs are summarized in `data/m00009_results/cluster.tsv`, and
+clustered FAA files are in `data/m00009_results/cluster`.
+
+
+
 ### Generating Multi-Sequence Alignments
-
-For each KO, run the following script to cluster proteins further
-
-```
-./scripts/align/cluster-dir m00009
-```
 
 To generate MSAs and PNGs that visualize the MSAs, run the following script for
 each module. This script runs the four sub-scripts below this, for each KO
@@ -225,7 +232,6 @@ script puts a MSA in FASTA format in `data/m00009_results/m00009-alignments`
 
 ```
 ./scripts/align/muscle-ko m00009 <faa file prefix>
-./scripts/align/hmmalign-ko m00009 <faa file prefix>
 ```
 
 Note: *s (STOP codons) from BLAST search are preserved through MUSCLE by first
@@ -237,7 +243,6 @@ MSAs can generated with the following scripts.
 
 ```
 ./scripts/align/mk-msa-vis m00009 <faa file prefix> muscle
-./scripts/align/mk-msa-vis m00009 <faa file prefix> hmmalign
 ```
 
 
