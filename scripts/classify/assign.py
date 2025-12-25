@@ -22,7 +22,15 @@ domain_hmm_db_name = Path(args.pfam_hmm_file).stem
 
 proteins_faa = [proteins_faa]
 if args.additional_genome_accession:
-    proteins_faa.append(DefaultPath.ncbi_genome_protein_faa(args.additional_genome_accession))
+    if os.path.exists(args.additional_genome_accession):
+        with open(args.additional_genome_accession, "r") as f:
+            accessions = f.readlines().split("\n")
+            for acc in accessions:
+                proteins_faa.append(DefaultPath.ncbi_genome_protein_faa(acc))
+                print("additional protein sequences from", proteins_faa[-1])
+    else:
+        proteins_faa.append(DefaultPath.ncbi_genome_protein_faa(args.additional_genome_accession))
+        print("additional protein sequences from", proteins_faa[-1])
 
 os.makedirs(output_dir, exist_ok=True)
 assign_ko(classify_rows, ortholog_hmm_db_name, proteins_faa, output_dir, domain_hmm_db_name = domain_hmm_db_name)

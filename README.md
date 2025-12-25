@@ -148,7 +148,6 @@ The following script puts outputs in `data/m00009_results` directory
 ./scripts/detect/search-genome m00009 GCF_002042975.1
 ```
 
-
 Or if you have a list of genome accessions in a file, e.g. `genomes.txt`, then do
 
 ```
@@ -198,6 +197,13 @@ remove those that do not appear in the `data/m00009_results/classify.tsv` file;
 only those proteins matching one or more KEGG orthologs are further classified
 using Pfam.
 
+The following helper script, `classify-ncbi`, calls the above two commands for
+each accession in an accession file.
+
+```
+scripts/classify/classify-ncbi data/genomes_related.txt
+```
+
 Use the following script to create FASTA files for orthologs, and domains for
 each ortholog, based on classification results. The FASTA files are in
 `data/m00009_results/faa` directory.
@@ -206,6 +212,15 @@ each ortholog, based on classification results. The FASTA files are in
 PYTHONPATH=. python3 scripts/classify/assign.py \
   data/m00009_ko.hmm pfam-downloads/Pfam-A.hmm m00009 \
   --additional-genome-accession GCF_932526225.1
+```
+
+Instead of one additional genome accession, a file containing a list of
+accessions can also be used.
+
+```
+PYTHONPATH=. python3 scripts/classify/assign.py \
+  data/m00009_ko.hmm pfam-downloads/Pfam-A.hmm m00009 \
+  --additional-genome-accession data/genomes_related.txt
 ```
 
 
