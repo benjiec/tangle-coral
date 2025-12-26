@@ -24,8 +24,8 @@ proteins_faa = [proteins_faa]
 if args.additional_genome_accession:
     if os.path.exists(args.additional_genome_accession):
         with open(args.additional_genome_accession, "r") as f:
-            accessions = f.readlines().split("\n")
-            for acc in accessions:
+            for acc in f.readlines():
+                acc = acc.strip()
                 proteins_faa.append(DefaultPath.ncbi_genome_protein_faa(acc))
                 print("additional protein sequences from", proteins_faa[-1])
     else:
