@@ -201,7 +201,7 @@ The following helper script, `classify-ncbi`, calls the above two commands for
 each accession in an accession file.
 
 ```
-scripts/classify/classify-ncbi data/genomes_related.txt
+scripts/classify/classify-ncbi data/genomes_ref.txt
 ```
 
 Use the following script to create FASTA files for orthologs, and domains for
@@ -220,7 +220,7 @@ accessions can also be used.
 ```
 PYTHONPATH=. python3 scripts/classify/assign.py \
   data/m00009_ko.hmm pfam-downloads/Pfam-A.hmm m00009 \
-  --additional-genome-accession data/genomes_related.txt
+  --additional-genome-accession data/genomes_ref.txt
 ```
 
 
