@@ -11,6 +11,9 @@ faa_dir=$2
 output_dir="data/${module_id}_results/alignments"
 mkdir -p $output_dir
 
+rm -f $output_dir/*.faa
+rm -f $output_dir/*.png
+
 if [[ ! -d "$faa_dir" ]]; then
   echo "Directory not found: $faa_dir" >&2
   exit 1
