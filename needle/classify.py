@@ -69,11 +69,11 @@ class ClassifyTSV(object):
 
         tacf = lambda row: row["target_accession"].strip() if row["target_accession"].strip() and row["target_accession"].strip() != "-" else row["target_name"].strip()
         qacf = lambda row: row["query_accession"].strip() if row["query_accession"].strip() and row["query_accession"].strip() != "-" else row["query_name"].strip()
-        sorted_eval_for_protein = {}
+        sorted_score_for_protein = {}
         hmm_rows = sorted(hmm_rows, key=qacf)
         for protein_accession, group in itertools.groupby(hmm_rows, key=qacf):
-            evalues = sorted([row["dom_evalue"] for row in list(group)])
-            sorted_eval_for_protein[protein_accession] = evalues
+            scores = sorted([row["dom_score"] for row in list(group)], reverse=True)
+            sorted_score_for_protein[protein_accession] = scores
 
         if not os.path.exists(tsv_path) or os.path.getsize(tsv_path) == 0:
             with open(tsv_path, "w") as f:
@@ -102,7 +102,7 @@ class ClassifyTSV(object):
                     ClassifyTSV.HDR_DOM_EVALUE:  row["dom_evalue"],
                     ClassifyTSV.HDR_DOM_SCORE:  row["dom_score"],
                     ClassifyTSV.HDR_SCORE_THRESHOLD: score_threshold,
-                    ClassifyTSV.HDR_DOM_RANK: sorted_eval_for_protein[protein_accession].index(row["dom_evalue"])+1
+                    ClassifyTSV.HDR_DOM_RANK: sorted_score_for_protein[protein_accession].index(row["dom_score"])+1
                 }
                 writer.writerow(data)
 

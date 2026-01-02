@@ -47,7 +47,7 @@ class TestClassifyTSV(unittest.TestCase):
                  query_accession = self.proteins[0].protein_hit_id,
                  query_length = 61,
                  seq_evalue = 0.001,
-                 seq_score = 20,
+                 seq_score = 30,
                  dom_evalue = 0.002,
                  dom_evalue_cond = 0.003,
                  dom_score = 21,
@@ -226,9 +226,9 @@ class TestClassifyTSV(unittest.TestCase):
             rows = self.read_classify_tsv_outputs(tmpf.name)
             self.assertEqual(len(rows), 3)
 
-            self.assertEqual(rows[0]["dom_rank_for_protein"], "2")
-            self.assertEqual(rows[1]["dom_rank_for_protein"], "1")
-            self.assertEqual(rows[2]["dom_rank_for_protein"], "1")
+            self.assertEqual(rows[0]["dom_rank_for_protein"], "2") # score 21 in first row vs 28 in second row
+            self.assertEqual(rows[1]["dom_rank_for_protein"], "1") # score 21 in first row vs 28 in second row
+            self.assertEqual(rows[2]["dom_rank_for_protein"], "1") # different protein
 
             os.remove(tmpf.name)
 
