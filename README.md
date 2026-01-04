@@ -223,6 +223,9 @@ PYTHONPATH=. python3 scripts/classify/assign.py \
   --additional-genome-accession data/genomes_ref.txt
 ```
 
+Note that different scoring threshold criterias are used for detected proteins
+(more tolerant) vs those from reference genomes (more stringent).
+
 
 ### Clustering (Optional)
 

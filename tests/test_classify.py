@@ -280,7 +280,7 @@ class TestAssignment(unittest.TestCase):
         self.assertEqual([(row["protein_accession"], row["hmm_accession"]) for row in assignments["k2"]],
                          [("p3", "k2")])
 
-    def test_creates_protein_fasta(self):
+    def test_creates_protein_fasta_by_assignment(self):
         rows = [
             self._classify_row("p1", "ko", "k1", 10, 100, 2),    # excluded, rank != 1
             self._classify_row("p1", "ko", "k2", 11, 100, 1),    # excluded, score too low
@@ -333,3 +333,45 @@ class TestAssignment(unittest.TestCase):
             k1_seqs = read_fasta_as_dict(tmpdir+"/k1_pf1.faa")
             self.assertEqual(list(k1_seqs.keys()), ["p4_2_18_pf1"])
             self.assertEqual(k1_seqs["p4_2_18_pf1"], "MKLMKLMKLMKLMKLMK")
+
+    def test_appends_to_existing_fasta(self):
+        rows = [
+            self._classify_row("p1", "ko", "k1", 10, 100, 2),    # excluded, rank != 1
+            self._classify_row("p1", "ko", "k2", 11, 100, 1),    # excluded, score too low
+            self._classify_row("p1", "ko", "k3", 11, 100, 1),    # excluded, score too low
+            self._classify_row("p1", "pf", "pf1", 100, 100, 1),  # excluded, hmm db does not match
+            self._classify_row("p2", "ko", "k1", 75, 100, 1),    # assigns k1 to p2
+            self._classify_row("p2", "ko", "k2", 90, 100, 2),    # higher score, but rank != 1
+            self._classify_row("p2", "pf0", "pf1", 100, 100, 1), # returned
+            self._classify_row("p2", "pf0", "pf2", 10, 100, 2),  # returned
+            self._classify_row("p3", "ko", "k2", 90, 100, 1),    # assigns k2 to p3
+            self._classify_row("p4", "ko", "k1", 100, 100, 1),   # assigns k1 to p4
+            self._classify_row("p4", "pf", "pf1", 100, 100, 1, 2, 18),  # returned
+        ]
+
+        proteins = {
+            "p1": "A"*20,
+            "p2": "K"*20,
+            "p3": "L"*20,
+            "p4": "LMK"*20,
+        }
+
+        # creates protein fasta, only p2 and p4 assigned to k1
+        with tempfile.TemporaryDirectory() as tmpdir:
+            proteins_faa = tmpdir+"/proteins.faa"
+            write_fasta_from_dict(proteins, proteins_faa)
+            assign_ko(rows, "ko", proteins_faa, tmpdir)
+            self.assertEqual(os.path.exists(tmpdir+"/k1.faa"), True)
+            k1_seqs = read_fasta_as_dict(tmpdir+"/k1.faa")
+            self.assertEqual(list(k1_seqs.keys()), ["p2", "p4"]) 
+
+        # does not override existing fasta content
+        with tempfile.TemporaryDirectory() as tmpdir:
+            proteins_faa = tmpdir+"/proteins.faa"
+            write_fasta_from_dict(proteins, proteins_faa)
+            some_existing_entries = { "x1": "A"*20 }
+            write_fasta_from_dict(some_existing_entries, tmpdir+"/k1.faa")
+            assign_ko(rows, "ko", proteins_faa, tmpdir)
+            self.assertEqual(os.path.exists(tmpdir+"/k1.faa"), True)
+            k1_seqs = read_fasta_as_dict(tmpdir+"/k1.faa")
+            self.assertEqual(list(k1_seqs.keys()), ["x1", "p2", "p4"]) 

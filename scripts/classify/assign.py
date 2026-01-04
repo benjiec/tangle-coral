@@ -16,21 +16,32 @@ classify_tsv = f"data/{args.module_id}_results/classify.tsv"
 
 classify_rows = ClassifyTSV.from_tsv_to_rows(classify_tsv)
 ortholog_hmm_db_name = Path(args.ortholog_hmm_file).stem
-proteins_faa = f"data/{args.module_id}_results/proteins.faa"
+protein_faa = f"data/{args.module_id}_results/proteins.faa"
 output_dir = f"data/{args.module_id}_results/faa"
 domain_hmm_db_name = Path(args.pfam_hmm_file).stem
 
-proteins_faa = [proteins_faa]
+os.makedirs(output_dir, exist_ok=True)
+
+#
+# first, non-reference genome, use default scoring threshold
+#
+
+assign_ko(classify_rows, ortholog_hmm_db_name, protein_faa, output_dir, domain_hmm_db_name = domain_hmm_db_name)
+
+#
+# then, reference genome, use more stringent scoring threshold
+#
+multiple_protein_faas = []
 if args.additional_genome_accession:
     if os.path.exists(args.additional_genome_accession):
         with open(args.additional_genome_accession, "r") as f:
             for acc in f.readlines():
                 acc = acc.strip()
-                proteins_faa.append(DefaultPath.ncbi_genome_protein_faa(acc))
-                print("additional protein sequences from", proteins_faa[-1])
+                multiple_protein_faas.append(DefaultPath.ncbi_genome_protein_faa(acc))
+                print("additional protein sequences from", multiple_protein_faas[-1])
     else:
-        proteins_faa.append(DefaultPath.ncbi_genome_protein_faa(args.additional_genome_accession))
-        print("additional protein sequences from", proteins_faa[-1])
+        multiple_protein_faas.append(DefaultPath.ncbi_genome_protein_faa(args.additional_genome_accession))
+        print("additional protein sequences from", multiple_protein_faas[-1])
 
-os.makedirs(output_dir, exist_ok=True)
-assign_ko(classify_rows, ortholog_hmm_db_name, proteins_faa, output_dir, domain_hmm_db_name = domain_hmm_db_name)
+# use more stringent scoring threshold
+assign_ko(classify_rows, ortholog_hmm_db_name, multiple_protein_faas, output_dir, domain_hmm_db_name = domain_hmm_db_name, score_to_threshold_ratio=0.95)

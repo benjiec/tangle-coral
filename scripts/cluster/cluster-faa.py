@@ -43,6 +43,8 @@ def run_mmseqs_cluster(faa_file, output_result_prefix):
 
 def parse_mmseqs_cluster_results(mmseqs_cluster_tsv):
     cluster_reps = {}
+    if not os.path.exists(mmseqs_cluster_tsv):
+        return cluster_reps
     with open(mmseqs_cluster_tsv, "r") as f:
         for line in f.readlines():
             line = line.strip()
