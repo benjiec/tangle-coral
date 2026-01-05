@@ -125,7 +125,7 @@ def _parse_with_bcbb(gff_path: str) -> Iterable[Tuple[Any, Any]]:
         return list(_flatten_features_from_bcbb_records(records))
 
 
-def parse_gff_to_hits(gff_path: str, protein_id_attr = None, genomic_sequences = None) -> List[ProteinHit]:
+def parse_gff_to_hits(gff_path: str, protein_id_attr = None, name_attr = None, genomic_sequences = None) -> List[ProteinHit]:
     """
     Parse a GFF (GFF3 preferred) file and convert CDS features into Match objects,
     grouped by the same attribute 'protein_id' into ProteinHit objects.
@@ -135,11 +135,14 @@ def parse_gff_to_hits(gff_path: str, protein_id_attr = None, genomic_sequences =
     records_and_feats: Iterable[Tuple[Any, Any]] = _parse_with_bcbb(gff_path)
     if protein_id_attr is None:
         protein_id_attr = "protein_id"
+    if name_attr is None:
+        name_attr = "product"
 
     def _group(records_feats: Iterable[Tuple[Any, Any]]) -> Tuple[Dict[str, List[Tuple[Any, Any]]], Dict[str, str], Dict[str, str]]:
         cds_by_protein: Dict[str, List[Tuple[Any, Any]]] = {}
         seqid_by_protein: Dict[str, str] = {}
         strand_by_protein: Dict[str, str] = {}
+        name_by_protein: Dict[str, str] = {}
         for rec, feat in records_feats:
             if _get_type(feat) != "CDS":
                 continue
@@ -154,6 +157,14 @@ def parse_gff_to_hits(gff_path: str, protein_id_attr = None, genomic_sequences =
                 continue
             cds_by_protein.setdefault(protein_id, []).append((rec, feat))
 
+            name_values = attrs.get(name_attr, [])
+            product_name = None
+            if isinstance(name_values, list):
+                product_name = name_values[0] if name_values else None
+            elif isinstance(name_values, str):
+                product_name = name_values
+            name_by_protein.setdefault(protein_id, product_name)
+
             seqid = _get_seqid_from_record_or_feat(rec, feat)
             strand = _get_strand(feat)
             prev_seqid = seqid_by_protein.get(protein_id)
@@ -161,14 +172,14 @@ def parse_gff_to_hits(gff_path: str, protein_id_attr = None, genomic_sequences =
             if prev_seqid is None:
                 seqid_by_protein[protein_id] = seqid
             elif prev_seqid != seqid:
-                raise ValueError(f"Inconsistent seqid for protein_id '{protein_id}': {prev_seqid} vs {seqid}")
+                print(f"Inconsistent seqid for protein_id '{protein_id}': {prev_seqid} vs {seqid}")
             if prev_strand is None:
                 strand_by_protein[protein_id] = strand
             elif prev_strand != strand:
-                raise ValueError(f"Inconsistent strand for protein_id '{protein_id}': {prev_strand} vs {strand}")
-        return cds_by_protein, seqid_by_protein, strand_by_protein
+                print(f"Inconsistent strand for protein_id '{protein_id}': {prev_strand} vs {strand}")
+        return cds_by_protein, seqid_by_protein, strand_by_protein, name_by_protein
 
-    cds_by_protein, seqid_by_protein, strand_by_protein = _group(records_and_feats)
+    cds_by_protein, seqid_by_protein, strand_by_protein, name_by_protein = _group(records_and_feats)
 
     protein_hits: List[ProteinHit] = []
 
@@ -231,16 +242,16 @@ def parse_gff_to_hits(gff_path: str, protein_id_attr = None, genomic_sequences =
         else:
             prot_t_start, prot_t_end = max_coord, min_coord
 
-        protein_hits.append(
-            ProteinHit(
-                matches=matches,
-                query_start=1,
-                query_end=cumulative_aa,
-                target_start=prot_t_start,
-                target_end=prot_t_end,
-                _protein_hit_id=protein_id,
-            )
+        protein = ProteinHit(
+            matches=matches,
+            query_start=1,
+            query_end=cumulative_aa,
+            target_start=prot_t_start,
+            target_end=prot_t_end,
+            _protein_hit_id=protein_id,
+            _product_name=name_by_protein[protein_id] if protein_id in name_by_protein else None
         )
+        protein_hits.append(protein)
 
     return protein_hits
 

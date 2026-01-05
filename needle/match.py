@@ -114,6 +114,7 @@ class ProteinHit:
     hmm_cleaned_protein_sequence: Optional[str] = None
     hmm_file: Optional[str] = None
     _protein_hit_id: Optional[str] = None
+    _product_name: Optional[str] = None
 
     @property
     def on_reverse_strand(self) -> bool:

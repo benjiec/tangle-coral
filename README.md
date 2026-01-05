@@ -204,6 +204,18 @@ each accession in an accession file.
 scripts/classify/classify-ncbi data/genomes_ref.txt
 ```
 
+Use the following script to generate a `protein_ncbi.tsv` and
+`protein_names.tsv` files. Both include just proteins from the NCBI reference
+genomes. `protein_ncbi.tsv` is similar to `proteins.tsv` and enumerates exons.
+`protein_names.tsv` lists the curated names of proteins, and is used in the
+Tableau workbook.
+
+```
+PYTHONPATH=. python3 scripts/classify/generate-ref-protein-tsv.py m00009 \
+  data/m00009_results/protein_ncbi.tsv \
+  data/m00009_results/protein_names.tsv
+```
+
 Use the following script to create FASTA files for orthologs, and domains for
 each ortholog, based on classification results. The FASTA files are in
 `data/m00009_results/faa` directory.
