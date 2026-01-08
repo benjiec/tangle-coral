@@ -10,7 +10,7 @@ grammar = Grammar(
     pathway    = step (ws step)*
     step       = options
     options    = option (comma option)*
-    option     = component (plusminus component)*
+    option     = plusminus? component (plusminus component)*
     component  = grouped / atom
     grouped    = "(" (pathway / options) ")"
 
@@ -68,8 +68,11 @@ class DefVisitor(NodeVisitor):
 
     def visit_option(self, node, visited_children):
         components = []
-        component, more_components = visited_children
-        components.append(("+", component))
+        plus_minus, component, more_components = visited_children
+        if len(plus_minus) == 0:
+            components.append(("+", component))
+        else:
+            components.append((plus_minus[0], component))
         for modifier, component in more_components:
             components.append((modifier[0], component))
         return Option(components=components)
@@ -149,6 +152,7 @@ class DefFormatter(object):
 
 def parse_module_definition(formatter, module_id, def_line):
     print(def_line)
+    def_line = def_line.replace("--", "").strip()
     tree = grammar.parse(def_line)
     visitor = DefVisitor()
     output = visitor.visit(tree)
@@ -178,6 +182,8 @@ with open('data/modules.tsv') as f:
         if line.startswith("Module ID"):
             continue
         module_id, module_name = line.split("\t")
+        if module_id[0] != "M":
+            continue
         print(module_id)
         module_data = fetch_module_data(module_id)
         parse_module_data(formatter, module_id, module_data)
