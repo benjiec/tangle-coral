@@ -70,12 +70,12 @@ echo "Module ID\tModule Name" | cat - data/modules.txt > data/modules.tsv
 rm data/modules.txt
 ```
 
-### Fetch KO numbers for all the modules
-
-The following creates `data/module_ko.tsv`
+The following two scripts downloads KEGG module definitions and store them as a
+list of KO numbers, and, in the second script, as steps and components.
 
 ```
 python3 scripts/data/fetch-kegg-module-ko.py
+PYTHONPATH=. python3 scripts/data/fetch-kegg-module-def.py
 ```
 
 ### Download KEGG KO profile HMMs
