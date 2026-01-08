@@ -268,8 +268,9 @@ The `faa_dir` argument can be either the `data/m00009_results/faa` dir, or the
 ./scripts/align/generate-msas m00009 <faa_dir>
 ```
 
-This script creates the `data/m00009_results/alignments` dir with both MSA
-FASTA and PNG files.
+This script creates the `data/m00009_results/alignments` dir and, for each
+input FAA file, generates a MSA FAA file, a PNG visualizing the MSA, and a HMM
+profile from the MSA.
 
 
 ### Other Scripts
