@@ -87,32 +87,67 @@ def fetch_module_data(module_id):
     return module_data
 
 
-def print_option(tree, spacing):
-    for component in tree.components:
-        if type(component[1]) == type(""):
-            print(" "*spacing, "component", component[0], component[1])
-        else:
-            print(" "*spacing, "component", component[0])
-            if type(component[1]) is Pathway:
-                print_pathway(component[1], spacing+4)
-            elif type(component[1]) is Step:
-                print_step(component[1], spacing+4)
+class DefFormatter(object):
+
+    def __init__(self):
+        self.row_module = []
+        self.row_coords = []
+        self.row_values = []
+
+    def gather_option(self, module_id, step_num, option_num, par_coords, tree, spacing):
+        for i, component in enumerate(tree.components):
+            coords = par_coords+[[step_num, option_num, i+1]]
+
+            if type(component[1]) == type(""):
+                # print(" "*spacing, "component", component[0], component[1])
+                self.row_module.append(module_id)
+                self.row_coords.append(coords)
+                self.row_values.append([1 if component[0] == "+" else 0, component[1]])
+
+            else:
+                # print(" "*spacing, "component", component[0], type(component[1]))
+                if type(component[1]) is Pathway:
+                    self.gather_pathway(module_id, coords, component[1], spacing+4)
+                elif type(component[1]) is Step:
+                    self.gather_step(module_id, 1, coords, component[1], spacing+4)
+
+    def gather_step(self, module_id, step_num, par_coords, tree, spacing):
+        for i, option in enumerate(tree.options):
+            # print(" "*spacing, "option", i+1)
+            self.gather_option(module_id, step_num, i+1, par_coords, option, spacing+4)
+
+    def gather_pathway(self, module_id, par_coords, tree, spacing=None):
+        spacing = 0 if spacing is None else spacing
+        for i, step in enumerate(tree.steps):
+            # print(" "*spacing, "step", i+1)
+            self.gather_step(module_id, i+1, par_coords, step, spacing+4)
+
+    def to_csv(self, fn):
+        nlevels = max([len(x) for x in self.row_coords])
+       
+        headers = []
+        headers.append("module_id")
+        for i in range(nlevels):
+            headers.append("sub_"*i+"step")
+            headers.append("sub_"*i+"step_option")
+            headers.append("sub_"*i+"step_option_component")
+        headers.append("essential")
+        headers.append("identifier")
+
+        with open(fn, "w") as f:
+            f.write(",".join(headers)+"\n")
+            for module_id,coords,values in zip(self.row_module, self.row_coords, self.row_values):
+                row = [module_id]
+                for i in range(nlevels):
+                    if i < len(coords):
+                        row.extend(coords[i])
+                    else:
+                        row.extend(["", "", ""])
+                row.extend(values)
+                f.write(",".join([str(x) for x in row])+"\n")
 
 
-def print_step(tree, spacing):
-    for option in tree.options:
-        print(" "*spacing, "option")
-        print_option(option, spacing+4)
-
-
-def print_pathway(tree, spacing=None):
-    spacing = 0 if spacing is None else spacing
-    for step in tree.steps:
-        print(" "*spacing, "step")
-        print_step(step, spacing+4)
-
-
-def parse_module_definition(def_line):
+def parse_module_definition(formatter, module_id, def_line):
     print(def_line)
     tree = grammar.parse(def_line)
     visitor = DefVisitor()
@@ -122,10 +157,10 @@ def parse_module_definition(def_line):
             output = output.options[0].components[0][1]
         else:
             output = Pathway(steps=[output])
-    print_pathway(output)
+    formatter.gather_pathway(module_id, [], output)
 
 
-def parse_module_data(module_data):
+def parse_module_data(formatter, module_id, module_data):
     keyword = "DEFINITION"
     lines = module_data.split("\n")
     def_lines = [line for line in lines if line.startswith(keyword)]
@@ -133,28 +168,27 @@ def parse_module_data(module_data):
         return None
     def_line = def_lines[0][len(keyword):]
     def_line = def_line.strip()
-    return parse_module_definition(def_line)
+    return parse_module_definition(formatter, module_id, def_line)
 
 
-"""
+formatter = DefFormatter()
+
 with open('data/modules.tsv') as f:
     for line in f.readlines():
         if line.startswith("Module ID"):
             continue
         module_id, module_name = line.split("\t")
-        if module_id not in ("M00009"):
-            continue
         print(module_id)
         module_data = fetch_module_data(module_id)
-        parse_module_data(module_data)
+        parse_module_data(formatter, module_id, module_data)
+
+"""
+parse_module_definition(formatter, "x1", "((K00134,K00150) K00927,K11389)")
+parse_module_definition(formatter, "x2", "(K00134,K00150) K00927,K11389")
+parse_module_definition(formatter, "x3", "(K00134,K00150,K00927,K11389)")
+parse_module_definition(formatter, "x4", "(K01647,K05942,K01659) (K01681,K27802,K01682) (K00031,K00030) ((K00164+K00658,K01616)+K00382,K00174+K00175-K00177-K00176) (K01902+K01903,K01899+K01900,K18118) (K00234+K00235+K00236+(K00237,K25801),K00239+K00240+K00241-(K00242,K18859,K18860),K00244+K00245+K00246-K00247) (K01676,K01679,K01677+K01678) (K00026,K00025,K00024,K00116)")
+parse_module_definition(formatter, "x5", "(K00844,K12407,K00845,K25026,K00886,K08074,K00918) (K01810,K06859,K13810,K15916) (K00850,K16370,K21071,K24182,K00918) (K01623,K01624,K11645,K16305,K16306) K01803 ((K00134,K00150) K00927,K11389) (K01834,K15633,K15634,K15635) (K01689,K27394) (K00873,K12406)")
+parse_module_definition(formatter, "x", "(K01596,K01610) (K01689,K27394) (K01834,K15633,K15634,K15635) K00927 (K00134,K00150) K01803 ((K01623,K01624,K11645) (K03841,K02446,K11532,K01086,K04041),K01622)")
 """
 
-parse_module_definition("((K00134,K00150) K00927,K11389)")
-
-parse_module_definition("(K00134,K00150) K00927,K11389")
-
-parse_module_definition("(K00134,K00150,K00927,K11389)")
-
-parse_module_definition("(K01647,K05942,K01659) (K01681,K27802,K01682) (K00031,K00030) ((K00164+K00658,K01616)+K00382,K00174+K00175-K00177-K00176) (K01902+K01903,K01899+K01900,K18118) (K00234+K00235+K00236+(K00237,K25801),K00239+K00240+K00241-(K00242,K18859,K18860),K00244+K00245+K00246-K00247) (K01676,K01679,K01677+K01678) (K00026,K00025,K00024,K00116)")
-
-parse_module_definition("(K00844,K12407,K00845,K25026,K00886,K08074,K00918) (K01810,K06859,K13810,K15916) (K00850,K16370,K21071,K24182,K00918) (K01623,K01624,K11645,K16305,K16306) K01803 ((K00134,K00150) K00927,K11389) (K01834,K15633,K15634,K15635) (K01689,K27394) (K00873,K12406)")
+formatter.to_csv('data/module_defs.tsv')

@@ -30,16 +30,12 @@ if __name__ == "__main__":
     print(f"{len(genome_accessions)} genome accessions")
 
     name_tsv_fieldnames = ["protein_accession", "name"]
-    """
     with open(args.output_name_tsv, "w") as f:
         writer = csv.DictWriter(f, fieldnames=name_tsv_fieldnames, delimiter='\t')
         writer.writeheader()
-    """
 
     for gac in genome_accessions:
         print(gac)
-        if gac not in ("GCF_000001405.40", "GCF_016699485.2"):
-            continue
         gff_path = DefaultPath.ncbi_genome_gff(gac)
         proteins = parse_gff_to_hits(gff_path)
         proteins = [p for p in proteins if p.query_accession in classified_protein_accessions]
