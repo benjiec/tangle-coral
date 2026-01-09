@@ -238,15 +238,6 @@ each ortholog, based on classification results. The FASTA files are in
 ```
 PYTHONPATH=. python3 scripts/classify/assign.py \
   data/m00009_ko.hmm pfam-downloads/Pfam-A.hmm m00009 \
-  --additional-genome-accession GCF_932526225.1
-```
-
-Instead of one additional genome accession, a file containing a list of
-accessions can also be used.
-
-```
-PYTHONPATH=. python3 scripts/classify/assign.py \
-  data/m00009_ko.hmm pfam-downloads/Pfam-A.hmm m00009 \
   --additional-genome-accession data/genomes_ref.txt
 ```
 

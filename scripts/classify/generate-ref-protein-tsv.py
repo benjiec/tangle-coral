@@ -29,6 +29,9 @@ if __name__ == "__main__":
 
     print(f"{len(genome_accessions)} genome accessions")
 
+    os.remove(args.output_protein_tsv)
+    os.remove(args.output_name_tsv)
+
     name_tsv_fieldnames = ["protein_accession", "name"]
     with open(args.output_name_tsv, "w") as f:
         writer = csv.DictWriter(f, fieldnames=name_tsv_fieldnames, delimiter='\t')
