@@ -149,7 +149,9 @@ The following script puts outputs in `data/m00009_results` directory
 ./scripts/detect/search-genome m00009 GCF_002042975.1
 ```
 
-Or if you have a list of genome accessions in a file, e.g. `data/genomes_coral.txt` then do
+Or if you have a list of genome accessions in a file, do the following. Note,
+these commands append to existing files, so to re-run detection on a genome,
+remove `data/m00009_results/proteins.{faa/tsv}` first.
 
 ```
 ./scripts/detect/search-genomes m00009 data/genomes_coral.txt
@@ -169,7 +171,8 @@ PYTHONPATH=. python3 scripts/detect/compare-gff-with-match.py \
 
 ### Classify Proteins
 
-The following two commands will classify detected proteins first by KEGG ortholog, then Pfam domains.
+The following two commands will classify detected proteins first by KEGG
+ortholog, then Pfam domains.
 
 ```
 PYTHONPATH=. python3 scripts/classify/classify.py \
@@ -178,7 +181,9 @@ PYTHONPATH=. python3 scripts/classify/classify.py \
 PYTHONPATH=. python3 scripts/classify/classify.py pfam-downloads/Pfam-A.hmm m00009
 ```
 
-Classification outputs appear in `data/m00009_results/classify.tsv`.
+Classification outputs appear in `data/m00009_results/classify.tsv`. If you
+are re-running classification, remove this file first.
+
 
 Annotated proteins submitted to NBCI can be classified in the same way, and
 added to the same output TSV, using the following two commands.
