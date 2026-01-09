@@ -118,6 +118,14 @@ PYTHONPATH=. python3 scripts/data/fetch-genomes.py data/genomes_algae.txt
 PYTHONPATH=. python3 scripts/data/fetch-genomes.py data/genomes_ref.txt
 ```
 
+Also download genomic sequences, using
+
+```
+PYTHONPATH=. python3 scripts/ncbi-download.py data/genomes_coral.txt
+PYTHONPATH=. python3 scripts/ncbi-download.py data/genomes_algae.txt
+PYTHONPATH=. python3 scripts/ncbi-download.py data/genomes_ref.txt
+```
+
 
 ## Workflow and Scripts
 
