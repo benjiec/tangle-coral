@@ -1,6 +1,6 @@
 import argparse
 from scripts.defaults import DefaultPath
-from needle.match import read_fasta_as_dict
+from needle.seq import read_fasta_as_dict
 from needle.detect import hmm_search_genome, Results
 
 ap = argparse.ArgumentParser()
