@@ -109,13 +109,13 @@ Also, download the `Pfam-A.clans.tsv` file into data directory.
 
 ### Prepare List of Genomes
 
-There is a list of Coral genomes in `data/genomes_coral.txt`, and a list of
-Symbiodinium (algae) genomes in `data/genomes_algae.txt`. Run the following
-command to generate `data/genomes.tsv`, which includes genome name and taxonomy
-information.
+Run the following commands to generate `data/genomes.tsv`, which includes
+genome name and taxonomy information for three sets of genomes.
 
 ```
 PYTHONPATH=. python3 scripts/data/fetch-genomes.py data/genomes_coral.txt
+PYTHONPATH=. python3 scripts/data/fetch-genomes.py data/genomes_algae.txt
+PYTHONPATH=. python3 scripts/data/fetch-genomes.py data/genomes_ref.txt
 ```
 
 
@@ -149,10 +149,11 @@ The following script puts outputs in `data/m00009_results` directory
 ./scripts/detect/search-genome m00009 GCF_002042975.1
 ```
 
-Or if you have a list of genome accessions in a file, e.g. `genomes.txt`, then do
+Or if you have a list of genome accessions in a file, e.g. `data/genomes_coral.txt` then do
 
 ```
-./scripts/detect/search-genomes m00009 genomes.txt
+./scripts/detect/search-genomes m00009 data/genomes_coral.txt
+./scripts/detect/search-genomes m00009 data/genomes_algae.txt
 ```
 
 Use the following script to compare, for a given HMM model, how NCBI annotated
