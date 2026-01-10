@@ -12,6 +12,7 @@ if __name__ == "__main__":
     ap.add_argument("module_id")
     ap.add_argument("output_protein_tsv", help="Output Protein TSV file")
     ap.add_argument("output_name_tsv", help="Output Protein TSV file")
+    ap.add_argument("--overwrite", help="Overwrite old data", action="store_true", default=False)
     args = ap.parse_args()
 
     classify_tsv = f"data/{args.module_id}_results/classify.tsv"
@@ -29,15 +30,19 @@ if __name__ == "__main__":
     )
 
     print(f"{len(genome_accessions)} genome accessions")
-
-    with contextlib.suppress(FileNotFoundError):
-        os.remove(args.output_protein_tsv)
-        os.remove(args.output_name_tsv)
-
     name_tsv_fieldnames = ["protein_accession", "name"]
-    with open(args.output_name_tsv, "w") as f:
-        writer = csv.DictWriter(f, fieldnames=name_tsv_fieldnames, delimiter='\t')
-        writer.writeheader()
+
+    if args.overwrite:
+        print("overwriting previous data")
+        with contextlib.suppress(FileNotFoundError):
+            os.remove(args.output_protein_tsv)
+            os.remove(args.output_name_tsv)
+
+        with open(args.output_name_tsv, "w") as f:
+            writer = csv.DictWriter(f, fieldnames=name_tsv_fieldnames, delimiter='\t')
+            writer.writeheader()
+    else:
+        print("appending to previous data")
 
     for gac in genome_accessions:
         print(gac)
