@@ -231,6 +231,11 @@ PYTHONPATH=. python3 scripts/classify/generate-ref-protein-tsv.py m00009 \
   data/m00009_results/protein_names.tsv
 ```
 
+*IMPORTANT* The above script fails for some GFFs that are malformed, e.g.
+GCF_000001735.4 (Arabidopsis) that includes weird trans-splicing in the GenBank
+file which GFF does not support. In these cases, manually fixing the GFFs to
+work around the errors is the best option at the moment.
+
 Use the following script to create FASTA files for orthologs, and domains for
 each ortholog, based on classification results. The FASTA files are in
 `data/m00009_results/faa` directory.

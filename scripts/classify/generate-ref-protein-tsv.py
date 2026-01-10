@@ -1,6 +1,7 @@
 import os
 import csv
 import argparse
+import contextlib
 from needle.gff import parse_gff_to_hits
 from scripts.defaults import DefaultPath
 from needle.match import ProteinsTSV
@@ -29,8 +30,9 @@ if __name__ == "__main__":
 
     print(f"{len(genome_accessions)} genome accessions")
 
-    os.remove(args.output_protein_tsv)
-    os.remove(args.output_name_tsv)
+    with contextlib.suppress(FileNotFoundError):
+        os.remove(args.output_protein_tsv)
+        os.remove(args.output_name_tsv)
 
     name_tsv_fieldnames = ["protein_accession", "name"]
     with open(args.output_name_tsv, "w") as f:
