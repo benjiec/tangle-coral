@@ -259,6 +259,7 @@ Note that different scoring threshold criterias are used for detected proteins
 For each KO, run the following script to cluster assigned sequences further
 
 ```
+rm data/m00009_results/clusters/*
 ./scripts/cluster/cluster m00009
 ```
 
@@ -280,6 +281,7 @@ The `faa_dir` argument can be either the `data/m00009_results/faa` dir, or the
 `data/m00009_results/clusters` dir.
 
 ```
+rm data/m00009_results/alignments/*
 ./scripts/align/generate-msas m00009 <faa_dir>
 ```
 
