@@ -234,6 +234,14 @@ Use the `--overwrite` option to remove old data and re-generate these files.
 Otherwise data will be added to the same files, including previously generated
 names, causing duplication.
 
+To add new names from a set of reference genomes,
+
+```
+PYTHONPATH=. python3 scripts/classify/generate-ref-protein-tsv.py m00009 \
+  data/m00009_results/protein_ncbi.tsv \
+  data/m00009_results/protein_names.tsv --genome-accession data/genomes_new.txt
+```
+
 *IMPORTANT* The above script fails for some GFFs that are malformed, e.g.
 GCF_000001735.4 (Arabidopsis) that includes weird trans-splicing in the GenBank
 file which GFF does not support. In these cases, manually fixing the GFFs to
@@ -259,7 +267,7 @@ Note that different scoring threshold criterias are used for detected proteins
 For each KO, run the following script to cluster assigned sequences further
 
 ```
-rm data/m00009_results/clusters/*
+# make sure Docker daemon is running
 ./scripts/cluster/cluster m00009
 ```
 
@@ -281,7 +289,7 @@ The `faa_dir` argument can be either the `data/m00009_results/faa` dir, or the
 `data/m00009_results/clusters` dir.
 
 ```
-rm data/m00009_results/alignments/*
+# make sure Docker daemon is running
 ./scripts/align/generate-msas m00009 <faa_dir>
 ```
 

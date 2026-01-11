@@ -13,7 +13,18 @@ if __name__ == "__main__":
     ap.add_argument("output_protein_tsv", help="Output Protein TSV file")
     ap.add_argument("output_name_tsv", help="Output Protein TSV file")
     ap.add_argument("--overwrite", help="Overwrite old data", action="store_true", default=False)
+    ap.add_argument("--genome-accession", help="Limit to these genome accession(s), can be a file", default=None)
     args = ap.parse_args()
+
+    genome_accession_filter = []
+    if args.genome_accession:
+        if os.path.exists(args.genome_accession):
+            with open(args.genome_accession, "r") as f:
+                for acc in f.readlines():
+                    acc = acc.strip()
+                    genome_accession_filter.append(acc)
+        else:
+            genome_accession_filter.append(args.genome_accession)
 
     classify_tsv = f"data/{args.module_id}_results/classify.tsv"
     classify_rows = ClassifyTSV.from_tsv_to_rows(classify_tsv)
@@ -21,7 +32,8 @@ if __name__ == "__main__":
     # get list of genome accessions that we have GFF files for
     genome_accessions = set(
         [row[ClassifyTSV.HDR_GENOME_ACCESSION] for row in classify_rows \
-         if os.path.exists(DefaultPath.ncbi_genome_gff(row[ClassifyTSV.HDR_GENOME_ACCESSION]))]
+         if os.path.exists(DefaultPath.ncbi_genome_gff(row[ClassifyTSV.HDR_GENOME_ACCESSION])) and \
+            (not genome_accession_filter or row[ClassifyTSV.HDR_GENOME_ACCESSION] in genome_accession_filter)]
     )
 
     classified_protein_accessions = set(
