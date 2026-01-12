@@ -234,7 +234,8 @@ Use the `--overwrite` option to remove old data and re-generate these files.
 Otherwise data will be added to the same files, including previously generated
 names, causing duplication.
 
-To add new names from a set of reference genomes,
+To add new names from a set of new reference genomes, without removing old
+entries
 
 ```
 PYTHONPATH=. python3 scripts/classify/generate-ref-protein-tsv.py m00009 \
