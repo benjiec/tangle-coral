@@ -201,7 +201,7 @@ def extract_fragments(target_accession, dna_start, dna_end, seq):
     return fragments
 
 
-def get_aa_sequences(target_accession, target_sequence, target_left = None, target_right = None, strand = None, win=50000, win_overlap=10000):
+def get_aa_sequences(target_accession, target_sequence, target_left = None, target_right = None, strand = None, win=50000, win_overlap=10000, min_aa_length=8):
 
     # target_left and target_right are 1b, if provided
     if target_left is None:
@@ -228,8 +228,9 @@ def get_aa_sequences(target_accession, target_sequence, target_left = None, targ
             for f in extract_fragments(target_accession, frame_dna_start, frame_dna_end, translation[2]):
                 acc, start, end, seq = f
                 k = (start, end)
-                # print(k, f)
-                coords[k] = f
+                if len(seq) >= min_aa_length:
+                    # print(k, seq)
+                    coords[k] = f
 
     return list(coords.values())
 
@@ -242,7 +243,7 @@ def hmm_search_genome(hmm_file, genome_accession, genomic_fasta_dict, min_aa_len
     for acc, genome_sequence in genomic_fasta_dict.items():
         if target_accession and acc != target_accession:
             continue
-        fragments.extend(get_aa_sequences(acc, genome_sequence, target_left=target_left, target_right=target_right, strand=strand))
+        fragments.extend(get_aa_sequences(acc, genome_sequence, target_left=target_left, target_right=target_right, strand=strand, min_aa_length=min_aa_length))
 
     fragments = [x for x in fragments if len(x[3]) >= min_aa_length]
     fragments = [x for x in fragments if (x[3].count('X') / len(x[3])) < 0.1]
@@ -273,6 +274,7 @@ def hmm_search_genome(hmm_file, genome_accession, genomic_fasta_dict, min_aa_len
         full_aa_seq = translated_fasta[target_name]
         aa_seq = extract_subsequence(full_aa_seq, row["ali_from"], row["ali_to"])
         if len(aa_seq) < min_aa_length:
+            # print("throw away", len(aa_seq), "at target", row["ali_from"])
             continue
 
         target_accession, target_start, target_end = name_to_coordinates[target_name]
