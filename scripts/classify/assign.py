@@ -25,8 +25,7 @@ os.makedirs(output_dir, exist_ok=True)
 #
 # first, non-reference genome, use default scoring threshold
 #
-
-assign_ko(classify_rows, ortholog_hmm_db_name, protein_faa, output_dir, domain_hmm_db_name = domain_hmm_db_name)
+assign_ko(classify_rows, ortholog_hmm_db_name, protein_faa, output_dir, domain_hmm_db_name = domain_hmm_db_name, score_to_threshold_ratio=0.9)
 
 #
 # then, reference genome, use more stringent scoring threshold
@@ -44,4 +43,4 @@ if args.additional_genome_accession:
         print("additional protein sequences from", multiple_protein_faas[-1])
 
 # use more stringent scoring threshold
-assign_ko(classify_rows, ortholog_hmm_db_name, multiple_protein_faas, output_dir, domain_hmm_db_name = domain_hmm_db_name, score_to_threshold_ratio=0.95)
+assign_ko(classify_rows, ortholog_hmm_db_name, multiple_protein_faas, output_dir, domain_hmm_db_name = domain_hmm_db_name, score_to_threshold_ratio=1)

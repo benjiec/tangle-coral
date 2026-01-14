@@ -138,7 +138,7 @@ def group_by_assignment(classify_rows, ortholog_hmm_db_name, score_to_threshold_
     return itertools.groupby(assigned_rows, keyf)
 
 
-def assign_ko(classify_rows, ortholog_hmm_db_name, proteins_faa, output_dir, domain_hmm_db_name = None, score_to_threshold_ratio = 0.75):
+def assign_ko(classify_rows, ortholog_hmm_db_name, proteins_faa, output_dir, domain_hmm_db_name = None, score_to_threshold_ratio = 0.9):
 
     if type(proteins_faa) == type(""):
         proteins_faa = [proteins_faa]
