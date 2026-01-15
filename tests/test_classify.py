@@ -286,11 +286,11 @@ class TestAssignment(unittest.TestCase):
             self._classify_row("p1", "ko", "k2", 11, 100, 1),    # excluded, score too low
             self._classify_row("p1", "ko", "k3", 11, 100, 1),    # excluded, score too low
             self._classify_row("p1", "pf", "pf1", 100, 100, 1),  # excluded, hmm db does not match
-            self._classify_row("p2", "ko", "k1", 75, 100, 1),    # assigns k1 to p2
-            self._classify_row("p2", "ko", "k2", 90, 100, 2),    # higher score, but rank != 1
+            self._classify_row("p2", "ko", "k1", 95, 100, 1),    # assigns k1 to p2
+            self._classify_row("p2", "ko", "k2", 98, 100, 2),    # higher score, but rank != 1
             self._classify_row("p2", "pf0", "pf1", 100, 100, 1), # returned
             self._classify_row("p2", "pf0", "pf2", 10, 100, 2),  # returned
-            self._classify_row("p3", "ko", "k2", 90, 100, 1),    # assigns k2 to p3
+            self._classify_row("p3", "ko", "k2", 95, 100, 1),    # assigns k2 to p3
             self._classify_row("p4", "ko", "k1", 100, 100, 1),   # assigns k1 to p4
             self._classify_row("p4", "pf", "pf1", 100, 100, 1, 2, 18),  # returned
         ]
@@ -340,11 +340,11 @@ class TestAssignment(unittest.TestCase):
             self._classify_row("p1", "ko", "k2", 11, 100, 1),    # excluded, score too low
             self._classify_row("p1", "ko", "k3", 11, 100, 1),    # excluded, score too low
             self._classify_row("p1", "pf", "pf1", 100, 100, 1),  # excluded, hmm db does not match
-            self._classify_row("p2", "ko", "k1", 75, 100, 1),    # assigns k1 to p2
-            self._classify_row("p2", "ko", "k2", 90, 100, 2),    # higher score, but rank != 1
+            self._classify_row("p2", "ko", "k1", 95, 100, 1),    # assigns k1 to p2
+            self._classify_row("p2", "ko", "k2", 98, 100, 2),    # higher score, but rank != 1
             self._classify_row("p2", "pf0", "pf1", 100, 100, 1), # returned
             self._classify_row("p2", "pf0", "pf2", 10, 100, 2),  # returned
-            self._classify_row("p3", "ko", "k2", 90, 100, 1),    # assigns k2 to p3
+            self._classify_row("p3", "ko", "k2", 95, 100, 1),    # assigns k2 to p3
             self._classify_row("p4", "ko", "k1", 100, 100, 1),   # assigns k1 to p4
             self._classify_row("p4", "pf", "pf1", 100, 100, 1, 2, 18),  # returned
         ]

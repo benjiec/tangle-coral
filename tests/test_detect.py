@@ -155,7 +155,7 @@ class TestHMMSearchGenome(unittest.TestCase):
         #  r1:  TATttaTTTattTAT  => 1
         #  r2:   ATTtatTTAttt    => 1
 
-        fragments = get_aa_sequences("t1", seq)
+        fragments = get_aa_sequences("t1", seq, min_aa_length=1)
 
         self.assertEqual(len(fragments), 2+1+2+1+1+1)
         # f0.1
@@ -186,7 +186,7 @@ class TestHMMSearchGenome(unittest.TestCase):
     def test_get_aa_sequences_returns_fragments_correctly_even_when_windowing(self):
 
         seq = "ATAA"*4  # this will have a lot of TAAs in some frames
-        fragments = get_aa_sequences("t1", seq, win=8, win_overlap=4)
+        fragments = get_aa_sequences("t1", seq, win=8, win_overlap=4, min_aa_length=1)
 
         # first window, 1..12
         # fwd: ATAAATAAATAA 1..12

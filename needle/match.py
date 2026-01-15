@@ -7,7 +7,7 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 from Bio.Seq import Seq
 
-MAX_AA_OVERLAP = 15
+MAX_AA_OVERLAP_GROUPING = 15
 
 
 @dataclass
@@ -54,7 +54,7 @@ def remove_duplicate_matches(matches: List[Match]) -> List[Match]:
     return retained
 
 
-def order_matches(matches: List[Match], max_overlap_len: int = MAX_AA_OVERLAP, cleanup: bool = False) -> List[Match]:
+def order_matches(matches: List[Match], cleanup: bool = False) -> List[Match]:
     if not matches:
         return []
 
@@ -70,23 +70,6 @@ def order_matches(matches: List[Match], max_overlap_len: int = MAX_AA_OVERLAP, c
         if left.on_reverse_strand != right.on_reverse_strand:
             raise NonlinearMatchException("Matches are on different strands")
 
-        # ordered correctly on the target as well
-        if (left.on_reverse_strand is False and left.target_start > right.target_start) or \
-           (left.on_reverse_strand is True and left.target_start < right.target_start):
-            msg = "Consecutive query matches are reversed on DNA (%s, rev strand %s, dna %s-%s and %s-%s)" % \
-                    (left.target_accession, left.on_reverse_strand, left.target_start, left.target_end, right.target_start, right.target_end)
-            if cleanup:  # recoverable - remove earliest one
-                if left.on_reverse_strand is False:  # remove left
-                    ordered = ordered[0:i]+ordered[i+1:]
-                    if i > 0:
-                        i = i-1
-                    continue
-                else:  # remove right
-                    ordered = ordered[0:i+1]+ordered[i+2:]
-                    continue
-            else:
-                raise NonlinearMatchException(msg)
-
         # query cannot contain each other
         if right.query_end <= left.query_end:
             msg = "Matching queries contain each other (%s %s-%s and %s-%s)" % \
@@ -98,6 +81,18 @@ def order_matches(matches: List[Match], max_overlap_len: int = MAX_AA_OVERLAP, c
             else:
                 raise NonlinearMatchException(msg)
 
+	# do the following AFTER removing contained matches: making sure
+	# ordered correctly on the target as well -- if ordered reverse on
+	# target, maybe it's a new copy of the gene? should NOT recover this.
+
+        if (left.on_reverse_strand is False and left.target_start > right.target_start) or \
+           (left.on_reverse_strand is True and left.target_start < right.target_start):
+            msg = "Consecutive query matches are reversed on DNA, new copy? (%s, rev strand %s, dna %s-%s and %s-%s)" % \
+                    (left.target_accession, left.on_reverse_strand, left.target_start, left.target_end, right.target_start, right.target_end)
+            raise NonlinearMatchException(msg)
+
+        query_overlap_len = max(0, left.query_end - right.query_start + 1)
+
 	# left cannot contain right on target - we already checked the
 	# target_left coordinates are correct above
         if (left.on_reverse_strand is False and right.target_end < left.target_end) or \
@@ -107,25 +102,6 @@ def order_matches(matches: List[Match], max_overlap_len: int = MAX_AA_OVERLAP, c
                 # print(msg)
                 ordered = ordered[0:i+1]+ordered[i+2:]
                 continue
-            else:
-                raise NonlinearMatchException(msg)
-
-        query_overlap_len = max(0, left.query_end - right.query_start + 1)
-
-        # query overlap not too large 
-        if query_overlap_len > max_overlap_len:
-            msg = "Overlap too large, likely a different copy of the protein (%s %s-%s and %s-%s)" % \
-                    (left.target_accession, left.query_start, left.query_end, right.query_start, right.query_end)
-            if cleanup:  # recoverable - remove smaller one
-                # print(msg)
-                if left.query_len() > right.query_len():
-                    ordered = ordered[0:i+1]+ordered[i+2:]
-                    continue
-                else:
-                    ordered = ordered[0:i]+ordered[i+1:]
-                    if i > 0:
-                        i = i-1
-                    continue
             else:
                 raise NonlinearMatchException(msg)
 
@@ -151,11 +127,11 @@ def order_matches(matches: List[Match], max_overlap_len: int = MAX_AA_OVERLAP, c
     return ordered
 
 
-def order_matches_for_junctions(matches: List[Match], max_overlap_len: int = MAX_AA_OVERLAP) -> List[Tuple[Match, Match, int, int]]:
+def order_matches_for_junctions(matches: List[Match]) -> List[Tuple[Match, Match, int, int]]:
     if not matches:
         return []
 
-    ordered = order_matches(matches, max_overlap_len = max_overlap_len, cleanup = False)
+    ordered = order_matches(matches, cleanup = False)
     pairs: List[Tuple[Match, Match, int, int]] = []
     junctions: List[Tuple[int, int]] = []
 
@@ -208,6 +184,7 @@ class ProteinHit:
         try:
             pairs = order_matches_for_junctions(matches)
         except NonlinearMatchException as e:
+            # print(str(e))
             return False
         return True
 
@@ -288,7 +265,7 @@ class ProteinHit:
         return first.target_accession
 
 
-def group_matches(all_matches, max_intron_length: int = 10_000, max_overlap_len: int = MAX_AA_OVERLAP) -> List[ProteinHit]:
+def group_matches(all_matches, max_intron_length: int = 10_000, max_overlap_len: int = MAX_AA_OVERLAP_GROUPING) -> List[ProteinHit]:
     """
     Group Match objects into ProteinHit objects.
     - Groups by (query_accession, target_accession)

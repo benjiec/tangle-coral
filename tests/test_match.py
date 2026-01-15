@@ -93,26 +93,17 @@ class TestOrderGroupMatches(unittest.TestCase):
         with self.assertRaisesRegex(NonlinearMatchException, "Consecutive query matches are reversed"):
             pairs = order_matches_for_junctions([m1, m2])
 
-    def test_order_throws_error_if_query_overlap_is_too_large(self):
-
-        m1 = self.makeM(6, 16, 1, 30)
-        m2 = self.makeM(10, 20, 15, 40)
-
-        pairs = order_matches_for_junctions([m1, m2], max_overlap_len=10)
-        with self.assertRaisesRegex(NonlinearMatchException, "Overlap too large"):
-            pairs = order_matches_for_junctions([m1, m2], max_overlap_len=4)
-
     def test_order_throws_error_if_query_overlap_is_larger_than_left_or_right_sequence(self):
 
         m1 = self.makeM(6, 16, 1, 10)   # there are deletions of query aa on DNA
         m2 = self.makeM(10, 20, 15, 40)
         with self.assertRaisesRegex(NonlinearMatchException, "Overlap larger than matched"):
-            pairs = order_matches_for_junctions([m1, m2], max_overlap_len=10)
+            pairs = order_matches_for_junctions([m1, m2])
 
         m1 = self.makeM(6, 16, 1, 30)
         m2 = self.makeM(10, 20, 15, 33)  # there are deletions of query aa on DNA
         with self.assertRaisesRegex(NonlinearMatchException, "Overlap larger than matched"):
-            pairs = order_matches_for_junctions([m1, m2], max_overlap_len=10)
+            pairs = order_matches_for_junctions([m1, m2])
 
     def test_group_matches_separate_matches_by_contig_and_distance(self):
 

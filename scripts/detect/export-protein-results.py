@@ -13,6 +13,7 @@ def main():
     parser.add_argument("genome_accession", help="Genome accession")
     parser.add_argument("hmm_file", help="HMM file to use for improve search results")
     parser.add_argument("output_dir", help="Path of output directory")
+    parser.add_argument("--hmm", help="HMM accession to export", default=None)
     args = parser.parse_args()
 
     target_fasta = DefaultPath.ncbi_genome_fna(args.genome_accession)
@@ -20,6 +21,9 @@ def main():
     res = Results(args.results_tsv, target_fasta_path=target_fasta)
     protein_matches = group_matches(res.matches())
     accession_ids = [pm.query_accession for pm in protein_matches]
+    if args.hmm:
+        protein_matches = [m for m in protein_matches if m.query_accession == args.hmm]
+        accession_ids = [args.hmm]
     hmm_collection = HMMCollection(args.hmm_file, accession_ids)
 
     try:

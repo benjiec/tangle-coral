@@ -340,53 +340,6 @@ class TestRefiningHitsWithHMM(unittest.TestCase):
         finally:
             hits_mod.hmm_search_genome = orig
 
-    def test_find_matches_at_locus_stops_searching_if_found_nonlinear_overlap(self):
-
-        orig = hits_mod.hmm_search_genome
-
-        searched = []
-        def fake_hmm_search_genome(_hmm_file, _ga, _gs, target_accession, target_left, target_right, strand, conditional):
-            first_match = [
-                dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence="F"*6),
-                dict(target_name="cand_1", dom_score=100, dom_evalue=0.0002, hmm_from=9, hmm_to=15, ali_from=11021, ali_to=11041, matched_sequence="F"*7),
-                dict(target_name="cand_2", dom_score=100, dom_evalue=0.0003, hmm_from=16, hmm_to=20, ali_from=11051, ali_to=11065, matched_sequence="F"*5)
-            ]
-
-            second_match = [
-                dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=7, hmm_to=8, ali_from=9000, ali_to=9018, matched_sequence="F"*6),
-                dict(target_name="cand_0", dom_score=100, dom_evalue=0.0001, hmm_from=5, hmm_to=10, ali_from=10001, ali_to=10018, matched_sequence="F"*6),
-                dict(target_name="cand_1", dom_score=100, dom_evalue=0.0002, hmm_from=9, hmm_to=15, ali_from=11021, ali_to=11041, matched_sequence="F"*7),
-                dict(target_name="cand_2", dom_score=100, dom_evalue=0.0003, hmm_from=16, hmm_to=20, ali_from=11051, ali_to=11065, matched_sequence="F"*5)
-            ]
-
-            searched.append((target_left, target_right))
-
-            if target_left == 10001: # initial
-                return first_match
-            elif target_left < 10001:
-                return second_match
-
-        try:
-            hits_mod.hmm_search_genome = fake_hmm_search_genome
-          
-            old_matches = [
-                Match(query_accession="Q", target_accession="T", query_start=5, query_end=10, target_start=10001, target_end=10018, e_value=0.1, identity=None)
-            ]
-
-            new_matches = find_matches_at_locus(
-                old_matches,
-                "T"*20000,
-                10001, 12000, "hmmfile", step=2000, max_search_distance=6000
-            )
-
-            self.assertNotEqual(new_matches, None)
-            self.assertEqual(len(new_matches), 3)
-            # stopped because non-linear match found
-            self.assertEqual(searched, [(10001, 12000), (8001, 14000)])
-
-        finally:
-            hits_mod.hmm_search_genome = orig
-
     def test_find_matches_at_locus_incrementally_search_on_rev_strand_as_well(self):
 
         orig = hits_mod.hmm_search_genome

@@ -254,6 +254,7 @@ def hmm_search_genome(hmm_file, genome_accession, genomic_fasta_dict, min_aa_len
     for target_accession, target_start, target_end, seq in fragments:
         target_name = f"{target_accession}_{target_start}_{target_end}"
         translated_fasta[target_name] = seq
+        # print(target_name, seq)
         name_to_coordinates[target_name] = (target_accession, target_start, target_end)
 
     hmm_rows = hmmsearch_sequence_dict(hmm_file, translated_fasta)
