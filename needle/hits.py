@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from typing import Dict, List, Optional, Tuple
 from Bio.Seq import Seq
 from .seq import extract_subsequence, extract_subsequence_strand_sensitive, compute_three_frame_translations
-from .match import Match, ProteinHit, order_matches_for_junctions, order_matches
+from .match import Match, ProteinHit, order_matches_for_junctions, order_matches, NonlinearMatchException
 from .detect import DOM_EVALUE_LIMIT, hmm_search_genome
 from .hmm import hmmsearch, HMMCollection
 
@@ -330,11 +330,15 @@ def find_matches_at_locus(old_matches, full_seq, start, end, hmm_file, step=2000
         print("    ", nm.target_start, nm.target_end, nm.query_start, nm.query_end)
     """
 
-    new_matches = order_matches(new_matches, cleanup=True)
-
     if not new_matches:
         # print("no new matches, stop searching")
         return None
+
+    try:
+        new_matches = order_matches(new_matches, cleanup=True)
+    except NonlinearMatchException as e:
+        print(new_matches[0].query_accession, str(e))
+        pass
 
     if not ProteinHit.can_collate_from_matches(new_matches):
         # print("can no longer collate, stop searching")
@@ -384,9 +388,10 @@ def find_matches_at_locus(old_matches, full_seq, start, end, hmm_file, step=2000
               new_start = max(1, start-step)
               new_end = min(len(full_seq), end+step)
 
-          more_matches = find_matches_at_locus(new_matches, full_seq, new_start, new_end, hmm_file,
-                                               step=step, max_search_distance=max_search_distance, direction=direction)
-          return more_matches if more_matches else new_matches
+          if new_start != start or new_end != end:
+              more_matches = find_matches_at_locus(new_matches, full_seq, new_start, new_end, hmm_file,
+                                                   step=step, max_search_distance=max_search_distance, direction=direction)
+              return more_matches if more_matches else new_matches
     else:
       if end > 1 or start < len(full_seq):
           if direction == -1:
@@ -399,9 +404,10 @@ def find_matches_at_locus(old_matches, full_seq, start, end, hmm_file, step=2000
               new_start = min(len(full_seq), start+step)
               new_end = max(1, end-step)
 
-          more_matches = find_matches_at_locus(new_matches, full_seq, new_start, new_end, hmm_file,
-                                               step=step, max_search_distance=max_search_distance, direction=direction)
-          return more_matches if more_matches else new_matches
+          if new_start != start or new_end != end:
+              more_matches = find_matches_at_locus(new_matches, full_seq, new_start, new_end, hmm_file,
+                                                   step=step, max_search_distance=max_search_distance, direction=direction)
+              return more_matches if more_matches else new_matches
 
     return new_matches
 
