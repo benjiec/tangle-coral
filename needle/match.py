@@ -87,10 +87,10 @@ def order_matches(matches: List[Match], cleanup: bool = False) -> List[Match]:
 
         if (left.on_reverse_strand is False and left.target_start > right.target_start) or \
            (left.on_reverse_strand is True and left.target_start < right.target_start):
-            msg = "Consecutive query matches are reversed on DNA, new copy? (%s, rev strand %s, dna %s-%s (hmm %s-%s) and %s-%s (hmm %s-%s))" % \
-                    (left.target_accession, left.on_reverse_strand,
-                     left.target_start, left.target_end, left.query_start, left.query_end,
-                     right.target_start, right.target_end, right.query_start, right.query_end)
+            msg = "Consecutive query matches are reversed on DNA, new copy? (%s, %s, rev strand %s, dna %s-%s (hmm %s-%s %s) and %s-%s (hmm %s-%s %s))" % \
+                    (left.query_accession, left.target_accession, left.on_reverse_strand,
+                     left.target_start, left.target_end, left.query_start, left.query_end, left.e_value,
+                     right.target_start, right.target_end, right.query_start, right.query_end, right.e_value)
             raise NonlinearMatchException(msg)
 
         query_overlap_len = max(0, left.query_end - right.query_start + 1)

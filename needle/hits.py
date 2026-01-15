@@ -337,7 +337,7 @@ def find_matches_at_locus(old_matches, full_seq, start, end, hmm_file, step=2000
     try:
         new_matches = order_matches(new_matches, cleanup=True)
     except NonlinearMatchException as e:
-        print(new_matches[0].query_accession, str(e))
+        # print(new_matches[0].query_accession, str(e))
         pass
 
     if not ProteinHit.can_collate_from_matches(new_matches):
