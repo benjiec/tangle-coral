@@ -292,7 +292,7 @@ def hmm_clean(protein_hits: List[ProteinHit], hmm_collection: HMMCollection, ove
     return list(cleaned.values())
 
 
-def find_matches_at_locus(old_matches, full_seq, start, end, hmm_file, step=2000, max_search_distance=10000, force_extend=False, direction=0):
+def find_matches_at_locus(old_matches, full_seq, start, end, hmm_file, step=2000, max_search_distance=30000, force_extend=False, direction=0):
 
     target_accession = old_matches[0].target_accession
     # print("HMM search space", target_accession, start, end)

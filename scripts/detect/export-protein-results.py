@@ -14,6 +14,7 @@ def main():
     parser.add_argument("hmm_file", help="HMM file to use for improve search results")
     parser.add_argument("output_dir", help="Path of output directory")
     parser.add_argument("--hmm", help="HMM accession to export", default=None)
+    parser.add_argument("--no-output", help="Skip output", action='store_true', default=False)
     args = parser.parse_args()
 
     target_fasta = DefaultPath.ncbi_genome_fna(args.genome_accession)
@@ -39,12 +40,13 @@ def main():
         print("filter by collatable", pre_filter, "=>", len(protein_matches))
         cleaned_protein_matches = hmm_clean(protein_matches, hmm_collection)
 
-        export_protein_hits(
-            args.genome_accession,
-            cleaned_protein_matches,
-            args.output_dir+"/proteins.faa",
-            args.output_dir+"/proteins.tsv"
-        )
+        if args.no_output is False:
+            export_protein_hits(
+                args.genome_accession,
+                cleaned_protein_matches,
+                args.output_dir+"/proteins.faa",
+                args.output_dir+"/proteins.tsv"
+            )
 
     finally:
         hmm_collection.clean()
