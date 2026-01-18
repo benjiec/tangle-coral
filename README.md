@@ -113,17 +113,15 @@ Run the following commands to generate `data/genomes.tsv`, which includes
 genome name and taxonomy information for three sets of genomes.
 
 ```
-PYTHONPATH=. python3 scripts/data/fetch-genomes.py data/genomes_coral.txt
-PYTHONPATH=. python3 scripts/data/fetch-genomes.py data/genomes_algae.txt
+PYTHONPATH=. python3 scripts/data/fetch-genomes.py data/genomes_detect.txt
 PYTHONPATH=. python3 scripts/data/fetch-genomes.py data/genomes_ref.txt
 ```
 
 Also download genomic sequences, using
 
 ```
-PYTHONPATH=. python3 scripts/ncbi-download.py data/genomes_coral.txt
-PYTHONPATH=. python3 scripts/ncbi-download.py data/genomes_algae.txt
-PYTHONPATH=. python3 scripts/ncbi-download.py data/genomes_ref.txt
+PYTHONPATH=. python3 scripts/data/ncbi-download.py data/genomes_detect.txt
+PYTHONPATH=. python3 scripts/data/ncbi-download.py data/genomes_ref.txt
 ```
 
 
@@ -162,8 +160,7 @@ these commands append to existing files, so to re-run detection on a genome,
 remove `data/m00009_results/proteins.{faa/tsv}` first.
 
 ```
-./scripts/detect/search-genomes m00009 data/genomes_coral.txt
-./scripts/detect/search-genomes m00009 data/genomes_algae.txt
+./scripts/detect/search-genomes m00009 data/genomes_detect.txt
 ```
 
 Use the following script to compare, for a given HMM model, how NCBI annotated
