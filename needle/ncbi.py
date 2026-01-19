@@ -184,17 +184,22 @@ def download_and_extract_prot_fasta(accession: str, output_dir: str, cache_dir: 
 
 def _parse_taxonomy_lineage(root):
 
-    domain = phylum = order = class_ = family = genus = species = '_'
+    domain = kingdom = phylum = order = class_ = family = genus = species = ''
 
     for taxon in root.findall('.//LineageEx/Taxon'):
         rank = taxon.findtext('Rank')
         name = taxon.findtext('ScientificName')
         if rank == 'domain':
             domain = name
+        elif rank == 'kingdom':
+            kingdom = name
         elif rank == 'phylum':
             phylum = name
-        elif rank == 'clade' and phylum is None and class_ is None:
-            phylum = name
+        elif rank == 'clade':
+            if domain and not kingdom and not phylum and not class_:
+                kingdom = name
+            elif kingdom and not phylum and not class_:
+                phylum = name
         elif rank == 'class':
             class_ = name
         elif rank == 'order':
@@ -215,6 +220,7 @@ def _parse_taxonomy_lineage(root):
 
     return {
         'Domain': domain,
+        'Kingdom': kingdom,
         'Phylum': phylum,
         'Class': class_,
         'Order': order,
@@ -240,7 +246,7 @@ def fetch_and_append_taxonomy(genome_acc: str, taxonomy_tsv: str):
     """
 
     genome_fieldnames = ['Genome Accession', 'Genome Name', 'TaxID', 'Organism']
-    lineage_fieldnames = ['Domain', 'Phylum', 'Class', 'Order', 'Family', 'Genus', 'Species']
+    lineage_fieldnames = ['Domain', 'Kingdom', 'Phylum', 'Class', 'Order', 'Family', 'Genus', 'Species']
 
     # Lookup UID for accession
     url = f"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=assembly&term={genome_acc}&retmode=json"
