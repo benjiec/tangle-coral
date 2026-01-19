@@ -63,12 +63,16 @@ class ClassifyTSV(object):
         return rows
 
     @staticmethod
-    def to_tsv_from_hmmscan_rows(hmm_db_name, tsv_path, hmm_rows, protein_genome_accession_dict, score_threshold_dict):
+    def to_tsv_from_hmmscan_rows(hmm_db_name, tsv_path, hmm_rows, protein_genome_accession_dict, score_threshold_dict, requires_prefix_match = False):
 
         # hmmscan (not hmmsearch): target is hmm profile, query is protein ID
 
         tacf = lambda row: row["target_accession"].strip() if row["target_accession"].strip() and row["target_accession"].strip() != "-" else row["target_name"].strip()
         qacf = lambda row: row["query_accession"].strip() if row["query_accession"].strip() and row["query_accession"].strip() != "-" else row["query_name"].strip()
+
+        if requires_prefix_match is True:
+            hmm_rows = [row for row in hmm_rows if qacf(row).startswith(tacf(row))]
+
         sorted_score_for_protein = {}
         hmm_rows = sorted(hmm_rows, key=qacf)
         for protein_accession, group in itertools.groupby(hmm_rows, key=qacf):
@@ -107,12 +111,13 @@ class ClassifyTSV(object):
                 writer.writerow(data)
 
 
-def classify(hmm_file, proteins_faa, cutoff_ga, output_tsv_path, protein_genome_accession_dict, score_threshold_dict, hmm_db_name = None):
+def classify(hmm_file, proteins_faa, cutoff_ga, output_tsv_path, protein_genome_accession_dict, score_threshold_dict, hmm_db_name = None, requires_prefix_match = False):
 
     hmm_rows = hmmscan_file(hmm_file, proteins_faa, cutoff=cutoff_ga)
     if hmm_db_name is None:
         hmm_db_name = Path(hmm_file).stem
-    ClassifyTSV.to_tsv_from_hmmscan_rows(hmm_db_name, output_tsv_path, hmm_rows, protein_genome_accession_dict, score_threshold_dict)
+    ClassifyTSV.to_tsv_from_hmmscan_rows(hmm_db_name, output_tsv_path, hmm_rows, protein_genome_accession_dict, score_threshold_dict,
+                                         requires_prefix_match = requires_prefix_match)
 
 
 def group_by_assignment(classify_rows, ortholog_hmm_db_name, score_to_threshold_ratio):
@@ -138,7 +143,7 @@ def group_by_assignment(classify_rows, ortholog_hmm_db_name, score_to_threshold_
     return itertools.groupby(assigned_rows, keyf)
 
 
-def assign_ko(classify_rows, ortholog_hmm_db_name, proteins_faa, output_dir, prefix_match = False, domain_hmm_db_name = None, score_to_threshold_ratio = 0.9):
+def assign_ko(classify_rows, ortholog_hmm_db_name, proteins_faa, output_dir, domain_hmm_db_name = None, score_to_threshold_ratio = 0.9):
 
     if type(proteins_faa) == type(""):
         proteins_faa = [proteins_faa]
@@ -154,12 +159,7 @@ def assign_ko(classify_rows, ortholog_hmm_db_name, proteins_faa, output_dir, pre
     for ko_id, ko_rows in assignments:
         ko_rows = list(ko_rows)
         ko_fasta_prefix = os.path.join(output_dir, ko_id)
-
-        if prefix_match is False:
-            protein_ids = set([row[ClassifyTSV.HDR_PROTEIN_ACCESSION] for row in ko_rows])
-
-        else:  # require protein detected using classified HMM accesion
-            protein_ids = set([row[ClassifyTSV.HDR_PROTEIN_ACCESSION] for row in ko_rows if row[ClassifyTSV.HDR_PROTEIN_ACCESSION].startswith(ko_id)])
+        protein_ids = set([row[ClassifyTSV.HDR_PROTEIN_ACCESSION] for row in ko_rows])
 
         # protein fasta - just protein sequences assigned to KO
         ko_proteins = {k:v for k,v in proteins_seq_dict.items() if k in protein_ids}

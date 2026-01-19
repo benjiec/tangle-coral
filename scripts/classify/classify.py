@@ -17,6 +17,7 @@ ap.add_argument("--disable-cutoff-ga", action="store_true", default=False)
 ap.add_argument("--genome-accession", type=str, default=None)
 ap.add_argument("--fasta-file", type=str, default=None)
 ap.add_argument("--filter-by-prev-output", action="store_true", default=False)
+ap.add_argument("--requires-prefix-match", action="store_true", default=False)
 args = ap.parse_args()
 
 if "Pfam-A.hmm" in args.hmm_file and args.disable_cutoff_ga:
@@ -35,11 +36,6 @@ proteins_faa = None
 protein_genome_accession_dict = None
 
 output_tsv = f"data/{args.module_id}_results/classify.tsv"
-proteins_tsv = f"data/{args.module_id}_results/proteins.tsv"
-if not os.path.exists(proteins_tsv):
-    print(f"Cannot find module assets in data/{args.module_id}_results")
-    exit(-1)
-protein_tsv_rows = ProteinsTSV.from_tsv_to_rows(proteins_tsv)
 
 if args.fasta_file:
     if args.genome_accession is None:
@@ -66,6 +62,7 @@ else:
     if not os.path.exists(proteins_faa) or not os.path.exists(proteins_tsv):
         print(f"Cannot find module assets in data/{args.module_id}_results")
         exit(-1)
+    protein_tsv_rows = ProteinsTSV.from_tsv_to_rows(proteins_tsv)
     protein_genome_accession_dict = {
       row["protein_hit_id"]: row["genome_accession"]
       for row in protein_tsv_rows
@@ -89,7 +86,7 @@ if args.filter_by_prev_output and os.path.exists(output_tsv):
     proteins_faa = tmpf.name
     tmp_fn = tmpf.name
 
-classify(args.hmm_file, proteins_faa, cutoff_ga, output_tsv, protein_genome_accession_dict, score_threshold_dict)
+classify(args.hmm_file, proteins_faa, cutoff_ga, output_tsv, protein_genome_accession_dict, score_threshold_dict, requires_prefix_match = args.requires_prefix_match)
 
 if tmp_fn:
     os.remove(tmp_fn)

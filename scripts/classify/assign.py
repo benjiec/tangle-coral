@@ -25,7 +25,7 @@ os.makedirs(output_dir, exist_ok=True)
 #
 # first, non-reference genome, use default scoring threshold
 #
-assign_ko(classify_rows, ortholog_hmm_db_name, protein_faa, output_dir, prefix_match = True, domain_hmm_db_name = domain_hmm_db_name, score_to_threshold_ratio=0.9)
+assign_ko(classify_rows, ortholog_hmm_db_name, protein_faa, output_dir, domain_hmm_db_name = domain_hmm_db_name, score_to_threshold_ratio=0.9)
 
 #
 # then, reference genome, use more stringent scoring threshold

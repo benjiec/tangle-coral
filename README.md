@@ -181,7 +181,7 @@ ortholog, then Pfam domains.
 
 ```
 PYTHONPATH=. python3 scripts/classify/classify.py \
-  --disable-cutoff-ga \
+  --disable-cutoff-ga --requires-prefix-match \
   data/m00009_ko.hmm m00009
 PYTHONPATH=. python3 scripts/classify/classify.py pfam-downloads/Pfam-A.hmm m00009
 ```
