@@ -182,64 +182,65 @@ def download_and_extract_prot_fasta(accession: str, output_dir: str, cache_dir: 
     return download_and_extract_fasta(accession, output_dir, 'PROT_FASTA', cache_dir) 
 
 
-def _parse_taxonomy_xml(root):
-    """
-    Parse taxonomy XML root and return (order, class_, family, genus, species) as strings.
-    """
-    order = class_ = family = genus = species = ''
+def _parse_taxonomy_lineage(root):
+
+    domain = phylum = order = class_ = family = genus = species = '_'
+
     for taxon in root.findall('.//LineageEx/Taxon'):
         rank = taxon.findtext('Rank')
         name = taxon.findtext('ScientificName')
-        if rank == 'order':
-            order = name
+        if rank == 'domain':
+            domain = name
+        elif rank == 'phylum':
+            phylum = name
+        elif rank == 'clade' and phylum is None and class_ is None:
+            phylum = name
         elif rank == 'class':
             class_ = name
+        elif rank == 'order':
+            order = name
         elif rank == 'family':
             family = name
         elif rank == 'genus':
             genus = name
         elif rank == 'species':
             species = name
+
     # If the current node is species, use its name
     for node in root.findall('.//Taxon'):
         rank = node.findtext('Rank')
         name = node.findtext('ScientificName')
         if rank == 'species':
             species = name
-    return order, class_, family, genus, species
+
+    return {
+        'Domain': domain,
+        'Phylum': phylum,
+        'Class': class_,
+        'Order': order,
+        'Family': family,
+        'Genus': genus,
+        'Species': species,
+    }
+
 
 def parse_taxonomy_tsv(taxonomy_tsv):
     """
     Yield each row of a taxonomy TSV/CSV as a dict, robust to column order and delimiter.
     """
     with open(taxonomy_tsv, newline='') as f:
-        sample = f.read(1024)
-        f.seek(0)
-        try:
-            dialect = csv.Sniffer().sniff(sample)
-        except csv.Error:
-            dialect = csv.excel_tab  # fallback to tab
-        reader = csv.DictReader(f, delimiter=dialect.delimiter)
+        reader = csv.DictReader(f, delimiter='\t')
         for row in reader:
             yield row
+
 
 def fetch_and_append_taxonomy(genome_acc: str, taxonomy_tsv: str):
     """
     Fetch genome and taxonomy info and append to taxonomy_tsv.
     """
 
-    fieldnames = ['Genome Accession', 'TaxID', 'Order', 'Class', 'Family', 'Genus', 'Species', 'Genome Name', 'Organism']
-    # If file does not exist or is empty, create it with header
-    if not os.path.exists(taxonomy_tsv) or os.path.getsize(taxonomy_tsv) == 0:
-        with open(taxonomy_tsv, 'w', newline='') as f:
-            writer = csv.DictWriter(f, fieldnames=fieldnames, delimiter='\t')
-            writer.writeheader()
-
-    # Read all rows, filter out any with matching accession or taxid
-    rows = []
-    for row in parse_taxonomy_tsv(taxonomy_tsv):
-        if row.get('Genome Accession', '') != genome_acc:
-            rows.append(row)
+    genome_fieldnames = ['Genome Accession', 'Genome Name', 'TaxID', 'Organism']
+    lineage_fieldnames = ['Domain', 'Phylum', 'Class', 'Order', 'Family', 'Genus', 'Species']
 
     # Lookup UID for accession
     url = f"https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?db=assembly&term={genome_acc}&retmode=json"
@@ -264,21 +265,34 @@ def fetch_and_append_taxonomy(genome_acc: str, taxonomy_tsv: str):
     r = requests.get(url)
     r.raise_for_status()
     root = ET.fromstring(r.text)
-    order, class_, family, genus, species_from_tax = _parse_taxonomy_xml(root)
-    # Prefer species from taxonomy, fallback to assembly summary if not present
-    final_species = species_from_tax or species
+    lineage = _parse_taxonomy_lineage(root)
     new_row = {
-        'Order': order,
-        'Class': class_,
-        'Family': family,
-        'Genus': genus,
-        'Species': final_species,
         'Genome Accession': genome_acc,
         'Genome Name': genome_name,
-        'Organism': organism,
-        'TaxID': taxid
+        'TaxID': taxid,
+        'Organism': organism
     }
+    new_row.update(lineage)
+
+    fieldnames = new_row.keys()
+    if set(fieldnames) != set(genome_fieldnames+lineage_fieldnames):
+        print(f"{genome_acc}: fieldnames do not match")
+        return
+
+    # If file does not exist or is empty, create it with header
+    if not os.path.exists(taxonomy_tsv):
+        print("Creating TSV")
+        with open(taxonomy_tsv, 'w', newline='') as f:
+            writer = csv.DictWriter(f, fieldnames=fieldnames, delimiter='\t')
+            writer.writeheader()
+
+    # Read all rows, filter out any with matching accession or taxid
+    rows = []
+    for row in parse_taxonomy_tsv(taxonomy_tsv):
+        if row.get('Genome Accession', '') != genome_acc:
+            rows.append(row)
     rows.append(new_row)
+
     # Write all rows back using DictWriter
     with open(taxonomy_tsv, 'w', newline='') as f:
         writer = csv.DictWriter(f, fieldnames=fieldnames, delimiter='\t')

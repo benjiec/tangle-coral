@@ -1,72 +1,72 @@
-Genome Accession	TaxID	Order	Class	Family	Genus	Species	Genome Name	Organism
-GCA_000507305.1	1280413	Suessiales	Dinophyceae	Symbiodiniaceae	Breviolum	Breviolum minutum	ASM50730v1	Breviolum minutum Mf 1.05b.01 (dinoflagellates)
-GCA_001896105.1	48498	Scleractinia	Anthozoa	Merulinidae	Orbicella	Orbicella faveolata	O_faveolata_v1	Orbicella faveolata (stony corals)
-GCA_003297005.1	1563115	Suessiales	Dinophyceae	Symbiodiniaceae	Symbiodinium	Symbiodinium sp. clade A	SymA ver 1.0	Symbiodinium sp. clade A Y106 (dinoflagellates)
-GCA_003297045.1	1563116	Suessiales	Dinophyceae	Symbiodiniaceae	Cladocopium	Cladocopium sp. clade C	SymC ver 1.0	Symbiodinium sp. clade C Y103 (dinoflagellates)
-GCA_014633955.1	70783	Scleractinia	Anthozoa	Acroporidae	Acropora	Acropora tenuis	Aten_1.0	Acropora tenuis (purple tipped acropora)
-GCA_014633975.1	367763	Scleractinia	Anthozoa	Acroporidae	Acropora	Acropora acuminata	Aacu_1.0	Acropora acuminata (stony corals)
-GCA_014634605.1	70782	Scleractinia	Anthozoa	Acroporidae	Acropora	Acropora florida	Aflo_1.0	Acropora florida (stony corals)
-GCA_024195265.1	1140371	Scleractinia	Anthozoa	Dendrophylliidae	Dendrophyllia	Dendrophyllia cribrosa	GRF_DCR_1.0	Dendrophyllia cribrosa (stony corals)
-GCA_029204205.1	174260	Scleractinia	Anthozoa	Caryophylliidae	Desmophyllum	Desmophyllum pertusum	Loph_1.0	Desmophyllum pertusum (stony corals)
-GCA_031213475.2	117523	Laminariales	Phaeophyceae	Laminariaceae	Nereocystis	Nereocystis luetkeana	uoNerLuet1.1	Nereocystis luetkeana (brown algae)
-GCA_032359415.1	6130	Scleractinia	Anthozoa	Acroporidae	Acropora	Acropora cervicornis	NEU_Acer_K2	Acropora cervicornis (staghorn coral)
-GCA_032361285.1	6100	Leptothecata	Hydrozoa	Aequoreidae	Aequorea	Aequorea victoria	ASM3236128v1	Aequorea victoria (hydrozoans)
-GCA_033675265.1	3060491	Actiniaria	Anthozoa	Actinostolidae	Actinostola	Actinostola sp. cb2023	ASM3367526v1	Actinostola sp. cb2023 (sea anemones)
-GCA_046269565.1	115959	Fucales	Phaeophyceae	Sargassaceae	Sargassum	Sargassum obtusifolium	ASM4626956v1	Sargassum obtusifolium (brown algae)
-GCA_047495695.1	49265	Thalassiosirales	Coscinodiscophyceae	Thalassiosiraceae	Thalassiosira	Thalassiosira rotula	ASM4749569v1	Thalassiosira rotula (diatoms)
-GCA_047906015.2	165419	Scleractinia	Anthozoa	Rhizangiidae	Astrangia	Astrangia poculata	PSU_Apoculata_full	Astrangia poculata (northern star coral)
-GCA_048937375.1	88149	Laminariales	Phaeophyceae	Laminariaceae	Saccharina	Saccharina japonica	ASM4893737v1	Saccharina japonica (brown algae)
-GCA_902702795.2	317549	Malacalcyonacea	Anthozoa	Plexauridae	Paramuricea	Paramuricea clavata	PACLA8	Paramuricea clavata (soft corals)
-GCA_942486025.1	104178	Scleractinia	Anthozoa	Poritidae	Porites	Porites evermanni	PEVE_v1	Porites evermanni (stony corals)
-GCA_942486035.1	104759	Scleractinia	Anthozoa	Poritidae	Porites	Porites lobata	PLOB_v1	Porites lobata (stony corals)
-GCA_942486045.1	46732	Scleractinia	Anthozoa	Pocilloporidae	Pocillopora	Pocillopora meandrina	PMEA_v1	Pocillopora meandrina (cauliflower coral)
-GCA_964199315.1	48499	Scleractinia	Anthozoa	Merulinidae	Orbicella	Orbicella franksi	jaOrbFran1.1 alternate haplotype	Orbicella franksi (stony corals)
-GCA_964200215.2	2829	Chattonellales	Raphidophyceae	Chattonellaceae	Heterosigma	Heterosigma akashiwo	PHAEHaka_V1.2	Heterosigma akashiwo (heterokonts)
-GCA_965279495.1	1602974	Suessiales	Dinophyceae	Symbiodiniaceae	Symbiodinium	Symbiodinium tridacnidarum	pySymTrid1.1	Symbiodinium tridacnidarum (dinoflagellates)
-GCF_000001405.40	9606	Primates	Mammalia	Hominidae	Homo	Homo sapiens	GRCh38.p14	Homo sapiens (human)
-GCF_000001735.4	3702	Brassicales	Magnoliopsida	Brassicaceae	Arabidopsis	Arabidopsis thaliana	TAIR10.1	Arabidopsis thaliana (thale cress)
-GCF_000146045.2	559292	Saccharomycetales	Saccharomycetes	Saccharomycetaceae	Saccharomyces	Saccharomyces cerevisiae	R64	Saccharomyces cerevisiae S288C (brewer's yeast)
-GCF_000209225.1	45351	Actiniaria	Anthozoa	Edwardsiidae	Nematostella	Nematostella vectensis	ASM20922v1	Nematostella vectensis (starlet sea anemone)
-GCF_000222465.1	70779	Scleractinia	Anthozoa	Acroporidae	Acropora	Acropora digitifera	Adig_1.1	Acropora digitifera (stony corals)
-GCF_001417965.1	2652724	Actiniaria	Anthozoa	Aiptasiidae	Exaiptasia	Exaiptasia diaphana	Aiptasia genome 1.1	Exaiptasia diaphana (sea anemones)
-GCF_002042975.1	48498	Scleractinia	Anthozoa	Merulinidae	Orbicella	Orbicella faveolata	ofav_dov_v1	Orbicella faveolata (stony corals)
-GCF_002571385.2	50429	Scleractinia	Anthozoa	Pocilloporidae	Stylophora	Stylophora pistillata	Stylophora pistillata v1.1	Stylophora pistillata (stony corals)
-GCF_003704095.1	46731	Scleractinia	Anthozoa	Pocilloporidae	Pocillopora	Pocillopora damicornis	ASM370409v1	Pocillopora damicornis (cauliflower coral)
-GCF_004143615.1	45264	Scleractinia	Anthozoa	Acroporidae	Acropora	Acropora millepora	amil_sf_1.1	Acropora millepora (stony corals)
-GCF_004324835.1	151771	Malacalcyonacea	Anthozoa	Nephtheidae	Dendronephthya	Dendronephthya gigantea	DenGig_1.0	Dendronephthya gigantea (soft corals)
-GCF_009602425.1	6105	Actiniaria	Anthozoa	Actiniidae	Actinia	Actinia tenebrosa	ASM960242v1	Actinia tenebrosa (Australian red waratah sea anemone)
-GCF_013076305.1	499914	Rhizostomeae	Scyphozoa	Rhizostomatidae	Rhopilema	Rhopilema esculentum	ASM1307630v1	Rhopilema esculentum (jellyfishes)
-GCF_013753865.1	45264	Scleractinia	Anthozoa	Acroporidae	Acropora	Acropora millepora	Amil_v2.1	Acropora millepora (stony corals)
-GCF_016699485.2	9031	Galliformes	Aves	Phasianidae	Gallus	Gallus gallus	bGalGal1.mat.broiler.GRCg7b	Gallus gallus (chicken)
-GCF_018143015.1	7654	Temnopleuroida	Echinoidea	Toxopneustidae	Lytechinus	Lytechinus variegatus	Lvar_3.0	Lytechinus variegatus (green sea urchin)
-GCF_021976095.1	2897299	Malacalcyonacea	Anthozoa	Xeniidae	Xenia	Xenia sp. Carnegie-2017	XeniaSp_v1	Xenia sp. Carnegie-2017 (soft corals)
-GCF_026151205.1	2820187	Lobata	Tentaculata	Bolinopsidae	Bolinopsis	Bolinopsis microptera	MBARI_Bmic_1.0	Bolinopsis microptera (comb jellies)
-GCF_030620025.1	203993	Scleractinia	Anthozoa	Pocilloporidae	Pocillopora	Pocillopora verrucosa	CSIRO_AGI_Pver_v1	Pocillopora verrucosa (stony corals)
-GCF_032118995.1	7602	Forcipulatida	Asteroidea	Asteriidae	Asterias	Asterias amurensis	ASM3211899v1	Asterias amurensis (Northern Pacific seastar)
-GCF_036669905.1	159855	Scleractinia	Anthozoa	Acroporidae	Acropora	Acropora muricata	ASM3666990v1	Acropora muricata (stony corals)
-GCF_036669915.1	203993	Scleractinia	Anthozoa	Pocilloporidae	Pocillopora	Pocillopora verrucosa	ASM3666991v2	Pocillopora verrucosa (stony corals)
-GCF_036669925.1	246305	Scleractinia	Anthozoa	Acroporidae	Montipora	Montipora capricornis	ASM3666992v2	Montipora capricornis (stony corals)
-GCF_036669935.1	591990	Scleractinia	Anthozoa	Acroporidae	Montipora	Montipora foliosa	ASM3666993v2	Montipora foliosa (stony corals)
-GCF_047335585.1	103695	Squamata	Lepidosauria	Agamidae	Pogona	Pogona vitticeps	Pvi2.1	Pogona vitticeps (central bearded dragon)
-GCF_049306965.1	7955	Cypriniformes	Actinopteri	Danionidae	Danio	Danio rerio	GRCz12tu	Danio rerio (zebrafish)
-GCF_902459465.1	7604	Forcipulatida	Asteroidea	Asteriidae	Asterias	Asterias rubens	eAstRub1.3	Asterias rubens (European starfish)
-GCF_932526225.1	45351	Actiniaria	Anthozoa	Edwardsiidae	Nematostella	Nematostella vectensis	jaNemVect1.1	Nematostella vectensis (starlet sea anemone)
-GCF_947623445.1	159417	Aplousobranchia	Ascidiacea	Clavelinidae	Clavelina	Clavelina lepadiformis	kaClaLepa1.1	Clavelina lepadiformis (light-bulb sea squirt)
-GCF_958299795.1	51062	Scleractinia	Anthozoa	Poritidae	Porites	Porites lutea	jaPorLute2.1	Porites lutea (stony corals)
-GCF_963422355.1	121492	Homosclerophorida	Homoscleromorpha	Plakinidae	Corticium	Corticium candelabrum	ooCorCand1.1	Corticium candelabrum (sponges)
-GCF_963675165.1	6063	Suberitida	Demospongiae	Halichondriidae	Halichondria	Halichondria panicea	odHalPani1.1	Halichondria panicea (sponges)
-GCF_964019385.1	27933	Leucosolenida	Calcarea	Sycettidae	Sycon	Sycon ciliatum	ocSycCili1.1	Sycon ciliatum (sponges)
-GCA_905231915.1	1628268	Suessiales	Dinophyceae	Symbiodiniaceae	Symbiodinium	Symbiodinium necroappetens	Snec_CCMP2469	Symbiodinium necroappetens (dinoflagellates)
-GCA_905237085.1	89957	Suessiales	Dinophyceae	Suessiaceae	Polarella	Polarella glacialis	Pgla_CCMP1383	Polarella glacialis (dinoflagellates)
-GCA_905221605.1	878477	Suessiales	Dinophyceae	Symbiodiniaceae	Symbiodinium	Symbiodinium natans	Snat_CCMP2548	Symbiodinium natans (dinoflagellates)
-GCA_001939145.1	2951	Suessiales	Dinophyceae	Symbiodiniaceae	Symbiodinium	Symbiodinium microadriaticum	ASM193914v1	Symbiodinium microadriaticum (dinoflagellates)
-GCA_947184155.2	2562237	Suessiales	Dinophyceae	Symbiodiniaceae	Cladocopium	Cladocopium goreaui	Cgoreaui_SCF055-01_v2.1	Cladocopium goreaui (dinoflagellates)
-GCA_009731375.1	1928728	Euglyphida	Imbricatea	Paulinellidae	Paulinella	Paulinella micropora	PmicroMYN1_1.0	Paulinella micropora (cercozoans)
-GCF_000149405.2	296543	Thalassiosirales	Coscinodiscophyceae	Thalassiosiraceae	Thalassiosira	Thalassiosira pseudonana	ASM14940v2	Thalassiosira pseudonana CCMP1335 (diatoms)
-GCA_964200205.2	43935	Ectocarpales	Phaeophyceae	Ectocarpaceae	Ectocarpus	Ectocarpus fasciculatus	PHAEEfasS1_V1.2	Ectocarpus fasciculatus (brown algae)
-GCF_000091205.1	280699	Cyanidiales	Bangiophyceae	Cyanidiaceae	Cyanidioschyzon	Cyanidioschyzon merolae	ASM9120v1	Cyanidioschyzon merolae strain 10D (red algae)
-GCF_000341285.1	130081	Galdieriales	Bangiophyceae	Galdieriaceae	Galdieria	Galdieria sulphuraria	ASM34128v1	Galdieria sulphuraria (red algae)
-GCF_000350225.1	2769	Gigartinales	Florideophyceae	Gigartinaceae	Chondrus	Chondrus crispus	ASM35022v2	Chondrus crispus (carragheen)
-GCA_963969995.1	1381693	Suessiales	Dinophyceae	Symbiodiniaceae	Durusdinium	Durusdinium trenchii	Durusdinium_trenchii_SCF082	Durusdinium trenchii (dinoflagellates)
-GCA_963970005.1	1381693	Suessiales	Dinophyceae	Symbiodiniaceae	Durusdinium	Durusdinium trenchii	Durusdinium_trenchii_CCMP2556	Durusdinium trenchii (dinoflagellates)
-GCF_038396675.1	6087	Anthoathecata	Hydrozoa	Hydridae	Hydra	Hydra vulgaris	HydraT2T_AEP	Hydra vulgaris (swiftwater hydra)
+Genome Accession	Genome Name	TaxID	Organism	Domain	Phylum	Class	Order	Family	Genus	Species
+GCF_000001405.40	GRCh38.p14	9606	Homo sapiens (human)	Eukaryota	Chordata	Mammalia	Primates	Hominidae	Homo	Homo sapiens
+GCF_000001735.4	TAIR10.1	3702	Arabidopsis thaliana (thale cress)	Eukaryota	Streptophyta	Magnoliopsida	Brassicales	Brassicaceae	Arabidopsis	Arabidopsis thaliana
+GCF_000146045.2	R64	559292	Saccharomyces cerevisiae S288C (brewer's yeast)	Eukaryota	Ascomycota	Saccharomycetes	Saccharomycetales	Saccharomycetaceae	Saccharomyces	Saccharomyces cerevisiae
+GCF_013076305.1	ASM1307630v1	499914	Rhopilema esculentum (jellyfishes)	Eukaryota	Cnidaria	Scyphozoa	Rhizostomeae	Rhizostomatidae	Rhopilema	Rhopilema esculentum
+GCF_016699485.2	bGalGal1.mat.broiler.GRCg7b	9031	Gallus gallus (chicken)	Eukaryota	Chordata	Aves	Galliformes	Phasianidae	Gallus	Gallus gallus
+GCF_018143015.1	Lvar_3.0	7654	Lytechinus variegatus (green sea urchin)	Eukaryota	Echinodermata	Echinoidea	Temnopleuroida	Toxopneustidae	Lytechinus	Lytechinus variegatus
+GCF_026151205.1	MBARI_Bmic_1.0	2820187	Bolinopsis microptera (comb jellies)	Eukaryota	Ctenophora	Tentaculata	Lobata	Bolinopsidae	Bolinopsis	Bolinopsis microptera
+GCF_032118995.1	ASM3211899v1	7602	Asterias amurensis (Northern Pacific seastar)	Eukaryota	Echinodermata	Asteroidea	Forcipulatida	Asteriidae	Asterias	Asterias amurensis
+GCF_047335585.1	Pvi2.1	103695	Pogona vitticeps (central bearded dragon)	Eukaryota	Chordata	Lepidosauria	Squamata	Agamidae	Pogona	Pogona vitticeps
+GCF_049306965.1	GRCz12tu	7955	Danio rerio (zebrafish)	Eukaryota	Chordata	Actinopteri	Cypriniformes	Danionidae	Danio	Danio rerio
+GCF_902459465.1	eAstRub1.3	7604	Asterias rubens (European starfish)	Eukaryota	Echinodermata	Asteroidea	Forcipulatida	Asteriidae	Asterias	Asterias rubens
+GCF_947623445.1	kaClaLepa1.1	159417	Clavelina lepadiformis (light-bulb sea squirt)	Eukaryota	Chordata	Ascidiacea	Aplousobranchia	Clavelinidae	Clavelina	Clavelina lepadiformis
+GCF_963422355.1	ooCorCand1.1	121492	Corticium candelabrum (sponges)	Eukaryota	Porifera	Homoscleromorpha	Homosclerophorida	Plakinidae	Corticium	Corticium candelabrum
+GCF_963675165.1	odHalPani1.1	6063	Halichondria panicea (sponges)	Eukaryota	Porifera	Demospongiae	Suberitida	Halichondriidae	Halichondria	Halichondria panicea
+GCF_964019385.1	ocSycCili1.1	27933	Sycon ciliatum (sponges)	Eukaryota	Porifera	Calcarea	Leucosolenida	Sycettidae	Sycon	Sycon ciliatum
+GCA_905237085.1	Pgla_CCMP1383	89957	Polarella glacialis (dinoflagellates)	Eukaryota	_	Dinophyceae	Suessiales	Suessiaceae	Polarella	Polarella glacialis
+GCA_000507305.1	ASM50730v1	1280413	Breviolum minutum Mf 1.05b.01 (dinoflagellates)	Eukaryota	_	Dinophyceae	Suessiales	Symbiodiniaceae	Breviolum	Breviolum minutum
+GCA_001896105.1	O_faveolata_v1	48498	Orbicella faveolata (stony corals)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Merulinidae	Orbicella	Orbicella faveolata
+GCA_001939145.1	ASM193914v1	2951	Symbiodinium microadriaticum (dinoflagellates)	Eukaryota	_	Dinophyceae	Suessiales	Symbiodiniaceae	Symbiodinium	Symbiodinium microadriaticum
+GCA_003297005.1	SymA ver 1.0	1563115	Symbiodinium sp. clade A Y106 (dinoflagellates)	Eukaryota	_	Dinophyceae	Suessiales	Symbiodiniaceae	Symbiodinium	Symbiodinium sp. clade A
+GCA_003297045.1	SymC ver 1.0	1563116	Symbiodinium sp. clade C Y103 (dinoflagellates)	Eukaryota	_	Dinophyceae	Suessiales	Symbiodiniaceae	Cladocopium	Cladocopium sp. clade C
+GCA_009731375.1	PmicroMYN1_1.0	1928728	Paulinella micropora (cercozoans)	Eukaryota	Cercozoa	Imbricatea	Euglyphida	Paulinellidae	Paulinella	Paulinella micropora
+GCA_014633955.1	Aten_1.0	70783	Acropora tenuis (purple tipped acropora)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Acroporidae	Acropora	Acropora tenuis
+GCA_014633975.1	Aacu_1.0	367763	Acropora acuminata (stony corals)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Acroporidae	Acropora	Acropora acuminata
+GCA_014634605.1	Aflo_1.0	70782	Acropora florida (stony corals)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Acroporidae	Acropora	Acropora florida
+GCA_024195265.1	GRF_DCR_1.0	1140371	Dendrophyllia cribrosa (stony corals)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Dendrophylliidae	Dendrophyllia	Dendrophyllia cribrosa
+GCA_029204205.1	Loph_1.0	174260	Desmophyllum pertusum (stony corals)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Caryophylliidae	Desmophyllum	Desmophyllum pertusum
+GCA_031213475.2	uoNerLuet1.1	117523	Nereocystis luetkeana (brown algae)	Eukaryota	_	Phaeophyceae	Laminariales	Laminariaceae	Nereocystis	Nereocystis luetkeana
+GCA_032359415.1	NEU_Acer_K2	6130	Acropora cervicornis (staghorn coral)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Acroporidae	Acropora	Acropora cervicornis
+GCA_032361285.1	ASM3236128v1	6100	Aequorea victoria (hydrozoans)	Eukaryota	Cnidaria	Hydrozoa	Leptothecata	Aequoreidae	Aequorea	Aequorea victoria
+GCA_033675265.1	ASM3367526v1	3060491	Actinostola sp. cb2023 (sea anemones)	Eukaryota	Cnidaria	Anthozoa	Actiniaria	Actinostolidae	Actinostola	Actinostola sp. cb2023
+GCA_046269565.1	ASM4626956v1	115959	Sargassum obtusifolium (brown algae)	Eukaryota	_	Phaeophyceae	Fucales	Sargassaceae	Sargassum	Sargassum obtusifolium
+GCA_047495695.1	ASM4749569v1	49265	Thalassiosira rotula (diatoms)	Eukaryota	Bacillariophyta	Coscinodiscophyceae	Thalassiosirales	Thalassiosiraceae	Thalassiosira	Thalassiosira rotula
+GCA_047906015.2	PSU_Apoculata_full	165419	Astrangia poculata (northern star coral)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Rhizangiidae	Astrangia	Astrangia poculata
+GCA_048937375.1	ASM4893737v1	88149	Saccharina japonica (brown algae)	Eukaryota	_	Phaeophyceae	Laminariales	Laminariaceae	Saccharina	Saccharina japonica
+GCA_902702795.2	PACLA8	317549	Paramuricea clavata (soft corals)	Eukaryota	Cnidaria	Anthozoa	Malacalcyonacea	Plexauridae	Paramuricea	Paramuricea clavata
+GCA_905221605.1	Snat_CCMP2548	878477	Symbiodinium natans (dinoflagellates)	Eukaryota	_	Dinophyceae	Suessiales	Symbiodiniaceae	Symbiodinium	Symbiodinium natans
+GCA_905231915.1	Snec_CCMP2469	1628268	Symbiodinium necroappetens (dinoflagellates)	Eukaryota	_	Dinophyceae	Suessiales	Symbiodiniaceae	Symbiodinium	Symbiodinium necroappetens
+GCA_942486025.1	PEVE_v1	104178	Porites evermanni (stony corals)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Poritidae	Porites	Porites evermanni
+GCA_942486035.1	PLOB_v1	104759	Porites lobata (stony corals)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Poritidae	Porites	Porites lobata
+GCA_942486045.1	PMEA_v1	46732	Pocillopora meandrina (cauliflower coral)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Pocilloporidae	Pocillopora	Pocillopora meandrina
+GCA_947184155.2	Cgoreaui_SCF055-01_v2.1	2562237	Cladocopium goreaui (dinoflagellates)	Eukaryota	_	Dinophyceae	Suessiales	Symbiodiniaceae	Cladocopium	Cladocopium goreaui
+GCA_963969995.1	Durusdinium_trenchii_SCF082	1381693	Durusdinium trenchii (dinoflagellates)	Eukaryota	_	Dinophyceae	Suessiales	Symbiodiniaceae	Durusdinium	Durusdinium trenchii
+GCA_963970005.1	Durusdinium_trenchii_CCMP2556	1381693	Durusdinium trenchii (dinoflagellates)	Eukaryota	_	Dinophyceae	Suessiales	Symbiodiniaceae	Durusdinium	Durusdinium trenchii
+GCA_964199315.1	jaOrbFran1.1 alternate haplotype	48499	Orbicella franksi (stony corals)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Merulinidae	Orbicella	Orbicella franksi
+GCA_964200205.2	PHAEEfasS1_V1.2	43935	Ectocarpus fasciculatus (brown algae)	Eukaryota	_	Phaeophyceae	Ectocarpales	Ectocarpaceae	Ectocarpus	Ectocarpus fasciculatus
+GCA_964200215.2	PHAEHaka_V1.2	2829	Heterosigma akashiwo (heterokonts)	Eukaryota	_	Raphidophyceae	Chattonellales	Chattonellaceae	Heterosigma	Heterosigma akashiwo
+GCA_965279495.1	pySymTrid1.1	1602974	Symbiodinium tridacnidarum (dinoflagellates)	Eukaryota	_	Dinophyceae	Suessiales	Symbiodiniaceae	Symbiodinium	Symbiodinium tridacnidarum
+GCF_000091205.1	ASM9120v1	280699	Cyanidioschyzon merolae strain 10D (red algae)	Eukaryota	Rhodophyta	Bangiophyceae	Cyanidiales	Cyanidiaceae	Cyanidioschyzon	Cyanidioschyzon merolae
+GCF_000149405.2	ASM14940v2	296543	Thalassiosira pseudonana CCMP1335 (diatoms)	Eukaryota	Bacillariophyta	Coscinodiscophyceae	Thalassiosirales	Thalassiosiraceae	Thalassiosira	Thalassiosira pseudonana
+GCF_000209225.1	ASM20922v1	45351	Nematostella vectensis (starlet sea anemone)	Eukaryota	Cnidaria	Anthozoa	Actiniaria	Edwardsiidae	Nematostella	Nematostella vectensis
+GCF_000222465.1	Adig_1.1	70779	Acropora digitifera (stony corals)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Acroporidae	Acropora	Acropora digitifera
+GCF_000341285.1	ASM34128v1	130081	Galdieria sulphuraria (red algae)	Eukaryota	Rhodophyta	Bangiophyceae	Galdieriales	Galdieriaceae	Galdieria	Galdieria sulphuraria
+GCF_000350225.1	ASM35022v2	2769	Chondrus crispus (carragheen)	Eukaryota	Rhodophyta	Florideophyceae	Gigartinales	Gigartinaceae	Chondrus	Chondrus crispus
+GCF_001417965.1	Aiptasia genome 1.1	2652724	Exaiptasia diaphana (sea anemones)	Eukaryota	Cnidaria	Anthozoa	Actiniaria	Aiptasiidae	Exaiptasia	Exaiptasia diaphana
+GCF_002042975.1	ofav_dov_v1	48498	Orbicella faveolata (stony corals)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Merulinidae	Orbicella	Orbicella faveolata
+GCF_002571385.2	Stylophora pistillata v1.1	50429	Stylophora pistillata (stony corals)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Pocilloporidae	Stylophora	Stylophora pistillata
+GCF_003704095.1	ASM370409v1	46731	Pocillopora damicornis (cauliflower coral)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Pocilloporidae	Pocillopora	Pocillopora damicornis
+GCF_004143615.1	amil_sf_1.1	45264	Acropora millepora (stony corals)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Acroporidae	Acropora	Acropora millepora
+GCF_004324835.1	DenGig_1.0	151771	Dendronephthya gigantea (soft corals)	Eukaryota	Cnidaria	Anthozoa	Malacalcyonacea	Nephtheidae	Dendronephthya	Dendronephthya gigantea
+GCF_009602425.1	ASM960242v1	6105	Actinia tenebrosa (Australian red waratah sea anemone)	Eukaryota	Cnidaria	Anthozoa	Actiniaria	Actiniidae	Actinia	Actinia tenebrosa
+GCF_013753865.1	Amil_v2.1	45264	Acropora millepora (stony corals)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Acroporidae	Acropora	Acropora millepora
+GCF_021976095.1	XeniaSp_v1	2897299	Xenia sp. Carnegie-2017 (soft corals)	Eukaryota	Cnidaria	Anthozoa	Malacalcyonacea	Xeniidae	Xenia	Xenia sp. Carnegie-2017
+GCF_030620025.1	CSIRO_AGI_Pver_v1	203993	Pocillopora verrucosa (stony corals)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Pocilloporidae	Pocillopora	Pocillopora verrucosa
+GCF_036669905.1	ASM3666990v1	159855	Acropora muricata (stony corals)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Acroporidae	Acropora	Acropora muricata
+GCF_036669915.1	ASM3666991v2	203993	Pocillopora verrucosa (stony corals)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Pocilloporidae	Pocillopora	Pocillopora verrucosa
+GCF_036669925.1	ASM3666992v2	246305	Montipora capricornis (stony corals)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Acroporidae	Montipora	Montipora capricornis
+GCF_036669935.1	ASM3666993v2	591990	Montipora foliosa (stony corals)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Acroporidae	Montipora	Montipora foliosa
+GCF_038396675.1	HydraT2T_AEP	6087	Hydra vulgaris (swiftwater hydra)	Eukaryota	Cnidaria	Hydrozoa	Anthoathecata	Hydridae	Hydra	Hydra vulgaris
+GCF_932526225.1	jaNemVect1.1	45351	Nematostella vectensis (starlet sea anemone)	Eukaryota	Cnidaria	Anthozoa	Actiniaria	Edwardsiidae	Nematostella	Nematostella vectensis
+GCF_958299795.1	jaPorLute2.1	51062	Porites lutea (stony corals)	Eukaryota	Cnidaria	Anthozoa	Scleractinia	Poritidae	Porites	Porites lutea
