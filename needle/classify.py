@@ -138,7 +138,7 @@ def group_by_assignment(classify_rows, ortholog_hmm_db_name, score_to_threshold_
     return itertools.groupby(assigned_rows, keyf)
 
 
-def assign_ko(classify_rows, ortholog_hmm_db_name, proteins_faa, output_dir, domain_hmm_db_name = None, score_to_threshold_ratio = 0.9):
+def assign_ko(classify_rows, ortholog_hmm_db_name, proteins_faa, output_dir, prefix_match = False, domain_hmm_db_name = None, score_to_threshold_ratio = 0.9):
 
     if type(proteins_faa) == type(""):
         proteins_faa = [proteins_faa]
@@ -154,7 +154,12 @@ def assign_ko(classify_rows, ortholog_hmm_db_name, proteins_faa, output_dir, dom
     for ko_id, ko_rows in assignments:
         ko_rows = list(ko_rows)
         ko_fasta_prefix = os.path.join(output_dir, ko_id)
-        protein_ids = set([row[ClassifyTSV.HDR_PROTEIN_ACCESSION] for row in ko_rows])
+
+        if prefix_match is False:
+            protein_ids = set([row[ClassifyTSV.HDR_PROTEIN_ACCESSION] for row in ko_rows])
+
+        else:  # require protein detected using classified HMM accesion
+            protein_ids = set([row[ClassifyTSV.HDR_PROTEIN_ACCESSION] for row in ko_rows if row[ClassifyTSV.HDR_PROTEIN_ACCESSION].startswith(ko_id)])
 
         # protein fasta - just protein sequences assigned to KO
         ko_proteins = {k:v for k,v in proteins_seq_dict.items() if k in protein_ids}
