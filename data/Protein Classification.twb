@@ -1638,7 +1638,7 @@
       </column>
       <column caption='Tax ID' datatype='integer' name='[TaxID]' role='dimension' type='ordinal' />
       <column caption='Pfam-A.clans.tsv' datatype='table' name='[__tableau_internal_object_id__].[Pfam-A.clans.tsv_0D66D8B340FD49AFBE5926B0445A9BA2]' role='measure' type='quantitative' />
-      <column caption='Joint Classification' datatype='table' name='[__tableau_internal_object_id__].[classify.tsv_1F94A630701641709ABCDE0D87068024]' role='measure' type='quantitative' />
+      <column caption='Domain Classification' datatype='table' name='[__tableau_internal_object_id__].[classify.tsv_1F94A630701641709ABCDE0D87068024]' role='measure' type='quantitative' />
       <column caption='classify.tsv' datatype='table' name='[__tableau_internal_object_id__].[classify.tsv_41D7134A408342E7B2342535CD3882A4]' role='measure' type='quantitative' />
       <column caption='clusters.tsv' datatype='table' name='[__tableau_internal_object_id__].[clusters.tsv_E64546A6C0A44CFEAC5ACA4AB7B67E1C]' role='measure' type='quantitative' />
       <column caption='genomes.tsv' datatype='table' name='[__tableau_internal_object_id__].[genomes.tsv_A529753FE33A4FB4BAB3038E070288E7]' role='measure' type='quantitative' />
@@ -1736,7 +1736,7 @@
         </groupfilter>
       </group>
       <extract _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' object-id='' units='records'>
-        <connection access_mode='readonly' author-locale='en_US' class='hyper' dbname='/var/folders/2h/747pycqs10j0vwjlyhhnkthr0000gn/T/tableau-temp/#TableauTemp_1lho7py1y8zozn191149i1kd8t58.hyper' default-settings='hyper' schema='Extract' sslmode='' tablename='Extract' update-time='01/19/2026 02:03:02 PM' username='tableau_internal_user'>
+        <connection access_mode='readonly' author-locale='en_US' class='hyper' dbname='/var/folders/2h/747pycqs10j0vwjlyhhnkthr0000gn/T/tableau-temp/#TableauTemp_1bjjz5g0aahopv10vj9sv1x8l1yr.hyper' default-settings='hyper' schema='Extract' sslmode='' tablename='Extract' update-time='01/19/2026 08:40:25 PM' username='tableau_internal_user'>
           <relation type='collection'>
             <relation name='classify.tsv_41D7134A408342E7B2342535CD3882A4' table='[Extract].[classify.tsv_41D7134A408342E7B2342535CD3882A4]' type='table' />
             <relation name='Pfam-A.clans.tsv_0D66D8B340FD49AFBE5926B0445A9BA2' table='[Extract].[Pfam-A.clans.tsv_0D66D8B340FD49AFBE5926B0445A9BA2]' type='table' />
@@ -1846,7 +1846,7 @@
               <family>classify.tsv</family>
               <local-type>string</local-type>
               <aggregation>Count</aggregation>
-              <approx-count>59441</approx-count>
+              <approx-count>73615</approx-count>
               <contains-null>true</contains-null>
               <collation flag='0' name='LEN_RUS' />
               <object-id>[classify.tsv_41D7134A408342E7B2342535CD3882A4]</object-id>
@@ -1891,7 +1891,7 @@
               <family>classify.tsv</family>
               <local-type>string</local-type>
               <aggregation>Count</aggregation>
-              <approx-count>1544</approx-count>
+              <approx-count>1434</approx-count>
               <contains-null>true</contains-null>
               <collation flag='0' name='LEN_RUS' />
               <object-id>[classify.tsv_41D7134A408342E7B2342535CD3882A4]</object-id>
@@ -1906,7 +1906,7 @@
               <family>classify.tsv</family>
               <local-type>integer</local-type>
               <aggregation>Sum</aggregation>
-              <approx-count>2415</approx-count>
+              <approx-count>2209</approx-count>
               <contains-null>true</contains-null>
               <object-id>[classify.tsv_41D7134A408342E7B2342535CD3882A4]</object-id>
             </metadata-record>
@@ -1920,7 +1920,7 @@
               <family>classify.tsv</family>
               <local-type>integer</local-type>
               <aggregation>Sum</aggregation>
-              <approx-count>2668</approx-count>
+              <approx-count>2414</approx-count>
               <contains-null>true</contains-null>
               <object-id>[classify.tsv_41D7134A408342E7B2342535CD3882A4]</object-id>
             </metadata-record>
@@ -1934,7 +1934,7 @@
               <family>classify.tsv</family>
               <local-type>integer</local-type>
               <aggregation>Sum</aggregation>
-              <approx-count>3512</approx-count>
+              <approx-count>3706</approx-count>
               <contains-null>true</contains-null>
               <object-id>[classify.tsv_41D7134A408342E7B2342535CD3882A4]</object-id>
             </metadata-record>
@@ -1948,7 +1948,7 @@
               <family>classify.tsv</family>
               <local-type>integer</local-type>
               <aggregation>Sum</aggregation>
-              <approx-count>3636</approx-count>
+              <approx-count>3827</approx-count>
               <contains-null>true</contains-null>
               <object-id>[classify.tsv_41D7134A408342E7B2342535CD3882A4]</object-id>
             </metadata-record>
@@ -1962,7 +1962,7 @@
               <family>classify.tsv</family>
               <local-type>real</local-type>
               <aggregation>Sum</aggregation>
-              <approx-count>12488</approx-count>
+              <approx-count>12274</approx-count>
               <contains-null>true</contains-null>
               <object-id>[classify.tsv_41D7134A408342E7B2342535CD3882A4]</object-id>
             </metadata-record>
@@ -1976,7 +1976,7 @@
               <family>classify.tsv</family>
               <local-type>real</local-type>
               <aggregation>Sum</aggregation>
-              <approx-count>10979</approx-count>
+              <approx-count>11098</approx-count>
               <contains-null>true</contains-null>
               <object-id>[classify.tsv_41D7134A408342E7B2342535CD3882A4]</object-id>
             </metadata-record>
@@ -1990,7 +1990,7 @@
               <family>classify.tsv</family>
               <local-type>real</local-type>
               <aggregation>Sum</aggregation>
-              <approx-count>6697</approx-count>
+              <approx-count>6645</approx-count>
               <contains-null>true</contains-null>
               <object-id>[classify.tsv_41D7134A408342E7B2342535CD3882A4]</object-id>
             </metadata-record>
@@ -2004,7 +2004,7 @@
               <family>classify.tsv</family>
               <local-type>real</local-type>
               <aggregation>Sum</aggregation>
-              <approx-count>51</approx-count>
+              <approx-count>71</approx-count>
               <contains-null>true</contains-null>
               <object-id>[classify.tsv_41D7134A408342E7B2342535CD3882A4]</object-id>
             </metadata-record>
@@ -2018,7 +2018,7 @@
               <family>classify.tsv</family>
               <local-type>integer</local-type>
               <aggregation>Sum</aggregation>
-              <approx-count>42</approx-count>
+              <approx-count>67</approx-count>
               <contains-null>true</contains-null>
               <object-id>[classify.tsv_41D7134A408342E7B2342535CD3882A4]</object-id>
             </metadata-record>
@@ -2107,7 +2107,7 @@
               <family>classify.tsv1</family>
               <local-type>string</local-type>
               <aggregation>Count</aggregation>
-              <approx-count>68892</approx-count>
+              <approx-count>78337</approx-count>
               <contains-null>true</contains-null>
               <collation flag='0' name='LEN_RUS' />
               <object-id>[classify.tsv_1F94A630701641709ABCDE0D87068024]</object-id>
@@ -2122,7 +2122,7 @@
               <family>classify.tsv1</family>
               <local-type>string</local-type>
               <aggregation>Count</aggregation>
-              <approx-count>79</approx-count>
+              <approx-count>80</approx-count>
               <contains-null>true</contains-null>
               <collation flag='0' name='LEN_RUS' />
               <object-id>[classify.tsv_1F94A630701641709ABCDE0D87068024]</object-id>
@@ -2152,7 +2152,7 @@
               <family>classify.tsv1</family>
               <local-type>string</local-type>
               <aggregation>Count</aggregation>
-              <approx-count>1779</approx-count>
+              <approx-count>1419</approx-count>
               <contains-null>true</contains-null>
               <collation flag='0' name='LEN_RUS' />
               <object-id>[classify.tsv_1F94A630701641709ABCDE0D87068024]</object-id>
@@ -2167,7 +2167,7 @@
               <family>classify.tsv1</family>
               <local-type>integer</local-type>
               <aggregation>Sum</aggregation>
-              <approx-count>2073</approx-count>
+              <approx-count>2360</approx-count>
               <contains-null>true</contains-null>
               <object-id>[classify.tsv_1F94A630701641709ABCDE0D87068024]</object-id>
             </metadata-record>
@@ -2181,7 +2181,7 @@
               <family>classify.tsv1</family>
               <local-type>integer</local-type>
               <aggregation>Sum</aggregation>
-              <approx-count>2413</approx-count>
+              <approx-count>2361</approx-count>
               <contains-null>true</contains-null>
               <object-id>[classify.tsv_1F94A630701641709ABCDE0D87068024]</object-id>
             </metadata-record>
@@ -2195,7 +2195,7 @@
               <family>classify.tsv1</family>
               <local-type>integer</local-type>
               <aggregation>Sum</aggregation>
-              <approx-count>3210</approx-count>
+              <approx-count>2981</approx-count>
               <contains-null>true</contains-null>
               <object-id>[classify.tsv_1F94A630701641709ABCDE0D87068024]</object-id>
             </metadata-record>
@@ -2209,7 +2209,7 @@
               <family>classify.tsv1</family>
               <local-type>integer</local-type>
               <aggregation>Sum</aggregation>
-              <approx-count>3881</approx-count>
+              <approx-count>3786</approx-count>
               <contains-null>true</contains-null>
               <object-id>[classify.tsv_1F94A630701641709ABCDE0D87068024]</object-id>
             </metadata-record>
@@ -2223,7 +2223,7 @@
               <family>classify.tsv1</family>
               <local-type>real</local-type>
               <aggregation>Sum</aggregation>
-              <approx-count>12201</approx-count>
+              <approx-count>12411</approx-count>
               <contains-null>true</contains-null>
               <object-id>[classify.tsv_1F94A630701641709ABCDE0D87068024]</object-id>
             </metadata-record>
@@ -2237,7 +2237,7 @@
               <family>classify.tsv1</family>
               <local-type>real</local-type>
               <aggregation>Sum</aggregation>
-              <approx-count>10526</approx-count>
+              <approx-count>11968</approx-count>
               <contains-null>true</contains-null>
               <object-id>[classify.tsv_1F94A630701641709ABCDE0D87068024]</object-id>
             </metadata-record>
@@ -2251,7 +2251,7 @@
               <family>classify.tsv1</family>
               <local-type>real</local-type>
               <aggregation>Sum</aggregation>
-              <approx-count>6673</approx-count>
+              <approx-count>6896</approx-count>
               <contains-null>true</contains-null>
               <object-id>[classify.tsv_1F94A630701641709ABCDE0D87068024]</object-id>
             </metadata-record>
@@ -2265,7 +2265,7 @@
               <family>classify.tsv1</family>
               <local-type>real</local-type>
               <aggregation>Sum</aggregation>
-              <approx-count>83</approx-count>
+              <approx-count>82</approx-count>
               <contains-null>true</contains-null>
               <object-id>[classify.tsv_1F94A630701641709ABCDE0D87068024]</object-id>
             </metadata-record>
@@ -2279,7 +2279,7 @@
               <family>classify.tsv1</family>
               <local-type>integer</local-type>
               <aggregation>Sum</aggregation>
-              <approx-count>53</approx-count>
+              <approx-count>68</approx-count>
               <contains-null>true</contains-null>
               <object-id>[classify.tsv_1F94A630701641709ABCDE0D87068024]</object-id>
             </metadata-record>
@@ -14190,7 +14190,7 @@
               <relation name='Pfam-A.clans.tsv_0D66D8B340FD49AFBE5926B0445A9BA2' table='[Extract].[Pfam-A.clans.tsv_0D66D8B340FD49AFBE5926B0445A9BA2]' type='table' />
             </properties>
           </object>
-          <object caption='Joint Classification' id='classify.tsv_1F94A630701641709ABCDE0D87068024'>
+          <object caption='Domain Classification' id='classify.tsv_1F94A630701641709ABCDE0D87068024'>
             <properties context=''>
               <relation connection='textscan.03am6ui0re1mh8139acku10xjxiz' name='classify.tsv1' table='[classify#tsv]' type='table'>
                 <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
@@ -14972,13 +14972,18 @@
             <column-instance column='[hmm_accession]' derivation='None' name='[none:hmm_accession:nk]' pivot='key' type='nominal' />
             <column-instance column='[hmm_db (classify.tsv1)]' derivation='None' name='[none:hmm_db (classify.tsv1):nk]' pivot='key' type='nominal' />
             <column-instance column='[hmm_end (classify.tsv1)]' derivation='None' name='[none:hmm_end (classify.tsv1):ok]' pivot='key' type='ordinal' />
+            <column-instance column='[hmm_end]' derivation='None' name='[none:hmm_end:ok]' pivot='key' type='ordinal' />
             <column-instance column='[hmm_start (classify.tsv1)]' derivation='None' name='[none:hmm_start (classify.tsv1):ok]' pivot='key' type='ordinal' />
+            <column-instance column='[hmm_start]' derivation='None' name='[none:hmm_start:ok]' pivot='key' type='ordinal' />
             <column-instance column='[hmm_start]' derivation='None' name='[none:hmm_start:qk]' pivot='key' type='quantitative' />
             <column-instance column='[protein_accession]' derivation='None' name='[none:protein_accession:nk]' pivot='key' type='nominal' />
+            <column-instance column='[protein_end (classify.tsv1)]' derivation='None' name='[none:protein_end (classify.tsv1):ok]' pivot='key' type='ordinal' />
             <column-instance column='[protein_end]' derivation='None' name='[none:protein_end:ok]' pivot='key' type='ordinal' />
             <column-instance column='[protein_start (classify.tsv1)]' derivation='None' name='[none:protein_start (classify.tsv1):qk]' pivot='key' type='quantitative' />
-            <column-instance column='[protein_start]' derivation='None' name='[none:protein_start:ok]' pivot='key' type='ordinal' />
             <column-instance column='[protein_start]' derivation='None' name='[none:protein_start:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[query_accession]' derivation='None' name='[none:query_accession:nk]' pivot='key' type='nominal' />
+            <column-instance column='[query_end (protein_ncbi.tsv)]' derivation='None' name='[none:query_end (protein_ncbi.tsv):ok]' pivot='key' type='ordinal' />
+            <column-instance column='[query_end]' derivation='None' name='[none:query_end:ok]' pivot='key' type='ordinal' />
             <column-instance column='[query_start (protein_ncbi.tsv)]' derivation='None' name='[none:query_start (protein_ncbi.tsv):ok]' pivot='key' type='ordinal' />
             <column-instance column='[query_start (protein_ncbi.tsv)]' derivation='None' name='[none:query_start (protein_ncbi.tsv):qk]' pivot='key' type='quantitative' />
             <column-instance column='[query_start]' derivation='None' name='[none:query_start:ok]' pivot='key' type='ordinal' />
@@ -14992,6 +14997,7 @@
             <column aggregation='Sum' caption='Protein End' datatype='integer' name='[protein_end]' role='dimension' type='ordinal' />
             <column aggregation='Sum' caption='Protein Start (Classify.Tsv1)' datatype='integer' name='[protein_start (classify.tsv1)]' role='dimension' type='ordinal' />
             <column aggregation='Sum' caption='Protein Start' datatype='integer' name='[protein_start]' role='dimension' type='ordinal' />
+            <column caption='Query Accession' datatype='string' name='[query_accession]' role='dimension' type='nominal' />
             <column aggregation='Sum' caption='Query End (Protein Ncbi.Tsv)' datatype='integer' name='[query_end (protein_ncbi.tsv)]' role='dimension' type='ordinal' />
             <column aggregation='Sum' caption='Query End' datatype='integer' name='[query_end]' role='dimension' type='ordinal' />
             <column aggregation='Sum' caption='Query Start (Protein Ncbi.Tsv)' datatype='integer' name='[query_start (protein_ncbi.tsv)]' role='dimension' type='ordinal' />
@@ -15023,11 +15029,11 @@
         </view>
         <style>
           <style-rule element='axis'>
-            <format attr='title' class='0' field='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:query_start:qk]' scope='cols' value='KO HMM Coord of Detected Protein Fragments' />
-            <format attr='title' class='0' field='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:hmm_start:qk]' scope='cols' value='KO HMM Coord of Match' />
+            <format attr='title' class='0' field='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:hmm_start:qk]' scope='cols' value='KO HMM Coord of KO Matches' />
             <format attr='title' class='0' field='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:query_start (protein_ncbi.tsv):qk]' scope='cols' value='Protein Coord of Exons' />
-            <format attr='title' class='0' field='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:protein_start:qk]' scope='cols' value='Protein Coord of KO HMM Matches' />
+            <format attr='title' class='0' field='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:protein_start:qk]' scope='cols' value='Protein Coord of KO Matches' />
             <format attr='title' class='0' field='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:protein_start (classify.tsv1):qk]' scope='cols' value='Protein Coord of Domains' />
+            <format attr='title' class='0' field='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:query_start:qk]' scope='cols' value='KO HMM Coord of Detected Fragments' />
           </style-rule>
           <style-rule element='header'>
             <format attr='width' field='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:protein_accession:nk]' value='256' />
@@ -15049,8 +15055,8 @@
               <size column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:Calculation_5695833864994816:qk]' />
               <color column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:Calculation_6305933866291202:qk]' />
               <lod column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:dom_rank_for_protein:ok]' />
-              <lod column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:protein_start:ok]' />
-              <lod column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:protein_end:ok]' />
+              <lod column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:hmm_accession:nk]' />
+              <lod column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:hmm_end:ok]' />
             </encodings>
           </pane>
           <pane id='2' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:query_start:qk]'>
@@ -15061,8 +15067,10 @@
             <encodings>
               <size column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:Calculation_6305933869731843:qk]' />
               <color column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:query_start:ok]' />
+              <lod column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:query_end:ok]' />
               <lod column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:target_start:ok]' />
               <lod column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:target_end:ok]' />
+              <lod column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:query_accession:nk]' />
             </encodings>
           </pane>
           <pane id='3' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:query_start (protein_ncbi.tsv):qk]'>
@@ -15073,6 +15081,7 @@
             <encodings>
               <size column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:Protein Detected Fragment Len (copy)_6305933869895684:qk]' />
               <color column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:query_start (protein_ncbi.tsv):ok]' />
+              <lod column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:query_end (protein_ncbi.tsv):ok]' />
               <lod column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:target_start (protein_ncbi.tsv):ok]' />
               <lod column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:target_end (protein_ncbi.tsv):ok]' />
             </encodings>
@@ -15085,6 +15094,10 @@
             <encodings>
               <size column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:Calculation_5695833866121217:qk]' />
               <color column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:Calculation_6305933866291202:qk]' />
+              <lod column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:protein_end:ok]' />
+              <lod column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:hmm_start:ok]' />
+              <lod column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:hmm_end:ok]' />
+              <lod column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:hmm_accession:nk]' />
             </encodings>
           </pane>
           <pane id='5' selection-relaxation-option='selection-relaxation-allow' x-axis-name='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:protein_start (classify.tsv1):qk]'>
@@ -15097,11 +15110,12 @@
               <color column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:hmm_accession (classify.tsv1):nk]' />
               <lod column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:hmm_start (classify.tsv1):ok]' />
               <lod column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:hmm_end (classify.tsv1):ok]' />
+              <lod column='[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:protein_end (classify.tsv1):ok]' />
             </encodings>
           </pane>
         </panes>
         <rows>([federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:Organism:nk] / ([federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:genome_accession:nk] / ([federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:protein_accession:nk] / [federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:Calculation_5695833866838019:nk])))</rows>
-        <cols>([federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:hmm_start:qk] + ([federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:query_start:qk] + ([federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:protein_start:qk] + ([federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:protein_start (classify.tsv1):qk] + [federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:query_start (protein_ncbi.tsv):qk]))))</cols>
+        <cols>([federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:hmm_start:qk] + ([federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:protein_start:qk] + ([federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:protein_start (classify.tsv1):qk] + ([federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:query_start:qk] + [federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:query_start (protein_ncbi.tsv):qk]))))</cols>
       </table>
       <simple-id uuid='{13A079BB-2096-4359-BAE3-7A11A4DD6323}' />
     </worksheet>
@@ -16063,16 +16077,22 @@
             <field>[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:hmm_accession:nk]</field>
             <field>[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:hmm_db (classify.tsv1):nk]</field>
             <field>[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:hmm_end (classify.tsv1):ok]</field>
+            <field>[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:hmm_end:ok]</field>
             <field>[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:hmm_start (classify.tsv1):ok]</field>
             <field>[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:hmm_start:ok]</field>
             <field>[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:protein_accession:nk]</field>
+            <field>[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:protein_end (classify.tsv1):ok]</field>
             <field>[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:protein_end:ok]</field>
             <field>[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:protein_start (classify.tsv1):ok]</field>
             <field>[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:protein_start (classify.tsv1):qk]</field>
             <field>[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:protein_start:ok]</field>
             <field>[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:protein_start:qk]</field>
+            <field>[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:query_accession:nk]</field>
+            <field>[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:query_end (protein_ncbi.tsv):ok]</field>
+            <field>[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:query_end:ok]</field>
             <field>[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:query_start (protein_ncbi.tsv):ok]</field>
             <field>[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:query_start:ok]</field>
+            <field>[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:query_start:qk]</field>
             <field>[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:target_end (protein_ncbi.tsv):ok]</field>
             <field>[federated.1jh4lwz0rc3ep414os8tl1xn23xc].[none:target_start (protein_ncbi.tsv):ok]</field>
           </color-one-way>
