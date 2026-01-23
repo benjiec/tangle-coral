@@ -18,11 +18,10 @@ Install NCBI Docker image
 docker pull ncbi/blast
 ```
 
-Install MMSeqs2 and HH-suite Docker images
+Install MMSeqs2 Docker image
 
 ```
 docker pull ghcr.io/soedinglab/mmseqs2
-docker pull soedinglab/hh-suite
 ```
 
 Setup SwissProt DB for MMSeqs2
@@ -294,12 +293,6 @@ The `faa_dir` argument can be either the `data/m00009_results/faa` dir, or the
 This script creates the `data/m00009_results/alignments` dir and, for each
 input FAA file, generates a MSA FAA file, a PNG visualizing the MSA, and a HMM
 profile from the MSA.
-
-To compare the alignments of two clusters in the same ortholog group, use the following script
-
-```
-./scripts/align/hhalign m00009 K00235 0bb2a08d 353fd803
-```
 
 
 ### Other Scripts
