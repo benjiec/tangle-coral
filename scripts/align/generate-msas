@@ -27,6 +27,6 @@ for faa_path in "$faa_dir"/*.faa; do
 
   scripts/align/muscle $faa_path "${output_dir}/$stem.faa"
   scripts/align/mk-msa-vis "${output_dir}/$stem.faa" "${output_dir}/$stem.png"
-  hmmbuild --amino "${output_dir}/$stem.hmm" "${output_dir}/$stem.faa"
-  hmmlogo "${output_dir}/$stem.hmm" > "${output_dir}/$stem.logo"
+  # hmmbuild --amino "${output_dir}/$stem.hmm" "${output_dir}/$stem.faa"
+  # hmmlogo "${output_dir}/$stem.hmm" > "${output_dir}/$stem.logo"
 done

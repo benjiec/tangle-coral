@@ -1,7 +1,7 @@
 import os
 import csv
 import argparse
-from needle.duckdb import load, ClusterClassify
+from needle.duckdb import load, AssignedClusters
 from needle.seq import read_fasta_as_dict
 
 parser = argparse.ArgumentParser()
@@ -11,7 +11,7 @@ parser.add_argument("output")
 args = parser.parse_args()
 
 load(args.module.lower())
-clusters = ClusterClassify(args.ko.upper()).clusters()
+clusters = AssignedClusters(args.ko.upper()).clusters()
 print(len(clusters), "clusters")
 
 tall_table = []
@@ -23,6 +23,8 @@ for cluster in clusters:
     print(len(proteins), "proteins")
 
     aln_fn = f"data/{args.module.lower()}_results/alignments/{cluster.cluster_fn()}.faa"
+    if not os.path.exists(aln_fn):
+        continue
     alignments = read_fasta_as_dict(aln_fn)
 
     for protein in proteins:
@@ -40,6 +42,7 @@ for cluster in clusters:
 
                 data = dict(
                     cluster_id=cluster.cluster_id,
+                    parent_cluster_id=cluster.parent_cluster_id,
                     protein_accession=protein.protein_accession,
                     genome_accession=protein.genome_accession,
                     alignment_pos=aln_pos+1,

@@ -48,13 +48,14 @@ class ProteinMatches(object):
 
 class ClusterProteins(object):
 
-    def __init__(self, ko_id, cluster_id, group_df):
+    def __init__(self, ko_id, cluster_id, parent_cluster_id, group_df):
         self.ko_id = ko_id
         self.cluster_id = cluster_id
+        self.parent_cluster_id = parent_cluster_id
         self.df = group_df
 
     def cluster_fn(self):
-        return f"{self.ko_id}_{self.cluster_id}"
+        return f"{self.parent_cluster_id}_{self.cluster_id}"
 
     def proteins(self, protein_sequence_dict):
 
@@ -84,14 +85,19 @@ class ClusterProteins(object):
         return proteins
 
 
-class ClusterClassify(object):
+class AssignedClusters(object):
 
     def __init__(self, ko_id):
         self.ko_id = ko_id
 
         con = duckdb.connect(":default:")
+
+	# do the join with ko_match, so we can filter to clusters for a
+	# specific KO ID. and might as well get the KO matches now.
+
         self.df = con.sql("""
             SELECT clusters.cluster_id,
+                   clusters.parent_cluster_id,
                    ko_match.protein_accession,
                    ko_match.genome_accession,
                    ko_match.hmm_accession as 'ko_accession',
@@ -102,11 +108,31 @@ class ClusterClassify(object):
                    ko_match.dom_evalue as 'ko_evalue'
               FROM needle.clusters
               JOIN needle.ko_match ON ko_match.protein_accession = clusters.member_accession AND ko_match.hmm_accession = '%s'
-      """ % ko_id).df()
+        """ % ko_id).df()
 
     def clusters(self):
 
         clusters = []
-        for cluster_id, group_df in self.df.groupby('cluster_id'):
-            clusters.append(ClusterProteins(self.ko_id, cluster_id, group_df))
+        for (cluster_id, parent_cluster_id), group_df in self.df.groupby(['cluster_id', 'parent_cluster_id']):
+            clusters.append(ClusterProteins(self.ko_id, cluster_id, parent_cluster_id, group_df))
         return clusters
+
+
+class PutativeProteins(object):
+
+    def __init__(self, ko_id, evalue_threshold=1E-20):
+        self.ko_id = ko_id
+
+        con = duckdb.connect(":default:")
+        self.df = con.sql("""
+            SELECT ko_match.protein_accession,
+                   ko_match.genome_accession
+              FROM needle.ko_match
+             WHERE ko_match.hmm_accession = '%s'
+             GROUP BY ko_match.protein_accession, ko_match.genome_accession
+             HAVING MIN(ko_match.dom_evalue) < %s
+        """ % (ko_id, evalue_threshold)).df()
+
+    def protein_genome_accessions(self):
+        unique_pairs = self.df[['protein_accession','genome_accession']].drop_duplicates()
+        return list(unique_pairs.itertuples(index=False, name=None))

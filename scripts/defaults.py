@@ -37,3 +37,15 @@ class DefaultPath(object):
     @staticmethod
     def ko_hmm():
         return "kegg-downloads/ko.hmm"
+
+    @staticmethod
+    def module_detected_proteins(module):
+        return f"data/{module.lower()}_results/proteins.faa"
+
+    @staticmethod
+    def module_ko_assigned_proteins(module, ko):
+        return f"data/{module.lower()}_results/faa/{ko.upper()}.faa"
+
+    @staticmethod
+    def module_ko_putative_proteins(module, ko):
+        return f"data/{module.lower()}_results/faa/{ko.upper()}-putative.faa"
