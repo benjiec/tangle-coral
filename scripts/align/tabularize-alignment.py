@@ -41,7 +41,7 @@ for cluster in clusters:
                 data = dict(
                     cluster_id=cluster.cluster_id,
                     protein_accession=protein.protein_accession,
-                    # genome_accession=protein.genome_accession,
+                    genome_accession=protein.genome_accession,
                     alignment_pos=aln_pos+1,
                     protein_pos=pro_pos,
                     aa = aln,
