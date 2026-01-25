@@ -26,7 +26,7 @@ for faa_path in "$faa_dir"/*.faa; do
   [ -e "$faa_path" ] || continue
   found=1
   echo "clustering $faa_path"
-  PYTHONPATH=. python3 scripts/cluster/cluster-faa.py "$faa_path" "$cluster_dir" "$cluster_tsv"
+  PYTHONPATH=. python3 scripts/cluster/create.py $module_id $faa_path
 done
 
 if [[ $found -eq 0 ]]; then

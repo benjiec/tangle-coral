@@ -49,3 +49,11 @@ class DefaultPath(object):
     @staticmethod
     def module_ko_putative_proteins(module, ko):
         return f"data/{module.lower()}_results/faa/{ko.upper()}-putative.faa"
+
+    @staticmethod
+    def module_cluster_dir(module):
+        return f"data/{module.lower()}_results/clusters"
+
+    @staticmethod
+    def module_cluster_tsv(module):
+        return f"data/{module.lower()}_results/clusters.tsv"
