@@ -28,13 +28,16 @@ for cluster in clusters:
     alignments = read_fasta_as_dict(aln_fn)
 
     for protein in proteins:
-        assert protein.protein_accession in alignments
-        aligned = alignments[protein.protein_accession]
-        assert aligned.replace("-", "") == protein.sequence
+        if protein.protein_accession not in alignments:
+            continue
+        aligned = alignments[protein.protein_accession].upper()
+        # when using hhmalign with --trim, the following assertion is no longer true
+        # assert aligned.replace("-", "").replace("X","") == protein.sequence.replace("X", "")
 
         pro_pos = 0
         for aln_pos, aln in enumerate(aligned):
-            if aln not in "-X":
+            # don't ignore X here - goal is to report protein positions that were aligned
+            if aln != "-":
                 pro_pos += 1
 
                 ko_match = protein.ko_match_at(pro_pos)

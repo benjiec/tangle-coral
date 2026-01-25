@@ -24,9 +24,17 @@ for faa_path in "$faa_dir"/*.faa; do
 
   filename=$(basename -- "$faa_path")
   stem="${filename%.*}"
+  hmm="${filename%%[_-]*}"
 
-  scripts/align/muscle $faa_path "${output_dir}/$stem.faa"
-  scripts/align/mk-msa-vis "${output_dir}/$stem.faa" "${output_dir}/$stem.png"
-  # hmmbuild --amino "${output_dir}/$stem.hmm" "${output_dir}/$stem.faa"
-  # hmmlogo "${output_dir}/$stem.hmm" > "${output_dir}/$stem.logo"
+  hmm_path="${output_dir}/$hmm.hmm"
+  aln_path="${output_dir}/$stem.faa"
+  png_path="${output_dir}/$stem.png"
+  # echo $hmm_path
+  echo $aln_path
+
+  hmmfetch data/${module_id}_ko.hmm $hmm > $hmm_path
+  hmmalign --outformat A2M --trim $hmm_path $faa_path > $aln_path
+  # hmmalign does not create uniform length alignments that pymsavis requires
+  # scripts/align/mk-msa-vis $aln_path $png_path
+  rm $hmm_path
 done
