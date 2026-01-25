@@ -31,10 +31,13 @@ for cluster in clusters:
         if protein.protein_accession not in alignments:
             continue
         aligned = alignments[protein.protein_accession].upper()
-        # when using hhmalign with --trim, the following assertion is no longer true
-        # assert aligned.replace("-", "").replace("X","") == protein.sequence.replace("X", "")
 
-        pro_pos = 0
+        protein_sequence = protein.sequence
+        aligned_no_gap = aligned.replace("-", "")
+        assert aligned_no_gap in protein_sequence
+        front_ntrimmed = protein_sequence.index(aligned_no_gap)
+
+        pro_pos = front_ntrimmed
         for aln_pos, aln in enumerate(aligned):
             # don't ignore X here - goal is to report protein positions that were aligned
             if aln != "-":

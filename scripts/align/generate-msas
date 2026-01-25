@@ -33,7 +33,7 @@ for faa_path in "$faa_dir"/*.faa; do
   echo $aln_path
 
   hmmfetch data/${module_id}_ko.hmm $hmm > $hmm_path
-  hmmalign --outformat A2M --trim $hmm_path $faa_path > $aln_path
+  hmmalign --trim --outformat A2M $hmm_path $faa_path > $aln_path
   # hmmalign does not create uniform length alignments that pymsavis requires
   # scripts/align/mk-msa-vis $aln_path $png_path
   rm $hmm_path
