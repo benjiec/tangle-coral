@@ -2,6 +2,7 @@ import os
 import uuid
 import argparse
 import subprocess
+from scripts.defaults import DefaultPath
 from needle.cluster import append_to_cluster_tsv, create_cluster_tsv, create_cluster_faa_files
 
 

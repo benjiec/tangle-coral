@@ -120,7 +120,7 @@ class AssignedClusters(object):
 
 class PutativeProteins(object):
 
-    def __init__(self, ko_id, evalue_threshold=1E-20):
+    def __init__(self, ko_id, evalue_threshold=1E-100):
         self.ko_id = ko_id
 
         con = duckdb.connect(":default:")
