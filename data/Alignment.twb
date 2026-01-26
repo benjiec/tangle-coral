@@ -887,20 +887,83 @@
       <style>
         <style-rule element='mark'>
           <encoding attr='color' field='[none:pfam_accession:nk]' type='palette'>
+            <map to='#499894'>
+              <bucket>&quot;PF00520.38&quot;</bucket>
+            </map>
             <map to='#4e79a7'>
               <bucket>%null%</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;PF13812.13&quot;</bucket>
             </map>
             <map to='#59a14f'>
               <bucket>&quot;PF16870.11&quot;</bucket>
             </map>
+            <map to='#59a14f'>
+              <bucket>&quot;PF20154.5&quot;</bucket>
+            </map>
             <map to='#76b7b2'>
               <bucket>&quot;PF16078.11&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;PF01124.24&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;PF00795.28&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;PF00117.35&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;PF20408.5&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;PF10294.16&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;PF13041.13&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;PF00012.27&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;PF06723.20&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;PF00226.37&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;PF01535.27&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;PF01596.24&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;PF09139.18&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;PF13646.13&quot;</bucket>
             </map>
             <map to='#e15759'>
               <bucket>&quot;PF02779.30&quot;</bucket>
             </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;PF00393.25&quot;</bucket>
+            </map>
             <map to='#f28e2b'>
               <bucket>&quot;PF00676.26&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;PF03446.22&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;PF00958.28&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;PF00069.32&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;PF17177.11&quot;</bucket>
             </map>
           </encoding>
           <encoding attr='color' field='[none:aa:nk]' type='palette'>
@@ -1062,33 +1125,6 @@
       </object-graph>
     </datasource>
   </datasources>
-  <shared-views>
-    <shared-view name='federated.11vkfcb0ao2ije1goa8rk181op37'>
-      <datasources>
-        <datasource caption='K00164' name='federated.11vkfcb0ao2ije1goa8rk181op37' />
-      </datasources>
-      <datasource-dependencies datasource='federated.11vkfcb0ao2ije1goa8rk181op37'>
-        <column caption='Aa' datatype='string' name='[aa]' role='dimension' type='nominal' />
-        <column caption='Cluster Id' datatype='string' name='[cluster_id]' role='dimension' type='nominal' />
-        <column-instance column='[aa]' derivation='None' name='[none:aa:nk]' pivot='key' type='nominal' />
-        <column-instance column='[cluster_id]' derivation='None' name='[none:cluster_id:nk]' pivot='key' type='nominal' />
-        <column-instance column='[parent_cluster_id]' derivation='None' name='[none:parent_cluster_id:nk]' pivot='key' type='nominal' />
-        <column caption='Parent Cluster Id' datatype='string' name='[parent_cluster_id]' role='dimension' type='nominal' />
-      </datasource-dependencies>
-      <filter class='categorical' column='[federated.11vkfcb0ao2ije1goa8rk181op37].[none:aa:nk]'>
-        <groupfilter function='except' user:ui-domain='relevant' user:ui-enumeration='exclusive' user:ui-marker='enumerate'>
-          <groupfilter function='level-members' level='[none:aa:nk]' />
-          <groupfilter function='member' level='[none:aa:nk]' member='&quot;X&quot;' />
-        </groupfilter>
-      </filter>
-      <filter class='categorical' column='[federated.11vkfcb0ao2ije1goa8rk181op37].[none:cluster_id:nk]'>
-        <groupfilter function='member' level='[none:cluster_id:nk]' member='&quot;0f2f6218&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
-      </filter>
-      <filter class='categorical' column='[federated.11vkfcb0ao2ije1goa8rk181op37].[none:parent_cluster_id:nk]'>
-        <groupfilter function='member' level='[none:parent_cluster_id:nk]' member='&quot;K00164-manual&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
-      </filter>
-    </shared-view>
-  </shared-views>
   <worksheets>
     <worksheet name='By Protein'>
       <table>
@@ -1123,6 +1159,18 @@
             <column caption='Protein Accession' datatype='string' name='[protein_accession]' role='dimension' type='nominal' />
             <column caption='Protein Pos' datatype='integer' name='[protein_pos]' role='measure' type='quantitative' />
           </datasource-dependencies>
+          <filter class='categorical' column='[federated.11vkfcb0ao2ije1goa8rk181op37].[none:aa:nk]' filter-group='6'>
+            <groupfilter function='except' user:ui-domain='relevant' user:ui-enumeration='exclusive' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[none:aa:nk]' />
+              <groupfilter function='member' level='[none:aa:nk]' member='&quot;X&quot;' />
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.11vkfcb0ao2ije1goa8rk181op37].[none:cluster_id:nk]' filter-group='5'>
+            <groupfilter function='member' level='[none:cluster_id:nk]' member='&quot;0f2f6218&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.11vkfcb0ao2ije1goa8rk181op37].[none:parent_cluster_id:nk]' filter-group='4'>
+            <groupfilter function='member' level='[none:parent_cluster_id:nk]' member='&quot;K00164-manual&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
           <slices>
             <column>[federated.11vkfcb0ao2ije1goa8rk181op37].[none:parent_cluster_id:nk]</column>
             <column>[federated.11vkfcb0ao2ije1goa8rk181op37].[none:cluster_id:nk]</column>
@@ -1212,7 +1260,19 @@
             <column-instance column='[Calculation_2095150570774528]' derivation='Sum' name='[sum:Calculation_2095150570774528:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Calculation_2095150574411785]' derivation='User' name='[usr:Calculation_2095150574411785:qk]' pivot='key' type='quantitative' />
           </datasource-dependencies>
+          <filter class='categorical' column='[federated.11vkfcb0ao2ije1goa8rk181op37].[none:aa:nk]' filter-group='6'>
+            <groupfilter function='except' user:ui-domain='relevant' user:ui-enumeration='exclusive' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[none:aa:nk]' />
+              <groupfilter function='member' level='[none:aa:nk]' member='&quot;X&quot;' />
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.11vkfcb0ao2ije1goa8rk181op37].[none:cluster_id:nk]' filter-group='5'>
+            <groupfilter function='member' level='[none:cluster_id:nk]' member='&quot;0f2f6218&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
           <computed-sort column='[federated.11vkfcb0ao2ije1goa8rk181op37].[none:ko_match:nk]' direction='DESC' using='[federated.11vkfcb0ao2ije1goa8rk181op37].[sum:Calculation_2095150570774528:qk]' />
+          <filter class='categorical' column='[federated.11vkfcb0ao2ije1goa8rk181op37].[none:parent_cluster_id:nk]' filter-group='4'>
+            <groupfilter function='member' level='[none:parent_cluster_id:nk]' member='&quot;K00164-manual&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
           <computed-sort column='[federated.11vkfcb0ao2ije1goa8rk181op37].[none:pfam_accession:nk]' direction='ASC' using='[federated.11vkfcb0ao2ije1goa8rk181op37].[cnt:pfam_accession:qk]' />
           <slices>
             <column>[federated.11vkfcb0ao2ije1goa8rk181op37].[none:parent_cluster_id:nk]</column>
@@ -1338,6 +1398,18 @@
             <column caption='Protein Accession' datatype='string' name='[protein_accession]' role='dimension' type='nominal' />
             <column caption='Protein Pos' datatype='integer' name='[protein_pos]' role='measure' type='quantitative' />
           </datasource-dependencies>
+          <filter class='categorical' column='[federated.11vkfcb0ao2ije1goa8rk181op37].[none:aa:nk]' filter-group='6'>
+            <groupfilter function='except' user:ui-domain='relevant' user:ui-enumeration='exclusive' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[none:aa:nk]' />
+              <groupfilter function='member' level='[none:aa:nk]' member='&quot;X&quot;' />
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.11vkfcb0ao2ije1goa8rk181op37].[none:cluster_id:nk]' filter-group='5'>
+            <groupfilter function='member' level='[none:cluster_id:nk]' member='&quot;0f2f6218&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.11vkfcb0ao2ije1goa8rk181op37].[none:parent_cluster_id:nk]' filter-group='4'>
+            <groupfilter function='member' level='[none:parent_cluster_id:nk]' member='&quot;K00164-manual&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
           <slices>
             <column>[federated.11vkfcb0ao2ije1goa8rk181op37].[none:parent_cluster_id:nk]</column>
             <column>[federated.11vkfcb0ao2ije1goa8rk181op37].[none:cluster_id:nk]</column>
@@ -1373,7 +1445,7 @@
     </worksheet>
   </worksheets>
   <windows source-height='30'>
-    <window class='worksheet' maximized='true' name='By Protein'>
+    <window class='worksheet' name='By Protein'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -1395,8 +1467,6 @@
         </edge>
         <edge name='right'>
           <strip size='160'>
-            <card mode='dropdown' param='[federated.11vkfcb0ao2ije1goa8rk181op37].[none:parent_cluster_id:nk]' type='filter' />
-            <card mode='dropdown' param='[federated.11vkfcb0ao2ije1goa8rk181op37].[none:cluster_id:nk]' type='filter' values='relevant' />
             <card pane-specification-id='0' param='[federated.11vkfcb0ao2ije1goa8rk181op37].[none:aa:nk]' type='color' />
           </strip>
         </edge>
@@ -1473,7 +1543,7 @@
       </viewpoint>
       <simple-id uuid='{A49AF071-F898-4B10-968B-13C890B91422}' />
     </window>
-    <window class='worksheet' name='Pfam vs Alignment'>
+    <window class='worksheet' maximized='true' name='Pfam vs Alignment'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -1495,8 +1565,6 @@
         </edge>
         <edge name='right'>
           <strip size='160'>
-            <card mode='checkdropdown' param='[federated.11vkfcb0ao2ije1goa8rk181op37].[none:parent_cluster_id:nk]' type='filter' />
-            <card mode='checkdropdown' param='[federated.11vkfcb0ao2ije1goa8rk181op37].[none:cluster_id:nk]' type='filter' values='relevant' />
             <card pane-specification-id='0' param='[federated.11vkfcb0ao2ije1goa8rk181op37].[none:pfam_accession:nk]' type='color' />
           </strip>
         </edge>

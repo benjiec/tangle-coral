@@ -15,6 +15,9 @@ def cluster_fn(module, ko, cluster_id):
     if os.path.exists(fn):
         return fn
     # print(f"{fn} does not exist")
+    fn = f"data/{module}_results/faa/{cluster_id}.faa"
+    if os.path.exists(fn):
+        return fn
     raise Exception("Cannot find cluster FAA file")
 
 
