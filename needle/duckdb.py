@@ -105,7 +105,8 @@ class AssignedClusters(object):
                    ko_match.hmm_end as 'ko_hmm_end',
                    ko_match.protein_start as 'ko_protein_start',
                    ko_match.protein_end as 'ko_protein_end',
-                   ko_match.dom_evalue as 'ko_evalue'
+                   ko_match.dom_evalue as 'ko_evalue',
+                   ko_match.dom_score as 'ko_score'
               FROM needle.clusters
               JOIN needle.ko_match ON ko_match.protein_accession = clusters.member_accession AND ko_match.hmm_accession = '%s'
         """ % ko_id).df()

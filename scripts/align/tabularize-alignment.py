@@ -57,6 +57,7 @@ for cluster in clusters:
                     ko_accession = None if ko_match is None else ko_match['ko_accession'],
                     ko_match = None if ko_match is None else f"{ko_match['ko_hmm_start']}-{ko_match['ko_hmm_end']}",
                     ko_evalue = None if ko_match is None else ko_match['ko_evalue'],
+                    ko_score = None if ko_match is None else ko_match['ko_score'],
                     pfam_accession = None if pfam_match is None else pfam_match['pfam_accession'],
                     pfam_match = None if pfam_match is None else f"{pfam_match['pfam_hmm_start']}-{pfam_match['pfam_hmm_end']}",
                     pfam_evalue = None if pfam_match is None else pfam_match['pfam_evalue'],
