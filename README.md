@@ -140,6 +140,14 @@ describing the TCA cycle. Replace this number with other module IDs as
 appropriate.
 
 
+-### Generating Query .hmm for a KEGG Module
+
+Use `hmmfetch` to create a smaller HMM database for the KOs of a module. Use
+the following naming convention but change the module ID: `data/m00009_ko.hmm`.
+This smaller HMM is used during protein detection. Full KO HMM dataset is used
+during classification.
+
+
 ### Detect Orthologs from Genomes
 
 The following script puts outputs in `data/m00009_results` directory
