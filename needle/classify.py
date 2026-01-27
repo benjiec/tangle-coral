@@ -71,6 +71,9 @@ class ClassifyTSV(object):
         qacf = lambda row: row["query_accession"].strip() if row["query_accession"].strip() and row["query_accession"].strip() != "-" else row["query_name"].strip()
 
         if requires_prefix_match is True:
+            # in this case, it's possible a protein appears in the output TSV file without dom rank == 1 rows
+            #
+            printf("Only classification to HMM used for protein detection will be saved")
             hmm_rows = [row for row in hmm_rows if qacf(row).startswith(tacf(row))]
 
         sorted_score_for_protein = {}
