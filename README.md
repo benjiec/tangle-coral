@@ -86,7 +86,7 @@ Download the HMM profiles from `https://www.genome.jp/ftp/db/kofam/`. The
 Concatenate all the .hmm files together, e.g.
 
 ```
-cat profiles/*.hmm > kegg_downloads/ko.hmm
+cat profiles/*.hmm > kegg-downloads/ko.hmm
 ```
 
 Also, download the `ko_list.gz` file from the above location into
@@ -140,12 +140,6 @@ describing the TCA cycle. Replace this number with other module IDs as
 appropriate.
 
 
-### Generating Query .hmm for a KEGG Module
-
-Use `hmmfetch` to create a smaller HMM database for the KOs of a module. Use
-the following naming convention but change the module ID: `data/m00009_ko.hmm`.
-
-
 ### Detect Orthologs from Genomes
 
 The following script puts outputs in `data/m00009_results` directory
@@ -169,7 +163,7 @@ found by Needle.
 ```
 PYTHONPATH=. python3 scripts/detect/compare-gff-with-match.py \
   --best-hmm \
-  data/m00009_ko.hmm GCF_002042975.1 data/m00009_results/proteins.tsv \
+  kegg-downloads/ko.hmm GCF_002042975.1 data/m00009_results/proteins.tsv \
   --output-file <filename>
 ```
 
@@ -180,8 +174,7 @@ ortholog, then Pfam domains.
 
 ```
 PYTHONPATH=. python3 scripts/classify/classify.py \
-  --disable-cutoff-ga --requires-prefix-match \
-  data/m00009_ko.hmm m00009
+  --disable-cutoff-ga kegg-downloads/ko.hmm m00009
 PYTHONPATH=. python3 scripts/classify/classify.py pfam-downloads/Pfam-A.hmm m00009
 ```
 
@@ -195,7 +188,7 @@ added to the same output TSV, using the following two commands.
 PYTHONPATH=. python3 scripts/classify/classify.py \
   --disable-cutoff-ga \
   --genome-accession GCF_932526225.1 \
-  data/m00009_ko.hmm m00009
+  kegg-downloads/ko.hmm m00009
 PYTHONPATH=. python3 scripts/classify/classify.py \
   --filter-by-prev-output \
   --genome-accession GCF_932526225.1 \
@@ -251,7 +244,7 @@ each ortholog, based on classification results. The FASTA files are in
 ```
 rm data/m00009_results/faa/*
 PYTHONPATH=. python3 scripts/classify/assign.py \
-  data/m00009_ko.hmm --additional-genome-accession data/genomes_ref.txt
+  kegg-downloads/ko.hmm --additional-genome-accession data/genomes_ref.txt
 ```
 
 Note that different scoring threshold criterias are used for detected proteins
