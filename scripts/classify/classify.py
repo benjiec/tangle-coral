@@ -18,6 +18,7 @@ ap.add_argument("--genome-accession", type=str, default=None)
 ap.add_argument("--fasta-file", type=str, default=None)
 ap.add_argument("--filter-by-prev-output", action="store_true", default=False)
 ap.add_argument("--requires-prefix-match", action="store_true", default=False)
+ap.add_argument("--cpu", type=int, default=None)
 args = ap.parse_args()
 
 if "Pfam-A.hmm" in args.hmm_file and args.disable_cutoff_ga:
@@ -86,7 +87,7 @@ if args.filter_by_prev_output and os.path.exists(output_tsv):
     proteins_faa = tmpf.name
     tmp_fn = tmpf.name
 
-classify(args.hmm_file, proteins_faa, cutoff_ga, output_tsv, protein_genome_accession_dict, score_threshold_dict, requires_prefix_match = args.requires_prefix_match)
+classify(args.hmm_file, proteins_faa, cutoff_ga, output_tsv, protein_genome_accession_dict, score_threshold_dict, requires_prefix_match = args.requires_prefix_match, cpu = args.cpu)
 
 if tmp_fn:
     os.remove(tmp_fn)

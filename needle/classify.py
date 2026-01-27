@@ -111,9 +111,9 @@ class ClassifyTSV(object):
                 writer.writerow(data)
 
 
-def classify(hmm_file, proteins_faa, cutoff_ga, output_tsv_path, protein_genome_accession_dict, score_threshold_dict, hmm_db_name = None, requires_prefix_match = False):
+def classify(hmm_file, proteins_faa, cutoff_ga, output_tsv_path, protein_genome_accession_dict, score_threshold_dict, hmm_db_name = None, requires_prefix_match = False, cpu = None):
 
-    hmm_rows = hmmscan_file(hmm_file, proteins_faa, cutoff=cutoff_ga)
+    hmm_rows = hmmscan_file(hmm_file, proteins_faa, cutoff=cutoff_ga, cpu=cpu)
     if hmm_db_name is None:
         hmm_db_name = Path(hmm_file).stem
     ClassifyTSV.to_tsv_from_hmmscan_rows(hmm_db_name, output_tsv_path, hmm_rows, protein_genome_accession_dict, score_threshold_dict,

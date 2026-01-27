@@ -315,12 +315,14 @@ def hmmsearch_sequence_dict(hmm_file_name, fasta_dict, cutoff=False, gap_removal
         return res
 
 
-def hmmscan_file(hmm_file_name, fasta_path, cutoff=True):
+def hmmscan_file(hmm_file_name, fasta_path, cutoff=True, cpu=None):
     with tempfile.TemporaryDirectory() as tmpdir:
         domtbl_path = os.path.join(tmpdir, "out.domtbl")
+        cmd = ["hmmscan"]
+        if cpu is not None:
+            cmd.extend(["--cpu", str(cpu)])
         if cutoff:
-            cmd = ["hmmscan", "--cut_ga", "--domtblout", domtbl_path, hmm_file_name, fasta_path]
-        else:
-            cmd = ["hmmscan", "--domtblout", domtbl_path, hmm_file_name, fasta_path]
+            cmd.append("--cut_ga")
+        cmd.extend(["--domtblout", domtbl_path, hmm_file_name, fasta_path])
         run_command(cmd)
         return parse_hmmsearch_domtbl(domtbl_path)

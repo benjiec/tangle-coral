@@ -174,8 +174,8 @@ ortholog, then Pfam domains.
 
 ```
 PYTHONPATH=. python3 scripts/classify/classify.py \
-  --disable-cutoff-ga kegg-downloads/ko.hmm m00009
-PYTHONPATH=. python3 scripts/classify/classify.py pfam-downloads/Pfam-A.hmm m00009
+  --cpu 4 --disable-cutoff-ga kegg-downloads/ko.hmm m00009
+PYTHONPATH=. python3 scripts/classify/classify.py --cpu 4 pfam-downloads/Pfam-A.hmm m00009
 ```
 
 Classification outputs appear in `data/m00009_results/classify.tsv`. If you

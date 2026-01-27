@@ -5,7 +5,7 @@
 # Loop through each line of the file
 while IFS= read -r acc; do
 
-PYTHONPATH=. python3 scripts/classify/classify.py --disable-cutoff-ga --genome-accession $acc kegg-downloads/ko.hmm m00009
-PYTHONPATH=. python3 scripts/classify/classify.py --filter-by-prev-output --genome-accession $acc pfam-downloads/Pfam-A.hmm m00009
+PYTHONPATH=. python3 scripts/classify/classify.py --cpu 4 --disable-cutoff-ga --genome-accession $acc kegg-downloads/ko.hmm m00009
+PYTHONPATH=. python3 scripts/classify/classify.py --cpu 4 --filter-by-prev-output --genome-accession $acc pfam-downloads/Pfam-A.hmm m00009
 
 done < $1
