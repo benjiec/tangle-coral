@@ -16,9 +16,11 @@ def load(module_id):
     duckdb.execute("CREATE TABLE needle.pfams AS SELECT * FROM 'data/Pfam-A.clans.tsv'")
 
     # module specific
+    duckdb.execute(f"CREATE TABLE needle.proteins AS SELECT * FROM 'data/{module_id}_results/proteins.tsv'")
     duckdb.execute(f"CREATE TABLE needle.ko_match AS SELECT * FROM 'data/{module_id}_results/candidate_ko.tsv'")
     duckdb.execute(f"CREATE TABLE needle.pfam_match AS SELECT * FROM 'data/{module_id}_results/candidate_pfam.tsv'")
     duckdb.execute(f"CREATE TABLE needle.clusters AS SELECT * FROM read_csv_auto('data/{module_id}_results/clusters.tsv', normalize_names=TRUE)")
+    duckdb.execute(f"CREATE TABLE needle.protein_fragments AS SELECT * FROM 'data/{module_id}_results/protein_fragments.tsv'")
 
     # used to generate the above tables
 
@@ -79,6 +81,21 @@ class CandidateClassifiedProteins(object):
              WHERE hmm_db = 'ko'
                AND (classify.hmm_accession = filtered.hmm_accession OR classify.dom_evalue < %s)
           """ % (self.selection_sql, incl_evalue_threshold)
+
+        df = self.con.sql(sql).df()
+        return df
+
+    def ko_assignments(self, score_to_threshold_ratio_detected, score_to_threshold_ratio_reference):
+        sql = """
+            SELECT DISTINCT classify.protein_accession, classify.genome_accession, classify.hmm_accession
+              FROM needle.classify
+              JOIN (%s) as filtered ON classify.protein_accession = filtered.protein_accession AND classify.genome_accession = filtered.genome_accession
+             WHERE hmm_db = 'ko'
+               AND dom_rank_for_protein = 1
+               AND (score_threshold = '-' OR
+                    (LEFT(classify.protein_accession, 6) == classify.hmm_accession AND CAST(dom_score AS FLOAT) / CAST(score_threshold AS FLOAT) >= %s) OR
+                    (LEFT(classify.protein_accession, 6) != classify.hmm_accession AND CAST(dom_score AS FLOAT) / CAST(score_threshold AS FLOAT) >= %s))
+          """ % (self.selection_sql, score_to_threshold_ratio_detected, score_to_threshold_ratio_reference)
 
         df = self.con.sql(sql).df()
         return df

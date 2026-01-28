@@ -38,6 +38,16 @@ match_sorter = lambda d: (d['genome_accession'], d['protein_accession'], d['hmm_
 ko_matches = sorted(ko_matches, key=match_sorter)
 pfam_matches = sorted(pfam_matches, key=match_sorter)
 
+ko_assignments = candidate_proteins.ko_assignments(0.9, 1.0)
+ko_assignments = ko_assignments.to_dict(orient='records')
+ko_assignments = {(d['protein_accession'], d['genome_accession']):d['hmm_accession'] for d in ko_assignments}
+for ko_match in ko_matches:
+    k = (ko_match['protein_accession'], ko_match['genome_accession'])
+    if k in ko_assignments and ko_assignments[k] == ko_match['hmm_accession']:
+        ko_match['assignment_status'] = 'assigned'
+    else:
+        ko_match['assignment_status'] = 'putative'
+
 output_ko = f"data/{args.module_id}_results/candidate_ko.tsv"
 output_pf = f"data/{args.module_id}_results/candidate_pfam.tsv"
 write_tsv_from_records(output_ko, ko_matches)
