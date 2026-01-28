@@ -39,6 +39,13 @@ def write_tsv_from_records(fn, records):
             writer.writerow(rec)
 
 
+def module_ko_ids(module_id):
+    con = duckdb.connect(":default:")
+    sql = "SELECT identifier FROM needle.module_steps WHERE module_id = '%s'" % module_id.upper()
+    df = con.sql(sql).df()
+    return list(df['identifier'].drop_duplicates())
+
+
 class CandidateClassifiedProteins(object):
 
     def _selection_sql(self, evalue_threshold):

@@ -6,7 +6,6 @@ import os
 import csv
 import itertools
 from pathlib import Path
-from .seq import read_fasta_as_dict, write_fasta_from_dict, extract_subsequence
 from .hmm import hmmscan_file
 
 
@@ -121,49 +120,3 @@ def classify(hmm_file, proteins_faa, cutoff_ga, output_tsv_path, protein_genome_
         hmm_db_name = Path(hmm_file).stem
     ClassifyTSV.to_tsv_from_hmmscan_rows(hmm_db_name, output_tsv_path, hmm_rows, protein_genome_accession_dict, score_threshold_dict,
                                          requires_prefix_match = requires_prefix_match)
-
-
-def group_by_assignment(classify_rows, ortholog_hmm_db_name, score_to_threshold_ratio):
-
-    # assignment criteria
-    # hmm_db == <ortholog_hmm_db_name> AND
-    # dom_rank_for_protein == 1 AND
-    # dom_score / score_threshold >= <score_to_threshold_ratio>
-
-    assignment_rows = [row for row in classify_rows if row[ClassifyTSV.HDR_HMM_DB] == ortholog_hmm_db_name and \
-                                                       row[ClassifyTSV.HDR_DOM_RANK] == 1 and \
-                                                       row[ClassifyTSV.HDR_DOM_SCORE] / row[ClassifyTSV.HDR_SCORE_THRESHOLD] >= score_to_threshold_ratio]
-                 
-    assignments = {row[ClassifyTSV.HDR_PROTEIN_ACCESSION]: row[ClassifyTSV.HDR_HMM_ACCESSION] for row in assignment_rows}
-    assigned_rows = [row for row in classify_rows if (row[ClassifyTSV.HDR_HMM_DB] != ortholog_hmm_db_name and \
-                                                      row[ClassifyTSV.HDR_PROTEIN_ACCESSION] in assignments) or \
-                                                     (row[ClassifyTSV.HDR_HMM_DB] == ortholog_hmm_db_name and \
-                                                      row[ClassifyTSV.HDR_PROTEIN_ACCESSION] in assignments and \
-                                                      row[ClassifyTSV.HDR_HMM_ACCESSION] == assignments[row[ClassifyTSV.HDR_PROTEIN_ACCESSION]])]
-
-    keyf = lambda row: assignments[row[ClassifyTSV.HDR_PROTEIN_ACCESSION]]
-    assigned_rows = sorted(assigned_rows, key=keyf)
-    return itertools.groupby(assigned_rows, keyf)
-
-
-def assign_ko(classify_rows, ortholog_hmm_db_name, proteins_faa, output_dir, score_to_threshold_ratio = 0.9):
-
-    if type(proteins_faa) == type(""):
-        proteins_faa = [proteins_faa]
-
-    proteins_seq_dict = {}
-    for faa_file in proteins_faa:
-        proteins_seq_dict |= read_fasta_as_dict(faa_file)
-
-    # only treat those rows we have sequences for
-    classify_rows = [row for row in classify_rows if row[ClassifyTSV.HDR_PROTEIN_ACCESSION] in proteins_seq_dict]
-    assignments = group_by_assignment(classify_rows, ortholog_hmm_db_name, score_to_threshold_ratio)
-
-    for ko_id, ko_rows in assignments:
-        ko_rows = list(ko_rows)
-        ko_fasta_prefix = os.path.join(output_dir, ko_id)
-        protein_ids = set([row[ClassifyTSV.HDR_PROTEIN_ACCESSION] for row in ko_rows])
-
-        # protein fasta - just protein sequences assigned to KO
-        ko_proteins = {k:v for k,v in proteins_seq_dict.items() if k in protein_ids}
-        write_fasta_from_dict(ko_proteins, ko_fasta_prefix+".faa", append=True)

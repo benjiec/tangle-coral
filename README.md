@@ -251,8 +251,7 @@ each ortholog, based on classification results. The FASTA files are in
 
 ```
 rm data/m00009_results/faa/*
-PYTHONPATH=. python3 scripts/classify/assign.py \
-  kegg-downloads/ko.hmm --additional-genome-accession data/genomes_ref.txt
+PYTHONPATH=. python3 scripts/classify/assign.py m00009
 ```
 
 Note that different scoring threshold criterias are used for detected proteins
