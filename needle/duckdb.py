@@ -4,17 +4,74 @@ import pandas as pd
 
 def load(module_id):
     duckdb.execute("CREATE SCHEMA needle")
-    duckdb.execute("CREATE TABLE needle.pfams AS SELECT * FROM 'data/Pfam-A.clans.tsv'")
+
+    # used in Tableau and scripts
+
+    # XXX change
+    duckdb.execute(f"CREATE TABLE needle.ko_match AS SELECT * FROM 'data/{module_id}_results/classify.tsv' WHERE hmm_db = 'ko'")
+    # XXX change
+    duckdb.execute(f"CREATE TABLE needle.pfam_match AS SELECT * FROM 'data/{module_id}_results/classify.tsv' WHERE hmm_db = 'Pfam-A'")
+
+    duckdb.execute("CREATE TABLE needle.genomes AS SELECT * FROM read_csv_auto('data/genomes.tsv', normalize_names=TRUE)")
+    duckdb.execute("CREATE TABLE needle.ko AS SELECT * FROM read_csv_auto('data/ko.tsv', normalize_names=TRUE)")
     duckdb.execute("CREATE TABLE needle.module_steps AS SELECT * FROM 'data/module_defs.csv'")
     duckdb.execute("CREATE TABLE needle.modules AS SELECT * FROM 'data/modules.tsv'")
-    duckdb.execute("CREATE TABLE needle.ko AS SELECT * FROM read_csv_auto('data/ko.tsv', normalize_names=TRUE)")
-    duckdb.execute("CREATE TABLE needle.genomes AS SELECT * FROM read_csv_auto('data/genomes.tsv', normalize_names=TRUE)")
-    duckdb.execute(f"CREATE TABLE needle.ko_match AS SELECT * FROM 'data/{module_id}_results/classify.tsv' WHERE hmm_db = '{module_id}_ko'")
-    duckdb.execute(f"CREATE TABLE needle.pfam_match AS SELECT * FROM 'data/{module_id}_results/classify.tsv' WHERE hmm_db = 'Pfam-A'")
-    duckdb.execute(f"CREATE TABLE needle.protein_names AS SELECT * FROM 'data/{module_id}_results/protein_names.tsv'")
-    duckdb.execute(f"CREATE TABLE needle.detected AS SELECT * FROM 'data/{module_id}_results/proteins.tsv'")
-    duckdb.execute(f"CREATE TABLE needle.ncbi_exons AS SELECT * FROM 'data/{module_id}_results/protein_ncbi.tsv'")
+    duckdb.execute("CREATE TABLE needle.pfams AS SELECT * FROM 'data/Pfam-A.clans.tsv'")
     duckdb.execute(f"CREATE TABLE needle.clusters AS SELECT * FROM read_csv_auto('data/{module_id}_results/clusters.tsv', normalize_names=TRUE)")
+
+    # used to generate the above tables
+
+    duckdb.execute(f"CREATE TABLE needle.classify AS SELECT * FROM 'data/{module_id}_results/classify.tsv'")
+    duckdb.execute(f"CREATE TABLE needle.protein_names AS SELECT * FROM 'data/{module_id}_results/protein_names.tsv'")
+    duckdb.execute(f"CREATE TABLE needle.detected AS SELECT * FROM 'data/{module_id}_results/protein_detected.tsv'")
+    duckdb.execute(f"CREATE TABLE needle.ncbi_exons AS SELECT * FROM 'data/{module_id}_results/protein_ncbi.tsv'")
+
+
+class CandidateClassifiedProteins(object):
+
+    def _selection_sql(self, evalue_threshold):
+        return """SELECT DISTINCT protein_accession, genome_accession, hmm_accession
+                    FROM needle.classify
+                   WHERE hmm_db = 'ko'
+                   GROUP BY protein_accession, genome_accession, hmm_accession
+                  HAVING MIN(dom_evalue) < %s""" % evalue_threshold
+
+    def __init__(self, evalue_threshold=1E-80):
+        self.con = duckdb.connect(":default:")
+        self.selection_sql = self._selection_sql(evalue_threshold)
+
+    def protein_genome_accessions(self):
+        df = self.con.sql(self.selection_sql).df()
+        unique_pairs = df[['protein_accession','genome_accession']].drop_duplicates()
+        return list(unique_pairs.itertuples(index=False, name=None))
+
+    def pfam_matches(self):
+        sql = """
+            SELECT DISTINCT classify.protein_accession,
+                   classify.genome_accession,
+                   hmm_db, classify.hmm_accession, hmm_start, hmm_end, protein_start, protein_end,
+                   dom_evalue_cond, dom_evalue, dom_score, score_threshold, dom_rank_for_protein
+              FROM needle.classify
+              JOIN (%s) as filtered ON classify.protein_accession = filtered.protein_accession AND classify.genome_accession = filtered.genome_accession
+             WHERE hmm_db = 'Pfam-A'""" % self.selection_sql
+
+        df = self.con.sql(sql).df()
+        return df
+
+    def ko_matches(self, incl_evalue_threshold=1E-10):
+        sql = """
+            SELECT DISTINCT classify.protein_accession,
+                   classify.genome_accession,
+                   hmm_db, classify.hmm_accession, hmm_start, hmm_end, protein_start, protein_end,
+                   dom_evalue_cond, dom_evalue, dom_score, score_threshold, dom_rank_for_protein
+              FROM needle.classify
+              JOIN (%s) as filtered ON classify.protein_accession = filtered.protein_accession AND classify.genome_accession = filtered.genome_accession
+             WHERE hmm_db = 'ko'
+               AND (classify.hmm_accession = filtered.hmm_accession OR classify.dom_evalue < %s)
+          """ % (self.selection_sql, incl_evalue_threshold)
+
+        df = self.con.sql(sql).df()
+        return df
 
 
 class ProteinMatches(object):
@@ -119,7 +176,7 @@ class AssignedClusters(object):
         return clusters
 
 
-class PutativeProteins(object):
+class ToUpdate_PutativeProteins(object):
 
     def __init__(self, ko_id, evalue_threshold=1E-100):
         self.ko_id = ko_id

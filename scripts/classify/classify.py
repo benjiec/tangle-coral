@@ -58,8 +58,8 @@ elif args.genome_accession:
     protein_genome_accession_dict = { k: args.genome_accession for k in proteins_fasta.keys() }
 
 else:    
-    proteins_faa = f"data/{args.module_id}_results/proteins.faa"
-    proteins_tsv = f"data/{args.module_id}_results/proteins.tsv"
+    proteins_faa = f"data/{args.module_id}_results/protein_detected.faa"
+    proteins_tsv = f"data/{args.module_id}_results/protein_detected.tsv"
     if not os.path.exists(proteins_faa) or not os.path.exists(proteins_tsv):
         print(f"Cannot find module assets in data/{args.module_id}_results")
         exit(-1)

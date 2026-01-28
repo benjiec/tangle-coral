@@ -44,8 +44,8 @@ def main():
             export_protein_hits(
                 args.genome_accession,
                 cleaned_protein_matches,
-                args.output_dir+"/proteins.faa",
-                args.output_dir+"/proteins.tsv"
+                args.output_dir+"/protein_detected.faa",
+                args.output_dir+"/protein_detected.tsv"
             )
 
     finally:
