@@ -91,8 +91,8 @@ class CandidateClassifiedProteins(object):
                    MAX(CASE WHEN ncbi_exons.target_accession IS NULL THEN 'hmm-detected' ELSE 'ncbi-reference' END) as 'proteome_type',
                    MAX(protein_names.name) as 'protein_name'
               FROM (%s) as filtered
-         LEFT JOIN needle.ncbi_exons ON filtered.protein_accession = ncbi_exons.protein_hit_id
-         LEFT JOIN needle.detected ON filtered.protein_accession = detected.protein_hit_id
+         LEFT JOIN needle.ncbi_exons ON filtered.protein_accession = ncbi_exons.protein_hit_id AND filtered.genome_accession = ncbi_exons.genome_accession
+         LEFT JOIN needle.detected ON filtered.protein_accession = detected.protein_hit_id AND filtered.genome_accession = detected.genome_accession
          LEFT JOIN needle.protein_names ON filtered.protein_accession = protein_names.protein_accession
              GROUP BY filtered.protein_accession, filtered.genome_accession
           """ % self.selection_sql
@@ -100,7 +100,39 @@ class CandidateClassifiedProteins(object):
         df = self.con.sql(sql).df()
         return df
 
+    def ncbi_fragments(self):
+        sql = """
+            SELECT DISTINCT ncbi_exons.protein_hit_id,
+                   ncbi_exons.genome_accession,
+                   target_accession,
+                   target_start,
+                   target_end,
+                   query_accession,
+                   query_start,
+                   query_end  
+              FROM (%s) as filtered
+              JOIN needle.ncbi_exons ON filtered.protein_accession = ncbi_exons.protein_hit_id AND filtered.genome_accession = ncbi_exons.genome_accession
+          """ % self.selection_sql
 
+        df = self.con.sql(sql).df()
+        return df
+
+    def detected_fragments(self):
+        sql = """
+            SELECT DISTINCT detected.protein_hit_id,
+                   detected.genome_accession,
+                   target_accession,
+                   target_start,
+                   target_end,
+                   query_accession,
+                   query_start,
+                   query_end  
+              FROM (%s) as filtered
+              JOIN needle.detected ON filtered.protein_accession = detected.protein_hit_id AND filtered.genome_accession = detected.genome_accession
+          """ % self.selection_sql
+
+        df = self.con.sql(sql).df()
+        return df
 
 
 class ProteinMatches(object):

@@ -28,7 +28,7 @@ if args.additional_genome_accession:
 load(args.module_id)
 candidate_proteins = CandidateClassifiedProteins()
 
-""" THIS WORKS
+# matches
 ko_matches = candidate_proteins.ko_matches()
 ko_matches = ko_matches.to_dict(orient='records')
 pfam_matches = candidate_proteins.pfam_matches()
@@ -42,8 +42,8 @@ output_ko = f"data/{args.module_id}_results/candidate_ko.tsv"
 output_pf = f"data/{args.module_id}_results/candidate_pfam.tsv"
 write_tsv_from_records(output_ko, ko_matches)
 write_tsv_from_records(output_pf, pfam_matches)
-"""
 
+# protein manifest
 proteins = candidate_proteins.proteins()
 proteins = proteins.to_dict(orient='records')
 
@@ -52,6 +52,19 @@ proteins = sorted(proteins, key=manifest_sorter)
 
 output_manifest = f"data/{args.module_id}_results/proteins.tsv"
 write_tsv_from_records(output_manifest, proteins)
+
+# fragments
+ncbi_fragments = candidate_proteins.ncbi_fragments()
+ncbi_fragments = ncbi_fragments.to_dict(orient='records')
+detected_fragments = candidate_proteins.detected_fragments()
+detected_fragments = detected_fragments.to_dict(orient='records')
+fragments = ncbi_fragments+detected_fragments
+
+fragments_sorter = lambda d: (d['genome_accession'], d['target_accession'], d['protein_hit_id'], d['query_accession'], d['target_start'])
+fragments = sorted(fragments, key=fragments_sorter)
+
+output_fragments = f"data/{args.module_id}_results/protein_fragments.tsv"
+write_tsv_from_records(output_fragments, fragments)
 
 
 
