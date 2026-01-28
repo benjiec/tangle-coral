@@ -1,3 +1,4 @@
+import csv
 import duckdb
 import pandas as pd
 
@@ -7,16 +8,16 @@ def load(module_id):
 
     # used in Tableau and scripts
 
-    # XXX change
-    duckdb.execute(f"CREATE TABLE needle.ko_match AS SELECT * FROM 'data/{module_id}_results/classify.tsv' WHERE hmm_db = 'ko'")
-    # XXX change
-    duckdb.execute(f"CREATE TABLE needle.pfam_match AS SELECT * FROM 'data/{module_id}_results/classify.tsv' WHERE hmm_db = 'Pfam-A'")
-
+    # generic
     duckdb.execute("CREATE TABLE needle.genomes AS SELECT * FROM read_csv_auto('data/genomes.tsv', normalize_names=TRUE)")
     duckdb.execute("CREATE TABLE needle.ko AS SELECT * FROM read_csv_auto('data/ko.tsv', normalize_names=TRUE)")
     duckdb.execute("CREATE TABLE needle.module_steps AS SELECT * FROM 'data/module_defs.csv'")
     duckdb.execute("CREATE TABLE needle.modules AS SELECT * FROM 'data/modules.tsv'")
     duckdb.execute("CREATE TABLE needle.pfams AS SELECT * FROM 'data/Pfam-A.clans.tsv'")
+
+    # module specific
+    duckdb.execute(f"CREATE TABLE needle.ko_match AS SELECT * FROM 'data/{module_id}_results/candidate_ko.tsv'")
+    duckdb.execute(f"CREATE TABLE needle.pfam_match AS SELECT * FROM 'data/{module_id}_results/candidate_pfam.tsv'")
     duckdb.execute(f"CREATE TABLE needle.clusters AS SELECT * FROM read_csv_auto('data/{module_id}_results/clusters.tsv', normalize_names=TRUE)")
 
     # used to generate the above tables
@@ -25,6 +26,15 @@ def load(module_id):
     duckdb.execute(f"CREATE TABLE needle.protein_names AS SELECT * FROM 'data/{module_id}_results/protein_names.tsv'")
     duckdb.execute(f"CREATE TABLE needle.detected AS SELECT * FROM 'data/{module_id}_results/protein_detected.tsv'")
     duckdb.execute(f"CREATE TABLE needle.ncbi_exons AS SELECT * FROM 'data/{module_id}_results/protein_ncbi.tsv'")
+
+
+def write_tsv_from_records(fn, records):
+    fieldnames = list(records[0].keys())
+    with open(fn, "w") as f:
+        writer = csv.DictWriter(f, fieldnames=fieldnames, delimiter='\t')
+        writer.writeheader()
+        for rec in records:
+            writer.writerow(rec)
 
 
 class CandidateClassifiedProteins(object):
@@ -72,6 +82,25 @@ class CandidateClassifiedProteins(object):
 
         df = self.con.sql(sql).df()
         return df
+
+    def proteins(self):
+        sql = """
+            SELECT DISTINCT filtered.protein_accession,
+                   filtered.genome_accession,
+                   MAX(IFNULL(ncbi_exons.target_accession,detected.target_accession)) as 'major_contig',
+                   MAX(CASE WHEN ncbi_exons.target_accession IS NULL THEN 'hmm-detected' ELSE 'ncbi-reference' END) as 'proteome_type',
+                   MAX(protein_names.name) as 'protein_name'
+              FROM (%s) as filtered
+         LEFT JOIN needle.ncbi_exons ON filtered.protein_accession = ncbi_exons.protein_hit_id
+         LEFT JOIN needle.detected ON filtered.protein_accession = detected.protein_hit_id
+         LEFT JOIN needle.protein_names ON filtered.protein_accession = protein_names.protein_accession
+             GROUP BY filtered.protein_accession, filtered.genome_accession
+          """ % self.selection_sql
+
+        df = self.con.sql(sql).df()
+        return df
+
+
 
 
 class ProteinMatches(object):

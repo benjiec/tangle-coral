@@ -1,9 +1,8 @@
 import os
-import csv
 import argparse
 from pathlib import Path
 from scripts.defaults import DefaultPath
-from needle.duckdb import load, CandidateClassifiedProteins
+from needle.duckdb import load, CandidateClassifiedProteins, write_tsv_from_records
 
 ap = argparse.ArgumentParser()
 ap.add_argument("module_id")
@@ -28,38 +27,31 @@ if args.additional_genome_accession:
 
 load(args.module_id)
 candidate_proteins = CandidateClassifiedProteins()
+
+""" THIS WORKS
 ko_matches = candidate_proteins.ko_matches()
-pfam_matches = candidate_proteins.pfam_matches()
-
-print(ko_matches)
-print(pfam_matches)
-
-sorter = lambda d: (d['genome_accession'], d['protein_accession'], d['hmm_db'], d['dom_rank_for_protein'], d['hmm_accession'], d['hmm_start'], d['hmm_end'])
-
 ko_matches = ko_matches.to_dict(orient='records')
-ko_matches = sorted(ko_matches, key=sorter)
-print(ko_matches[0])
-
+pfam_matches = candidate_proteins.pfam_matches()
 pfam_matches = pfam_matches.to_dict(orient='records')
-pfam_matches = sorted(pfam_matches, key=sorter)
-print(pfam_matches[0])
 
-fieldnames = list(ko_matches[0].keys())
+match_sorter = lambda d: (d['genome_accession'], d['protein_accession'], d['hmm_db'], d['dom_rank_for_protein'], d['hmm_accession'], d['hmm_start'], d['hmm_end'])
+ko_matches = sorted(ko_matches, key=match_sorter)
+pfam_matches = sorted(pfam_matches, key=match_sorter)
+
 output_ko = f"data/{args.module_id}_results/candidate_ko.tsv"
 output_pf = f"data/{args.module_id}_results/candidate_pfam.tsv"
+write_tsv_from_records(output_ko, ko_matches)
+write_tsv_from_records(output_pf, pfam_matches)
+"""
 
-with open(output_ko, "w") as f:
-    writer = csv.DictWriter(f, fieldnames=fieldnames, delimiter='\t')
-    writer.writeheader()
-    for rec in ko_matches:
-        writer.writerow(rec)
+proteins = candidate_proteins.proteins()
+proteins = proteins.to_dict(orient='records')
 
-with open(output_pf, "w") as f:
-    writer = csv.DictWriter(f, fieldnames=fieldnames, delimiter='\t')
-    writer.writeheader()
-    for rec in pfam_matches:
-        writer.writerow(rec)
+manifest_sorter = lambda d: (d['genome_accession'], d['major_contig'], d['proteome_type'], d['protein_accession'])
+proteins = sorted(proteins, key=manifest_sorter)
 
+output_manifest = f"data/{args.module_id}_results/proteins.tsv"
+write_tsv_from_records(output_manifest, proteins)
 
 
 
