@@ -56,7 +56,7 @@ class ClassifyTSV(object):
                 row[ClassifyTSV.HDR_DOM_EVALUE_COND] = float(row[ClassifyTSV.HDR_DOM_EVALUE_COND])
                 row[ClassifyTSV.HDR_DOM_EVALUE] = float(row[ClassifyTSV.HDR_DOM_EVALUE])
                 row[ClassifyTSV.HDR_DOM_SCORE] = float(row[ClassifyTSV.HDR_DOM_SCORE])
-                row[ClassifyTSV.HDR_SCORE_THRESHOLD] = float(row[ClassifyTSV.HDR_SCORE_THRESHOLD]) if row[ClassifyTSV.HDR_SCORE_THRESHOLD] else None
+                row[ClassifyTSV.HDR_SCORE_THRESHOLD] = float(row[ClassifyTSV.HDR_SCORE_THRESHOLD]) if row[ClassifyTSV.HDR_SCORE_THRESHOLD] and row[ClassifyTSV.HDR_SCORE_THRESHOLD] != '-' else None
                 row[ClassifyTSV.HDR_DOM_RANK] = int(row[ClassifyTSV.HDR_DOM_RANK])
                 rows.append(row)
 
