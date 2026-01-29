@@ -55,7 +55,10 @@ class CandidateClassifiedProteins(object):
                    GROUP BY protein_accession, genome_accession, hmm_accession
                   HAVING MIN(dom_evalue) < %s""" % evalue_threshold
 
-    def __init__(self, evalue_threshold=1E-80):
+    # if evalue_threshold is too low (e.g. 1E-80), then KO with lower score
+    # thresholds, e.g. K00116 at ~200, may not filter through
+    #
+    def __init__(self, evalue_threshold=1E-40):
         self.con = duckdb.connect(":default:")
         self.selection_sql = self._selection_sql(evalue_threshold)
 
