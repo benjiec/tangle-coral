@@ -66,7 +66,8 @@ class CandidateClassifiedProteins(object):
 
     def pfam_matches(self):
         sql = """
-            SELECT DISTINCT classify.protein_accession,
+            SELECT DISTINCT
+                   classify.protein_accession,
                    classify.genome_accession,
                    hmm_db, classify.hmm_accession, hmm_start, hmm_end, protein_start, protein_end,
                    dom_evalue_cond, dom_evalue, dom_score, score_threshold, dom_rank_for_protein
@@ -79,14 +80,17 @@ class CandidateClassifiedProteins(object):
 
     def ko_matches(self, incl_evalue_threshold=1E-10):
         sql = """
-            SELECT DISTINCT classify.protein_accession,
+            SELECT DISTINCT
+                   classify.protein_accession,
                    classify.genome_accession,
                    hmm_db, classify.hmm_accession, hmm_start, hmm_end, protein_start, protein_end,
                    dom_evalue_cond, dom_evalue, dom_score, score_threshold, dom_rank_for_protein
               FROM needle.classify
-              JOIN (%s) as filtered ON classify.protein_accession = filtered.protein_accession AND classify.genome_accession = filtered.genome_accession
+              JOIN (%s) as filtered ON classify.protein_accession = filtered.protein_accession
+                                   AND classify.genome_accession = filtered.genome_accession
+                                   AND classify.hmm_accession = filtered.hmm_accession
              WHERE hmm_db = 'ko'
-               AND (classify.hmm_accession = filtered.hmm_accession OR classify.dom_evalue < %s)
+               AND classify.dom_evalue < %s
           """ % (self.selection_sql, incl_evalue_threshold)
 
         df = self.con.sql(sql).df()
@@ -109,7 +113,8 @@ class CandidateClassifiedProteins(object):
 
     def proteins(self):
         sql = """
-            SELECT DISTINCT filtered.protein_accession,
+            SELECT DISTINCT
+                   filtered.protein_accession,
                    filtered.genome_accession,
                    MAX(IFNULL(ncbi_exons.target_accession,detected.target_accession)) as 'major_contig',
                    MAX(CASE WHEN ncbi_exons.target_accession IS NULL THEN 'hmm-detected' ELSE 'ncbi-reference' END) as 'proteome_type',
@@ -126,7 +131,8 @@ class CandidateClassifiedProteins(object):
 
     def ncbi_fragments(self):
         sql = """
-            SELECT DISTINCT ncbi_exons.protein_hit_id,
+            SELECT DISTINCT
+                   ncbi_exons.protein_hit_id,
                    ncbi_exons.genome_accession,
                    target_accession,
                    target_start,
@@ -143,7 +149,8 @@ class CandidateClassifiedProteins(object):
 
     def detected_fragments(self):
         sql = """
-            SELECT DISTINCT detected.protein_hit_id,
+            SELECT DISTINCT
+                   detected.protein_hit_id,
                    detected.genome_accession,
                    target_accession,
                    target_start,
