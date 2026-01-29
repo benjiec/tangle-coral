@@ -4,41 +4,22 @@ Needle is a suite of tools to curate and compare sequences of proteins by
 pathway, for understudied organisms. Cryptic gene structures, unconventional
 splicing models, unfinished genomes, understudied proteomes, are some of the
 challenges that make applying traditional workflows (e.g. gene prediction and
-classification) difficult and/or unreliable. Needle focuses on working around
-these challenges to detect presence of proteins for key pathways, and curates
-information in a phylogentic aware manner to enable comparative analysis within
-and across species.
+classification) difficult and/or unreliable. Needle uses existing HMM profiles
+to detect and classify proteins on raw genomic DNA or predicted proteomes, then
+curate/cluster proteins in a phylogenetic aware manner by pathway.
 
 
 ## Setup
 
-Install NCBI Docker image
+Install the following programs
 
-```
-docker pull ncbi/blast
-```
+  * hmmer3 package: e.g. on MacOS run `brew install hmmer`
+  * MMSeqs2 docker image: `docker pull ghcr.io/soedinglab/mmseqs2`
+  * Muscle aligner: `docker pull pegi3s/muscle`
+  * (Optional) SwissProt DB for MMSeqs2: `scripts/data/mmseqs-swissprot-setup`
+  * (Optional) NCBI docker image: `docker pull ncbi/blast`
 
-Install MMSeqs2 Docker image
-
-```
-docker pull ghcr.io/soedinglab/mmseqs2
-```
-
-Setup SwissProt DB for MMSeqs2
-
-```
-scripts/data/mmseqs-swissprot-setup
-```
-
-Install Muscle Docker image
-
-```
-docker pull pegi3s/muscle
-```
-
-Install `HMMer` package. E.g. on MacOS run `brew install hmmer`.
-
-Create Python virtualenv
+Also create a Python virtualenv and then install required packages.
 
 ```
 python3 -m venv .venv
@@ -48,68 +29,54 @@ pip3 install -r requirements.txt
 
 ## Initial Data
 
-There are some initial data already in `data` directory. Below are instructions
-to re-create them.
-
-### Download a list of KO (KEGG Ortholog) numbers and names
-
-```
-curl https://rest.kegg.jp/list/ko -o data/ko.txt
-echo "Ortholog ID\tOrtholog Name" | cat - data/ko.txt > data/ko.tsv
-rm data/ko.txt
-```
-
-To load this TSV file into Tableau, remove `"` and replace them with `''`.
-
-
-### Download a list of KEGG modules
-
-```
-curl https://rest.kegg.jp/list/module -o data/modules.txt
-echo "Module ID\tModule Name" | cat - data/modules.txt > data/modules.tsv
-rm data/modules.txt
-```
-
-The following two scripts downloads KEGG module definitions and store them as a
-list of KO numbers, and, in the second script, as steps and components.
-
-```
-python3 scripts/data/fetch-kegg-module-ko.py
-PYTHONPATH=. python3 scripts/data/fetch-kegg-module-def.py
-```
-
-### Download KEGG KO profile HMMs
-
-Download the HMM profiles from `https://www.genome.jp/ftp/db/kofam/`. The
-`profiles.tar.gz` file is large, so this may take awhile.
-
-Concatenate all the .hmm files together, e.g.
-
-```
-cat profiles/*.hmm > kegg-downloads/ko.hmm
-```
-
-Also, download the `ko_list.gz` file from the above location into
-`data/ko_thresholds.gz`. This file contains scoring criteria for using the
-HMMs.
-
-### Download HMM profiles from Pfam
+There are some initial data already in `data` directory. Here are some
+additional data to download.
 
 Download
-`https://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/Pfam-A.hmm.gz`. After
-uncompress into `pfam-downloads` directory, run the following to create a
-searchable HMM database
 
-```
-hmmpress pfam-downloads/Pfam-A.hmm
-```
+  * KEGG KO profile HMMs: `https://www.genome.jp/ftp/db/kofam/profiles.tar.gz`
+    * Then concatenate all the profiles together: `cat profiles/*.hmm > kegg-downloads/ko.hmm`
+    * Run `hmmpress kegg-downloads/ko.hmm`
 
-Also, download the `Pfam-A.clans.tsv` file into data directory.
+  * KEGG ortholog table: `data/ko.tsv`
 
-### Prepare List of Genomes
+    ```
+    curl https://rest.kegg.jp/list/ko -o data/ko.txt
+    echo "Ortholog ID\tOrtholog Name" | cat - data/ko.txt > data/ko.tsv
+    rm data/ko.txt
+    # then manually remove `"` and replace them with `''` in this file
+    ```
+
+  * KEGG modules list: `data/modules.tsv` `data/module_ko.tsv` `data/module_defs.csv`
+
+    ```
+    curl https://rest.kegg.jp/list/module -o data/modules.txt
+    echo "Module ID\tModule Name" | cat - data/modules.txt > data/modules.tsv
+    rm data/modules.txt
+    python3 scripts/data/fetch-kegg-module-ko.py
+    PYTHONPATH=. python3 scripts/data/fetch-kegg-module-def.py
+    ```
+
+  * Pfam HMM profiles: `https://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/Pfam-A.hmm.gz`
+    * Store uncompress file at: `pfam-downloads/Pfam-A.hmm`
+    * Run `hmmpress pfam-downloads/Pfam-A.hmm`
+    * Also
+      * `data/ko_thresholds.gz`: from KEGG FTP site `https://www.genome.jp/ftp/db/kofam/ko_list.gz`
+      * `data/Pfam-A.clans.tsv`: also from above FTP site
+
+
+## Prepare List of Genomes
+
+Put NCBI genome accessions into two files
+
+  * To run de novo HMM based protein detection: `data/genomes_detect.txt`
+  * To process curated proteins submitted to NCBI: `data/genomes_ref.txt`
+
+A genome can be in both files, but genomes in the second file must have a
+`proteins.faa` file at NCBI available to download.
 
 Run the following commands to generate `data/genomes.tsv`, which includes
-genome name and taxonomy information for three sets of genomes.
+genome name and taxonomy information.
 
 ```
 PYTHONPATH=. python3 scripts/data/fetch-genomes.py data/genomes_detect.txt
@@ -123,24 +90,29 @@ PYTHONPATH=. python3 scripts/data/ncbi-download.py data/genomes_detect.txt
 PYTHONPATH=. python3 scripts/data/ncbi-download.py data/genomes_ref.txt
 ```
 
+Genome sequences are large. The above scripts store them in
+`ncbi-downloads/ncbi-dataset`. You can symlink a different volume (e.g. an
+external drive) to that path.
+
 
 ## Workflow and Scripts
 
-The general workflow looks like the following, starting with a KEGG pathway
-module and the HMM profiles for orthologs for that module
+The general workflow looks like the following
 
-  * Detect Proteins using ortholog profile HMMs: HMM search plus refinement
-  * Classify Proteins: hmmscan
-  * Cluster Proteins: MMSeqs2
-  * Generate MSAs: Muscle
-  * Finish Protein Sequences
+  * Create a HMM database for a KEGG module
+  * Detect proteins using the module specific HMM database
+  * Classify detected proteins using the full KEGG HMM database
+  * Filter reference proteins (those from NCBI) by module specific HMM database then classify using the full KEGG HMM database
+  * Assign proteins to KO numbers, and generate list of putative proteins lacking definitive assignment
+  * Cluster assigned and putative proteins
+  * Generate MSA for each cluster
 
 The following instructions use "m00009", which is the KEGG module M00009
 describing the TCA cycle. Replace this number with other module IDs as
 appropriate.
 
 
--### Generating Query .hmm for a KEGG Module
+### Create a HMM database for a KEGG module
 
 Use `hmmfetch` to create a smaller HMM database for the KOs of a module. Use
 the following naming convention but change the module ID: `data/m00009_ko.hmm`.
@@ -148,36 +120,28 @@ This smaller HMM is used during protein detection. Full KO HMM dataset is used
 during classification.
 
 
-### Detect Orthologs from Genomes
-
-The following script puts outputs in `data/m00009_results` directory
-
-```
-./scripts/detect/search-genome m00009 GCF_002042975.1
-```
-
-Or if you have a list of genome accessions in a file, do the following. Note,
-these commands append to existing files, so to re-run detection on a genome,
-remove `data/m00009_results/proteins.{faa/tsv}` first.
+### Detect proteins using the module specific HMM database
 
 ```
 ./scripts/detect/search-genomes m00009 data/genomes_detect.txt
 ```
 
-Use the following script to compare, for a given HMM model, how NCBI annotated
-proteins (i.e. in `protein.faa` and `genomic.gff`) compare against protein
-found by Needle.
+Or if just for one genome accession
 
 ```
-PYTHONPATH=. python3 scripts/detect/compare-gff-with-match.py \
-  --best-hmm \
-  kegg-downloads/ko.hmm GCF_002042975.1 data/m00009_results/protein_detected.tsv \
-  --output-file <filename>
+./scripts/detect/search-genome m00009 GCF_002042975.1
 ```
 
-### Classify Proteins
+Note: these scripts append to existing files, so to re-run detection on a
+genome, remove `data/m00009_results/proteins.{faa/tsv}` first.
 
-The following two commands will classify detected proteins first by KEGG
+
+### Classify detected proteins using the full KEGG HMM database
+
+Classification outputs appear in `data/m00009_results/classify.tsv`. If you are
+re-running classification, remove this file first.
+
+The following two commands will classify detected proteins first by full KEGG
 ortholog, then Pfam domains.
 
 ```
@@ -186,19 +150,29 @@ PYTHONPATH=. python3 scripts/classify/classify.py \
 PYTHONPATH=. python3 scripts/classify/classify.py --cpu 4 pfam-downloads/Pfam-A.hmm m00009
 ```
 
-Classification outputs appear in `data/m00009_results/classify.tsv`. If you
-are re-running classification, remove this file first.
 
-Annotated proteins submitted to NBCI can be classified in the same way, and
-added to the same output TSV, using the following two commands.
+### Filter and classify reference proteins from NCBI
+
+Annotated proteins submitted to NBCI should be first filtered to those relevant
+to the KEGG module, then classified using the full KO HMM database. Otherwise
+the classification process will run too long.
+
+The following script does everything
+
+```
+scripts/classify/classify-ncbi data/genomes_ref.txt
+```
+
+For each genome accession, the above script runs the following
 
 ```
 PYTHONPATH=. python3 scripts/classify/classify.py \
-  --disable-cutoff-ga \
-  --genome-accession GCF_932526225.1 \
+  --disable-cutoff-ga --genome-accession GCF_932526225.1 \
+  data/m00009_ko.hmm m00009
+PYTHONPATH=. python3 scripts/classify/classify.py --filter-by-prev-output \
+  --disable-cutoff-ga --genome-accession GCF_932526225.1 \
   kegg-downloads/ko.hmm m00009
-PYTHONPATH=. python3 scripts/classify/classify.py \
-  --filter-by-prev-output \
+PYTHONPATH=. python3 scripts/classify/classify.py --filter-by-prev-output \
   --genome-accession GCF_932526225.1 \
   pfam-downloads/Pfam-A.hmm m00009
 ```
@@ -207,13 +181,6 @@ The `--filter-by-prev-output` argument first filters the curated proteins to
 remove those that do not appear in the `data/m00009_results/classify.tsv` file;
 only those proteins matching one or more KEGG orthologs are further classified
 using Pfam.
-
-The following helper script, `classify-ncbi`, calls the above two commands for
-each accession in an accession file.
-
-```
-scripts/classify/classify-ncbi data/genomes_ref.txt
-```
 
 Use the following script to generate a `protein_ncbi.tsv` and
 `protein_names.tsv` files. Both include just proteins from the NCBI reference
@@ -245,9 +212,11 @@ GCF_000001735.4 (Arabidopsis) that includes weird trans-splicing in the GenBank
 file which GFF does not support. In these cases, manually fixing the GFFs to
 work around the errors is the best option at the moment.
 
-Use the following script to create FASTA files for orthologs, and domains for
-each ortholog, based on classification results. The FASTA files are in
-`data/m00009_results/faa` directory.
+
+### Assign proteins to KO numbers and curate various assets
+
+Use the following script to create FASTA files with proteins assigned to
+orthologs, as well as putative proteins, and some other TSV assets.
 
 ```
 rm data/m00009_results/faa/*
@@ -258,9 +227,7 @@ Note that different scoring threshold criterias are used for detected proteins
 (more tolerant) vs those from reference genomes (more stringent).
 
 
-### Clustering (Optional)
-
-For each KO, run the following script to cluster assigned sequences further
+### Cluster assigned and putative proteins
 
 ```
 # make sure Docker daemon is running
@@ -270,28 +237,35 @@ For each KO, run the following script to cluster assigned sequences further
 Cluster outputs are summarized in `data/m00009_results/cluster.tsv`, and
 clustered FAA files are in `data/m00009_results/clusters`.
 
-Classification and clustering results -- i.e. how detected proteins match
-against KO HMM profiles and how Pfam domains map onto those proteins assigned
-to a KO -- can be visualized using Tableau. A template workbook that uses the
-classification output TSV and several downloaded data files (e.g.
-`genomes.tsv`, `ko.tsv`, and `Pfam-A.clans.tsv`), is `data/Protein
-Classification.twb`.
 
-
-### Generating Multi-Sequence Alignments
-
-To generate MSAs and PNGs that visualize the MSAs, run the following script.
-The `faa_dir` argument can be either the `data/m00009_results/faa` dir, or the
-`data/m00009_results/clusters` dir.
+### Generate MSA for each cluster
 
 ```
 # make sure Docker daemon is running
-./scripts/align/generate-msas m00009 <faa_dir>
+./scripts/align/generate-msas m00009 data/m00009_results/clusters
 ```
 
-This script creates the `data/m00009_results/alignments` dir and, for each
-input FAA file, generates a MSA FAA file, a PNG visualizing the MSA, and a HMM
-profile from the MSA.
+### Using results
+
+Classification and clustering results -- i.e. how detected proteins match
+against KO HMM profiles and how Pfam domains map onto those proteins assigned
+to a KO -- can be visualized using Tableau. Example workbooks, for m00009, are
+
+  * `data/Protein Classification.twb`: joins several TSV files and provides
+    global view into what species have what proteins for what pathway steps
+
+  * `data/Alignment.twb`: visualizes protein alignments for clusters position
+    by position, with domain and ortholog annotations.
+
+    * This one is specific to a KO ID and requires a tabularized alignment output file
+
+      ```
+      PYTHONPATH=. python3 scripts/align/tabularize-alignment.py \
+         m00009 K00164 data/m00009_results/alignments/K00164.tsv
+      ```
+
+Also `needle/duckdb.py` shows how to use duckdb to join and query the TSV
+files.
 
 
 ### Other Scripts
@@ -307,3 +281,16 @@ Download files from NCBI
 ```
 PYTHONPATH=. python3 scripts/ncbi-download.py GCF_932526225.1
 ```
+
+Use the following script to compare, for a given HMM model, how NCBI annotated
+proteins (i.e. in `protein.faa` and `genomic.gff`) compare against protein
+found by Needle.
+
+```
+PYTHONPATH=. python3 scripts/detect/compare-gff-with-match.py \
+  --best-hmm \
+  kegg-downloads/ko.hmm GCF_002042975.1 data/m00009_results/protein_detected.tsv \
+  --output-file <filename>
+```
+
+
