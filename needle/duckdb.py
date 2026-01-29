@@ -204,6 +204,7 @@ class ClusterProteins(object):
         con = duckdb.connect(":default:")
         pfam_df = con.sql("""
             SELECT pfam_match.protein_accession,
+                   pfam_match.genome_accession,
                    pfam_match.hmm_accession as 'pfam_accession',
                    pfam_match.hmm_start as 'pfam_hmm_start',
                    pfam_match.hmm_end as 'pfam_hmm_end',
@@ -222,21 +223,17 @@ class ClusterProteins(object):
             else:
                 seq = protein_sequence_dict[protein_accession]
 
-            protein_pfam_match_df = pfam_df[pfam_df['protein_accession'] == protein_accession]
+            protein_pfam_match_df = pfam_df[(pfam_df['protein_accession'] == protein_accession) & (pfam_df['genome_accession'] == genome_accession)]
             proteins.append(ProteinMatches(self.ko_id, protein_accession, genome_accession, protein_ko_match_df, protein_pfam_match_df, seq))
         return proteins
 
 
-class AssignedClusters(object):
+class Clusters(object):
 
     def __init__(self, ko_id):
         self.ko_id = ko_id
 
         con = duckdb.connect(":default:")
-
-	# do the join with ko_match, so we can filter to clusters for a
-	# specific KO ID. and might as well get the KO matches now.
-
         self.df = con.sql("""
             SELECT clusters.cluster_id,
                    clusters.parent_cluster_id,
@@ -250,8 +247,11 @@ class AssignedClusters(object):
                    ko_match.dom_evalue as 'ko_evalue',
                    ko_match.dom_score as 'ko_score'
               FROM needle.clusters
-              JOIN needle.ko_match ON ko_match.protein_accession = clusters.member_accession AND ko_match.hmm_accession = '%s'
-        """ % ko_id).df()
+              JOIN needle.ko_match ON ko_match.protein_accession = clusters.member_accession
+             WHERE ko_match.hmm_accession = '%s'
+               AND clusters.parent_cluster_id LIKE '%s%%'
+               AND ko_match.assignment_status IN ('assigned', 'putative')
+        """ % (ko_id, ko_id)).df()
 
     def clusters(self):
 
@@ -259,23 +259,3 @@ class AssignedClusters(object):
         for (cluster_id, parent_cluster_id), group_df in self.df.groupby(['cluster_id', 'parent_cluster_id']):
             clusters.append(ClusterProteins(self.ko_id, cluster_id, parent_cluster_id, group_df))
         return clusters
-
-
-class ToUpdate_PutativeProteins(object):
-
-    def __init__(self, ko_id, evalue_threshold=1E-100):
-        self.ko_id = ko_id
-
-        con = duckdb.connect(":default:")
-        self.df = con.sql("""
-            SELECT ko_match.protein_accession,
-                   ko_match.genome_accession
-              FROM needle.ko_match
-             WHERE ko_match.hmm_accession = '%s'
-             GROUP BY ko_match.protein_accession, ko_match.genome_accession
-             HAVING MIN(ko_match.dom_evalue) < %s
-        """ % (ko_id, evalue_threshold)).df()
-
-    def protein_genome_accessions(self):
-        unique_pairs = self.df[['protein_accession','genome_accession']].drop_duplicates()
-        return list(unique_pairs.itertuples(index=False, name=None))
