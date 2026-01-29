@@ -97,19 +97,28 @@ class CandidateClassifiedProteins(object):
         return df
 
     def ko_assignments(self, score_to_threshold_ratio_detected, score_to_threshold_ratio_reference):
+
+        # criteria
+        #   - top 3 rank
+        #   - score to threshold ratio greater than provided limits
+        #
+        # returns hmm accession with highest rank, meeting the above criteria
+        # note: rank is sorted by evalue
+
         sql = """
-            SELECT DISTINCT classify.protein_accession, classify.genome_accession, classify.hmm_accession
+            SELECT DISTINCT classify.protein_accession, classify.genome_accession, classify.hmm_accession, dom_rank_for_protein
               FROM needle.classify
               JOIN (%s) as filtered ON classify.protein_accession = filtered.protein_accession AND classify.genome_accession = filtered.genome_accession
              WHERE hmm_db = 'ko'
-               AND dom_rank_for_protein = 1
+               AND dom_rank_for_protein <= 3
                AND (score_threshold = '-' OR
                     (LEFT(classify.protein_accession, 6) == classify.hmm_accession AND CAST(dom_score AS FLOAT) / CAST(score_threshold AS FLOAT) >= %s) OR
                     (LEFT(classify.protein_accession, 6) != classify.hmm_accession AND CAST(dom_score AS FLOAT) / CAST(score_threshold AS FLOAT) >= %s))
           """ % (self.selection_sql, score_to_threshold_ratio_detected, score_to_threshold_ratio_reference)
 
         df = self.con.sql(sql).df()
-        return df
+        df_filtered = df.sort_values('dom_rank_for_protein', ascending=True).drop_duplicates(['protein_accession', 'genome_accession'])
+        return df_filtered
 
     def proteins(self):
         sql = """
