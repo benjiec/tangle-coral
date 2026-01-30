@@ -47,13 +47,12 @@ Download
     # then manually remove `"` and replace them with `''` in this file
     ```
 
-  * KEGG modules list: `data/modules.tsv` `data/module_ko.tsv` `data/module_defs.csv`
+  * KEGG modules list: `data/modules.tsv` `data/module_defs.csv`
 
     ```
     curl https://rest.kegg.jp/list/module -o data/modules.txt
     echo "Module ID\tModule Name" | cat - data/modules.txt > data/modules.tsv
     rm data/modules.txt
-    python3 scripts/data/fetch-kegg-module-ko.py
     PYTHONPATH=. python3 scripts/data/fetch-kegg-module-def.py
     ```
 

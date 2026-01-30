@@ -12,8 +12,8 @@ def load(module_id):
     # generic
     duckdb.execute("CREATE TABLE needle.genomes AS SELECT * FROM read_csv_auto('data/genomes.tsv', normalize_names=TRUE)")
     duckdb.execute("CREATE TABLE needle.ko AS SELECT * FROM read_csv_auto('data/ko.tsv', normalize_names=TRUE)")
-    duckdb.execute("CREATE TABLE needle.module_steps AS SELECT * FROM 'data/module_defs.csv'")
-    duckdb.execute("CREATE TABLE needle.modules AS SELECT * FROM 'data/modules.tsv'")
+    duckdb.execute("CREATE TABLE needle.modules AS SELECT * FROM read_csv_auto(['data/modules.tsv', 'data/custom_modules.tsv'], union_by_name=true)")
+    duckdb.execute("CREATE TABLE needle.module_steps AS SELECT * FROM read_csv_auto(['data/module_defs.csv', 'data/custom_module_defs.csv'], union_by_name=true)")
     duckdb.execute("CREATE TABLE needle.pfams AS SELECT * FROM 'data/Pfam-A.clans.tsv'")
 
     # module specific
