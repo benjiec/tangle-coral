@@ -4,6 +4,7 @@ import pandas as pd
 
 
 def load(module_id):
+    duckdb.execute("DROP SCHEMA IF EXISTS needle CASCADE")
     duckdb.execute("CREATE SCHEMA needle")
 
     # used in Tableau and scripts
@@ -25,8 +26,9 @@ def load(module_id):
     # used to generate the above tables
 
     duckdb.execute(f"CREATE TABLE needle.classify AS SELECT * FROM 'data/{module_id}_results/classify.tsv'")
-    duckdb.execute(f"CREATE TABLE needle.protein_names AS SELECT * FROM 'data/{module_id}_results/protein_names.tsv'")
     duckdb.execute(f"CREATE TABLE needle.detected AS SELECT * FROM 'data/{module_id}_results/protein_detected.tsv'")
+    # following only available for NCBI proteomes
+    duckdb.execute(f"CREATE TABLE needle.protein_names AS SELECT * FROM 'data/{module_id}_results/protein_names.tsv'")
     duckdb.execute(f"CREATE TABLE needle.ncbi_exons AS SELECT * FROM 'data/{module_id}_results/protein_ncbi.tsv'")
 
 
@@ -99,10 +101,10 @@ class CandidateClassifiedProteins(object):
         df = self.con.sql(sql).df()
         return df
 
-    def ko_assignments(self, score_to_threshold_ratio_detected, score_to_threshold_ratio_reference):
+    def ko_assignments(self, score_to_threshold_ratio_detected, score_to_threshold_ratio_reference, top_n_rank=5):
 
         # criteria
-        #   - top 3 rank
+        #   - top N rank
         #   - score to threshold ratio greater than provided limits
         #
         # returns hmm accession with highest rank, meeting the above criteria
@@ -112,12 +114,13 @@ class CandidateClassifiedProteins(object):
             SELECT DISTINCT classify.protein_accession, classify.genome_accession, classify.hmm_accession, dom_rank_for_protein
               FROM needle.classify
               JOIN (%s) as filtered ON classify.protein_accession = filtered.protein_accession AND classify.genome_accession = filtered.genome_accession
+              JOIN needle.proteins ON classify.protein_accession = proteins.protein_accession AND classify.genome_accession = proteins.genome_accession
              WHERE hmm_db = 'ko'
-               AND dom_rank_for_protein <= 3
+               AND dom_rank_for_protein <= %s
                AND (score_threshold = '-' OR
-                    (LEFT(classify.protein_accession, 6) == classify.hmm_accession AND CAST(dom_score AS FLOAT) / CAST(score_threshold AS FLOAT) >= %s) OR
-                    (LEFT(classify.protein_accession, 6) != classify.hmm_accession AND CAST(dom_score AS FLOAT) / CAST(score_threshold AS FLOAT) >= %s))
-          """ % (self.selection_sql, score_to_threshold_ratio_detected, score_to_threshold_ratio_reference)
+                    (proteins.proteome_type = 'hmm-detected' AND CAST(dom_score AS FLOAT) / CAST(score_threshold AS FLOAT) >= %s) OR
+                    (proteins.proteome_type = 'ncbi-reference' AND CAST(dom_score AS FLOAT) / CAST(score_threshold AS FLOAT) >= %s))
+          """ % (self.selection_sql, top_n_rank, score_to_threshold_ratio_detected, score_to_threshold_ratio_reference)
 
         df = self.con.sql(sql).df()
         df_filtered = df.sort_values('dom_rank_for_protein', ascending=True).drop_duplicates(['protein_accession', 'genome_accession'])
@@ -130,7 +133,8 @@ class CandidateClassifiedProteins(object):
                    filtered.genome_accession,
                    MAX(IFNULL(ncbi_exons.target_accession,detected.target_accession)) as 'major_contig',
                    MAX(CASE WHEN ncbi_exons.target_accession IS NULL THEN 'hmm-detected' ELSE 'ncbi-reference' END) as 'proteome_type',
-                   MAX(protein_names.name) as 'protein_name'
+                   MAX(protein_names.name) as 'protein_name',
+                   MAX(IFNULL(ncbi_exons.query_end,detected.query_end))-MIN(IFNULL(ncbi_exons.query_start,detected.query_start))+1 as 'protein_length_approx'
               FROM (%s) as filtered
          LEFT JOIN needle.ncbi_exons ON filtered.protein_accession = ncbi_exons.protein_hit_id AND filtered.genome_accession = ncbi_exons.genome_accession
          LEFT JOIN needle.detected ON filtered.protein_accession = detected.protein_hit_id AND filtered.genome_accession = detected.genome_accession

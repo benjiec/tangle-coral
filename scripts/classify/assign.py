@@ -9,48 +9,13 @@ ap = argparse.ArgumentParser()
 ap.add_argument("module_id")
 args = ap.parse_args()
 
-protein_faa = f"data/{args.module_id}_results/protein_detected.faa"
-output_dir = f"data/{args.module_id}_results/faa"
-os.makedirs(output_dir, exist_ok=True)
-
 load(args.module_id)
 module_kos = module_ko_ids(args.module_id)
 candidate_proteins = CandidateClassifiedProteins()
 
-# matches
-ko_matches = candidate_proteins.ko_matches()
-ko_matches = ko_matches.to_dict(orient='records')
-pfam_matches = candidate_proteins.pfam_matches()
-pfam_matches = pfam_matches.to_dict(orient='records')
-
-match_sorter = lambda d: (d['genome_accession'], d['protein_accession'], d['hmm_db'], d['dom_rank_for_protein'], d['hmm_accession'], d['hmm_start'], d['hmm_end'])
-ko_matches = sorted(ko_matches, key=match_sorter)
-pfam_matches = sorted(pfam_matches, key=match_sorter)
-
-ko_assignments = candidate_proteins.ko_assignments(0.9, 1.0)
-ko_assignments = ko_assignments.to_dict(orient='records')
-ko_assignments = {(d['protein_accession'], d['genome_accession']):d['hmm_accession'] for d in ko_assignments}
-ko_assigned = {}
-ko_putative = {}
-
-for ko_match in ko_matches:
-    ko_id = ko_match['hmm_accession']
-    k = (ko_match['protein_accession'], ko_match['genome_accession'])
-    if k in ko_assignments and ko_assignments[k] == ko_id:
-        ko_match['assignment_status'] = 'assigned'
-        if ko_id in module_kos:
-            ko_assigned.setdefault(ko_id, []).append(k)
-    elif k in ko_assignments:
-        ko_match['assignment_status'] = 'other'
-    else:
-        ko_match['assignment_status'] = 'putative'
-        if ko_id in module_kos:
-            ko_putative.setdefault(ko_id, []).append(k)
-
-output_ko = f"data/{args.module_id}_results/candidate_ko.tsv"
-output_pf = f"data/{args.module_id}_results/candidate_pfam.tsv"
-write_tsv_from_records(output_ko, ko_matches)
-write_tsv_from_records(output_pf, pfam_matches)
+#
+# first, create manifests and fragments
+#
 
 # protein manifest
 proteins = candidate_proteins.proteins()
@@ -75,12 +40,62 @@ fragments = sorted(fragments, key=fragments_sorter)
 output_fragments = f"data/{args.module_id}_results/protein_fragments.tsv"
 write_tsv_from_records(output_fragments, fragments)
 
+#
+# reload data, including newly created manifests, before generating assignments, which uses manifests
+#
+
+load(args.module_id)
+
+# matches
+ko_matches = candidate_proteins.ko_matches()
+ko_matches = ko_matches.to_dict(orient='records')
+pfam_matches = candidate_proteins.pfam_matches()
+pfam_matches = pfam_matches.to_dict(orient='records')
+
+match_sorter = lambda d: (d['genome_accession'], d['protein_accession'], d['hmm_db'], d['dom_rank_for_protein'], d['hmm_accession'], d['hmm_start'], d['hmm_end'])
+ko_matches = sorted(ko_matches, key=match_sorter)
+pfam_matches = sorted(pfam_matches, key=match_sorter)
+
+ko_assignments = candidate_proteins.ko_assignments(0.9, 1.0)
+ko_assignments = ko_assignments.to_dict(orient='records')
+ko_assignments = {(d['protein_accession'], d['genome_accession']):d['hmm_accession'] for d in ko_assignments}
+faa_ko_assigned = {}  # which KO:proteins to save to FAA files
+faa_ko_putative = {}  # which KO:proteins to save to FAA files
+
+for ko_match in ko_matches:
+    ko_id = ko_match['hmm_accession']
+    k = (ko_match['protein_accession'], ko_match['genome_accession'])
+    if k in ko_assignments and ko_assignments[k] == ko_id:
+        ko_match['assignment_status'] = 'assigned'
+        if ko_id in module_kos:
+            faa_ko_assigned.setdefault(ko_id, []).append(k)
+    elif k in ko_assignments:
+        ko_match['assignment_status'] = 'other'
+    else:
+        ko_match['assignment_status'] = 'putative'
+        if ko_id in module_kos:
+            faa_ko_putative.setdefault(ko_id, []).append(k)
+
+output_ko = f"data/{args.module_id}_results/candidate_ko.tsv"
+output_pf = f"data/{args.module_id}_results/candidate_pfam.tsv"
+write_tsv_from_records(output_ko, ko_matches)
+write_tsv_from_records(output_pf, pfam_matches)
+
+
+#
+# write FAA files
+#
+
+protein_faa = f"data/{args.module_id}_results/protein_detected.faa"
+output_dir = f"data/{args.module_id}_results/faa"
+os.makedirs(output_dir, exist_ok=True)
+
 # write two FAAs files for each KO in the module, assigned and putative
 genome_with_proteins = {}
 protein_sequences = read_fasta_as_dict(protein_faa)
 
 ko_assigned_protein_sequences = {}
-for ko_id, items in ko_assigned.items():
+for ko_id, items in faa_ko_assigned.items():
     for protein_accession, genome_accession in items:
         if protein_accession in protein_sequences:
             protein_sequence = protein_sequences[protein_accession]
@@ -93,7 +108,7 @@ for ko_id, items in ko_assigned.items():
         ko_assigned_protein_sequences.setdefault(ko_id, {})[protein_accession] = protein_sequence
 
 ko_putative_protein_sequences = {}
-for ko_id, items in ko_putative.items():
+for ko_id, items in faa_ko_putative.items():
     for protein_accession, genome_accession in items:
         if protein_accession in protein_sequences:
             protein_sequence = protein_sequences[protein_accession]
