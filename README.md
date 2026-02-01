@@ -159,7 +159,7 @@ the classification process will run too long.
 The following script does everything
 
 ```
-scripts/classify/classify-ncbi data/genomes_ref.txt
+scripts/classify/classify-ncbi m00009 data/genomes_ref.txt
 ```
 
 For each genome accession, the above script runs the following
