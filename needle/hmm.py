@@ -297,6 +297,8 @@ def hmmsearch_file(hmm_file_name, fasta_path, cutoff=False, gap_removal=True):
 
 
 def hmmsearch(hmm_file_name, sequences, cutoff=False, gap_removal=True):
+    if len(sequences) == 0:
+        return []
     with tempfile.TemporaryDirectory() as tmpdir:
         fasta_path = os.path.join(tmpdir, "cands.faa")
         with open(fasta_path, "w") as f:
@@ -306,6 +308,8 @@ def hmmsearch(hmm_file_name, sequences, cutoff=False, gap_removal=True):
 
 
 def hmmsearch_sequence_dict(hmm_file_name, fasta_dict, cutoff=False, gap_removal=True):
+    if len(fasta_dict.keys()) == 0:
+        return []
     with tempfile.NamedTemporaryFile(delete=False, suffix=".faa", mode="w") as tmpf:
         for acc, sequence in fasta_dict.items():
             tmpf.write(f">{acc}\n{sequence}\n")
