@@ -9,8 +9,9 @@ ap = argparse.ArgumentParser()
 ap.add_argument("module_id")
 args = ap.parse_args()
 
-load(args.module_id, load_final_assets=False)
+load(args.module_id, load_manifests=False, load_assignments=False)
 module_kos = module_ko_ids(args.module_id)
+print(module_kos)
 candidate_proteins = CandidateClassifiedProteins()
 
 #
@@ -44,7 +45,7 @@ write_tsv_from_records(output_fragments, fragments)
 # reload data, including newly created manifests, before generating assignments, which uses manifests
 #
 
-load(args.module_id)
+load(args.module_id, load_assignments=False)
 
 # matches
 ko_matches = candidate_proteins.ko_matches()

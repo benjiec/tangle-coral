@@ -3,14 +3,14 @@ import duckdb
 import pandas as pd
 
 
-def load(module_id, load_final_assets=True):
+def load(module_id, load_manifests=True, load_assignments=True):
 
     duckdb.execute("DROP SCHEMA IF EXISTS needle CASCADE")
     duckdb.execute("CREATE SCHEMA needle")
 
-    # used in Tableau and scripts
-
     # generic
+    #
+
     duckdb.execute("CREATE TABLE needle.genomes AS SELECT * FROM read_csv_auto('data/genomes.tsv', normalize_names=TRUE)")
     duckdb.execute("CREATE TABLE needle.ko AS SELECT * FROM read_csv_auto('data/ko.tsv', normalize_names=TRUE)")
     duckdb.execute("CREATE TABLE needle.modules AS SELECT * FROM read_csv_auto(['data/modules.tsv', 'data/custom_modules.tsv'], union_by_name=true)")
@@ -18,14 +18,20 @@ def load(module_id, load_final_assets=True):
     duckdb.execute("CREATE TABLE needle.pfams AS SELECT * FROM 'data/Pfam-A.clans.tsv'")
 
     # module specific
-    if load_final_assets:
+    #
+
+    if load_manifests:
         duckdb.execute(f"CREATE TABLE needle.proteins AS SELECT * FROM 'data/{module_id}_results/proteins.tsv'")
+        duckdb.execute(f"CREATE TABLE needle.protein_fragments AS SELECT * FROM 'data/{module_id}_results/protein_fragments.tsv'")
+
+    if load_assignments:
         duckdb.execute(f"CREATE TABLE needle.ko_match AS SELECT * FROM 'data/{module_id}_results/candidate_ko.tsv'")
         duckdb.execute(f"CREATE TABLE needle.pfam_match AS SELECT * FROM 'data/{module_id}_results/candidate_pfam.tsv'")
         duckdb.execute(f"CREATE TABLE needle.clusters AS SELECT * FROM read_csv_auto('data/{module_id}_results/clusters.tsv', normalize_names=TRUE)")
-        duckdb.execute(f"CREATE TABLE needle.protein_fragments AS SELECT * FROM 'data/{module_id}_results/protein_fragments.tsv'")
 
     # used to generate the above tables
+    #
+
     duckdb.execute(f"CREATE TABLE needle.classify AS SELECT * FROM 'data/{module_id}_results/classify.tsv'")
     duckdb.execute(f"CREATE TABLE needle.detected AS SELECT * FROM 'data/{module_id}_results/protein_detected.tsv'")
     # following only available for NCBI proteomes
