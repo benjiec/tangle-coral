@@ -9,7 +9,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument("module_id")
 args = ap.parse_args()
 
-load(args.module_id)
+load(args.module_id, load_final_assets=False)
 module_kos = module_ko_ids(args.module_id)
 candidate_proteins = CandidateClassifiedProteins()
 
