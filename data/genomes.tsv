@@ -70,3 +70,10 @@ GCF_036669935.1	ASM3666993v2	591990	Montipora foliosa (stony corals)	Eukaryota	M
 GCF_038396675.1	HydraT2T_AEP	6087	Hydra vulgaris (swiftwater hydra)	Eukaryota	Metazoa	Cnidaria	Hydrozoa	Anthoathecata	Hydridae	Hydra	Hydra vulgaris
 GCF_932526225.1	jaNemVect1.1	45351	Nematostella vectensis (starlet sea anemone)	Eukaryota	Metazoa	Cnidaria	Anthozoa	Actiniaria	Edwardsiidae	Nematostella	Nematostella vectensis
 GCF_958299795.1	jaPorLute2.1	51062	Porites lutea (stony corals)	Eukaryota	Metazoa	Cnidaria	Anthozoa	Scleractinia	Poritidae	Porites	Porites lutea
+GCF_000005845.2	ASM584v2	511145	Escherichia coli str. K-12 substr. MG1655 (E. coli)	Bacteria	Pseudomonadati	Pseudomonadota	Gammaproteobacteria	Enterobacterales	Enterobacteriaceae	Escherichia	Escherichia coli
+GCF_001583435.1	ASM158343v1	570277	Endozoicomonas montiporae CL-33 (g-proteobacteria)	Bacteria	Pseudomonadati	Pseudomonadota	Gammaproteobacteria	Oceanospirillales	Endozoicomonadaceae	Endozoicomonas	Endozoicomonas montiporae
+GCF_002864045.1	ASM286404v1	1701104	Endozoicomonas acroporae (g-proteobacteria)	Bacteria	Pseudomonadati	Pseudomonadota	Gammaproteobacteria	Oceanospirillales	Endozoicomonadaceae	Endozoicomonas	Endozoicomonas acroporae
+GCA_012269485.1	ASM1226948v1	1904441	Paracoccaceae bacterium (a-proteobacteria)	Bacteria	Pseudomonadati	Pseudomonadota	Alphaproteobacteria	Rhodobacterales	Paracoccaceae		Paracoccaceae bacterium
+GCF_012270375.1	ASM1227037v1	1486246	Halomonas sp. (g-proteobacteria)	Bacteria	Pseudomonadati	Pseudomonadota	Gammaproteobacteria	Oceanospirillales	Halomonadaceae	Halomonas	Halomonas sp.
+GCF_012270115.1	ASM1227011v1	232	Alteromonas sp. (g-proteobacteria)	Bacteria	Pseudomonadati	Pseudomonadota	Gammaproteobacteria	Alteromonadales	Alteromonadaceae	Alteromonas	Alteromonas sp.
+GCA_012267535.1	ASM1226753v1	2026735	Deltaproteobacteria bacterium (bacteria)	Bacteria	Pseudomonadati	Myxococcota	Myxococcia				Deltaproteobacteria bacterium
