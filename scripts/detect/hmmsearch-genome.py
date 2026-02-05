@@ -20,8 +20,7 @@ hmm_rows = hmm_search_genome(
     args.hmm_file, genome_accession, genomic_fasta,
     target_accession = args.target_accession,
     target_left = args.target_left,
-    target_right = args.target_right,
-    conditional = True  # setting this argument to true, so we can use c-Evalue, which is more permissive
+    target_right = args.target_right
 )
 
 detected = []

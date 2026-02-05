@@ -8,7 +8,7 @@ from .seq import to_dna_coordinate, compute_three_frame_translations
 from .hmm import hmmsearch_sequence_dict
 
 
-DOM_EVALUE_LIMIT = 0.001
+DOM_EVALUE_LIMIT = 0.01
 
 
 class Results:
@@ -237,7 +237,7 @@ def get_aa_sequences(target_accession, target_sequence, target_left = None, targ
 
 def hmm_search_genome(hmm_file, genome_accession, genomic_fasta_dict, min_aa_length = 8,
                       target_accession = None, target_left = None, target_right = None,
-                      strand = None, conditional=False):
+                      strand = None):
 
     fragments = []
     for acc, genome_sequence in genomic_fasta_dict.items():
@@ -258,10 +258,7 @@ def hmm_search_genome(hmm_file, genome_accession, genomic_fasta_dict, min_aa_len
         name_to_coordinates[target_name] = (target_accession, target_start, target_end)
 
     hmm_rows = hmmsearch_sequence_dict(hmm_file, translated_fasta)
-    if conditional:
-        hmm_rows = [row for row in hmm_rows if row["dom_evalue_cond"] <= DOM_EVALUE_LIMIT]
-    else:
-        hmm_rows = [row for row in hmm_rows if row["dom_evalue"] <= DOM_EVALUE_LIMIT]
+    hmm_rows = [row for row in hmm_rows if row["dom_evalue"] <= DOM_EVALUE_LIMIT]
     # print(genome_accession, "total hmm rows", len(hmm_rows))
 
     filtered_rows = []

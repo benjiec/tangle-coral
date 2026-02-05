@@ -146,7 +146,6 @@ ortholog, then Pfam domains.
 ```
 PYTHONPATH=. python3 scripts/classify/classify.py \
   --cpu 4 --disable-cutoff-ga kegg-downloads/ko.hmm m00009
-PYTHONPATH=. python3 scripts/classify/classify.py --cpu 4 pfam-downloads/Pfam-A.hmm m00009
 ```
 
 
@@ -161,25 +160,6 @@ The following script does everything
 ```
 scripts/classify/classify-ncbi m00009 data/genomes_ref.txt
 ```
-
-For each genome accession, the above script runs the following
-
-```
-PYTHONPATH=. python3 scripts/classify/classify.py \
-  --disable-cutoff-ga --genome-accession GCF_932526225.1 \
-  data/m00009_ko.hmm m00009
-PYTHONPATH=. python3 scripts/classify/classify.py --filter-by-prev-output \
-  --disable-cutoff-ga --genome-accession GCF_932526225.1 \
-  kegg-downloads/ko.hmm m00009
-PYTHONPATH=. python3 scripts/classify/classify.py --filter-by-prev-output \
-  --genome-accession GCF_932526225.1 \
-  pfam-downloads/Pfam-A.hmm m00009
-```
-
-The `--filter-by-prev-output` argument first filters the curated proteins to
-remove those that do not appear in the `data/m00009_results/classify.tsv` file;
-only those proteins matching one or more KEGG orthologs are further classified
-using Pfam.
 
 Use the following script to generate a `protein_ncbi.tsv` and
 `protein_names.tsv` files. Both include just proteins from the NCBI reference
@@ -224,6 +204,16 @@ PYTHONPATH=. python3 scripts/classify/assign.py m00009
 
 Note that different scoring threshold criterias are used for detected proteins
 (more tolerant) vs those from reference genomes (more stringent).
+
+Afterward, use the following scripts to compute Pfam matches
+
+```
+rm data/m00009_results/candidate_pfam.tsv
+PYTHONPATH=. python3 scripts/classify/classify.py \
+  --cpu 4 --filter-by data/m00009_results/candidate_ko.tsv \
+  pfam-downloads/Pfam-A.hmm m00009 data/m00009_results/candidate_pfam.tsv
+scripts/classify/classify-pfam-ncbi m00009 data/genomes_ref.txt
+```
 
 
 ### Cluster assigned and putative proteins

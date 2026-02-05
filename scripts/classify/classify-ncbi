@@ -7,8 +7,8 @@ module=$1
 # Loop through each line of the file
 while IFS= read -r acc; do
 
-PYTHONPATH=. python3 scripts/classify/classify.py --cpu 2                         --disable-cutoff-ga --genome-accession $acc data/${module}_ko.hmm ${module}
-PYTHONPATH=. python3 scripts/classify/classify.py --cpu 2 --filter-by-prev-output --disable-cutoff-ga --genome-accession $acc kegg-downloads/ko.hmm ${module}
-PYTHONPATH=. python3 scripts/classify/classify.py --cpu 2 --filter-by-prev-output --genome-accession $acc pfam-downloads/Pfam-A.hmm ${module}
+outfn="data/${module}_results/classify.tsv"
+PYTHONPATH=. python3 scripts/classify/classify.py --cpu 2                      --disable-cutoff-ga --genome-accession $acc data/${module}_ko.hmm ${module} ${outfn}
+PYTHONPATH=. python3 scripts/classify/classify.py --cpu 2 --filter-by ${outfn} --disable-cutoff-ga --genome-accession $acc kegg-downloads/ko.hmm ${module} ${outfn}
 
 done < $2

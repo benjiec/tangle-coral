@@ -76,20 +76,6 @@ class CandidateClassifiedProteins(object):
         unique_pairs = df[['protein_accession','genome_accession']].drop_duplicates()
         return list(unique_pairs.itertuples(index=False, name=None))
 
-    def pfam_matches(self):
-        sql = """
-            SELECT DISTINCT
-                   classify.protein_accession,
-                   classify.genome_accession,
-                   hmm_db, classify.hmm_accession, hmm_start, hmm_end, protein_start, protein_end,
-                   dom_evalue_cond, dom_evalue, dom_score, score_threshold, dom_rank_for_protein
-              FROM needle.classify
-              JOIN (%s) as filtered ON classify.protein_accession = filtered.protein_accession AND classify.genome_accession = filtered.genome_accession
-             WHERE hmm_db = 'Pfam-A'""" % self.selection_sql
-
-        df = self.con.sql(sql).df()
-        return df
-
     def ko_matches(self, incl_evalue_threshold=1E-10):
         sql = """
             SELECT DISTINCT

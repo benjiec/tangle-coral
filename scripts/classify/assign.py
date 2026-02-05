@@ -50,12 +50,9 @@ load(args.module_id, load_assignments=False)
 # matches
 ko_matches = candidate_proteins.ko_matches()
 ko_matches = ko_matches.to_dict(orient='records')
-pfam_matches = candidate_proteins.pfam_matches()
-pfam_matches = pfam_matches.to_dict(orient='records')
 
 match_sorter = lambda d: (d['genome_accession'], d['protein_accession'], d['hmm_db'], d['dom_rank_for_protein'], d['hmm_accession'], d['hmm_start'], d['hmm_end'])
 ko_matches = sorted(ko_matches, key=match_sorter)
-pfam_matches = sorted(pfam_matches, key=match_sorter)
 
 ko_assignments = candidate_proteins.ko_assignments(0.9, 1.0)
 ko_assignments = ko_assignments.to_dict(orient='records')
@@ -78,9 +75,7 @@ for ko_match in ko_matches:
             faa_ko_putative.setdefault(ko_id, []).append(k)
 
 output_ko = f"data/{args.module_id}_results/candidate_ko.tsv"
-output_pf = f"data/{args.module_id}_results/candidate_pfam.tsv"
 write_tsv_from_records(output_ko, ko_matches)
-write_tsv_from_records(output_pf, pfam_matches)
 
 
 #

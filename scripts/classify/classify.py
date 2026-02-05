@@ -13,10 +13,11 @@ import argparse
 ap = argparse.ArgumentParser()
 ap.add_argument("hmm_file")
 ap.add_argument("module_id")
+ap.add_argument("output_tsv")
 ap.add_argument("--disable-cutoff-ga", action="store_true", default=False)
 ap.add_argument("--genome-accession", type=str, default=None)
 ap.add_argument("--fasta-file", type=str, default=None)
-ap.add_argument("--filter-by-prev-output", action="store_true", default=False)
+ap.add_argument("--filter-by", type=str, default=None)
 ap.add_argument("--requires-prefix-match", action="store_true", default=False)
 ap.add_argument("--cpu", type=int, default=None)
 args = ap.parse_args()
@@ -36,7 +37,7 @@ with gzip.open("data/ko_thresholds.gz", mode='rt') as f:
 proteins_faa = None
 protein_genome_accession_dict = None
 
-output_tsv = f"data/{args.module_id}_results/classify.tsv"
+output_tsv = args.output_tsv
 
 if args.fasta_file:
     if args.genome_accession is None:
@@ -73,11 +74,11 @@ assert proteins_faa and protein_genome_accession_dict
 print(f"classifying {proteins_faa}")
 
 tmp_fn = None
-if args.filter_by_prev_output and os.path.exists(output_tsv):
-    print(f"filtering fasta using {output_tsv}")
+if args.filter_by and os.path.exists(args.filter_by):
+    print(f"filtering fasta using {args.filter_by}")
 
     proteins_fasta = read_fasta_as_dict(proteins_faa)
-    classify_rows = ClassifyTSV.from_tsv_to_rows(output_tsv)
+    classify_rows = ClassifyTSV.from_tsv_to_rows(args.filter_by)
     proteins = {row["protein_accession"] for row in classify_rows}
     proteins_fasta = {k:v for k,v in proteins_fasta.items() if k in proteins}
 
