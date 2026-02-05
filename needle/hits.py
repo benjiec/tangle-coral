@@ -299,8 +299,7 @@ def find_matches_at_locus(old_matches, full_seq, start, end, hmm_file, step=2000
     hmm_rows = hmm_search_genome(
         hmm_file, None, {target_accession: full_seq},
         target_accession = target_accession, target_left = min(start, end), target_right = max(start, end),
-        strand = -1 if old_matches[0].on_reverse_strand else 1,
-        conditional = True
+        strand = -1 if old_matches[0].on_reverse_strand else 1
     )
 
     new_matches = []
