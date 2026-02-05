@@ -29,12 +29,16 @@ def load(module_id, load_manifests=True, load_assignments=True):
         duckdb.execute(f"CREATE TABLE needle.pfam_match AS SELECT * FROM 'data/{module_id}_results/candidate_pfam.tsv'")
         duckdb.execute(f"CREATE TABLE needle.clusters AS SELECT * FROM read_csv_auto('data/{module_id}_results/clusters.tsv', normalize_names=TRUE)")
 
-    # used to generate the above tables
+    # used to generate the above manifest, fragments, and candidate tables
     #
+    duckdb.execute(f"""
+        CREATE TABLE needle.classify
+                  AS SELECT *
+                       REPLACE (NULLIF(score_threshold, '-')::DOUBLE AS score_threshold)
+                FROM read_csv_auto('data/{module_id}_results/classify.tsv', types={{'score_threshold': 'VARCHAR'}})
+    """)
 
-    duckdb.execute(f"CREATE TABLE needle.classify AS SELECT * FROM 'data/{module_id}_results/classify.tsv'")
     duckdb.execute(f"CREATE TABLE needle.detected AS SELECT * FROM 'data/{module_id}_results/protein_detected.tsv'")
-    # following only available for NCBI proteomes
     duckdb.execute(f"CREATE TABLE needle.protein_names AS SELECT * FROM 'data/{module_id}_results/protein_names.tsv'")
     duckdb.execute(f"CREATE TABLE needle.ncbi_exons AS SELECT * FROM 'data/{module_id}_results/protein_ncbi.tsv'")
 
@@ -76,7 +80,7 @@ class CandidateClassifiedProteins(object):
         unique_pairs = df[['protein_accession','genome_accession']].drop_duplicates()
         return list(unique_pairs.itertuples(index=False, name=None))
 
-    def ko_matches(self, incl_evalue_threshold=1E-10):
+    def ko_matches(self, incl_evalue_threshold=1E-10, max_dom_ranking=25):
         sql = """
             SELECT DISTINCT
                    classify.protein_accession,
@@ -88,8 +92,9 @@ class CandidateClassifiedProteins(object):
                                    AND classify.genome_accession = filtered.genome_accession
                                    AND classify.hmm_accession = filtered.hmm_accession
              WHERE hmm_db = 'ko'
-               AND classify.dom_evalue < %s
-          """ % (self.selection_sql, incl_evalue_threshold)
+               AND classify.dom_evalue <= %s
+               AND classify.dom_rank_for_protein <= %s
+          """ % (self.selection_sql, incl_evalue_threshold, max_dom_ranking)
 
         df = self.con.sql(sql).df()
         return df
@@ -110,9 +115,8 @@ class CandidateClassifiedProteins(object):
               JOIN needle.proteins ON classify.protein_accession = proteins.protein_accession AND classify.genome_accession = proteins.genome_accession
              WHERE hmm_db = 'ko'
                AND dom_rank_for_protein <= %s
-               AND (score_threshold = '-' OR
-                    (proteins.proteome_type = 'hmm-detected' AND CAST(dom_score AS FLOAT) / CAST(score_threshold AS FLOAT) >= %s) OR
-                    (proteins.proteome_type = 'ncbi-reference' AND CAST(dom_score AS FLOAT) / CAST(score_threshold AS FLOAT) >= %s))
+               AND ((proteins.proteome_type = 'hmm-detected' AND dom_score / TRY_CAST(score_threshold AS DOUBLE) >= %s) OR
+                    (proteins.proteome_type = 'ncbi-reference' AND dom_score / TRY_CAST(score_threshold AS DOUBLE) >= %s))
           """ % (self.selection_sql, top_n_rank, score_to_threshold_ratio_detected, score_to_threshold_ratio_reference)
 
         df = self.con.sql(sql).df()

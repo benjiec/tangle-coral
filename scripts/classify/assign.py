@@ -11,7 +11,6 @@ args = ap.parse_args()
 
 load(args.module_id, load_manifests=False, load_assignments=False)
 module_kos = module_ko_ids(args.module_id)
-print(module_kos)
 candidate_proteins = CandidateClassifiedProteins()
 
 #
@@ -22,7 +21,7 @@ candidate_proteins = CandidateClassifiedProteins()
 proteins = candidate_proteins.proteins()
 proteins = proteins.to_dict(orient='records')
 
-manifest_sorter = lambda d: (d['genome_accession'], d['major_contig'], d['proteome_type'], d['protein_accession'])
+manifest_sorter = lambda d: (d['genome_accession'] or "", d['major_contig'] or "", d['proteome_type'] or "", d['protein_accession'] or "")
 proteins = sorted(proteins, key=manifest_sorter)
 
 output_manifest = f"data/{args.module_id}_results/proteins.tsv"
