@@ -62,7 +62,7 @@ class ClassifyTSV(object):
         return rows
 
     @staticmethod
-    def to_tsv_from_hmmscan_rows(hmm_db_name, tsv_path, hmm_rows, protein_genome_accession_dict, score_threshold_dict, requires_prefix_match = False):
+    def to_tsv_from_hmmscan_rows(hmm_db_name, tsv_path, hmm_rows, protein_genome_accession_dict, score_threshold_dict, requires_prefix_match = False, max_rank = None):
 
         # hmmscan (not hmmsearch): target is hmm profile, query is protein ID
 
@@ -94,6 +94,9 @@ class ClassifyTSV(object):
                 genome_accession = protein_genome_accession_dict[protein_accession]
                 hmm_accession = tacf(row)
                 score_threshold = "" if score_threshold_dict is None or hmm_accession not in score_threshold_dict else score_threshold_dict[hmm_accession]
+                score_rank = sorted_score_for_protein[protein_accession].index(row["dom_score"])+1
+                if max_rank is not None and score_rank > max_rank:
+                    continue
 
                 data = {
                     ClassifyTSV.HDR_PROTEIN_ACCESSION:  protein_accession,
@@ -108,15 +111,15 @@ class ClassifyTSV(object):
                     ClassifyTSV.HDR_DOM_EVALUE:  row["dom_evalue"],
                     ClassifyTSV.HDR_DOM_SCORE:  row["dom_score"],
                     ClassifyTSV.HDR_SCORE_THRESHOLD: score_threshold,
-                    ClassifyTSV.HDR_DOM_RANK: sorted_score_for_protein[protein_accession].index(row["dom_score"])+1
+                    ClassifyTSV.HDR_DOM_RANK: score_rank
                 }
                 writer.writerow(data)
 
 
-def classify(hmm_file, proteins_faa, cutoff_ga, output_tsv_path, protein_genome_accession_dict, score_threshold_dict, hmm_db_name = None, requires_prefix_match = False, cpu = None):
+def classify(hmm_file, proteins_faa, cutoff_ga, output_tsv_path, protein_genome_accession_dict, score_threshold_dict, hmm_db_name = None, requires_prefix_match = False, cpu = None, max_rank = None):
 
     hmm_rows = hmmscan_file(hmm_file, proteins_faa, cutoff=cutoff_ga, cpu=cpu)
     if hmm_db_name is None:
         hmm_db_name = Path(hmm_file).stem
     ClassifyTSV.to_tsv_from_hmmscan_rows(hmm_db_name, output_tsv_path, hmm_rows, protein_genome_accession_dict, score_threshold_dict,
-                                         requires_prefix_match = requires_prefix_match)
+                                         requires_prefix_match = requires_prefix_match, max_rank = max_rank)

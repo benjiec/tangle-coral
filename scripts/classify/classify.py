@@ -20,6 +20,7 @@ ap.add_argument("--fasta-file", type=str, default=None)
 ap.add_argument("--filter-by", type=str, default=None)
 ap.add_argument("--requires-prefix-match", action="store_true", default=False)
 ap.add_argument("--cpu", type=int, default=None)
+ap.add_argument("--max-rank", type=int, default=25)
 args = ap.parse_args()
 
 if "Pfam-A.hmm" in args.hmm_file and args.disable_cutoff_ga:
@@ -88,7 +89,8 @@ if args.filter_by and os.path.exists(args.filter_by):
     proteins_faa = tmpf.name
     tmp_fn = tmpf.name
 
-classify(args.hmm_file, proteins_faa, cutoff_ga, output_tsv, protein_genome_accession_dict, score_threshold_dict, requires_prefix_match = args.requires_prefix_match, cpu = args.cpu)
+classify(args.hmm_file, proteins_faa, cutoff_ga, output_tsv, protein_genome_accession_dict, score_threshold_dict,
+         requires_prefix_match = args.requires_prefix_match, cpu = args.cpu, max_rank = args.max_rank)
 
 if tmp_fn:
     os.remove(tmp_fn)
