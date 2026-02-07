@@ -9,7 +9,7 @@ from needle.classify import ClassifyTSV
 
 if __name__ == "__main__":
     ap = argparse.ArgumentParser(description="Generates protein TSV for classified NCBI RefSeq proteins.")
-    ap.add_argument("module_id")
+    ap.add_argument("classify_tsv")
     ap.add_argument("output_protein_tsv", help="Output Protein TSV file")
     ap.add_argument("output_name_tsv", help="Output Protein TSV file")
     ap.add_argument("--overwrite", help="Overwrite old data", action="store_true", default=False)
@@ -26,8 +26,7 @@ if __name__ == "__main__":
         else:
             genome_accession_filter.append(args.genome_accession)
 
-    classify_tsv = f"data/{args.module_id}_results/classify.tsv"
-    classify_rows = ClassifyTSV.from_tsv_to_rows(classify_tsv)
+    classify_rows = ClassifyTSV.from_tsv_to_rows(args.classify_tsv)
 
     # get list of genome accessions that we have GFF files for
     genome_accessions = set(

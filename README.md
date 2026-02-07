@@ -144,7 +144,7 @@ The following command will classify detected proteins against full KEGG ortholog
 
 ```
 PYTHONPATH=. python3 scripts/classify/classify.py \
-  --cpu 4 --disable-cutoff-ga kegg-downloads/ko.hmm m00009
+  --cpu 4 --disable-cutoff-ga kegg-downloads/ko.hmm m00009 data/m00009_results/classify.tsv
 ```
 
 
@@ -167,7 +167,8 @@ exons.  `protein_names.tsv` lists the curated names of proteins, and is used in
 the Tableau workbook.
 
 ```
-PYTHONPATH=. python3 scripts/classify/generate-ref-protein-tsv.py m00009 \
+PYTHONPATH=. python3 scripts/classify/generate-ref-protein-tsv.py \
+  data/m00009_results/candidate_ko.tsv \
   data/m00009_results/protein_ncbi.tsv \
   data/m00009_results/protein_names.tsv --overwrite
 ```
@@ -180,7 +181,8 @@ To add new names from a set of new reference genomes, without removing old
 entries
 
 ```
-PYTHONPATH=. python3 scripts/classify/generate-ref-protein-tsv.py m00009 \
+PYTHONPATH=. python3 scripts/classify/generate-ref-protein-tsv.py \
+  data/m00009_results/candidate_ko.tsv \
   data/m00009_results/protein_ncbi.tsv \
   data/m00009_results/protein_names.tsv --genome-accession data/genomes_new.txt
 ```
