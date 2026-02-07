@@ -140,8 +140,7 @@ genome, remove `data/m00009_results/proteins.{faa/tsv}` first.
 Classification outputs appear in `data/m00009_results/classify.tsv`. If you are
 re-running classification, remove this file first.
 
-The following two commands will classify detected proteins first by full KEGG
-ortholog, then Pfam domains.
+The following command will classify detected proteins against full KEGG ortholog database
 
 ```
 PYTHONPATH=. python3 scripts/classify/classify.py \
@@ -282,4 +281,12 @@ PYTHONPATH=. python3 scripts/detect/compare-gff-with-match.py \
   --output-file <filename>
 ```
 
+KO to Pfam mapping was generated using KO consensus sequence. `--cut_ga` option
+was used with `hmmscan`, in the following script; technically, all hits
+satisfied the gathering criteria defined by Pfam. The table was manually
+cleaned up into the format in `data/ko_pfam.tsv`.
 
+```
+PYTHONPATH=. python3 scripts/classify/classify.py \
+  --genome-accession _ --fasta-file kegg-downloads/ko.consensus.faa pfam-downloads/Pfam-A.hmm _ data/ko_pfam_raw.tsv
+```
