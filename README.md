@@ -234,27 +234,35 @@ clustered FAA files are in `data/m00009_results/clusters`.
 ./scripts/align/generate-msas m00009 data/m00009_results/clusters
 ```
 
-### Using results
+### Visualized Curated Proteins
 
 Classification and clustering results -- i.e. how detected proteins match
 against KO HMM profiles and how Pfam domains map onto those proteins assigned
-to a KO -- can be visualized using Tableau. Example workbooks, for m00009, are
+to a KO -- can be visualized using Tableau. For example,
 
-  * `data/Protein Classification.twb`: joins several TSV files and provides
+  * `data/m00009_results/Protein Classification.twb`: joins several TSV files and provides
     global view into what species have what proteins for what pathway steps
-
-  * `data/Alignment.twb`: visualizes protein alignments for clusters position
-    by position, with domain and ortholog annotations.
-
-    * This one is specific to a KO ID and requires a tabularized alignment output file
-
-      ```
-      PYTHONPATH=. python3 scripts/align/tabularize-alignment.py \
-         m00009 K00164 data/m00009_results/alignments/K00164.tsv
-      ```
 
 Also `needle/duckdb.py` shows how to use duckdb to join and query the TSV
 files.
+
+
+### Data Analysis
+
+Generate tabularized alignments to visualize, within a cluster, how KO matches, domains, amino acids align
+
+```
+PYTHONPATH=. python3 scripts/align/tabularize-alignment.py \
+     m00009 K00164 data/m00009_results/alignments/K00164.tsv
+```
+
+DESeq2 analysis on RNAseq or proteomics results
+
+```
+python3 scripts/analysis/des2-simple.py \
+  --timepoint 1 \
+  data/exp_results/doi:10.1126_sciadv.aba2498/rnaseq_data.tsv GCA_014633955.1 data/exp_results/doi:10.1126_sciadv.aba2498
+```
 
 
 ### Other Scripts
