@@ -296,3 +296,10 @@ CSV or TSV check: returns # of rows and makes sure file is valid
 python3 scripts/data/csv-check.py data/m00009_results/classify.tsv
 python3 scripts/data/csv-check.py --delimiter "," data/module_defs.csv
 ```
+
+Update a TSV file with new or modified genome accession column
+
+```
+python3 scripts/data/update-genome-accession.py tsv_fn.tsv GCA_006542545.1
+python3 scripts/data/update-genome-accession.py tsv_fn.tsv GCA_006542545.1 --when existing_acc
+```
