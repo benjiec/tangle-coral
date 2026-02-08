@@ -21,7 +21,7 @@ def get_entries(metadata, genome_accession, quant_fn):
         for row in reader:
             d = metadata.copy()
             d["genome_accession"] = genome_accession
-            d["protein_accession"] = row["Name"]
+            d["sequence_id"] = row["Name"]
             d["count"] = row["NumReads"]
             d["tpm"] = row["TPM"]
             entries.append(d)
