@@ -260,7 +260,7 @@ DESeq2 analysis on RNAseq or proteomics results
 
 ```
 python3 scripts/analysis/des2-simple.py \
-  --timepoint 1 \
+  --timepoint 1 --min-count 5 \
   data/exp_results/doi:10.1126_sciadv.aba2498/rnaseq_data.tsv GCA_014633955.1 data/exp_results/doi:10.1126_sciadv.aba2498
 ```
 

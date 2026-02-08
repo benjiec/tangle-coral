@@ -9,6 +9,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument("data_tsv")
 ap.add_argument("genome_accession")
 ap.add_argument("output_dir")
+ap.add_argument("--min-count", type=int, default=10)
 ap.add_argument("--cohort", type=str, default=None)
 ap.add_argument("--timepoint", type=str, default=None)
 args = ap.parse_args()
@@ -48,10 +49,10 @@ counts_df = counts_df.set_index('timepoint_sample')
 # convert to wide with sequence_id as column, sample as row
 counts_df = counts_df.pivot(columns='sequence_id', values='count')
 
-# filter out genes that have less than 10 read counts in total
-sequence_to_keep = counts_df.columns[counts_df.sum(axis=0) >= 10]
+# filter out genes that have less than min_count read counts in total
+sequence_to_keep = counts_df.columns[counts_df.sum(axis=0) >= args.min_count]
 counts_df = counts_df[sequence_to_keep]
-counts_df = counts_df.round().astype(int)
+counts_df = counts_df.fillna(0.0).round().astype(int)
 
 # get them in the same index order
 metadata_df = metadata_df.loc[counts_df.index]
