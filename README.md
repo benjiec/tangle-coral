@@ -168,7 +168,7 @@ the Tableau workbook.
 
 ```
 PYTHONPATH=. python3 scripts/classify/generate-ref-protein-tsv.py \
-  data/m00009_results/candidate_ko.tsv \
+  m00009 \
   data/m00009_results/protein_ncbi.tsv \
   data/m00009_results/protein_names.tsv --overwrite
 ```
@@ -215,7 +215,6 @@ PYTHONPATH=. python3 scripts/classify/classify.py \
   pfam-downloads/Pfam-A.hmm m00009 data/m00009_results/candidate_pfam.tsv
 scripts/classify/classify-pfam-ncbi m00009 data/genomes_ref.txt
 ```
-
 
 ### Cluster assigned and putative proteins
 
@@ -291,4 +290,11 @@ cleaned up into the format in `data/ko_pfam.tsv`.
 ```
 PYTHONPATH=. python3 scripts/classify/classify.py \
   --genome-accession _ --fasta-file kegg-downloads/ko.consensus.faa pfam-downloads/Pfam-A.hmm _ data/ko_pfam_raw.tsv
+```
+
+CSV or TSV check: returns # of rows and makes sure file is valid
+
+```
+python3 scripts/data/csv-check.py data/m00009_results/classify.tsv
+python3 scripts/data/csv-check.py --delimiter "," data/module_defs.csv
 ```
