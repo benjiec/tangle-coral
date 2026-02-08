@@ -3,44 +3,38 @@ import duckdb
 import pandas as pd
 
 
-def load(module_id, load_manifests=True, load_assignments=True):
-
+def init_schema():
     duckdb.execute("DROP SCHEMA IF EXISTS needle CASCADE")
     duckdb.execute("CREATE SCHEMA needle")
 
-    # generic
-    #
 
+def load_unassigned(module_id, load_protein_specifics=False):
+    duckdb.execute(f"""
+        CREATE TABLE needle.classify
+                  AS SELECT *
+                       REPLACE (NULLIF(score_threshold, '-')::DOUBLE AS score_threshold)
+                FROM read_csv_auto('data/{module_id}_results/classify.tsv', strict_mode=false, types={{'score_threshold': 'VARCHAR'}})
+    """)
+
+    if load_protein_specifics:
+        duckdb.execute(f"CREATE TABLE needle.protein_names AS SELECT * FROM 'data/{module_id}_results/protein_names.tsv'")
+        duckdb.execute(f"CREATE TABLE needle.ncbi_exons AS SELECT * FROM 'data/{module_id}_results/protein_ncbi.tsv'")
+        duckdb.execute(f"CREATE TABLE needle.detected AS SELECT * FROM 'data/{module_id}_results/protein_detected.tsv'")
+
+def load_generic():
     duckdb.execute("CREATE TABLE needle.genomes AS SELECT * FROM read_csv_auto('data/genomes.tsv', normalize_names=TRUE)")
     duckdb.execute("CREATE TABLE needle.ko AS SELECT * FROM read_csv_auto('data/ko.tsv', normalize_names=TRUE)")
     duckdb.execute("CREATE TABLE needle.modules AS SELECT * FROM read_csv_auto(['data/modules.tsv', 'data/custom_modules.tsv'], union_by_name=true)")
     duckdb.execute("CREATE TABLE needle.module_steps AS SELECT * FROM read_csv_auto(['data/module_defs.csv', 'data/custom_module_defs.csv'], union_by_name=true)")
     duckdb.execute("CREATE TABLE needle.pfams AS SELECT * FROM 'data/Pfam-A.clans.tsv'")
 
-    # module specific
-    #
+def load_assigned(module_id):
+    duckdb.execute(f"CREATE TABLE needle.proteins AS SELECT * FROM 'data/{module_id}_results/proteins.tsv'")
+    duckdb.execute(f"CREATE TABLE needle.protein_fragments AS SELECT * FROM 'data/{module_id}_results/protein_fragments.tsv'")
 
-    if load_manifests:
-        duckdb.execute(f"CREATE TABLE needle.proteins AS SELECT * FROM 'data/{module_id}_results/proteins.tsv'")
-        duckdb.execute(f"CREATE TABLE needle.protein_fragments AS SELECT * FROM 'data/{module_id}_results/protein_fragments.tsv'")
-
-    if load_assignments:
-        duckdb.execute(f"CREATE TABLE needle.ko_match AS SELECT * FROM 'data/{module_id}_results/candidate_ko.tsv'")
-        duckdb.execute(f"CREATE TABLE needle.pfam_match AS SELECT * FROM 'data/{module_id}_results/candidate_pfam.tsv'")
-        duckdb.execute(f"CREATE TABLE needle.clusters AS SELECT * FROM read_csv_auto('data/{module_id}_results/clusters.tsv', normalize_names=TRUE)")
-
-    # used to generate the above manifest, fragments, and candidate tables
-    #
-    duckdb.execute(f"""
-        CREATE TABLE needle.classify
-                  AS SELECT *
-                       REPLACE (NULLIF(score_threshold, '-')::DOUBLE AS score_threshold)
-                FROM read_csv_auto('data/{module_id}_results/classify.tsv', types={{'score_threshold': 'VARCHAR'}})
-    """)
-
-    duckdb.execute(f"CREATE TABLE needle.detected AS SELECT * FROM 'data/{module_id}_results/protein_detected.tsv'")
-    duckdb.execute(f"CREATE TABLE needle.protein_names AS SELECT * FROM 'data/{module_id}_results/protein_names.tsv'")
-    duckdb.execute(f"CREATE TABLE needle.ncbi_exons AS SELECT * FROM 'data/{module_id}_results/protein_ncbi.tsv'")
+    duckdb.execute(f"CREATE TABLE needle.ko_match AS SELECT * FROM 'data/{module_id}_results/candidate_ko.tsv'")
+    duckdb.execute(f"CREATE TABLE needle.pfam_match AS SELECT * FROM 'data/{module_id}_results/candidate_pfam.tsv'")
+    duckdb.execute(f"CREATE TABLE needle.clusters AS SELECT * FROM read_csv_auto('data/{module_id}_results/clusters.tsv', normalize_names=TRUE)")
 
 
 def write_tsv_from_records(fn, records):
@@ -59,7 +53,12 @@ def module_ko_ids(module_id):
     return list(df['identifier'].drop_duplicates())
 
 
-class CandidateClassifiedProteins(object):
+class Unassigned(object):
+
+    @staticmethod
+    def init(module_id):
+        init_schema()
+        load_unassigned(module_id)
 
     def _selection_sql(self, evalue_threshold):
         return """SELECT DISTINCT protein_accession, genome_accession, hmm_accession
@@ -99,6 +98,15 @@ class CandidateClassifiedProteins(object):
         df = self.con.sql(sql).df()
         return df
 
+
+class AssignmentCandidates(Unassigned):
+
+    @staticmethod
+    def init(module_id):
+        init_schema()
+        load_generic()
+        load_unassigned(module_id, load_protein_specifics=True)
+
     def ko_assignments(self, score_to_threshold_ratio_detected, score_to_threshold_ratio_reference, top_n_rank=5):
 
         # criteria
@@ -112,11 +120,11 @@ class CandidateClassifiedProteins(object):
             SELECT DISTINCT classify.protein_accession, classify.genome_accession, classify.hmm_accession, dom_rank_for_protein
               FROM needle.classify
               JOIN (%s) as filtered ON classify.protein_accession = filtered.protein_accession AND classify.genome_accession = filtered.genome_accession
-              JOIN needle.proteins ON classify.protein_accession = proteins.protein_accession AND classify.genome_accession = proteins.genome_accession
+         LEFT JOIN needle.protein_names ON classify.protein_accession = protein_names.protein_accession
              WHERE hmm_db = 'ko'
                AND dom_rank_for_protein <= %s
-               AND ((proteins.proteome_type = 'hmm-detected' AND dom_score / TRY_CAST(score_threshold AS DOUBLE) >= %s) OR
-                    (proteins.proteome_type = 'ncbi-reference' AND dom_score / TRY_CAST(score_threshold AS DOUBLE) >= %s))
+               AND ((protein_names.protein_accession IS NULL AND dom_score / TRY_CAST(score_threshold AS DOUBLE) >= %s) OR
+                    (protein_names.protein_accession IS NOT NULL AND dom_score / TRY_CAST(score_threshold AS DOUBLE) >= %s))
           """ % (self.selection_sql, top_n_rank, score_to_threshold_ratio_detected, score_to_threshold_ratio_reference)
 
         df = self.con.sql(sql).df()
@@ -249,6 +257,12 @@ class ClusterProteins(object):
 
 
 class Clusters(object):
+
+    @staticmethod
+    def init(module_id):
+        init_schema()
+        load_generic()
+        load_assigned(module_id)
 
     def __init__(self, ko_id):
         self.ko_id = ko_id

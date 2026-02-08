@@ -2,49 +2,21 @@ import os
 import argparse
 from pathlib import Path
 from scripts.defaults import DefaultPath
-from needle.duckdb import load, CandidateClassifiedProteins, write_tsv_from_records, module_ko_ids
+from needle.duckdb import AssignmentCandidates, write_tsv_from_records, module_ko_ids
 from needle.seq import read_fasta_as_dict, write_fasta_from_dict
 
 ap = argparse.ArgumentParser()
 ap.add_argument("module_id")
 args = ap.parse_args()
 
-load(args.module_id, load_manifests=False, load_assignments=False)
+AssignmentCandidates.init(args.module_id)
+candidate_proteins = AssignmentCandidates()
 module_kos = module_ko_ids(args.module_id)
-candidate_proteins = CandidateClassifiedProteins()
+
 
 #
-# first, create manifests and fragments
+# Generating assignments
 #
-
-# protein manifest
-proteins = candidate_proteins.proteins()
-proteins = proteins.to_dict(orient='records')
-
-manifest_sorter = lambda d: (d['genome_accession'] or "", d['major_contig'] or "", d['proteome_type'] or "", d['protein_accession'] or "")
-proteins = sorted(proteins, key=manifest_sorter)
-
-output_manifest = f"data/{args.module_id}_results/proteins.tsv"
-write_tsv_from_records(output_manifest, proteins)
-
-# fragments
-ncbi_fragments = candidate_proteins.ncbi_fragments()
-ncbi_fragments = ncbi_fragments.to_dict(orient='records')
-detected_fragments = candidate_proteins.detected_fragments()
-detected_fragments = detected_fragments.to_dict(orient='records')
-fragments = ncbi_fragments+detected_fragments
-
-fragments_sorter = lambda d: (d['genome_accession'], d['target_accession'], d['protein_hit_id'], d['query_accession'], d['target_start'])
-fragments = sorted(fragments, key=fragments_sorter)
-
-output_fragments = f"data/{args.module_id}_results/protein_fragments.tsv"
-write_tsv_from_records(output_fragments, fragments)
-
-#
-# reload data, including newly created manifests, before generating assignments, which uses manifests
-#
-
-load(args.module_id, load_assignments=False)
 
 # matches
 ko_matches = candidate_proteins.ko_matches()
@@ -76,9 +48,8 @@ for ko_match in ko_matches:
 output_ko = f"data/{args.module_id}_results/candidate_ko.tsv"
 write_tsv_from_records(output_ko, ko_matches)
 
-
 #
-# write FAA files
+# Write FAA files
 #
 
 protein_faa = f"data/{args.module_id}_results/protein_detected.faa"
@@ -124,3 +95,34 @@ for ko_id, sequence_dict in ko_putative_protein_sequences.items():
     faa_fn = f"data/{args.module_id}_results/faa/{ko_id}-putative.faa"
     write_fasta_from_dict(sequence_dict, faa_fn)
     print(faa_fn)
+
+
+#
+# Protein manifest
+#
+
+proteins = candidate_proteins.proteins()
+proteins = proteins.to_dict(orient='records')
+
+manifest_sorter = lambda d: (d['genome_accession'] or "", d['major_contig'] or "", d['proteome_type'] or "", d['protein_accession'] or "")
+proteins = sorted(proteins, key=manifest_sorter)
+
+output_manifest = f"data/{args.module_id}_results/proteins.tsv"
+write_tsv_from_records(output_manifest, proteins)
+
+
+#
+# Combined protein fragments file from both detected and NCBI
+#
+
+ncbi_fragments = candidate_proteins.ncbi_fragments()
+ncbi_fragments = ncbi_fragments.to_dict(orient='records')
+detected_fragments = candidate_proteins.detected_fragments()
+detected_fragments = detected_fragments.to_dict(orient='records')
+fragments = ncbi_fragments+detected_fragments
+
+fragments_sorter = lambda d: (d['genome_accession'], d['target_accession'], d['protein_hit_id'], d['query_accession'], d['target_start'])
+fragments = sorted(fragments, key=fragments_sorter)
+
+output_fragments = f"data/{args.module_id}_results/protein_fragments.tsv"
+write_tsv_from_records(output_fragments, fragments)
