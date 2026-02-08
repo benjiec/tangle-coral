@@ -271,15 +271,13 @@ Download files from NCBI
 PYTHONPATH=. python3 scripts/ncbi-download.py GCF_932526225.1
 ```
 
-Use the following script to compare, for a given HMM model, how NCBI annotated
-proteins (i.e. in `protein.faa` and `genomic.gff`) compare against protein
-found by Needle.
+The classify script can be used to classify any FAA file, e.g. against KO
 
 ```
-PYTHONPATH=. python3 scripts/detect/compare-gff-with-match.py \
-  --best-hmm \
-  kegg-downloads/ko.hmm GCF_002042975.1 data/m00009_results/protein_detected.tsv \
-  --output-file <filename>
+PYTHONPATH=. python3 scripts/classify/classify.py \
+  --disable-cutoff --genome-accession _ \
+  --fasta-file experiments/10.1126_sciadv.aba2498_vanoppen_2020_sciadv/aten.faa \
+  kegg-downloads/ko.hmm _ experiments/10.1126_sciadv.aba2498_vanoppen_2020_sciadv/aten.ko.tsv
 ```
 
 KO to Pfam mapping was generated using KO consensus sequence. `--cut_ga` option
