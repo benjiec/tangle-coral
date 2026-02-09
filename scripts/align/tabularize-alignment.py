@@ -1,7 +1,7 @@
 import os
 import csv
 import argparse
-from needle.duckdb import load, Clusters
+from needle.duckdb import Clusters
 from needle.seq import read_fasta_as_dict
 
 parser = argparse.ArgumentParser()
@@ -10,7 +10,7 @@ parser.add_argument("ko")
 parser.add_argument("output")
 args = parser.parse_args()
 
-load(args.module.lower())
+Clusters.init(args.module.lower())
 clusters = Clusters(args.ko.upper()).clusters()
 print(len(clusters), "clusters")
 

@@ -264,6 +264,15 @@ python3 scripts/analysis/des2-simple.py \
   data/exp_results/doi:10.1126_sciadv.aba2498/rnaseq_data.tsv GCA_014633955.1 data/exp_results/doi:10.1126_sciadv.aba2498
 ```
 
+Use the following to merge multiple DES2 TSV files into a single tall TSV file, first argument is output directory
+
+```
+PYTHONPATH=. python3 scripts/analysis/des2-merge.py \
+  data/exp_results/doi:10.1038_s43247-025-02167-7 \
+  data/exp_results/doi:10.1038_s43247-025-02167-7/peptides.faa \
+  data/exp_results/doi:10.1038_s43247-025-02167-7/deseq2_*.tsv
+```
+
 
 ### Other Scripts
 
