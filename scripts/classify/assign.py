@@ -13,7 +13,6 @@ AssignmentCandidates.init(args.module_id)
 candidate_proteins = AssignmentCandidates()
 module_kos = module_ko_ids(args.module_id)
 
-
 #
 # Generating assignments
 #
@@ -25,7 +24,7 @@ ko_matches = ko_matches.to_dict(orient='records')
 match_sorter = lambda d: (d['genome_accession'], d['protein_accession'], d['hmm_db'], d['dom_rank_for_protein'], d['hmm_accession'], d['hmm_start'], d['hmm_end'])
 ko_matches = sorted(ko_matches, key=match_sorter)
 
-ko_assignments = candidate_proteins.ko_assignments(0.9, 1.0)
+ko_assignments = candidate_proteins.ko_assignments(0.9, 1.0, module_kos)
 ko_assignments = ko_assignments.to_dict(orient='records')
 ko_assignments = {(d['protein_accession'], d['genome_accession']):d['hmm_accession'] for d in ko_assignments}
 faa_ko_assigned = {}  # which KO:proteins to save to FAA files

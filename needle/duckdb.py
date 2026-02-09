@@ -107,7 +107,7 @@ class AssignmentCandidates(Unassigned):
         load_generic()
         load_unassigned(module_id, load_protein_specifics=True)
 
-    def ko_assignments(self, score_to_threshold_ratio_detected, score_to_threshold_ratio_reference, top_n_rank=5):
+    def ko_assignments(self, score_to_threshold_ratio_detected, score_to_threshold_ratio_reference, module_kos, top_n_rank=5):
 
         # criteria
         #   - top N rank
@@ -123,12 +123,20 @@ class AssignmentCandidates(Unassigned):
          LEFT JOIN needle.protein_names ON classify.protein_accession = protein_names.protein_accession
              WHERE hmm_db = 'ko'
                AND dom_rank_for_protein <= %s
+               AND (protein_names.protein_accession IS NOT NULL OR
+                    classify.hmm_accession NOT IN (%s) OR
+                    LEFT(classify.protein_accession, 6) = classify.hmm_accession)
                AND ((protein_names.protein_accession IS NULL AND dom_score / TRY_CAST(score_threshold AS DOUBLE) >= %s) OR
                     (protein_names.protein_accession IS NOT NULL AND dom_score / TRY_CAST(score_threshold AS DOUBLE) >= %s))
-          """ % (self.selection_sql, top_n_rank, score_to_threshold_ratio_detected, score_to_threshold_ratio_reference)
+          """ % (self.selection_sql, top_n_rank,
+                 ",".join([f"'{x}'" for x in module_kos]),
+                 score_to_threshold_ratio_detected, score_to_threshold_ratio_reference)
 
         df = self.con.sql(sql).df()
+
+        # sort then drop duplicates means we keep the top ranked HMM profile, if multiple profiles can be assigned
         df_filtered = df.sort_values('dom_rank_for_protein', ascending=True).drop_duplicates(['protein_accession', 'genome_accession'])
+
         return df_filtered
 
     def proteins(self):
