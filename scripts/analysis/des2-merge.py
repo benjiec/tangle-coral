@@ -29,10 +29,11 @@ manifest_tsv = args.output_dir+"/sequence_list.tsv"
 des2_merged_tsv = args.output_dir+"/des2_tall.tsv"
 
 with open(manifest_tsv, "w") as f:
-    writer = csv.DictWriter(f, delimiter="\t", fieldnames=["sequence_id"])
+    # add an empty column to help Tableau understand this is a tab delimited file
+    writer = csv.DictWriter(f, delimiter="\t", fieldnames=["sequence_id","empty"])
     writer.writeheader()
     for key,_ in seq_dict.items():
-        writer.writerow(dict(sequence_id=key))
+        writer.writerow(dict(sequence_id=key,empty=""))
 
 with open(des2_merged_tsv, "w") as f:
     writer = csv.DictWriter(f, delimiter="\t", fieldnames=list(entries[0].keys()))

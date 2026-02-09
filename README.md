@@ -273,6 +273,22 @@ PYTHONPATH=. python3 scripts/analysis/des2-merge.py \
   data/exp_results/doi:10.1038_s43247-025-02167-7/deseq2_*.tsv
 ```
 
+The classify script can be used to classify any .faa file. The output can then
+be used to see what KOs, domains, and GO terms are over or under-expressed.
+E.g., the following two lines classify proteins and concatenate results into
+one output .tsv file.
+
+```
+PYTHONPATH=. python3 scripts/classify/classify.py \
+  --disable-cutoff --genome-accession _ \
+  --fasta-file exp_results/doi:10.1126_sciadv.aba2498/aten.faa \
+  kegg-downloads/ko.hmm _ exp_results/doi:10.1126_sciadv.aba2498/sequence_ko.tsv
+PYTHONPATH=. python3 scripts/classify/classify.py \
+  --disable-cutoff --genome-accession _ \
+  --fasta-file exp_results/doi:10.1126_sciadv.aba2498/c_goreaui.faa \
+  kegg-downloads/ko.hmm _ exp_results/doi:10.1126_sciadv.aba2498/sequence_ko.tsv
+```
+
 
 ### Other Scripts
 
@@ -286,15 +302,6 @@ Download files from NCBI
 
 ```
 PYTHONPATH=. python3 scripts/ncbi-download.py GCF_932526225.1
-```
-
-The classify script can be used to classify any FAA file, e.g. against KO
-
-```
-PYTHONPATH=. python3 scripts/classify/classify.py \
-  --disable-cutoff --genome-accession _ \
-  --fasta-file experiments/10.1126_sciadv.aba2498_vanoppen_2020_sciadv/aten.faa \
-  kegg-downloads/ko.hmm _ experiments/10.1126_sciadv.aba2498_vanoppen_2020_sciadv/aten.ko.tsv
 ```
 
 KO to Pfam mapping was generated using KO consensus sequence. `--cut_ga` option
