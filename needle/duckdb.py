@@ -112,6 +112,7 @@ class AssignmentCandidates(Unassigned):
         # criteria
         #   - top N rank
         #   - score to threshold ratio greater than provided limits
+        #   - ref protein, or hmm hit is either not part of the module or matches the hmm used to detect the protein
         #
         # returns hmm accession with highest rank, meeting the above criteria
         # note: rank is sorted by evalue
