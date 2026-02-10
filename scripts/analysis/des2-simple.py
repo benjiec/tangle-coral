@@ -7,7 +7,6 @@ from pydeseq2.ds import DeseqStats
 
 ap = argparse.ArgumentParser()
 ap.add_argument("data_tsv")
-ap.add_argument("genome_accession")
 ap.add_argument("output_dir")
 ap.add_argument("--min-count", type=int, default=10)
 ap.add_argument("--cohort", type=str, default=None)
@@ -21,11 +20,10 @@ if cohort and timepoint:
 if not cohort and not timepoint:
     raise Exception("--cohort and --timepoint: please specify exactly one")
 
-master_df = pd.read_csv(args.data_tsv, delimiter='\t')
+tall_df = pd.read_csv(args.data_tsv, delimiter='\t')
 cond_name = None
 
 # filter data by genome
-tall_df = master_df[master_df['genome_accession'] == args.genome_accession]
 if cohort is not None:
     tall_df = tall_df[tall_df['cohort'] == cohort].copy()
     tall_df['condition'] = tall_df['timepoint']

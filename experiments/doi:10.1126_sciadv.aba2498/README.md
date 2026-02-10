@@ -53,7 +53,21 @@ salmon quant -i c_goreaui.salmon_index \
              -o c_goreaui-quants/SRR9331965 -p 2
 ```
 
-3. Classify transcripts to KOs
+3. Process quants
+
+```
+python3 experiments/doi:10.1126_sciadv.aba2498/process_salmon_quants.py \
+  experiments/doi:10.1126_sciadv.aba2498 data/exp_results/doi:10.1126_sciadv.aba2498
+
+python3 scripts/data/update-genome-accession.py \
+  data/exp_results/doi:10.1126_sciadv.aba2498/sequence_data.tsv \
+  GCA_014633955.1 --when doi:10.1126/sciadv.aba2498-a_tenuis
+python3 scripts/data/update-genome-accession.py \
+  data/exp_results/doi:10.1126_sciadv.aba2498/sequence_data.tsv \
+  GCA_947184155.2 --when doi:10.1126/sciadv.aba2498-c_goreaui
+```
+
+4. Classify transcripts to KOs
 
 ```
 PYTHONPATH=. python3 scripts/classify/classify.py \
@@ -69,3 +83,5 @@ PYTHONPATH=. python3 scripts/classify/classify.py \
 
 Then, copy the .ko.tsv and .faa files to
 data/exp_results/10.1126_sciadv.aba2498 directory.
+
+5. Run DESeq2, see repo README.md

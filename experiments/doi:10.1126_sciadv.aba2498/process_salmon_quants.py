@@ -1,7 +1,3 @@
-# run this in top level of repo dir, when you have the quant file locations linked here
-#
-# python3 experiments/doi:10.1126_sciadv.aba2498/process_salmon_quants.py experiments/doi:10.1126_sciadv.aba2498 data/exp_results/doi:10.1126_sciadv.aba2498
-
 import os
 import csv
 import argparse
@@ -24,6 +20,11 @@ def get_entries(metadata, genome_accession, quant_fn):
             d["sequence_id"] = row["Name"]
             d["count"] = row["NumReads"]
             d["tpm"] = row["TPM"]
+
+            # convert to protein name
+            if d["sequence_id"].startswith("lcl|"):
+                d["sequence_id"] = "_".join(d["sequence_id"].split("_cds_")[1].split("_")[:-1])
+
             entries.append(d)
 
     return entries
@@ -73,7 +74,7 @@ all_entries = []
 all_entries.extend(process_dir(args.data_dir+"/aten-quants", "doi:10.1126/sciadv.aba2498-a_tenuis", md))
 all_entries.extend(process_dir(args.data_dir+"/c_goreaui-quants", "doi:10.1126/sciadv.aba2498-c_goreaui", md))
 
-with open(args.output_dir+"/rnaseq_data.tsv", "w") as f:
+with open(args.output_dir+"/sequence_data.tsv", "w") as f:
     writer = csv.DictWriter(f, delimiter="\t", fieldnames=list(all_entries[0].keys()))
     writer.writeheader()
     for entry in all_entries:
