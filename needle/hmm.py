@@ -29,12 +29,14 @@ class HMMCollection(object):
                 with tempfile.NamedTemporaryFile(dir=temp_dir, delete=False, suffix=".hmm") as tmpf:
                     tmpf.close()
                     # print("fetching hmm into temp file", tmpf.name)
-                    hmmfetch(big_hmm_file, acc, tmpf.name)
-                    self.__by_accession[acc] = tmpf.name
+                    try: # file may not be there
+                        hmmfetch(big_hmm_file, acc, tmpf.name)
+                        self.__by_accession[acc] = tmpf.name
+                    except:
+                        os.remove(tmpf.name)
 
     def get(self, accession):
-        return self.__by_accession[accession]
-
+        return self.__by_accession[accession] if accession in self.__by_accession else None
 
     def clean(self):
         for fn in self.__by_accession.values():
@@ -272,12 +274,14 @@ def parse_hmmsearch_output(output_path):
     return [x.match_row() for x in alignments]
 
 
-def hmmsearch_file(hmm_file_name, fasta_path, cutoff=False, gap_removal=True):
+def hmmsearch_file(hmm_file_name, fasta_path, cutoff=False, gap_removal=True, cpu=None):
     with tempfile.NamedTemporaryFile(delete=False, suffix=".domtbl", mode="w") as domtbl_f:
         domtbl_f.close()
         with tempfile.NamedTemporaryFile(delete=False, suffix=".txt", mode="w") as out_f:
             out_f.close()
             cmd = ["hmmsearch"]
+            if cpu is not None:
+                cmd.extend(["--cpu", str(cpu)])
             if cutoff:
                 cmd.append("--cut_ga")
             cmd.extend(["-o", out_f.name, "--domtblout", domtbl_f.name, hmm_file_name, fasta_path])
@@ -296,7 +300,7 @@ def hmmsearch_file(hmm_file_name, fasta_path, cutoff=False, gap_removal=True):
             return res
 
 
-def hmmsearch(hmm_file_name, sequences, cutoff=False, gap_removal=True):
+def hmmsearch(hmm_file_name, sequences, cutoff=False, gap_removal=True, cpu=None):
     if len(sequences) == 0:
         return []
     with tempfile.TemporaryDirectory() as tmpdir:
@@ -304,17 +308,17 @@ def hmmsearch(hmm_file_name, sequences, cutoff=False, gap_removal=True):
         with open(fasta_path, "w") as f:
             for i, cand in enumerate(sequences):
                 f.write(f">cand_{i}\n{cand}\n")
-        return hmmsearch_file(hmm_file_name, fasta_path, cutoff=cutoff, gap_removal=gap_removal)
+        return hmmsearch_file(hmm_file_name, fasta_path, cutoff=cutoff, gap_removal=gap_removal, cpu=cpu)
 
 
-def hmmsearch_sequence_dict(hmm_file_name, fasta_dict, cutoff=False, gap_removal=True):
+def hmmsearch_sequence_dict(hmm_file_name, fasta_dict, cutoff=False, gap_removal=True, cpu=None):
     if len(fasta_dict.keys()) == 0:
         return []
     with tempfile.NamedTemporaryFile(delete=False, suffix=".faa", mode="w") as tmpf:
         for acc, sequence in fasta_dict.items():
             tmpf.write(f">{acc}\n{sequence}\n")
         tmpf.close()
-        res = hmmsearch_file(hmm_file_name, tmpf.name, cutoff=cutoff, gap_removal=gap_removal)
+        res = hmmsearch_file(hmm_file_name, tmpf.name, cutoff=cutoff, gap_removal=gap_removal, cpu=cpu)
         os.remove(tmpf.name)
         return res
 

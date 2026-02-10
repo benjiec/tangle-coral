@@ -14,6 +14,7 @@ ap = argparse.ArgumentParser()
 ap.add_argument("hmm_file")
 ap.add_argument("module_id")
 ap.add_argument("output_tsv")
+ap.add_argument("--incr", action="store_true", default=False)
 ap.add_argument("--disable-cutoff-ga", action="store_true", default=False)
 ap.add_argument("--genome-accession", type=str, default=None)
 ap.add_argument("--fasta-file", type=str, default=None)
@@ -88,6 +89,23 @@ if args.filter_by and os.path.exists(args.filter_by):
     write_fasta_from_dict(proteins_fasta, tmpf.name)
     proteins_faa = tmpf.name
     tmp_fn = tmpf.name
+
+if args.incr and os.path.exists(output_tsv):
+    print(f"only classifying new proteins")
+
+    proteins_fasta = read_fasta_as_dict(proteins_faa)
+    existing_rows = ClassifyTSV.from_tsv_to_rows(output_tsv)
+    existing_proteins = {row["protein_accession"] for row in existing_rows}
+    proteins_fasta = {k:v for k,v in proteins_fasta.items() if k not in existing_proteins}
+
+    if tmp_fn:
+        os.remove(tmp_fn)
+    tmpf = tempfile.NamedTemporaryFile(delete=False, suffix=".faa", mode="w")
+    tmpf.close()
+    write_fasta_from_dict(proteins_fasta, tmpf.name)
+    proteins_faa = tmpf.name
+    tmp_fn = tmpf.name
+
 
 classify(args.hmm_file, proteins_faa, cutoff_ga, output_tsv, protein_genome_accession_dict, score_threshold_dict,
          requires_prefix_match = args.requires_prefix_match, cpu = args.cpu, max_rank = args.max_rank)

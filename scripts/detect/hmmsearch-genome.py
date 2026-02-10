@@ -7,6 +7,8 @@ ap = argparse.ArgumentParser()
 ap.add_argument("hmm_file")
 ap.add_argument("genome_accession")
 ap.add_argument("output_file")
+ap.add_argument("--append", action="store_true", default=False)
+ap.add_argument("--cpu", type=int, default=None)
 ap.add_argument("--target-accession", type=str, default=None)
 ap.add_argument("--target-left", type=int, default=None)
 ap.add_argument("--target-right", type=int, default=None)
@@ -20,7 +22,8 @@ hmm_rows = hmm_search_genome(
     args.hmm_file, genome_accession, genomic_fasta,
     target_accession = args.target_accession,
     target_left = args.target_left,
-    target_right = args.target_right
+    target_right = args.target_right,
+    cpu = args.cpu
 )
 
 detected = []
@@ -38,8 +41,9 @@ for row in hmm_rows:
     )
     detected.append(out)
 
-with open(args.output_file, "w") as f:
-    f.write("\t".join(Results.PRODUCER_HEADER)+"\n")
+with open(args.output_file, "a" if args.append else "w") as f:
+    if args.append is False:
+        f.write("\t".join(Results.PRODUCER_HEADER)+"\n")
     for d in detected:
         assert len(d) == len(Results.PRODUCER_HEADER)
         f.write("\t".join([str(x) for x in d])+"\n")

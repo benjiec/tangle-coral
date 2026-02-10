@@ -284,10 +284,17 @@ def hmm_clean(protein_hits: List[ProteinHit], hmm_collection: HMMCollection, ove
 
     cleaned: Dict[ProteinHit] = {}
 
+    skipped = []
     for pm in protein_hits:
-        new_pm = hmm_clean_protein(pm, hmm_collection.get(pm.query_accession), overlap_flanking_len)
-        if new_pm:
-            cleaned[new_pm.protein_hit_id] = new_pm
+        hmm_profile = hmm_collection.get(pm.query_accession)
+        if hmm_profile is None:
+            if pm.query_accession not in skipped:
+                skipped.append(pm.query_accession)
+                print("skipping", pm.query_accession, "cannot find HMM profile")
+        else:
+            new_pm = hmm_clean_protein(pm, hmm_profile, overlap_flanking_len)
+            if new_pm:
+                cleaned[new_pm.protein_hit_id] = new_pm
 
     return list(cleaned.values())
 
@@ -436,6 +443,7 @@ def hmm_expand_protein(protein_hit, genomic_sequence_dict, hmm_file, direction):
 def hmm_expand(protein_hits, genomic_sequence_dict, hmm_collection):
     new_protein_hits = {}
 
+    skipped = []
     for pm in protein_hits:
         """
         print()
@@ -444,8 +452,14 @@ def hmm_expand(protein_hits, genomic_sequence_dict, hmm_collection):
             print("    ", nm.target_start, nm.target_end, nm.query_start, nm.query_end)
         """
 
-        pm = hmm_expand_protein(pm, genomic_sequence_dict, hmm_collection.get(pm.query_accession), -1)
-        pm = hmm_expand_protein(pm, genomic_sequence_dict, hmm_collection.get(pm.query_accession), 1)
-        new_protein_hits[pm.protein_hit_id] = pm
+        hmm_profile = hmm_collection.get(pm.query_accession)
+        if hmm_profile is None:
+            if pm.query_accession not in skipped:
+                skipped.append(pm.query_accession)
+                print("skipping", pm.query_accession, "cannot find HMM profile")
+        else:
+            pm = hmm_expand_protein(pm, genomic_sequence_dict, hmm_profile, -1)
+            pm = hmm_expand_protein(pm, genomic_sequence_dict, hmm_profile, 1)
+            new_protein_hits[pm.protein_hit_id] = pm
 
     return list(new_protein_hits.values())

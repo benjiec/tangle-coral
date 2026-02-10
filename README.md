@@ -182,7 +182,7 @@ entries
 
 ```
 PYTHONPATH=. python3 scripts/classify/generate-ref-protein-tsv.py \
-  data/m00009_results/candidate_ko.tsv \
+  m00009 \
   data/m00009_results/protein_ncbi.tsv \
   data/m00009_results/protein_names.tsv --genome-accession data/genomes_new.txt
 ```
@@ -288,6 +288,41 @@ PYTHONPATH=. python3 scripts/classify/classify.py \
   --fasta-file exp_results/doi:10.1126_sciadv.aba2498/c_goreaui.faa \
   kegg-downloads/ko.hmm _ exp_results/doi:10.1126_sciadv.aba2498/sequence_ko.tsv
 ```
+
+### Incrementally Adding to a Module Dataset
+
+To add more KOs to an existing module's dataset, first
+
+  * Create a new `.hmm` file with the new KOs, and
+  * Update existing module's `.hmm` file (e.g. `data/m00009_ko.hmm`) to include the new KOs
+
+`scripts/detect/hmmsearch-genome.py` has a `--append` option, to add to an existing
+detected protein fragment TSV file. Using this option, with a new HMM file,
+will add additional detected fragments. The `search-genomes` script can then
+re-export detected proteins for ALL the genomes; this last step is not
+incremental but does not take as long as a de novo detection. For example,
+
+```
+PYTHONPATH=. python3 scripts/detect/hmmsearch-genome.py \
+  --append --cpu 4 \
+  data/x90001_NEW.hmm GCA_006542545.1 data/x90001_results/detected/x90001_GCA_006542545.1.tsv
+
+rm data/x90001_results/protein_detected.{faa,tsv}
+scripts/detect/search-genomes x90001 data/genomes_detect.txt
+```
+
+Classification of both reference proteins and detected proteins will also need
+to be done incrementally, using the `--incr` option of `scripts/classify/classify.py`.
+
+```
+PYTHONPATH=. python3 scripts/classify/classify.py \
+  --incr --cpu 4 --disable-cutoff-ga kegg-downloads/ko.hmm x90001 data/x90001_results/classify.tsv
+
+scripts/classify/classify-ncbi-incr x90001 data/x90001_NEW.hmm data/genomes_ref.txt
+```
+
+The rest of the steps -- assignment, Pfam scan, generating names, clustering,
+alignment -- needs to re-run fully.
 
 
 ### Other Scripts
