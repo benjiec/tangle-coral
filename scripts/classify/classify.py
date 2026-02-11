@@ -82,7 +82,7 @@ if args.filter_by and os.path.exists(args.filter_by):
     proteins_fasta = read_fasta_as_dict(proteins_faa)
     classify_rows = ClassifyTSV.from_tsv_to_rows(args.filter_by)
     proteins = {row["protein_accession"] for row in classify_rows}
-    before = len(proteins.keys())
+    before = len(proteins)
     proteins_fasta = {k:v for k,v in proteins_fasta.items() if k in proteins}
     after = len(proteins_fasta.keys())
     print(f"  {before} -> {after}")
