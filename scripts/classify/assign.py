@@ -68,7 +68,13 @@ for ko_id, items in faa_ko_assigned.items():
             if genome_accession not in genome_with_proteins:
                 protein_fn = DefaultPath.ncbi_genome_protein_faa(genome_accession)
                 print("reading sequences from", protein_fn)
+                if not os.path.exists(protein_fn):
+                    print(f"cannot read protein fasta for {protein_accession}, {genome_accession}")
+                    continue
                 protein_sequences.update(read_fasta_as_dict(protein_fn))
+            if protein_accession not in protein_sequences:
+                print(f"cannot find protein sequence for {protein_accession}, {genome_accession}")
+                continue
             protein_sequence = protein_sequences[protein_accession]
         ko_assigned_protein_sequences.setdefault(ko_id, {})[protein_accession] = protein_sequence
 
@@ -81,7 +87,13 @@ for ko_id, items in faa_ko_putative.items():
             if genome_accession not in genome_with_proteins:
                 protein_fn = DefaultPath.ncbi_genome_protein_faa(genome_accession)
                 print("reading sequences from", protein_fn)
+                if not os.path.exists(protein_fn):
+                    print(f"cannot read protein fasta for {protein_accession}, {genome_accession}")
+                    continue
                 protein_sequences.update(read_fasta_as_dict(protein_fn))
+            if protein_accession not in protein_sequences:
+                print(f"cannot find protein sequence for {protein_accession}, {genome_accession}")
+                continue
             protein_sequence = protein_sequences[protein_accession]
         ko_putative_protein_sequences.setdefault(ko_id, {})[protein_accession] = protein_sequence
 
