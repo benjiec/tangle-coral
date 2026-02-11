@@ -82,7 +82,10 @@ if args.filter_by and os.path.exists(args.filter_by):
     proteins_fasta = read_fasta_as_dict(proteins_faa)
     classify_rows = ClassifyTSV.from_tsv_to_rows(args.filter_by)
     proteins = {row["protein_accession"] for row in classify_rows}
+    before = len(proteins.keys())
     proteins_fasta = {k:v for k,v in proteins_fasta.items() if k in proteins}
+    after = len(proteins_fasta.keys())
+    print(f"  {before} -> {after}")
 
     tmpf = tempfile.NamedTemporaryFile(delete=False, suffix=".faa", mode="w")
     tmpf.close()
@@ -96,7 +99,10 @@ if args.incr and os.path.exists(output_tsv):
     proteins_fasta = read_fasta_as_dict(proteins_faa)
     existing_rows = ClassifyTSV.from_tsv_to_rows(output_tsv)
     existing_proteins = {row["protein_accession"] for row in existing_rows}
+    before = len(proteins_fasta.keys())
     proteins_fasta = {k:v for k,v in proteins_fasta.items() if k not in existing_proteins}
+    after = len(proteins_fasta.keys())
+    print(f"  {before} -> {after}")
 
     if tmp_fn:
         os.remove(tmp_fn)

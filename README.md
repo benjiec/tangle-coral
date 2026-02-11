@@ -324,9 +324,15 @@ PYTHONPATH=. python3 scripts/classify/classify.py \
 scripts/classify/classify-ncbi-incr x90001 data/x90001_NEW.hmm data/genomes_ref.txt
 ```
 
-The rest of the steps -- assignment, Pfam scan, generating names, clustering,
-alignment -- needs to re-run fully.
+Pfam search can also be done incrementally
 
+```
+PYTHONPATH=. python3 scripts/classify/classify.py \
+  --incr --cpu 4 --filter-by data/m00009_results/candidate_ko.tsv \
+  pfam-downloads/Pfam-A.hmm m00009 data/m00009_results/candidate_pfam.tsv
+
+scripts/classify/classify-pfam-ncbi-incr m00009 data/genomes_ref.txt
+```
 
 ### Other Scripts
 

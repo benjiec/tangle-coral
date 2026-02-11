@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# argument: module id, genome accession list file name
+
+module=$1
+
+ko_matches="data/${module}_results/candidate_ko.tsv"
+pf_matches="data/${module}_results/candidate_pfam.tsv"
+
+# Loop through each line of the file
+while IFS= read -r acc; do
+
+PYTHONPATH=. python3 scripts/classify/classify.py --incr --cpu 4 --filter-by ${ko_matches} --genome-accession $acc pfam-downloads/Pfam-A.hmm ${module} ${pf_matches}
+
+done < $2
