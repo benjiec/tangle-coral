@@ -100,8 +100,23 @@ PYTHONPATH=. python3 scripts/classify/classify.py \
   kegg-downloads/ko.hmm _ experiments/10.1126_sciadv.aba2498/aten.ko.tsv
 ```
 
+Then filter the classified file to only keep classifications above the KO
+threshold. For example,
+
+```
+python3 scripts/analysis/assign-ko.py experiments/10.1126_sciadv.aba2498/sequence_ko.tsv
+mv experiments/10.1126_sciadv.aba2498/sequence_ko.tsv_filtered experiments/10.1126_sciadv.aba2498/sequence_ko.tsv
+```
+
 Then, copy the .ko.tsv and .faa files to
-data/exp_results/10.1126_sciadv.aba2498 directory.
+data/exp_results/10.1126_sciadv.aba2498 directory. Usually, following these
+conventions
+
+  * `sequence_data.tsv`: data file
+  * `sequence_ko.tsv`: sequence to KO mapping
+  * `sequence_list.tsv`: from des2-merge script below
+  * `des2_tall.tsv`: des2 data, from des2-merge script below
+
 
 ## Run DESeq2
 
