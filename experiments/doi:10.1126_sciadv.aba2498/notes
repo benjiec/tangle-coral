@@ -1,0 +1,7 @@
+Raw seq reads were downloaded from NCBI using BioProject code referenced in
+paper. 
+
+Decoy and transcript fasta files for C. goreaui and A. tenius were constructed.
+Salmon was used to map reads onto these transcripts.
+
+DESeq2 performs count normalization by default.

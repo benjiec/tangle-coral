@@ -1,4 +1,7 @@
 
+SRA files were downloaded from NCBI. Salmon was used to map SRA files onto the
+ssa01.fna file below.
+
 ssa01.fna file is downloaded from NCBI: https://www.ncbi.nlm.nih.gov/Traces/wgs/?val=GLGU01
 
 To detect and classify proteins
