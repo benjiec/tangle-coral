@@ -249,31 +249,13 @@ files.
 
 ### Data Analysis
 
+Also, see experiments/README.md.
+
 Generate tabularized alignments to visualize, within a cluster, how KO matches, domains, amino acids align
 
 ```
 PYTHONPATH=. python3 scripts/align/tabularize-alignment.py \
      m00009 K00164 data/m00009_results/alignments/K00164.tsv
-```
-
-DESeq2 analysis on RNAseq or proteomics results
-
-```
-python3 scripts/analysis/des2-simple.py \
-  --timepoint 1 --min-count 5 \
-  data/exp_results/doi:10.1126_sciadv.aba2498/sequence_data.tsv data/exp_results/doi:10.1126_sciadv.aba2498
-```
-
-Use the following to merge multiple DES2 TSV files into a single tall TSV file,
-first argument is output directory. IMPORTANT: for RNAseq data, make sure the
-mapped file from Salmon, or other tool, has been converted to refer to protein
-sequence IDs in the proteins.faa file.
-
-```
-PYTHONPATH=. python3 scripts/analysis/des2-merge.py \
-  data/exp_results/doi:10.1126_sciadv.aba2498 \
-  data/exp_results/doi:10.1126_sciadv.aba2498/proteins.faa \
-  data/exp_results/doi:10.1126_sciadv.aba2498/deseq2_*.tsv
 ```
 
 The classify script can be used to classify any .faa file. The output can then
@@ -291,6 +273,7 @@ PYTHONPATH=. python3 scripts/classify/classify.py \
   --fasta-file exp_results/doi:10.1126_sciadv.aba2498/c_goreaui.faa \
   kegg-downloads/ko.hmm _ exp_results/doi:10.1126_sciadv.aba2498/sequence_ko.tsv
 ```
+
 
 ### Incrementally Adding to a Module Dataset
 

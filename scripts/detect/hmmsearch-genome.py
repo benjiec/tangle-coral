@@ -9,13 +9,18 @@ ap.add_argument("genome_accession")
 ap.add_argument("output_file")
 ap.add_argument("--append", action="store_true", default=False)
 ap.add_argument("--cpu", type=int, default=None)
+ap.add_argument("--fna-file", type=str, default=None)
 ap.add_argument("--target-accession", type=str, default=None)
 ap.add_argument("--target-left", type=int, default=None)
 ap.add_argument("--target-right", type=int, default=None)
 args = ap.parse_args()
 
 genome_accession = args.genome_accession
-fna_file = DefaultPath.ncbi_genome_fna(genome_accession)
+
+if args.fna_file:
+    fna_file = args.fna_file
+else:
+    fna_file = DefaultPath.ncbi_genome_fna(genome_accession)
 genomic_fasta = read_fasta_as_dict(fna_file)
 
 hmm_rows = hmm_search_genome(
