@@ -105,12 +105,37 @@ data/exp_results/10.1126_sciadv.aba2498 directory.
 
 ## Run DESeq2
 
-DESeq2 analysis on RNAseq or proteomics results
+DESeq2 analysis on RNAseq or proteomics results can be done using two scripts.
+First, the `des2-simple.py` script does simple comparison of every two types of
+cohorts at a given timepoint, or every two timepoints at the same cohort. For
+example,
 
 ```
 python3 scripts/analysis/des2-simple.py \
   --timepoint 1 --min-count 5 \
   data/exp_results/doi:10.1126_sciadv.aba2498/sequence_data.tsv data/exp_results/doi:10.1126_sciadv.aba2498
+
+python3 scripts/analysis/des2-simple.py \
+  --cohort SS8 --min-count 5 \
+  data/exp_results/doi:10.1126_sciadv.aba2498/sequence_data.tsv data/exp_results/doi:10.1126_sciadv.aba2498
+```
+
+Then, the `des2-factor.py` script uses the `cohort_metadata.tsv` file to select
+split by category, and then within each category, does comparison of every two
+factor values. For example,
+
+```
+python3 scripts/analysis/des2-factor.py \
+  --factor NutrientLevel --category Temperature \
+  data/exp_results/doi:10.1093_pcp_pcac175/sequence_data.tsv \
+  data/exp_results/doi:10.1093_pcp_pcac175/cohort_metadata.tsv \
+  data/exp_results/doi:10.1093_pcp_pcac175
+
+python3 scripts/analysis/des2-factor.py \
+  --factor Temperature --category NutrientLevel \
+  data/exp_results/doi:10.1093_pcp_pcac175/sequence_data.tsv \
+  data/exp_results/doi:10.1093_pcp_pcac175/cohort_metadata.tsv \
+  data/exp_results/doi:10.1093_pcp_pcac175
 ```
 
 Use the following to merge multiple DES2 TSV files into a single tall TSV file,

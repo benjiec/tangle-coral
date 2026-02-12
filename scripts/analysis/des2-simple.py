@@ -23,7 +23,6 @@ if not cohort and not timepoint:
 tall_df = pd.read_csv(args.data_tsv, delimiter='\t')
 cond_name = None
 
-# filter data by genome
 if cohort is not None:
     tall_df = tall_df[tall_df['cohort'] == cohort].copy()
     tall_df['condition'] = tall_df['timepoint']
