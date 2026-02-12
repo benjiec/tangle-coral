@@ -1,0 +1,15 @@
+
+ssa01.fna file is downloaded from NCBI: https://www.ncbi.nlm.nih.gov/Traces/wgs/?val=GLGU01
+
+To detect and classify proteins
+
+PYTHONPATH=. python3 scripts/detect/hmmsearch-genome.py --cpu 2 --fna-file ssa01.fna kegg-downloads/ko.hmm _ ssa01.tsv
+PYTHONPATH=. python3 scripts/detect/export-protein-results.py \
+  --fna ssa01.fna \
+  ssa01.tsv symbiodinium_linucheae_doi_10.1093_ismejo_wraf268_ssa01 \
+  kegg-downloads/ko.hmm \
+  data/exp_results/doi:10.1093_ismejo_wraf268
+PYTHONPATH=. python3 scripts/classify/classify.py \
+  --fasta 
+  kegg-downloads/ko.hmm \
+  data/exp_results/doi:10.1093_ismejo_wraf268/sequence_ko.tsv

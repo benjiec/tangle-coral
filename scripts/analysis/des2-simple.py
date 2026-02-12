@@ -33,15 +33,15 @@ else:
     cond_name = f"timepoint_{timepoint}_cohort"
 
 # generate unique sample-timepoint column
-tall_df['timepoint_sample'] = tall_df['sample'].astype(str) + '/' + tall_df['timepoint'].astype(str)
+tall_df['cohort_timepoint_sample'] = tall_df['sample'].astype(str) + '/' + tall_df['timepoint'].astype(str) + '/' + tall_df['cohort'].astype(str)
 
 # split into counts and metadata dataframes
-metadata_df = tall_df[['timepoint_sample', 'condition']].drop_duplicates()
-counts_df = tall_df[['timepoint_sample', 'sequence_id', 'count']]
+metadata_df = tall_df[['cohort_timepoint_sample', 'condition']].drop_duplicates()
+counts_df = tall_df[['cohort_timepoint_sample', 'sequence_id', 'count']]
 
 # set both to be indexed by sample
-metadata_df = metadata_df.set_index('timepoint_sample')
-counts_df = counts_df.set_index('timepoint_sample')
+metadata_df = metadata_df.set_index('cohort_timepoint_sample')
+counts_df = counts_df.set_index('cohort_timepoint_sample')
 
 # convert to wide with sequence_id as column, sample as row
 counts_df = counts_df.pivot(columns='sequence_id', values='count')
@@ -76,7 +76,7 @@ unique_values = metadata_df['condition'].unique()
 pairs = list(combinations(unique_values, 2))
 
 for pair in pairs:
-    fn = "_".join(pair)
+    fn = "_".join([str(x) for x in pair])
     fn = f"{args.output_dir}/deseq2_{cond_name}_{fn}.tsv"
     print("generating", fn)
 

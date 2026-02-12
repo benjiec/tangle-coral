@@ -13,11 +13,15 @@ def main():
     parser.add_argument("genome_accession", help="Genome accession")
     parser.add_argument("hmm_file", help="HMM file to use for improve search results")
     parser.add_argument("output_dir", help="Path of output directory")
+    parser.add_argument("--fna", help="HMM accession to export", default=None)
     parser.add_argument("--hmm", help="HMM accession to export", default=None)
     parser.add_argument("--no-output", help="Skip output", action='store_true', default=False)
     args = parser.parse_args()
 
-    target_fasta = DefaultPath.ncbi_genome_fna(args.genome_accession)
+    if args.fna:
+        target_fasta = args.fna
+    else:
+        target_fasta = DefaultPath.ncbi_genome_fna(args.genome_accession)
 
     res = Results(args.results_tsv, target_fasta_path=target_fasta)
     protein_matches = group_matches(res.matches())
