@@ -71,6 +71,14 @@ salmon quant -i c_goreaui.salmon_index \
              -o c_goreaui-quants/SRR9331965 -p 2
 ```
 
+### Multiple genomes in a single dataset
+
+You can put multiple genomes in a single dataset file, i.e.
+`sequence_data.tsv`, if the sequence IDs are unique. It makes loading/filtering
+data later easier. But, DO NOT DO THIS if sequence IDs may clash; use separate
+files in that case.
+
+
 ### Process quants
 
 Each directory may have its own script to process quants into `sequence_data.tsv`.
@@ -133,6 +141,9 @@ conventions
 
 ## Run DESeq2
 
+First, identify an internal control gene, EIF5B has been shown to work well for
+algae and likely coral as well.
+
 DESeq2 analysis on RNAseq or proteomics results can be done using two scripts.
 First, the `des2-simple.py` script does simple comparison of every two types of
 cohorts at a given timepoint, or every two timepoints at the same cohort. For
@@ -140,13 +151,15 @@ example,
 
 ```
 python3 scripts/analysis/des2-simple.py \
-  --timepoint 1 --min-count 5 \
+  --timepoint 1 --min-count 5 --control-sequence aten_0.1.m1.6600.m1 \
   data/exp_results/doi:10.1126_sciadv.aba2498/sequence_data.tsv data/exp_results/doi:10.1126_sciadv.aba2498
 
 python3 scripts/analysis/des2-simple.py \
-  --cohort SS8 --min-count 5 \
+  --cohort SS8 --min-count 5 --control-sequence aten_0.1.m1.6600.m1 \
   data/exp_results/doi:10.1126_sciadv.aba2498/sequence_data.tsv data/exp_results/doi:10.1126_sciadv.aba2498
 ```
+
+WARNING - des2-factor.py script below NEEDS TO BE UPDATED to support specifyibng stable gene controls.
 
 Then, the `des2-factor.py` script uses the `cohort_metadata.tsv` file to select
 split by category, and then within each category, does comparison of every two

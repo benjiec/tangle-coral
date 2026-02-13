@@ -1,3 +1,4 @@
+import re
 import pandas as pd
 import argparse
 from itertools import combinations
@@ -8,6 +9,8 @@ from pydeseq2.ds import DeseqStats
 ap = argparse.ArgumentParser()
 ap.add_argument("data_tsv")
 ap.add_argument("output_dir")
+ap.add_argument("--control-sequence", type=str, default=None)
+ap.add_argument("--genome-accession", type=str, default=None)
 ap.add_argument("--min-count", type=int, default=10)
 ap.add_argument("--cohort", type=str, default=None)
 ap.add_argument("--timepoint", type=str, default=None)
@@ -20,7 +23,15 @@ if cohort and timepoint:
 if not cohort and not timepoint:
     raise Exception("--cohort and --timepoint: please specify exactly one")
 
+if args.control_sequence and not args.genome_accession:
+    raise Exception("Requires a genome accession if specifying control sequence")
+if args.genome_accession and not args.control_sequence:
+    raise Exception("Not filtering by genome accession if control sequence not specified")
+
 tall_df = pd.read_csv(args.data_tsv, delimiter='\t')
+if args.genome_accession:
+    tall_df = tall_df[tall_df['genome_accession'] == args.genome_accession]
+
 cond_name = None
 
 if cohort is not None:
@@ -31,6 +42,10 @@ else:
     tall_df = tall_df[tall_df['timepoint'].astype(str) == timepoint].copy()
     tall_df['condition'] = tall_df['cohort']
     cond_name = f"timepoint_{timepoint}_cohort"
+
+if args.control_sequence:
+    ctrl = re.sub(r'\W', '_', args.control_sequence)
+    cond_name = f"{ctrl}_{args.genome_accession}_{cond_name}"
 
 # generate unique sample-timepoint column
 tall_df['cohort_timepoint_sample'] = tall_df['sample'].astype(str) + '/' + tall_df['timepoint'].astype(str) + '/' + tall_df['cohort'].astype(str)
@@ -58,12 +73,18 @@ print("metadata", metadata_df.shape)
 print("counts", counts_df.shape)
 
 inference = DefaultInference(n_cpus=2)
+
+stable_controls = None
+if args.control_sequence:
+    stable_controls = [args.control_sequence]
+
 dds = DeseqDataSet(
     counts=counts_df,
     metadata=metadata_df,
     design="~condition",
     refit_cooks=True,
     inference=inference,
+    control_genes=stable_controls
 )
 
 dds.deseq2()
