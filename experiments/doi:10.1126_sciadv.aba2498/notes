@@ -6,10 +6,10 @@ Salmon was used to map reads onto these transcripts.
 
 DESeq2 performs count normalization by default.
 
-des2-simple.py script has options to specify a stable gene control. We ran
-these options
+des2-simple.py script has options to specify one or more stable gene controls.
+We ran these options
 
-  - Split dataset by genome, stable gene control
+  - Split dataset by genome, stable gene control EIF5B
     - GCA_014633955.1: aten_0.1.m1.6600.m1
     - GCA_947184155.2: CAL1159269.1
   - Split dataset by genome, no stable gene control
