@@ -9,7 +9,7 @@ from pydeseq2.ds import DeseqStats
 ap = argparse.ArgumentParser()
 ap.add_argument("data_tsv")
 ap.add_argument("output_dir")
-ap.add_argument("--control-sequence", type=str, default=None)
+ap.add_argument("--control-sequence", type=str, default=None, action="append")
 ap.add_argument("--genome-accession", type=str, default=None)
 ap.add_argument("--min-count", type=int, default=10)
 ap.add_argument("--cohort", type=str, default=None)
@@ -23,13 +23,10 @@ if cohort and timepoint:
 if not cohort and not timepoint:
     raise Exception("--cohort and --timepoint: please specify exactly one")
 
-if args.control_sequence and not args.genome_accession:
-    raise Exception("Requires a genome accession if specifying control sequence")
-if args.genome_accession and not args.control_sequence:
-    raise Exception("Not filtering by genome accession if control sequence not specified")
-
 tall_df = pd.read_csv(args.data_tsv, delimiter='\t')
+
 if args.genome_accession:
+    print(f"filtering by {args.genome_accession}")
     tall_df = tall_df[tall_df['genome_accession'] == args.genome_accession]
 
 cond_name = None
@@ -44,8 +41,12 @@ else:
     cond_name = f"timepoint_{timepoint}_cohort"
 
 if args.control_sequence:
-    ctrl = re.sub(r'\W', '_', args.control_sequence)
-    cond_name = f"{ctrl}_{args.genome_accession}_{cond_name}"
+    for ctrl in args.control_sequence:
+        ctrl = re.sub(r'\W', '_', ctrl)
+        cond_name = f"ctrl_{ctrl}_{cond_name}"
+
+if args.genome_accession:
+    cond_name = f"{args.genome_accession}_{cond_name}"
 
 # generate unique sample-timepoint column
 tall_df['cohort_timepoint_sample'] = tall_df['sample'].astype(str) + '/' + tall_df['timepoint'].astype(str) + '/' + tall_df['cohort'].astype(str)
@@ -76,7 +77,9 @@ inference = DefaultInference(n_cpus=2)
 
 stable_controls = None
 if args.control_sequence:
-    stable_controls = [args.control_sequence]
+    assert type(args.control_sequence) in (list, tuple)
+    stable_controls = args.control_sequence
+    print("using controls", stable_controls)
 
 dds = DeseqDataSet(
     counts=counts_df,
