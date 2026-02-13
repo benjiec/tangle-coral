@@ -266,12 +266,8 @@ one output .tsv file.
 ```
 PYTHONPATH=. python3 scripts/classify/classify.py \
   --disable-cutoff --genome-accession _ \
-  --fasta-file exp_results/doi:10.1126_sciadv.aba2498/aten.faa \
-  kegg-downloads/ko.hmm _ exp_results/doi:10.1126_sciadv.aba2498/sequence_ko.tsv
-PYTHONPATH=. python3 scripts/classify/classify.py \
-  --disable-cutoff --genome-accession _ \
-  --fasta-file exp_results/doi:10.1126_sciadv.aba2498/c_goreaui.faa \
-  kegg-downloads/ko.hmm _ exp_results/doi:10.1126_sciadv.aba2498/sequence_ko.tsv
+  --fasta-file your_fasta_file.faa \
+  kegg-downloads/ko.hmm _ your_sequence_ko.tsv
 ```
 
 

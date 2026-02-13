@@ -1,18 +1,19 @@
 
-SRA files were downloaded from NCBI. Salmon was used to map SRA files onto the
-ssa01.fna file below.
-
 ssa01.fna file is downloaded from NCBI: https://www.ncbi.nlm.nih.gov/Traces/wgs/?val=GLGU01
 
-To detect and classify proteins
+SRA files were downloaded from NCBI. Salmon was used to map SRA files onto the
+ssa01.fna.
 
-PYTHONPATH=. python3 scripts/detect/hmmsearch-genome.py --cpu 2 --fna-file ssa01.fna kegg-downloads/ko.hmm _ ssa01.tsv
-PYTHONPATH=. python3 scripts/detect/export-protein-results.py \
-  --fna ssa01.fna \
-  ssa01.tsv symbiodinium_linucheae_doi_10.1093_ismejo_wraf268_ssa01 \
-  kegg-downloads/ko.hmm \
-  data/exp_results/doi:10.1093_ismejo_wraf268
-PYTHONPATH=. python3 scripts/classify/classify.py \
-  --fasta 
-  kegg-downloads/ko.hmm \
-  data/exp_results/doi:10.1093_ismejo_wraf268/sequence_ko.tsv
+ssa01.fna is DNA transcripts - we need proteins for our analysis. The following
+was used to detect proteins in ssa01.fna.
+
+pip3 install orfipy
+orfipy ssa01.fna --pep ssa01.faa --min 200 --procs 4 --start ATG
+
+200 min was used because the paper says they used a minimum 200 for transcript
+length, during trinity assembly.
+
+the longest protein for each transcript was then selected using the
+select_orfs.py script, this resulted in the final proteins.faa file in the
+data/exp_results directory. This .faa file was then classified by KO and Pfam
+HMMs.
