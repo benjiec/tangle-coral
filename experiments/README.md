@@ -92,12 +92,14 @@ python3 scripts/data/update-genome-accession.py \
 PYTHONPATH=. python3 scripts/classify/classify.py \
   --disable-cutoff --genome-accession _ \
   --fasta-file experiments/10.1126_sciadv.aba2498/c_goreaui.faa \
-  kegg-downloads/ko.hmm _ experiments/10.1126_sciadv.aba2498/c_goreaui.ko.tsv
+  kegg-downloads/ko.hmm _ experiments/10.1126_sciadv.aba2498/c_goreaui_ko.tsv
 
 PYTHONPATH=. python3 scripts/classify/classify.py \
   --disable-cutoff --genome-accession _ \
   --fasta-file experiments/10.1126_sciadv.aba2498/aten.faa \
-  kegg-downloads/ko.hmm _ experiments/10.1126_sciadv.aba2498/aten.ko.tsv
+  kegg-downloads/ko.hmm _ experiments/10.1126_sciadv.aba2498/aten_ko.tsv
+
+cat experiments/10.1126_sciadv.aba2498/c_goreaui_ko.tsv experiments/10.1126_sciadv.aba2498/aten_ko.tsv > experiments/10.1126_sciadv.aba2498/sequence_ko.tsv
 ```
 
 Then filter the classified file to only keep classifications above the KO
@@ -108,12 +110,23 @@ python3 scripts/analysis/assign-ko.py experiments/10.1126_sciadv.aba2498/sequenc
 mv experiments/10.1126_sciadv.aba2498/sequence_ko.tsv_filtered experiments/10.1126_sciadv.aba2498/sequence_ko.tsv
 ```
 
+You can also directly classify/identify Pfam domains from the proteome
+
+```
+PYTHONPATH=. python3 scripts/classify/classify.py \
+  --genome-accession _ \
+  --fasta-file data/exp_results/doi:10.1126_sciadv.aba2498/proteins.faa \
+  pfam-downloads/Pfam-A.hmm _ data/exp_results/doi:10.1126_sciadv.aba2498/sequence_pfam.tsv \
+   --cpu 4
+```
+
 Then, copy the .ko.tsv and .faa files to
 data/exp_results/10.1126_sciadv.aba2498 directory. Usually, following these
 conventions
 
   * `sequence_data.tsv`: data file
   * `sequence_ko.tsv`: sequence to KO mapping
+  * `sequence_pfam.tsv`: sequence to Pfam mapping
   * `sequence_list.tsv`: from des2-merge script below
   * `des2_tall.tsv`: des2 data, from des2-merge script below
 
