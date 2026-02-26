@@ -32,6 +32,7 @@ this is not a big deal and going with longest ORFs to simplify processing.
 
 DESeq2 - ran with GLGU01006859.1 as stable control.
 
+```
 python3 scripts/analysis/des2-simple.py --timepoint 192 --min-count 5 \
   --control-sequence GLGU01006859.1 \
   data/exp_results/doi:10.1093_ismejo_wraf268/sequence_data.tsv data/exp_results/doi:10.1093_ismejo_wraf268
@@ -40,7 +41,12 @@ python3 scripts/analysis/des2-simple.py --cohort 34C --min-count 5 \
   --control-sequence GLGU01006859.1 \
   data/exp_results/doi:10.1093_ismejo_wraf268/sequence_data.tsv data/exp_results/doi:10.1093_ismejo_wraf268
 
+python3 scripts/analysis/des2-specific.py --cohort1 34C --timepoint1 0 --cohort2 27C --timepoint2 192 --min-count 5 \
+  --control-sequence GLGU01006859.1 \
+  data/exp_results/doi:10.1093_ismejo_wraf268/sequence_data.tsv data/exp_results/doi:10.1093_ismejo_wraf268
+
 PYTHONPATH=. python3 scripts/analysis/des2-merge.py \
   data/exp_results/doi:10.1093_ismejo_wraf268 \
   data/exp_results/doi:10.1093_ismejo_wraf268/proteins.faa \
   data/exp_results/doi:10.1093_ismejo_wraf268/deseq2_*.tsv
+```
