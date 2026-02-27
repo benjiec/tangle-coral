@@ -110,11 +110,12 @@ unique_values = metadata_df['condition'].unique()
 pairs = list(combinations(unique_values, 2))
 
 for pair in pairs:
-    fn = "_".join([str(x) for x in pair])
+    baseline, testgroup = sorted(pair)
+    fn = f"base_{baseline}_test_{testgroup}"
     fn = f"{args.output_dir}/deseq2_{cond_name}_{fn}.tsv"
     print("generating", fn)
 
-    contrast = ["condition"]+list(pair)
+    contrast = ["condition", testgroup, baseline]
     ds = DeseqStats(dds, contrast=contrast, inference=inference, quiet=True)
     ds.summary()
     ds.results_df.to_csv(fn, sep='\t')
