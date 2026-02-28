@@ -1,3 +1,5 @@
+import gzip
+from contextlib import contextmanager
 from typing import Dict, List, Optional, Tuple
 from Bio.Seq import Seq
 
@@ -23,12 +25,21 @@ def extract_subsequence_strand_sensitive(full_sequence: Optional[str], start_1_b
     return subs
 
 
+@contextmanager
+def open_fasta_to_read(fn):
+    with open(fn, 'rb') as test_f:
+        is_gz = test_f.read(2) == b'\x1f\x8b'
+    opener = gzip.open if is_gz else open
+    with opener(fn, "rt", encoding="utf-8") as f:
+        yield f
+
+
 def read_fasta_as_dict(path: str) -> Dict[str, str]:
     sequences_by_accession: Dict[str, str] = {}
     current_acc: Optional[str] = None
     current_seq_parts: List[str] = []
 
-    with open(path, "r") as f:
+    with open_fasta_to_read(path) as f:
         for raw_line in f:
             if not raw_line:
                 continue
@@ -53,12 +64,20 @@ def read_fasta_as_dict(path: str) -> Dict[str, str]:
     return sequences_by_accession
 
 
-def write_fasta_from_dict(fasta_dict: Dict[str, str], path: str, append = False):
-    mode = "w"
-    if append is True:
-        mode = "a"
+@contextmanager
+def open_fasta_to_write(fn, mode):
+    is_gz = fn.endswith(".gz")
+    opener = gzip.open if is_gz else open
+    with opener(fn, mode, encoding="utf-8") as f:
+        yield f
 
-    with open(path, mode) as f:
+
+def write_fasta_from_dict(fasta_dict: Dict[str, str], path: str, append = False):
+    mode = "wt"
+    if append is True:
+        mode = "at"
+
+    with open_fasta_to_write(path, mode) as f:
         for k,v in fasta_dict.items():
             f.write(f">{k}\n{v}\n")
 
