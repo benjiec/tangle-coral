@@ -1,7 +1,6 @@
 
 Paper: https://pmc.ncbi.nlm.nih.gov/articles/PMC8484447/
 
-
 ## Data
 
 Zip file of data was downloaded from Dryad repository using accession
@@ -62,7 +61,7 @@ PYTHONPATH=. python3 experiments/doi:10.1038_s41467-021-25950-4/unique-acc.py \
   data/exp_results/doi:10.1038_s41467-021-25950-4/pseudodiploria_symb.fna.gz 
 ```
 
-Salmon map reads to transcriptomes, e.g.
+Create Salmon index, then use Salmon to map reads to transcriptomes, e.g.
 
 ```
 salmon index -t pseudodiploria_symb.fna -i pseudodiploria_symb.salmon_index
@@ -71,15 +70,37 @@ salmon quant -i pseudodiploria_symb.salmon_index \
   -1 SRR6255880_R1.fastq -2 SRR6255880_R2.fastq
 ```
 
+See `mk_map_cmds.py` for a list of Salmon commands used on the SRA files.
+
 TODO map reads onto .fna.gz files
 TODO summarize quantifications into sequence_data.tsv file with genome accessions
 
 
 ## Mapping to KO and Pfam
 
-TODO translate and select ORFs, create proteins.faa
-TODO map to KO and Pfam
+Use `orfipy` to translate and compute ORFs for each of the 6 .fna files, e.g.
 
+```
+orfipy orbicella_host.fna.gz --pep orbicella_host.faa --min 150 --procs 4 --start ATG
+```
+
+Combine the 6 .faa output files into a single `proteins.faa`, then perform KO
+and Pfam detection on this file.
+
+```
+PYTHONPATH=. python3 scripts/classify/classify.py \
+  --cpu 2 --disable-cutoff-ga --genome-accession _ \
+  --fasta-file experiments/doi:10.1038_s41467-021-25950-4/proteins.faa \
+  kegg-downloads/ko.hmm _ data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_ko.orf.tsv
+
+PYTHONPATH=. python3 scripts/classify/classify.py \
+  --cpu 2 --genome-accession _ \
+  --fasta-file experiments/doi:10.1038_s41467-021-25950-4/proteins.faa \
+  pfam-downloads/Pfam-A.hmm _ data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_pfam.orf.tsv
+```
+
+TODO map to KO and Pfam
+TODO remove _ORF suffix from classification .tsv files
 
 ## DESeq2
 
