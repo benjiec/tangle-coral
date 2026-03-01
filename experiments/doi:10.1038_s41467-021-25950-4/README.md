@@ -100,42 +100,40 @@ PYTHONPATH=. python3 scripts/classify/classify.py \
 ```
 
 TODO map to KO and Pfam
-TODO remove _ORF suffix from classification .tsv files
+TODO deduplicate because multiple ORFs, and then remove _ORF suffix, may be we should do tx2gene first?
+TODO run scripts/analysis/assign-ko.py on KO TSV
+TODO create a smaller set of classified files for Tableau joining, filtered with DESeq2 results
 
 ## DESeq2
 
-TODO find internal control genes
-TODO run DESeq2 by each genome, total 6
-
 ```
 python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \
-  --control-sequence SYMB_CONTROL \
   --genome-accession doi:10.1038_s41467-021-25950-4_breviolum_b5 \
   data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
 
 python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \
-  --control-sequence SYMB_CONTROL \
   --genome-accession doi:10.1038_s41467-021-25950-4_breviolum_faviinorum \
   data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
 
 python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \
-  --control-sequence SYMB_CONTROL \
   --genome-accession doi:10.1038_s41467-021-25950-4_symbiodinium_a3 \
   data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
 
 python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \
-  --control-sequence HOST_CONTROL \
   --genome-accession doi:10.1038_s41467-021-25950-4_orbicella_faveolata \
   data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
 
 python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \
-  --control-sequence HOST_CONTROL \
   --genome-accession doi:10.1038_s41467-021-25950-4_pseudodiploria_clivosa \
   data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
 
 python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \
-  --control-sequence HOST_CONTROL \
   --genome-accession doi:10.1038_s41467-021-25950-4_siderastrea_radians \
   data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
+
+PYTHONPATH=. python3 scripts/analysis/des2-merge.py \
+  data/exp_results/doi:10.1038_s41467-021-25950-4 \
+  data/exp_results/doi:10.1038_s41467-021-25950-4/proteins.faa \
+  data/exp_results/doi:10.1038_s41467-021-25950-4/deseq2_*.tsv
 ```
 

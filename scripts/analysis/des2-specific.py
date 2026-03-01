@@ -118,4 +118,10 @@ for pair in pairs:
     contrast = ["condition", testgroup, baseline]
     ds = DeseqStats(dds, contrast=contrast, inference=inference, quiet=True)
     ds.summary()
+
+    available_coeffs = dds.varm["LFC"].columns
+    target_coeff = [c for c in available_coeffs if f"[{testgroup}]" in c or f"T.{testgroup}" in c][0]
+    print(f"Shrinking using coeff: {target_coeff}")
+    ds.lfc_shrink(coeff=target_coeff)
+
     ds.results_df.to_csv(fn, sep='\t')

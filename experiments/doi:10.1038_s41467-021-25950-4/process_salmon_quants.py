@@ -1,3 +1,4 @@
+import re
 import os
 import csv
 import argparse
@@ -9,18 +10,29 @@ parser.add_argument("data_dir")
 parser.add_argument("output_dir")
 args = parser.parse_args()
 
+from collections import defaultdict
 
-def get_entries(metadata, quant_fn):
-    entries = []
+def tximport(metadata, quant_fn):
+    aggregated = defaultdict(lambda: {"count": 0.0, "tpm": 0.0, "iso_count": 0})
 
     with open(quant_fn, "r") as f:
         reader = csv.DictReader(f, delimiter="\t")
         for row in reader:
-            d = metadata.copy()
-            d["sequence_id"] = row["Name"]
-            d["count"] = row["NumReads"]
-            d["tpm"] = row["TPM"]
-            entries.append(d)
+            seq_id = re.sub(r'_i\d+$', '', row["Name"])
+            aggregated[seq_id]["count"] += float(row["NumReads"])
+            aggregated[seq_id]["tpm"] += float(row["TPM"])
+            aggregated[seq_id]["iso_count"] += 1
+
+    entries = []
+    for seq_id, stats in aggregated.items():
+        d = metadata.copy()
+        d["sequence_id"] = seq_id
+        d["count"] = stats["count"]
+        # Standard tximport sums TPMs for the gene level
+        d["tpm"] = stats["tpm"] 
+        # Optional: store how many isoforms were collapsed
+        d["isoform_count"] = stats["iso_count"]
+        entries.append(d)
 
     return entries
 
@@ -34,7 +46,7 @@ def process_dir(rootdirn, fn_to_metadata):
         quant_file = subdir / "quant.sf"
         if os.path.exists(quant_file):
             print(subdir.stem, quant_file)
-            entries.extend(get_entries(fn_to_metadata[subdir.stem], quant_file))
+            entries.extend(tximport(fn_to_metadata[subdir.stem], quant_file))
 
     return entries
 

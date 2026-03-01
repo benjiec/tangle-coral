@@ -14,6 +14,7 @@ ap.add_argument("--genome-accession", type=str, default=None)
 ap.add_argument("--min-count", type=int, default=10)
 ap.add_argument("--cohort", type=str, default=None)
 ap.add_argument("--timepoint", type=str, default=None)
+ap.add_argument("--include-timepoint", type=str, default=None, action="append")
 args = ap.parse_args()
 
 cohort = args.cohort
@@ -33,7 +34,7 @@ cond_name = None
 
 if cohort is not None:
     tall_df = tall_df[tall_df['cohort'] == cohort].copy()
-    tall_df['condition'] = tall_df['timepoint']
+    tall_df['condition'] = tall_df['timepoint'].astype(str)
     cond_name = f"cohort_{cohort}_timepoint"
 else:
     tall_df = tall_df[tall_df['timepoint'].astype(str) == timepoint].copy()
@@ -101,6 +102,12 @@ pairs = list(combinations(unique_values, 2))
 
 for pair in pairs:
     baseline, testgroup = sorted(pair)
+
+    if args.include_timepoint:
+        if baseline not in args.include_timepoint and testgroup not in args.include_timepoint:
+            print(f"skipping {testgroup} vs {baseline}")
+            continue
+
     fn = f"base_{baseline}_test_{testgroup}"
     fn = f"{args.output_dir}/deseq2_{cond_name}_{fn}.tsv"
     print("generating", fn)
@@ -108,4 +115,10 @@ for pair in pairs:
     contrast = ["condition", testgroup, baseline]
     ds = DeseqStats(dds, contrast=contrast, inference=inference, quiet=True)
     ds.summary()
+
+    available_coeffs = dds.varm["LFC"].columns
+    target_coeff = [c for c in available_coeffs if f"[{testgroup}]" in c or f"T.{testgroup}" in c][0]
+    print(f"Shrinking using coeff: {target_coeff}")
+    ds.lfc_shrink(coeff=target_coeff)
+
     ds.results_df.to_csv(fn, sep='\t')
