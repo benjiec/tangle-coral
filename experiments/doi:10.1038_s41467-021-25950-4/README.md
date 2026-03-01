@@ -66,14 +66,14 @@ Create Salmon index, then use Salmon to map reads to transcriptomes, e.g.
 ```
 salmon index -t pseudodiploria_symb.fna -i pseudodiploria_symb.salmon_index
 salmon quant -i pseudodiploria_symb.salmon_index \
-  -l A --validateMappings -o quants/SRR6255880 -p 2\
-  -1 SRR6255880_R1.fastq -2 SRR6255880_R2.fastq
+  -l A --validateMappings -o symb_quants/SRR6255880 -p 2\
+  -1 SRR6255880_1.fastq -2 SRR6255880_2.fastq
 ```
 
 See `mk_map_cmds.py` for a list of Salmon commands used on the SRA files.
 
-TODO map reads onto .fna.gz files
-TODO summarize quantifications into sequence_data.tsv file with genome accessions
+`process_salmon_quants.py` was used to summarize the quantifications into
+`sequence_data.full.tsv`. This TSV is rather large, and slow to load.
 
 
 ## Mapping to KO and Pfam
@@ -106,3 +106,36 @@ TODO remove _ORF suffix from classification .tsv files
 
 TODO find internal control genes
 TODO run DESeq2 by each genome, total 6
+
+```
+python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \
+  --control-sequence SYMB_CONTROL \
+  --genome-accession doi:10.1038_s41467-021-25950-4_breviolum_b5 \
+  data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
+
+python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \
+  --control-sequence SYMB_CONTROL \
+  --genome-accession doi:10.1038_s41467-021-25950-4_breviolum_faviinorum \
+  data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
+
+python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \
+  --control-sequence SYMB_CONTROL \
+  --genome-accession doi:10.1038_s41467-021-25950-4_symbiodinium_a3 \
+  data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
+
+python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \
+  --control-sequence HOST_CONTROL \
+  --genome-accession doi:10.1038_s41467-021-25950-4_orbicella_faveolata \
+  data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
+
+python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \
+  --control-sequence HOST_CONTROL \
+  --genome-accession doi:10.1038_s41467-021-25950-4_pseudodiploria_clivosa \
+  data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
+
+python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \
+  --control-sequence HOST_CONTROL \
+  --genome-accession doi:10.1038_s41467-021-25950-4_siderastrea_radians \
+  data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
+```
+
