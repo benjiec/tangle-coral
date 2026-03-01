@@ -1,5 +1,6 @@
 # curates tall table of des2 data, with a manifest
 
+import re
 import csv
 import argparse
 from pathlib import Path
@@ -13,6 +14,8 @@ args = parser.parse_args()
 
 ANALYSIS_FIELD = "analysis_type"
 seq_dict = read_fasta_as_dict(args.faa_file)
+# strip off orifypy suffix on top of trinity suffix
+seq_ids = { re.sub(r'_i\d+_ORF\.\d+$', '', k) for k in seq_dict.keys() }
 
 entries = []
 
@@ -30,10 +33,10 @@ des2_merged_tsv = args.output_dir+"/des2_tall.tsv"
 
 with open(manifest_tsv, "w") as f:
     # add an empty column to help Tableau understand this is a tab delimited file
-    writer = csv.DictWriter(f, delimiter="\t", fieldnames=["sequence_id","empty"])
+    writer = csv.DictWriter(f, delimiter="\t", fieldnames=["sequence_id", "empty"])
     writer.writeheader()
-    for key,_ in seq_dict.items():
-        writer.writerow(dict(sequence_id=key,empty=""))
+    for x in seq_ids:
+        writer.writerow(dict(sequence_id=x, empty=""))
 
 with open(des2_merged_tsv, "w") as f:
     writer = csv.DictWriter(f, delimiter="\t", fieldnames=list(entries[0].keys()))

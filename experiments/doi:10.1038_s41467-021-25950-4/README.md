@@ -130,7 +130,12 @@ python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \
 python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \
   --genome-accession doi:10.1038_s41467-021-25950-4_siderastrea_radians \
   data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
+```
 
+TODO how do we summarize the ORFs so we can generate list of manifests?
+  dedup by gene/isoform: check for contained, then longest?
+
+```
 PYTHONPATH=. python3 scripts/analysis/des2-merge.py \
   data/exp_results/doi:10.1038_s41467-021-25950-4 \
   data/exp_results/doi:10.1038_s41467-021-25950-4/proteins.faa \
