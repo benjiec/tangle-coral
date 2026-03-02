@@ -1,11 +1,11 @@
 
 Paper: https://pmc.ncbi.nlm.nih.gov/articles/PMC8484447/
 
-## Data
+## Trinity assembled transcripts and NGS reads
 
 Zip file of data was downloaded from Dryad repository using accession
-10.5061/dryad.k3j9kd57b. The zip file contains Trinity assembled .fna files
-used for mapping.
+10.5061/dryad.k3j9kd57b. The zip file contains Trinity assembled .fna files by
+species. The assemblies require some processing, see below.
 
 Paper says
 
@@ -21,7 +21,7 @@ Raw sequencing data were downloaded from SRA using sratools, e.g.
 fasterq-dump SRR6255822 --progress
 ```
 
-The following SRA entries were used:
+The SRA entries are
 
   * SRR6255820: Orbicella, control, A
   * SRR6255822: Orbicella, control, B
@@ -42,15 +42,12 @@ The following SRA entries were used:
   * SRR6256324: Siderastrea, treatment, B
   * SRR6256325: Siderastrea, treatment, C	
 
-DESeq2 results were downloaded from supplemental data 1 from the paper
-[https://pmc.ncbi.nlm.nih.gov/articles/PMC8484447/]. We re-mapped the reads and
-re-generated the DESeq2 results, but are using the author's DESeq2 results for
-reference and sanity check.
+DESeq2 results from the paper can be downloaded from supplemental data 1 from
+the paper [https://pmc.ncbi.nlm.nih.gov/articles/PMC8484447/]. They can be used
+as a reference.
 
 
-## Read mapping
-
-For now just using host and algae transcriptomes.
+## Transcript clustering
 
 First rewrite the .fna.gz files to have a prefix for each entry, so we ensure
 all entry names are unique across the three holobionts. E.g. do the following
@@ -58,13 +55,37 @@ for the 6 files (3 hosts, 3 symbionts)
 
 ```
 PYTHONPATH=. python3 experiments/doi:10.1038_s41467-021-25950-4/unique-acc.py \
-  data/exp_results/doi:10.1038_s41467-021-25950-4/pseudodiploria_symb.fna.gz 
+  data/exp_results/doi:10.1038_s41467-021-25950-4/pseudodiploria_symb.fna.gz
 ```
+
+Cluster each of the 6 transcripts using MMSeqs. This step crushes/aggregates
+genes on different alleles but provides more statistical power for differential
+analysis through this aggregation.
+
+```
+scripts/cluster/mmseqs-cluster-trinity-transcripts \
+  data/exp_results/doi:10.1038_s41467-021-25950-4/orbicella_host.fna.gz
+scripts/cluster/mmseqs-cluster-trinity-transcripts \
+  data/exp_results/doi:10.1038_s41467-021-25950-4/orbicella_symb.fna.gz
+
+scripts/cluster/mmseqs-cluster-trinity-transcripts \
+  data/exp_results/doi:10.1038_s41467-021-25950-4/pseudodiploria_host.fna.gz
+scripts/cluster/mmseqs-cluster-trinity-transcripts \
+  data/exp_results/doi:10.1038_s41467-021-25950-4/pseudodiploria_symb.fna.gz
+
+scripts/cluster/mmseqs-cluster-trinity-transcripts \
+  data/exp_results/doi:10.1038_s41467-021-25950-4/siderastrea_host.fna.gz
+scripts/cluster/mmseqs-cluster-trinity-transcripts \
+  data/exp_results/doi:10.1038_s41467-021-25950-4/siderastrea_symb.fna.gz
+```
+
+
+## Read mapping
 
 Create Salmon index, then use Salmon to map reads to transcriptomes, e.g.
 
 ```
-salmon index -t pseudodiploria_symb.fna -i pseudodiploria_symb.salmon_index
+salmon index -t pseudodiploria_symb.fna.gz_rep_seq.fna -i pseudodiploria_symb.salmon_index
 salmon quant -i pseudodiploria_symb.salmon_index \
   -l A --validateMappings -o symb_quants/SRR6255880 -p 2\
   -1 SRR6255880_1.fastq -2 SRR6255880_2.fastq
@@ -73,7 +94,10 @@ salmon quant -i pseudodiploria_symb.salmon_index \
 See `mk_map_cmds.py` for a list of Salmon commands used on the SRA files.
 
 `process_salmon_quants.py` was used to summarize the quantifications into
-`sequence_data.full.tsv`. This TSV is rather large, and slow to load.
+`sequence_data.full.tsv`. This TSV is rather large, and slow to load. This
+script not only rolls up the quantifications into a nice table, but also does
+aggregation of both counts and TPM by "gene" in case some isoforms are still
+present after mmseqs clustering.
 
 
 ## Mapping to KO and Pfam
@@ -81,11 +105,18 @@ See `mk_map_cmds.py` for a list of Salmon commands used on the SRA files.
 Use `orfipy` to translate and compute ORFs for each of the 6 .fna files, e.g.
 
 ```
-orfipy orbicella_host.fna.gz --pep orbicella_host.faa --min 150 --procs 4 --start ATG
+orfipy orbicella_host.fna.gz_rep_seq.fna.gz --pep orbicella_host.faa --min 150 --procs 4 --start ATG
 ```
 
-Combine the 6 .faa output files into a single `proteins.faa`, then perform KO
-and Pfam detection on this file.
+Combine the 6 .faa output files into a single `proteins.faa`
+
+Run the following to remove some contained sequences
+
+```
+PYTHONPATH=. python3 dedup-faa.py <faa file>
+```
+
+Perform KO and Pfam detection on protein fasta sequence
 
 ```
 PYTHONPATH=. python3 scripts/classify/classify.py \
@@ -105,6 +136,8 @@ TODO run scripts/analysis/assign-ko.py on KO TSV
 TODO create a smaller set of classified files for Tableau joining, filtered with DESeq2 results
 
 ## DESeq2
+
+TODO quantify reads then run DESeq2
 
 ```
 python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \
