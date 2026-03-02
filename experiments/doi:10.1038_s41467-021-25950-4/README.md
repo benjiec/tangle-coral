@@ -108,13 +108,7 @@ Use `orfipy` to translate and compute ORFs for each of the 6 .fna files, e.g.
 orfipy orbicella_host.fna.gz_rep_seq.fna.gz --pep orbicella_host.faa --min 150 --procs 4 --start ATG
 ```
 
-Combine the 6 .faa output files into a single `proteins.faa`
-
-Run the following to remove some contained sequences
-
-```
-PYTHONPATH=. python3 dedup-faa.py <faa file>
-```
+Combine the 6 .faa output files into a single `proteins.faa`.
 
 Perform KO and Pfam detection on protein fasta sequence
 
@@ -131,9 +125,9 @@ PYTHONPATH=. python3 scripts/classify/classify.py \
 ```
 
 TODO map to KO and Pfam
-TODO deduplicate because multiple ORFs, and then remove _ORF suffix, may be we should do tx2gene first?
+TODO deduplicate by gene, then remove _ORF so entries match sequence_list.tsv
 TODO run scripts/analysis/assign-ko.py on KO TSV
-TODO create a smaller set of classified files for Tableau joining, filtered with DESeq2 results
+
 
 ## DESeq2
 
@@ -163,15 +157,9 @@ python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \
 python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \
   --genome-accession doi:10.1038_s41467-021-25950-4_siderastrea_radians \
   data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
-```
 
-TODO how do we summarize the ORFs so we can generate list of manifests?
-  dedup by gene/isoform: check for contained, then longest?
-
-```
 PYTHONPATH=. python3 scripts/analysis/des2-merge.py \
   data/exp_results/doi:10.1038_s41467-021-25950-4 \
   data/exp_results/doi:10.1038_s41467-021-25950-4/proteins.faa \
   data/exp_results/doi:10.1038_s41467-021-25950-4/deseq2_*.tsv
 ```
-
