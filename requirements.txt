@@ -7,3 +7,5 @@ bcbio-gff>=0.6.9
 parsimonious>=0.11.0
 duckdb>=1.4.3
 pydeseq2==0.5.4
+pyarrow==23.0.1
+pytximport==0.13.0

@@ -22,5 +22,5 @@ SRR6256325: siderastrea, treatment, C
 for line in manifest.strip().split("\n"):
     sra_rec = line.split(": ")[0]
     holobiont = line.split(": ")[1].split(",")[0]
-    print(f"salmon quant -i {holobiont}_host.salmon_index -l A --validateMappings -p 2 -o host_quants/{sra_rec} -1 {sra_rec}_1.fastq -2 {sra_rec}_2.fastq")
-    print(f"salmon quant -i {holobiont}_symb.salmon_index -l A --validateMappings -p 2 -o symb_quants/{sra_rec} -1 {sra_rec}_1.fastq -2 {sra_rec}_2.fastq")
+    print(f"salmon quant -i {holobiont}_host.salmon_index -l A --validateMappings -p 2 -o host_quants/{sra_rec} -1 reads/{sra_rec}_1.fastq -2 reads/{sra_rec}_2.fastq")
+    print(f"salmon quant -i {holobiont}_symb.salmon_index -l A --validateMappings -p 2 -o symb_quants/{sra_rec} -1 reads/{sra_rec}_1.fastq -2 reads/{sra_rec}_2.fastq")

@@ -88,19 +88,23 @@ Create Salmon index, then use Salmon to map reads to transcriptomes, e.g.
 salmon index -t pseudodiploria_symb.fna.gz_rep_seq.fna -i pseudodiploria_symb.salmon_index
 salmon quant -i pseudodiploria_symb.salmon_index \
   -l A --validateMappings -o symb_quants/SRR6255880 -p 2\
-  -1 SRR6255880_1.fastq -2 SRR6255880_2.fastq
+  -1 reads/SRR6255880_1.fastq -2 reads/SRR6255880_2.fastq
 ```
 
 See `mk_map_cmds.py` for a list of Salmon commands used on the SRA files.
 
 `process_salmon_quants.py` was used to summarize the quantifications into
-`sequence_data.full.tsv`. This TSV is rather large, and slow to load. This
-script not only rolls up the quantifications into a nice table, but also does
-aggregation of both counts and TPM by "gene" in case some isoforms are still
-present after mmseqs clustering.
+`sequence_data.full.tsv`. This script uses `pytximport` package to roll up
+Trinity transcript/isoform level counts into gene level counts.
+
+```
+PYTHONPATH=. python3 experiments/doi:10.1038_s41467-021-25950-4/process_salmon_quants.py \
+  <data_dir_where_quantification_directories_are> \
+  data/exp_results/doi:10.1038_s41467-021-25950-4
+```
 
 
-## Mapping to KO and Pfam
+## Annotation of KO and Pfam
 
 Use `orfipy` to translate and compute ORFs for each of the 6 .fna files, e.g.
 
@@ -125,13 +129,11 @@ PYTHONPATH=. python3 scripts/classify/classify.py \
 ```
 
 TODO map to KO and Pfam
-TODO deduplicate by gene, then remove _ORF so entries match sequence_list.tsv
+TODO deduplicate isoforms by gene, remove duplicate entries, then remove _ORF so entries match sequence_list.tsv
 TODO run scripts/analysis/assign-ko.py on KO TSV
 
 
 ## DESeq2
-
-TODO quantify reads then run DESeq2
 
 ```
 python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \

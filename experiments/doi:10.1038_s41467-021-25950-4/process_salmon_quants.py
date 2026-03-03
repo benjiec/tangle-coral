@@ -3,7 +3,9 @@ import os
 import csv
 import argparse
 import itertools
+import pandas as pd
 from pathlib import Path
+from pytximport import tximport
 
 parser = argparse.ArgumentParser()
 parser.add_argument("data_dir")
@@ -12,43 +14,57 @@ args = parser.parse_args()
 
 from collections import defaultdict
 
-def tximport(metadata, quant_fn):
-    aggregated = defaultdict(lambda: {"count": 0.0, "tpm": 0.0, "iso_count": 0})
+def load_sf(metadata, quant_fn):
 
+    tx_to_gene = []
     with open(quant_fn, "r") as f:
         reader = csv.DictReader(f, delimiter="\t")
         for row in reader:
-            seq_id = re.sub(r'_i\d+$', '', row["Name"])
-            aggregated[seq_id]["count"] += float(row["NumReads"])
-            aggregated[seq_id]["tpm"] += float(row["TPM"])
-            aggregated[seq_id]["iso_count"] += 1
+            gene_id = re.sub(r'_i\d+$', '', row["Name"])
+            tx_to_gene.append(dict(transcript_id=row["Name"], gene_id=gene_id))
+    tx_to_gene_map = pd.DataFrame(tx_to_gene)
 
-    entries = []
-    for seq_id, stats in aggregated.items():
-        d = metadata.copy()
-        d["sequence_id"] = seq_id
-        d["count"] = stats["count"]
-        # Standard tximport sums TPMs for the gene level
-        d["tpm"] = stats["tpm"] 
-        # Optional: store how many isoforms were collapsed
-        d["isoform_count"] = stats["iso_count"]
-        entries.append(d)
+    txi = tximport(
+        [quant_fn],
+        data_type="salmon",
+        transcript_gene_map=tx_to_gene_map,
+        counts_from_abundance="length_scaled_tpm"
+    )
 
-    return entries
+    counts_df = pd.DataFrame(
+        txi.X.T,
+        index=txi.var_names,   # These are your 'gene_id's (stripped Trinity names)
+        columns=["corrected_counts"]
+    )
+
+    tpm_df = pd.DataFrame(
+        txi.obsm['abundance'].T, # Transpose to get Genes as Rows
+        index=txi.var_names,
+        columns=[f"TPM" for s in txi.obs_names]
+    )
+
+    assert (counts_df.index == tpm_df.index).all(), "Index mismatch: Counts and TPM rows do not align"
+   
+    combined_df = pd.concat([counts_df, tpm_df], axis=1)
+    combined_df.index.name = 'sequence_id'
+    combined_df = combined_df.reset_index()
+    for mk, mv in metadata.items():
+        combined_df[mk] = mv
+    combined_df["count"] = combined_df["corrected_counts"].astype(float).round().astype(int).round().astype(int)
+
+    return combined_df
 
 
 def process_dir(rootdirn, fn_to_metadata):
     root = Path(rootdirn)
     subdirs = [x for x in root.iterdir() if x.is_dir()]
-    entries = []
-
+    dataframes = []
     for subdir in subdirs:
         quant_file = subdir / "quant.sf"
         if os.path.exists(quant_file):
             print(subdir.stem, quant_file)
-            entries.extend(tximport(fn_to_metadata[subdir.stem], quant_file))
-
-    return entries
+            dataframes.append(load_sf(fn_to_metadata[subdir.stem], quant_file))
+    return dataframes
 
 
 md = {
@@ -92,20 +108,8 @@ host_md = {
   for fn,desc in md.items()
 }
 
-host_entries = process_dir(args.data_dir+"/host_quants", host_md)
-symb_entries = process_dir(args.data_dir+"/symb_quants", symb_md)
-all_entries = host_entries + symb_entries
-
-kf = lambda entry: entry["genome_accession"]
-all_entries = sorted(all_entries, key=kf)
-for acc, group in itertools.groupby(all_entries, kf):
-    group = list(group)
-    print(acc, len(group))
-    avg_count = sum([float(x["count"]) for x in group]) / len(group)
-    print(acc, avg_count)
-
-with open(args.output_dir+"/sequence_data.tsv", "w") as f:
-    writer = csv.DictWriter(f, delimiter="\t", fieldnames=list(all_entries[0].keys()))
-    writer.writeheader()
-    for entry in all_entries:
-        writer.writerow(entry)
+host_dataframes = process_dir(args.data_dir+"/host_quants", host_md)
+symb_dataframes = process_dir(args.data_dir+"/symb_quants", symb_md)
+all_dataframes = host_dataframes + symb_dataframes
+tall_df = pd.concat(all_dataframes, axis=0, ignore_index=True)
+tall_df.to_csv(args.output_dir+"/sequence_data.tsv", sep="\t", index=False)
