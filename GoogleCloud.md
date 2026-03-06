@@ -26,6 +26,24 @@ gcloud auth application-default login
 gcloud auth configure-docker us-east1-docker.pkg.dev
 ```
 
+Create a docker repository
+
+```
+gcloud artifacts repositories create needle-docker \
+    --repository-format=docker \
+    --location=us-east1 \
+    --description="Docker repository for Needle Nextflow workflow"
+```
+
+Create a bucket for storing files
+
+```
+gcloud storage buckets create gs://needle-files\
+    --location=us-east1 \
+    --uniform-bucket-level-access
+```
+
+
 ## Building Images
 
 ```
@@ -35,10 +53,6 @@ docker build --platform linux/amd64 -t us-east1-docker.pkg.dev/needle-489321/nee
 We can create a repository, then push the image
 
 ```
-gcloud artifacts repositories create needle-docker \
-    --repository-format=docker \
-    --location=us-east1 \
-    --description="Docker repository for Needle Nextflow workflow"
 docker push us-east1-docker.pkg.dev/needle-489321/needle-docker/needle-core:latest
 ```
 
@@ -77,5 +91,3 @@ Then you can look at the status of the job
 gcloud batch jobs describe test-job-v1 --location us-east1
 gcloud batch jobs delete test-job-v1 --location us-east1
 ```
-
-
