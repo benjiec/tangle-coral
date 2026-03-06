@@ -43,6 +43,13 @@ gcloud storage buckets create gs://needle-files\
     --uniform-bucket-level-access
 ```
 
+And copy some files
+
+```
+gcloud storage cp -r ./kegg-downloads gs://needle-files/kegg-downloads
+gcloud storage cp -r ./pfam-downloads gs://needle-files/pfam-downloads
+```
+
 
 ## Building Images
 
