@@ -144,7 +144,8 @@ The following command will classify detected proteins against full KEGG ortholog
 
 ```
 PYTHONPATH=. python3 scripts/classify/classify.py \
-  --cpu 4 --disable-cutoff-ga kegg-downloads/ko.hmm m00009 data/m00009_results/classify.tsv
+  --cpu 4 --disable-cutoff-ga --hmm-threshold-file data/ko_thresholds.tsv \
+  kegg-downloads/ko.hmm m00009 data/m00009_results/classify.tsv
 ```
 
 
@@ -265,8 +266,8 @@ one output .tsv file.
 
 ```
 PYTHONPATH=. python3 scripts/classify/classify.py \
-  --disable-cutoff --genome-accession _ \
-  --fasta-file your_fasta_file.faa \
+  --disable-cutoff --hmm-threshold-file data/ko_thresholds.tsv \
+  --genome-accession _ --fasta-file your_fasta_file.faa \
   kegg-downloads/ko.hmm _ your_sequence_ko.tsv
 ```
 
@@ -298,7 +299,8 @@ to be done incrementally, using the `--incr` option of `scripts/classify/classif
 
 ```
 PYTHONPATH=. python3 scripts/classify/classify.py \
-  --incr --cpu 4 --disable-cutoff-ga kegg-downloads/ko.hmm x90001 data/x90001_results/classify.tsv
+  --incr --cpu 4 --disable-cutoff-ga --hmm-threshold-file data/ko_thresholds.tsv \
+  kegg-downloads/ko.hmm x90001 data/x90001_results/classify.tsv
 
 scripts/classify/classify-ncbi-incr x90001 data/x90001_NEW.hmm data/genomes_ref.txt
 ```

@@ -118,8 +118,8 @@ Perform KO and Pfam detection on protein fasta sequence
 
 ```
 PYTHONPATH=. python3 scripts/classify/classify.py \
-  --cpu 2 --disable-cutoff-ga --genome-accession _ \
-  --fasta-file experiments/doi:10.1038_s41467-021-25950-4/proteins.faa \
+  --cpu 2 --disable-cutoff-ga --hmm-threshold-file data/ko_thresholds.tsv \
+  --genome-accession _ --fasta-file experiments/doi:10.1038_s41467-021-25950-4/proteins.faa \
   kegg-downloads/ko.hmm _ data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_ko.orf.tsv
 
 PYTHONPATH=. python3 scripts/classify/classify.py \
@@ -131,6 +131,17 @@ PYTHONPATH=. python3 scripts/classify/classify.py \
 TODO map to KO and Pfam
 TODO deduplicate isoforms by gene, remove duplicate entries, then remove _ORF so entries match sequence_list.tsv
 TODO run scripts/analysis/assign-ko.py on KO TSV
+
+Run the classification on Google Cloud
+
+```
+PYTHONPATH=../.. python3 split-fasta.py proteins.faa 115
+gcloud storage cp proteins_*.faa gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/
+gcloud storage cp gc-prepare-ssd.sh gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/
+gcloud batch jobs submit classify-ko --config gc-classify-ko.json --location us-east1
+gcloud batch jobs describe classify-ko --location us-east1
+gcloud batch jobs delete classify-ko --location us-east1
+```
 
 
 ## DESeq2

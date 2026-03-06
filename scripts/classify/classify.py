@@ -17,6 +17,7 @@ ap.add_argument("output_tsv")
 ap.add_argument("--incr", action="store_true", default=False)
 ap.add_argument("--disable-cutoff-ga", action="store_true", default=False)
 ap.add_argument("--genome-accession", type=str, default=None)
+ap.add_argument("--hmm-threshold-file", type=str, default=None)
 ap.add_argument("--fasta-file", type=str, default=None)
 ap.add_argument("--filter-by", type=str, default=None)
 ap.add_argument("--requires-prefix-match", action="store_true", default=False)
@@ -25,16 +26,19 @@ ap.add_argument("--max-rank", type=int, default=25)
 args = ap.parse_args()
 
 if "Pfam-A.hmm" in args.hmm_file and args.disable_cutoff_ga:
-    print("warning: Pfam-A.hmm selected, recommend leaving on cutff-ga")
+    print("WARNING: Pfam-A.hmm selected, recommend leaving on GA cutoff")
 cutoff_ga = not args.disable_cutoff_ga
 print("using cutoff_ga:", cutoff_ga)
 
 # always load ko thresholds, if we use Pfam this will just get ignored
 
 score_threshold_dict = None
-with gzip.open("data/ko_thresholds.gz", mode='rt') as f:
-    reader = csv.DictReader(f, delimiter='\t')
-    score_threshold_dict = {row['knum']: row['threshold'] for row in reader}
+if args.hmm_threshold_file:
+    with open(args.hmm_threshold_file, mode='r') as f:
+        reader = csv.DictReader(f, delimiter='\t')
+        score_threshold_dict = {row['model']: row['threshold'] for row in reader}
+elif args.disable_cutoff_ga:
+    print("WARNING: recommend specifying a HMM threshold file if GA cutoff is OFF")
 
 proteins_faa = None
 protein_genome_accession_dict = None

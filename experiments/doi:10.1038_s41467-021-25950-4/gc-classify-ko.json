@@ -1,14 +1,14 @@
 {
   "taskGroups": [
     {
-      "taskCount": 115, 
+      "taskCount": 1, 
       "parallelism": 50,
       "taskSpec": {
         "runnables": [
           {
             "displayName": "Prepare Local SSD and Data",
             "script": {
-              "text": "mkfs.ext4 -F /dev/nvme0n1 && mkdir -p /mnt/disks/ssd && mount /dev/nvme0n1 /mnt/disks/ssd && chmod a+w /mnt/disks/ssd && gsutil -m cp gs://needle-files/kegg-downloads/ko.hmm.* /mnt/disks/ssd/ && gsutil cp gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/proteins_${BATCH_TASK_INDEX}.fasta /mnt/disks/ssd/input.fasta"
+              "text": "gsutil cp gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/gc-prepare-ssd.sh ./prepare.sh && chmod +x ./prepare.sh && ./prepare.sh"
             }
           },
           {
@@ -20,8 +20,9 @@
                 "--disable-cutoff-ga",
                 "--cpu", "4",
                 "--genome-accession", "_",
-                "--fasta-file", "/mnt/disks/ssd/input.fasta",
-                "/mnt/disks/ssd/kegg_db",
+                "--fasta-file", "/mnt/disks/ssd/input.faa",
+                "--hmm-threshold-file", "/mnt/disks/ssd/ko_thresholds.tsv",
+                "/mnt/disks/ssd/ko.hmm",
                 "_",
                 "/mnt/disks/ssd/sequence_ko_${BATCH_TASK_INDEX}.tsv"
               ],
@@ -33,14 +34,8 @@
           {
             "displayName": "Upload Results",
             "script": {
-              "text": "gsutil cp /mnt/disks/ssd/sequence_ko_${BATCH_TASK_INDEX}.tsv gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/"
+              "text": "ls -l /mnt/disks/ssd/ && gsutil cp /mnt/disks/ssd/sequence_ko_${BATCH_TASK_INDEX}.tsv gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/"
             }
-          }
-        ],
-        "volumes": [
-          {
-            "device_name": "google-local-nvme-ssd-0",
-            "mount_path": "/mnt/disks/ssd"
           }
         ]
       }

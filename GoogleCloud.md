@@ -47,6 +47,7 @@ And copy some files
 
 ```
 gcloud storage cp -r ./kegg-downloads gs://needle-files/kegg-downloads
+gcloud storage cp -r data/ko_thresholds.tsv gs://needle-files/kegg-downloads/
 gcloud storage cp -r ./pfam-downloads gs://needle-files/pfam-downloads
 ```
 

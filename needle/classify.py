@@ -82,10 +82,12 @@ class ClassifyTSV(object):
             sorted_score_for_protein[protein_accession] = scores
 
         if not os.path.exists(tsv_path) or os.path.getsize(tsv_path) == 0:
+            print(f"creating {tsv_path}")
             with open(tsv_path, "w") as f:
                 writer = csv.DictWriter(f, fieldnames=ClassifyTSV.HEADERS, delimiter='\t')
                 writer.writeheader()
 
+        print(f"writing to {tsv_path}")
         with open(tsv_path, "a") as f:
             writer = csv.DictWriter(f, fieldnames=ClassifyTSV.HEADERS, delimiter='\t')
 
