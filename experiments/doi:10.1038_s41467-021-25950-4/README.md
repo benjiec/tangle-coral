@@ -137,10 +137,17 @@ Run the classification on Google Cloud
 ```
 PYTHONPATH=../.. python3 split-fasta.py proteins.faa 115
 gcloud storage cp proteins_*.faa gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/
-gcloud storage cp gc-prepare-ssd.sh gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/
+gcloud storage cp gc-prepare-*.sh gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/
+
 gcloud batch jobs submit classify-ko --config gc-classify-ko.json --location us-east1
 gcloud batch jobs describe classify-ko --location us-east1
+gsutil cat gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/sequence_ko_*.tsv > sequence_ko_full.tsv
 gcloud batch jobs delete classify-ko --location us-east1
+
+gcloud batch jobs submit classify-pfam --config gc-classify-pfam.json --location us-east1
+gcloud batch jobs describe classify-pfam --location us-east1
+gsutil cat gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/sequence_pfam_*.tsv > sequence_pfam_full.tsv
+gcloud batch jobs delete classify-pfam --location us-east1
 ```
 
 

@@ -12,7 +12,7 @@
           {
             "displayName": "Prepare Local SSD and Data",
             "script": {
-              "text": "gsutil cp gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/gc-prepare-task-ko.sh ./prepare_task_${BATCH_TASK_INDEX}.sh && bash ./prepare_task_${BATCH_TASK_INDEX}.sh"
+              "text": "gsutil cp gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/gc-prepare-ssd-pfam.sh ./prepare-${BATCH_TASK_INDEX}.sh && ./prepare-${BATCH_TASK_INDEX}.sh"
             }
           },
           {
@@ -22,7 +22,7 @@
               "commands": [
                 "/bin/bash",
                 "-c",
-                "python3 scripts/classify/classify.py --disable-cutoff-ga --cpu 2 --genome-accession _ --fasta-file /mnt/disks/ssd/input_${BATCH_TASK_INDEX}.faa --hmm-threshold-file /mnt/disks/ssd/ko_thresholds.tsv /mnt/disks/ssd/ko.hmm _ /mnt/disks/ssd/sequence_ko_${BATCH_TASK_INDEX}.tsv"
+                "python3 scripts/classify/classify.py --disable-cutoff-ga --cpu 2 --genome-accession _ --fasta-file /mnt/disks/ssd/input_${BATCH_TASK_INDEX}.faa /mnt/disks/ssd/Pfam-A.hmm _ /mnt/disks/ssd/sequence_pfam_${BATCH_TASK_INDEX}.tsv"
               ],
               "volumes": [
                 "/mnt/disks/ssd:/mnt/disks/ssd"
@@ -32,7 +32,7 @@
           {
             "displayName": "Upload Results",
             "script": {
-              "text": "ls -l /mnt/disks/ssd/ && gsutil cp /mnt/disks/ssd/sequence_ko_${BATCH_TASK_INDEX}.tsv gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/"
+              "text": "ls -l /mnt/disks/ssd/ && gsutil cp /mnt/disks/ssd/sequence_pfam_${BATCH_TASK_INDEX}.tsv gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/"
             }
           }
         ]
@@ -55,7 +55,7 @@
         "policy": {
           "machineType": "c3-standard-4-lssd",
           "provisioningModel": "SPOT",
-          "bootScript": "#!/bin/bash\ngcloud storage cp gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/gc-prepare-ssd-ko.sh ./prepare-ssd.sh && bash ./prepare-ssd.sh"
+          "bootScript": "#!/bin/bash\ngcloud storage cp gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/gc-prepare-ssd-pfam.sh ./prepare-ssd.sh && bash ./prepare-ssd.sh"
         }
       }
     ],
