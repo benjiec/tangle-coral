@@ -2,15 +2,22 @@
   "taskGroups": [
     {
       "taskCount": 115,
-      "parallelism": 60,
+      "parallelism": 30,
       "taskSpec": {
         "computeResource": {
-          "cpuMilli": 2000,
-          "memoryMib": 7500
+          "cpuMilli": 4000,
+          "memoryMib": 16000
         },
+        "maxRetryCount": 5,
         "runnables": [
           {
             "displayName": "Prepare Local SSD and Data",
+            "script": {
+              "text": "gsutil cp gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/gc-prepare-ssd-ko.sh ./prepare_ssd.sh && bash ./prepare_ssd.sh"
+            }
+          },
+          {
+            "displayName": "Download Task Specific Assets",
             "script": {
               "text": "gsutil cp gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/gc-prepare-task-ko.sh ./prepare_task_${BATCH_TASK_INDEX}.sh && bash ./prepare_task_${BATCH_TASK_INDEX}.sh"
             }
@@ -54,8 +61,7 @@
         "installGpuDrivers": false,
         "policy": {
           "machineType": "c3-standard-4-lssd",
-          "provisioningModel": "SPOT",
-          "bootScript": "#!/bin/bash\ngcloud storage cp gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/gc-prepare-ssd-ko.sh ./prepare-ssd.sh && bash ./prepare-ssd.sh"
+          "provisioningModel": "SPOT"
         }
       }
     ],
