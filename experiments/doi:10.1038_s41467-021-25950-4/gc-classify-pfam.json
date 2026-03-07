@@ -2,18 +2,19 @@
   "taskGroups": [
     {
       "taskCount": 400,
-      "parallelism": 30,
+      "parallelism": 45,
+      "taskCountPerNode": 1,
       "taskSpec": {
         "computeResource": {
           "cpuMilli": 4000,
-          "memoryMib": 16000
+          "memoryMib": 12000
         },
         "maxRetryCount": 5,
         "runnables": [
           {
-            "displayName": "Prepare Local SSD and Data",
+            "displayName": "Prepare Local Storage and Data",
             "script": {
-              "text": "gsutil cp gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/gc-prepare-ssd-pfam.sh ./prepare-ssd.sh && ./prepare-ssd.sh"
+              "text": "gsutil cp gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/gc-prepare-hd-pfam.sh ./prepare-hd.sh && ./prepare-hd.sh"
             }
           },
           {
@@ -29,17 +30,17 @@
               "commands": [
                 "/bin/bash",
                 "-c",
-                "python3 scripts/classify/classify.py --cpu 2 --genome-accession _ --fasta-file /mnt/disks/ssd/input_${BATCH_TASK_INDEX}.faa /mnt/disks/ssd/Pfam-A.hmm _ /mnt/disks/ssd/sequence_pfam_${BATCH_TASK_INDEX}.tsv"
+                "python3 scripts/classify/classify.py --cpu 4 --genome-accession _ --fasta-file /data/input_${BATCH_TASK_INDEX}.faa /data/Pfam-A.hmm _ /data/sequence_pfam_${BATCH_TASK_INDEX}.tsv"
               ],
               "volumes": [
-                "/mnt/disks/ssd:/mnt/disks/ssd"
+                "/data:/data" 
               ]
             }
           },
           {
             "displayName": "Upload Results",
             "script": {
-              "text": "ls -l /mnt/disks/ssd/ && gsutil cp /mnt/disks/ssd/sequence_pfam_${BATCH_TASK_INDEX}.tsv gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/"
+              "text": "ls -l /data/ && gsutil cp /data/sequence_pfam_${BATCH_TASK_INDEX}.tsv gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/"
             }
           }
         ]
@@ -60,8 +61,9 @@
       {
         "installGpuDrivers": false,
         "policy": {
-          "machineType": "c3-standard-4-lssd",
-          "provisioningModel": "SPOT"
+          "machineType": "n2-standard-4",
+          "provisioningModel": "SPOT",
+          "bootDiskSizeGb": 50
         }
       }
     ],

@@ -29,7 +29,7 @@
               "commands": [
                 "/bin/bash",
                 "-c",
-                "python3 scripts/classify/classify.py --disable-cutoff-ga --cpu 2 --genome-accession _ --fasta-file /mnt/disks/ssd/input_${BATCH_TASK_INDEX}.faa --hmm-threshold-file /mnt/disks/ssd/ko_thresholds.tsv /mnt/disks/ssd/ko.hmm _ /mnt/disks/ssd/sequence_ko_${BATCH_TASK_INDEX}.tsv"
+                "python3 scripts/classify/classify.py --disable-cutoff-ga --cpu 4 --genome-accession _ --fasta-file /mnt/disks/ssd/input_${BATCH_TASK_INDEX}.faa --hmm-threshold-file /mnt/disks/ssd/ko_thresholds.tsv /mnt/disks/ssd/ko.hmm _ /mnt/disks/ssd/sequence_ko_${BATCH_TASK_INDEX}.tsv"
               ],
               "volumes": [
                 "/mnt/disks/ssd:/mnt/disks/ssd"
