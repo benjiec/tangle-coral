@@ -135,8 +135,8 @@ TODO run scripts/analysis/assign-ko.py on KO TSV
 Run the classification on Google Cloud
 
 ```
-PYTHONPATH=../.. python3 split-fasta.py proteins.faa 115
-gcloud storage cp proteins_*.faa gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/
+PYTHONPATH=../.. python3 split-fasta.py inputs/proteins.faa 400
+gcloud storage cp inputs/proteins_*.faa gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/
 gcloud storage cp gc-prepare-*.sh gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/
 
 gcloud batch jobs submit classify-ko --config gc-classify-ko.json --location us-east1

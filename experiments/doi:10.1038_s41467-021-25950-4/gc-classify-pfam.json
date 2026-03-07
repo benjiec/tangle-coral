@@ -1,7 +1,7 @@
 {
   "taskGroups": [
     {
-      "taskCount": 115,
+      "taskCount": 400,
       "parallelism": 30,
       "taskSpec": {
         "computeResource": {
@@ -29,7 +29,7 @@
               "commands": [
                 "/bin/bash",
                 "-c",
-                "python3 scripts/classify/classify.py --disable-cutoff-ga --cpu 2 --genome-accession _ --fasta-file /mnt/disks/ssd/input_${BATCH_TASK_INDEX}.faa /mnt/disks/ssd/Pfam-A.hmm _ /mnt/disks/ssd/sequence_pfam_${BATCH_TASK_INDEX}.tsv"
+                "python3 scripts/classify/classify.py --cpu 2 --genome-accession _ --fasta-file /mnt/disks/ssd/input_${BATCH_TASK_INDEX}.faa /mnt/disks/ssd/Pfam-A.hmm _ /mnt/disks/ssd/sequence_pfam_${BATCH_TASK_INDEX}.tsv"
               ],
               "volumes": [
                 "/mnt/disks/ssd:/mnt/disks/ssd"
