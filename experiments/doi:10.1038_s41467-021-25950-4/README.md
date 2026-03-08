@@ -132,22 +132,32 @@ TODO map to KO and Pfam
 TODO deduplicate isoforms by gene, remove duplicate entries, then remove _ORF so entries match sequence_list.tsv
 TODO run scripts/analysis/assign-ko.py on KO TSV
 
-Run the classification on Google Cloud
+
+### Run the classification on Google Cloud
+
+The following job to classify proteins by KO took 11.5 hrs on 30 C3-LSSD VMs
+with 115 tasks, ~3 hrs per task to process 20k FASTA entries. Google Cloud cost
+was ~$17.
 
 ```
-PYTHONPATH=../.. python3 split-fasta.py inputs/proteins.faa 400
-gcloud storage cp inputs/proteins_*.faa gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/
+PYTHONPATH=../.. python3 split-fasta.py inputs/proteins.faa 115
 gcloud storage cp gc-prepare-*.sh gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/
-
+gcloud storage cp inputs/proteins_*.faa gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/
 gcloud batch jobs submit classify-ko --config gc-classify-ko.json --location us-east1
 gcloud batch jobs describe classify-ko --location us-east1
 gsutil cat gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/sequence_ko_*.tsv > sequence_ko_full.tsv
-gcloud batch jobs delete classify-ko --location us-east1
+```
 
-gcloud batch jobs submit classify-pfam --config gc-classify-pfam.json --location us-east1
-gcloud batch jobs describe classify-pfam --location us-east1
+Using 400 tasks for Pfam, so ~5000 FASTA entries per task, the following job
+took 4.7 hrs to complete on 45 N2-Standard VMs. Google Cloud cost was ~$15.
+
+```
+PYTHONPATH=../.. python3 split-fasta.py inputs/proteins.faa 400
+gcloud storage cp gc-prepare-*.sh gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/
+gcloud storage cp inputs/proteins_*.faa gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/
+gcloud batch jobs submit exp-5-classify-pfam --config gc-classify-pfam.json --location us-east1
+gcloud batch jobs describe exp-5-classify-pfam --location us-east1
 gsutil cat gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/sequence_pfam_*.tsv > sequence_pfam_full.tsv
-gcloud batch jobs delete classify-pfam --location us-east1
 ```
 
 

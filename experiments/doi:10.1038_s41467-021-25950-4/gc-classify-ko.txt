@@ -1,0 +1,84 @@
+allocationPolicy:
+  instances:
+  - policy:
+      machineType: c3-standard-4-lssd
+      provisioningModel: SPOT
+  labels:
+    batch-job-id: classify-ko
+  location:
+    allowedLocations:
+    - regions/us-east1
+    - zones/us-east1-b
+    - zones/us-east1-c
+    - zones/us-east1-d
+  network:
+    networkInterfaces:
+    - network: projects/needle-489321/global/networks/default
+      noExternalIpAddress: true
+      subnetwork: projects/needle-489321/regions/us-east1/subnetworks/default
+  serviceAccount:
+    email: 1009810818161-compute@developer.gserviceaccount.com
+createTime: '2026-03-07T03:12:03.768807273Z'
+logsPolicy:
+  destination: CLOUD_LOGGING
+name: projects/needle-489321/locations/us-east1/jobs/classify-ko
+status:
+  runDuration: 41703.073589284s
+  state: SUCCEEDED
+  statusEvents:
+  - description: Job state is set from QUEUED to SCHEDULED for job projects/1009810818161/locations/us-east1/jobs/classify-ko.
+    eventTime: '2026-03-07T03:12:10.234138310Z'
+    type: STATUS_CHANGED
+  - description: Job state is set from SCHEDULED to RUNNING for job projects/1009810818161/locations/us-east1/jobs/classify-ko.
+    eventTime: '2026-03-07T03:13:11.769735187Z'
+    type: STATUS_CHANGED
+  - description: Job state is set from RUNNING to SUCCEEDED for job projects/1009810818161/locations/us-east1/jobs/classify-ko.
+    eventTime: '2026-03-07T14:48:14.843324471Z'
+    type: STATUS_CHANGED
+  taskGroups:
+    group0:
+      counts:
+        SUCCEEDED: '115'
+      instances:
+      - bootDisk:
+          image: projects/batch-custom-image/global/images/batch-debian-11-official-20260129-00-p00
+          sizeGb: '30'
+          type: pd-balanced
+        machineType: c3-standard-4-lssd
+        provisioningModel: SPOT
+        taskPack: '1'
+taskGroups:
+- name: projects/1009810818161/locations/us-east1/jobs/classify-ko/taskGroups/group0
+  parallelism: '30'
+  taskCount: '115'
+  taskSpec:
+    computeResource:
+      cpuMilli: '4000'
+      memoryMib: '16000'
+    maxRetryCount: 5
+    runnables:
+    - displayName: Prepare Local SSD and Data
+      script:
+        text: gsutil cp gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/gc-prepare-ssd-ko.sh
+          ./prepare_ssd.sh && bash ./prepare_ssd.sh
+    - displayName: Download Task Specific Assets
+      script:
+        text: gsutil cp gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/gc-prepare-task-ko.sh
+          ./prepare_task_${BATCH_TASK_INDEX}.sh && bash ./prepare_task_${BATCH_TASK_INDEX}.sh
+    - container:
+        commands:
+        - /bin/bash
+        - -c
+        - python3 scripts/classify/classify.py --disable-cutoff-ga --cpu 2 --genome-accession
+          _ --fasta-file /mnt/disks/ssd/input_${BATCH_TASK_INDEX}.faa --hmm-threshold-file
+          /mnt/disks/ssd/ko_thresholds.tsv /mnt/disks/ssd/ko.hmm _ /mnt/disks/ssd/sequence_ko_${BATCH_TASK_INDEX}.tsv
+        imageUri: us-east1-docker.pkg.dev/needle-489321/needle-docker/needle-core:latest
+        volumes:
+        - /mnt/disks/ssd:/mnt/disks/ssd
+      displayName: Run Needle Core HMMScan
+    - displayName: Upload Results
+      script:
+        text: ls -l /mnt/disks/ssd/ && gsutil cp /mnt/disks/ssd/sequence_ko_${BATCH_TASK_INDEX}.tsv
+          gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/
+uid: classify-ko-f7123ceb-4827-4b70-a205-80
+updateTime: '2026-03-07T14:48:14.843324471Z'

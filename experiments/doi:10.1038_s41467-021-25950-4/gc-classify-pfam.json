@@ -14,7 +14,7 @@
           {
             "displayName": "Prepare Local Storage and Data",
             "script": {
-              "text": "gsutil cp gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/gc-prepare-hd-pfam.sh ./prepare-hd.sh && ./prepare-hd.sh"
+              "text": "gsutil cp gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/gc-prepare-hd-pfam.sh ./prepare-hd.sh && bash ./prepare-hd.sh"
             }
           },
           {
@@ -63,7 +63,9 @@
         "policy": {
           "machineType": "n2-standard-4",
           "provisioningModel": "SPOT",
-          "bootDiskSizeGb": 50
+          "bootDisk": {
+            "sizeGb": 50
+          }
         }
       }
     ],
