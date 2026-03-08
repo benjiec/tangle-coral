@@ -15,6 +15,7 @@ ap.add_argument("--min-count", type=int, default=10)
 ap.add_argument("--cohort", type=str, default=None)
 ap.add_argument("--timepoint", type=str, default=None)
 ap.add_argument("--include-timepoint", type=str, default=None, action="append")
+ap.add_argument("--lfc-shrink", default=False, action="store_true")
 args = ap.parse_args()
 
 cohort = args.cohort
@@ -114,11 +115,14 @@ for pair in pairs:
 
     contrast = ["condition", testgroup, baseline]
     ds = DeseqStats(dds, contrast=contrast, inference=inference, quiet=True)
-    ds.summary()
+    ds.summary(independent_filter=False)
 
-    available_coeffs = dds.varm["LFC"].columns
-    target_coeff = [c for c in available_coeffs if f"[{testgroup}]" in c or f"T.{testgroup}" in c][0]
-    print(f"Shrinking using coeff: {target_coeff}")
-    ds.lfc_shrink(coeff=target_coeff)
+    if not args.lfc_shrink:
+        print("WARNING: skipping LFC shrinkage")
+    else:
+        available_coeffs = dds.varm["LFC"].columns
+        target_coeff = [c for c in available_coeffs if f"[{testgroup}]" in c or f"T.{testgroup}" in c][0]
+        print(f"Shrinking using coeff: {target_coeff}")
+        ds.lfc_shrink(coeff=target_coeff)
 
     ds.results_df.to_csv(fn, sep='\t')
