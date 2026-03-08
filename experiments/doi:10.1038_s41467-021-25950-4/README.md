@@ -120,18 +120,26 @@ Perform KO and Pfam detection on protein fasta sequence
 PYTHONPATH=. python3 scripts/classify/classify.py \
   --cpu 2 --disable-cutoff-ga --hmm-threshold-file data/ko_thresholds.tsv \
   --genome-accession _ --fasta-file experiments/doi:10.1038_s41467-021-25950-4/proteins.faa \
-  kegg-downloads/ko.hmm _ data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_ko.orf.tsv
+  kegg-downloads/ko.hmm _ data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_ko_full.tsv
 
 PYTHONPATH=. python3 scripts/classify/classify.py \
   --cpu 2 --genome-accession _ \
   --fasta-file experiments/doi:10.1038_s41467-021-25950-4/proteins.faa \
-  pfam-downloads/Pfam-A.hmm _ data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_pfam.orf.tsv
+  pfam-downloads/Pfam-A.hmm _ data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_pfam_full.tsv
 ```
 
-TODO map to KO and Pfam
-TODO deduplicate isoforms by gene, remove duplicate entries, then remove _ORF so entries match sequence_list.tsv
-TODO run scripts/analysis/assign-ko.py on KO TSV
+Then, aggregate hits on ORFs of isoforms of genes by gene. Also, filter KO
+selections by threshold
 
+```
+PYTHONPATH=../.. python3 ../../scripts/analysis/classify-by-transcript.py sequence_ko_full.tsv
+PYTHONPATH=../.. python3 ../../scripts/analysis/assign-ko.py sequence_ko_full.tsv_aggregated
+mv sequence_ko_full.tsv_aggregated_filtered sequence_ko.tsv
+rm sequence_ko_full.tsv_aggregated
+
+PYTHONPATH=../.. python3 ../../scripts/analysis/classify-by-transcript.py sequence_pfam_full.tsv
+mv sequence_pfam_full.tsv_aggregated sequence_pfam.tsv
+```
 
 ### Run the classification on Google Cloud
 
@@ -146,6 +154,7 @@ gcloud storage cp inputs/proteins_*.faa gs://needle-files/experiments/doi:10.103
 gcloud batch jobs submit classify-ko --config gc-classify-ko.json --location us-east1
 gcloud batch jobs describe classify-ko --location us-east1
 gsutil cat gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/sequence_ko_*.tsv > sequence_ko_full.tsv
+{ head -1 sequence_ko_full.tsv; grep -v protein_accession sequence_ko_full.tsv; } > sequence_ko.tsv
 ```
 
 Using 400 tasks for Pfam, so ~5000 FASTA entries per task, the following job
@@ -158,6 +167,7 @@ gcloud storage cp inputs/proteins_*.faa gs://needle-files/experiments/doi:10.103
 gcloud batch jobs submit exp-5-classify-pfam --config gc-classify-pfam.json --location us-east1
 gcloud batch jobs describe exp-5-classify-pfam --location us-east1
 gsutil cat gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/sequence_pfam_*.tsv > sequence_pfam_full.tsv
+{ head -1 sequence_pfam_full.tsv; grep -v protein_accession sequence_pfam_full.tsv; } > sequence_pfam.tsv
 ```
 
 
