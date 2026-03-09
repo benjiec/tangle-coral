@@ -174,27 +174,27 @@ gsutil cat gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/sequence
 ## DESeq2
 
 ```
-python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \
+python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
   --genome-accession doi:10.1038_s41467-021-25950-4_breviolum_b5 \
   data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
 
-python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \
+python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
   --genome-accession doi:10.1038_s41467-021-25950-4_breviolum_faviinorum \
   data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
 
-python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \
+python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
   --genome-accession doi:10.1038_s41467-021-25950-4_symbiodinium_a3 \
   data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
 
-python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \
+python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
   --genome-accession doi:10.1038_s41467-021-25950-4_orbicella_faveolata \
   data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
 
-python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \
+python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
   --genome-accession doi:10.1038_s41467-021-25950-4_pseudodiploria_clivosa \
   data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
 
-python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 5 \
+python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
   --genome-accession doi:10.1038_s41467-021-25950-4_siderastrea_radians \
   data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
 
