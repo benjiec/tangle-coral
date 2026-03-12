@@ -116,6 +116,17 @@ for pair in pairs:
     fn = f"{args.output_dir}/deseq2_{cond_name}_{fn}.tsv"
     print("generating", fn)
 
+    # compute max CV of testgroup or base
+    samples_baseline = metadata_df.index[metadata_df['condition'] == baseline]
+    samples_test = metadata_df.index[metadata_df['condition'] == testgroup]
+    mean_baseline = counts_df.loc[samples_baseline].mean()
+    std_baseline = counts_df.loc[samples_baseline].std()
+    mean_test = counts_df.loc[samples_test].mean()
+    std_test = counts_df.loc[samples_test].std()
+    cv_baseline = std_baseline / (mean_baseline + 1e-8)
+    cv_test = std_test / (mean_test + 1e-8)
+    max_cv = np.maximum(cv_baseline, cv_test)
+
     contrast = ["condition", testgroup, baseline]
     ds = DeseqStats(dds, contrast=contrast, inference=inference, quiet=True)
     ds.summary()
@@ -127,5 +138,10 @@ for pair in pairs:
         target_coeff = [c for c in available_coeffs if f"[{testgroup}]" in c or f"T.{testgroup}" in c][0]
         print(f"Shrinking using coeff: {target_coeff}")
         ds.lfc_shrink(coeff=target_coeff)
+
+    # attach the Max CV and group means to the results dataframe
+    ds.results_df['max_cv'] = max_cv
+    ds.results_df[f'mean_base'] = mean_baseline
+    ds.results_df[f'mean_testgroup'] = mean_test
 
     ds.results_df.to_csv(fn, sep='\t')
