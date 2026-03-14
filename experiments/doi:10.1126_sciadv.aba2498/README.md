@@ -45,3 +45,43 @@ bowtie2 --local --very-sensitive-local -p 8 \
   -1 SRR9331959_1.fastq -2 SRR9331959_2.fastq \         
   -S SRR9331959_bowtie_local.sam
 ```
+
+
+## Trinity
+
+Reduce size of reads
+
+```
+bowtie2-build c_goreaui.fna c_goreaui.bowtie.index
+
+bowtie2 -x GCA_014633955.1_index \
+        -1 SRR9331959_1.fastq -2 SRR9331959_2.fastq \
+        -p 8 \
+        --no-unal \
+        --un-conc SRR9331959_host_removed.fastq \
+        -S SRR9331959_to_host.sam
+bowtie2 --local -x c_goreaui.bowtie.index \
+        -1 SRR9331959_host_removed.1.fastq -2 SRR9331959_host_removed.2.fastq \
+        -p 8 \
+        --no-unal \
+        --al-conc SRR9331959_algae_captured.fastq \
+        -S SRR9331959_algae_capture.sam
+
+bbnorm.sh \
+        in1=./SRR9331959_algae_captured.1.fastq \
+        in2=./SRR9331959_algae_captured.2.fastq \
+        out1=SRR9331959_norm.1.fq \
+        out2=SRR9331959_norm.2.fq \
+        target=50
+```
+
+De novo assembly
+
+```
+Trinity --seqType fq \         
+        --left SRR9331959_norm.1.fq \
+        --right SRR9331959_norm.2.fq \
+        --max_memory 20G \
+        --CPU 8 \
+        --output trinity_SRR9331959_algae --no_normalize_reads
+```
