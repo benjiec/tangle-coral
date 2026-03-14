@@ -29,7 +29,7 @@ fasterq-dump SRR9331965
 
 ## Running Salmon to map reads
 
-Install Salmon using Conda into an environment, like "salmon_env"
+Install Salmon using Conda into an environment, like "salmon_env". Also install samtools in that env.
 
 Then run the following before you can start using salmon
 
