@@ -1,12 +1,12 @@
 # Analysis Tasks
 
+
 ## Download data from NCBI SRA
 
 To install tools
 
 ```
 pip3 install pysradb
-brew install awscli
 ```
 
 Use the following to get a list of SRR accessions to download
@@ -15,31 +15,77 @@ Use the following to get a list of SRR accessions to download
 pysradb metadata PRJNA591730 > metadata.tsv
 ```
 
-Then put together a script to download them using
-
-```
-aws s3 cp s3://sra-pub-run-odp/sra/SRR36764133/SRR36764133 . --no-sign-request
-```
-
 To extract fastq files, use NCBI SRA toolkit (https://github.com/ncbi/sra-tools/wiki/01.-Downloading-SRA-Toolkit)
 
 ```
 fasterq-dump SRR9331965
 ```
 
-## Running Salmon to map reads
+
+## Conda environments
 
 Install Salmon using Conda into an environment, like "salmon_env". Also install samtools in that env.
+
+```
+conda create -n trinity_env -c bioconda -c conda-forge trinity
+conda activate trinity_env
+conda install -c bioconda bbmap salmon bowtie2 samtools
+```
 
 Then run the following before you can start using salmon
 
 ```
 conda init
 source ~/.bash_profile
-conda activate salmon_env
+conda activate trinity_env
 ```
 
-### Building decoy-aware inde
+
+## Trinity de novo assembly of transcriptome
+
+Reduce size of reads, starting with an existing reference genome.
+
+```
+bowtie2-build c_goreaui.fna c_goreaui.bowtie.index
+
+bowtie2 -x GCA_014633955.1_index \
+        -1 SRR9331959_1.fastq -2 SRR9331959_2.fastq \
+        -p 8 \
+        --no-unal \
+        --un-conc SRR9331959_host_removed.fastq \
+        -S SRR9331959_to_host.sam
+bowtie2 --local -x c_goreaui.bowtie.index \
+        -1 SRR9331959_host_removed.1.fastq -2 SRR9331959_host_removed.2.fastq \
+        -p 8 \
+        --no-unal \
+        --al-conc SRR9331959_algae_captured.fastq \
+        -S SRR9331959_algae_capture.sam
+
+bbnorm.sh \
+        in1=./SRR9331959_algae_captured.1.fastq \
+        in2=./SRR9331959_algae_captured.2.fastq \
+        out1=SRR9331959_norm.1.fq \
+        out2=SRR9331959_norm.2.fq \
+        target=50
+```
+
+De novo assembly
+
+```
+Trinity --seqType fq \         
+        --left SRR9331959_norm.1.fq \
+        --right SRR9331959_norm.2.fq \
+        --max_memory 20G \
+        --CPU 8 \
+        --output trinity_SRR9331959_algae --no_normalize_reads
+```
+
+
+## Aligning against reference rather than assembled transcriptome
+
+Building decoy-aware index, using genomic sequence as decoys, as reads may
+contain UTRs or pre-mRNAs not in the curated transcriptome (often just START to
+STOP).
 
 ```
 grep "^>" c_goreaui.fna | cut -d " " -f 1 | sed -e 's/>//g' > c_goreaui.decoys.txt
@@ -51,7 +97,7 @@ cat aten.transcripts.fna aten.fna > aten.gentrome.fna
 salmon index -t aten.gentrome.fna -d aten.decoys.txt -i aten.salmon_index
 ```
 
-### Quant using Salmon
+## Quant using Salmon
 
 Change the "-p 2" to however many CPUs/cores you would like to use
 
@@ -71,21 +117,25 @@ salmon quant -i c_goreaui.salmon_index \
              -o c_goreaui-quants/SRR9331965 -p 2
 ```
 
-### Multiple genomes in a single dataset
+## Process quants
+
+Each directory must have its own script to process quants into `sequence_data.tsv`.
 
 You can put multiple genomes in a single dataset file, i.e.
-`sequence_data.tsv`, if the sequence IDs are unique. It makes loading/filtering
-data later easier. But, DO NOT DO THIS if sequence IDs may clash; use separate
-files in that case.
+`sequence_data.tsv`. This is preferred if multiple species are present in a
+sample, as DESeq2 can normalize across samples, based on more data per sample.
+However, make sure, in the mapping workflow, that sequence IDs are unique
+between species.
 
-
-### Process quants
-
-Each directory may have its own script to process quants into `sequence_data.tsv`.
 
 ```
 python3 experiments/doi:10.1126_sciadv.aba2498/process_salmon_quants.py \
   experiments/doi:10.1126_sciadv.aba2498 data/exp_results/doi:10.1126_sciadv.aba2498
+```
+
+Helpers to update the genome accession to something more formal
+
+```
 python3 scripts/data/update-genome-accession.py \
   data/exp_results/doi:10.1126_sciadv.aba2498/sequence_data.tsv \
   GCA_014633955.1 --when doi:10.1126/sciadv.aba2498-a_tenuis
@@ -93,6 +143,7 @@ python3 scripts/data/update-genome-accession.py \
   data/exp_results/doi:10.1126_sciadv.aba2498/sequence_data.tsv \
   GCA_947184155.2 --when doi:10.1126/sciadv.aba2498-c_goreaui
 ```
+
 
 ## Classify transcripts to KOs
 
@@ -151,32 +202,23 @@ example,
 
 ```
 python3 scripts/analysis/des2-simple.py \
-  --timepoint 1 --min-count 5 --control-sequence aten_0.1.m1.6600.m1 \
+  --timepoint 1 --min-count 5 \
   data/exp_results/doi:10.1126_sciadv.aba2498/sequence_data.tsv data/exp_results/doi:10.1126_sciadv.aba2498
 
 python3 scripts/analysis/des2-simple.py \
-  --cohort SS8 --min-count 5 --control-sequence aten_0.1.m1.6600.m1 \
+  --cohort SS8 --min-count 5 \
   data/exp_results/doi:10.1126_sciadv.aba2498/sequence_data.tsv data/exp_results/doi:10.1126_sciadv.aba2498
 ```
 
-WARNING - des2-factor.py script below NEEDS TO BE UPDATED to support specifyibng stable gene controls.
+Use the `--include-timepoint 0` flag with the `--cohort` flag to limit to
+specific timepoints, when comparing timepoint data within a cohort.
 
-Then, the `des2-factor.py` script uses the `cohort_metadata.tsv` file to select
-split by category, and then within each category, does comparison of every two
-factor values. For example,
+There is also a `des2-specific.py` script to compare any two cohort and/or
+timepoints
 
 ```
-python3 scripts/analysis/des2-factor.py \
-  --factor NutrientLevel --category Temperature \
-  data/exp_results/doi:10.1093_pcp_pcac175/sequence_data.tsv \
-  data/exp_results/doi:10.1093_pcp_pcac175/cohort_metadata.tsv \
-  data/exp_results/doi:10.1093_pcp_pcac175
-
-python3 scripts/analysis/des2-factor.py \
-  --factor Temperature --category NutrientLevel \
-  data/exp_results/doi:10.1093_pcp_pcac175/sequence_data.tsv \
-  data/exp_results/doi:10.1093_pcp_pcac175/cohort_metadata.tsv \
-  data/exp_results/doi:10.1093_pcp_pcac175
+python3 scripts/analysis/des2-specific.py --cohort1 34C --timepoint1 0 --cohort2 27C --timepoint2 192 --min-count 5 \
+  data/exp_results/doi:10.1093_ismejo_wraf268/sequence_data.tsv data/exp_results/doi:10.1093_ismejo_wraf268
 ```
 
 Use the following to merge multiple DES2 TSV files into a single tall TSV file,
@@ -189,4 +231,30 @@ PYTHONPATH=. python3 scripts/analysis/des2-merge.py \
   data/exp_results/doi:10.1126_sciadv.aba2498 \
   data/exp_results/doi:10.1126_sciadv.aba2498/proteins.faa \
   data/exp_results/doi:10.1126_sciadv.aba2498/deseq2_*.tsv
+```
+
+
+## Invesigate transcript fidelity
+
+Use bowtie2 to align reads against a reference genome, already indexed. to
+obtain alignments with soft clipping. This allows investigation of specific
+transcripts, how reads line up against the transcript, to see if there may be
+multiple copies of portions of the transcripts may exist elsewhere in
+transcriptome, or highly expressed domains either incorrectly assembled or
+mapped at this transcript, or if the transcript is a full legitimate
+transcript.
+
+```
+bowtie2-build c_goreaui.transcriptome.fna c_goreaui.transcriptome.bowtie.index
+
+bowtie2 --local --very-sensitive-local -p 8 \
+  -x c_goreaui.transcriptome.bowtie.index \
+  -1 SRR9331959_1.fastq -2 SRR9331959_2.fastq \         
+  -S SRR9331959_c_goreaui.sam
+
+samtools view -S -b SRR9331959_c_goreaui.sam > SRR9331959_unsorted.bam
+samtools sort SRR9331959_unsorted.bam -o SRR9331959_sorted.bam
+samtools index SRR9331959_sorted.bam
+
+samtools view SRR9331959_sorted.bam "lcl|CAMXCT020004035.1_cds_CAL1160776.1_35975" > SRR9331959_CAL1160776.1.reads.txt
 ```
