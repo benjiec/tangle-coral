@@ -29,7 +29,7 @@ Install Salmon using Conda into an environment, like "salmon_env". Also install 
 ```
 conda create -n trinity_env -c bioconda -c conda-forge trinity
 conda activate trinity_env
-conda install -c bioconda bbmap salmon bowtie2 samtools
+conda install -c bioconda bbmap salmon bowtie2 samtools transdecoder
 ```
 
 Then run the following before you can start using salmon
@@ -78,6 +78,25 @@ Trinity --seqType fq \
         --max_memory 20G \
         --CPU 8 \
         --output trinity_SRR9331959_algae --no_normalize_reads
+
+TrinityStats.pl trinity_SRR9331959_algae.Trinity.fasta
+```
+
+Cluster the transcripts, so if isoforms are grouped into different genes, they
+can be clustered together. Note that this step is geared towards differential
+functional analysis, not genetics. We are favoring aggregating, rather than
+separating, alleles, for example.
+
+```
+scripts/cluster/mmseqs-cluster-trinity-transcripts \
+  trinity_SRR9331959_algae.Trinity.fasta
+```
+
+Use TransDecoder to compute ORFs
+
+```
+TransDecoder.LongOrfs -t trinity_SRR9331959_algae.Trinity.fasta_rep_seq.fna.gz
+TransDecoder.Predict -t trinity_SRR9331959_algae.Trinity.fasta_rep_seq.fna.gz -T 8
 ```
 
 
@@ -234,7 +253,7 @@ PYTHONPATH=. python3 scripts/analysis/des2-merge.py \
 ```
 
 
-## Invesigate transcript fidelity
+## Investigate transcript fidelity
 
 Use bowtie2 to align reads against a reference genome, already indexed. to
 obtain alignments with soft clipping. This allows investigation of specific
@@ -257,4 +276,14 @@ samtools sort SRR9331959_unsorted.bam -o SRR9331959_sorted.bam
 samtools index SRR9331959_sorted.bam
 
 samtools view SRR9331959_sorted.bam "lcl|CAMXCT020004035.1_cds_CAL1160776.1_35975" > SRR9331959_CAL1160776.1.reads.txt
+```
+
+You can also search for a specific sequence using bowtie2, even though other
+tools may be better for this
+
+```
+bowtie2 --local -f -p 8 \
+        -x c_goreaui.transcriptome.bowtie.index \
+        -U query.fasta \
+        -S results.sam
 ```
