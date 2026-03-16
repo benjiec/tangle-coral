@@ -275,7 +275,8 @@ samtools view -S -b SRR9331959_c_goreaui.sam > SRR9331959_unsorted.bam
 samtools sort SRR9331959_unsorted.bam -o SRR9331959_sorted.bam
 samtools index SRR9331959_sorted.bam
 
-samtools view SRR9331959_sorted.bam "lcl|CAMXCT020004035.1_cds_CAL1160776.1_35975" > SRR9331959_CAL1160776.1.reads.txt
+samtools view SRR9331959_sorted.bam "lcl|CAMXCT020004035.1_cds_CAL1160776.1_35975" > SRR9331959_CAL1160776.1.sam
+python3 scripts/analysis/pileup.py SRR9331959_CAL1160776.1.sam SRR9331959_CAL1160776.1.png
 ```
 
 You can also search for a specific sequence using bowtie2, even though other
