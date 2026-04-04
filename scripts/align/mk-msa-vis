@@ -1,5 +1,0 @@
-#!/bin/bash
-
-# argument: faa file, output png file
-
-pymsaviz -i $1 -o $2 --color_scheme Taylor --show_consensus --show_count

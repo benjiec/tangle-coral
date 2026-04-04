@@ -1,11 +1,7 @@
-biopython>=1.81
-numpy>=1.24.0
-pandas>=2.0.0
-requests>=2.32
 pymsaviz==0.5.0
 bcbio-gff>=0.6.9
 parsimonious>=0.11.0
-duckdb>=1.4.3
 pydeseq2==0.5.4
 pyarrow==23.0.1
 pytximport==0.13.0
+tangle @ git+https://github.com/benjiec/tangle.git@b3958350f47b013bb366de60a3d10b864c3929a2
