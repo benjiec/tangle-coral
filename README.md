@@ -40,17 +40,20 @@ python3 scripts/area/genome-list.py | python3 scripts/world/ncbi-genome-metadata
 scripts/world/kegg-download.sh
 ```
 
-Also
+### Heap
+
+HMM profiles for KEGG and Pfam should be downloaded to the approriate
+directories according to README.md file.
+
+
+### Other
+
+Download this
 
 ```
 curl https://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/Pfam-A.clans.tsv.gz -o $TANGLE_WORLD/tangle/Pfam-A.clans.tsv.gz
 gunzip $TANGLE_WORLD/tangle/Pfam-A.clans.tsv.gz
 ```
-
-### Heap
-
-HMM profiles for KEGG and Pfam should be downloaded to the approriate
-directories according to README.md file.
 
 See `heap/helpers/ipr-pfam.py` on how to generate an UniProt to Pfam TSV, as a
 DetectedTable. This file should be in
