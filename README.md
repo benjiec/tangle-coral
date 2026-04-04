@@ -46,7 +46,7 @@ HMM profiles for KEGG and Pfam should be downloaded to the approriate
 directories according to README.md file.
 
 
-### Other
+### Other (move to Tangle repo soon)
 
 Download this
 
@@ -54,6 +54,8 @@ Download this
 curl https://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/Pfam-A.clans.tsv.gz -o $TANGLE_WORLD/tangle/Pfam-A.clans.tsv.gz
 gunzip $TANGLE_WORLD/tangle/Pfam-A.clans.tsv.gz
 ```
+
+Where did this come from `pfam_go_simple.tsv`?
 
 See `heap/helpers/ipr-pfam.py` on how to generate an UniProt to Pfam TSV, as a
 DetectedTable. This file should be in
