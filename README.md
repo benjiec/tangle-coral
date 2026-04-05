@@ -84,7 +84,7 @@ from all genomes requiring protein detection.
 rm pooled.fna
 tangle-py tangle/scripts/area/genome-list.py -d | \
   tangle-py tangle/scripts/defaults.py -f ncbi_genome_fna - | \
-  xargs venv-needle/bin/python3 needle/scripts/pool-contigs.py pooled.fna
+  xargs venv-tangle/bin/python3 tangle/scripts/pool-contigs.py pooled.fna
 ```
 
 Then use that pooled file to setup a Google Cloud job
@@ -98,13 +98,17 @@ needle-py needle/gcloud/hmm-detect/setup.py \
 
 Heap helper: Detected protein filtered to likely protein
 
-Merge with curated proteins and pool accessions
+tangle-py tangle/scripts/demux-outputs.py test.tsv test.faa test_demux.tsv detected
+
+Merge with curated proteins and pool accessions - use default script to output ncbi or detected, but not return if doesn't exist
 
 Classify by KO
 
 Classify by Pfam
 
-Assign KO, separate assignment table
+Demux again
+
+Assign KO, separate assignment table - before or after demux? if after, for each genome?
 
 Cluster assigned, in cluster TSV, with name
 
