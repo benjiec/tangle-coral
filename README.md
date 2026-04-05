@@ -1,23 +1,22 @@
 # Tangle: Coral
 
-This repository keeps instructions and scripts for populating the Tangle area
-"Coral". It is intended to be used with the following repositories
+This repository includes instructions and scripts for organizing coral genomic,
+transcriptomic, and proteomic data. The repository uses the other "tools"
+centric repositories in the tangle project group
 
-  * tangle-tangle: data models and scripts for downloading public information
-  * tangle-needle: HMM based protein detection
-  * tangle-heap: HMM and structural based classifications
-  * tangle-pile: Transcriptomic data pipeline
+  * `tangle`: data models, scripts for downloading public datasets
+  * `needle`: HMM based protein detection
+  * `heap`: HMM and structural based classifications
+  * `pile`: Transcriptomic data pipeline
 
 
-## Setup
+## Tool Setup
 
-In addition to the above repositories, which should all be cloned and setup
-according the the README files in those repositories, get the following
+Clone and setup the virtual environments for each of the above repositories, in
+addition to this one. Follow the README in each repository. Some repositories
+require building Docker images for use locally or on Google Cloud.
 
-  * MMSeqs2 docker image: `docker pull ghcr.io/soedinglab/mmseqs2`
-  * Muscle aligner: `docker pull pegi3s/muscle`
-
-Also create a Python virtualenv and then install required packages.
+For this repository, use
 
 ```
 python3 -m venv venv-coral
@@ -25,34 +24,75 @@ source venv-coral/bin/activate
 pip3 install -r requirements.txt
 ```
 
+Organize the virtual environments like the following (assumption going forward
+in this document).
+
+```
+<tangle working directory>
+  └── tangle/ 
+  └── needle/ 
+  └── heap/ 
+  └── pile/ 
+  └── coral/
+  └── venv-tangle/ 
+  └── venv-needle/ 
+  └── venv-heap/ 
+  └── venv-coral/ 
+``` 
+
+Then create the following aliases for command line execution
+
+```
+alias tangle-py='venv-tangle/bin/python3'
+alias needle-py='venv-needle/bin/python3'
+alias heap-py='venv-heap/bin/python3'
+alias coral-py='venv-coral/bin/python3'
+```
+
+Unless otherwise specified, examples in this file assume the working directory
+is the current directory.
+
 
 ## Data Setup
 
-Setup $TANGLE_WORLD and $TANGLE_AREA environment variables. The last shoudld be
-set to "coral", for example.
+See `tangle/README.md`. Setup $TANGLE_WORLD and $TANGLE_AREA environment
+variables. For the coral area, the last shoudld be set to "coral".
 
-Files from `./data/` should be copied/mirroed to `$TANGLE_WORLD/areas/$TANGLE_AREA/`.
+Files from `coral/data/` should be copied/mirroed to
+`$TANGLE_WORLD/areas/$TANGLE_AREA/`.
 
-### From `tango` repository
 
 ```
-python3 scripts/area/genome-list.py | python3 scripts/world/ncbi-download.py -
-python3 scripts/area/genome-list.py | python3 scripts/world/ncbi-genome-metadata.py -
-scripts/world/kegg-download.sh
-scripts/world/pfam-download.sh
+tangle-py tangle/scripts/area/genome-list.py | tangle-py tangle/scripts/world/ncbi-download.py -
+tangle-py tangle/scripts/area/genome-list.py | tangle-py tangle/scripts/world/ncbi-genome-metadata.py -
+tangle-py tangle/scripts/world/kegg-download.sh
+tangle-py tangle/scripts/world/pfam-download.sh
 ```
 
-### From `heap` repository
-
-HMM profiles for KEGG and Pfam should be downloaded to the approriate
-directories according to README.md file.
+HMM profiles for KEGG and Pfam should be downloaded to directories specified by
+matching environment variables, according to `heap/README.md`.
 
 
 ## Workflow and Scripts
 
-### Needle
+### Needle: protein detection
 
-Pooled genomic accessions in setup script
+Use the following command to generate a pooled .fna file, containing contigs
+from all genomes requiring protein detection.
+
+```
+rm pooled.fna
+tangle-py tangle/scripts/area/genome-list.py -d | \
+  tangle-py tangle/scripts/defaults.py -f ncbi_genome_fna - | \
+  xargs venv-needle/bin/python3 needle/scripts/pool-contigs.py pooled.fna
+```
+
+Then use that pooled file to setup a Google Cloud job
+
+```
+needle-py needle/gcloud/hmm-detect/setup.py \
+  --genome-accession _ --run-dir-parent runs pooled.fna
+```
 
 ### Heap
 
