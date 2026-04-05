@@ -28,64 +28,48 @@ pip3 install -r requirements.txt
 
 ## Data Setup
 
-Setup $TANGLE_WORLD and $TANGLE_AREA environment variables.
+Setup $TANGLE_WORLD and $TANGLE_AREA environment variables. The last shoudld be
+set to "coral", for example.
 
-Files from `data/` should be copied/mirroed to `$TANGLE_WORLD/areas/$TANGLE_AREA/`.
+Files from `./data/` should be copied/mirroed to `$TANGLE_WORLD/areas/$TANGLE_AREA/`.
 
-### Tangle
+### From `tango` repository
 
 ```
 python3 scripts/area/genome-list.py | python3 scripts/world/ncbi-download.py -
 python3 scripts/area/genome-list.py | python3 scripts/world/ncbi-genome-metadata.py -
 scripts/world/kegg-download.sh
+scripts/world/pfam-download.sh
 ```
 
-### Heap
+### From `heap` repository
 
 HMM profiles for KEGG and Pfam should be downloaded to the approriate
 directories according to README.md file.
-
-
-### Other (move to Tangle repo soon)
-
-Download this
-
-```
-curl https://ftp.ebi.ac.uk/pub/databases/Pfam/current_release/Pfam-A.clans.tsv.gz -o $TANGLE_WORLD/tangle/Pfam-A.clans.tsv.gz
-gunzip $TANGLE_WORLD/tangle/Pfam-A.clans.tsv.gz
-```
-
-Where did this come from `pfam_go_simple.tsv`?
-
-See `heap/helpers/ipr-pfam.py` on how to generate an UniProt to Pfam TSV, as a
-DetectedTable. This file should be in
-`$TANGLE_WORLD/tangle/uniprot-pfam.tsv.gz`.
 
 
 ## Workflow and Scripts
 
 ### Needle
 
-Prepare genome FAA file for detection, by concatenating genome accession with
-contigs - TODO need a script
-
-Use needle repo to setup a GC batch job to detect proteins
-
-Use needle repo `generate-ref-protein-tsv.py` script to parse GFF into detected
-list - TODO need a script
+Pooled genomic accessions in setup script
 
 ### Heap
 
-Use heap repo to filter detected FAA to remove likely unclassifiable results -
-TODO need a script
+Heap helper: Detected protein filtered to likely protein
 
-Use heap repo to setup a GC batch job detect KO and detect Pfam, from both
-detected proteins and reference proteins - TODO need a script
+Merge with curated proteins and pool accessions
 
-Use heap repo to assign KOs
+Classify by KO
 
-Use heap repo to cluster proteins - need a script to generate FAAs then
-cluster.
+Classify by Pfam
 
-Use heap repo `tabularize-alignment.py` script to generate TSV of protein
-alignments with KO and Pfam mapped on.
+Assign KO, separate assignment table
+
+Cluster assigned, in cluster TSV, with name
+
+Cluster putative from classify TSV, with name
+
+Visualize feature projection of putative against KO and Pfam, by cluster
+
+Dynamically compute cluster FAA to create a muscle alignment, can use a cluster TSV and a specific cluster
