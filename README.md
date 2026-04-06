@@ -83,7 +83,7 @@ from all genomes requiring protein detection.
 ```
 rm pooled.fna
 tangle-py tangle/scripts/area/genome-list.py -d | \
-  tangle-py tangle/scripts/defaults.py -f ncbi_genome_fna - | \
+  tangle-py tangle/scripts/defaults.py -f -m ncbi_genome_fna - | \
   xargs venv-tangle/bin/python3 tangle/scripts/pool-contigs.py pooled.fna
 ```
 
@@ -97,21 +97,47 @@ rm pooled.fna
 
 ### Heap: classification and clustering
 
-Filtering
+There are many small protein fragments detected that will not be close to being
+assigned a KO. The following script filters them away.
 
 ```
-heap-py heap/scripts/ko-filter-target.py runs/20260402_a611f70c/test.tsv x.filtered.tsv
+heap-py heap/scripts/ko-filter-target.py \
+  runs/20260402_a611f70c/protein_fragments.tsv \
+  runs/20260402_a611f70c/protein_fragments_filtered.tsv 
 ```
 
-Demux, which will produce protein files per genome after filtering
+Detection was run on many genomes. The following script demultiplex the results
+and creates the appropriate detection TSV and protein FASTAs for each genome.
 
 ```
-tangle-py tangle/scripts/demux-outputs.py test.tsv test.faa test_demux.tsv detected
+tangle-py tangle/scripts/demux-outputs.py \
+  runs/20260402_a611f70c/protein_fragments_filtered.tsv \
+  runs/20260402_a611f70c/proteins.faa \
+  `tangle-py tangle/scripts/defaults.py -m area_protein_fragments_tsv` \
+  `tangle-py tangle/scripts/defaults.py -m area_genomics_dir` \
 ```
 
-TODO
+At this point, all the proteins we have downloaded from NCBI, or detected using needle, are here
 
-Merge with curated proteins and pool accessions - use default script to output ncbi or detected, but not return if doesn't exist
+```
+tangle-py tangle/scripts/area/genome-list.py | \
+  tangle-py tangle/scripts/defaults.py \
+  -m area_detected_proteins \
+  -m ncbi_genome_proteins_path \
+  -f -
+```
+
+Use the following to generate a pooled proteins FASTA file
+
+```
+tangle-py tangle/scripts/area/genome-list.py | \
+  tangle-py tangle/scripts/defaults.py \
+  -m area_detected_proteins \
+  -m ncbi_genome_proteins_path \
+  -f - | \
+  xargs venv-tangle/bin/python3 tangle/scripts/pool-contigs.py \
+  pooled_proteins.faa
+```
 
 Classify by KO
 
