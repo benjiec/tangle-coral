@@ -117,7 +117,12 @@ tangle-py tangle/scripts/demux-outputs.py \
   `tangle-py tangle/scripts/defaults.py -m area_genomics_dir` \
 ```
 
-At this point, all the proteins we have downloaded from NCBI, or detected using needle, are here
+The `demux-outputs.py` script has an `--use-existing-target-database` option,
+which is useful, if needed, to filter an `.faa` file to contain only accessions
+in a `.tsv` file, even if no demux-ing is needed.
+
+At this point, all the proteins we have downloaded from NCBI, or detected using
+needle, are here
 
 ```
 tangle-py tangle/scripts/area/genome-list.py | \
