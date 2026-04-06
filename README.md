@@ -92,13 +92,24 @@ Then use that pooled file to setup a Google Cloud job
 ```
 needle-py needle/gcloud/hmm-detect/setup.py \
   --genome-accession _ --run-dir-parent runs pooled.fna
+rm pooled.fna
 ```
 
-### Heap
+### Heap: classification and clustering
 
-Heap helper: Detected protein filtered to likely protein
+Filtering
 
+```
+heap-py heap/scripts/ko-filter-target.py runs/20260402_a611f70c/test.tsv x.filtered.tsv
+```
+
+Demux, which will produce protein files per genome after filtering
+
+```
 tangle-py tangle/scripts/demux-outputs.py test.tsv test.faa test_demux.tsv detected
+```
+
+TODO
 
 Merge with curated proteins and pool accessions - use default script to output ncbi or detected, but not return if doesn't exist
 
