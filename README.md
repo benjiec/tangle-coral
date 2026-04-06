@@ -112,9 +112,9 @@ and creates the appropriate detection TSV and protein FASTAs for each genome.
 ```
 tangle-py tangle/scripts/demux-outputs.py \
   runs/20260402_a611f70c/protein_fragments_filtered.tsv \
-  runs/20260402_a611f70c/proteins.faa \
   `tangle-py tangle/scripts/defaults.py -m area_protein_fragments_tsv` \
-  `tangle-py tangle/scripts/defaults.py -m area_genomics_dir` \
+  --pooled-target-fasta runs/20260402_a611f70c/proteins.faa \
+  --demuxed-fasta-parent-dir `tangle-py tangle/scripts/defaults.py -m area_genomics_dir` \
 ```
 
 The `demux-outputs.py` script has an `--use-existing-target-database` option,
@@ -144,18 +144,56 @@ tangle-py tangle/scripts/area/genome-list.py | \
   pooled_proteins.faa
 ```
 
-Classify by KO
+Use the `pooled_proteins.faa` to setup KO and Pfam classification jobs on
+Google Cloud
 
-Classify by Pfam
+```
+heap-py heap/gcloud/hmmscan-ko/setup.py \
+  --run-dir-parent runs \
+  --query-database-name _ pooled_proteins.faa
+```
 
-Demux again
+and
 
-Assign KO, separate assignment table - before or after demux? if after, for each genome?
+```
+heap-py heap/gcloud/hmmscan-ko/setup.py \
+  --run-dir-parent runs \
+  --query-database-name _ pooled_proteins.faa
+```
+
+The results should be de-multiplexed
+
+```
+tangle-py tangle/scripts/demux-outputs.py \
+  runs/<run_dir>/sequence_ko_unassigned.tsv \
+  runs/<run_dir>/sequence_ko_unassigned_demux.tsv
+
+tangle-py tangle/scripts/demux-outputs.py \
+  runs/<run_dir>/sequence_pfam.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_sequence_pfam_tsv` \
+```
+
+For KO classification, use the following script to filter down to proteins very
+close to the KEGG threshold
+
+```
+heap-py heap/scripts/ko-assign.py \
+  --scoring-ratio-min 0.8  \
+  runs/<run_dir>/sequence_ko_unassigned_demux.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_sequence_ko_assigned_tsv` \
+```
+
+Note that the assignment file includes the KO profile thresholds and rankings
+for each target sequence by query, but does not explicitly assign a protein to
+a KO. Analysis scripts or tools can determine the appropriate ratio of bitscore
+to threshold to use for assigning KO number to a protein.
+
+TODO
 
 Cluster assigned, in cluster TSV, with name
 
 Cluster putative from classify TSV, with name
 
-Visualize feature projection of putative against KO and Pfam, by cluster
-
 Dynamically compute cluster FAA to create a muscle alignment, can use a cluster TSV and a specific cluster
+
+Visualize feature projection of putative against KO and Pfam, by cluster
