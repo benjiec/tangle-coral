@@ -1,0 +1,1644 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20261.26.0226.1626                               -->
+<workbook original-version='18.1' source-build='2026.1.0 (20261.26.0226.1626)' source-platform='mac' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AnimationOnByDefault />
+    <MarkAnimation />
+    <ObjectModelEncapsulateLegacy />
+    <ObjectModelExtractV2 />
+    <ObjectModelTableType />
+    <SchemaViewerObjectModel />
+    <SheetIdentifierTracking />
+    <SortTagCleanup />
+    <_.fcp.VConnDownstreamExtractsWithWarnings.true...VConnDownstreamExtractsWithWarnings />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='proteins' inline='true' name='federated.1puwtde14g52yd17gxuzy1jcauvg' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='proteins' name='textscan.13c3cg514f8rxb11ob09q16faj49'>
+            <connection class='textscan' directory='/Users/benjie/git/tangle' filename='proteins.tsv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.13c3cg514f8rxb11ob09q16faj49' name='proteins.tsv' table='[proteins#tsv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
+            <column datatype='string' name='detection_type' ordinal='0' />
+            <column datatype='string' name='detection_method' ordinal='1' />
+            <column datatype='string' name='batch' ordinal='2' />
+            <column datatype='string' name='query_accession' ordinal='3' />
+            <column datatype='string' name='query_database' ordinal='4' />
+            <column datatype='string' name='query_type' ordinal='5' />
+            <column datatype='string' name='target_accession' ordinal='6' />
+            <column datatype='string' name='target_database' ordinal='7' />
+            <column datatype='string' name='target_type' ordinal='8' />
+            <column datatype='string' name='target_model' ordinal='9' />
+            <column datatype='integer' name='query_start' ordinal='10' />
+            <column datatype='integer' name='query_end' ordinal='11' />
+            <column datatype='integer' name='target_start' ordinal='12' />
+            <column datatype='integer' name='target_end' ordinal='13' />
+            <column datatype='string' name='evalue' ordinal='14' />
+            <column datatype='string' name='bitscore' ordinal='15' />
+            <column datatype='string' name='bitscore_threshold' ordinal='16' />
+            <column datatype='string' name='custom_metric_name' ordinal='17' />
+            <column datatype='string' name='custom_metric_value' ordinal='18' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[proteins.tsv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;\\t&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>detection_type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[detection_type]</local-name>
+            <parent-name>[proteins.tsv]</parent-name>
+            <remote-alias>detection_type</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>detection_method</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[detection_method]</local-name>
+            <parent-name>[proteins.tsv]</parent-name>
+            <remote-alias>detection_method</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>batch</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[batch]</local-name>
+            <parent-name>[proteins.tsv]</parent-name>
+            <remote-alias>batch</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_accession</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[query_accession]</local-name>
+            <parent-name>[proteins.tsv]</parent-name>
+            <remote-alias>query_accession</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_database</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[query_database]</local-name>
+            <parent-name>[proteins.tsv]</parent-name>
+            <remote-alias>query_database</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[query_type]</local-name>
+            <parent-name>[proteins.tsv]</parent-name>
+            <remote-alias>query_type</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_accession</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[target_accession]</local-name>
+            <parent-name>[proteins.tsv]</parent-name>
+            <remote-alias>target_accession</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_database</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[target_database]</local-name>
+            <parent-name>[proteins.tsv]</parent-name>
+            <remote-alias>target_database</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[target_type]</local-name>
+            <parent-name>[proteins.tsv]</parent-name>
+            <remote-alias>target_type</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_model</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[target_model]</local-name>
+            <parent-name>[proteins.tsv]</parent-name>
+            <remote-alias>target_model</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_start</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[query_start]</local-name>
+            <parent-name>[proteins.tsv]</parent-name>
+            <remote-alias>query_start</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_end</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[query_end]</local-name>
+            <parent-name>[proteins.tsv]</parent-name>
+            <remote-alias>query_end</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_start</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[target_start]</local-name>
+            <parent-name>[proteins.tsv]</parent-name>
+            <remote-alias>target_start</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_end</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[target_end]</local-name>
+            <parent-name>[proteins.tsv]</parent-name>
+            <remote-alias>target_end</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>evalue</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[evalue]</local-name>
+            <parent-name>[proteins.tsv]</parent-name>
+            <remote-alias>evalue</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <approx-count>1</approx-count>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bitscore</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[bitscore]</local-name>
+            <parent-name>[proteins.tsv]</parent-name>
+            <remote-alias>bitscore</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <approx-count>1</approx-count>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bitscore_threshold</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[bitscore_threshold]</local-name>
+            <parent-name>[proteins.tsv]</parent-name>
+            <remote-alias>bitscore_threshold</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <approx-count>1</approx-count>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>custom_metric_name</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[custom_metric_name]</local-name>
+            <parent-name>[proteins.tsv]</parent-name>
+            <remote-alias>custom_metric_name</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <approx-count>1</approx-count>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>custom_metric_value</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[custom_metric_value]</local-name>
+            <parent-name>[proteins.tsv]</parent-name>
+            <remote-alias>custom_metric_value</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <approx-count>1</approx-count>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column aggregation='Sum' caption='Query Left' datatype='integer' name='[Calculation_2109539072421888]' role='dimension' type='ordinal'>
+        <calculation class='tableau' formula='MIN([query_start],[query_end])' />
+      </column>
+      <column aggregation='Sum' caption='Query Length' datatype='integer' name='[Query Left (copy)_2109539072528385]' role='dimension' type='ordinal'>
+        <calculation class='tableau' formula='ABS([query_start]-[query_end])+1' />
+      </column>
+      <column caption='proteins.tsv' datatype='table' name='[__tableau_internal_object_id__].[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]' role='measure' type='quantitative' />
+      <column caption='Batch' datatype='string' name='[batch]' role='dimension' type='nominal' />
+      <column caption='Bitscore' datatype='string' name='[bitscore]' role='dimension' type='nominal' />
+      <column caption='Bitscore Threshold' datatype='string' name='[bitscore_threshold]' role='dimension' type='nominal' />
+      <column caption='Custom Metric Name' datatype='string' name='[custom_metric_name]' role='dimension' type='nominal' />
+      <column caption='Custom Metric Value' datatype='string' name='[custom_metric_value]' role='dimension' type='nominal' />
+      <column caption='Detection Method' datatype='string' name='[detection_method]' role='dimension' type='nominal' />
+      <column caption='Detection Type' datatype='string' name='[detection_type]' role='dimension' type='nominal' />
+      <column caption='Evalue' datatype='string' name='[evalue]' role='dimension' type='nominal' />
+      <column caption='Query Accession' datatype='string' name='[query_accession]' role='dimension' type='nominal' />
+      <column caption='Query Database' datatype='string' name='[query_database]' role='dimension' type='nominal' />
+      <column aggregation='Sum' caption='Query End' datatype='integer' name='[query_end]' role='dimension' type='ordinal' />
+      <column aggregation='Sum' caption='Query Start' datatype='integer' name='[query_start]' role='dimension' type='ordinal' />
+      <column caption='Query Type' datatype='string' name='[query_type]' role='dimension' type='nominal' />
+      <column caption='Target Accession' datatype='string' name='[target_accession]' role='dimension' type='nominal' />
+      <column caption='Target Database' datatype='string' name='[target_database]' role='dimension' type='nominal' />
+      <column aggregation='Sum' caption='Target End' datatype='integer' name='[target_end]' role='dimension' type='ordinal' />
+      <column caption='Target Model' datatype='string' name='[target_model]' role='dimension' type='nominal' />
+      <column aggregation='Sum' caption='Target Start' datatype='integer' name='[target_start]' role='dimension' type='ordinal' />
+      <column caption='Target Type' datatype='string' name='[target_type]' role='dimension' type='nominal' />
+      <column-instance column='[target_model]' derivation='None' name='[none:target_model:nk]' pivot='key' type='nominal' />
+      <extract _.fcp.VConnDownstreamExtractsWithWarnings.true...user-specific='false' count='-1' enabled='true' object-id='' units='records'>
+        <connection access_mode='readonly' author-locale='en_US' class='hyper' dbname='/var/folders/2h/747pycqs10j0vwjlyhhnkthr0000gn/T/tableau-temp/#TableauTemp_0huhujb0j8fknd14p8uuh1o4pjdv.hyper' default-settings='hyper' schema='Extract' sslmode='' tablename='Extract' update-time='04/07/2026 09:01:53 PM' username='tableau_internal_user'>
+          <relation name='Extract' table='[Extract].[Extract]' type='table' />
+          <metadata-records>
+            <metadata-record class='column'>
+              <remote-name>detection_type</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[detection_type]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>detection_type</remote-alias>
+              <ordinal>0</ordinal>
+              <family>proteins.tsv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>detection_method</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[detection_method]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>detection_method</remote-alias>
+              <ordinal>1</ordinal>
+              <family>proteins.tsv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>batch</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[batch]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>batch</remote-alias>
+              <ordinal>2</ordinal>
+              <family>proteins.tsv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>304</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>query_accession</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[query_accession]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>query_accession</remote-alias>
+              <ordinal>3</ordinal>
+              <family>proteins.tsv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1620</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>query_database</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[query_database]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>query_database</remote-alias>
+              <ordinal>4</ordinal>
+              <family>proteins.tsv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>query_type</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[query_type]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>query_type</remote-alias>
+              <ordinal>5</ordinal>
+              <family>proteins.tsv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>target_accession</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[target_accession]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>target_accession</remote-alias>
+              <ordinal>6</ordinal>
+              <family>proteins.tsv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>437379</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>target_database</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[target_database]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>target_database</remote-alias>
+              <ordinal>7</ordinal>
+              <family>proteins.tsv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>target_type</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[target_type]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>target_type</remote-alias>
+              <ordinal>8</ordinal>
+              <family>proteins.tsv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>target_model</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[target_model]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>target_model</remote-alias>
+              <ordinal>9</ordinal>
+              <family>proteins.tsv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>19828</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>query_start</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[query_start]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>query_start</remote-alias>
+              <ordinal>10</ordinal>
+              <family>proteins.tsv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>383131</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>query_end</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[query_end]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>query_end</remote-alias>
+              <ordinal>11</ordinal>
+              <family>proteins.tsv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>312957</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>target_start</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[target_start]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>target_start</remote-alias>
+              <ordinal>12</ordinal>
+              <family>proteins.tsv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>3962</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>target_end</remote-name>
+              <remote-type>20</remote-type>
+              <local-name>[target_end]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>target_end</remote-alias>
+              <ordinal>13</ordinal>
+              <family>proteins.tsv</family>
+              <local-type>integer</local-type>
+              <aggregation>Sum</aggregation>
+              <approx-count>4541</approx-count>
+              <contains-null>true</contains-null>
+              <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>evalue</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[evalue]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>evalue</remote-alias>
+              <ordinal>14</ordinal>
+              <family>proteins.tsv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>bitscore</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[bitscore]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>bitscore</remote-alias>
+              <ordinal>15</ordinal>
+              <family>proteins.tsv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>bitscore_threshold</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[bitscore_threshold]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>bitscore_threshold</remote-alias>
+              <ordinal>16</ordinal>
+              <family>proteins.tsv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>custom_metric_name</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[custom_metric_name]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>custom_metric_name</remote-alias>
+              <ordinal>17</ordinal>
+              <family>proteins.tsv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+            </metadata-record>
+            <metadata-record class='column'>
+              <remote-name>custom_metric_value</remote-name>
+              <remote-type>129</remote-type>
+              <local-name>[custom_metric_value]</local-name>
+              <parent-name>[Extract]</parent-name>
+              <remote-alias>custom_metric_value</remote-alias>
+              <ordinal>18</ordinal>
+              <family>proteins.tsv</family>
+              <local-type>string</local-type>
+              <aggregation>Count</aggregation>
+              <approx-count>1</approx-count>
+              <contains-null>true</contains-null>
+              <collation flag='0' name='LEN_RUS' />
+              <object-id>[proteins.tsv_F08503B78E734E2EB1BC663901034DA5]</object-id>
+            </metadata-record>
+          </metadata-records>
+        </connection>
+      </extract>
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[none:target_model:nk]' type='palette'>
+            <map to='#499894'>
+              <bucket>&quot;K03068&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;K06272&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;K08852&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;K10334&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;K10607&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;K12026&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;K15412&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;K18639&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;K20480&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;K23377&quot;</bucket>
+            </map>
+            <map to='#499894'>
+              <bucket>&quot;K25806&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;K00326&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;K04931&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;K08175&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;K09855&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;K10449&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;K11413&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;K12846&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;K17544&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;K19626&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;K22808&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;K24899&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;K02575&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;K05389&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;K08714&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;K10328&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;K10477&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;K12004&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;K14398&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;K18410&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;K20032&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;K23206&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;K25208&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;K04367&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;K06707&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;K08882&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;K10396&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;K10663&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;K12036&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;K16470&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;K19038&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;K21441&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;K24023&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;K27887&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;K03255&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;K06571&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;K08856&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;K10335&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;K10608&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;K12028&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;K16272&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;K18680&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;K21413&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;K23424&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;K26087&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;K02581&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;K05403&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;K08811&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;K10329&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;K10478&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;K12011&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;K15176&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;K18477&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;K20309&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;K23209&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;K25419&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;K04899&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;K07126&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;K09467&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;K10406&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;K11411&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;K12641&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;K17452&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;K19492&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;K21952&quot;</bucket>
+            </map>
+            <map to='#9d7660'>
+              <bucket>&quot;K24498&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;K01053&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;K04933&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;K08220&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;K09856&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;K10453&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;K11414&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;K13155&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;K17705&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;K19804&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;K22866&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;K24932&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;K04879&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;K06946&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;K09289&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;K10403&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;K11093&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;K12410&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;K17307&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;K19490&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;K21871&quot;</bucket>
+            </map>
+            <map to='#b07aa1'>
+              <bucket>&quot;K24435&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;K02656&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;K06153&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;K08847&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;K10330&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;K10515&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;K12012&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;K15201&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;K18585&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;K20347&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;K23330&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;K25576&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;K04427&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;K06826&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;K08884&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;K10397&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;K10694&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;K12132&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;K16474&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;K19041&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;K21442&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;K24373&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;K27895&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;K04729&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;K06867&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;K09257&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;K10398&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;K10716&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;K12289&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;K16726&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;K19044&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;K21543&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;K24427&quot;</bucket>
+            </map>
+            <map to='#d37295'>
+              <bucket>&quot;K28035&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;K04887&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;K06974&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;K09358&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;K10405&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;K11121&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;K12600&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;K17387&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;K19491&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;K21917&quot;</bucket>
+            </map>
+            <map to='#d4a6c8'>
+              <bucket>&quot;K24483&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;K04901&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;K07458&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;K09667&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;K10426&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;K11412&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;K12822&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;K17543&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;K19495&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;K22415&quot;</bucket>
+            </map>
+            <map to='#d7b5a6'>
+              <bucket>&quot;K24774&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;K03355&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;K06694&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;K08865&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;K10339&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;K10649&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;K12031&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;K16288&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;K18710&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;K21435&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;K23634&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;K26480&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;K02861&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;K06227&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;K08849&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;K10331&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;K10602&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;K12017&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;K15381&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;K18627&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;K20349&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;K23369&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;K25729&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;K01425&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;K04934&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;K08267&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;K10323&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;K10471&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;K11997&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;K13173&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;K18169&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;K19816&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;K23038&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;K24934&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;K04874&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;K06872&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;K09258&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;K10399&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;K10914&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;K12306&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;K16781&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;K19045&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;K21596&quot;</bucket>
+            </map>
+            <map to='#fabfd2'>
+              <bucket>&quot;K24434&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;K04357&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;K06699&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;K08866&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;K10393&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;K10652&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;K12035&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;K16343&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;K18809&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;K21437&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;K23785&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;K27310&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;K01883&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;K04935&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;K08294&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;K10325&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;K10473&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;K12001&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;K13342&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;K18235&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;K19833&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;K23204&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;K24937&quot;</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <field-sort-info field-sort-order-type='custom-order'>
+        <field-sort-custom-order field='detection_type' />
+        <field-sort-custom-order field='detection_method' />
+        <field-sort-custom-order field='batch' />
+        <field-sort-custom-order field='query_accession' />
+        <field-sort-custom-order field='query_database' />
+        <field-sort-custom-order field='query_type' />
+        <field-sort-custom-order field='target_accession' />
+        <field-sort-custom-order field='target_database' />
+        <field-sort-custom-order field='target_type' />
+        <field-sort-custom-order field='target_model' />
+        <field-sort-custom-order field='query_start' />
+        <field-sort-custom-order field='Calculation_2109539072421888' />
+        <field-sort-custom-order field='Query Left (copy)_2109539072528385' />
+        <field-sort-custom-order field='query_end' />
+        <field-sort-custom-order field='target_start' />
+        <field-sort-custom-order field='target_end' />
+        <field-sort-custom-order field='evalue' />
+        <field-sort-custom-order field='bitscore' />
+        <field-sort-custom-order field='bitscore_threshold' />
+        <field-sort-custom-order field='custom_metric_name' />
+        <field-sort-custom-order field='custom_metric_value' />
+        <field-sort-custom-order field='Geometry (generated)' />
+        <field-sort-custom-order field='Latitude (generated)' />
+        <field-sort-custom-order field='Longitude (generated)' />
+        <field-sort-custom-order field=':Measure Names' />
+        <field-sort-custom-order field='Multiple Values' />
+      </field-sort-info>
+      <object-graph>
+        <objects>
+          <object caption='proteins.tsv' id='proteins.tsv_F08503B78E734E2EB1BC663901034DA5'>
+            <properties context=''>
+              <relation connection='textscan.13c3cg514f8rxb11ob09q16faj49' name='proteins.tsv' table='[proteins#tsv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
+                  <column datatype='string' name='detection_type' ordinal='0' />
+                  <column datatype='string' name='detection_method' ordinal='1' />
+                  <column datatype='string' name='batch' ordinal='2' />
+                  <column datatype='string' name='query_accession' ordinal='3' />
+                  <column datatype='string' name='query_database' ordinal='4' />
+                  <column datatype='string' name='query_type' ordinal='5' />
+                  <column datatype='string' name='target_accession' ordinal='6' />
+                  <column datatype='string' name='target_database' ordinal='7' />
+                  <column datatype='string' name='target_type' ordinal='8' />
+                  <column datatype='string' name='target_model' ordinal='9' />
+                  <column datatype='integer' name='query_start' ordinal='10' />
+                  <column datatype='integer' name='query_end' ordinal='11' />
+                  <column datatype='integer' name='target_start' ordinal='12' />
+                  <column datatype='integer' name='target_end' ordinal='13' />
+                  <column datatype='string' name='evalue' ordinal='14' />
+                  <column datatype='string' name='bitscore' ordinal='15' />
+                  <column datatype='string' name='bitscore_threshold' ordinal='16' />
+                  <column datatype='string' name='custom_metric_name' ordinal='17' />
+                  <column datatype='string' name='custom_metric_value' ordinal='18' />
+                </columns>
+              </relation>
+            </properties>
+            <properties context='extract'>
+              <relation name='Extract' table='[Extract].[Extract]' type='table' />
+            </properties>
+          </object>
+        </objects>
+      </object-graph>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='Pileup of Detected Proteins'>
+      <layout-options>
+        <title>
+          <formatted-text>
+            <run>&lt;Sheet Name&gt;</run>
+          </formatted-text>
+        </title>
+        <caption>
+          <formatted-text>
+            <run fontcolor='#333333' fontsize='12'>Vertically stacked bars at the same region of Query Left reveal likely duplicated proteins from detection; their sequences are not identical but likely very similar.</run>
+          </formatted-text>
+        </caption>
+      </layout-options>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='proteins' name='federated.1puwtde14g52yd17gxuzy1jcauvg' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1puwtde14g52yd17gxuzy1jcauvg'>
+            <column aggregation='Sum' caption='Query Left' datatype='integer' name='[Calculation_2109539072421888]' role='dimension' type='ordinal'>
+              <calculation class='tableau' formula='MIN([query_start],[query_end])' />
+            </column>
+            <column aggregation='Sum' caption='Query Length' datatype='integer' name='[Query Left (copy)_2109539072528385]' role='dimension' type='ordinal'>
+              <calculation class='tableau' formula='ABS([query_start]-[query_end])+1' />
+            </column>
+            <column-instance column='[Calculation_2109539072421888]' derivation='Min' name='[min:Calculation_2109539072421888:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_2109539072421888]' derivation='None' name='[none:Calculation_2109539072421888:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Query Left (copy)_2109539072528385]' derivation='None' name='[none:Query Left (copy)_2109539072528385:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[query_accession]' derivation='None' name='[none:query_accession:nk]' pivot='key' type='nominal' />
+            <column-instance column='[query_end]' derivation='None' name='[none:query_end:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[query_start]' derivation='None' name='[none:query_start:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[target_accession]' derivation='None' name='[none:target_accession:nk]' pivot='key' type='nominal' />
+            <column-instance column='[target_end]' derivation='None' name='[none:target_end:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[target_model]' derivation='None' name='[none:target_model:nk]' pivot='key' type='nominal' />
+            <column-instance column='[target_start]' derivation='None' name='[none:target_start:ok]' pivot='key' type='ordinal' />
+            <column caption='Query Accession' datatype='string' name='[query_accession]' role='dimension' type='nominal' />
+            <column aggregation='Sum' caption='Query End' datatype='integer' name='[query_end]' role='dimension' type='ordinal' />
+            <column aggregation='Sum' caption='Query Start' datatype='integer' name='[query_start]' role='dimension' type='ordinal' />
+            <column caption='Target Accession' datatype='string' name='[target_accession]' role='dimension' type='nominal' />
+            <column aggregation='Sum' caption='Target End' datatype='integer' name='[target_end]' role='dimension' type='ordinal' />
+            <column caption='Target Model' datatype='string' name='[target_model]' role='dimension' type='nominal' />
+            <column aggregation='Sum' caption='Target Start' datatype='integer' name='[target_start]' role='dimension' type='ordinal' />
+          </datasource-dependencies>
+          <filter class='quantitative' column='[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:Calculation_2109539072421888:qk]' included-values='in-range'>
+            <min>566713</min>
+            <max>755618</max>
+          </filter>
+          <filter class='categorical' column='[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:query_accession:nk]'>
+            <groupfilter function='member' level='[none:query_accession:nk]' member='&quot;NW_018148940.1&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <computed-sort column='[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:target_accession:nk]' direction='ASC' using='[federated.1puwtde14g52yd17gxuzy1jcauvg].[min:Calculation_2109539072421888:qk]' />
+          <slices>
+            <column>[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:query_accession:nk]</column>
+            <column>[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:Calculation_2109539072421888:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='label'>
+            <format attr='display' field='[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:target_accession:nk]' value='false' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <size column='[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:Query Left (copy)_2109539072528385:qk]' />
+              <lod column='[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:query_start:ok]' />
+              <lod column='[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:query_end:ok]' />
+              <color column='[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:target_model:nk]' />
+              <lod column='[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:target_accession:nk]' />
+              <lod column='[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:target_start:ok]' />
+              <lod column='[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:target_end:ok]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>([federated.1puwtde14g52yd17gxuzy1jcauvg].[none:query_accession:nk] / [federated.1puwtde14g52yd17gxuzy1jcauvg].[none:target_accession:nk])</rows>
+        <cols>[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:Calculation_2109539072421888:qk]</cols>
+      </table>
+      <simple-id uuid='{DD6B9162-4661-467A-8C3D-F8FF18F9C728}' />
+    </worksheet>
+  </worksheets>
+  <windows source-height='30'>
+    <window class='worksheet' maximized='true' name='Pileup of Detected Proteins'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card mode='dropdown' param='[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:query_accession:nk]' type='filter' />
+            <card param='[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:Calculation_2109539072421888:qk]' show-domain='false' show-null-ctrls='false' type='filter' />
+            <card pane-specification-id='0' param='[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:target_model:nk]' type='color' />
+          </strip>
+        </edge>
+        <edge name='bottom'>
+          <strip size='94'>
+            <card type='caption' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='fit-height' />
+        <highlight>
+          <color-one-way>
+            <field>[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:Calculation_2109539072421888:ok]</field>
+            <field>[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:Query Left (copy)_2109539072528385:ok]</field>
+            <field>[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:query_accession:nk]</field>
+            <field>[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:query_end:ok]</field>
+            <field>[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:query_start:ok]</field>
+            <field>[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:target_accession:nk]</field>
+            <field>[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:target_end:ok]</field>
+            <field>[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:target_model:nk]</field>
+            <field>[federated.1puwtde14g52yd17gxuzy1jcauvg].[none:target_start:ok]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{9B2922F7-01BF-4D73-9B99-CC8850875D51}' />
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='384' name='Pileup of Detected Proteins' width='384'>
+      iVBORw0KGgoAAAANSUhEUgAAAYAAAAGACAYAAACkx7W/AAAACXBIWXMAAA7DAAAOwwHHb6hk
+      AAAYRElEQVR4nO3dW3Cb5Z3H8Z9kWbYsy+ezkzh2DAmGDCQkGHCmtLAdDqXATndnuzDQmbKz
+      Fzt7u0sverNt94LtJTu7F7t0pzBAmZ2dbUpLhzQJkKQp4CZA04Y4J8cOceTEsR3LsmSdvBch
+      r3kjK1k5ev1aer6fmYz1PJLf/kfT0Y//87ckz8LCwoIAAMbxul0AAMAdBAAAGIoAAABDGR8A
+      Y2NjbpcAAK4wPgAAwFQEAAAYigAAAEMRAABgKAIAAAxFAACAoQgAADAUAQAAhiIAAMBQnms/
+      DdS0d8aWlZWpqqqqYNdLp9PWdfMxcTosSWrqaZMkHdvzqTY9dKftMclkUuXl5QWo0m65Nbt1
+      Xan4ngvJuZqL7bpOXpua87uu79qNjo6OgheymkUiEYVCoYJdL5VKSZJ8vqyn9rrOTZyWJIXu
+      vFLL2OBpbX9qh+0x8/PzqqioKECVdsut2a3rSsX3XEjO1Vxs13Xy2tSc33WvewR0+PBh7d+/
+      X5L0wQcf6Pjx4wqHw5qbm9Nrr70mSTp48KCu/UqBoaEhvf3229q9e7cymYzee+897dq1S5J0
+      9OhR7dq1Szt37tT8/Lz+8Ic/6PXXX7d+Nx6P66WXXtLCwoL27dunPXv26De/+Y2i0ajeeust
+      7dy5UxMTE5Kk0dFRvfnmm5Kk/fv365133tEnn3xiXWtyclJvvPGGzp49+/96wgDAJNcNgLm5
+      Oc3Ozmp2dlbRaFSdnZ06fvy4jh8/rmAwqFQqpdnZWXk8HtvvDQ8P67HHHpPP51M8HteWLVus
+      ljocDqu/v1/19fWKRqNau3atWltbrd/dt2+fenp6JEkzMzMaGBhQLBbTiRMn1N/fr8cff1yH
+      Dx9WOp3WkSNH1NjYqIWFBUWjUT388MMKh8PWtcrKyrRt2zbrv+oAAItu2OcODAzot7/9rXw+
+      n4LBoGKxmFKplLZu3aoTJ04secZ09cU+FAopHo+roaHBuq+1tVX79+/X/Py8AoGAAoGAdd/J
+      kyfV1tamcDisTCajqqoqvffee/L5fOrt7dWePXtUU1OjeDyu/fv3695779WhQ4eUTqfl9/tt
+      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
+      AAAAQ/0fJqOnf6AjMVUAAAAASUVORK5CYII=
+    </thumbnail>
+  </thumbnails>
+</workbook>
