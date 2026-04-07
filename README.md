@@ -97,6 +97,8 @@ rm pooled.fna
 
 ### Heap: classification and clustering
 
+#### Preparing data for classification
+
 There are many small protein fragments detected that will not be close to being
 assigned a KO. The following script filters them away.
 
@@ -120,6 +122,8 @@ tangle-py tangle/scripts/demux-outputs.py \
 The `demux-outputs.py` script has an `--use-existing-target-database` option,
 which is useful, if needed, to filter an `.faa` file to contain only accessions
 in a `.tsv` file, even if no demux-ing is needed.
+
+#### Classification
 
 At this point, all the proteins we have downloaded from NCBI, or detected using
 needle, are here
@@ -188,7 +192,7 @@ for each target sequence by query, but does not explicitly assign a protein to
 a KO. Analysis scripts or tools can determine the appropriate ratio of bitscore
 to threshold to use for assigning KO number to a protein.
 
-TODO
+### MMSeqs: Clustering
 
 Cluster assigned, in cluster TSV, with name
 
