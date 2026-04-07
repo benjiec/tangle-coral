@@ -99,8 +99,21 @@ rm pooled.fna
 
 #### Preparing data for classification
 
-There are many small protein fragments detected that will not be close to being
-assigned a KO. The following script filters them away.
+Previous step uses HMM profiles to detect amino acid sequences and piece
+sequences together into potential proteins. Many HMM profiles share the same or
+very similar domains, thus resulting in multiple detected proteins with slight
+differences in their sequences. Also, some detected proteins may only contain
+enough amino acid sequences to partially match to a profile, and have no chance
+to ever being classified as a full protein downstream.
+
+A couple of the scripts below attempt to remove some of these junk or
+duplications. Similar but not the same proteins at a locus are not being
+consolidated prior to classification; while they increase classification
+compute time, their presence may result in a more closely matched sequence
+assigned to a profile post classification.
+
+The following script filters them away small matches that have no chance of
+being classified and assigned to a KO.
 
 ```
 heap-py heap/scripts/ko-filter-target.py \
@@ -114,14 +127,25 @@ and creates the appropriate detection TSV and protein FASTAs for each genome.
 ```
 tangle-py tangle/scripts/demux-outputs.py \
   runs/20260402_a611f70c/protein_fragments_filtered.tsv \
-  `tangle-py tangle/scripts/defaults.py -m area_protein_fragments_tsv` \
+  runs/20260402_a611f70c/protein_fragments_filtered_demuxed.tsv \
   --pooled-target-fasta runs/20260402_a611f70c/proteins.faa \
   --demuxed-fasta-parent-dir `tangle-py tangle/scripts/defaults.py -m area_genomics_dir` \
 ```
 
-The `demux-outputs.py` script has an `--use-existing-target-database` option,
-which is useful, if needed, to filter an `.faa` file to contain only accessions
-in a `.tsv` file, even if no demux-ing is needed.
+The following script to cleanup each demuxed TSV and protein fasta file
+further, to remove entries contained in other entries at the same locus.
+
+```
+needle-py needle/scripts/remove-contained.py \
+  <genome_dir>/proteins.tsv <genome_dir>/proteins.faa \
+  <genome_dir>/proteins.contained-removed.tsv <genome_dir>/proteins.contained-removed.faa
+
+mv <genome_dir>/proteins.contained-removed.tsv <genome_dir>/proteins.tsv
+mv <genome_dir>/proteins.contained-removed.faa <genome_dir>/proteins.faa
+```
+
+# XXX remove contained on Google Cloud
+
 
 #### Classification
 
@@ -135,6 +159,9 @@ tangle-py tangle/scripts/area/genome-list.py | \
   -m ncbi_genome_proteins_path \
   -f -
 ```
+
+XXX Create a protein manifest that includes detected and reference, and
+includes proteome_type and genome accession
 
 Use the following to generate a pooled proteins FASTA file
 
@@ -174,7 +201,7 @@ tangle-py tangle/scripts/demux-outputs.py \
 
 tangle-py tangle/scripts/demux-outputs.py \
   runs/<run_dir>/sequence_pfam.tsv \
-  `tangle-py tangle/scripts/defaults.py -m area_sequence_pfam_tsv` \
+  `tangle-py tangle/scripts/defaults.py -m area_protein_pfam_tsv` \
 ```
 
 For KO classification, use the following script to filter down to proteins very
@@ -184,13 +211,17 @@ close to the KEGG threshold
 heap-py heap/scripts/ko-assign.py \
   --scoring-ratio-min 0.8  \
   runs/<run_dir>/sequence_ko_unassigned_demux.tsv \
-  `tangle-py tangle/scripts/defaults.py -m area_sequence_ko_assigned_tsv` \
+  `tangle-py tangle/scripts/defaults.py -m area_protein_ko_assigned_tsv` \
 ```
 
 Note that the assignment file includes the KO profile thresholds and rankings
 for each target sequence by query, but does not explicitly assign a protein to
 a KO. Analysis scripts or tools can determine the appropriate ratio of bitscore
 to threshold to use for assigning KO number to a protein.
+
+XXX TODO There are multple proteins at a locus now with same assignment, we
+need to duplicate and pick a best one
+
 
 ### MMSeqs: Clustering
 
@@ -201,3 +232,22 @@ Cluster putative from classify TSV, with name
 Dynamically compute cluster FAA to create a muscle alignment, can use a cluster TSV and a specific cluster
 
 Visualize feature projection of putative against KO and Pfam, by cluster
+
+
+## Recipes
+
+Combining reference proteome with custom one, then cluster using high stringency
+
+```
+tangle-py tangle/scripts/defaults.py \
+  -m ncbi_genome_proteins_path GCF_002042975.1 | \
+  xargs cat custom.faa > combined.faa
+python3 tangle/scripts/mmseqs-cluster.py \
+  --coverage 0.95 \
+  --min-seq-id 0.95 \
+  combined.faa
+```
+
+The `demux-outputs.py` script has an `--use-existing-target-database` option,
+which is useful, if needed, to filter an `.faa` file to contain only accessions
+in a `.tsv` file, even if no demux-ing is needed.
