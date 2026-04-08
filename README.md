@@ -113,35 +113,35 @@ compute time, their presence may result in a more closely matched sequence
 assigned to a profile post classification.
 
 The following script filters them away small matches that have no chance of
-being classified and assigned to a KO.
+being classified and assigned to a KO. Remove the `--forget-original` argument
+to leave a copy of the original tsv with `.orig` suffix.
 
 ```
 heap-py heap/scripts/ko-filter-target.py \
-  runs/20260402_a611f70c/protein_fragments.tsv \
-  runs/20260402_a611f70c/protein_fragments_filtered.tsv 
+  --forget-original \
+  runs/20260402_a611f70c/output_*.tsv
 ```
 
 Detection was run on many genomes. The following script demultiplex the results
-and creates the appropriate detection TSV and protein FASTAs for each genome.
+and creates the appropriate detection tsv and protein fastas for each genome.
+Note that this script appends to each genome's TSV and fasta files, so remove
+previous copies if re-running.
 
 ```
 tangle-py tangle/scripts/demux-outputs.py \
-  runs/20260402_a611f70c/protein_fragments_filtered.tsv \
-  runs/20260402_a611f70c/protein_fragments_filtered_demuxed.tsv \
-  --pooled-target-fasta runs/20260402_a611f70c/proteins.faa \
-  --demuxed-fasta-parent-dir `tangle-py tangle/scripts/defaults.py -m area_genomics_dir` \
+  --forget-original \
+  --pooled-target-fasta-suffix .faa \
+  --demuxed-parent-dir `tangle-py tangle/scripts/defaults.py -m area_genomics_dir` \
+  runs/20260402_a611f70c/output_*.tsv
 ```
 
-The following script to cleanup each demuxed TSV and protein fasta file
+Use the following script to cleanup each demuxed tsv and protein fasta file
 further, to remove entries contained in other entries at the same locus.
 
 ```
 needle-py needle/scripts/remove-contained.py \
-  <genome_dir>/proteins.tsv <genome_dir>/proteins.faa \
-  <genome_dir>/proteins.contained-removed.tsv <genome_dir>/proteins.contained-removed.faa
-
-mv <genome_dir>/proteins.contained-removed.tsv <genome_dir>/proteins.tsv
-mv <genome_dir>/proteins.contained-removed.faa <genome_dir>/proteins.faa
+  --forget-original \
+  `tangle-py tangle/scripts/defaults.py -m area_genomics_dir`/*
 ```
 
 # XXX remove contained on Google Cloud
