@@ -136,15 +136,14 @@ tangle-py tangle/scripts/demux-outputs.py \
 ```
 
 Use the following script to cleanup each demuxed tsv and protein fasta file
-further, to remove entries contained in other entries at the same locus.
+further, to remove entries contained in other entries at the same locus. This
+process takes about 2-4 hours.
 
 ```
 needle-py needle/scripts/remove-contained.py \
   --forget-original \
   `tangle-py tangle/scripts/defaults.py -m area_genomics_dir`/*
 ```
-
-# XXX remove contained on Google Cloud
 
 
 #### Classification
@@ -156,20 +155,40 @@ needle, are here
 tangle-py tangle/scripts/area/genome-list.py | \
   tangle-py tangle/scripts/defaults.py \
   -m area_detected_proteins \
-  -m ncbi_genome_proteins_path \
+  -m ncbi_genome_proteins \
   -f -
 ```
 
-XXX Create a protein manifest that includes detected and reference, and
-includes proteome_type and genome accession
+Use the following two commands to create an manifest of both the detected and
+NCBI protein sequences.
 
-Use the following to generate a pooled proteins FASTA file
+```
+tangle-py tangle/scripts/area/genome-list.py | \
+  tangle-py tangle/scripts/defaults.py \
+  -m area_detected_proteins -f - | \
+  xargs venv-tangle/bin/python3 tangle/scripts/manifest.py \
+    --sequence-source hmm-detected \
+    --sequence-type protein \
+    `tangle-py tangle/scripts/defaults.py -m area_sequence_manifest_tsv`
+
+tangle-py tangle/scripts/area/genome-list.py | \
+  tangle-py tangle/scripts/defaults.py \
+  -m ncbi_genome_proteins -f - | \
+  xargs venv-tangle/bin/python3 tangle/scripts/manifest.py \
+    --append \
+    --sequence-source ncbi \
+    --sequence-type protein \
+    `tangle-py tangle/scripts/defaults.py -m area_sequence_manifest_tsv`
+```
+
+Use the following to generate a pooled proteins FASTA file. Likely, there are
+~20M sequences.
 
 ```
 tangle-py tangle/scripts/area/genome-list.py | \
   tangle-py tangle/scripts/defaults.py \
   -m area_detected_proteins \
-  -m ncbi_genome_proteins_path \
+  -m ncbi_genome_proteins \
   -f - | \
   xargs venv-tangle/bin/python3 tangle/scripts/pool-contigs.py \
   pooled_proteins.faa
@@ -219,8 +238,8 @@ for each target sequence by query, but does not explicitly assign a protein to
 a KO. Analysis scripts or tools can determine the appropriate ratio of bitscore
 to threshold to use for assigning KO number to a protein.
 
-XXX TODO There are multple proteins at a locus now with same assignment, we
-need to duplicate and pick a best one
+XXX final de-duplication: for each genome - mmseq cluster 0.95/0.95, group by
+locus, rank by assignment/match metrics
 
 
 ### MMSeqs: Clustering
