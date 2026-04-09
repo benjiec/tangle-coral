@@ -75,12 +75,11 @@ matching environment variables, according to `heap/README.md`.
 
 ## Genomics Workflows
 
-The goal of the genomics workflows is to end up with a picture of how many KO
-proteins and how much of each KEGG module are present in each genome. For
-genomes without predicted/curated proteins, HMM detection is used to directly
-detect, classify, and filter down to likely proteins matching KO HMM profiles.
-For genomes with curated proteins, all curated proteins are classified against
-KO HMM profiles.
+The goal of the genomics workflows is to end up with a picture of how many KOs
+and KEGG modules are detectable in various genomes. For genomes without
+predicted/curated proteins, a HMM based workflow detects and finds proteins
+matching KO HMM profiles. For genomes with curated proteins, all curated
+protein sequences are classified against KO HMM profiles.
 
 
 ### Needle: protein detection
@@ -105,7 +104,6 @@ rm pooled.fna
 
 
 ### Heap: classification
-
 
 #### Preparing data for classification
 
@@ -180,8 +178,7 @@ heap-py heap/gcloud/hmmscan-ko/setup.py \
 ```
 
 Use the rclone option to download individual output files into an outputs
-directory. The following command demultiplexes the classification outputs.
-directories.
+directory. Run the following to demultiplex the results.
 
 ```
 tangle-py tangle/scripts/demux-outputs.py \
@@ -190,8 +187,7 @@ tangle-py tangle/scripts/demux-outputs.py \
 ```
 
 Use the following script to select proteins that match or are close to matching
-a KO. Note that the output files have not been demultiplexed yet, so the
-assignment file contains pooled protein accessions, still.
+a KO.
 
 ```
 heap-py heap/scripts/ko-assign.py \
