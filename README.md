@@ -73,7 +73,14 @@ HMM profiles for KEGG and Pfam should be downloaded to directories specified by
 matching environment variables, according to `heap/README.md`.
 
 
-## Workflow and Scripts
+## Genomics Workflows
+
+The goal of the genomics workflows is to end up with a picture of how many KO
+proteins and how much of each KEGG module are present in each genome. For
+genomes without predicted/curated proteins, HMM detection is used to directly
+detect, classify, and filter down to likely proteins matching KO HMM profiles.
+For genomes with curated proteins, all curated proteins are classified against
+KO HMM profiles.
 
 
 ### Needle: protein detection
@@ -97,7 +104,7 @@ rm pooled.fna
 ```
 
 
-### Heap: classification and clustering
+### Heap: classification
 
 
 #### Preparing data for classification
@@ -193,9 +200,30 @@ heap-py heap/scripts/ko-assign.py \
   runs/<run_dir>/sequence_ko_*.tsv
 ```
 
-XXX filter script to filter both .tsv and .faa
+Then use the following script to filter each genome's protein tsv and fasta to
+those that appear in the assignment file. Only do this for the detected
+genomes.
 
-XXX mmseqs, filter by locus
+```
+tangle-py tangle/scripts/filter-proteins.py \
+  --filter-targets-with-queries-from \
+    `tangle-py tangle/scripts/defaults.py -m area_protein_ko_assigned_tsv` \
+  `tangle-py tangle/scripts/defaults.py -m area_genomics_dir`/GC*
+```
+
+There are still a good number of duplicate proteins in each detected proteome,
+at this point, because each HMM profile in the KO database was used to detect
+proteins separately and several could have found similar proteins at the same
+locus. Use the following script to further filter. Warning, this is a monster
+of a script, highly recommend keeping the .orig files in case something goes
+wrong.
+
+```
+tangle-py tangle/scripts/filter-clustered-proteins.py \
+  --ko-classification-tsv \
+    `tangle-py tangle/scripts/defaults.py -m area_protein_ko_assigned_tsv` \
+  `tangle-py tangle/scripts/defaults.py -m area_genomics_dir`/GC*
+```
 
 
 #### Generating a manifest
@@ -269,22 +297,3 @@ Cluster putative from classify TSV, with name
 Dynamically compute cluster FAA to create a muscle alignment, can use a cluster TSV and a specific cluster
 
 Visualize feature projection of putative against KO and Pfam, by cluster
-
-
-## Recipes
-
-Combining reference proteome with custom one, then cluster using high stringency
-
-```
-tangle-py tangle/scripts/defaults.py \
-  -m ncbi_genome_proteins_path GCF_002042975.1 | \
-  xargs cat custom.faa > combined.faa
-python3 tangle/scripts/mmseqs-cluster.py \
-  --coverage 0.95 \
-  --min-seq-id 0.95 \
-  combined.faa
-```
-
-The `demux-outputs.py` script has an `--use-existing-target-database` option,
-which is useful, if needed, to filter an `.faa` file to contain only accessions
-in a `.tsv` file, even if no demux-ing is needed.
