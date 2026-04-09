@@ -75,6 +75,7 @@ matching environment variables, according to `heap/README.md`.
 
 ## Workflow and Scripts
 
+
 ### Needle: protein detection
 
 Use the following command to generate a pooled .fna file, containing contigs
@@ -95,7 +96,9 @@ needle-py needle/gcloud/hmm-detect/setup.py \
 rm pooled.fna
 ```
 
+
 ### Heap: classification and clustering
+
 
 #### Preparing data for classification
 
@@ -211,16 +214,25 @@ heap-py heap/gcloud/hmmscan-ko/setup.py \
   --query-database-name _ pooled_proteins.faa
 ```
 
-The results should be de-multiplexed
+Use the rclone option to download individual output files into an outputs
+directory, then use the following to demultiplex the outputs.
 
 ```
 tangle-py tangle/scripts/demux-outputs.py \
-  runs/<run_dir>/sequence_ko_unassigned.tsv \
-  runs/<run_dir>/sequence_ko_unassigned_demux.tsv
+  --forget-original \
+  runs/<run_dir>/outputs/sequence_ko_*
 
 tangle-py tangle/scripts/demux-outputs.py \
-  runs/<run_dir>/sequence_pfam.tsv \
-  `tangle-py tangle/scripts/defaults.py -m area_protein_pfam_tsv` \
+  --forget-original \
+  runs/<run_dir>/sequence_pfam_*.tsv
+```
+
+The Pfam file can be processed and moved to the standard location like this
+
+```
+cat <run_dir>/sequence_pfam_*.tsv > sequence_pfam_full.tsv
+{ head -1 sequence_pfam_full.tsv; grep -v query_database sequence_pfam_full.tsv; } > sequence_pfam.tsv; rm sequence_pfam_full.tsv
+mv sequence_pfam.tsv `tangle-py tangle/scripts/defaults.py -m area_protein_pfam_tsv`
 ```
 
 For KO classification, use the following script to filter down to proteins very
@@ -229,14 +241,15 @@ close to the KEGG threshold
 ```
 heap-py heap/scripts/ko-assign.py \
   --scoring-ratio-min 0.8  \
-  runs/<run_dir>/sequence_ko_unassigned_demux.tsv \
   `tangle-py tangle/scripts/defaults.py -m area_protein_ko_assigned_tsv` \
+  runs/<run_dir>/sequence_ko_*.tsv
 ```
 
 Note that the assignment file includes the KO profile thresholds and rankings
-for each target sequence by query, but does not explicitly assign a protein to
-a KO. Analysis scripts or tools can determine the appropriate ratio of bitscore
-to threshold to use for assigning KO number to a protein.
+for each query accession (i.e. protein accession) by KO, but does not
+explicitly assign a protein to a KO. Analysis scripts or tools can determine
+the appropriate ratio of bitscore to threshold to use for assigning KO number
+to a protein.
 
 XXX final de-duplication: for each genome - mmseq cluster 0.95/0.95, group by
 locus, rank by assignment/match metrics
