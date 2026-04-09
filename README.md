@@ -149,18 +149,56 @@ needle-py needle/scripts/remove-contained.py \
 ```
 
 
-#### Classification
+#### Classification against KO
 
-At this point, all the proteins we have downloaded from NCBI, or detected using
-needle, are here
+Use the following to generate a pooled proteins FASTA file. Likely, there are
+~20M sequences.
 
 ```
 tangle-py tangle/scripts/area/genome-list.py | \
   tangle-py tangle/scripts/defaults.py \
   -m area_detected_proteins \
   -m ncbi_genome_proteins \
-  -f -
+  -f - | \
+  xargs venv-tangle/bin/python3 tangle/scripts/pool-contigs.py \
+  pooled_proteins.faa
 ```
+
+Use the `pooled_proteins.faa` to setup a KO classification job on Google Cloud
+
+```
+heap-py heap/gcloud/hmmscan-ko/setup.py \
+  --run-dir-parent runs \
+  --query-database-name _ pooled_proteins.faa
+```
+
+Use the rclone option to download individual output files into an outputs
+directory. The following command demultiplexes the classification outputs.
+directories.
+
+```
+tangle-py tangle/scripts/demux-outputs.py \
+  --forget-original \
+  runs/<run_dir>/outputs/sequence_ko_*
+```
+
+Use the following script to select proteins that match or are close to matching
+a KO. Note that the output files have not been demultiplexed yet, so the
+assignment file contains pooled protein accessions, still.
+
+```
+heap-py heap/scripts/ko-assign.py \
+  --scoring-ratio-min 0.8  \
+  `tangle-py tangle/scripts/defaults.py -m area_protein_ko_assigned_tsv` \
+  runs/<run_dir>/sequence_ko_*.tsv
+```
+
+XXX filter script to filter both .tsv and .faa
+
+XXX mmseqs, filter by locus
+
+
+#### Generating a manifest
 
 Use the following two commands to create an manifest of both the detected and
 NCBI protein sequences.
@@ -184,8 +222,11 @@ tangle-py tangle/scripts/area/genome-list.py | \
     `tangle-py tangle/scripts/defaults.py -m area_sequence_manifest_tsv`
 ```
 
-Use the following to generate a pooled proteins FASTA file. Likely, there are
-~20M sequences.
+
+#### Classification against Pfam
+
+Use the following to generate a pooled proteins FASTA file, now much smaller
+than the input used for KO classification.
 
 ```
 tangle-py tangle/scripts/area/genome-list.py | \
@@ -197,62 +238,26 @@ tangle-py tangle/scripts/area/genome-list.py | \
   pooled_proteins.faa
 ```
 
-Use the `pooled_proteins.faa` to setup KO and Pfam classification jobs on
-Google Cloud
+Submit a HMM scan job on Google Cloud
 
 ```
-heap-py heap/gcloud/hmmscan-ko/setup.py \
-  --run-dir-parent runs \
-  --query-database-name _ pooled_proteins.faa
-```
-
-and
-
-```
-heap-py heap/gcloud/hmmscan-ko/setup.py \
+heap-py heap/gcloud/hmmscan-pfam/setup.py \
   --run-dir-parent runs \
   --query-database-name _ pooled_proteins.faa
 ```
 
 Use the rclone option to download individual output files into an outputs
-directory, then use the following to demultiplex the outputs.
+directory, then use the following to demultiplex the outputs and concatenate.
 
 ```
-tangle-py tangle/scripts/demux-outputs.py \
-  --forget-original \
-  runs/<run_dir>/outputs/sequence_ko_*
-
 tangle-py tangle/scripts/demux-outputs.py \
   --forget-original \
   runs/<run_dir>/sequence_pfam_*.tsv
-```
 
-The Pfam file can be processed and moved to the standard location like this
-
-```
 cat <run_dir>/sequence_pfam_*.tsv > sequence_pfam_full.tsv
 { head -1 sequence_pfam_full.tsv; grep -v query_database sequence_pfam_full.tsv; } > sequence_pfam.tsv; rm sequence_pfam_full.tsv
 mv sequence_pfam.tsv `tangle-py tangle/scripts/defaults.py -m area_protein_pfam_tsv`
 ```
-
-For KO classification, use the following script to filter down to proteins very
-close to the KEGG threshold
-
-```
-heap-py heap/scripts/ko-assign.py \
-  --scoring-ratio-min 0.8  \
-  `tangle-py tangle/scripts/defaults.py -m area_protein_ko_assigned_tsv` \
-  runs/<run_dir>/sequence_ko_*.tsv
-```
-
-Note that the assignment file includes the KO profile thresholds and rankings
-for each query accession (i.e. protein accession) by KO, but does not
-explicitly assign a protein to a KO. Analysis scripts or tools can determine
-the appropriate ratio of bitscore to threshold to use for assigning KO number
-to a protein.
-
-XXX final de-duplication: for each genome - mmseq cluster 0.95/0.95, group by
-locus, rank by assignment/match metrics
 
 
 ### MMSeqs: Clustering
