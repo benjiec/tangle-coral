@@ -75,6 +75,15 @@ HMM profiles for KEGG and Pfam should be downloaded to directories specified by
 matching environment variables, according to `heap/README.md`.
 
 
+## RNAseq Workflows
+
+Experiment specific scripts, to associate quants and conditions, are in
+`experiments/` directory.
+
+See [experiments/README.md](experiments/README.md) for more instructions on
+processing quants, classifying transcripts, and more.
+
+
 ## Genomics Workflows
 
 The goal of the genomics workflows is to end up with a picture of how many KOs
@@ -291,7 +300,5 @@ mv sequence_pfam.tsv `tangle-py tangle/scripts/defaults.py -m area_protein_pfam_
 Cluster assigned, in cluster TSV, with name
 
 Cluster putative from classify TSV, with name
-
-Dynamically compute cluster FAA to create a muscle alignment, can use a cluster TSV and a specific cluster
 
 Visualize feature projection of putative against KO and Pfam, by cluster

@@ -28,8 +28,9 @@ coral-py coral/experiments/PM32426508/process_salmon_quants.py \
 
 ## Classify Transcripts
 
-Use heap-py and tangle-py commands from ../README.md to classify transcripts to
-KOs and Pfam domains. For KO, remember to run the assignment step afterward.
+Use heap-py and tangle-py commands from [../README.md](../README.md) to
+classify transcripts to KOs and Pfam domains. For KO, remember to run the
+assignment step afterward.
 
 As inputs, use the amino acid sequences of ORFs predicted by TransDecoder -- or
 pile proteome files.
