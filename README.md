@@ -40,13 +40,15 @@ in this document).
   └── venv-coral/ 
 ``` 
 
-Then create the following aliases for command line execution
+Then create the following aliases for command line execution (substitute full
+paths)
 
 ```
 alias tangle-py='venv-tangle/bin/python3'
 alias needle-py='venv-needle/bin/python3'
 alias heap-py='venv-heap/bin/python3'
 alias coral-py='venv-coral/bin/python3'
+alias pile-py='docker-compose -f pile/docker-compose.yml run --rm pile python3'
 ```
 
 Unless otherwise specified, examples in this file assume the working directory
