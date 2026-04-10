@@ -2,7 +2,11 @@
 
 ## Processing RNAseq Data and Quantification
 
-See https://github.com/benjiec/pile
+See https://github.com/benjiec/tangle-pile
+
+In experiment specific directories under the pile directory structure, generate
+quantification files as well as proteome (i.e. .faa) files (possibly more than
+one, for different species in the same experiment).
 
 
 ## Process Quants
@@ -17,8 +21,9 @@ normalization. However, make sure, in the mapping workflow, that sequence IDs
 are unique between species.
 
 ```
-python3 experiments/doi:10.1126_sciadv.aba2498/process_salmon_quants.py \
-  experiments/doi:10.1126_sciadv.aba2498 data/exp_results/doi:10.1126_sciadv.aba2498
+coral-py coral/experiments/PM32426508/process_salmon_quants.py \
+  experiments/PM32426508 \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`
 ```
 
 ## Classify Transcripts
@@ -26,7 +31,10 @@ python3 experiments/doi:10.1126_sciadv.aba2498/process_salmon_quants.py \
 Use heap-py and tangle-py commands from ../README.md to classify transcripts to
 KOs and Pfam domains. For KO, remember to run the assignment step afterward.
 
-These commands should generate
+As inputs, use the amino acid sequences of ORFs predicted by TransDecoder -- or
+pile proteome files.
+
+This section should generate
 
   * `sequence_ko.tsv`: sequence to KO mapping
   * `sequence_pfam.tsv`: sequence to Pfam mapping
@@ -46,13 +54,15 @@ cohorts at a given timepoint, or every two timepoints at the same cohort. For
 example,
 
 ```
-python3 scripts/analysis/des2-simple.py \
+coral-py coral/scripts/analysis/des2-simple.py \
   --timepoint 1 --min-count 5 \
-  data/exp_results/doi:10.1126_sciadv.aba2498/sequence_data.tsv data/exp_results/doi:10.1126_sciadv.aba2498
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`/sequence_data.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`
 
-python3 scripts/analysis/des2-simple.py \
+coral-py coral/scripts/analysis/des2-simple.py \
   --cohort SS8 --min-count 5 \
-  data/exp_results/doi:10.1126_sciadv.aba2498/sequence_data.tsv data/exp_results/doi:10.1126_sciadv.aba2498
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`/sequence_data.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`
 ```
 
 Use the `--include-timepoint 0` flag with the `--cohort` flag to limit to
@@ -62,8 +72,9 @@ There is also a `des2-specific.py` script to compare any two cohort and/or
 timepoints
 
 ```
-python3 scripts/analysis/des2-specific.py --cohort1 34C --timepoint1 0 --cohort2 27C --timepoint2 192 --min-count 5 \
-  data/exp_results/doi:10.1093_ismejo_wraf268/sequence_data.tsv data/exp_results/doi:10.1093_ismejo_wraf268
+coral-py coral/scripts/analysis/des2-specific.py --cohort1 34C --timepoint1 0 --cohort2 27C --timepoint2 192 --min-count 5 \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/sequence_data.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`
 ```
 
 Use the following to merge multiple DES2 TSV files into a single tall TSV file,
@@ -72,8 +83,8 @@ mapped file from Salmon, or other tool, has been converted to refer to protein
 sequence IDs in the proteins.faa file.
 
 ```
-PYTHONPATH=. python3 scripts/analysis/des2-merge.py \
-  data/exp_results/doi:10.1126_sciadv.aba2498 \
-  data/exp_results/doi:10.1126_sciadv.aba2498/proteins.faa \
-  data/exp_results/doi:10.1126_sciadv.aba2498/deseq2_*.tsv
+coral-py coral/scripts/analysis/des2-merge.py \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508` \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`/proteins.faa \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`/deseq2_*.tsv
 ```

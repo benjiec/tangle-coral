@@ -15,12 +15,6 @@ treatment fragments per each species were pooled and assembled using Trinity
 (v2.4.0)72, generating three metatranscriptomes (O. faveolata, S. radians, and
 P. clivosa)."
 
-Raw sequencing data were downloaded from SRA using sratools, e.g.
-
-```
-fasterq-dump SRR6255822 --progress
-```
-
 The SRA entries are
 
   * SRR6255820: Orbicella, control, A
@@ -58,55 +52,13 @@ PYTHONPATH=. python3 experiments/doi:10.1038_s41467-021-25950-4/unique-acc.py \
   data/exp_results/doi:10.1038_s41467-021-25950-4/pseudodiploria_symb.fna.gz
 ```
 
-Cluster each of the 6 transcripts using MMSeqs. This step crushes/aggregates
-genes on different alleles but provides more statistical power for differential
-analysis through this aggregation.
-
-```
-scripts/cluster/mmseqs-cluster-trinity-transcripts \
-  data/exp_results/doi:10.1038_s41467-021-25950-4/orbicella_host.fna.gz
-scripts/cluster/mmseqs-cluster-trinity-transcripts \
-  data/exp_results/doi:10.1038_s41467-021-25950-4/orbicella_symb.fna.gz
-
-scripts/cluster/mmseqs-cluster-trinity-transcripts \
-  data/exp_results/doi:10.1038_s41467-021-25950-4/pseudodiploria_host.fna.gz
-scripts/cluster/mmseqs-cluster-trinity-transcripts \
-  data/exp_results/doi:10.1038_s41467-021-25950-4/pseudodiploria_symb.fna.gz
-
-scripts/cluster/mmseqs-cluster-trinity-transcripts \
-  data/exp_results/doi:10.1038_s41467-021-25950-4/siderastrea_host.fna.gz
-scripts/cluster/mmseqs-cluster-trinity-transcripts \
-  data/exp_results/doi:10.1038_s41467-021-25950-4/siderastrea_symb.fna.gz
-```
-
-
-## Read mapping
-
-Create Salmon index, then use Salmon to map reads to transcriptomes, e.g.
-
-```
-salmon index -t pseudodiploria_symb.fna.gz_rep_seq.fna -i pseudodiploria_symb.salmon_index
-salmon quant -i pseudodiploria_symb.salmon_index \
-  -l A --validateMappings -o symb_quants/SRR6255880 -p 2\
-  -1 reads/SRR6255880_1.fastq -2 reads/SRR6255880_2.fastq
-```
-
-See `mk_map_cmds.py` for a list of Salmon commands used on the SRA files.
-
-`process_salmon_quants.py` was used to summarize the quantifications into
-`sequence_data.full.tsv`. This script uses `pytximport` package to roll up
-Trinity transcript/isoform level counts into gene level counts.
-
-```
-PYTHONPATH=. python3 experiments/doi:10.1038_s41467-021-25950-4/process_salmon_quants.py \
-  <data_dir_where_quantification_directories_are> \
-  data/exp_results/doi:10.1038_s41467-021-25950-4
-```
+Use Pile to quantify, starting with the unique-fied transcripts.
 
 
 ## Annotation of KO and Pfam
 
-Use `orfipy` to translate and compute ORFs for each of the 6 .fna files, e.g.
+Use `orfipy` to translate and compute ORFs for each of the 6 .fna clustered
+sequences, e.g.
 
 ```
 orfipy orbicella_host.fna.gz_rep_seq.fna.gz --pep orbicella_host.faa --min 150 --procs 4 --start ATG
@@ -114,92 +66,59 @@ orfipy orbicella_host.fna.gz_rep_seq.fna.gz --pep orbicella_host.faa --min 150 -
 
 Combine the 6 .faa output files into a single `proteins.faa`.
 
-Perform KO and Pfam detection on protein fasta sequence
+Perform KO and Pfam detection on protein fasta sequence, using tangle-py
+commands. Don't forget to also filter KO classifications further to those
+meeting KO HMM thresholds.
+
+Then, aggregate hits on ORFs of isoforms of genes by gene. Basically, we want
+classification outputs to use the same accessions as those used in Salmon and
+DESeq2.
 
 ```
-PYTHONPATH=. python3 scripts/classify/classify.py \
-  --cpu 2 --disable-cutoff-ga --hmm-threshold-file data/ko_thresholds.tsv \
-  --genome-accession _ --fasta-file experiments/doi:10.1038_s41467-021-25950-4/proteins.faa \
-  kegg-downloads/ko.hmm _ data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_ko_full.tsv
-
-PYTHONPATH=. python3 scripts/classify/classify.py \
-  --cpu 2 --genome-accession _ \
-  --fasta-file experiments/doi:10.1038_s41467-021-25950-4/proteins.faa \
-  pfam-downloads/Pfam-A.hmm _ data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_pfam_full.tsv
-```
-
-Then, aggregate hits on ORFs of isoforms of genes by gene. Also, filter KO
-selections by threshold
-
-```
-PYTHONPATH=../.. python3 ../../scripts/analysis/classify-by-transcript.py sequence_ko_full.tsv
-PYTHONPATH=../.. python3 ../../scripts/analysis/assign-ko.py sequence_ko_full.tsv_aggregated
-mv sequence_ko_full.tsv_aggregated_filtered sequence_ko.tsv
+coral-py coral/scripts/analysis/classify-by-transcript.py sequence_ko_full.tsv
+mv sequence_ko_full.tsv_aggregated sequence_ko.tsv
 rm sequence_ko_full.tsv_aggregated
 
-PYTHONPATH=../.. python3 ../../scripts/analysis/classify-by-transcript.py sequence_pfam_full.tsv
+coral-py coral/scripts/analysis/classify-by-transcript.py sequence_pfam_full.tsv
 mv sequence_pfam_full.tsv_aggregated sequence_pfam.tsv
-```
-
-### Run the classification on Google Cloud
-
-The following job to classify proteins by KO took 11.5 hrs on 30 C3-LSSD VMs
-with 115 tasks, ~3 hrs per task to process 20k FASTA entries. Google Cloud cost
-was ~$17.
-
-```
-PYTHONPATH=../.. python3 split-fasta.py inputs/proteins.faa 115
-gcloud storage cp gc-prepare-*.sh gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/
-gcloud storage cp inputs/proteins_*.faa gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/
-gcloud batch jobs submit classify-ko --config gc-classify-ko.json --location us-east1
-gcloud batch jobs describe classify-ko --location us-east1
-gsutil cat gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/sequence_ko_*.tsv > sequence_ko_full.tsv
-{ head -1 sequence_ko_full.tsv; grep -v protein_accession sequence_ko_full.tsv; } > sequence_ko.tsv
-```
-
-Using 400 tasks for Pfam, so ~5000 FASTA entries per task, the following job
-took 4.7 hrs to complete on 45 N2-Standard VMs. Google Cloud cost was ~$15.
-
-```
-PYTHONPATH=../.. python3 split-fasta.py inputs/proteins.faa 400
-gcloud storage cp gc-prepare-*.sh gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/
-gcloud storage cp inputs/proteins_*.faa gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/
-gcloud batch jobs submit exp-5-classify-pfam --config gc-classify-pfam.json --location us-east1
-gcloud batch jobs describe exp-5-classify-pfam --location us-east1
-gsutil cat gs://needle-files/experiments/doi:10.1038_s41467-021-25950-4/sequence_pfam_*.tsv > sequence_pfam_full.tsv
-{ head -1 sequence_pfam_full.tsv; grep -v protein_accession sequence_pfam_full.tsv; } > sequence_pfam.tsv
 ```
 
 
 ## DESeq2
 
 ```
-python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
+coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
   --genome-accession doi:10.1038_s41467-021-25950-4_breviolum_b5 \
-  data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_data.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
 
-python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
+coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
   --genome-accession doi:10.1038_s41467-021-25950-4_breviolum_faviinorum \
-  data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_data.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
 
-python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
+coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
   --genome-accession doi:10.1038_s41467-021-25950-4_symbiodinium_a3 \
-  data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_data.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
 
-python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
+coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
   --genome-accession doi:10.1038_s41467-021-25950-4_orbicella_faveolata \
-  data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_data.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
 
-python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
+coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
   --genome-accession doi:10.1038_s41467-021-25950-4_pseudodiploria_clivosa \
-  data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_data.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
 
-python3 scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
+coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
   --genome-accession doi:10.1038_s41467-021-25950-4_siderastrea_radians \
-  data/exp_results/doi:10.1038_s41467-021-25950-4/sequence_data.tsv data/exp_results/doi:10.1038_s41467-021-25950-4
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_data.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
 
-PYTHONPATH=. python3 scripts/analysis/des2-merge.py \
-  data/exp_results/doi:10.1038_s41467-021-25950-4 \
-  data/exp_results/doi:10.1038_s41467-021-25950-4/proteins.faa \
-  data/exp_results/doi:10.1038_s41467-021-25950-4/deseq2_*.tsv
+coral-py coral/scripts/analysis/des2-merge.py \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802` \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/proteins.faa \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/deseq2_*.tsv
 ```
