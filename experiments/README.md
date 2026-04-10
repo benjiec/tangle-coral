@@ -7,80 +7,38 @@ See https://github.com/benjiec/pile
 
 ## Process Quants
 
-Each directory must have its own script to process quants into `sequence_data.tsv`.
+Each directory must have its own script to process quants into
+`sequence_data.tsv`.
 
 You can put multiple genomes in a single dataset file, i.e.
 `sequence_data.tsv`. This is preferred if multiple species are present in a
-sample, as DESeq2 can normalize across samples, based on more data per sample.
-However, make sure, in the mapping workflow, that sequence IDs are unique
-between species.
+sample, as DESeq2 can normalize across samples and more data helps with
+normalization. However, make sure, in the mapping workflow, that sequence IDs
+are unique between species.
 
 ```
 python3 experiments/doi:10.1126_sciadv.aba2498/process_salmon_quants.py \
   experiments/doi:10.1126_sciadv.aba2498 data/exp_results/doi:10.1126_sciadv.aba2498
 ```
 
-Helpers to update the genome accession to something more formal
-
-```
-python3 scripts/data/update-genome-accession.py \
-  data/exp_results/doi:10.1126_sciadv.aba2498/sequence_data.tsv \
-  GCA_014633955.1 --when doi:10.1126/sciadv.aba2498-a_tenuis
-python3 scripts/data/update-genome-accession.py \
-  data/exp_results/doi:10.1126_sciadv.aba2498/sequence_data.tsv \
-  GCA_947184155.2 --when doi:10.1126/sciadv.aba2498-c_goreaui
-```
-
-
 ## Classify Transcripts
 
-```
-PYTHONPATH=. python3 scripts/classify/classify.py \
-  --disable-cutoff --genome-accession _ \
-  --fasta-file experiments/10.1126_sciadv.aba2498/c_goreaui.faa \
-  kegg-downloads/ko.hmm _ experiments/10.1126_sciadv.aba2498/c_goreaui_ko.tsv
+Use heap-py and tangle-py commands from ../README.md to classify transcripts to
+KOs and Pfam domains. For KO, remember to run the assignment step afterward.
 
-PYTHONPATH=. python3 scripts/classify/classify.py \
-  --disable-cutoff --genome-accession _ \
-  --fasta-file experiments/10.1126_sciadv.aba2498/aten.faa \
-  kegg-downloads/ko.hmm _ experiments/10.1126_sciadv.aba2498/aten_ko.tsv
+These commands should generate
 
-cat experiments/10.1126_sciadv.aba2498/c_goreaui_ko.tsv experiments/10.1126_sciadv.aba2498/aten_ko.tsv > experiments/10.1126_sciadv.aba2498/sequence_ko.tsv
-```
-
-Then filter the classified file to only keep classifications above the KO
-threshold. For example,
-
-```
-python3 scripts/analysis/assign-ko.py experiments/10.1126_sciadv.aba2498/sequence_ko.tsv
-mv experiments/10.1126_sciadv.aba2498/sequence_ko.tsv_filtered experiments/10.1126_sciadv.aba2498/sequence_ko.tsv
-```
-
-You can also directly classify/identify Pfam domains from the proteome
-
-```
-PYTHONPATH=. python3 scripts/classify/classify.py \
-  --genome-accession _ \
-  --fasta-file data/exp_results/doi:10.1126_sciadv.aba2498/proteins.faa \
-  pfam-downloads/Pfam-A.hmm _ data/exp_results/doi:10.1126_sciadv.aba2498/sequence_pfam.tsv \
-   --cpu 4
-```
-
-Then, copy the .ko.tsv and .faa files to
-data/exp_results/10.1126_sciadv.aba2498 directory. Usually, following these
-conventions
-
-  * `sequence_data.tsv`: data file
   * `sequence_ko.tsv`: sequence to KO mapping
   * `sequence_pfam.tsv`: sequence to Pfam mapping
-  * `sequence_list.tsv`: from des2-merge script below
-  * `des2_tall.tsv`: des2 data, from des2-merge script below
 
 
 ## Run DESeq2
 
-First, identify an internal control gene, EIF5B has been shown to work well for
-algae and likely coral as well.
+This section generates
+
+  * `sequence_list.tsv`: from des2-merge script below
+  * `des2_tall.tsv`: des2 data, from des2-merge script below
+
 
 DESeq2 analysis on RNAseq or proteomics results can be done using two scripts.
 First, the `des2-simple.py` script does simple comparison of every two types of
