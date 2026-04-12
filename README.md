@@ -302,3 +302,33 @@ Cluster assigned, in cluster TSV, with name
 Cluster putative from classify TSV, with name
 
 Visualize feature projection of putative against KO and Pfam, by cluster
+
+
+### BigQuery
+
+Create dataset like this, with "tangle" as the dataset name
+
+```
+bq mk --location=[REGION] tangle_coral
+```
+
+Load assets using
+
+```
+tangle-py tangle/scripts/bq-load-assets.py --dataset-name tangle_coral
+```
+
+Load data from an area with
+
+```
+tangle-py tangle/scripts/bq-schema.py tangle.detected > tangle_detected.schema.json
+bq load \
+  --source_format=CSV \
+  --field_delimiter='\t' \
+  --skip_leading_rows=1 \
+  tangle_coral.detected \
+  `tangle-py tangle/scripts/defaults.py -m area_detected_proteins_tsv_path GCF_002042975.1` \
+  ./tangle_detected.schema.json
+rm ./tangle_detected.schema.json
+```
+
