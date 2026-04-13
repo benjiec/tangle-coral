@@ -136,6 +136,7 @@ being classified and assigned to a KO. Remove the `--forget-original` argument
 to leave a copy of the original tsv with `.orig` suffix.
 
 ```
+# can run concurrently on different inputs
 heap-py heap/scripts/ko-filter-target.py \
   --forget-original \
   runs/20260402_a611f70c/output_*.tsv
@@ -148,6 +149,7 @@ IMPORTANT: this script appends to each genome's TSV and fasta files, so REMOVE
 PREVIOUS DATA if re-running.
 
 ```
+# CANNOT run concurrently on different inputs because aggregates data by genome
 tangle-py tangle/scripts/demux-outputs.py \
   --forget-original \
   --pooled-target-fasta-suffix .faa \
@@ -160,6 +162,7 @@ further, to remove entries contained in other entries at the same locus. This
 process takes about 2-4 hours.
 
 ```
+# can run concurrently on different inputs
 needle-py needle/scripts/remove-contained.py \
   --forget-original \
   `tangle-py tangle/scripts/defaults.py -m area_genomics_dir`/*
@@ -193,6 +196,7 @@ Use the rclone option to download individual output files into an outputs
 directory. Run the following to demultiplex the results.
 
 ```
+# can run concurrently on different inputs
 tangle-py tangle/scripts/demux-outputs.py \
   --forget-original \
   runs/<run_dir>/outputs/sequence_ko_*
@@ -202,6 +206,7 @@ Use the following script to select proteins that match or are close to matching
 a KO.
 
 ```
+# CANNOT run concurrently on different inputs because aggregates outcome into one file
 heap-py heap/scripts/ko-assign.py \
   --scoring-ratio-min 0.8  \
   `tangle-py tangle/scripts/defaults.py -m area_protein_ko_assigned_tsv` \
@@ -213,6 +218,7 @@ those that appear in the assignment file. Only do this for the detected
 genomes.
 
 ```
+# can run concurrently on different inputs
 tangle-py tangle/scripts/filter-proteins.py \
   --filter-targets-with-queries-from \
     `tangle-py tangle/scripts/defaults.py -m area_protein_ko_assigned_tsv` \
@@ -227,6 +233,7 @@ of a script, highly recommend keeping the .orig files in case something goes
 wrong.
 
 ```
+# can run concurrently on different inputs
 tangle-py tangle/scripts/filter-clustered-proteins.py \
   --ko-classification-tsv \
     `tangle-py tangle/scripts/defaults.py -m area_protein_ko_assigned_tsv` \
@@ -286,6 +293,7 @@ Use the rclone option to download individual output files into an outputs
 directory, then use the following to demultiplex the outputs and concatenate.
 
 ```
+# can run concurrently on different inputs
 tangle-py tangle/scripts/demux-outputs.py \
   --forget-original \
   runs/<run_dir>/sequence_pfam_*.tsv
