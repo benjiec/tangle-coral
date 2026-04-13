@@ -210,7 +210,7 @@ a KO.
 heap-py heap/scripts/ko-assign.py \
   --scoring-ratio-min 0.8  \
   `tangle-py tangle/scripts/defaults.py -m area_protein_ko_assigned_tsv` \
-  runs/<run_dir>/sequence_ko_*.tsv
+  runs/<run_dir>/outputs/sequence_ko_*.tsv
 ```
 
 Then use the following script to filter each genome's protein tsv and fasta to
