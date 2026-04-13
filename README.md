@@ -143,8 +143,9 @@ heap-py heap/scripts/ko-filter-target.py \
 
 Detection was run on many genomes. The following script demultiplex the results
 and creates the appropriate detection tsv and protein fastas for each genome.
-Note that this script appends to each genome's TSV and fasta files, so remove
-previous copies if re-running.
+
+IMPORTANT: this script appends to each genome's TSV and fasta files, so REMOVE
+PREVIOUS DATA if re-running.
 
 ```
 tangle-py tangle/scripts/demux-outputs.py \
