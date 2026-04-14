@@ -152,6 +152,7 @@ PREVIOUS DATA if re-running.
 # CANNOT run concurrently on different inputs because aggregates data by genome
 tangle-py tangle/scripts/demux-outputs.py \
   --forget-original \
+  --set-batch \
   --pooled-target-fasta-suffix .faa \
   --demuxed-parent-dir `tangle-py tangle/scripts/defaults.py -m area_genomics_dir` \
   runs/20260402_a611f70c/output_*.tsv
@@ -198,6 +199,7 @@ directory. Run the following to demultiplex the results.
 ```
 # can run concurrently on different inputs
 tangle-py tangle/scripts/demux-outputs.py \
+  --set-batch \
   --forget-original \
   runs/<run_dir>/outputs/sequence_ko_*
 ```
@@ -303,6 +305,7 @@ directory, then use the following to demultiplex the outputs and concatenate.
 ```
 # can run concurrently on different inputs
 tangle-py tangle/scripts/demux-outputs.py \
+  --set-batch \
   --forget-original \
   runs/<run_dir>/sequence_pfam_*.tsv
 
