@@ -202,8 +202,16 @@ tangle-py tangle/scripts/demux-outputs.py \
   runs/<run_dir>/outputs/sequence_ko_*
 ```
 
-Use the following script to select proteins that match or are close to matching
-a KO.
+If you ran the `hmmscan-ko` job on Google Cloud, the results are already
+filtered to remove those far below the KO HMM thresholds. Then you can just do
+
+```
+cat runs/<run_dir>/outputs/sequence_ko_*.tsv > sequence_ko_full.tsv
+{ head -1 sequence_ko_full.tsv; grep -v query_database sequence_ko_full.tsv; } > sequence_ko.tsv; rm sequence_ko_full.tsv
+mv sequence_ko.tsv `tangle-py tangle/scripts/defaults.py -m area_protein_ko_assigned_tsv`
+```
+
+However, if results were not filtered, run the following script
 
 ```
 # CANNOT run concurrently on different inputs because aggregates outcome into one file
