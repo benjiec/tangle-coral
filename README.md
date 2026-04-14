@@ -338,16 +338,42 @@ Load assets using
 tangle-py tangle/scripts/bq-load-assets.py --dataset-name tangle_coral
 ```
 
-Load data from an area with
+Load UniProt to Pfam mappings
 
 ```
-tangle-py tangle/scripts/bq-schema.py tangle.detected > tangle_detected.schema.json
+tangle-py tangle/scripts/bq-schema.py \
+  --check $TANGLE_WORLD/tangle/uniprot_pfam.tsv.gz \
+  tangle.detected
+
+# make sure the above runs successfully
+tangle-py tangle/scripts/bq-schema.py \
+  tangle.detected > tangle_detected.schema.json
 bq load \
   --source_format=CSV \
   --field_delimiter='\t' \
   --skip_leading_rows=1 \
-  tangle_coral.detected \
-  `tangle-py tangle/scripts/defaults.py -m area_detected_proteins_tsv_path GCF_002042975.1` \
+  tangle_coral.global_detected \
+  $TANGLE_WORLD/tangle/uniprot_pfam.tsv.gz \
+  ./tangle_detected.schema.json
+rm ./tangle_detected.schema.json
+```
+
+Load sequence KO assignments
+
+```
+tangle-py tangle/scripts/bq-schema.py \
+  --check `tangle-py tangle/scripts/defaults.py -m area_protein_ko_assigned_tsv` \
+  tangle.detected
+
+# make sure the above runs successfully
+tangle-py tangle/scripts/bq-schema.py \
+  tangle.detected > tangle_detected.schema.json
+bq load \
+  --source_format=CSV \
+  --field_delimiter='\t' \
+  --skip_leading_rows=1 \
+  tangle_coral.global_detected \
+  `tangle-py tangle/scripts/defaults.py -m area_protein_ko_assigned_tsv` \
   ./tangle_detected.schema.json
 rm ./tangle_detected.schema.json
 ```
