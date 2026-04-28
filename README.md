@@ -121,26 +121,7 @@ rm pooled.fna
 Previous step uses HMM profiles to detect amino acid sequences and piece
 sequences together into potential proteins. Many HMM profiles share the same or
 very similar domains, thus resulting in multiple detected proteins with slight
-differences in their sequences. Also, some detected proteins may only contain
-enough amino acid sequences to partially match to a profile, and have no chance
-to ever being classified as a full protein downstream.
-
-A couple of the scripts below attempt to remove some of these junk or
-duplications. Similar but not the same proteins at a locus are not being
-consolidated prior to classification; while they increase classification
-compute time, their presence may result in a more closely matched sequence
-assigned to a profile post classification.
-
-The following script filters them away small matches that have no chance of
-being classified and assigned to a KO. Remove the `--forget-original` argument
-to leave a copy of the original tsv with `.orig` suffix.
-
-```
-# can run concurrently on different inputs
-heap-py heap/scripts/ko-filter-target.py \
-  --forget-original \
-  runs/20260402_a611f70c/output_*.tsv
-```
+differences in their sequences.
 
 Detection was run on many genomes. The following script demultiplex the results
 and creates the appropriate detection tsv and protein fastas for each genome.
@@ -168,6 +149,11 @@ needle-py needle/scripts/remove-contained.py \
   --forget-original \
   `tangle-py tangle/scripts/defaults.py -m area_genomics_dir`/*
 ```
+
+Similar but not the same proteins at a locus are not being consolidated prior
+to classification; while they increase classification compute time, their
+presence may result in a more closely matched sequence assigned to a profile
+post classification.
 
 
 #### Classification against KO
@@ -315,22 +301,15 @@ mv sequence_pfam.tsv `tangle-py tangle/scripts/defaults.py -m area_protein_pfam_
 ```
 
 
-### MMSeqs: Clustering
-
-Cluster assigned, in cluster TSV, with name
-
-Cluster putative from classify TSV, with name
-
-Visualize feature projection of putative against KO and Pfam, by cluster
-
-
-### BigQuery
+## Loading to BigQuery
 
 Create dataset like this, with "tangle" as the dataset name
 
 ```
 bq mk --location=[REGION] tangle_coral
 ```
+
+### Generic assets
 
 Load assets using
 
@@ -358,6 +337,8 @@ bq load \
 rm ./tangle_detected.schema.json
 ```
 
+### Genomics "detected" table
+
 Load sequence KO assignments
 
 ```
@@ -377,4 +358,29 @@ bq load \
   ./tangle_detected.schema.json
 rm ./tangle_detected.schema.json
 ```
+
+XXX Load sequence Pfam assignments
+
+XXX Load per genome protein detection data
+
+
+### Genomics manifest
+
+XXX
+
+
+### Tables for RNAseq experiments
+
+XXX
+
+
+## MMSeqs: Clustering
+
+Cluster assigned, in cluster TSV, with name
+
+Cluster putative from classify TSV, with name
+
+Visualize feature projection of putative against KO and Pfam, by cluster
+
+
 
