@@ -337,7 +337,7 @@ bq load \
 rm ./tangle_detected.schema.json
 ```
 
-### Genomics "detected" table
+### Genomics: KO and Pfam mappings
 
 Load sequence KO assignments
 
@@ -345,8 +345,8 @@ Load sequence KO assignments
 tangle-py tangle/scripts/bq-schema.py \
   --check `tangle-py tangle/scripts/defaults.py -m area_protein_ko_assigned_tsv` \
   tangle.detected
-
 # make sure the above runs successfully
+
 tangle-py tangle/scripts/bq-schema.py \
   tangle.detected > tangle_detected.schema.json
 bq load \
@@ -359,15 +359,76 @@ bq load \
 rm ./tangle_detected.schema.json
 ```
 
-XXX Load sequence Pfam assignments
+Load sequence Pfam assignments
 
-XXX Load per genome protein detection data
+```
+tangle-py tangle/scripts/bq-schema.py \
+  --check `tangle-py tangle/scripts/defaults.py -m area_protein_pfam_tsv` \
+  tangle.detected
+# make sure the above runs successfully
 
+tangle-py tangle/scripts/bq-schema.py \
+  tangle.detected > tangle_detected.schema.json
+bq load \
+  --source_format=CSV \
+  --field_delimiter='\t' \
+  --skip_leading_rows=1 \
+  tangle_coral.global_detected \
+  `tangle-py tangle/scripts/defaults.py -m area_protein_pfam_tsv` \
+  ./tangle_detected.schema.json
+rm ./tangle_detected.schema.json
+```
+
+### Genomics: detected protein to contig mappings
+
+**SKIP for now, as we don't have similar mappings for proteins from NCBI** The
+latter requires parsing GFFs, and there are some malformed GFFs in NCBI that
+makes parsing less automated.
+
+Load genomic contig to protein mappings, from all the genomes
+
+```
+cat `tangle-py tangle/scripts/defaults.py -m area_genomics_dir`/GC*/proteins.tsv > proteins.tsv.all
+{ head -1 proteins.tsv.all; grep -v query_database proteins.tsv.all; } > proteins.tsv; rm proteins.tsv.all
+
+tangle-py tangle/scripts/bq-schema.py \
+  --check proteins.tsv \
+  tangle.detected
+# make sure the above runs successfully
+
+tangle-py tangle/scripts/bq-schema.py \
+  tangle.detected > tangle_detected.schema.json
+bq load \
+  --source_format=CSV \
+  --field_delimiter='\t' \
+  --skip_leading_rows=1 \
+  tangle_coral.global_detected \
+  proteins.tsv \
+  ./tangle_detected.schema.json
+rm ./tangle_detected.schema.json
+```
 
 ### Genomics manifest
 
-XXX
+Use the following to load the manifest of all protein identifiers
 
+```
+tangle-py tangle/scripts/bq-schema.py \
+  --check `tangle-py tangle/scripts/defaults.py -m area_sequence_manifest_tsv` \
+  tangle.manifest
+# make sure the above runs successfully
+
+tangle-py tangle/scripts/bq-schema.py \
+  tangle.manifest > tangle_manifest.schema.json
+bq load \
+  --source_format=CSV \
+  --field_delimiter='\t' \
+  --skip_leading_rows=1 \
+  tangle_coral.genomic_sequences \
+  `tangle-py tangle/scripts/defaults.py -m area_sequence_manifest_tsv` \
+  ./tangle_manifest.schema.json
+rm ./tangle_manifest.schema.json
+```
 
 ### Tables for RNAseq experiments
 
@@ -381,6 +442,3 @@ Cluster assigned, in cluster TSV, with name
 Cluster putative from classify TSV, with name
 
 Visualize feature projection of putative against KO and Pfam, by cluster
-
-
-
