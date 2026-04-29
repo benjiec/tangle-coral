@@ -408,7 +408,7 @@ bq load \
 rm ./tangle_detected.schema.json
 ```
 
-### Genomics manifest
+### Sequence and genome manifests
 
 Use the following to load the manifest of all protein identifiers
 
@@ -428,6 +428,18 @@ bq load \
   `tangle-py tangle/scripts/defaults.py -m area_sequence_manifest_tsv` \
   ./tangle_manifest.schema.json
 rm ./tangle_manifest.schema.json
+```
+
+And the following to load list of genomes
+
+```
+bq load \
+  --source_format=CSV \
+  --field_delimiter='\t' \
+  --skip_leading_rows=1 \
+  --autodetect \
+  tangle_coral.genomes \
+  `tangle-py tangle/scripts/defaults.py -m area_genome_taxon_tsv`
 ```
 
 ### Tables for RNAseq experiments
