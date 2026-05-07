@@ -29,7 +29,7 @@ The following tables are loaded into BigQuery.
       * `target_database` is "KO": maps protein sequences (`query_accession` and `query_database`) to KEGG orthologs (`target_accession`)
       * `target_database` is "Pfam-A": maps protein sequences (`query_accession` and `query_database`) to Pfam families (`LEFT(target_accession,7)`)
       * other intended uses
-	* exons mapping: `query_database` and `target_database` are genome accessions, `query_database` and `query_accession` identify a contig,
+        * exons mapping: `query_database` and `target_database` are genome accessions, `query_database` and `query_accession` identify a contig,
           and `target_database` and `target_accession` identify a protein sequence.
         * structural detection: `target_database` is `afdb_swissprot`, `query_database` and `query_accession` identify a protein sequence
 
