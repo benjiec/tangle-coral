@@ -4,9 +4,11 @@ import re
 import csv
 import argparse
 from pathlib import Path
-from needle.seq import read_fasta_as_dict
+from tangle.sequence import read_fasta_as_dict
+from tangle.manifest import ManifestTable
 
 parser = argparse.ArgumentParser()
+parser.add_argument("experiment_id")
 parser.add_argument("output_dir")
 parser.add_argument("faa_file")
 parser.add_argument("des2_tsv_files", nargs="+")
@@ -26,17 +28,16 @@ for tsv_file in args.des2_tsv_files:
         reader = csv.DictReader(f, delimiter="\t")
         for row in reader:
             row[ANALYSIS_FIELD] = analysis_type
+            row["experiment_id"] = args.experiment_id
             entries.append(row)
 
 manifest_tsv = args.output_dir+"/sequence_list.tsv"
 des2_merged_tsv = args.output_dir+"/des2_tall.tsv"
 
-with open(manifest_tsv, "w") as f:
-    # add an empty column to help Tableau understand this is a tab delimited file
-    writer = csv.DictWriter(f, delimiter="\t", fieldnames=["sequence_id", "empty"])
-    writer.writeheader()
-    for x in seq_ids:
-        writer.writerow(dict(sequence_id=x, empty=""))
+sequences = []
+for x in seq_ids:
+    sequences.append(dict(sequence_accession=x, sequence_database=args.experiment_id, sequence_type="transcript", sequence_source="paper"))
+ManifestTable.write_tsv(manifest_tsv, sequences)
 
 with open(des2_merged_tsv, "w") as f:
     writer = csv.DictWriter(f, delimiter="\t", fieldnames=list(entries[0].keys()))
