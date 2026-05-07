@@ -10,6 +10,31 @@ centric repositories in the tangle project group
   * `pile`: Transcriptomic data pipeline
 
 
+## BigQuery Tables
+
+The following tables are loaded into BigQuery.
+
+  * Public data
+    ** `kegg_modules`: names of modules, join with `module_id`
+    ** `kegg_orthologs`: names of KOs, join with `ortholog_id`
+    ** `kegg_module_definitions`: step by step specification of modules, key fields for joining are `ortholog_id` and `module_id`
+    ** `pfam_domains`: names of Pfam families, join with `pfam_accession` and use `pfam_description`
+    ** `pfam_go`: quick and simple mapping of Pfam families to GO terms, join with `pfam_accession` and use `go_description`
+
+  * Genomic data
+    ** `genomes`: list of genome accessions and taxonomy, key field for joining is `Genome Accession`
+    ** `genomic_sequences`: manifest of detected protein sequences, key field for joining is `sequence_accession` and `sequence_database`
+      *** For genomic data (as oppose to RNAseq data) `sequence_database` refers to a genome accession
+    ** `global_detected`: big table of detected features and have different semantics depends on query and target
+      *** `detection_method` is "hmm" and `target_database` is "KO": maps protein sequences (identified by `query_accession` and `query_database`) to KEGG orthologs (`target_accession`)
+      *** `detection_method` is "hmm" and `target_database` is "Pfam-A": maps protein sequences (identified by `query_accession` and `query_database`) to Pfam families (`LEFT(target_accession,7)`)
+      *** other intended uses
+        **** Exons mapping: `target_database` and `target_database` are genome accession, `source_type` is `contig`, `target_type` is `protein`
+        **** Structural detection: `target_database` is `afdb_swissprot`, `query_database` and `query_accession` identify a protein sequence
+
+   * Experiment data
+
+
 ## Tool Setup
 
 Clone and setup the virtual environments for each of the above repositories, in
@@ -444,13 +469,4 @@ bq load \
 
 ### Tables for RNAseq experiments
 
-XXX
-
-
-## MMSeqs: Clustering
-
-Cluster assigned, in cluster TSV, with name
-
-Cluster putative from classify TSV, with name
-
-Visualize feature projection of putative against KO and Pfam, by cluster
+TODO
