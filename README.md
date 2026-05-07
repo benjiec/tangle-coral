@@ -471,4 +471,38 @@ bq load \
 
 ### Tables for RNAseq experiments
 
-TODO
+Each experiment directory in area experiment dir (i.e. `tangle-py
+tangle/scripts/defaults.py -m area_experiments_dir`) should have the following
+files
+
+  * `sequence_list.tsv`
+  * `sequence_data.tsv`
+  * `sequence_ko.tsv`
+  * `sequence_pfam.tsv`
+  * `des2_tall.tsv`
+
+If the `sequence_data.tsv` does not have experiment_id column, add using
+something like the following
+
+```
+coral-py coral/experiments/helpers/add-column.py \
+  /Volumes/Extreme_Pro/areas/coral/experiments/PM41342399/sequence_data.tsv \
+  experiment_id EXP_PM41342399
+```
+
+If the `sequence_ko.tsv` and `sequence_pfam.tsv` files are the older format, use the following
+
+```
+coral-py coral/experiments/helpers/update-detected.py \
+  /Volumes/Extreme_Pro/areas/coral/experiments/PM41342399/sequence_ko.tsv EXP_PM41342399 KO
+coral-py coral/experiments/helpers/update-detected.py \
+  /Volumes/Extreme_Pro/areas/coral/experiments/PM41342399/sequence_pfam.tsv EXP_PM41342399 Pfam-A --pfam-mode
+coral-py coral/experiments/helpers/update-detected.py \
+  /Volumes/Extreme_Pro/areas/coral/experiments/PM34593802/sequence_ko.tsv EXP_PM34593802 KO
+coral-py coral/experiments/helpers/update-detected.py \
+  /Volumes/Extreme_Pro/areas/coral/experiments/PM34593802/sequence_pfam.tsv EXP_PM34593802 Pfam-A --pfam-mode
+coral-py coral/experiments/helpers/update-detected.py \
+  /Volumes/Extreme_Pro/areas/coral/experiments/PM32426508/sequence_ko.tsv EXP_PM32426508 KO
+coral-py coral/experiments/helpers/update-detected.py \
+  /Volumes/Extreme_Pro/areas/coral/experiments/PM32426508/sequence_pfam.tsv EXP_PM32426508 Pfam-A --pfam-mode
+```
