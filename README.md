@@ -26,6 +26,7 @@ The following tables are loaded into BigQuery.
     * `genomic_sequences`: protein manifest, join with `sequence_accession` *and* `sequence_database`
       * For genomic data (as oppose to RNAseq) `sequence_database` refers to a genome accession
     * `global_detected`: detected features with different semantics based on content
+      * warning: there may be sequences in this table that do not appear in the `genomic_sequences` table
       * `target_database` is "KO": maps protein sequences (`query_accession` and `query_database`) to KEGG orthologs (`target_accession`)
       * `target_database` is "Pfam-A": maps protein sequences (`query_accession` and `query_database`) to Pfam families (`LEFT(target_accession,7)`)
       * other intended uses
