@@ -117,7 +117,7 @@ coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_data.tsv \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
 
-coral-py coral/scripts/analysis/des2-merge.py \
+coral-py coral/scripts/analysis/des2-merge.py EXP_PM34593802 \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802` \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/proteins.faa \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/deseq2_*.tsv
