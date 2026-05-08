@@ -31,18 +31,21 @@ this is not a big deal and going with longest ORFs to simplify processing.
 ## DESeq2
 
 ```
-python3 scripts/analysis/des2-simple.py --timepoint 192 --min-count 5 \
-  data/exp_results/doi:10.1093_ismejo_wraf268/sequence_data.tsv data/exp_results/doi:10.1093_ismejo_wraf268
+coral-py coral/scripts/analysis/des2-simple.py --timepoint 192 --min-count 5 \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/sequence_data.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`
 
-python3 scripts/analysis/des2-simple.py --cohort 34C --min-count 5 \
+coral-py coral/scripts/analysis/des2-simple.py --cohort 34C --min-count 5 \
   --include-timepoint 0 \
-  data/exp_results/doi:10.1093_ismejo_wraf268/sequence_data.tsv data/exp_results/doi:10.1093_ismejo_wraf268
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/sequence_data.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`
 
-python3 scripts/analysis/des2-specific.py --cohort1 34C --timepoint1 0 --cohort2 27C --timepoint2 192 --min-count 5 \
-  data/exp_results/doi:10.1093_ismejo_wraf268/sequence_data.tsv data/exp_results/doi:10.1093_ismejo_wraf268
+coral-py coral/scripts/analysis/des2-specific.py --cohort1 34C --timepoint1 0 --cohort2 27C --timepoint2 192 --min-count 5 \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/sequence_data.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`
 
-PYTHONPATH=. python3 scripts/analysis/des2-merge.py EXP_PM41342399 \
-  data/exp_results/doi:10.1093_ismejo_wraf268 \
-  data/exp_results/doi:10.1093_ismejo_wraf268/proteins.faa \
-  data/exp_results/doi:10.1093_ismejo_wraf268/deseq2_*.tsv
+coral-py coral/scripts/analysis/des2-merge.py EXP_PM41342399 \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399` \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/proteins.faa \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/deseq2_*.tsv
 ```

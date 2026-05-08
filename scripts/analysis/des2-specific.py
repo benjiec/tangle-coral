@@ -1,5 +1,6 @@
 import re
 import pandas as pd
+import numpy as np
 import argparse
 from itertools import combinations
 from pydeseq2.dds import DeseqDataSet

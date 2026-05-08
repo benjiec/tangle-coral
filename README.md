@@ -476,33 +476,98 @@ tangle/scripts/defaults.py -m area_experiments_dir`) should have the following
 files
 
   * `sequence_list.tsv`
-  * `sequence_data.tsv`
   * `sequence_ko.tsv`
   * `sequence_pfam.tsv`
+  * `sequence_data.tsv`
   * `des2_tall.tsv`
 
-If the `sequence_data.tsv` does not have experiment_id column, add using
-something like the following
-
-```
-coral-py coral/experiments/helpers/add-column.py \
-  /Volumes/Extreme_Pro/areas/coral/experiments/PM41342399/sequence_data.tsv \
-  experiment_id EXP_PM41342399
-```
-
-If the `sequence_ko.tsv` and `sequence_pfam.tsv` files are the older format, use the following
+If the `sequence_ko.tsv` and `sequence_pfam.tsv` files are in the older format, use the following
 
 ```
 coral-py coral/experiments/helpers/update-detected.py \
-  /Volumes/Extreme_Pro/areas/coral/experiments/PM41342399/sequence_ko.tsv EXP_PM41342399 KO
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/sequence_ko.tsv EXP_PM41342399 KO
 coral-py coral/experiments/helpers/update-detected.py \
-  /Volumes/Extreme_Pro/areas/coral/experiments/PM41342399/sequence_pfam.tsv EXP_PM41342399 Pfam-A --pfam-mode
-coral-py coral/experiments/helpers/update-detected.py \
-  /Volumes/Extreme_Pro/areas/coral/experiments/PM34593802/sequence_ko.tsv EXP_PM34593802 KO
-coral-py coral/experiments/helpers/update-detected.py \
-  /Volumes/Extreme_Pro/areas/coral/experiments/PM34593802/sequence_pfam.tsv EXP_PM34593802 Pfam-A --pfam-mode
-coral-py coral/experiments/helpers/update-detected.py \
-  /Volumes/Extreme_Pro/areas/coral/experiments/PM32426508/sequence_ko.tsv EXP_PM32426508 KO
-coral-py coral/experiments/helpers/update-detected.py \
-  /Volumes/Extreme_Pro/areas/coral/experiments/PM32426508/sequence_pfam.tsv EXP_PM32426508 Pfam-A --pfam-mode
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/sequence_pfam.tsv EXP_PM41342399 Pfam-A --pfam-mode
+```
+
+Use the following script to standardize the column orders for
+`sequence_data.tsv` and `des2_tall.tsv`
+
+```
+coral-py coral/experiments/helpers/update-exp.py \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399` EXP_PM41342399
+```
+
+Then, use the following to load into BigQuery, repeating for each experiment
+
+```
+tangle-py tangle/scripts/bq-schema.py \
+  --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/sequence_list.tsv \
+  tangle.manifest
+tangle-py tangle/scripts/bq-schema.py \
+  --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/sequence_ko.tsv \
+  tangle.detected
+tangle-py tangle/scripts/bq-schema.py \
+  --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/sequence_pfam.tsv \
+  tangle.detected
+tangle-py tangle/scripts/bq-schema.py \
+  --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/sequence_data.tsv \
+  --table-name TranscriptCountsTable \
+  tangle.exp
+tangle-py tangle/scripts/bq-schema.py \
+  --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/des2_tall.tsv \
+  --table-name DESeq2Table \
+  tangle.exp
+
+# make sure the above runs successfully
+
+tangle-py tangle/scripts/bq-schema.py tangle.manifest > tangle_manifest.schema.json
+tangle-py tangle/scripts/bq-schema.py tangle.detected > tangle_detected.schema.json
+tangle-py tangle/scripts/bq-schema.py --table-name TranscriptCountsTable tangle.exp > exp_transcript_counts.schema.json
+tangle-py tangle/scripts/bq-schema.py --table-name DESeq2Table tangle.exp > exp_deseq2_tall.schema.json
+
+bq load \
+  --source_format=CSV \
+  --field_delimiter='\t' \
+  --skip_leading_rows=1 \
+  tangle_coral.experiment_sequences \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/sequence_list.tsv \
+  ./tangle_manifest.schema.json
+
+bq load \
+  --source_format=CSV \
+  --field_delimiter='\t' \
+  --skip_leading_rows=1 \
+  tangle_coral.experiment_detected \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/sequence_ko.tsv \
+  ./tangle_detected.schema.json
+
+bq load \
+  --source_format=CSV \
+  --field_delimiter='\t' \
+  --skip_leading_rows=1 \
+  tangle_coral.experiment_detected \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/sequence_pfam.tsv \
+  ./tangle_detected.schema.json
+
+bq load \
+  --source_format=CSV \
+  --field_delimiter='\t' \
+  --skip_leading_rows=1 \
+  tangle_coral.experiment_transcript_counts \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/sequence_data.tsv \
+  ./exp_transcript_counts.schema.json
+
+bq load \
+  --source_format=CSV \
+  --field_delimiter='\t' \
+  --skip_leading_rows=1 \
+  tangle_coral.experiment_deseq2_tall \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/des2_tall.tsv \
+  ./exp_deseq2_tall.schema.json
+
+rm ./tangle_manifest.schema.json
+rm ./tangle_detected.schema.json
+rm ./exp_transcript_counts.schema.json
+rm ./exp_deseq2_tall.schema.json
 ```
