@@ -35,6 +35,12 @@ The following tables are loaded into BigQuery.
         * structural detection: `target_database` is `afdb_swissprot`, `query_database` and `query_accession` identify a protein sequence
 
    * Experiment data
+     * `experiment_sequences`: list of sequences, join with `sequence_id`, filter by `experiment_id`
+     * `experiment_detected`: detected features, much like `global_detected`
+       * Join `sequence_id` with `query_accession`, `experiment_id` with `query_database`
+     * `experiment_transcript_counts`: RNAseq transcript counts, join with `sequence_id`
+     * `experiment_deseq2_tall`: tall table of DESeq2 analysis, join with `sequence_id`
+       * `analysis_type` column describes base and test groups
 
 
 ## Tool Setup
