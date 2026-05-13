@@ -36,23 +36,36 @@
           <relation connection='bigquery.0bodklx1j6pnnh1ckg38c137tvnv' name='kegg_orthologs' table='[needle-489321.tangle_coral].[kegg_orthologs]' type='table' />
           <relation connection='bigquery.0bodklx1j6pnnh1ckg38c137tvnv' name='pfam_domains' table='[needle-489321.tangle_coral].[pfam_domains]' type='table' />
           <relation connection='bigquery.0bodklx1j6pnnh1ckg38c137tvnv' name='pfam_go' table='[needle-489321.tangle_coral].[pfam_go]' type='table' />
+          <relation connection='bigquery.0bodklx1j6pnnh1ckg38c137tvnv' name='experiment_detected1' table='[needle-489321.tangle_coral].[experiment_detected]' type='table' />
+          <relation connection='bigquery.0bodklx1j6pnnh1ckg38c137tvnv' name='kegg_orthologs1' table='[needle-489321.tangle_coral].[kegg_orthologs]' type='table' />
+          <relation connection='bigquery.0bodklx1j6pnnh1ckg38c137tvnv' name='pfam_domains1' table='[needle-489321.tangle_coral].[pfam_domains]' type='table' />
           <relation connection='bigquery.0bodklx1j6pnnh1ckg38c137tvnv' name='experiment_transcript_counts' table='[needle-489321.tangle_coral].[experiment_transcript_counts]' type='table' />
         </relation>
         <cols>
           <map key='[analysis_type]' value='[experiment_deseq2_tall].[analysis_type]' />
           <map key='[baseMean]' value='[experiment_deseq2_tall].[baseMean]' />
+          <map key='[batch (experiment_detected1)]' value='[experiment_detected1].[batch]' />
           <map key='[batch]' value='[experiment_detected].[batch]' />
+          <map key='[bitscore (experiment_detected1)]' value='[experiment_detected1].[bitscore]' />
           <map key='[bitscore]' value='[experiment_detected].[bitscore]' />
+          <map key='[bitscore_threshold (experiment_detected1)]' value='[experiment_detected1].[bitscore_threshold]' />
           <map key='[bitscore_threshold]' value='[experiment_detected].[bitscore_threshold]' />
+          <map key='[clan_accession (pfam_domains1)]' value='[pfam_domains1].[clan_accession]' />
           <map key='[clan_accession]' value='[pfam_domains].[clan_accession]' />
+          <map key='[clan_short_name (pfam_domains1)]' value='[pfam_domains1].[clan_short_name]' />
           <map key='[clan_short_name]' value='[pfam_domains].[clan_short_name]' />
           <map key='[cohort]' value='[experiment_transcript_counts].[cohort]' />
           <map key='[count]' value='[experiment_transcript_counts].[count]' />
+          <map key='[custom_metric_name (experiment_detected1)]' value='[experiment_detected1].[custom_metric_name]' />
           <map key='[custom_metric_name]' value='[experiment_detected].[custom_metric_name]' />
+          <map key='[custom_metric_value (experiment_detected1)]' value='[experiment_detected1].[custom_metric_value]' />
           <map key='[custom_metric_value]' value='[experiment_detected].[custom_metric_value]' />
+          <map key='[detection_method (experiment_detected1)]' value='[experiment_detected1].[detection_method]' />
           <map key='[detection_method]' value='[experiment_detected].[detection_method]' />
+          <map key='[detection_type (experiment_detected1)]' value='[experiment_detected1].[detection_type]' />
           <map key='[detection_type]' value='[experiment_detected].[detection_type]' />
           <map key='[essential]' value='[kegg_module_definitions].[essential]' />
+          <map key='[evalue (experiment_detected1)]' value='[experiment_detected1].[evalue]' />
           <map key='[evalue]' value='[experiment_detected].[evalue]' />
           <map key='[experiment_id (experiment_deseq2_tall)]' value='[experiment_deseq2_tall].[experiment_id]' />
           <map key='[experiment_id]' value='[experiment_transcript_counts].[experiment_id]' />
@@ -68,18 +81,28 @@
           <map key='[module_id]' value='[kegg_module_definitions].[module_id]' />
           <map key='[module_name]' value='[kegg_modules].[module_name]' />
           <map key='[ortholog_id (kegg_orthologs)]' value='[kegg_orthologs].[ortholog_id]' />
+          <map key='[ortholog_id (kegg_orthologs1)]' value='[kegg_orthologs1].[ortholog_id]' />
           <map key='[ortholog_id]' value='[kegg_module_definitions].[ortholog_id]' />
+          <map key='[ortholog_name (kegg_orthologs1)]' value='[kegg_orthologs1].[ortholog_name]' />
           <map key='[ortholog_name]' value='[kegg_orthologs].[ortholog_name]' />
           <map key='[padj]' value='[experiment_deseq2_tall].[padj]' />
           <map key='[pfam_accession (pfam_domains)]' value='[pfam_domains].[pfam_accession]' />
+          <map key='[pfam_accession (pfam_domains1)]' value='[pfam_domains1].[pfam_accession]' />
           <map key='[pfam_accession]' value='[pfam_go].[pfam_accession]' />
+          <map key='[pfam_description (pfam_domains1)]' value='[pfam_domains1].[pfam_description]' />
           <map key='[pfam_description]' value='[pfam_domains].[pfam_description]' />
+          <map key='[pfam_short_name (pfam_domains1)]' value='[pfam_domains1].[pfam_short_name]' />
           <map key='[pfam_short_name]' value='[pfam_domains].[pfam_short_name]' />
           <map key='[pvalue]' value='[experiment_deseq2_tall].[pvalue]' />
+          <map key='[query_accession (experiment_detected1)]' value='[experiment_detected1].[query_accession]' />
           <map key='[query_accession]' value='[experiment_detected].[query_accession]' />
+          <map key='[query_database (experiment_detected1)]' value='[experiment_detected1].[query_database]' />
           <map key='[query_database]' value='[experiment_detected].[query_database]' />
+          <map key='[query_end (experiment_detected1)]' value='[experiment_detected1].[query_end]' />
           <map key='[query_end]' value='[experiment_detected].[query_end]' />
+          <map key='[query_start (experiment_detected1)]' value='[experiment_detected1].[query_start]' />
           <map key='[query_start]' value='[experiment_detected].[query_start]' />
+          <map key='[query_type (experiment_detected1)]' value='[experiment_detected1].[query_type]' />
           <map key='[query_type]' value='[experiment_detected].[query_type]' />
           <map key='[raw_count]' value='[experiment_transcript_counts].[raw_count]' />
           <map key='[sample]' value='[experiment_transcript_counts].[sample]' />
@@ -99,11 +122,17 @@
           <map key='[sub_sub_step]' value='[kegg_module_definitions].[sub_sub_step]' />
           <map key='[sub_sub_step_option]' value='[kegg_module_definitions].[sub_sub_step_option]' />
           <map key='[sub_sub_step_option_component]' value='[kegg_module_definitions].[sub_sub_step_option_component]' />
+          <map key='[target_accession (experiment_detected1)]' value='[experiment_detected1].[target_accession]' />
           <map key='[target_accession]' value='[experiment_detected].[target_accession]' />
+          <map key='[target_database (experiment_detected1)]' value='[experiment_detected1].[target_database]' />
           <map key='[target_database]' value='[experiment_detected].[target_database]' />
+          <map key='[target_end (experiment_detected1)]' value='[experiment_detected1].[target_end]' />
           <map key='[target_end]' value='[experiment_detected].[target_end]' />
+          <map key='[target_model (experiment_detected1)]' value='[experiment_detected1].[target_model]' />
           <map key='[target_model]' value='[experiment_detected].[target_model]' />
+          <map key='[target_start (experiment_detected1)]' value='[experiment_detected1].[target_start]' />
           <map key='[target_start]' value='[experiment_detected].[target_start]' />
+          <map key='[target_type (experiment_detected1)]' value='[experiment_detected1].[target_type]' />
           <map key='[target_type]' value='[experiment_detected].[target_type]' />
           <map key='[timepoint]' value='[experiment_transcript_counts].[timepoint]' />
           <map key='[tpm]' value='[experiment_transcript_counts].[tpm]' />
@@ -759,6 +788,292 @@
             <object-id>[pfam_go_E4CE2D54742F452BA5006E7EC75F6FC0]</object-id>
           </metadata-record>
           <metadata-record class='column'>
+            <remote-name>detection_type</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[detection_type (experiment_detected1)]</local-name>
+            <parent-name>[experiment_detected1]</parent-name>
+            <remote-alias>detection_type</remote-alias>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[experiment_detected_6FBC3CD448624040826B900EB977C0EB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>detection_method</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[detection_method (experiment_detected1)]</local-name>
+            <parent-name>[experiment_detected1]</parent-name>
+            <remote-alias>detection_method</remote-alias>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[experiment_detected_6FBC3CD448624040826B900EB977C0EB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>batch</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[batch (experiment_detected1)]</local-name>
+            <parent-name>[experiment_detected1]</parent-name>
+            <remote-alias>batch</remote-alias>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[experiment_detected_6FBC3CD448624040826B900EB977C0EB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_accession</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[query_accession (experiment_detected1)]</local-name>
+            <parent-name>[experiment_detected1]</parent-name>
+            <remote-alias>query_accession</remote-alias>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[experiment_detected_6FBC3CD448624040826B900EB977C0EB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_database</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[query_database (experiment_detected1)]</local-name>
+            <parent-name>[experiment_detected1]</parent-name>
+            <remote-alias>query_database</remote-alias>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[experiment_detected_6FBC3CD448624040826B900EB977C0EB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_type</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[query_type (experiment_detected1)]</local-name>
+            <parent-name>[experiment_detected1]</parent-name>
+            <remote-alias>query_type</remote-alias>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[experiment_detected_6FBC3CD448624040826B900EB977C0EB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_accession</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[target_accession (experiment_detected1)]</local-name>
+            <parent-name>[experiment_detected1]</parent-name>
+            <remote-alias>target_accession</remote-alias>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[experiment_detected_6FBC3CD448624040826B900EB977C0EB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_database</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[target_database (experiment_detected1)]</local-name>
+            <parent-name>[experiment_detected1]</parent-name>
+            <remote-alias>target_database</remote-alias>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[experiment_detected_6FBC3CD448624040826B900EB977C0EB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_type</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[target_type (experiment_detected1)]</local-name>
+            <parent-name>[experiment_detected1]</parent-name>
+            <remote-alias>target_type</remote-alias>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[experiment_detected_6FBC3CD448624040826B900EB977C0EB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_model</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[target_model (experiment_detected1)]</local-name>
+            <parent-name>[experiment_detected1]</parent-name>
+            <remote-alias>target_model</remote-alias>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[experiment_detected_6FBC3CD448624040826B900EB977C0EB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_start</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[query_start (experiment_detected1)]</local-name>
+            <parent-name>[experiment_detected1]</parent-name>
+            <remote-alias>query_start</remote-alias>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[experiment_detected_6FBC3CD448624040826B900EB977C0EB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_end</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[query_end (experiment_detected1)]</local-name>
+            <parent-name>[experiment_detected1]</parent-name>
+            <remote-alias>query_end</remote-alias>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[experiment_detected_6FBC3CD448624040826B900EB977C0EB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_start</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[target_start (experiment_detected1)]</local-name>
+            <parent-name>[experiment_detected1]</parent-name>
+            <remote-alias>target_start</remote-alias>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[experiment_detected_6FBC3CD448624040826B900EB977C0EB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_end</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[target_end (experiment_detected1)]</local-name>
+            <parent-name>[experiment_detected1]</parent-name>
+            <remote-alias>target_end</remote-alias>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[experiment_detected_6FBC3CD448624040826B900EB977C0EB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>evalue</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[evalue (experiment_detected1)]</local-name>
+            <parent-name>[experiment_detected1]</parent-name>
+            <remote-alias>evalue</remote-alias>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[experiment_detected_6FBC3CD448624040826B900EB977C0EB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bitscore</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[bitscore (experiment_detected1)]</local-name>
+            <parent-name>[experiment_detected1]</parent-name>
+            <remote-alias>bitscore</remote-alias>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[experiment_detected_6FBC3CD448624040826B900EB977C0EB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bitscore_threshold</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[bitscore_threshold (experiment_detected1)]</local-name>
+            <parent-name>[experiment_detected1]</parent-name>
+            <remote-alias>bitscore_threshold</remote-alias>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[experiment_detected_6FBC3CD448624040826B900EB977C0EB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>custom_metric_name</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[custom_metric_name (experiment_detected1)]</local-name>
+            <parent-name>[experiment_detected1]</parent-name>
+            <remote-alias>custom_metric_name</remote-alias>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[experiment_detected_6FBC3CD448624040826B900EB977C0EB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>custom_metric_value</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[custom_metric_value (experiment_detected1)]</local-name>
+            <parent-name>[experiment_detected1]</parent-name>
+            <remote-alias>custom_metric_value</remote-alias>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[experiment_detected_6FBC3CD448624040826B900EB977C0EB]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ortholog_id</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[ortholog_id (kegg_orthologs1)]</local-name>
+            <parent-name>[kegg_orthologs1]</parent-name>
+            <remote-alias>ortholog_id</remote-alias>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[kegg_orthologs_48195954B11049989DF79964E7F7DA2F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ortholog_name</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[ortholog_name (kegg_orthologs1)]</local-name>
+            <parent-name>[kegg_orthologs1]</parent-name>
+            <remote-alias>ortholog_name</remote-alias>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[kegg_orthologs_48195954B11049989DF79964E7F7DA2F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>pfam_accession</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[pfam_accession (pfam_domains1)]</local-name>
+            <parent-name>[pfam_domains1]</parent-name>
+            <remote-alias>pfam_accession</remote-alias>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pfam_domains_738BD4AC7078486F873A1D8F70D087B7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>clan_accession</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[clan_accession (pfam_domains1)]</local-name>
+            <parent-name>[pfam_domains1]</parent-name>
+            <remote-alias>clan_accession</remote-alias>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pfam_domains_738BD4AC7078486F873A1D8F70D087B7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>clan_short_name</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[clan_short_name (pfam_domains1)]</local-name>
+            <parent-name>[pfam_domains1]</parent-name>
+            <remote-alias>clan_short_name</remote-alias>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pfam_domains_738BD4AC7078486F873A1D8F70D087B7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>pfam_short_name</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[pfam_short_name (pfam_domains1)]</local-name>
+            <parent-name>[pfam_domains1]</parent-name>
+            <remote-alias>pfam_short_name</remote-alias>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pfam_domains_738BD4AC7078486F873A1D8F70D087B7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>pfam_description</remote-name>
+            <remote-type>130</remote-type>
+            <local-name>[pfam_description (pfam_domains1)]</local-name>
+            <parent-name>[pfam_domains1]</parent-name>
+            <remote-alias>pfam_description</remote-alias>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[pfam_domains_738BD4AC7078486F873A1D8F70D087B7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
             <remote-name>experiment_id</remote-name>
             <remote-type>130</remote-type>
             <local-name>[experiment_id]</local-name>
@@ -863,8 +1178,8 @@
       <column caption='Target Accession no version' datatype='string' name='[Calculation_0424687539331073]' role='dimension' type='nominal'>
         <calculation class='tableau' formula='IF LEFT([target_accession], 2) == &quot;PF&quot;&#10;THEN LEFT([target_accession], 7)&#10;ELSE [target_accession]&#10;END' />
       </column>
-      <column caption='Max Ortholog ID Matching Sequence ID' datatype='string' name='[Calculation_0424687662379010]' role='dimension' type='nominal'>
-        <calculation class='tableau' formula='{FIXED [sequence_id (experiment_deseq2_tall)]: MAX([ortholog_id (kegg_orthologs)])}' />
+      <column caption='Secondary Ortholog Name' datatype='string' name='[Calculation_0424687670321159]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='{FIXED [target_accession (experiment_detected1)]: MAX([ortholog_name (kegg_orthologs1)])}' />
       </column>
       <column caption='-log(Padj)' datatype='real' name='[Calculation_3343751797477378]' role='measure' type='quantitative'>
         <calculation class='tableau' formula='-Log([padj],10)' />
@@ -872,29 +1187,45 @@
       <column caption='Rank' datatype='real' name='[Calculation_3343751802658819]' role='measure' type='quantitative'>
         <calculation class='tableau' formula='(ABS([log2FoldChange]) * [Calculation_3343751797477378]) / (1 + [max_cv])' />
       </column>
+      <column caption='Secondary Pfam Description' datatype='string' name='[Secondary Ortholog Name (copy)_0424687670538248]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='{FIXED [target_accession (experiment_detected1)]: MAX([pfam_description (pfam_domains1)])}' />
+      </column>
       <column caption='experiment_deseq2_tall' datatype='table' name='[__tableau_internal_object_id__].[experiment_deseq2_tall_1DE2F4AA3519409B94D28A36B6E2FD06]' role='measure' type='quantitative' />
       <column caption='experiment_detected' datatype='table' name='[__tableau_internal_object_id__].[experiment_detected_309AA47AD816430F81EC159300F71837]' role='measure' type='quantitative' />
+      <column caption='secondary_experiment_detected' datatype='table' name='[__tableau_internal_object_id__].[experiment_detected_6FBC3CD448624040826B900EB977C0EB]' role='measure' type='quantitative' />
       <column caption='experiment_sequences' datatype='table' name='[__tableau_internal_object_id__].[experiment_sequences_0E98331A9B804BC4BE2872F7A710B19D]' role='measure' type='quantitative' />
       <column caption='experiment_transcript_counts' datatype='table' name='[__tableau_internal_object_id__].[experiment_transcript_counts_08184C3D0F474DC191DEFE53A791882C]' role='measure' type='quantitative' />
       <column caption='kegg_module_definitions' datatype='table' name='[__tableau_internal_object_id__].[kegg_module_definitions_3BDA68E0AD5049C399CA5C75101ADEF6]' role='measure' type='quantitative' />
       <column caption='kegg_modules' datatype='table' name='[__tableau_internal_object_id__].[kegg_modules_996BECFD33574D1D927332D2874C3817]' role='measure' type='quantitative' />
+      <column caption='secondary_kegg_orthologs' datatype='table' name='[__tableau_internal_object_id__].[kegg_orthologs_48195954B11049989DF79964E7F7DA2F]' role='measure' type='quantitative' />
       <column caption='kegg_orthologs' datatype='table' name='[__tableau_internal_object_id__].[kegg_orthologs_5B13351B31684AA08243987D230699D5]' role='measure' type='quantitative' />
       <column caption='pfam_domains' datatype='table' name='[__tableau_internal_object_id__].[pfam_domains_4D69F218A4464FA6AF65C98BD79F8AD1]' role='measure' type='quantitative' />
+      <column caption='secondary_pfam_domains' datatype='table' name='[__tableau_internal_object_id__].[pfam_domains_738BD4AC7078486F873A1D8F70D087B7]' role='measure' type='quantitative' />
       <column caption='pfam_go' datatype='table' name='[__tableau_internal_object_id__].[pfam_go_E4CE2D54742F452BA5006E7EC75F6FC0]' role='measure' type='quantitative' />
       <column caption='Analysis Type' datatype='string' name='[analysis_type]' role='dimension' type='nominal' />
       <column caption='Base Mean' datatype='real' name='[baseMean]' role='measure' type='quantitative' />
+      <column caption='Batch (Experiment Detected1)' datatype='string' name='[batch (experiment_detected1)]' role='dimension' type='nominal' />
       <column caption='Batch' datatype='string' name='[batch]' role='dimension' type='nominal' />
+      <column caption='Bitscore (Experiment Detected1)' datatype='real' name='[bitscore (experiment_detected1)]' role='measure' type='quantitative' />
       <column caption='Bitscore' datatype='real' name='[bitscore]' role='measure' type='quantitative' />
+      <column caption='Bitscore Threshold (Experiment Detected1)' datatype='real' name='[bitscore_threshold (experiment_detected1)]' role='measure' type='quantitative' />
       <column caption='Bitscore Threshold' datatype='real' name='[bitscore_threshold]' role='measure' type='quantitative' />
+      <column caption='Clan Accession (Pfam Domains1)' datatype='string' name='[clan_accession (pfam_domains1)]' role='dimension' type='nominal' />
       <column caption='Clan Accession' datatype='string' name='[clan_accession]' role='dimension' type='nominal' />
+      <column caption='Clan Short Name (Pfam Domains1)' datatype='string' name='[clan_short_name (pfam_domains1)]' role='dimension' type='nominal' />
       <column caption='Clan Short Name' datatype='string' name='[clan_short_name]' role='dimension' type='nominal' />
       <column caption='Cohort' datatype='string' name='[cohort]' role='dimension' type='nominal' />
       <column caption='Count' datatype='real' name='[count]' role='measure' type='quantitative' />
+      <column caption='Custom Metric Name (Experiment Detected1)' datatype='string' name='[custom_metric_name (experiment_detected1)]' role='dimension' type='nominal' />
       <column caption='Custom Metric Name' datatype='string' name='[custom_metric_name]' role='dimension' type='nominal' />
+      <column caption='Custom Metric Value (Experiment Detected1)' datatype='real' name='[custom_metric_value (experiment_detected1)]' role='measure' type='quantitative' />
       <column caption='Custom Metric Value' datatype='real' name='[custom_metric_value]' role='measure' type='quantitative' />
+      <column caption='Detection Method (Experiment Detected1)' datatype='string' name='[detection_method (experiment_detected1)]' role='dimension' type='nominal' />
       <column caption='Detection Method' datatype='string' name='[detection_method]' role='dimension' type='nominal' />
+      <column caption='Detection Type (Experiment Detected1)' datatype='string' name='[detection_type (experiment_detected1)]' role='dimension' type='nominal' />
       <column caption='Detection Type' datatype='string' name='[detection_type]' role='dimension' type='nominal' />
       <column caption='Essential' datatype='integer' name='[essential]' role='measure' type='quantitative' />
+      <column caption='Evalue (Experiment Detected1)' datatype='real' name='[evalue (experiment_detected1)]' role='measure' type='quantitative' />
       <column caption='Evalue' datatype='real' name='[evalue]' role='measure' type='quantitative' />
       <column caption='Experiment Id (Experiment Deseq2 Tall)' datatype='string' name='[experiment_id (experiment_deseq2_tall)]' role='dimension' type='nominal' />
       <column caption='Experiment Id' datatype='string' name='[experiment_id]' role='dimension' type='nominal' />
@@ -910,18 +1241,28 @@
       <column caption='Module Id' datatype='string' name='[module_id]' role='dimension' type='nominal' />
       <column caption='Module Name' datatype='string' name='[module_name]' role='dimension' type='nominal' />
       <column caption='Ortholog Id (Kegg Orthologs)' datatype='string' name='[ortholog_id (kegg_orthologs)]' role='dimension' type='nominal' />
+      <column caption='Ortholog Id (Kegg Orthologs1)' datatype='string' name='[ortholog_id (kegg_orthologs1)]' role='dimension' type='nominal' />
       <column caption='Ortholog Id' datatype='string' name='[ortholog_id]' role='dimension' type='nominal' />
+      <column caption='Ortholog Name (Kegg Orthologs1)' datatype='string' name='[ortholog_name (kegg_orthologs1)]' role='dimension' type='nominal' />
       <column caption='Ortholog Name' datatype='string' name='[ortholog_name]' role='dimension' type='nominal' />
       <column caption='Padj' datatype='real' name='[padj]' role='measure' type='quantitative' />
       <column caption='Pfam Accession (Pfam Domains)' datatype='string' name='[pfam_accession (pfam_domains)]' role='dimension' type='nominal' />
+      <column caption='Pfam Accession (Pfam Domains1)' datatype='string' name='[pfam_accession (pfam_domains1)]' role='dimension' type='nominal' />
       <column caption='Pfam Accession' datatype='string' name='[pfam_accession]' role='dimension' type='nominal' />
+      <column caption='Pfam Description (Pfam Domains1)' datatype='string' name='[pfam_description (pfam_domains1)]' role='dimension' type='nominal' />
       <column caption='Pfam Description' datatype='string' name='[pfam_description]' role='dimension' type='nominal' />
+      <column caption='Pfam Short Name (Pfam Domains1)' datatype='string' name='[pfam_short_name (pfam_domains1)]' role='dimension' type='nominal' />
       <column caption='Pfam Short Name' datatype='string' name='[pfam_short_name]' role='dimension' type='nominal' />
       <column caption='Pvalue' datatype='real' name='[pvalue]' role='measure' type='quantitative' />
+      <column caption='Query Accession (Experiment Detected1)' datatype='string' name='[query_accession (experiment_detected1)]' role='dimension' type='nominal' />
       <column caption='Query Accession' datatype='string' name='[query_accession]' role='dimension' type='nominal' />
+      <column caption='Query Database (Experiment Detected1)' datatype='string' name='[query_database (experiment_detected1)]' role='dimension' type='nominal' />
       <column caption='Query Database' datatype='string' name='[query_database]' role='dimension' type='nominal' />
+      <column caption='Query End (Experiment Detected1)' datatype='integer' name='[query_end (experiment_detected1)]' role='measure' type='quantitative' />
       <column caption='Query End' datatype='integer' name='[query_end]' role='measure' type='quantitative' />
+      <column caption='Query Start (Experiment Detected1)' datatype='integer' name='[query_start (experiment_detected1)]' role='measure' type='quantitative' />
       <column caption='Query Start' datatype='integer' name='[query_start]' role='measure' type='quantitative' />
+      <column caption='Query Type (Experiment Detected1)' datatype='string' name='[query_type (experiment_detected1)]' role='dimension' type='nominal' />
       <column caption='Query Type' datatype='string' name='[query_type]' role='dimension' type='nominal' />
       <column caption='Raw Count' datatype='real' name='[raw_count]' role='measure' type='quantitative' />
       <column caption='Sample' datatype='string' name='[sample]' role='dimension' type='nominal' />
@@ -941,11 +1282,17 @@
       <column caption='Sub Sub Step' datatype='integer' name='[sub_sub_step]' role='measure' type='quantitative' />
       <column caption='Sub Sub Step Option' datatype='integer' name='[sub_sub_step_option]' role='measure' type='quantitative' />
       <column caption='Sub Sub Step Option Component' datatype='integer' name='[sub_sub_step_option_component]' role='measure' type='quantitative' />
+      <column caption='Target Accession (Experiment Detected1)' datatype='string' name='[target_accession (experiment_detected1)]' role='dimension' type='nominal' />
       <column caption='Target Accession' datatype='string' name='[target_accession]' role='dimension' type='nominal' />
+      <column caption='Target Database (Experiment Detected1)' datatype='string' name='[target_database (experiment_detected1)]' role='dimension' type='nominal' />
       <column caption='Target Database' datatype='string' name='[target_database]' role='dimension' type='nominal' />
+      <column caption='Target End (Experiment Detected1)' datatype='integer' name='[target_end (experiment_detected1)]' role='measure' type='quantitative' />
       <column caption='Target End' datatype='integer' name='[target_end]' role='measure' type='quantitative' />
+      <column caption='Target Model (Experiment Detected1)' datatype='string' name='[target_model (experiment_detected1)]' role='dimension' type='nominal' />
       <column caption='Target Model' datatype='string' name='[target_model]' role='dimension' type='nominal' />
+      <column caption='Target Start (Experiment Detected1)' datatype='integer' name='[target_start (experiment_detected1)]' role='measure' type='quantitative' />
       <column caption='Target Start' datatype='integer' name='[target_start]' role='measure' type='quantitative' />
+      <column caption='Target Type (Experiment Detected1)' datatype='string' name='[target_type (experiment_detected1)]' role='dimension' type='nominal' />
       <column caption='Target Type' datatype='string' name='[target_type]' role='dimension' type='nominal' />
       <column caption='Timepoint' datatype='string' name='[timepoint]' role='dimension' type='nominal' />
       <column caption='Tpm' datatype='real' name='[tpm]' role='measure' type='quantitative' />
@@ -6468,6 +6815,11 @@
               <relation connection='bigquery.0bodklx1j6pnnh1ckg38c137tvnv' name='experiment_detected' table='[needle-489321.tangle_coral].[experiment_detected]' type='table' />
             </properties>
           </object>
+          <object caption='secondary_experiment_detected' id='experiment_detected_6FBC3CD448624040826B900EB977C0EB'>
+            <properties context=''>
+              <relation connection='bigquery.0bodklx1j6pnnh1ckg38c137tvnv' name='experiment_detected1' table='[needle-489321.tangle_coral].[experiment_detected]' type='table' />
+            </properties>
+          </object>
           <object caption='experiment_sequences' id='experiment_sequences_0E98331A9B804BC4BE2872F7A710B19D'>
             <properties context=''>
               <relation connection='bigquery.0bodklx1j6pnnh1ckg38c137tvnv' name='experiment_sequences' table='[needle-489321.tangle_coral].[experiment_sequences]' type='table' />
@@ -6488,6 +6840,11 @@
               <relation connection='bigquery.0bodklx1j6pnnh1ckg38c137tvnv' name='kegg_modules' table='[needle-489321.tangle_coral].[kegg_modules]' type='table' />
             </properties>
           </object>
+          <object caption='secondary_kegg_orthologs' id='kegg_orthologs_48195954B11049989DF79964E7F7DA2F'>
+            <properties context=''>
+              <relation connection='bigquery.0bodklx1j6pnnh1ckg38c137tvnv' name='kegg_orthologs1' table='[needle-489321.tangle_coral].[kegg_orthologs]' type='table' />
+            </properties>
+          </object>
           <object caption='kegg_orthologs' id='kegg_orthologs_5B13351B31684AA08243987D230699D5'>
             <properties context=''>
               <relation connection='bigquery.0bodklx1j6pnnh1ckg38c137tvnv' name='kegg_orthologs' table='[needle-489321.tangle_coral].[kegg_orthologs]' type='table' />
@@ -6496,6 +6853,11 @@
           <object caption='pfam_domains' id='pfam_domains_4D69F218A4464FA6AF65C98BD79F8AD1'>
             <properties context=''>
               <relation connection='bigquery.0bodklx1j6pnnh1ckg38c137tvnv' name='pfam_domains' table='[needle-489321.tangle_coral].[pfam_domains]' type='table' />
+            </properties>
+          </object>
+          <object caption='secondary_pfam_domains' id='pfam_domains_738BD4AC7078486F873A1D8F70D087B7'>
+            <properties context=''>
+              <relation connection='bigquery.0bodklx1j6pnnh1ckg38c137tvnv' name='pfam_domains1' table='[needle-489321.tangle_coral].[pfam_domains]' type='table' />
             </properties>
           </object>
           <object caption='pfam_go' id='pfam_go_E4CE2D54742F452BA5006E7EC75F6FC0'>
@@ -6536,6 +6898,20 @@
           <relationship>
             <expression op='AND'>
               <expression op='='>
+                <expression op='[sequence_database]' />
+                <expression op='[query_database (experiment_detected1)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[sequence_accession]' />
+                <expression op='[query_accession (experiment_detected1)]' />
+              </expression>
+            </expression>
+            <first-end-point object-id='experiment_sequences_0E98331A9B804BC4BE2872F7A710B19D' />
+            <second-end-point object-id='experiment_detected_6FBC3CD448624040826B900EB977C0EB' />
+          </relationship>
+          <relationship>
+            <expression op='AND'>
+              <expression op='='>
                 <expression op='[sequence_accession]' />
                 <expression op='[sequence_id]' />
               </expression>
@@ -6572,6 +6948,20 @@
           <relationship>
             <expression op='AND'>
               <expression op='='>
+                <expression op='[target_accession (experiment_detected1)]' />
+                <expression op='[ortholog_id (kegg_orthologs1)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[target_database (experiment_detected1)]' />
+                <expression op='&quot;KO&quot;' />
+              </expression>
+            </expression>
+            <first-end-point object-id='experiment_detected_6FBC3CD448624040826B900EB977C0EB' />
+            <second-end-point object-id='kegg_orthologs_48195954B11049989DF79964E7F7DA2F' />
+          </relationship>
+          <relationship>
+            <expression op='AND'>
+              <expression op='='>
                 <expression op='[target_database]' />
                 <expression op='&quot;KO&quot;' />
               </expression>
@@ -6596,6 +6986,20 @@
             </expression>
             <first-end-point object-id='experiment_detected_309AA47AD816430F81EC159300F71837' />
             <second-end-point object-id='pfam_domains_4D69F218A4464FA6AF65C98BD79F8AD1' />
+          </relationship>
+          <relationship>
+            <expression op='AND'>
+              <expression op='='>
+                <expression op='[target_database (experiment_detected1)]' />
+                <expression op='&quot;Pfam-A&quot;' />
+              </expression>
+              <expression op='='>
+                <expression op='LEFT([target_accession (experiment_detected1)],7)' />
+                <expression op='[pfam_accession (pfam_domains1)]' />
+              </expression>
+            </expression>
+            <first-end-point object-id='experiment_detected_6FBC3CD448624040826B900EB977C0EB' />
+            <second-end-point object-id='pfam_domains_738BD4AC7078486F873A1D8F70D087B7' />
           </relationship>
           <relationship>
             <expression op='AND'>
@@ -7220,9 +7624,6 @@
             <column caption='Target Accession no version' datatype='string' name='[Calculation_0424687539331073]' role='dimension' type='nominal'>
               <calculation class='tableau' formula='IF LEFT([target_accession], 2) == &quot;PF&quot;&#10;THEN LEFT([target_accession], 7)&#10;ELSE [target_accession]&#10;END' />
             </column>
-            <column caption='Max Ortholog ID Matching Sequence ID' datatype='string' name='[Calculation_0424687662379010]' role='dimension' type='nominal'>
-              <calculation class='tableau' formula='{FIXED [sequence_id (experiment_deseq2_tall)]: MAX([ortholog_id (kegg_orthologs)])}' />
-            </column>
             <column caption='-log(Padj)' datatype='real' name='[Calculation_3343751797477378]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='-Log([padj],10)' />
             </column>
@@ -7236,7 +7637,6 @@
             <column-instance column='[Calculation_3343751802658819]' derivation='Max' name='[max:Calculation_3343751802658819:qk]' pivot='key' type='quantitative' />
             <column caption='Max Cv' datatype='real' name='[max_cv]' role='measure' type='quantitative' />
             <column-instance column='[Calculation_0424687539331073]' derivation='None' name='[none:Calculation_0424687539331073:nk]' pivot='key' type='nominal' />
-            <column-instance column='[Calculation_0424687662379010]' derivation='None' name='[none:Calculation_0424687662379010:nk]' pivot='key' type='nominal' />
             <column-instance column='[Calculation_3343751797477378]' derivation='None' name='[none:Calculation_3343751797477378:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Calculation_3343751802658819]' derivation='None' name='[none:Calculation_3343751802658819:qk]' pivot='key' type='quantitative' />
             <column-instance column='[analysis_type]' derivation='None' name='[none:analysis_type:nk]' pivot='key' type='nominal' />
@@ -7247,7 +7647,6 @@
             <column-instance column='[sequence_id (experiment_deseq2_tall)]' derivation='None' name='[none:sequence_id (experiment_deseq2_tall):nk]' pivot='key' type='nominal' />
             <column-instance column='[target_accession]' derivation='None' name='[none:target_accession:nk]' pivot='key' type='nominal' />
             <column-instance column='[target_database]' derivation='None' name='[none:target_database:nk]' pivot='key' type='nominal' />
-            <column caption='Ortholog Id (Kegg Orthologs)' datatype='string' name='[ortholog_id (kegg_orthologs)]' role='dimension' type='nominal' />
             <column caption='Padj' datatype='real' name='[padj]' role='measure' type='quantitative' />
             <column caption='Pfam Description' datatype='string' name='[pfam_description]' role='dimension' type='nominal' />
             <column caption='Sequence Database' datatype='string' name='[sequence_database]' role='dimension' type='nominal' />
@@ -7421,7 +7820,6 @@
               <size column='[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:Calculation_3343751797477378:qk]' />
               <lod column='[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:sequence_id (experiment_deseq2_tall):nk]' />
               <lod column='[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:Calculation_3343751802658819:qk]' />
-              <lod column='[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:Calculation_0424687662379010:nk]' />
             </encodings>
             <style>
               <style-rule element='mark'>
@@ -7436,6 +7834,236 @@
         <cols>([federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:analysis_type:nk] * [federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:log2FoldChange:qk])</cols>
       </table>
       <simple-id uuid='{C9C759E9-F135-48E7-A7DB-BC3B7D9E9EB0}' />
+    </worksheet>
+    <worksheet name='MnSOD Related Pfam List'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='experiment_sequences+ (tangle_coral)' name='federated.13uu7ig1rqq1he1ao3tcl1lw0vwm' />
+          </datasources>
+          <datasource-dependencies datasource='federated.13uu7ig1rqq1he1ao3tcl1lw0vwm'>
+            <column caption='Target Accession no version' datatype='string' name='[Calculation_0424687539331073]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='IF LEFT([target_accession], 2) == &quot;PF&quot;&#10;THEN LEFT([target_accession], 7)&#10;ELSE [target_accession]&#10;END' />
+            </column>
+            <column caption='Secondary Ortholog Name' datatype='string' name='[Calculation_0424687670321159]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='{FIXED [target_accession (experiment_detected1)]: MAX([ortholog_name (kegg_orthologs1)])}' />
+            </column>
+            <column caption='-log(Padj)' datatype='real' name='[Calculation_3343751797477378]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='-Log([padj],10)' />
+            </column>
+            <column caption='Rank' datatype='real' name='[Calculation_3343751802658819]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='(ABS([log2FoldChange]) * [Calculation_3343751797477378]) / (1 + [max_cv])' />
+            </column>
+            <column caption='Secondary Pfam Description' datatype='string' name='[Secondary Ortholog Name (copy)_0424687670538248]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='{FIXED [target_accession (experiment_detected1)]: MAX([pfam_description (pfam_domains1)])}' />
+            </column>
+            <column caption='Analysis Type' datatype='string' name='[analysis_type]' role='dimension' type='nominal' />
+            <column-instance column='[Calculation_3343751797477378]' derivation='Avg' name='[avg:Calculation_3343751797477378:qk]' pivot='key' type='quantitative' />
+            <column caption='Genome Accession' datatype='string' name='[genome_accession]' role='dimension' type='nominal' />
+            <column datatype='real' name='[log2FoldChange]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_3343751802658819]' derivation='Max' name='[max:Calculation_3343751802658819:qk]' pivot='key' type='quantitative' />
+            <column caption='Max Cv' datatype='real' name='[max_cv]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_0424687539331073]' derivation='None' name='[none:Calculation_0424687539331073:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Calculation_0424687670321159]' derivation='None' name='[none:Calculation_0424687670321159:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Calculation_3343751797477378]' derivation='None' name='[none:Calculation_3343751797477378:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Calculation_3343751802658819]' derivation='None' name='[none:Calculation_3343751802658819:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Secondary Ortholog Name (copy)_0424687670538248]' derivation='None' name='[none:Secondary Ortholog Name (copy)_0424687670538248:nk]' pivot='key' type='nominal' />
+            <column-instance column='[analysis_type]' derivation='None' name='[none:analysis_type:nk]' pivot='key' type='nominal' />
+            <column-instance column='[genome_accession]' derivation='None' name='[none:genome_accession:nk]' pivot='key' type='nominal' />
+            <column-instance column='[log2FoldChange]' derivation='None' name='[none:log2FoldChange:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[pfam_description]' derivation='None' name='[none:pfam_description:nk]' pivot='key' type='nominal' />
+            <column-instance column='[sequence_database]' derivation='None' name='[none:sequence_database:nk]' pivot='key' type='nominal' />
+            <column-instance column='[sequence_id (experiment_deseq2_tall)]' derivation='None' name='[none:sequence_id (experiment_deseq2_tall):nk]' pivot='key' type='nominal' />
+            <column-instance column='[target_accession (experiment_detected1)]' derivation='None' name='[none:target_accession (experiment_detected1):nk]' pivot='key' type='nominal' />
+            <column-instance column='[target_accession]' derivation='None' name='[none:target_accession:nk]' pivot='key' type='nominal' />
+            <column-instance column='[target_database (experiment_detected1)]' derivation='None' name='[none:target_database (experiment_detected1):nk]' pivot='key' type='nominal' />
+            <column-instance column='[target_database]' derivation='None' name='[none:target_database:nk]' pivot='key' type='nominal' />
+            <column caption='Ortholog Name (Kegg Orthologs1)' datatype='string' name='[ortholog_name (kegg_orthologs1)]' role='dimension' type='nominal' />
+            <column caption='Padj' datatype='real' name='[padj]' role='measure' type='quantitative' />
+            <column caption='Pfam Description (Pfam Domains1)' datatype='string' name='[pfam_description (pfam_domains1)]' role='dimension' type='nominal' />
+            <column caption='Pfam Description' datatype='string' name='[pfam_description]' role='dimension' type='nominal' />
+            <column caption='Sequence Database' datatype='string' name='[sequence_database]' role='dimension' type='nominal' />
+            <column caption='Sequence Id (Experiment Deseq2 Tall)' datatype='string' name='[sequence_id (experiment_deseq2_tall)]' role='dimension' type='nominal' />
+            <column caption='Target Accession (Experiment Detected1)' datatype='string' name='[target_accession (experiment_detected1)]' role='dimension' type='nominal' />
+            <column caption='Target Accession' datatype='string' name='[target_accession]' role='dimension' type='nominal' />
+            <column caption='Target Database (Experiment Detected1)' datatype='string' name='[target_database (experiment_detected1)]' role='dimension' type='nominal' />
+            <column caption='Target Database' datatype='string' name='[target_database]' role='dimension' type='nominal' />
+          </datasource-dependencies>
+          <filter class='quantitative' column='[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[avg:Calculation_3343751797477378:qk]' included-values='in-range'>
+            <min>1.0</min>
+          </filter>
+          <filter class='categorical' column='[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:Calculation_0424687539331073:nk]'>
+            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-manual-selection='true' user:ui-manual-selection-all-when-empty='true' user:ui-marker='enumerate'>
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K00432&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K00510&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K00522&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K00799&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K01412&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K02580&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K03156&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K03175&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K03685&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K04043&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K04077&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K04078&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K04519&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K04564&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K04730&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K07202&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K07243&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K08703&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K09408&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K09539&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K11187&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K11411&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K11413&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K11592&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K11830&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K13299&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K13625&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K14714&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K15113&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K17450&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K17496&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K17732&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K17768&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K17769&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K17770&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K17794&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K17795&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K17804&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K18419&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K20011&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K21398&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K22068&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K23790&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;K28407&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00012&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00023&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00035&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00043&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00069&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00076&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00081&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00097&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00104&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00105&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00118&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00153&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00166&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00210&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00226&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00229&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00250&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00255&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00270&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00330&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00340&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00505&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00515&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00531&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00554&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00578&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00636&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00675&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF00694&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF01126&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF01459&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF01566&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF01592&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF02064&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF02146&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF02170&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF02171&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF02176&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF02394&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF02466&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF02535&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF02777&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF02798&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF03031&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF03368&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF03656&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF04280&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF04281&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF05193&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF08534&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF08699&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF09011&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF10417&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF12796&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF13181&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF13923&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF14622&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF16179&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF16486&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF16487&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF16488&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF16675&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF16676&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF18048&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF20930&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF20932&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF21355&quot;' />
+              <groupfilter function='member' level='[none:Calculation_0424687539331073:nk]' member='&quot;PF26050&quot;' />
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:analysis_type:nk]'>
+            <groupfilter function='member' level='[none:analysis_type:nk]' member='&quot;deseq2_GCA_947184155.2_timepoint_1_cohort_base_SS8_test_WT1&quot;' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <computed-sort column='[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:target_accession:nk]' direction='DESC' using='[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[max:Calculation_3343751802658819:qk]' />
+          <filter class='categorical' column='[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:target_database:nk]'>
+            <groupfilter function='union' user:ui-domain='database' user:ui-enumeration='inclusive' user:ui-marker='enumerate'>
+              <groupfilter function='member' level='[none:target_database:nk]' member='&quot;KO&quot;' />
+              <groupfilter function='member' level='[none:target_database:nk]' member='&quot;Pfam-A&quot;' />
+            </groupfilter>
+          </filter>
+          <shelf-sorts>
+            <shelf-sort-v2 dimension-to-sort='[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:Calculation_3343751802658819:ok]' direction='DESC' measure-to-sort-by='[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:Calculation_3343751802658819:ok]' shelf='rows' />
+          </shelf-sorts>
+          <slices>
+            <column>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:analysis_type:nk]</column>
+            <column>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:sequence_database:nk]</column>
+            <column>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:target_database:nk]</column>
+            <column>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:Calculation_0424687539331073:nk]</column>
+            <column>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[avg:Calculation_3343751797477378:qk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='header'>
+            <format attr='width' field='[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:analysis_type:nk]' value='176' />
+            <format attr='height' field='[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:analysis_type:nk]' value='96' />
+            <format attr='wrap' data-class='subtotal' field='[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:analysis_type:nk]' value='on' />
+            <format attr='text-align' data-class='total' field='[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:analysis_type:nk]' value='right' />
+            <format attr='text-orientation' data-class='total' field='[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:analysis_type:nk]' value='0' />
+            <format attr='text-align' data-class='subtotal' field='[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:analysis_type:nk]' value='right' />
+            <format attr='text-orientation' data-class='subtotal' field='[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:analysis_type:nk]' value='-90' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='text-orientation' field='[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:analysis_type:nk]' value='0' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <mark-sizing mark-sizing-setting='marks-scaling-off' />
+            <style>
+              <style-rule element='mark'>
+                <format attr='size' value='0.75762432813644409' />
+                <format attr='mark-labels-cull' value='true' />
+                <format attr='mark-labels-show' value='false' />
+              </style-rule>
+            </style>
+          </pane>
+        </panes>
+        <rows>([federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:genome_accession:nk] / ([federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:analysis_type:nk] / ([federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:Calculation_3343751802658819:ok] / ([federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:sequence_id (experiment_deseq2_tall):nk] / ([federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:target_accession:nk] / ([federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:pfam_description:nk] / ([federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:log2FoldChange:ok] / ([federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:Calculation_3343751797477378:ok] / ([federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:target_database (experiment_detected1):nk] / ([federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:target_accession (experiment_detected1):nk] / ([federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:Calculation_0424687670321159:nk] / [federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:Secondary Ortholog Name (copy)_0424687670538248:nk])))))))))))</rows>
+        <cols />
+      </table>
+      <simple-id uuid='{02DAD71F-8A56-4C4A-B30D-ABB031BACE65}' />
     </worksheet>
     <worksheet name='Pfam Ranking'>
       <table>
@@ -8023,7 +8651,7 @@
       </viewpoint>
       <simple-id uuid='{1A136B93-76CC-4E25-A96E-A1C393C48AD3}' />
     </window>
-    <window class='worksheet' maximized='true' name='MnSOD Related Pfam'>
+    <window class='worksheet' name='MnSOD Related Pfam'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -8068,6 +8696,60 @@
         </highlight>
       </viewpoint>
       <simple-id uuid='{7F3D1E16-C54B-4E95-86A9-26089FB7E3EA}' />
+    </window>
+    <window class='worksheet' maximized='true' name='MnSOD Related Pfam List'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card mode='dropdown' param='[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:analysis_type:nk]' type='filter' values='relevant' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <zoom type='fit-width' />
+        <highlight>
+          <color-one-way>
+            <field>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:Calculation_0424687539331073:nk]</field>
+            <field>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:Calculation_0424687662379010:nk]</field>
+            <field>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:Calculation_0424687670321159:nk]</field>
+            <field>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:Calculation_3343751797477378:qk]</field>
+            <field>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:Calculation_3343751802658819:ok]</field>
+            <field>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:Calculation_3343751802658819:qk]</field>
+            <field>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:Secondary Ortholog Name (copy)_0424687670538248:nk]</field>
+            <field>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:analysis_type:nk]</field>
+            <field>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:genome_accession:nk]</field>
+            <field>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:log2FoldChange:qk]</field>
+            <field>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:ortholog_name (kegg_orthologs1):nk]</field>
+            <field>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:ortholog_name:nk]</field>
+            <field>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:padj:qk]</field>
+            <field>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:pfam_description:nk]</field>
+            <field>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:sequence_id (experiment_deseq2_tall):nk]</field>
+            <field>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:target_accession (experiment_detected1):nk]</field>
+            <field>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:target_accession:nk]</field>
+            <field>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:target_database (experiment_detected1):nk]</field>
+            <field>[federated.13uu7ig1rqq1he1ao3tcl1lw0vwm].[none:target_database:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{99E0AF68-478E-4BA5-90B2-B4253664035B}' />
     </window>
     <window class='worksheet' name='MnSOD Related KO'>
       <cards>
@@ -14444,6 +15126,386 @@
       q0OVgZ7OWZSBPn36NCtBozoAvObEYjHi8bjIyPnLIP3uxGAwiJe3ZwF1AHh1qAPA6ZzFAcDj
       8VBZWSk+v9UhoDfJCXw0G6iK6gR+lahO4NM5i07gUCiUlT1XnQGovLGoM4BXhzoDOJ2zOAM4
       GgJSVUBvEclk8oXMVSoqKm8mmV4kgP8PCIxLNM6zEisAAAAASUVORK5CYII=
+    </thumbnail>
+    <thumbnail height='384' name='MnSOD Related Pfam List' width='384'>
+      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
+      5kilUpSVlTE0NJQ/BysrK/h8PqLRKAcOHGBychKr1Upvby9bW1tYrVZKSkpYX19/6m8xkUiw
+      s7PDq6++SklJCWtra2QyGerq6lhcXMx3bIODg1RXV5PJZPJTWEtLSzQ0NLC1tQV8fi+goaGB
+      xcVF6urqMBgMLC0t0djYiM1mw+PxUFBQQFVVFaOjo0SjUQoKCjhw4ED+iqekpITFxUVMJhM2
+      m42KigqGhoYoLS3Nz69/k6RSKW7evInNZiMSiZBKpUin0xgMBsbGxohGo1RWVv7up4A0TSOd
+      TmO1Wh/7ek8kEuHTTz/Nv3799dcpKCigsLDwS99M3ZvLczgcv3OEk81mUVUVi8WSTzar1fql
+      9wmfH1sqlcJqteZveOZyufyoJ51O52/uZTKZ/OgsnU7j8XgoKip6qNP3er1EIhEAHA4Hhw8f
+      fmibe/vMZrOP3MwKBoP5qReTycTRo0fzN/i+7KhPVVUymcwj5+xx9kZ+e6OnVCqFxWJ57D5T
+      qRQTExP5EWFzczMlJSVfqrYH7Y0wn/X4vni+0uk0JpMpH6bpdPqptT/pswe38ySqquYHA38I
+      mUwGVVXz5yydTqMoCmazOX/cf4ibm3u+uI9MJoOiKJhMpkfa/XHrmc3mh9omm82Sy+We6Tv4
+      ZWUyGe7evcuxY8cemu54VqqqoqoqJpOJW7du8fLLL+d/j3tTPEajMX9ce9+LL/t9/aZ48Lsv
+      j4F+RVKpFIqiPHbEKIT4w9kb/X/xivN/Y3d39xs7rfOHIAEghBA6Jf8XkBBC6JQEgBBC6JQE
+      gBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQE
+      gBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQE
+      gBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQE
+      gBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQE
+      gBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQEgBBC6JQE
+      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
+      AAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5J
+      AAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5J
+      AAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5J
+      AAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5J
+      AAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5JAAghhE5J
+      AAghhE5JAAghhE5JAAghhE6ZnncBQoivh6qqZDKZ512G+AaRABBCJ7LZLDs7O8+7DPENomia
+      pj3vIoQQ4v+SVCqFxWJBUZQ/yPaTySRWq/X33r7x/ffff/+rKUkI8cdkbGwMj8dDKpXC4XDQ
+      1dVFIBDAbrdjMBgYHh6mpqaGVCrF4OAgHo+HyspKxsfH8fl8+Hw+KisrGR0dxePxUFVVhaIo
+      DA8PMz8/T1VVFSbT55MMkUgEn89HRUUFAJubm8zOzlJVVfXE+jRNo7e3l/Ly8vx29vh8Psxm
+      MxaL5Ynrb2xsEI/HsdvtX0FrPSyRSGAwGDAYHr2Nmkgk6OnpobCwkMHBQdbW1qiqqnrssk+y
+      uLhIQUEBRqPxsZ/fv38fs9lMYWHhYz/XNI3Z2VnGx8cxmUw4nU4AYrEY3d3dpNNpSkpK5Caw
+      EHq1urrKqVOnWFhYIBwOA3D69GlcLhdTU1MsLS0Bn3fWra2ttLS0MD4+Tnt7OydPniQajRII
+      BLDZbBw+fJi+vj7Gx8cpKyvjwoUL+U47k8ngdrvz21NVlb6+PlZWVp5a387ODqurq8zNzaGq
+      KsvLy4yMjLC1tcXW1hbpdJqNjQ2CwSCZTIZsNks0GiUSieD3+wGwWCyEQiFmZ2fx+Xz5bW9s
+      bLC8vEw8Hsfn8zE3N4emaSwuLjIyMsLu7i6qqjI7O4vf70fTNDweD1NTU2SzWW7dusXw8DDb
+      29ssLCzk3wcYHR3l+PHj2Gw2Lly4gM1myx97LpdjdnaWQCBAKpVidHSU9fV1UqkUbrebiYkJ
+      stksNpsNg8HAxsYGo6OjJJNJ4vE4o6OjhMNhTp48ycjIyBPbTtM0jEYjFy9eZGxsLP9+d3c3
+      Z86cwev1srW1JQEghF5ls1lCoRDxeByz2czq6iozMzMkEglOnTqFy+UCoLKyEqPRyMDAAG1t
+      bVitVlZXVzl48CB2u53V1VU2NjaIRqMsLS3h8/m4ceMGiUQCALPZzIULFzCbzQBMTEzQ1taW
+      f/0kc3NzvPLKK6ytrZHJZOjr62P//v0MDg4Cn3fiw8PDpFIpxsbG8Hq9RCIR/ud//oetrS2i
+      0SihUIiBgQEKCwuZmppCVVUAPv30U1ZWVggGg4TDYRKJBD6fj4GBAWpqarh79y4zMzNomsby
+      8jLhcBij0UgikWBsbIyioiL27duXv+JxOp35ANje3qakpASHw0FnZyfj4+PU1NQAMDg4iMlk
+      wmQy0dnZSVVVFUNDQ6yvr7O8vIzdbmd4eBiPx0M6naa3t5eamhq6u7vp6enJ72cvXJ80g28w
+      GGhqaqK/v5+6urqHPnM4HFRXV5NOpyUAhNCrbDZLIpHg1VdfpaCggNLSUmpra7FarQ8tt7W1
+      xa1bt3jzzTdxOp1omsb09DSHDx+mqqqK48ePYzKZcDgcOBwOLl26xJkzZ5ibm1JfbFkAACAA
+      SURBVHtkn6qq4na7WVxcxOPxEAwGH1ubpmn4fD7Gx8dZXV0lmUxSVVVFRUUFBoMBTdPo7Oyk
+      paWF2tpa1tfXWVxcpLGxkYaGBo4fP56fPikoKKC2tpaioqJ8h1lZWcnZs2fZ3t4mHA6zvb2N
+      yWSitLSU8vJyzGYz4XCYlZUVcrkcsVgsHyDpdJrCwsJ8J9/W1sbIyMgjN9gNBgOvvvoqJ06c
+      wOPxALC7u0tDQwOVlZVomkZFRQX79u0jmUxSWVlJfX09sVgsf36CwSBzc3M4nU7OnDnD4uIi
+      8/PzACiK8sQA0DSNzz77jIaGBo4ePfrQ+6qqEovFsFqt8hSQEHpVVlZGa2srAPF4nLKyMsrK
+      ytA0jYGBAVZWVujq6sJoNGIymejp6aGlpQWLxUJtbS1Go5F0Os3ExATxeJxz584BcP36dRRF
+      4cUXX6Svr4+jR48yODjIysoK4+PjfP/73wfAaDTm7wl8USKRoKGhgbNnzxIIBFheXsZmswGf
+      d+hWq5XvfOc73L9/n9LSUurr61ldXcVoNObn/E0mE6qq5tfb+xvAbrejKApNTU0sLi6iqipm
+      s5lAIMCtW7eoqKjIX23szcWnUik2NzcpLS2lqqqKzs5OTpw4QTAYxGg0ksvlALBarcTjcTwe
+      D5FIhHg8ztmzZwFobm7m5s2blJeXU1lZye3bt0mlUtTW1tLZ2Ynf7+fMmTMEAgEsFgv19fVk
+      s1kKCwtZXl5GURSy2SyqqpLL5Z54XyGVSrG+vk5BQQHr6+uUlZVht9tpbGzk+vXr+WXkKSAh
+      xO8lm82iKEp+xL3XET7pBuZXLZVKcevWLV588cX8tNWXsTcqNhqN3L59m5dffjlf+96UkcFg
+      IJvNYjQa80/e7L3eW39vWmZzc5OJiQleeumlfCf9YEetqiqKoqAoCplMBpPJlJ+KOnz48EPL
+      7m1777296Z+pqal8h/5lPXgcEgBCiD9quVyOVCr1lTztk0qlHpkC+9+IRCKUlpY+82OauVwO
+      TdMeedrpScLhMGVlZb/3Y6ASAEIIoVNyE1gIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRK
+      AkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRK
+      AkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRK
+      AkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRK
+      AkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRK
+      AkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXRKAkAIIXTK9LwLEP93
+      ZTIZNjY2nncZQognUDRN0553EeL/Jk3TyOVyz7sMIcQTSAAIIf7oqKqKoigoivK8S/mjJlNA
+      4ms1MTFBJBKhra2N6elpMpkMDoeDixcvAuB2u/H5fJSVldHS0kJ3dze5XI4XXniBRCLB8vIy
+      yWSSd955h56eHnZ3d2lrayOZTLK+vk40GuXcuXP4fD7i8TgFBQW0t7czNDRENpvl+PHjhMNh
+      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
+      cg4cOPDQtJLRaMz/2VNVVZWfGkomkxQXF1NTU5MfTOxJJBLU1NSQyWQIBAL574nBYMiH0jdR
+      QUEBbW1tjwwKMpkMuVyOW7ducfr0aZkCEl8Pg8HAgQMHqK+vx+FwUFtbSyQS4eDBgyiKgtfr
+      xW63U1xczMDAAJWVldhsNkKhEMvLy+RyOVKpFKFQCL/fz/79+8nlcoyOjnLmzBksFku+4wTw
+      +XwEg0FWV1ex2+309vayuLjImTNnWFxcZGxsjIMHD1JWVsb6+jqHDx9+5h9zdXU1PT09+P1+
+      CgsLOXPmTL6esrIypqamWFpaoqCggPv375NIJFAUhdXVVYLBIMFgkIMHD9La2orL5cpPhYXD
+      Yfx+P06nk8HBQXw+HwcOHMBqtdLb28vKygoXLlxgdHSUnZ2dfIe3d+9gdnaWra0tbDYbxcXF
+      v/M4stksFRUVKIqS7/RKSkryV1UDAwO88MILHDx4kJGREba3tzl16hTFxcX09PTQ0NBAYWEh
+      q6urrKysEIvF2N3dzU8bHT9+nNnZWRwOB93d3fj9fo4ePYrRaKSwsJDS0tIn1pZKpXA4HBw6
+      dIiamhp2dnZwOByUlJSQzWZxuVy0tLSQTCax2Wz5cKitrSWbzVJWVoaqqlitVsxmM2VlZWSz
+      2fzx7S3jcrkIBAJEo1EqKysZGhpiY2ODo0eP0tDQgMfjYXt7m4aGBhYXF9nZ2aG6upra2lr6
+      +vq+sVNABoMBq9VKMpmkt7eXRCJBPB4nl8uRy+UIh8MEg0F5CkgI8cdt7ybz5cuXsVgsv9e2
+      HryK1AMJACGE0Cm5ByCEEDolASCEEDolASCEEDolASCEEDolASCEEDolASCEEDolASCEEDol
+      ASCEEDolASCEEDolASCEEDolASCEEDolASCEEDolASCEEDolASCEEDolASCEEDolASCEEDol
+      ASCEEDolASCEEDolASCEEDolASCEEDolASCEEDolASCEEDolASCEEDolASCEEDolASCEEDol
+      ASCEEDolASCEEDolASCEEDolASCEEDolASCEEDolASCEEDolASCEEDolASCEEDolASCEEDol
+      ASCEEDolASCEEDolASCEEDolASCEEDolASCEEDolASCEEDolASCEEDolASCEEDolASCEEDol
+      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
+      /BRQNBplZ2eH+vr6Z1q+t7eX9vZ2ioqKfp9SJQCEEOKrttet/qEeA9U07SvZtgSAEELolNwE
+      FkIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIA
+      EEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIA
+      EEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIA
+      EEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIA
+      EEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIAEEIInZIA
+      EEIInZIAEEIInZIAEEIInZIAEEIInTI97wLE/12ZTIZQKPS8yxBCPIGiaZr2vIsQQgjx9ZMp
+      IPG10jQNVVUf+feDn2ezWfbGJY97/eD6X/zsi+s9bl97/1ZVNf/vXC7HlxkL7a3/uG0/uJ0v
+      HuPePh+sYe+9L9b74Osv7u9x9X5x3896DF+sZ+/1g237xf0/6Rw9qbYH23hvmS+e+6fV92U9
+      rS3S6fQzLfdl9/fgdr/Men/oMfjjzsne+ZYpIPG1GhoaYmNjg8uXL3Pnzh0MBgNXrlzJf37v
+      3j1UVSWbzXLlyhWuX7+OzWajra2N/fv3Mz09jdvt5jvf+Q69vb2kUikqKyupqKjgxo0bnD17
+      lqamJkZHR4lEIpSWltLe3s7t27exWCy89tpr+c/MZjMnT57kzp07AJw+fZr9+/f/zmNYXFxk
+      YmICk8nE66+/jsfj4f79+/zZn/0ZGxsbhEIhDh06RCqVoqOjA4fDwaVLl1hcXOTGjRv84Ac/
+      IJFIMDExQS6XI5fLUVtby/r6OltbW7z11ltMTEywvb1NeXk5TU1N/Pa3v0VRFK5cucL9+/fJ
+      ZDKkUineeecdADY3N7l58ybt7e0cOnTomc7FJ598QmFhIYlEgkuXLvGb3/yG/fv3097eztzc
+      HPF4nKKiIg4fPkxHRwcA165dw+12EwwGsVgsvPrqq9y+fRtFUThw4ADxeJzV1VWSySRvv/02
+      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
+      Gxbge07PzekAAAAASUVORK5CYII=
     </thumbnail>
     <thumbnail height='384' name='Pfam Ranking' width='384'>
       iVBORw0KGgoAAAANSUhEUgAAAYAAAAGACAYAAACkx7W/AAAACXBIWXMAAA7DAAAOwwHHb6hk
