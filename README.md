@@ -107,6 +107,14 @@ tangle-py tangle/scripts/world/pfam-download.sh
 HMM profiles for KEGG and Pfam should be downloaded to directories specified by
 matching environment variables, according to `heap/README.md`.
 
+Download `uniprot_sprot.dat.gz` from UniProt FTP, then run
+
+```
+tangle-py tangle/scripts/world/parse-uniprot-dat.py uniprot_sprot.dat.gz
+```
+
+to generate uniprot TSVs, there are two.
+
 
 ## RNAseq Workflows
 
@@ -350,16 +358,36 @@ Load assets using
 tangle-py tangle/scripts/bq-load-assets.py --dataset-name tangle_coral
 ```
 
-Load UniProt to Pfam mappings
+Load UniProt to Pfam and GO mappings
 
 ```
 tangle-py tangle/scripts/bq-schema.py \
   --check $TANGLE_WORLD/tangle/uniprot_pfam.tsv.gz \
   tangle.detected
 
+tangle-py tangle/scripts/bq-schema.py \
+  --check $TANGLE_WORLD/tangle/uniprot_go.tsv.gz \
+  --table-name UniPGoTable \
+  tangle.uniprot
+
+tangle-py tangle/scripts/bq-schema.py \
+  --check $TANGLE_WORLD/tangle/uniprot.tsv.gz \
+  --table-name UniPTable \
+  tangle.uniprot
+
 # make sure the above runs successfully
+
 tangle-py tangle/scripts/bq-schema.py \
   tangle.detected > tangle_detected.schema.json
+
+tangle-py tangle/scripts/bq-schema.py \
+  --table-name UniPGoTable \
+  tangle.uniprot > tangle_uniprot_go.schema.json
+
+tangle-py tangle/scripts/bq-schema.py \
+  --table-name UniPTable \
+  tangle.uniprot > tangle_uniprot.schema.json
+
 bq load \
   --source_format=CSV \
   --field_delimiter='\t' \
@@ -367,7 +395,26 @@ bq load \
   tangle_coral.global_detected \
   $TANGLE_WORLD/tangle/uniprot_pfam.tsv.gz \
   ./tangle_detected.schema.json
+
+bq load \
+  --source_format=CSV \
+  --field_delimiter='\t' \
+  --skip_leading_rows=1 \
+  tangle_coral.uniprot_go \
+  $TANGLE_WORLD/tangle/uniprot_go.tsv.gz \
+  ./tangle_uniprot_go.schema.json
+
+bq load \
+  --source_format=CSV \
+  --field_delimiter='\t' \
+  --skip_leading_rows=1 \
+  tangle_coral.uniprot \
+  $TANGLE_WORLD/tangle/uniprot.tsv.gz \
+  ./tangle_uniprot.schema.json
+
 rm ./tangle_detected.schema.json
+rm ./tangle_uniprot_go.schema.json
+rm ./tangle_uniprot.schema.json
 ```
 
 ### Genomics: KO and Pfam mappings
