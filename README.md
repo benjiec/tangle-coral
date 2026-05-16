@@ -100,8 +100,15 @@ Files from `coral/data/` should be copied/mirroed to
 ```
 tangle-py tangle/scripts/area/genome-list.py | tangle-py tangle/scripts/world/ncbi-download.py -
 tangle-py tangle/scripts/area/genome-list.py | tangle-py tangle/scripts/world/ncbi-genome-metadata.py -
-tangle-py tangle/scripts/world/kegg-download.sh
-tangle-py tangle/scripts/world/pfam-download.sh
+tangle/scripts/world/kegg-download.py
+tangle/scripts/world/pfam-download.sh
+tangle/scripts/world/odb-download.sh
+```
+
+Parse the OrthoDB files into a TSV file that joins UniProt IDs to OrthoDB groups.
+
+```
+tangle-py tangle/scripts/world/parse-odb.py
 ```
 
 HMM profiles for KEGG and Pfam should be downloaded to directories specified by
