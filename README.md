@@ -180,17 +180,6 @@ tangle-py tangle/scripts/demux-outputs.py \
   runs/20260402_a611f70c/output_*.tsv
 ```
 
-Use the following script to cleanup each demuxed tsv and protein fasta file
-further, to remove entries contained in other entries at the same locus. This
-process takes about 2-4 hours.
-
-```
-# can run concurrently on different inputs
-needle-py needle/scripts/remove-contained.py \
-  --forget-original \
-  `tangle-py tangle/scripts/defaults.py -m area_genomics_dir`/*
-```
-
 Similar but not the same proteins at a locus are not being consolidated prior
 to classification; while they increase classification compute time, their
 presence may result in a more closely matched sequence assigned to a profile
