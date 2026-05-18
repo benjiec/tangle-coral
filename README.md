@@ -413,6 +413,30 @@ rm ./tangle_uniprot_go.schema.json
 rm ./tangle_uniprot.schema.json
 ```
 
+Load OrthoDB groups and join table with UniProt accessions
+
+```
+tangle-py tangle/scripts/bq-schema.py \
+  --check $TANGLE_WORLD/tangle/odb_uniprot_groups.tsv \
+  tangle.orthodb
+
+# make sure the above runs successfully
+
+tangle-py tangle/scripts/bq-schema.py \
+  tangle.orthodb > tangle_odb_uniprot_groups.schema.json
+
+bq load \
+  --source_format=CSV \
+  --field_delimiter='\t' \
+  --skip_leading_rows=1 \
+  tangle_coral.orthodb_uniprot_groups \
+  $TANGLE_WORLD/tangle/odb_uniprot_groups.tsv \
+  ./tangle_odb_uniprot_groups.schema.json
+
+rm ./tangle_odb_uniprot_groups.schema.json
+```
+
+
 ### Genomics: KO and Pfam mappings
 
 Load sequence KO assignments
