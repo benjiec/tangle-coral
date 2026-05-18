@@ -417,7 +417,7 @@ Load OrthoDB groups and join table with UniProt accessions
 
 ```
 tangle-py tangle/scripts/bq-schema.py \
-  --check $TANGLE_WORLD/tangle/odb_uniprot_groups.tsv \
+  --check $TANGLE_WORLD/tangle/odb_uniprot_groups.tsv.gz \
   tangle.orthodb
 
 # make sure the above runs successfully
@@ -430,7 +430,7 @@ bq load \
   --field_delimiter='\t' \
   --skip_leading_rows=1 \
   tangle_coral.orthodb_uniprot_groups \
-  $TANGLE_WORLD/tangle/odb_uniprot_groups.tsv \
+  $TANGLE_WORLD/tangle/odb_uniprot_groups.tsv.gz \
   ./tangle_odb_uniprot_groups.schema.json
 
 rm ./tangle_odb_uniprot_groups.schema.json
