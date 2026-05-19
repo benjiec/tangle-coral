@@ -89,3 +89,23 @@ coral-py coral/scripts/analysis/des2-merge.py \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`/proteins.faa \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`/deseq2_*.tsv
 ```
+
+## Select Transcripts for Further Processing
+
+Use the following to get a list of top transcripts. The last line specifies a
+file of past results so we don't re-classify sequence IDs already classified.
+
+```
+coral-py coral/scripts/analysis/top-sequences.py \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/des2_tall.tsv \
+  --l2fc-threshold 1 --padj-threshold 0.05 \
+  --results-fn `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_fs.tsv
+```
+
+And to do the above, then use results to filter a fasta, add
+
+```
+  | tangle-py tangle/scripts/fasta-emit.py \
+      `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/proteins.faa.gz \
+      --prefix-with-underscore -
+```
