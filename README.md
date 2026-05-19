@@ -20,6 +20,9 @@ The following tables are loaded into BigQuery.
     * `kegg_module_definitions`: step by step specification of modules, join with `ortholog_id` and `module_id`
     * `pfam_domains`: names of Pfam families, join with `pfam_accession` and use `pfam_description`
     * `pfam_go`: mapping of Pfam families to GO terms, join with `pfam_accession` and use `go_description`
+    * `uniprot`: mapping of UniProt accession to function description, join with `uniprot_accession`
+    * `uniprot_go`: mapping of UniProt accession to GO terms, join with `uniprot_accession`
+    * `orthodb_uniprot_groups`: mapping of UniProt accessions to OrthoDB groups, join with `uniprot_accession`
 
   * Genomic data
     * `genomes`: list of genome accessions and taxonomy, join with `Genome Accession`
@@ -29,10 +32,10 @@ The following tables are loaded into BigQuery.
       * warning: there may be sequences in this table that do not appear in the `genomic_sequences` table
       * `target_database` is "KO": maps protein sequences (`query_accession` and `query_database`) to KEGG orthologs (`target_accession`)
       * `target_database` is "Pfam-A": maps protein sequences (`query_accession` and `query_database`) to Pfam families (`LEFT(target_accession,7)`)
+      * `target_database` is "afdb_swissprot": maps protein sequences (`query_accession` and `query_database`) to SwissProt (`target_accession`)
       * other intended uses
         * exons mapping: `query_database` and `target_database` are genome accessions, `query_database` and `query_accession` identify a contig,
           and `target_database` and `target_accession` identify a protein sequence.
-        * structural detection: `target_database` is `afdb_swissprot`, `query_database` and `query_accession` identify a protein sequence
 
    * Experiment data
      * `experiment_sequences`: list of sequences, join with `sequence_id`, filter by `sequence_database` as experiment
@@ -143,36 +146,23 @@ protein sequences are classified against KO HMM profiles.
 
 ### Needle: protein detection
 
-Use the following command to generate a pooled .fna file, containing contigs
-from all genomes requiring protein detection.
+Use the following commands to a) generate a pooled .fna file, containing
+contigs from all genomes requiring protein detection, and b) setup a Google
+Cloud job.
 
 ```
 rm pooled.fna
 tangle-py tangle/scripts/area/genome-list.py -d | \
   tangle-py tangle/scripts/defaults.py -f -m ncbi_genome_fna - | \
   xargs venv-tangle/bin/python3 tangle/scripts/pool-contigs.py pooled.fna
-```
 
-Then use that pooled file to setup a Google Cloud job
-
-```
 needle-py needle/gcloud/hmm-detect/setup.py \
   --genome-accession _ --run-dir-parent runs pooled.fna
 rm pooled.fna
 ```
 
-
-### Heap: classification
-
-#### Preparing data for classification
-
-Previous step uses HMM profiles to detect amino acid sequences and piece
-sequences together into potential proteins. Many HMM profiles share the same or
-very similar domains, thus resulting in multiple detected proteins with slight
-differences in their sequences.
-
-Detection was run on many genomes. The following script demultiplex the results
-and creates the appropriate detection tsv and protein fastas for each genome.
+After run completes, use the following to demux the outputs by genome accession
+and create .faa and .tsv files for each detected genome.
 
 IMPORTANT: this script appends to each genome's TSV and fasta files, so REMOVE
 PREVIOUS DATA if re-running.
@@ -184,19 +174,16 @@ tangle-py tangle/scripts/demux-outputs.py \
   --set-batch \
   --pooled-target-fasta-suffix .faa \
   --demuxed-parent-dir `tangle-py tangle/scripts/defaults.py -m area_genomics_dir` \
-  runs/20260402_a611f70c/output_*.tsv
+  runs/<run_dir>/outputs/output_*.tsv
 ```
 
-Similar but not the same proteins at a locus are not being consolidated prior
-to classification; while they increase classification compute time, their
-presence may result in a more closely matched sequence assigned to a profile
-post classification.
 
+### Heap: classification
 
-#### Classification against KO
+#### Classification by KO
 
-Use the following to generate a pooled proteins FASTA file. Likely, there are
-~20M sequences.
+Use the following commands to a) generate a pooled proteins FASTA file, and b)
+generate a Google Cloud job.
 
 ```
 tangle-py tangle/scripts/area/genome-list.py | \
@@ -206,18 +193,13 @@ tangle-py tangle/scripts/area/genome-list.py | \
   -f - | \
   xargs venv-tangle/bin/python3 tangle/scripts/pool-contigs.py \
   pooled_proteins.faa
-```
 
-Use the `pooled_proteins.faa` to setup a KO classification job on Google Cloud
-
-```
 heap-py heap/gcloud/hmmscan-ko/setup.py \
   --run-dir-parent runs \
   --query-database-name _ pooled_proteins.faa
 ```
 
-Use the rclone option to download individual output files into an outputs
-directory. Run the following to demultiplex the results.
+Run the following to demultiplex the results.
 
 ```
 # can run concurrently on different inputs
@@ -225,30 +207,14 @@ tangle-py tangle/scripts/demux-outputs.py \
   --set-batch \
   --forget-original \
   runs/<run_dir>/outputs/sequence_ko_*
-```
 
-If you ran the `hmmscan-ko` job on Google Cloud, the results are already
-filtered to remove those far below the KO HMM thresholds. Then you can just do
-
-```
 cat runs/<run_dir>/outputs/sequence_ko_*.tsv > sequence_ko_full.tsv
 { head -1 sequence_ko_full.tsv; grep -v query_database sequence_ko_full.tsv; } > sequence_ko.tsv; rm sequence_ko_full.tsv
 mv sequence_ko.tsv `tangle-py tangle/scripts/defaults.py -m area_protein_ko_assigned_tsv`
 ```
 
-However, if results were not filtered, run the following script
-
-```
-# CANNOT run concurrently on different inputs because aggregates outcome into one file
-heap-py heap/scripts/ko-assign.py \
-  --scoring-ratio-min 0.8  \
-  `tangle-py tangle/scripts/defaults.py -m area_protein_ko_assigned_tsv` \
-  runs/<run_dir>/outputs/sequence_ko_*.tsv
-```
-
-Then use the following script to filter each genome's protein tsv and fasta to
-those that appear in the assignment file. Only do this for the detected
-genomes.
+Use the following script to filter each genome's protein tsv and fasta to those
+that appear in the assignment file. Only do this for the detected genomes.
 
 ```
 # can run concurrently on different inputs
@@ -301,8 +267,8 @@ tangle-py tangle/scripts/area/genome-list.py | \
 
 #### Classification against Pfam
 
-Use the following to generate a pooled proteins FASTA file, now much smaller
-than the input used for KO classification.
+Use the following commands to a) generate a pooled proteins FASTA file, and b)
+setup a Google Cloud job.
 
 ```
 tangle-py tangle/scripts/area/genome-list.py | \
@@ -312,27 +278,22 @@ tangle-py tangle/scripts/area/genome-list.py | \
   -f - | \
   xargs venv-tangle/bin/python3 tangle/scripts/pool-contigs.py \
   pooled_proteins.faa
-```
 
-Submit a HMM scan job on Google Cloud
-
-```
 heap-py heap/gcloud/hmmscan-pfam/setup.py \
   --run-dir-parent runs \
   --query-database-name _ pooled_proteins.faa
 ```
 
-Use the rclone option to download individual output files into an outputs
-directory, then use the following to demultiplex the outputs and concatenate.
+Use the following to demultiplex the outputs and concatenate.
 
 ```
 # can run concurrently on different inputs
 tangle-py tangle/scripts/demux-outputs.py \
   --set-batch \
   --forget-original \
-  runs/<run_dir>/sequence_pfam_*.tsv
+  runs/<run_dir>/outputs/sequence_pfam_*.tsv
 
-cat <run_dir>/sequence_pfam_*.tsv > sequence_pfam_full.tsv
+cat runs/<run_dir>/outputs/sequence_pfam_*.tsv > sequence_pfam_full.tsv
 { head -1 sequence_pfam_full.tsv; grep -v query_database sequence_pfam_full.tsv; } > sequence_pfam.tsv; rm sequence_pfam_full.tsv
 mv sequence_pfam.tsv `tangle-py tangle/scripts/defaults.py -m area_protein_pfam_tsv`
 ```
@@ -437,7 +398,16 @@ rm ./tangle_odb_uniprot_groups.schema.json
 ```
 
 
-### Genomics: KO and Pfam mappings
+### Tables for genomics data
+
+The following tables can be removed, if reloading data
+
+  * `genomic_sequences`
+  * `genomes` - if there are new genomes
+  * `global_detected` - because SwissProt to Pfam data is in here as well, remove old data by `batch` value using Google Cloud console
+
+
+#### KO and Pfam assignments
 
 Load sequence KO assignments
 
@@ -479,7 +449,7 @@ bq load \
 rm ./tangle_detected.schema.json
 ```
 
-### Genomics: detected protein to contig mappings
+#### Detected protein to contig mappings
 
 **SKIP for now, as we don't have similar mappings for proteins from NCBI** The
 latter requires parsing GFFs, and there are some malformed GFFs in NCBI that
@@ -508,7 +478,7 @@ bq load \
 rm ./tangle_detected.schema.json
 ```
 
-### Sequence and genome manifests
+#### Sequence and genome manifests
 
 Use the following to load the manifest of all protein identifiers
 
