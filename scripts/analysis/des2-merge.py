@@ -15,9 +15,15 @@ parser.add_argument("des2_tsv_files", nargs="+")
 args = parser.parse_args()
 
 ANALYSIS_FIELD = "analysis_type"
-seq_dict = read_fasta_as_dict(args.faa_file)
+
+if Path(args.faa_file+".gz").exists():
+    seq_dict = read_fasta_as_dict(args.faa_file+".gz")
+else:
+    seq_dict = read_fasta_as_dict(args.faa_file)
+
 # strip off orifypy suffix on top of trinity suffix
-seq_ids = { re.sub(r'_i\d+_ORF\.\d+$', '', k) for k in seq_dict.keys() }
+def acc_to_seq_id(k):
+    return re.sub(r'_i\d+_ORF\.\d+$', '', k)
 
 entries = []
 
@@ -35,8 +41,14 @@ manifest_tsv = args.output_dir+"/sequence_list.tsv"
 des2_merged_tsv = args.output_dir+"/des2_tall.tsv"
 
 sequences = []
-for x in seq_ids:
-    sequences.append(dict(sequence_accession=x, sequence_database=args.experiment_id, sequence_type="transcript", sequence_source="paper"))
+for k,v in seq_dict.items():
+    sequences.append(dict(
+        sequence_accession=acc_to_seq_id(k),
+        sequence_database=args.experiment_id,
+        sequence_type="transcript",
+        sequence_source="paper",
+        sequence_length=len(v))
+    )
 ManifestTable.write_tsv(manifest_tsv, sequences)
 
 with open(des2_merged_tsv, "w") as f:
