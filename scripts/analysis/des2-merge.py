@@ -10,20 +10,16 @@ from tangle.manifest import ManifestTable
 parser = argparse.ArgumentParser()
 parser.add_argument("experiment_id")
 parser.add_argument("output_dir")
-parser.add_argument("faa_file")
+parser.add_argument("transcripts_fna_file")
 parser.add_argument("des2_tsv_files", nargs="+")
 args = parser.parse_args()
 
 ANALYSIS_FIELD = "analysis_type"
 
-if Path(args.faa_file+".gz").exists():
-    seq_dict = read_fasta_as_dict(args.faa_file+".gz")
+if Path(args.transcripts_fna_file+".gz").exists():
+    seq_dict = read_fasta_as_dict(args.transcripts_fna_file+".gz")
 else:
-    seq_dict = read_fasta_as_dict(args.faa_file)
-
-# strip off orifypy suffix on top of trinity suffix
-def acc_to_seq_id(k):
-    return re.sub(r'_i\d+_ORF\.\d+$', '', k)
+    seq_dict = read_fasta_as_dict(args.transcripts_fna_file)
 
 entries = []
 
@@ -43,7 +39,7 @@ des2_merged_tsv = args.output_dir+"/des2_tall.tsv"
 sequences = []
 for k,v in seq_dict.items():
     sequences.append(dict(
-        sequence_accession=acc_to_seq_id(k),
+        sequence_accession=k,
         sequence_database=args.experiment_id,
         sequence_type="transcript",
         sequence_source="paper",
