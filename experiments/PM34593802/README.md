@@ -41,28 +41,20 @@ the paper [https://pmc.ncbi.nlm.nih.gov/articles/PMC8484447/]. They can be used
 as a reference.
 
 
-## Transcript clustering
+## Transcript clustering, quantification, classification
 
 First rewrite the .fna.gz files to have a prefix for each entry, so we ensure
 all entry names are unique across the three holobionts. E.g. do the following
 for the 6 files (3 hosts, 3 symbionts)
 
 ```
-PYTHONPATH=. python3 experiments/doi:10.1038_s41467-021-25950-4/unique-acc.py \
-  data/exp_results/doi:10.1038_s41467-021-25950-4/pseudodiploria_symb.fna.gz
+PYTHONPATH=. python3 experiments/PM34593802/unique-acc.py \
+  pseudodiploria_symb.fna.gz
 ```
 
-Use Pile to quantify, starting with the unique-fied transcripts.
-
-
-## Annotation of KO and Pfam
-
-Use `orfipy` to translate and compute ORFs for each of the 6 .fna clustered
-sequences, e.g.
-
-```
-orfipy orbicella_host.fna.gz_rep_seq.fna.gz --pep orbicella_host.faa --min 150 --procs 4 --start ATG
-```
+Use Pile to quantify, starting with the unique-fied transcripts. Pile can
+cluster the transcripts prior to quantification. Also, use Pile to run
+TransDecoder to predict ORFs.
 
 Combine the 6 .faa output files into a single `proteins.faa`.
 
@@ -88,32 +80,32 @@ mv sequence_pfam_full.tsv_aggregated sequence_pfam.tsv
 
 ```
 coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
-  --genome-accession doi:10.1038_s41467-021-25950-4_breviolum_b5 \
+  --genome-accession x_breviolum_b5 \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_data.tsv \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
 
 coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
-  --genome-accession doi:10.1038_s41467-021-25950-4_breviolum_faviinorum \
+  --genome-accession x_breviolum_faviinorum \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_data.tsv \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
 
 coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
-  --genome-accession doi:10.1038_s41467-021-25950-4_symbiodinium_a3 \
+  --genome-accession x_symbiodinium_a3 \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_data.tsv \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
 
 coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
-  --genome-accession doi:10.1038_s41467-021-25950-4_orbicella_faveolata \
+  --genome-accession x_orbicella_faveolata \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_data.tsv \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
 
 coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
-  --genome-accession doi:10.1038_s41467-021-25950-4_pseudodiploria_clivosa \
+  --genome-accession x_pseudodiploria_clivosa \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_data.tsv \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
 
 coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
-  --genome-accession doi:10.1038_s41467-021-25950-4_siderastrea_radians \
+  --genome-accession x_siderastrea_radians \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_data.tsv \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
 
