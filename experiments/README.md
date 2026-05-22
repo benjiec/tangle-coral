@@ -1,6 +1,6 @@
 # Analysis Tasks
 
-## Processing RNAseq Data and Quantification
+## Processing RNAseq Data, Quantification
 
 See https://github.com/benjiec/tangle-pile
 
@@ -25,21 +25,6 @@ coral-py coral/experiments/PM32426508/process_salmon_quants.py \
   experiments/PM32426508 \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`
 ```
-
-## Classify Transcripts
-
-Use heap-py and tangle-py commands from [../README.md](../README.md) to
-classify transcripts to KOs and Pfam domains. For KO, remember to run the
-assignment step afterward.
-
-As inputs, use the amino acid sequences of ORFs predicted by TransDecoder -- or
-pile proteome files.
-
-This section should generate
-
-  * `sequence_ko.tsv`: sequence to KO mapping
-  * `sequence_pfam.tsv`: sequence to Pfam mapping
-
 
 ## Run DESeq2
 
@@ -79,14 +64,12 @@ coral-py coral/scripts/analysis/des2-specific.py --cohort1 34C --timepoint1 0 --
 ```
 
 Use the following to merge multiple DES2 TSV files into a single tall TSV file,
-first argument is output directory. IMPORTANT: for RNAseq data, make sure the
-mapped file from Salmon, or other tool, has been converted to refer to protein
-sequence IDs in the proteins.faa file.
+first argument is output directory.
 
 ```
 coral-py coral/scripts/analysis/des2-merge.py \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508` \
-  `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`/proteins.faa \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`/transcripts.fna.gz \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`/deseq2_*.tsv
 ```
 
@@ -106,6 +89,6 @@ And to do the above, then use results to filter a fasta, add
 
 ```
   | tangle-py tangle/scripts/fasta-emit.py \
-      `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/proteins.faa.gz \
+      `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcripts.fna.gz \
       --prefix-with-underscore -
 ```

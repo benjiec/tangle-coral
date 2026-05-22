@@ -41,7 +41,7 @@ the paper [https://pmc.ncbi.nlm.nih.gov/articles/PMC8484447/]. They can be used
 as a reference.
 
 
-## Transcript clustering, quantification, classification
+## Transcript clustering
 
 First rewrite the .fna.gz files to have a prefix for each entry, so we ensure
 all entry names are unique across the three holobionts. E.g. do the following
@@ -52,28 +52,34 @@ PYTHONPATH=. python3 experiments/PM34593802/unique-acc.py \
   pseudodiploria_symb.fna.gz
 ```
 
-Use Pile to quantify, starting with the unique-fied transcripts. Pile can
-cluster the transcripts prior to quantification. Also, use Pile to run
-TransDecoder to predict ORFs.
-
-Combine the 6 .faa output files into a single `proteins.faa`.
-
-Perform KO and Pfam detection on protein fasta sequence, using tangle-py
-commands. Don't forget to also filter KO classifications further to those
-meeting KO HMM thresholds.
-
-Then, aggregate hits on ORFs of isoforms of genes by gene. Basically, we want
-classification outputs to use the same accessions as those used in Salmon and
-DESeq2.
+Create a Pile directory for this project's transcriptomes
 
 ```
-coral-py coral/scripts/analysis/classify-by-transcript.py sequence_ko_full.tsv
-mv sequence_ko_full.tsv_aggregated sequence_ko.tsv
-rm sequence_ko_full.tsv_aggregated
-
-coral-py coral/scripts/analysis/classify-by-transcript.py sequence_pfam_full.tsv
-mv sequence_pfam_full.tsv_aggregated sequence_pfam.tsv
+mkdir -p <pile_parent_dir>/PM34593802/transcriptomes
 ```
+
+Place the 6 files into 6 separate transcriptome directories. Run clustering
+using Pile. Then make sure each directory has a `transcripts.fna` file
+(clustered) and `transcripts.unclustered.fna` file. They can be with `.gz`
+suffixers.
+
+See Pile README. Run TransDecoder, then convert the protein GFF3 file into
+Tangle detected format, as `detected.tsv` in each of the 6 transcriptome dirs.
+
+
+# Quantification
+
+See Pile README on downloaded SRA assets. Then use Pile to quantify.
+
+
+# Classification
+
+Combine the 6 .faa output files into a single `proteins.faa.gz`, and all 6
+.fna.gz output files into a single `transcripts.fna.gz`.
+
+Perform KO and Pfam detection on protein fasta sequence, using heap-py
+commands, on GCloud. Don't forget to also filter KO classifications further to
+those meeting KO HMM thresholds.
 
 
 ## DESeq2
