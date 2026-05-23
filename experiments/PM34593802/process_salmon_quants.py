@@ -93,7 +93,7 @@ symb_md = {
     timepoint=0,
     cohort=desc.split(", ")[2],
     sample=desc.split(", ")[3],
-    genome_accession="doi:10.1038_s41467-021-25950-4_"+desc.split(", ")[1].lower().replace(" ", "_")
+    genome_accession="x_"+desc.split(", ")[1].lower().replace(" ", "_")
   )
   for fn,desc in md.items()
 }
@@ -103,7 +103,7 @@ host_md = {
     timepoint=0,
     cohort=desc.split(", ")[2],
     sample=desc.split(", ")[3],
-    genome_accession="doi:10.1038_s41467-021-25950-4_"+desc.split(", ")[0].lower().replace(" ", "_")
+    genome_accession="x_"+desc.split(", ")[0].lower().replace(" ", "_")
   )
   for fn,desc in md.items()
 }

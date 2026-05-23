@@ -69,7 +69,8 @@ Tangle detected format, as `detected.tsv` in each of the 6 transcriptome dirs.
 
 # Quantification
 
-See Pile README on downloaded SRA assets. Then use Pile to quantify.
+See Pile README on downloaded SRA assets. Then use Pile to quantify. See
+`quant.sh` for exact commands for each transcriptome.
 
 
 # Classification
@@ -117,6 +118,6 @@ coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
 
 coral-py coral/scripts/analysis/des2-merge.py EXP_PM34593802 \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802` \
-  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/proteins.faa \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcripts.fna.gz \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/deseq2_*.tsv
 ```
