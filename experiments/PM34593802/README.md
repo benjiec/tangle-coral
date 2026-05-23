@@ -66,6 +66,11 @@ suffixers.
 See Pile README. Run TransDecoder, then convert the protein GFF3 file into
 Tangle detected format, as `detected.tsv` in each of the 6 transcriptome dirs.
 
+Combine the 6 .tsv detected files into a single `transcript_proteins.tsv`.
+Combine the 6 .faa output files into a single `proteins.faa.gz`, and all 6
+.fna.gz output files into a single `transcripts.fna.gz`. These files should
+then be moved to `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`.
+
 
 # Quantification
 
@@ -74,9 +79,6 @@ See Pile README on downloaded SRA assets. Then use Pile to quantify. See
 
 
 # Classification
-
-Combine the 6 .faa output files into a single `proteins.faa.gz`, and all 6
-.fna.gz output files into a single `transcripts.fna.gz`.
 
 Perform KO and Pfam detection on protein fasta sequence, using heap-py
 commands, on GCloud. Don't forget to also filter KO classifications further to
