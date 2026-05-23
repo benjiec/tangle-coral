@@ -56,15 +56,15 @@ important columns for joining/analyzing data are
 
   * `query_database`, `target_database`: join with `experiment_id` from other tables
   * `query_accession` when `query_type` is "transcript": transcript ID or accession
-  * `query_accession` when `query_type` is "gene": gene ID, not used outside of this table
-  * `target_accession` when `target_type` is "gene": gene ID
+  * `query_accession` when `query_type` is "cds": cds ID, not used outside of this table
+  * `target_accession` when `target_type` is "cds": cds ID
   * `target_accession` when `target_type` is "protein": protein ID or accession, joinable with `experiment_detected` accessions
 
 Transcript counts and differential expression statistics are based on
 transcript IDs, in `experiment_sequences`, `experiment_transcript_counts`, and
 `experiment_deseq2_tall` tables. `experiment_sequences` table can join with
 `experiment_transcript_proteins` twice, first to translate transcript ID to
-gene ID, then from gene ID to a protein ID or accession. The outcome of this
+cds ID, then from cds ID to a protein ID or accession. The outcome of this
 join can then be further joined with `experiment_detected` to find Pfam domains
 or KEGG ortholog matches.
 
@@ -74,12 +74,12 @@ from the above tables and joins.
 
   * `transcript_start`, `transcript_end`
     * First `experiment_transcript_proteins` join, `query_start` and
-      `query_end`. If a gene is in reverse strand, then the start value is
+      `query_end`. If a cds is on reverse strand, then the start value is
       larger than the end value.
-  * `gene_start_on_transcript`, `gene_end_on_transcript`
+  * `cds_start_on_transcript`, `cds_end_on_transcript`
     * First `experiment_transcript_proteins` join, `target_start` and
       `target_end`.
-  * `protein_start_on_gene`, `protein_end_on_gene`
+  * `protein_start_on_cds`, `protein_end_on_cds`
     * Second `experiment_transcript_proteins` join, `query_start` and
       `query_end`.
   * `protein_start`, `protein_end`
@@ -111,9 +111,9 @@ Formula for `protein_start_on_transcript`
 ```
 IF [Transcript Start] < [Transcript End]
 THEN
-  [Protein Start on Gene]+([Gene Start on Transcript]-[Transcript Start])
+  [Protein Start on CDS]+([CDS Start on Transcript]-[Transcript Start])
 ELSE
-  [Protein End on Gene]+([Gene Start on Transcript]-[Transcript End])
+  [Protein End on CDS]+([CDS Start on Transcript]-[Transcript End])
 END
 ```
 
@@ -122,9 +122,9 @@ Formula for `protein_end_on_transcript`
 ```
 IF [Transcript Start] < [Transcript End]
 THEN
-  [Protein End on Gene]+([Gene Start on Transcript]-[Transcript Start])
+  [Protein End on CDS]+([CDS Start on Transcript]-[Transcript Start])
 ELSE
-  [Protein Start on Gene]+([Gene Start on Transcript]-[Transcript End])
+  [Protein Start on CDS]+([CDS Start on Transcript]-[Transcript End])
 END
 ```
 
