@@ -12,10 +12,10 @@ one, for different species in the same experiment).
 ## Process Quants
 
 Each directory must have its own script to process quants into
-`sequence_data.tsv`.
+`gene_counts.tsv`.
 
 You can put multiple genomes in a single dataset file, i.e.
-`sequence_data.tsv`. This is preferred if multiple species are present in a
+`gene_counts.tsv`. This is preferred if multiple species are present in a
 sample, as DESeq2 can normalize across samples and more data helps with
 normalization. However, make sure, in the mapping workflow, that sequence IDs
 are unique between species.
@@ -25,6 +25,18 @@ coral-py coral/experiments/PM32426508/process_salmon_quants.py \
   experiments/PM32426508 \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`
 ```
+
+
+## Transcript Manifest
+
+Generate transcript manifest, like this
+
+```
+coral-py coral/scripts/analysis/transcript-manifest.py EXP_PM34593802 \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802` \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcripts.fna.gz
+```
+
 
 ## Run DESeq2
 
@@ -42,12 +54,12 @@ example,
 ```
 coral-py coral/scripts/analysis/des2-simple.py \
   --timepoint 1 --min-count 5 \
-  `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`/sequence_data.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`/gene_counts.tsv \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`
 
 coral-py coral/scripts/analysis/des2-simple.py \
   --cohort SS8 --min-count 5 \
-  `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`/sequence_data.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`/gene_counts.tsv \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`
 ```
 
@@ -59,7 +71,7 @@ timepoints
 
 ```
 coral-py coral/scripts/analysis/des2-specific.py --cohort1 34C --timepoint1 0 --cohort2 27C --timepoint2 192 --min-count 5 \
-  `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/sequence_data.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/gene_counts.tsv \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`
 ```
 
@@ -69,7 +81,6 @@ first argument is output directory.
 ```
 coral-py coral/scripts/analysis/des2-merge.py \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508` \
-  `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`/transcripts.fna.gz \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`/deseq2_*.tsv
 ```
 

@@ -56,14 +56,14 @@ tall_df['cohort_timepoint_sample'] = tall_df['sample'].astype(str) + '/' + tall_
 
 # split into counts and metadata dataframes
 metadata_df = tall_df[['cohort_timepoint_sample', 'condition']].drop_duplicates()
-counts_df = tall_df[['cohort_timepoint_sample', 'sequence_id', 'count']]
+counts_df = tall_df[['cohort_timepoint_sample', 'gene_id', 'count']]
 
 # set both to be indexed by sample
 metadata_df = metadata_df.set_index('cohort_timepoint_sample')
 counts_df = counts_df.set_index('cohort_timepoint_sample')
 
-# convert to wide with sequence_id as column, sample as row
-counts_df = counts_df.pivot(columns='sequence_id', values='count')
+# convert to wide with gene_id as column, sample as row
+counts_df = counts_df.pivot(columns='gene_id', values='count')
 
 # filter out genes that have less than min_count read counts in total
 sequence_to_keep = counts_df.columns[counts_df.sum(axis=0) >= args.min_count]

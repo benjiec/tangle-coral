@@ -98,7 +98,7 @@ def load_sf(metadata: dict, quant_fn: str) -> pd.DataFrame:
         combined_df[f"weighted_physical_length"] - combined_df[f"effective_length"]
     )
     
-    combined_df.index.name = 'sequence_id'
+    combined_df.index.name = 'gene_id'
     combined_df = combined_df.reset_index()
     
     for mk, mv in metadata.items():
@@ -127,23 +127,23 @@ def process_dir(rootdirn, fn_to_metadata):
 
 md = {
   "SRR6255820": "Orbicella faveolata, Symbiodinium A3, control, A",
-  # "SRR6255822": "Orbicella faveolata, Symbiodinium A3, control, B",
-  # "SRR6255825": "Orbicella faveolata, Symbiodinium A3, control, C",
-  # "SRR6255844": "Orbicella faveolata, Symbiodinium A3, treatment, A",
-  # "SRR6255862": "Orbicella faveolata, Symbiodinium A3, treatment, B",
-  # "SRR6255864": "Orbicella faveolata, Symbiodinium A3, treatment, C",
-  # "SRR6255880": "Pseudodiploria clivosa, Breviolum faviinorum, control, A",
-  # "SRR6255882": "Pseudodiploria clivosa, Breviolum faviinorum, control, B",
-  # "SRR6255888": "Pseudodiploria clivosa, Breviolum faviinorum, control, C",
-  # "SRR6255887": "Pseudodiploria clivosa, Breviolum faviinorum, treatment, A",
-  # "SRR6255886": "Pseudodiploria clivosa, Breviolum faviinorum, treatment, B",
-  # "SRR6255890": "Pseudodiploria clivosa, Breviolum faviinorum, treatment, C",
-  # "SRR6255889": "Siderastrea radians, Breviolum B5, control, A",
-  # "SRR6256312": "Siderastrea radians, Breviolum B5, control, B",
-  # "SRR6256323": "Siderastrea radians, Breviolum B5, control, C",
-  # "SRR6256322": "Siderastrea radians, Breviolum B5, treatment, A",
-  # "SRR6256324": "Siderastrea radians, Breviolum B5, treatment, B",
-  # "SRR6256325": "Siderastrea radians, Breviolum B5, treatment, C",
+  "SRR6255822": "Orbicella faveolata, Symbiodinium A3, control, B",
+  "SRR6255825": "Orbicella faveolata, Symbiodinium A3, control, C",
+  "SRR6255844": "Orbicella faveolata, Symbiodinium A3, treatment, A",
+  "SRR6255862": "Orbicella faveolata, Symbiodinium A3, treatment, B",
+  "SRR6255864": "Orbicella faveolata, Symbiodinium A3, treatment, C",
+  "SRR6255880": "Pseudodiploria clivosa, Breviolum faviinorum, control, A",
+  "SRR6255882": "Pseudodiploria clivosa, Breviolum faviinorum, control, B",
+  "SRR6255888": "Pseudodiploria clivosa, Breviolum faviinorum, control, C",
+  "SRR6255887": "Pseudodiploria clivosa, Breviolum faviinorum, treatment, A",
+  "SRR6255886": "Pseudodiploria clivosa, Breviolum faviinorum, treatment, B",
+  "SRR6255890": "Pseudodiploria clivosa, Breviolum faviinorum, treatment, C",
+  "SRR6255889": "Siderastrea radians, Breviolum B5, control, A",
+  "SRR6256312": "Siderastrea radians, Breviolum B5, control, B",
+  "SRR6256323": "Siderastrea radians, Breviolum B5, control, C",
+  "SRR6256322": "Siderastrea radians, Breviolum B5, treatment, A",
+  "SRR6256324": "Siderastrea radians, Breviolum B5, treatment, B",
+  "SRR6256325": "Siderastrea radians, Breviolum B5, treatment, C",
 }
 
 symb_md = {
@@ -173,8 +173,8 @@ symb_tx_to_gene, symb_dataframes = process_dir(args.data_dir, symb_md)
 
 all_dataframes = host_dataframes + symb_dataframes
 tall_df = pd.concat(all_dataframes, axis=0, ignore_index=True)
-tall_df.to_csv(args.output_dir+"/sequence_data.tsv", sep="\t", index=False)
+tall_df.to_csv(args.output_dir+"/gene_counts.tsv", sep="\t", index=False)
 
 all_tx_to_gene = host_tx_to_gene + symb_tx_to_gene
 tall_df = pd.concat(all_tx_to_gene, axis=0, ignore_index=True)
-tall_df.to_csv(args.output_dir+"/sequence_tx_to_gene.tsv", sep="\t", index=False)
+tall_df.to_csv(args.output_dir+"/transcript_genes.tsv", sep="\t", index=False)

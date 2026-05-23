@@ -1,25 +1,16 @@
-# curates tall table of des2 data, with a manifest
+# curates tall table of des2 data
 
-import re
 import csv
 import argparse
 from pathlib import Path
-from tangle.sequence import read_fasta_as_dict
-from tangle.manifest import ManifestTable
 
 parser = argparse.ArgumentParser()
 parser.add_argument("experiment_id")
 parser.add_argument("output_dir")
-parser.add_argument("transcripts_fna_file")
 parser.add_argument("des2_tsv_files", nargs="+")
 args = parser.parse_args()
 
 ANALYSIS_FIELD = "analysis_type"
-
-if Path(args.transcripts_fna_file+".gz").exists():
-    seq_dict = read_fasta_as_dict(args.transcripts_fna_file+".gz")
-else:
-    seq_dict = read_fasta_as_dict(args.transcripts_fna_file)
 
 entries = []
 
@@ -33,19 +24,7 @@ for tsv_file in args.des2_tsv_files:
             row["experiment_id"] = args.experiment_id
             entries.append(row)
 
-manifest_tsv = args.output_dir+"/sequence_list.tsv"
 des2_merged_tsv = args.output_dir+"/des2_tall.tsv"
-
-sequences = []
-for k,v in seq_dict.items():
-    sequences.append(dict(
-        sequence_accession=k,
-        sequence_database=args.experiment_id,
-        sequence_type="transcript",
-        sequence_source="paper",
-        sequence_length=len(v))
-    )
-ManifestTable.write_tsv(manifest_tsv, sequences)
 
 with open(des2_merged_tsv, "w") as f:
     writer = csv.DictWriter(f, delimiter="\t", fieldnames=list(entries[0].keys()))

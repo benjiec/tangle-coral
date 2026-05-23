@@ -90,36 +90,35 @@ those meeting KO HMM thresholds.
 ```
 coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
   --genome-accession x_breviolum_b5 \
-  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_data.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/gene_counts.tsv \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
 
 coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
   --genome-accession x_breviolum_faviinorum \
-  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_data.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/gene_counts.tsv \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
 
 coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
   --genome-accession x_symbiodinium_a3 \
-  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_data.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/gene_counts.tsv \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
 
 coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
   --genome-accession x_orbicella_faveolata \
-  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_data.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/gene_counts.tsv \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
 
 coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
   --genome-accession x_pseudodiploria_clivosa \
-  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_data.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/gene_counts.tsv \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
 
 coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
   --genome-accession x_siderastrea_radians \
-  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_data.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/gene_counts.tsv \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
 
 coral-py coral/scripts/analysis/des2-merge.py EXP_PM34593802 \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802` \
-  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcripts.fna.gz \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/deseq2_*.tsv
 ```

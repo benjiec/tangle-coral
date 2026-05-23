@@ -39,7 +39,7 @@ The following tables are loaded into BigQuery.
           and `target_database` and `target_accession` identify a protein sequence.
 
    * Experiment data
-     * `experiment_sequences`: list of transcripts, join with `sequence_id`, filter by `sequence_database` as experiment
+     * `experiment_transcripts`: list of transcripts, join with `sequence_id`, filter by `sequence_database` as experiment
      * `experiment_transcript_proteins`: join table of transcripts to proteins, see below on how to use
      * `experiment_detected`: protein domains or ortholog matches, much like `global_detected`
        * Join protein accessions with `query_accession`, `experiment_id` or `sequence_database` with `query_database`
@@ -61,8 +61,8 @@ important columns for joining/analyzing data are
   * `target_accession` when `target_type` is "protein": protein ID or accession, joinable with `experiment_detected` accessions
 
 Transcript counts and differential expression statistics are based on
-transcript IDs, in `experiment_sequences`, `experiment_transcript_counts`, and
-`experiment_deseq2_tall` tables. `experiment_sequences` table can join with
+transcript IDs, in `experiment_transcripts`, `experiment_transcript_counts`, and
+`experiment_deseq2_tall` tables. `experiment_transcripts` table can join with
 `experiment_transcript_proteins` twice, first to translate transcript ID to
 cds ID, then from cds ID to a protein ID or accession. The outcome of this
 join can then be further joined with `experiment_detected` to find Pfam domains
@@ -624,10 +624,10 @@ Each experiment directory in area experiment dir (i.e. `tangle-py
 tangle/scripts/defaults.py -m area_experiments_dir`) should have the following
 files
 
-  * `sequence_list.tsv`
+  * `transcript_list.tsv`
   * `sequence_ko.tsv`
   * `sequence_pfam.tsv`
-  * `sequence_data.tsv`
+  * `gene_counts.tsv`
   * `des2_tall.tsv`
 
 If the `sequence_ko.tsv` and `sequence_pfam.tsv` files are in the older format, use the following
@@ -651,7 +651,7 @@ Then, use the following to load into BigQuery, repeating for each experiment
 
 ```
 tangle-py tangle/scripts/bq-schema.py \
-  --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/sequence_list.tsv \
+  --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/transcript_list.tsv \
   tangle.manifest
 tangle-py tangle/scripts/bq-schema.py \
   --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/sequence_ko.tsv \
@@ -660,8 +660,8 @@ tangle-py tangle/scripts/bq-schema.py \
   --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/sequence_pfam.tsv \
   tangle.detected
 tangle-py tangle/scripts/bq-schema.py \
-  --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/sequence_data.tsv \
-  --table-name TranscriptCountsTable \
+  --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/gene_counts.tsv \
+  --table-name GeneCountsTable \
   tangle.exp
 tangle-py tangle/scripts/bq-schema.py \
   --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/des2_tall.tsv \
@@ -672,15 +672,15 @@ tangle-py tangle/scripts/bq-schema.py \
 
 tangle-py tangle/scripts/bq-schema.py tangle.manifest > tangle_manifest.schema.json
 tangle-py tangle/scripts/bq-schema.py tangle.detected > tangle_detected.schema.json
-tangle-py tangle/scripts/bq-schema.py --table-name TranscriptCountsTable tangle.exp > exp_transcript_counts.schema.json
+tangle-py tangle/scripts/bq-schema.py --table-name GeneCountsTable tangle.exp > exp_gene_counts.schema.json
 tangle-py tangle/scripts/bq-schema.py --table-name DESeq2Table tangle.exp > exp_deseq2_tall.schema.json
 
 bq load \
   --source_format=CSV \
   --field_delimiter='\t' \
   --skip_leading_rows=1 \
-  tangle_coral.experiment_sequences \
-  `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/sequence_list.tsv \
+  tangle_coral.experiment_transcripts \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM41342399`/transcript_list.tsv \
   ./tangle_manifest.schema.json
 
 bq load \
