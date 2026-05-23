@@ -23,6 +23,7 @@ The following tables are loaded into BigQuery.
     * `uniprot`: mapping of UniProt accession to function description, join with `uniprot_accession`
     * `uniprot_go`: mapping of UniProt accession to GO terms, join with `uniprot_accession`
     * `orthodb_uniprot_groups`: mapping of UniProt accessions to OrthoDB groups, join with `uniprot_accession`
+    * `kegg_ko_thresholds`: KO HMM thresholds and consensus lenth, join ortholog ID with `model`
 
   * Genomic data
     * `genomes`: list of genome accessions and taxonomy, join with `Genome Accession`
@@ -38,12 +39,94 @@ The following tables are loaded into BigQuery.
           and `target_database` and `target_accession` identify a protein sequence.
 
    * Experiment data
-     * `experiment_sequences`: list of sequences, join with `sequence_id`, filter by `sequence_database` as experiment
-     * `experiment_detected`: detected features, much like `global_detected`
-       * Join `sequence_id` with `query_accession`, `experiment_id` or `sequence_database` with `query_database`
+     * `experiment_sequences`: list of transcripts, join with `sequence_id`, filter by `sequence_database` as experiment
+     * `experiment_transcript_proteins`: join table of transcripts to proteins, see below on how to use
+     * `experiment_detected`: protein domains or ortholog matches, much like `global_detected`
+       * Join protein accessions with `query_accession`, `experiment_id` or `sequence_database` with `query_database`
      * `experiment_transcript_counts`: RNAseq transcript counts, join with `sequence_id` and `experiment_id`
      * `experiment_deseq2_tall`: tall table of DESeq2 analysis, join with `sequence_id` and `experiment_id`
        * `analysis_type` column describes base and test groups
+
+
+### Experiment Transcript to Proteins Table
+
+The `experiment_transcript_proteins` table uses the `tangle.DetectedTable`
+format to specify how transcript IDs and protein IDs are related. Some of the
+important columns for joining/analyzing data are
+
+  * `query_database`, `target_database`: join with `experiment_id` from other tables
+  * `query_accession` when `query_type` is "transcript": transcript ID or accession
+  * `query_accession` when `query_type` is "gene": gene ID, not used outside of this table
+  * `target_accession` when `target_type` is "gene": gene ID
+  * `target_accession` when `target_type` is "protein": protein ID or accession, joinable with `experiment_detected` accessions
+
+Transcript counts and differential expression statistics are based on
+transcript IDs, in `experiment_sequences`, `experiment_transcript_counts`, and
+`experiment_deseq2_tall` tables. `experiment_sequences` table can join with
+`experiment_transcript_proteins` twice, first to translate transcript ID to
+gene ID, then from gene ID to a protein ID or accession. The outcome of this
+join can then be further joined with `experiment_detected` to find Pfam domains
+or KEGG ortholog matches.
+
+It may be important to understand where a Pfam or KO match appears on the
+transcript. The following terms may be more human readable, and can be computed
+from the above tables and joins.
+
+  * `transcript_start`, `transcript_end`
+    * First `experiment_transcript_proteins` join, `query_start` and
+      `query_end`. If a gene is in reverse strand, then the start value is
+      larger than the end value.
+  * `gene_start_on_transcript`, `gene_end_on_transcript`
+    * First `experiment_transcript_proteins` join, `target_start` and
+      `target_end`.
+  * `protein_start_on_gene`, `protein_end_on_gene`
+    * Second `experiment_transcript_proteins` join, `query_start` and
+      `query_end`.
+  * `protein_start`, `protein_end`
+    * Second `experiment_transcript_proteins` join, `target_start` and
+      `target_end`.
+  * `protein_start_on_transcript`, `protein_end_on_transcript`: RNA bp location
+    on transcript where protein starts and ends
+    * See below for formulas
+  * `protein_length`
+    * This is `abs(protein_start-protein_end)+1`
+  * `match_start_on_protein`, `match_end_on_protein`
+    * `experiment_detected`, `query_start` and `query_end`
+  * `matched_start`, `matched_end`
+    * `experiment_detected`, `target_start` and `target_end`
+  * `protein_match_length`
+    * This is `abs(match_start_on_protein-match_end_on_protein)+1`
+  * `matched_length`
+    * This is `abs(matched_start-matched_end)+1`
+  * `protein_match_percent`
+    * This is `100*protein_match_length/protein_length`
+  * `ko_consensus_length`
+    * Left join `experiment_detected` with `kegg_ko_thresholds` on `target_database = "KO"` and `target_accession = kegg_ko_thresholds.model`
+    * This is the `mlen` column in the `kegg_ko_thresholds` table
+  * `matched_percent`
+    * This is `100*matched_length/ko_consensus_length`
+
+Formula for `protein_start_on_transcript`
+
+```
+IF [Transcript Start] < [Transcript End]
+THEN
+  [Protein Start on Gene]+([Gene Start on Transcript]-[Transcript Start])
+ELSE
+  [Protein End on Gene]+([Gene Start on Transcript]-[Transcript End])
+END
+```
+
+Formula for `protein_end_on_transcript`
+
+```
+IF [Transcript Start] < [Transcript End]
+THEN
+  [Protein End on Gene]+([Gene Start on Transcript]-[Transcript Start])
+ELSE
+  [Protein Start on Gene]+([Gene Start on Transcript]-[Transcript End])
+END
+```
 
 
 ## Tool Setup
@@ -372,6 +455,29 @@ bq load \
 rm ./tangle_detected.schema.json
 rm ./tangle_uniprot_go.schema.json
 rm ./tangle_uniprot.schema.json
+```
+
+Load KEGG KO thresholds
+
+```
+tangle-py tangle/scripts/bq-schema.py \
+  --check ko_thresholds.tsv \
+  tangle.kegg
+
+# make sure the above runs successfully
+
+tangle-py tangle/scripts/bq-schema.py \
+  tangle.kegg > tangle_kegg_ko_thresholds.schema.json
+
+bq load \
+  --source_format=CSV \
+  --field_delimiter='\t' \
+  --skip_leading_rows=1 \
+  tangle_coral.kegg_ko_thresholds \
+  ko_thresholds.tsv \
+  ./tangle_kegg_ko_thresholds.schema.json
+
+rm ./tangle_kegg_ko_thresholds.schema.json
 ```
 
 Load OrthoDB groups and join table with UniProt accessions
