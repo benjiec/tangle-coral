@@ -54,20 +54,26 @@ coral-py coral/scripts/analysis/des2-merge.py \
 
 ## Select Transcripts for Further Processing
 
-Use the following to get a list of top transcripts. The last line specifies a
-file of past results so we don't re-classify sequence IDs already classified.
+Use the following to get a list of top transcripts. The `--results-fn` line
+specifies a file of past results so we don't re-classify sequence IDs already
+classified. The `--transcript-genes-fn` and `--transcript-proteins-fn` lines
+convert gene IDs to transcript IDs and protein IDs respectively using the
+lookup files; ignoring one or all of them will leave the output IDs at the last
+available conversion or just gene ids.
 
 ```
 coral-py coral/scripts/analysis/top-sequences.py \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/des2_tall.tsv \
-  --l2fc-threshold 1 --padj-threshold 0.05 \
-  --results-fn `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_fs.tsv
+  --l2fc-threshold 0.1 --padj-threshold 0.05 \
+  --results-fn `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_fs.tsv \
+  --transcript-genes-fn `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcript_genes.tsv \
+  --transcript-proteins-fn `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcript_proteins.tsv
 ```
 
-And to do the above, then use results to filter a fasta, add
+And you can pipe the results from above to filter a protein fasta, for further
+classification
 
 ```
   | tangle-py tangle/scripts/fasta-emit.py \
-      `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcripts.fna.gz \
-      --prefix-with-underscore -
+      `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/proteins.faa.gz -
 ```
