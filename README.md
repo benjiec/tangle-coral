@@ -692,7 +692,7 @@ bq load \
   --source_format=CSV \
   --field_delimiter='\t' \
   --skip_leading_rows=1 \
-  tangle_coral.experiment_detected \
+  tangle_coral.experiment_transcript_proteins \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcript_proteins.tsv \
   ./tangle_detected.schema.json
 
@@ -739,6 +739,7 @@ bq load \
 rm ./tangle_manifest.schema.json
 rm ./tangle_detected.schema.json
 rm ./exp_gene_counts.schema.json
+rm ./exp_transcript_genes.schema.json
 rm ./exp_deseq2_tall.schema.json
 ```
 
