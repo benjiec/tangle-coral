@@ -6,8 +6,10 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 from pytximport import tximport
+from tangle.exp import GeneCountsTable, TranscriptGenesTable
 
 parser = argparse.ArgumentParser()
+parser.add_argument("experiment_id")
 parser.add_argument("data_dir")
 parser.add_argument("output_dir")
 args = parser.parse_args()
@@ -77,7 +79,7 @@ def load_sf(metadata: dict, quant_fn: str) -> pd.DataFrame:
     tpm_df = pd.DataFrame(
         txi.obsm['abundance'].T, 
         index=txi.var_names, 
-        columns=[f"TPM"]
+        columns=[f"tpm"]
     )
     
     eff_len_df = pd.DataFrame(
@@ -92,11 +94,6 @@ def load_sf(metadata: dict, quant_fn: str) -> pd.DataFrame:
 
     # Phase 5: Consolidated Merge and Metadata Injection
     combined_df = pd.concat([counts_df, tpm_df, eff_len_df, phys_len_df], axis=1)
-    
-    # Calculate operational metrics
-    combined_df[f"length_delta"] = (
-        combined_df[f"weighted_physical_length"] - combined_df[f"effective_length"]
-    )
     
     combined_df.index.name = 'gene_id'
     combined_df = combined_df.reset_index()
@@ -172,9 +169,16 @@ host_tx_to_gene, host_dataframes = process_dir(args.data_dir, host_md)
 symb_tx_to_gene, symb_dataframes = process_dir(args.data_dir, symb_md)
 
 all_dataframes = host_dataframes + symb_dataframes
-tall_df = pd.concat(all_dataframes, axis=0, ignore_index=True)
-tall_df.to_csv(args.output_dir+"/gene_counts.tsv", sep="\t", index=False)
+df = pd.concat(all_dataframes, axis=0, ignore_index=True)
+rows = df.to_dict(orient="records")
+for row in rows:
+    row["experiment_id"] = args.experiment_id
+    del row["corrected_counts"]
+GeneCountsTable.write_tsv(args.output_dir+"/gene_counts.tsv", rows)
 
 all_tx_to_gene = host_tx_to_gene + symb_tx_to_gene
-tall_df = pd.concat(all_tx_to_gene, axis=0, ignore_index=True)
-tall_df.to_csv(args.output_dir+"/transcript_genes.tsv", sep="\t", index=False)
+df = pd.concat(all_tx_to_gene, axis=0, ignore_index=True)
+rows = df.to_dict(orient="records")
+for row in rows:
+    row["experiment_id"] = args.experiment_id
+TranscriptGenesTable.write_tsv(args.output_dir+"/transcript_genes.tsv", rows)

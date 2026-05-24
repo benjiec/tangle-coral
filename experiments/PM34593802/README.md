@@ -1,6 +1,7 @@
 
 Paper: https://pmc.ncbi.nlm.nih.gov/articles/PMC8484447/
 
+
 ## Trinity assembled transcripts and NGS reads
 
 Zip file of data was downloaded from Dryad repository using accession
@@ -48,7 +49,7 @@ all entry names are unique across the three holobionts. E.g. do the following
 for the 6 files (3 hosts, 3 symbionts)
 
 ```
-PYTHONPATH=. python3 experiments/PM34593802/unique-acc.py \
+coral-py coral/experiments/PM34593802/unique-acc.py \
   pseudodiploria_symb.fna.gz
 ```
 
@@ -61,24 +62,56 @@ mkdir -p <pile_parent_dir>/PM34593802/transcriptomes
 Place the 6 files into 6 separate transcriptome directories. Run clustering
 using Pile. Then make sure each directory has a `transcripts.fna` file
 (clustered) and `transcripts.unclustered.fna` file. They can be with `.gz`
-suffixers.
+suffixers. The directories are
+
+```
+breviolum_b5
+breviolum_faviinorum
+orbicella_faveolata
+pseudodiploria_clivosa
+siderastrea_radians
+symbiodinium_a3
+```
 
 See Pile README. Run TransDecoder, then convert the protein GFF3 file into
-Tangle detected format, as `detected.tsv` in each of the 6 transcriptome dirs.
+Tangle detected format, as `detected.tsv` in each of the 6 transcriptome dirs. E.g.
+
+```
+PILE_WORKSPACE=PM34593802 pile-py pile/transdecoder_to_detected.py \
+  orbicella_faveolata
+```
 
 Combine the 6 .tsv detected files into a single `transcript_proteins.tsv`.
 Combine the 6 .faa output files into a single `proteins.faa.gz`, and all 6
-.fna.gz output files into a single `transcripts.fna.gz`. These files should
-then be moved to `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`.
+.fna.gz output files into a single `transcripts.fna.gz`.
 
+These three combined files should then be moved to `tangle-py
+tangle/scripts/defaults.py -m area_experiment PM34593802`.
 
-# Quantification
+Generate transcript manifest, like this
+
+```
+coral-py coral/scripts/analysis/transcript-manifest.py EXP_PM34593802 \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802` \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcripts.fna.gz
+```
+
+## Quantification
 
 See Pile README on downloaded SRA assets. Then use Pile to quantify. See
 `quant.sh` for exact commands for each transcriptome.
 
+Process the quants using the following script, to generate a `gene_counts.tsv`
+file and a `transcript_genes.tsv` file.
 
-# Classification
+```
+coral-py coral/experiments/PM34593802/process_salmon_quants.py EXP_PM34593802 \
+  <pile workbase dir>/quants \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
+```
+
+
+## Classification
 
 Perform KO and Pfam detection on protein fasta sequence, using heap-py
 commands, on GCloud. Don't forget to also filter KO classifications further to

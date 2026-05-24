@@ -8,43 +8,10 @@ In experiment specific directories under the pile directory structure, generate
 quantification files as well as proteome (i.e. .faa) files (possibly more than
 one, for different species in the same experiment).
 
-
-## Process Quants
-
-Each directory must have its own script to process quants into
-`gene_counts.tsv`.
-
-You can put multiple genomes in a single dataset file, i.e.
-`gene_counts.tsv`. This is preferred if multiple species are present in a
-sample, as DESeq2 can normalize across samples and more data helps with
-normalization. However, make sure, in the mapping workflow, that sequence IDs
-are unique between species.
-
-```
-coral-py coral/experiments/PM32426508/process_salmon_quants.py \
-  experiments/PM32426508 \
-  `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`
-```
+See PM34593802/README.md for an example workflow.
 
 
-## Transcript Manifest
-
-Generate transcript manifest, like this
-
-```
-coral-py coral/scripts/analysis/transcript-manifest.py EXP_PM34593802 \
-  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802` \
-  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcripts.fna.gz
-```
-
-
-## Run DESeq2
-
-This section generates
-
-  * `sequence_list.tsv`: from des2-merge script below
-  * `des2_tall.tsv`: des2 data, from des2-merge script below
-
+## Running DESeq2
 
 DESeq2 analysis on RNAseq or proteomics results can be done using two scripts.
 First, the `des2-simple.py` script does simple comparison of every two types of
@@ -83,6 +50,7 @@ coral-py coral/scripts/analysis/des2-merge.py \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508` \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`/deseq2_*.tsv
 ```
+
 
 ## Select Transcripts for Further Processing
 
