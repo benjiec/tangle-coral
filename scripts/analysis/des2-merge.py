@@ -3,6 +3,7 @@
 import csv
 import argparse
 from pathlib import Path
+from tangle.exp import DESeq2Table
 
 parser = argparse.ArgumentParser()
 parser.add_argument("experiment_id")
@@ -12,7 +13,12 @@ args = parser.parse_args()
 
 ANALYSIS_FIELD = "analysis_type"
 
-entries = []
+rows = []
+
+def to_float(v):
+    if v:
+        return float(v)
+    return "nan"
 
 for tsv_file in args.des2_tsv_files:
     analysis_type = Path(tsv_file).stem
@@ -22,12 +28,16 @@ for tsv_file in args.des2_tsv_files:
         for row in reader:
             row[ANALYSIS_FIELD] = analysis_type
             row["experiment_id"] = args.experiment_id
-            entries.append(row)
+            row["baseMean"] = to_float(row["baseMean"]) 
+            row["log2FoldChange"] = to_float(row["log2FoldChange"])
+            row["lfcSE"] = to_float(row["lfcSE"])
+            row["stat"] = to_float(row["stat"])
+            row["pvalue"] = to_float(row["pvalue"])
+            row["padj"] = to_float(row["padj"])
+            row["max_cv"] = to_float(row["max_cv"])
+            row["mean_base"] = to_float(row["mean_base"])
+            row["mean_testgroup"] = to_float(row["mean_testgroup"])
+            rows.append(row)
 
 des2_merged_tsv = args.output_dir+"/des2_tall.tsv"
-
-with open(des2_merged_tsv, "w") as f:
-    writer = csv.DictWriter(f, delimiter="\t", fieldnames=list(entries[0].keys()))
-    writer.writeheader()
-    for entry in entries:
-        writer.writerow(entry)
+DESeq2Table.write_tsv(des2_merged_tsv, rows)
