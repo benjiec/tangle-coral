@@ -1,6 +1,7 @@
 # curates transcript manifest
 
 import argparse
+from pathlib import Path
 from tangle.sequence import read_fasta_as_dict
 from tangle.manifest import ManifestTable
 
