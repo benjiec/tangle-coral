@@ -8,7 +8,7 @@ from pydeseq2.default_inference import DefaultInference
 from pydeseq2.ds import DeseqStats
 
 ap = argparse.ArgumentParser()
-ap.add_argument("data_tsv")
+ap.add_argument("counts_tsv")
 ap.add_argument("output_dir")
 ap.add_argument("--control-sequence", type=str, default=None, action="append")
 ap.add_argument("--genome-accession", type=str, default=None)
@@ -26,7 +26,7 @@ if cohort and timepoint:
 if not cohort and not timepoint:
     raise Exception("--cohort and --timepoint: please specify exactly one")
 
-tall_df = pd.read_csv(args.data_tsv, delimiter='\t')
+tall_df = pd.read_csv(args.counts_tsv, delimiter='\t')
 
 if args.genome_accession:
     print(f"filtering by {args.genome_accession}")
@@ -54,16 +54,20 @@ if args.genome_accession:
 # generate unique sample-timepoint column
 tall_df['cohort_timepoint_sample'] = tall_df['sample'].astype(str) + '/' + tall_df['timepoint'].astype(str) + '/' + tall_df['cohort'].astype(str)
 
+sequence_type_vals = tall_df['sequence_type'].unique()
+assert len(sequence_type_vals) == 1, f"Expected 1 value for sequence type, got {len(sequence_type_vals)}: {sequence_type_vals}"
+sequence_type = sequence_type_vals[0]
+
 # split into counts and metadata dataframes
 metadata_df = tall_df[['cohort_timepoint_sample', 'condition']].drop_duplicates()
-counts_df = tall_df[['cohort_timepoint_sample', 'gene_id', 'count']]
+counts_df = tall_df[['cohort_timepoint_sample', 'sequence_id', 'count']]
 
 # set both to be indexed by sample
 metadata_df = metadata_df.set_index('cohort_timepoint_sample')
 counts_df = counts_df.set_index('cohort_timepoint_sample')
 
-# convert to wide with gene_id as column, sample as row
-counts_df = counts_df.pivot(columns='gene_id', values='count')
+# convert to wide with sequence_id as column, sample as row
+counts_df = counts_df.pivot(columns='sequence_id', values='count')
 
 # filter out genes that have less than min_count read counts in total
 sequence_to_keep = counts_df.columns[counts_df.sum(axis=0) >= args.min_count]
@@ -111,7 +115,8 @@ for pair in pairs:
             continue
 
     fn = f"base_{baseline}_test_{testgroup}"
-    fn = f"{args.output_dir}/deseq2_{cond_name}_{fn}.tsv"
+    analysis_type = f"{cond_name}_{fn}"
+    fn = f"{args.output_dir}/deseq2_{analysis_type}.{sequence_type}.tsv"
     print("generating", fn)
 
     # compute max CV of testgroup or base
@@ -142,4 +147,6 @@ for pair in pairs:
     ds.results_df[f'mean_base'] = mean_baseline
     ds.results_df[f'mean_testgroup'] = mean_test
 
+    ds.results_df['analysis_type'] = f"{analysis_type}"
+    ds.results_df['sequence_type'] = sequence_type
     ds.results_df.to_csv(fn, sep='\t')

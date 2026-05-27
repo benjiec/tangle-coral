@@ -44,8 +44,8 @@ The following tables are loaded into BigQuery.
      * `experiment_detected`: protein domains or ortholog matches, much like `global_detected`
        * Join protein accessions with `query_accession`, `experiment_id` or `sequence_database` with `query_database`
      * `experiment_transcript_genes`: mapping transcript IDs to gene IDs that are then counted, see below
-     * `experiment_gene_counts`: RNAseq transcript counts, join with `gene_id` and `experiment_id`
-     * `experiment_deseq2_tall`: tall table of DESeq2 analysis, join with `gene_id` and `experiment_id`
+     * `experiment_sequence_counts`: RNAseq transcript or gene counts, join with `sequence_id` and `experiment_id`
+     * `experiment_deseq2_tall`: tall table of DESeq2 analysis, join with `sequence_id` and `experiment_id`
        * `analysis_type` column describes base and test groups
 
 
@@ -62,7 +62,7 @@ important columns for joining/analyzing data are
   * `target_accession` when `target_type` is "protein": protein ID or accession, joinable with `experiment_detected` accessions
 
 Transcript counts and differential expression statistics are based on
-transcript IDs, in `experiment_transcripts`, `experiment_gene_counts`, and
+transcript IDs, in `experiment_transcripts`, `experiment_sequence_counts`, and
 `experiment_deseq2_tall` tables. `experiment_transcripts` table can join with
 `experiment_transcript_proteins` twice, first to translate transcript ID to
 cds ID, then from cds ID to a protein ID or accession. The outcome of this
@@ -134,11 +134,12 @@ END
 RNASeq experiments count and analyze differential expression by genes,
 potentially aggregating multiple transcripts of gene isoforms together. While
 each experiment's transcriptome is represented by a list of transcripts, the
-counts and deseq2 tables refer to gene IDs. Use the following join
+counts and deseq2 tables likely refer to gene IDs in the `sequence_id` column,
+with `sequence_type` set to "gene". Use the following join
 
   * `sequence_id` and `sequence_database` columns from `experiment_transcripts`
   * Join `transcript_id` and `experiment_id` columns of `experiment_transcript_genes`
-  * Join `gene_id` and `experiment_id` columns of `experiment_gene_counts` or `experiemnt_deseq2_tall`
+  * Join `sequence_id` and `experiment_id` columns of `experiment_sequence_counts` or `experiemnt_deseq2_tall`
 
 
 ## Tool Setup
@@ -642,6 +643,7 @@ files
   * `sequence_pfam.tsv`
   * `transcript_genes.tsv`
   * `gene_counts.tsv`
+  * `transcript_counts.tsv`
   * `des2_tall.tsv`
 
 Use the following to load into BigQuery, repeating for each experiment
@@ -661,7 +663,11 @@ tangle-py tangle/scripts/bq-schema.py \
   tangle.detected
 tangle-py tangle/scripts/bq-schema.py \
   --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/gene_counts.tsv \
-  --table-name GeneCountsTable \
+  --table-name SequenceCountsTable \
+  tangle.exp
+tangle-py tangle/scripts/bq-schema.py \
+  --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcript_counts.tsv \
+  --table-name SequenceCountsTable \
   tangle.exp
 tangle-py tangle/scripts/bq-schema.py \
   --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcript_genes.tsv \
@@ -676,7 +682,7 @@ tangle-py tangle/scripts/bq-schema.py \
 
 tangle-py tangle/scripts/bq-schema.py tangle.manifest > tangle_manifest.schema.json
 tangle-py tangle/scripts/bq-schema.py tangle.detected > tangle_detected.schema.json
-tangle-py tangle/scripts/bq-schema.py --table-name GeneCountsTable tangle.exp > exp_gene_counts.schema.json
+tangle-py tangle/scripts/bq-schema.py --table-name SequenceCountsTable tangle.exp > exp_sequence_counts.schema.json
 tangle-py tangle/scripts/bq-schema.py --table-name TranscriptGenesTable tangle.exp > exp_transcript_genes.schema.json
 tangle-py tangle/scripts/bq-schema.py --table-name DESeq2Table tangle.exp > exp_deseq2_tall.schema.json
 
@@ -716,9 +722,17 @@ bq load \
   --source_format=CSV \
   --field_delimiter='\t' \
   --skip_leading_rows=1 \
-  tangle_coral.experiment_gene_counts \
+  tangle_coral.experiment_sequence_counts \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/gene_counts.tsv \
-  ./exp_gene_counts.schema.json
+  ./exp_sequence_counts.schema.json
+
+bq load \
+  --source_format=CSV \
+  --field_delimiter='\t' \
+  --skip_leading_rows=1 \
+  tangle_coral.experiment_sequence_counts \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcript_counts.tsv \
+  ./exp_sequence_counts.schema.json
 
 bq load \
   --source_format=CSV \
@@ -738,7 +752,7 @@ bq load \
 
 rm ./tangle_manifest.schema.json
 rm ./tangle_detected.schema.json
-rm ./exp_gene_counts.schema.json
+rm ./exp_sequence_counts.schema.json
 rm ./exp_transcript_genes.schema.json
 rm ./exp_deseq2_tall.schema.json
 ```

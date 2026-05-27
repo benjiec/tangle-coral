@@ -6,7 +6,7 @@ import pandas as pd
 import numpy as np
 from pathlib import Path
 from pytximport import tximport
-from tangle.exp import GeneCountsTable, TranscriptGenesTable
+from tangle.exp import SequenceCountsTable, TranscriptGenesTable
 
 parser = argparse.ArgumentParser()
 parser.add_argument("experiment_id")
@@ -15,12 +15,12 @@ parser.add_argument("output_dir")
 args = parser.parse_args()
 
 
-def load_sf(metadata: dict, quant_fn: str) -> pd.DataFrame:
+def load_quants_by_gene(metadata: dict, quant_fn: str) -> pd.DataFrame:
     """
-    Processes a single Salmon quant.sf file.
-    Aggregates transcript metrics to gene level (Trinity convention).
-    Returns a dataframe containing corrected counts, TPM, abundance-weighted 
-    effective length, and abundance-weighted physical length.
+    Processes a single Salmon quant.sf file. Aggregates transcript metrics to
+    gene level (Trinity convention). Returns a dataframe containing corrected
+    counts, TPM, abundance-weighted effective length, and abundance-weighted
+    physical length.
     """
 
     # Phase 1: Parse and calculate transcript-level weights
@@ -73,7 +73,7 @@ def load_sf(metadata: dict, quant_fn: str) -> pd.DataFrame:
     counts_df = pd.DataFrame(
         txi.X.T, 
         index=txi.var_names, 
-        columns=[f"corrected_counts"]
+        columns=[f"count"]
     )
     
     tpm_df = pd.DataFrame(
@@ -95,31 +95,68 @@ def load_sf(metadata: dict, quant_fn: str) -> pd.DataFrame:
     # Phase 5: Consolidated Merge and Metadata Injection
     combined_df = pd.concat([counts_df, tpm_df, eff_len_df, phys_len_df], axis=1)
     
-    combined_df.index.name = 'gene_id'
+    combined_df.index.name = 'sequence_id'
     combined_df = combined_df.reset_index()
+    combined_df['sequence_type'] = 'gene'
     
     for mk, mv in metadata.items():
         combined_df[mk] = mv
         
-    combined_df["count"] = combined_df[f"corrected_counts"].round().astype(int)
+    combined_df["count"] = combined_df[f"count"].round().astype(int)
 
     return tx_to_gene_map, combined_df
+
+
+def load_quants_by_transcript(metadata: dict, quant_fn: str) -> pd.DataFrame:
+    """
+    Processes a single Salmon quant.sf file at the transcript level.
+    Bypasses tximport to retain individual isoform metrics (_i versions).
+    """
+
+    # Phase 1: Read raw Salmon quantification matrix directly
+    raw_df = pd.read_csv(quant_fn, sep="\t")
+
+    # Phase 2: Extract, isolate, and rename target metrics
+    # Salmon schema: Name | Length | EffectiveLength | TPM | NumReads
+    transcript_df = pd.DataFrame(index=raw_df["Name"])
+
+    transcript_df["count"] = raw_df["NumReads"].values
+    transcript_df["tpm"] = raw_df["TPM"].values
+    transcript_df["effective_length"] = raw_df["EffectiveLength"].values
+    transcript_df["weighted_physical_length"] = raw_df["Length"].values
+
+    # Phase 5: Index and Metadata Injection
+
+    transcript_df.index.name = 'sequence_id'
+    combined_df = transcript_df.reset_index()
+    combined_df['sequence_type'] = 'transcript'
+
+    for mk, mv in metadata.items():
+        combined_df[mk] = mv
+
+    combined_df["count"] = combined_df["count"].round().astype(int)
+
+    return combined_df
 
 
 def process_dir(rootdirn, fn_to_metadata):
     root = Path(rootdirn)
 
-    dataframes = []
     tx_to_gene = []
+    gene_dfs = []
+    transcript_dfs = []
 
     for k,v in fn_to_metadata.items():
         quant_path = root / v["transcriptome"] / k / "quant.sf"
         print(quant_path)
-        t2g, df = load_sf(v, quant_path)
-        dataframes.append(df)
-        tx_to_gene.append(t2g)
 
-    return tx_to_gene, dataframes
+        t2g, df = load_quants_by_gene(v, quant_path)
+        tx_to_gene.append(t2g)
+        gene_dfs.append(df)
+        df = load_quants_by_transcript(v, quant_path)
+        transcript_dfs.append(df)
+
+    return tx_to_gene, gene_dfs, transcript_dfs
 
 
 md = {
@@ -165,16 +202,8 @@ host_md = {
   for fn,desc in md.items()
 }
 
-host_tx_to_gene, host_dataframes = process_dir(args.data_dir, host_md)
-symb_tx_to_gene, symb_dataframes = process_dir(args.data_dir, symb_md)
-
-all_dataframes = host_dataframes + symb_dataframes
-df = pd.concat(all_dataframes, axis=0, ignore_index=True)
-rows = df.to_dict(orient="records")
-for row in rows:
-    row["experiment_id"] = args.experiment_id
-    del row["corrected_counts"]
-GeneCountsTable.write_tsv(args.output_dir+"/gene_counts.tsv", rows)
+host_tx_to_gene, host_gene_dfs, host_transcript_dfs = process_dir(args.data_dir, host_md)
+symb_tx_to_gene, symb_gene_dfs, symb_transcript_dfs = process_dir(args.data_dir, symb_md)
 
 all_tx_to_gene = host_tx_to_gene + symb_tx_to_gene
 df = pd.concat(all_tx_to_gene, axis=0, ignore_index=True)
@@ -182,3 +211,19 @@ rows = df.to_dict(orient="records")
 for row in rows:
     row["experiment_id"] = args.experiment_id
 TranscriptGenesTable.write_tsv(args.output_dir+"/transcript_genes.tsv", rows)
+
+gene_dfs = host_gene_dfs + symb_gene_dfs
+gene_df = pd.concat(gene_dfs, axis=0, ignore_index=True)
+rows = gene_df.to_dict(orient="records")
+for row in rows:
+    row["experiment_id"] = args.experiment_id
+    del row["transcriptome"]
+SequenceCountsTable.write_tsv(args.output_dir+"/gene_counts.tsv", rows)
+
+transcript_dfs = host_transcript_dfs + symb_transcript_dfs
+transcript_df = pd.concat(transcript_dfs, axis=0, ignore_index=True)
+rows = transcript_df.to_dict(orient="records")
+for row in rows:
+    row["experiment_id"] = args.experiment_id
+    del row["transcriptome"]
+SequenceCountsTable.write_tsv(args.output_dir+"/transcript_counts.tsv", rows)

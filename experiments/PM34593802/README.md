@@ -120,6 +120,8 @@ those meeting KO HMM thresholds.
 
 ## DESeq2
 
+Gene level
+
 ```
 coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
   --genome-accession x_breviolum_b5 \
@@ -150,7 +152,11 @@ coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
   --genome-accession x_siderastrea_radians \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/gene_counts.tsv \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
+```
 
+Merge
+
+```
 coral-py coral/scripts/analysis/des2-merge.py EXP_PM34593802 \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802` \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/deseq2_*.tsv
