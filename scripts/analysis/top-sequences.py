@@ -21,11 +21,12 @@ if args.results_fn:
 
 source = CSVSource(DESeq2Table, args.des2_tall_fn)
 des2_rows = source.values()
+des2_rows = [row for row in des2_rows if row["sequence_type"] == "gene"]
 
 prev_sequences = {r["query_accession"]:1 for r in prev_results}
 filtered_rows = [r for r in des2_rows if abs(r["log2foldchange"]) >= args.l2fc_threshold and \
                                          r["padj"] <= args.padj_threshold]
-gene_ids = {r["gene_id"]:1 for r in filtered_rows}
+gene_ids = {r["sequence_id"]:1 for r in filtered_rows}
 final_ids = gene_ids
 
 if args.transcript_genes_fn:

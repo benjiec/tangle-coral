@@ -154,6 +154,40 @@ coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
 ```
 
+Transcript level
+
+```
+coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
+  --genome-accession x_breviolum_b5 \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcript_counts.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
+
+coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
+  --genome-accession x_breviolum_faviinorum \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcript_counts.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
+
+coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
+  --genome-accession x_symbiodinium_a3 \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcript_counts.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
+
+coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
+  --genome-accession x_orbicella_faveolata \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcript_counts.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
+
+coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
+  --genome-accession x_pseudodiploria_clivosa \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcript_counts.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
+
+coral-py coral/scripts/analysis/des2-simple.py --timepoint 0 --min-count 50 \
+  --genome-accession x_siderastrea_radians \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcript_counts.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`
+```
+
 Merge
 
 ```

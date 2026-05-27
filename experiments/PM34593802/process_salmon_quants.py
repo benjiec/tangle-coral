@@ -207,6 +207,7 @@ symb_tx_to_gene, symb_gene_dfs, symb_transcript_dfs = process_dir(args.data_dir,
 
 all_tx_to_gene = host_tx_to_gene + symb_tx_to_gene
 df = pd.concat(all_tx_to_gene, axis=0, ignore_index=True)
+df = df.drop_duplicates()
 rows = df.to_dict(orient="records")
 for row in rows:
     row["experiment_id"] = args.experiment_id
