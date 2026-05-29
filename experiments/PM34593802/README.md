@@ -98,6 +98,32 @@ coral-py coral/scripts/analysis/transcript-manifest.py EXP_PM34593802 \
 
 ## Quantification
 
+Concatenate host and algae transcriptomes together, as samples should be
+counted against them together
+
+```
+PILE_WORKSPACE=PM34593802 pile-py pile/transcriptome_concat.py \
+  orbicella_faveolata symbiodinium_a3
+PILE_WORKSPACE=PM34593802 pile-py pile/quant_index.py \
+  orbicella_faveolata_symbiodinium_a3
+PILE_WORKSPACE=PM34593802 pile-py pile/transcriptome_index.py \
+  orbicella_faveolata_symbiodinium_a3
+
+PILE_WORKSPACE=PM34593802 pile-py pile/transcriptome_concat.py \
+  pseudodiploria_clivosa breviolum_faviinorum
+PILE_WORKSPACE=PM34593802 pile-py pile/quant_index.py \
+  pseudodiploria_clivosa_breviolum_faviinorum
+PILE_WORKSPACE=PM34593802 pile-py pile/transcriptome_index.py \
+  pseudodiploria_clivosa_breviolum_faviinorum
+
+PILE_WORKSPACE=PM34593802 pile-py pile/transcriptome_concat.py \
+  siderastrea_radians breviolum_b5
+PILE_WORKSPACE=PM34593802 pile-py pile/quant_index.py \
+  siderastrea_radians_breviolum_b5
+PILE_WORKSPACE=PM34593802 pile-py pile/transcriptome_index.py \
+  siderastrea_radians_breviolum_b5
+```
+
 See Pile README on downloaded SRA assets. Then use Pile to quantify. See
 `quant.sh` for exact commands for each transcriptome.
 

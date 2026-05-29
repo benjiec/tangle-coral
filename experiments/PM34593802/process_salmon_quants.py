@@ -31,8 +31,10 @@ def load_quants_by_gene(metadata: dict, quant_fn: str) -> pd.DataFrame:
         reader = csv.DictReader(f, delimiter="\t")
         for row in reader:
             tx_id = row["Name"]
+            if not tx_id.startswith(metadata["species_prefix"]):
+                continue
+
             gene_id = re.sub(r'_i\d+$', '', tx_id)
-            
             tx_to_gene.append({"transcript_id": tx_id, "gene_id": gene_id})
             raw_records.append({
                 "gene_id": gene_id,
@@ -115,6 +117,7 @@ def load_quants_by_transcript(metadata: dict, quant_fn: str) -> pd.DataFrame:
 
     # Phase 1: Read raw Salmon quantification matrix directly
     raw_df = pd.read_csv(quant_fn, sep="\t")
+    raw_df = raw_df[raw_df['Name'].str.startswith(metadata["species_prefix"])]
 
     # Phase 2: Extract, isolate, and rename target metrics
     # Salmon schema: Name | Length | EffectiveLength | TPM | NumReads
@@ -160,46 +163,48 @@ def process_dir(rootdirn, fn_to_metadata):
 
 
 md = {
-  "SRR6255820": "Orbicella faveolata, Symbiodinium A3, control, A",
-  "SRR6255822": "Orbicella faveolata, Symbiodinium A3, control, B",
-  "SRR6255825": "Orbicella faveolata, Symbiodinium A3, control, C",
-  "SRR6255844": "Orbicella faveolata, Symbiodinium A3, treatment, A",
-  "SRR6255862": "Orbicella faveolata, Symbiodinium A3, treatment, B",
-  "SRR6255864": "Orbicella faveolata, Symbiodinium A3, treatment, C",
-  "SRR6255880": "Pseudodiploria clivosa, Breviolum faviinorum, control, A",
-  "SRR6255882": "Pseudodiploria clivosa, Breviolum faviinorum, control, B",
-  "SRR6255888": "Pseudodiploria clivosa, Breviolum faviinorum, control, C",
-  "SRR6255887": "Pseudodiploria clivosa, Breviolum faviinorum, treatment, A",
-  "SRR6255886": "Pseudodiploria clivosa, Breviolum faviinorum, treatment, B",
-  "SRR6255890": "Pseudodiploria clivosa, Breviolum faviinorum, treatment, C",
-  "SRR6255889": "Siderastrea radians, Breviolum B5, control, A",
-  "SRR6256312": "Siderastrea radians, Breviolum B5, control, B",
-  "SRR6256323": "Siderastrea radians, Breviolum B5, control, C",
-  "SRR6256322": "Siderastrea radians, Breviolum B5, treatment, A",
-  "SRR6256324": "Siderastrea radians, Breviolum B5, treatment, B",
-  "SRR6256325": "Siderastrea radians, Breviolum B5, treatment, C",
+  "SRR6255820": ("orbicella_faveolata_symbiodinium_a3", "orbicella_host", "orbicella_symb", "control", "A"),
+  "SRR6255822": ("orbicella_faveolata_symbiodinium_a3", "orbicella_host", "orbicella_symb", "control", "B"),
+  "SRR6255825": ("orbicella_faveolata_symbiodinium_a3", "orbicella_host", "orbicella_symb", "control", "C"),
+  "SRR6255844": ("orbicella_faveolata_symbiodinium_a3", "orbicella_host", "orbicella_symb", "treatment", "A"),
+  "SRR6255862": ("orbicella_faveolata_symbiodinium_a3", "orbicella_host", "orbicella_symb", "treatment", "B"),
+  "SRR6255864": ("orbicella_faveolata_symbiodinium_a3", "orbicella_host", "orbicella_symb", "treatment", "C"),
+  "SRR6255880": ("pseudodiploria_clivosa_breviolum_faviinorum", "pseudodiploria_host", "pseudodiploria_symb", "control", "A"),
+  "SRR6255882": ("pseudodiploria_clivosa_breviolum_faviinorum", "pseudodiploria_host", "pseudodiploria_symb", "control", "B"),
+  "SRR6255888": ("pseudodiploria_clivosa_breviolum_faviinorum", "pseudodiploria_host", "pseudodiploria_symb", "control", "C"),
+  "SRR6255887": ("pseudodiploria_clivosa_breviolum_faviinorum", "pseudodiploria_host", "pseudodiploria_symb", "treatment", "A"),
+  "SRR6255886": ("pseudodiploria_clivosa_breviolum_faviinorum", "pseudodiploria_host", "pseudodiploria_symb", "treatment", "B"),
+  "SRR6255890": ("pseudodiploria_clivosa_breviolum_faviinorum", "pseudodiploria_host", "pseudodiploria_symb", "treatment", "C"),
+  "SRR6255889": ("siderastrea_radians_breviolum_b5", "siderastrea_host", "siderastrea_symb", "control", "A"),
+  "SRR6256312": ("siderastrea_radians_breviolum_b5", "siderastrea_host", "siderastrea_symb", "control", "B"),
+  "SRR6256323": ("siderastrea_radians_breviolum_b5", "siderastrea_host", "siderastrea_symb", "control", "C"),
+  "SRR6256322": ("siderastrea_radians_breviolum_b5", "siderastrea_host", "siderastrea_symb", "treatment", "A"),
+  "SRR6256324": ("siderastrea_radians_breviolum_b5", "siderastrea_host", "siderastrea_symb", "treatment", "B"),
+  "SRR6256325": ("siderastrea_radians_breviolum_b5", "siderastrea_host", "siderastrea_symb", "treatment", "C"),
 }
 
 symb_md = {
   fn: dict(
     timepoint=0,
-    cohort=desc.split(", ")[2],
-    sample=desc.split(", ")[3],
-    transcriptome=desc.split(", ")[1].lower().replace(" ", "_"),
-    genome_accession="x_"+desc.split(", ")[1].lower().replace(" ", "_")
+    cohort=desc[3],
+    sample=desc[4],
+    transcriptome=desc[0],
+    species_prefix=desc[2],
+    genome_accession="x_"+desc[0].split("_")[2].lower()+"_"+desc[0].split("_")[3].lower()
   )
-  for fn,desc in md.items()
+  for fn, desc in md.items()
 }
 
 host_md = {
   fn: dict(
     timepoint=0,
-    cohort=desc.split(", ")[2],
-    sample=desc.split(", ")[3],
-    transcriptome=desc.split(", ")[0].lower().replace(" ", "_"),
-    genome_accession="x_"+desc.split(", ")[0].lower().replace(" ", "_")
+    cohort=desc[3],
+    sample=desc[4],
+    transcriptome=desc[0],
+    species_prefix=desc[1],
+    genome_accession="x_"+desc[0].split("_")[0].lower()+"_"+desc[0].split("_")[1].lower()
   )
-  for fn,desc in md.items()
+  for fn, desc in md.items()
 }
 
 host_tx_to_gene, host_gene_dfs, host_transcript_dfs = process_dir(args.data_dir, host_md)
@@ -219,6 +224,7 @@ rows = gene_df.to_dict(orient="records")
 for row in rows:
     row["experiment_id"] = args.experiment_id
     del row["transcriptome"]
+    del row["species_prefix"]
 SequenceCountsTable.write_tsv(args.output_dir+"/gene_counts.tsv", rows)
 
 transcript_dfs = host_transcript_dfs + symb_transcript_dfs
@@ -227,4 +233,5 @@ rows = transcript_df.to_dict(orient="records")
 for row in rows:
     row["experiment_id"] = args.experiment_id
     del row["transcriptome"]
+    del row["species_prefix"]
 SequenceCountsTable.write_tsv(args.output_dir+"/transcript_counts.tsv", rows)
