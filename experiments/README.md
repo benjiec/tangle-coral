@@ -64,16 +64,13 @@ available conversion or just gene ids.
 ```
 coral-py coral/scripts/analysis/top-sequences.py \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/des2_tall.tsv \
-  --l2fc-threshold 0.1 --padj-threshold 0.05 \
-  --results-fn `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_fs.tsv \
-  --transcript-genes-fn `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcript_genes.tsv \
-  --transcript-proteins-fn `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcript_proteins.tsv
+  --l2fc-threshold 0.1 --padj-threshold 0.05 --mean-threshold 200 \
 ```
 
 And you can pipe the results from above to filter a protein fasta, for further
 classification
 
 ```
-  | tangle-py tangle/scripts/fasta-emit.py \
+  | tangle-py tangle/scripts/fasta-emit.py --prefix-with-underscore \
       `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/proteins.faa.gz -
 ```
