@@ -106,3 +106,12 @@ tangle-py tangle/scripts/demux-mmseq-clusters.py \
   --cluster-type aa \
   cluster_cluster.tsv clusters.tsv
 ```
+
+Look at an alignment by cluster name
+
+```
+tangle-py tangle/scripts/cluster-align.py \
+  cluster_all_seqs.fasta \
+  "EXP_PM34593802|siderastrea_symb_TRINITY_DN523509_c0_g1_i1.p1" \
+  out.faa
+```
