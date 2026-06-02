@@ -72,5 +72,37 @@ classification
 
 ```
   | tangle-py tangle/scripts/fasta-emit.py --prefix-with-underscore \
-      `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/proteins.faa.gz -
+      `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/proteins.faa.gz - > top.faa
+```
+
+
+## Clustering of top transcripts
+
+Add transcripts to a pool of sequences that have database name in the accessions
+
+```
+tangle-py tangle/scripts/fasta-pool.py \
+  --database PM34593802
+  top.faa 
+  --append-to all_interesting_sequences.faa
+```
+
+Cluster using MMSeqs
+
+```
+docker run --rm \
+  -v .:/work \
+  ghcr.io/soedinglab/mmseqs2 \
+  easy-cluster /work/all_interesting_sequences.faa /work/cluster /tmp \
+  --cov-mode 0
+```
+
+Prepare a cluster TSV that can be loaded into BigQuery
+
+```
+tangle-py tangle/scripts/demux-mmseq-clusters.py \
+  --clustering-description glbtx \
+  --parameters "c0.8 sid0" \
+  --cluster-type aa \
+  cluster_cluster.tsv clusters.tsv
 ```

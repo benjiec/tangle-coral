@@ -22,7 +22,6 @@ The following tables are loaded into BigQuery.
     * `pfam_go`: mapping of Pfam families to GO terms, join with `pfam_accession` and use `go_description`
     * `uniprot`: mapping of UniProt accession to function description, join with `uniprot_accession`
     * `uniprot_go`: mapping of UniProt accession to GO terms, join with `uniprot_accession`
-    * `orthodb_uniprot_groups`: mapping of UniProt accessions to OrthoDB groups, join with `uniprot_accession`
     * `kegg_ko_thresholds`: KO HMM thresholds and consensus lenth, join ortholog ID with `model`
 
   * Genomic data
@@ -204,12 +203,6 @@ tangle/scripts/world/pfam-download.sh
 tangle/scripts/world/odb-download.sh
 ```
 
-Parse the OrthoDB files into a TSV file that joins UniProt IDs to OrthoDB groups.
-
-```
-tangle-py tangle/scripts/world/parse-odb.py
-```
-
 HMM profiles for KEGG and Pfam should be downloaded to directories specified by
 matching environment variables, according to `heap/README.md`.
 
@@ -265,7 +258,7 @@ PREVIOUS DATA if re-running.
 
 ```
 # CANNOT run concurrently on different inputs because aggregates data by genome
-tangle-py tangle/scripts/demux-outputs.py \
+tangle-py tangle/scripts/demux-detected.py \
   --forget-original \
   --set-batch \
   --pooled-target-fasta-suffix .faa \
@@ -299,7 +292,7 @@ Run the following to demultiplex the results.
 
 ```
 # can run concurrently on different inputs
-tangle-py tangle/scripts/demux-outputs.py \
+tangle-py tangle/scripts/demux-detected.py \
   --set-batch \
   --forget-original \
   runs/<run_dir>/outputs/sequence_ko_*
@@ -384,7 +377,7 @@ Use the following to demultiplex the outputs and concatenate.
 
 ```
 # can run concurrently on different inputs
-tangle-py tangle/scripts/demux-outputs.py \
+tangle-py tangle/scripts/demux-detected.py \
   --set-batch \
   --forget-original \
   runs/<run_dir>/outputs/sequence_pfam_*.tsv
@@ -492,30 +485,6 @@ bq load \
 
 rm ./tangle_kegg_ko_thresholds.schema.json
 ```
-
-Load OrthoDB groups and join table with UniProt accessions
-
-```
-tangle-py tangle/scripts/bq-schema.py \
-  --check $TANGLE_WORLD/tangle/odb_uniprot_groups.tsv.gz \
-  tangle.orthodb
-
-# make sure the above runs successfully
-
-tangle-py tangle/scripts/bq-schema.py \
-  tangle.orthodb > tangle_odb_uniprot_groups.schema.json
-
-bq load \
-  --source_format=CSV \
-  --field_delimiter='\t' \
-  --skip_leading_rows=1 \
-  tangle_coral.orthodb_uniprot_groups \
-  $TANGLE_WORLD/tangle/odb_uniprot_groups.tsv.gz \
-  ./tangle_odb_uniprot_groups.schema.json
-
-rm ./tangle_odb_uniprot_groups.schema.json
-```
-
 
 ### Tables for genomics data
 
@@ -777,4 +746,26 @@ bq load \
   tangle_coral.experiment_detected \
   sequence_fs.tsv \
   ./tangle_detected.schema.json
+```
+
+### Clusters
+
+```
+tangle-py tangle/scripts/bq-schema.py \
+  --check clusters.tsv \
+  tangle.cluster
+
+# make sure the above runs completely
+
+tangle-py tangle/scripts/bq-schema.py tangle.cluster > tangle_cluster.schema.json
+
+bq load \
+  --source_format=CSV \
+  --field_delimiter='\t' \
+  --skip_leading_rows=1 \
+  tangle_coral.clusters \
+  clusters.tsv \
+  ./tangle_cluster.schema.json
+
+rm ./tangle_cluster.schema.json
 ```
