@@ -82,8 +82,8 @@ Add transcripts to a pool of sequences that have database name in the accessions
 
 ```
 tangle-py tangle/scripts/fasta-pool.py \
-  --database PM34593802
-  top.faa 
+  --database EXP_PM34593802 \
+  top.faa \
   --append-to all_interesting_sequences.faa
 ```
 
@@ -94,7 +94,7 @@ docker run --rm \
   -v .:/work \
   ghcr.io/soedinglab/mmseqs2 \
   easy-cluster /work/all_interesting_sequences.faa /work/cluster /tmp \
-  --cov-mode 0
+  --cov-mode 0 -c 0.8 --min-seq-id 0
 ```
 
 Prepare a cluster TSV that can be loaded into BigQuery
