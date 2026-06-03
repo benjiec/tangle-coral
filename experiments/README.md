@@ -114,3 +114,5 @@ tangle-py tangle/scripts/cluster-align.py \
   cluster_all_seqs.fasta out.faa \
   ea23f31d37
 ```
+
+The resulting alignment file `out.faa` can be visaulized at https://alignmentviewer.org/
