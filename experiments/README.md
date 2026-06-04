@@ -87,13 +87,13 @@ tangle-py tangle/scripts/fasta-pool.py \
   --append-to all_interesting_sequences.faa
 ```
 
-Cluster using MMSeqs
+Cluster using MMSeqs, for AA sequences
 
 ```
 docker run --rm \
   -v .:/work \
   ghcr.io/soedinglab/mmseqs2 \
-  easy-cluster /work/all_interesting_sequences.faa /work/cluster /tmp \
+  easy-cluster /work/top_pooled.faa /work/cluster /tmp \
   --cov-mode 0 -c 0.8 --min-seq-id 0 -s 4
 ```
 
@@ -119,3 +119,35 @@ tangle-py tangle/scripts/cluster-align.py \
 ```
 
 The resulting alignment file `out.faa` can be visaulized at https://alignmentviewer.org/
+
+Cluster using MMSeqs, for 3Di. First cd into the directory with the 3Di database
+
+```
+docker run --platform linux/amd64 --rm \
+  -v .:/work \
+  ghcr.io/steineggerlab/foldseek cluster \
+  /work/final_db /work/cluster_db /tmp \
+  --target-search-mode 1 \
+  --cov-mode 0 -c 0.8 -s 4 --min-seq-id 0
+```
+
+Dump the cluster DB TSV
+
+```
+docker run --platform linux/amd64 --rm -v .:/work ghcr.io/steineggerlab/foldseek createtsv \
+    /work/final_db \
+    /work/final_db \
+    /work/cluster_db \
+    /work/top_cluster_3di.txt
+```
+
+Prepare a cluster TSV that can be loaded into BigQuery
+
+```
+tangle-py tangle/scripts/demux-mmseq-clusters.py \
+  --member-database EXP_PM34593802 \
+  --clustering-description glbtx \
+  --parameters "c_m=0,c=0.8,s_id=0,s=4" \
+  --cluster-type 3di \
+  top_cluster_3di.txt clusters_3di.tsv
+```
