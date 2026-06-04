@@ -129,12 +129,8 @@ docker run --platform linux/amd64 --rm \
   ghcr.io/steineggerlab/foldseek cluster \
   /work/final_db /work/cluster_db /tmp \
   --target-search-mode 1 \
-  --cov-mode 1 -c 0.8 -s 4 --min-seq-id 0
-```
+  --cov-mode 0 -c 0.8 -s 5 --min-seq-id 0
 
-Dump the cluster DB TSV
-
-```
 docker run --platform linux/amd64 --rm -v .:/work ghcr.io/steineggerlab/foldseek createtsv \
     /work/final_db \
     /work/final_db \
@@ -148,7 +144,35 @@ Prepare a cluster TSV that can be loaded into BigQuery
 tangle-py tangle/scripts/demux-mmseq-clusters.py \
   --member-database EXP_PM34593802 \
   --clustering-description glbtx \
-  --parameters "c_m=1,c=0.8,s_id=0,s=4" \
+  --parameters "c_m=0,c=0.8,s_id=0,s=5" \
   --cluster-type 3di \
   top_cluster_3di.txt clusters_3di.tsv
+```
+
+3Di search
+
+```
+docker run --platform linux/amd64 --rm \
+  -v ./query_db_ko:/query \
+  -v ./target_db_top_tx:/target \
+  -v ./res:/res ghcr.io/steineggerlab/foldseek \
+  search \
+  /query/final_db \
+  /target/final_db \
+  /res/result_db \
+  /tmp \
+  --target-search-mode 1 \
+  -e 0.001 \
+  -c 0.8
+
+docker run --platform linux/amd64 --rm \
+  -v ./query_db_ko:/query \
+  -v ./target_db_top_tx:/target \
+  -v ./res:/res ghcr.io/steineggerlab/foldseek \
+  convertalis \
+  /query/final_db \
+  /target/final_db \
+  /res/result_db \
+  /res/results.tsv \
+  --format-output "query,target,fident,alnlen,mismatch,gapopen,qstart,qend,tstart,tend,evalue,bits"
 ```
