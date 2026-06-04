@@ -120,7 +120,8 @@ tangle-py tangle/scripts/cluster-align.py \
 
 The resulting alignment file `out.faa` can be visaulized at https://alignmentviewer.org/
 
-Cluster using MMSeqs, for 3Di. First cd into the directory with the 3Di database
+Cluster using MMSeqs, for 3Di. First cd into the directory with the 3Di
+database, then (note the parameter differences)
 
 ```
 docker run --platform linux/amd64 --rm \
@@ -128,7 +129,7 @@ docker run --platform linux/amd64 --rm \
   ghcr.io/steineggerlab/foldseek cluster \
   /work/final_db /work/cluster_db /tmp \
   --target-search-mode 1 \
-  --cov-mode 0 -c 0.8 -s 4 --min-seq-id 0
+  --cov-mode 1 -c 0.8 -s 4 --min-seq-id 0
 ```
 
 Dump the cluster DB TSV
@@ -147,7 +148,7 @@ Prepare a cluster TSV that can be loaded into BigQuery
 tangle-py tangle/scripts/demux-mmseq-clusters.py \
   --member-database EXP_PM34593802 \
   --clustering-description glbtx \
-  --parameters "c_m=0,c=0.8,s_id=0,s=4" \
+  --parameters "c_m=1,c=0.8,s_id=0,s=4" \
   --cluster-type 3di \
   top_cluster_3di.txt clusters_3di.tsv
 ```
