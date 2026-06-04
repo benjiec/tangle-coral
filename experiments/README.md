@@ -94,7 +94,7 @@ docker run --rm \
   -v .:/work \
   ghcr.io/soedinglab/mmseqs2 \
   easy-cluster /work/all_interesting_sequences.faa /work/cluster /tmp \
-  --cov-mode 0 -c 0.8 --min-seq-id 0
+  --cov-mode 0 -c 0.8 --min-seq-id 0 -s 4
 ```
 
 Prepare a cluster TSV that can be loaded into BigQuery
@@ -102,7 +102,7 @@ Prepare a cluster TSV that can be loaded into BigQuery
 ```
 tangle-py tangle/scripts/demux-mmseq-clusters.py \
   --clustering-description glbtx \
-  --parameters "c0.8 sid0" \
+  --parameters "c_m=0,c=0.8,s_id=0,s=4" \
   --cluster-type aa \
   cluster_cluster.tsv clusters.tsv
 ```
@@ -111,6 +111,9 @@ Look at an alignment by cluster name
 
 ```
 tangle-py tangle/scripts/cluster-align.py \
+  --clustering-description glbtx \
+  --parameters "c_m=0,c=0.8,s_id=0,s=4" \
+  --cluster-type aa \
   cluster_all_seqs.fasta out.faa \
   ea23f31d37
 ```
