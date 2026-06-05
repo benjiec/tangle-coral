@@ -120,7 +120,39 @@ tangle-py tangle/scripts/cluster-align.py \
 
 The resulting alignment file `out.faa` can be visaulized at https://alignmentviewer.org/
 
-Cluster using MMSeqs, for 3Di. First cd into the directory with the 3Di
+3Di search for KOs
+
+```
+docker run --platform linux/amd64 --rm \
+  -v ./query_db_ko:/query \
+  -v ./target_db_top_tx:/target \
+  -v ./res:/res ghcr.io/steineggerlab/foldseek \
+  search \
+  /query/final_db \
+  /target/final_db \
+  /res/result_db \
+  /tmp \
+  --target-search-mode 1 \
+  --alignment-mode 2 \
+  -e 0.001 \
+  -c 0.0
+
+docker run --platform linux/amd64 --rm \
+  -v ./query_db_ko:/query \
+  -v ./target_db_top_tx:/target \
+  -v ./res:/res ghcr.io/steineggerlab/foldseek \
+  convertalis \
+  /query/final_db \
+  /target/final_db \
+  /res/result_db \
+  /res/results.tsv \
+  --format-output "query,target,fident,alnlen,mismatch,gapopen,qstart,qend,tstart,tend,evalue,bits"
+```
+
+The following is not very useful, so it's here as notes. Don't waste time on
+this at the moment.
+
+3Di clustering using FoldSeek. First cd into the directory with the 3Di
 database, then (note the parameter differences)
 
 ```
@@ -147,32 +179,4 @@ tangle-py tangle/scripts/demux-mmseq-clusters.py \
   --parameters "c_m=0,c=0.8,s_id=0,s=5" \
   --cluster-type 3di \
   top_cluster_3di.txt clusters_3di.tsv
-```
-
-3Di search
-
-```
-docker run --platform linux/amd64 --rm \
-  -v ./query_db_ko:/query \
-  -v ./target_db_top_tx:/target \
-  -v ./res:/res ghcr.io/steineggerlab/foldseek \
-  search \
-  /query/final_db \
-  /target/final_db \
-  /res/result_db \
-  /tmp \
-  --target-search-mode 1 \
-  -e 0.001 \
-  -c 0.8
-
-docker run --platform linux/amd64 --rm \
-  -v ./query_db_ko:/query \
-  -v ./target_db_top_tx:/target \
-  -v ./res:/res ghcr.io/steineggerlab/foldseek \
-  convertalis \
-  /query/final_db \
-  /target/final_db \
-  /res/result_db \
-  /res/results.tsv \
-  --format-output "query,target,fident,alnlen,mismatch,gapopen,qstart,qend,tstart,tend,evalue,bits"
 ```
