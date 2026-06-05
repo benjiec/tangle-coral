@@ -133,8 +133,9 @@ docker run --platform linux/amd64 --rm \
   /res/result_db \
   /tmp \
   --target-search-mode 1 \
-  --alignment-mode 2 \
+  --alignment-type 2 \
   -e 0.001 \
+  -s 9.5 \
   -c 0.0
 
 docker run --platform linux/amd64 --rm \
