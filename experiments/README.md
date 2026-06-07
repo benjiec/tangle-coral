@@ -147,7 +147,29 @@ docker run --platform linux/amd64 --rm \
   /target/final_db \
   /res/result_db \
   /res/results.tsv \
-  --format-output "query,target,fident,alnlen,mismatch,gapopen,qstart,qend,tstart,tend,evalue,bits"
+  --format-output "query,target,evalue,bits,qstart,qend,tstart,tend"
+
+# Generates file that can be uploaded
+heap-py heap/scripts/foldseek.py \
+  --input-from-foldseek 3di/res-cm0-c0/results.tsv \
+  --keep-all-results \
+  --query-database-name EXP_PM34593802 \
+  --query-type protein \
+  --target-database-name 3di-ko \
+  --target-type protein \
+  _ _ _ sequence_3di_ko.tsv
+
+# Load to BQ
+
+tangle-py tangle/scripts/bq-schema.py tangle.detected > tangle_detected.schema.json
+
+bq load \
+  --source_format=CSV \
+  --field_delimiter='\t' \
+  --skip_leading_rows=1 \
+  tangle_coral.experiment_detected \
+  sequence_3di_ko.tsv \
+  ./tangle_detected.schema.json 
 ```
 
 The following is not very useful, so it's here as notes. Don't waste time on
