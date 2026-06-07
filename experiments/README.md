@@ -124,8 +124,8 @@ The resulting alignment file `out.faa` can be visaulized at https://alignmentvie
 
 ```
 docker run --platform linux/amd64 --rm \
-  -v ./query_db_ko:/query \
-  -v ./target_db_top_tx:/target \
+  -v ./query_db_top_tx:/query \
+  -v ./target_db_ko:/target \
   -v ./res:/res ghcr.io/steineggerlab/foldseek \
   search \
   /query/final_db \
@@ -139,8 +139,8 @@ docker run --platform linux/amd64 --rm \
   -c 0.0
 
 docker run --platform linux/amd64 --rm \
-  -v ./query_db_ko:/query \
-  -v ./target_db_top_tx:/target \
+  -v ./query_db_top_tx:/query \
+  -v ./target_db_ko:/target \
   -v ./res:/res ghcr.io/steineggerlab/foldseek \
   convertalis \
   /query/final_db \
