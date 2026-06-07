@@ -136,7 +136,7 @@ docker run --platform linux/amd64 --rm \
   --alignment-type 2 \
   -e 0.001 \
   -s 9.5 \
-  -c 0.0
+  --cov-mode 0 -c 0.0
 
 docker run --platform linux/amd64 --rm \
   -v ./query_db_top_tx:/query \
