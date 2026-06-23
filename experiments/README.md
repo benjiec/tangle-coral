@@ -64,7 +64,7 @@ available conversion or just gene ids.
 ```
 coral-py coral/scripts/analysis/top-sequences.py \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/des2_tall.tsv \
-  --l2fc-threshold 0.1 --padj-threshold 0.05 --mean-threshold 200 \
+  --l2fc-threshold 0.1 --padj-threshold 0.05 --mean-threshold 200
 ```
 
 And you can pipe the results from above to filter a protein fasta, for further
@@ -78,12 +78,20 @@ classification
 
 ## Clustering of top transcripts
 
+For each experiment, save the `top.faa` (e.g. from above) as `proteins.top.faa`.
+
 Add transcripts to a pool of sequences that have database name in the accessions
 
 ```
 tangle-py tangle/scripts/fasta-pool.py \
   --database EXP_PM34593802 \
-  top.faa \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/proteins.top.faa \
+  --append-to all_interesting_sequences.faa
+
+
+tangle-py tangle/scripts/fasta-pool.py \
+  --database EXP_PM32426508 \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM32426508`/proteins.top.faa \
   --append-to all_interesting_sequences.faa
 ```
 
@@ -93,7 +101,7 @@ Cluster using MMSeqs, for AA sequences
 docker run --rm \
   -v .:/work \
   ghcr.io/soedinglab/mmseqs2 \
-  easy-cluster /work/top_pooled.faa /work/cluster /tmp \
+  easy-cluster /work/all_interesting_sequences.faa /work/cluster /tmp \
   --cov-mode 0 -c 0.8 --min-seq-id 0 -s 4
 ```
 
@@ -120,7 +128,12 @@ tangle-py tangle/scripts/cluster-align.py \
 
 The resulting alignment file `out.faa` can be visaulized at https://alignmentviewer.org/
 
-3Di search for KOs
+
+## 3Di Search for KOs
+
+Target is KO consensus sequence 3Di database. Query is the AA sequences of
+interests 3Di database. Convert to 3Di using
+`heap/gcloud/foldseek-create-prostt5-db/setup.py`.
 
 ```
 docker run --platform linux/amd64 --rm \
@@ -171,6 +184,8 @@ bq load \
   sequence_3di_ko.tsv \
   ./tangle_detected.schema.json 
 ```
+
+## Notes: clustering by 3Di (not useful)
 
 The following is not very useful, so it's here as notes. Don't waste time on
 this at the moment.
