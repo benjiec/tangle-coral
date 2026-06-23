@@ -610,9 +610,11 @@ files
   * `transcript_proteins.tsv`
   * `sequence_ko.tsv`
   * `sequence_pfam.tsv`
+  * `sequence_fs.tsv`
+  * `sequence_3di_ko.tsv`
   * `transcript_genes.tsv`
-  * `gene_counts.tsv`
-  * `transcript_counts.tsv`
+  * `gene_counts.tsv.gz`
+  * `transcript_counts.tsv.gz`
   * `des2_tall.tsv`
 
 Use the following to load into BigQuery, repeating for each experiment
@@ -634,11 +636,14 @@ tangle-py tangle/scripts/bq-schema.py \
   --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_fs.tsv \
   tangle.detected
 tangle-py tangle/scripts/bq-schema.py \
-  --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/gene_counts.tsv \
+  --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_3di_ko.tsv \
+  tangle.detected
+tangle-py tangle/scripts/bq-schema.py \
+  --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/gene_counts.tsv.gz \
   --table-name SequenceCountsTable \
   tangle.exp
 tangle-py tangle/scripts/bq-schema.py \
-  --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcript_counts.tsv \
+  --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcript_counts.tsv.gz \
   --table-name SequenceCountsTable \
   tangle.exp
 tangle-py tangle/scripts/bq-schema.py \
@@ -702,8 +707,16 @@ bq load \
   --source_format=CSV \
   --field_delimiter='\t' \
   --skip_leading_rows=1 \
+  tangle_coral.experiment_detected \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_3di_ko.tsv \
+  ./tangle_detected.schema.json 
+
+bq load \
+  --source_format=CSV \
+  --field_delimiter='\t' \
+  --skip_leading_rows=1 \
   tangle_coral.experiment_sequence_counts \
-  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/gene_counts.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/gene_counts.tsv.gz \
   ./exp_sequence_counts.schema.json
 
 bq load \
@@ -711,7 +724,7 @@ bq load \
   --field_delimiter='\t' \
   --skip_leading_rows=1 \
   tangle_coral.experiment_sequence_counts \
-  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcript_counts.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/transcript_counts.tsv.gz \
   ./exp_sequence_counts.schema.json
 
 bq load \
