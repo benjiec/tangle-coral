@@ -754,7 +754,7 @@ rm ./exp_deseq2_tall.schema.json
 
 ```
 tangle-py tangle/scripts/bq-schema.py \
-  --check clusters.tsv \
+  --check `tangle-py tangle/scripts/defaults.py -m area_experiments_dir`/clusters.tsv \
   tangle.cluster
 
 # make sure the above runs completely
@@ -766,7 +766,7 @@ bq load \
   --field_delimiter='\t' \
   --skip_leading_rows=1 \
   tangle_coral.clusters \
-  clusters.tsv \
+  `tangle-py tangle/scripts/defaults.py -m area_experiments_dir`/clusters.tsv \
   ./tangle_cluster.schema.json
 
 rm ./tangle_cluster.schema.json
