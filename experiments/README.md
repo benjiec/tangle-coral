@@ -154,7 +154,7 @@ interests 3Di database. Convert to 3Di using
 
 ```
 docker run --platform linux/amd64 --rm \
-  -v ./query_db_top_tx:/query \
+  -v ./query_db:/query \
   -v ./target_db_ko:/target \
   -v ./res:/res ghcr.io/steineggerlab/foldseek \
   search \
@@ -169,7 +169,7 @@ docker run --platform linux/amd64 --rm \
   --cov-mode 0 -c 0.0
 
 docker run --platform linux/amd64 --rm \
-  -v ./query_db_top_tx:/query \
+  -v ./query_db:/query \
   -v ./target_db_ko:/target \
   -v ./res:/res ghcr.io/steineggerlab/foldseek \
   convertalis \
@@ -180,8 +180,8 @@ docker run --platform linux/amd64 --rm \
   --format-output "query,target,evalue,bits,qstart,qend,tstart,tend"
 
 # Generates file that can be uploaded
-heap-py heap/scripts/foldseek.py \
-  --input-from-foldseek 3di/res-cm0-c0/results.tsv \
+heap-py ../heap/scripts/foldseek.py \
+  --input-from-foldseek res/results.tsv \
   --keep-all-results \
   --query-database-name EXP_PM34593802 \
   --query-type protein \
