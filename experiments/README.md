@@ -76,6 +76,23 @@ classification
 ```
 
 
+## Map Top Transcripts to SwissProt using 3Di
+
+Use `heap/gcloud/foldseek-swissprot`. 
+
+Convert outputs into a format we can use
+
+```
+heap-py heap/scripts/foldseek.py \
+  --input-from-foldseek sequence_fs_raw.tsv \
+  --query-database-name EXP_PM34593802 \
+  --query-type protein \
+  --target-database-name afdb-swissprot \
+  --target-type protein \
+  _ _ _ sequence_fs.tsv
+```
+
+
 ## Clustering of top transcripts
 
 For each experiment, save the `top.faa` (e.g. from above) as `proteins.top.faa`.

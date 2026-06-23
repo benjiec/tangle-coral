@@ -631,6 +631,9 @@ tangle-py tangle/scripts/bq-schema.py \
   --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_pfam.tsv \
   tangle.detected
 tangle-py tangle/scripts/bq-schema.py \
+  --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_fs.tsv \
+  tangle.detected
+tangle-py tangle/scripts/bq-schema.py \
   --check `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/gene_counts.tsv \
   --table-name SequenceCountsTable \
   tangle.exp
@@ -691,6 +694,14 @@ bq load \
   --source_format=CSV \
   --field_delimiter='\t' \
   --skip_leading_rows=1 \
+  tangle_coral.experiment_detected \
+  `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/sequence_fs.tsv \
+  ./tangle_detected.schema.json
+
+bq load \
+  --source_format=CSV \
+  --field_delimiter='\t' \
+  --skip_leading_rows=1 \
   tangle_coral.experiment_sequence_counts \
   `tangle-py tangle/scripts/defaults.py -m area_experiment PM34593802`/gene_counts.tsv \
   ./exp_sequence_counts.schema.json
@@ -724,28 +735,6 @@ rm ./tangle_detected.schema.json
 rm ./exp_sequence_counts.schema.json
 rm ./exp_transcript_genes.schema.json
 rm ./exp_deseq2_tall.schema.json
-```
-
-To just load a file into the `experiment_detected` table (rows can be removed
-with the unique `batch` value later) do the following, replacing
-"sequence_fs.tsv" with your TSV file
-
-```
-tangle-py tangle/scripts/bq-schema.py \
-  --check sequence_fs.tsv \
-  tangle.detected
-
-# make sure the above runs completely
-
-tangle-py tangle/scripts/bq-schema.py tangle.detected > tangle_detected.schema.json
-
-bq load \
-  --source_format=CSV \
-  --field_delimiter='\t' \
-  --skip_leading_rows=1 \
-  tangle_coral.experiment_detected \
-  sequence_fs.tsv \
-  ./tangle_detected.schema.json
 ```
 
 ### Clusters
