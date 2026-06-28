@@ -6,7 +6,8 @@ build-backend = "setuptools.build_meta"
 name = "coral"
 version = "0.1.0"
 dependencies = [
-  "tangle @ git+https://github.com/benjiec/tangle.git@45eaf46",
+  "tangle @ git+https://github.com/benjiec/tangle.git@1f7c7d9",
+  "needle @ git+https://github.com/benjiec/tangle-needle.git@3f35ab6",
   "pydeseq2==0.5.4",
   "pyarrow==23.0.1",
   "pytximport==0.13.0"
