@@ -1,0 +1,7 @@
+.needle-venv
+swissprot-downloads
+__pycache__
+.*.swp
+tmp
+.*.twbr
+coral.egg-info

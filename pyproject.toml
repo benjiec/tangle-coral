@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "coral"
+version = "0.1.0"
+dependencies = [
+  "tangle @ git+https://github.com/benjiec/tangle.git@3b8c07f",
+  "needle @ git+https://github.com/benjiec/tangle-needle.git@3f35ab6",
+  "sieve @ git+https://github.com/benjiec/tangle-sieve.git@836d673",
+  "pydeseq2==0.5.4",
+  "pyarrow==23.0.1",
+  "pytximport==0.13.0"
+]
+description = "Tangle Coral Data"
+requires-python = ">=3.9"
+
+[project.optional-dependencies]
+dev = [
+]
+
+[tool.setuptools.packages.find]
+where = ["."]
