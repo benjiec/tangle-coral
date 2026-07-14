@@ -2,7 +2,7 @@ from sieve.rules import HMMAlignment, KO, Leader, Pfam, Rules, TFMotifs
 from sieve.result_filters import Field, FieldRegex, LeaderCall
 
 rule_tangle_curated = Rules(
-    Leader().upstreamOfPfam("PF00081").betweenAA(-45,-15).is_mTP(deeploc=True)
+    Leader().upstreamOfPfam("PF00081").betweenAA(-45,-15).is_SP(deeploc=True)
 
     # required domains
     & Pfam.matches("PF00081")
@@ -28,7 +28,7 @@ rule_tangle_curated = Rules(
 )
 
 rule_fasta = Rules(
-    Leader().upstreamOfPfam("PF00081").betweenAA(-45,-15).is_mTP(deeploc=True)
+    Leader().upstreamOfPfam("PF00081").betweenAA(-45,-15).is_SP(deeploc=True)
 
     # required domains
     & Pfam.matches("PF00081")
@@ -48,5 +48,5 @@ rule_fasta = Rules(
 is_positive = (
       FieldRegex(r"HMMAlignment.+").all().eq("true")
     & FieldRegex(r"Pfam.matches.+").all().eq("true")
-    & LeaderCall("Mitochondrion").ge(50)
+    & LeaderCall("SP").ge(50)
 )
