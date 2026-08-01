@@ -1,0 +1,658 @@
+protein_accession	genome	compartment	KO	evalue	bitscore	bitscore_threshold	query_start	query_end	target_start	target_end	prot_len	leader_len	met_start	has_leader	KO_name
+OLP90119.1	GCA_001939145.1	ER	K08054	1.60E-178	595.9	374.1	903	1399	67	561	1417	902	True	True	CANX; calnexin
+CAE7319963.1	GCA_905221605.1	ER	K09580	1.10E-141	474.5	523.3	108	587	115	579	597	107	True	True	PDIA1, P4HB; protein disulfide-isomerase A1 [EC:5.3.4.1]
+CAE7214199.1	GCA_905231915.1	ER	K08054	3.10E-178	594.9	374.1	23	514	69	563	530	22	True	True	CANX; calnexin
+CAE8589763.1	GCA_905237085.1	ER	K08054	2.50E-176	588.6	374.1	15	507	44	545	847	14	True	False	CANX; calnexin
+CAE8625947.1	GCA_905237085.1	ER	K08054	2.30E-180	601.9	374.1	13	541	42	562	561	12	True	False	CANX; calnexin
+CAL1150024.1	GCA_947184155.2	ER	K08054	7.50E-159	530.9	374.1	933	1583	44	584	2047	932	True	True	CANX; calnexin
+CAL1161436.1	GCA_947184155.2	ER	K08054	3.00E-171	571.9	374.1	939	1451	44	554	1467	938	True	True	CANX; calnexin
+OLP77944.1	GCA_001939145.1	cytosol	K02997	2.60E-103	346.5	172.63	6	206	27	225	769	5	True	False	RP-S9e, RPS9; small subunit ribosomal protein S9e
+OLP77946.1	GCA_001939145.1	cytosol	K02997	1.40E-101	340.8	172.63	778	970	21	211	971	777	True	True	RP-S9e, RPS9; small subunit ribosomal protein S9e
+OLP77995.1	GCA_001939145.1	cytosol	K02932	2.10E-128	430.1	152.2	1	307	76	366	312	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+OLP80394.1	GCA_001939145.1	cytosol	K02981	1.40E-126	423.3	250.33	383	638	53	309	643	382	True	True	RP-S2e, RPS2; small subunit ribosomal protein S2e
+OLP80397.1	GCA_001939145.1	cytosol	K02981	1.00E-123	413.9	250.33	31	278	60	311	3250	30	True	True	RP-S2e, RPS2; small subunit ribosomal protein S2e
+OLP80398.1	GCA_001939145.1	cytosol	K02873	1.10E-82	278.8	38.27	3	216	50	253	218	2	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+OLP83445.1	GCA_001939145.1	cytosol	K02873	1.50E-82	278.3	38.27	3	216	50	256	1238	2	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+OLP87563.1	GCA_001939145.1	cytosol	K02997	4.30E-70	237.3	172.63	139	293	46	220	461	138	True	True	RP-S9e, RPS9; small subunit ribosomal protein S9e
+OLP87758.1	GCA_001939145.1	cytosol	K02932	1.10E-126	424.4	152.2	1	307	76	366	312	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+OLP88063.1	GCA_001939145.1	cytosol	K02960	1.00E-72	245.1	157.47	650	795	35	175	1022	649	True	True	RP-S16e, RPS16; small subunit ribosomal protein S16e
+OLP88627.1	GCA_001939145.1	cytosol	K02995	9.70E-95	317.4	41.23	1	201	34	230	665	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+OLP90727.1	GCA_001939145.1	cytosol	K02997	2.10E-99	333.6	172.63	6	185	27	206	1130	5	True	False	RP-S9e, RPS9; small subunit ribosomal protein S9e
+OLP91120.1	GCA_001939145.1	cytosol	K02866	2.00E-107	359.9	95.23	74	282	53	258	290	73	True	True	RP-L10e, RPL10; large subunit ribosomal protein L10e
+OLP91123.1	GCA_001939145.1	cytosol	K02866	2.60E-109	366.1	95.23	1	207	50	258	215	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+OLP91812.1	GCA_001939145.1	cytosol	K02866	1.80E-110	369.9	95.23	308	522	42	258	530	307	True	True	RP-L10e, RPL10; large subunit ribosomal protein L10e
+OLP93040.1	GCA_001939145.1	cytosol	K02993	5.50E-69	233.7	75	1	190	42	232	855	0	True	False	RP-S7e, RPS7; small subunit ribosomal protein S7e
+OLP93043.1	GCA_001939145.1	cytosol	K02993	2.30E-71	241.5	75	194	384	41	232	386	193	True	True	RP-S7e, RPS7; small subunit ribosomal protein S7e
+OLP95023.1	GCA_001939145.1	cytosol	K02896	8.20E-32	111.7	31.8	356	578	12	213	834	355	True	True	RP-L24e, RPL24; large subunit ribosomal protein L24e
+OLQ13668.1	GCA_001939145.1	cytosol	K02870	3.30E-85	287.4	134.1	269	510	50	283	1998	268	True	True	RP-L12e, RPL12; large subunit ribosomal protein L12e
+OLQ14078.1	GCA_001939145.1	cytosol	K02991	1.10E-105	354.4	54.6	1	213	24	239	2792	0	True	False	RP-S6e, RPS6; small subunit ribosomal protein S6e
+CAE6966591.1	GCA_905221605.1	cytosol	K02873	3.60E-82	277.0	38.27	3	216	50	253	218	2	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAE6966603.1	GCA_905221605.1	cytosol	K02873	3.00E-82	277.3	38.27	3	216	50	253	218	2	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAE6970979.1	GCA_905221605.1	cytosol	K02932	1.30E-126	424.1	152.2	1	307	76	366	312	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAE6973481.1	GCA_905221605.1	cytosol	K02910	1.30E-53	182.1	25.4	5	120	31	147	121	4	True	False	RP-L31e, RPL31; large subunit ribosomal protein L31e
+CAE7022871.1	GCA_905221605.1	cytosol	K02995	2.10E-98	329.4	41.23	1	208	34	237	209	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAE7035065.1	GCA_905221605.1	cytosol	K02981	1.90E-126	422.9	250.33	4	256	56	309	261	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE7035069.1	GCA_905221605.1	cytosol	K02981	1.90E-126	422.9	250.33	4	256	56	309	261	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE7219877.1	GCA_905221605.1	cytosol	K02866	5.70E-109	365.0	95.23	1	207	50	258	215	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE7241699.1	GCA_905221605.1	cytosol	K02981	1.00E-125	420.5	250.33	4	259	56	312	261	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE7243742.1	GCA_905221605.1	cytosol	K02880	6.20E-90	302.4	152.63	271	536	23	247	545	270	True	True	RP-L17e, RPL17; large subunit ribosomal protein L17e
+CAE7277167.1	GCA_905221605.1	cytosol	K02997	3.70E-105	352.6	172.63	6	191	27	211	192	5	True	False	RP-S9e, RPS9; small subunit ribosomal protein S9e
+CAE7277190.1	GCA_905221605.1	cytosol	K02997	3.70E-105	352.6	172.63	6	191	27	211	192	5	True	False	RP-S9e, RPS9; small subunit ribosomal protein S9e
+CAE7293635.1	GCA_905221605.1	cytosol	K02930	4.90E-165	551.0	92.3	1	405	100	495	649	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAE7317709.1	GCA_905221605.1	cytosol	K02997	2.40E-103	346.6	172.63	6	191	27	211	192	5	True	False	RP-S9e, RPS9; small subunit ribosomal protein S9e
+CAE7370737.1	GCA_905221605.1	cytosol	K02932	6.00E-132	441.8	152.2	1	320	76	368	661	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAE7409504.1	GCA_905221605.1	cytosol	K02993	3.60E-72	244.2	75	1	190	42	232	192	0	True	False	RP-S7e, RPS7; small subunit ribosomal protein S7e
+CAE7445158.1	GCA_905221605.1	cytosol	K02991	5.70E-109	365.2	54.6	1	230	24	256	233	0	True	False	RP-S6e, RPS6; small subunit ribosomal protein S6e
+CAE7462997.1	GCA_905221605.1	cytosol	K02991	3.00E-99	333.2	54.6	109	333	30	256	339	108	True	True	RP-S6e, RPS6; small subunit ribosomal protein S6e
+CAE7463767.1	GCA_905221605.1	cytosol	K02896	3.20E-35	122.9	31.8	343	537	25	216	754	342	True	True	RP-L24e, RPL24; large subunit ribosomal protein L24e
+CAE7533677.1	GCA_905221605.1	cytosol	K02866	4.00E-111	372.1	95.23	1	207	50	258	215	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE7600962.1	GCA_905221605.1	cytosol	K02873	5.80E-82	276.3	38.27	3	216	50	253	218	2	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAE7191322.1	GCA_905231915.1	cytosol	K02896	1.50E-36	127.3	31.8	356	564	12	216	582	355	True	True	RP-L24e, RPL24; large subunit ribosomal protein L24e
+CAE7211452.1	GCA_905231915.1	cytosol	K02873	4.10E-84	283.4	38.27	367	593	37	252	881	366	False	True	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAE7362440.1	GCA_905231915.1	cytosol	K02991	3.40E-101	339.6	54.6	1	220	35	257	225	0	True	False	RP-S6e, RPS6; small subunit ribosomal protein S6e
+CAE7442698.1	GCA_905231915.1	cytosol	K02995	1.80E-97	326.4	41.23	1	208	34	237	209	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAE7460826.1	GCA_905231915.1	cytosol	K02866	9.80E-110	367.5	95.23	1	207	50	258	215	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE7517004.1	GCA_905231915.1	cytosol	K02997	2.00E-98	330.4	172.63	6	182	27	202	572	5	True	False	RP-S9e, RPS9; small subunit ribosomal protein S9e
+CAE7647247.1	GCA_905231915.1	cytosol	K02981	5.10E-127	424.8	250.33	4	256	56	309	261	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE7786716.1	GCA_905231915.1	cytosol	K02997	1.30E-98	331.1	172.63	766	944	21	197	945	765	True	True	RP-S9e, RPS9; small subunit ribosomal protein S9e
+CAE7817835.1	GCA_905231915.1	cytosol	K02889	8.40E-55	186.6	35.87	8	203	50	240	949	7	True	False	RP-L21e, RPL21; large subunit ribosomal protein L21e
+CAE7834837.1	GCA_905231915.1	cytosol	K02997	2.40E-103	346.6	172.63	6	191	27	211	192	5	True	False	RP-S9e, RPS9; small subunit ribosomal protein S9e
+CAE7841718.1	GCA_905231915.1	cytosol	K02870	4.70E-44	152.2	134.1	275	510	50	246	510	274	False	True	RP-L12e, RPL12; large subunit ribosomal protein L12e
+CAE7847665.1	GCA_905231915.1	cytosol	K02910	8.60E-44	150.0	25.4	140	238	24	125	252	139	True	True	RP-L31e, RPL31; large subunit ribosomal protein L31e
+CAE7900126.1	GCA_905231915.1	cytosol	K02932	1.10E-126	424.4	152.2	1	307	76	366	312	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAE7944760.1	GCA_905231915.1	cytosol	K02991	1.70E-109	366.9	54.6	698	948	22	260	3461	697	True	True	RP-S6e, RPS6; small subunit ribosomal protein S6e
+CAE8581154.1	GCA_905237085.1	cytosol	K02873	5.50E-82	276.4	38.27	1	214	48	251	219	0	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAE8581155.1	GCA_905237085.1	cytosol	K02873	5.50E-82	276.4	38.27	1	214	48	251	219	0	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAE8581156.1	GCA_905237085.1	cytosol	K02873	5.50E-82	276.4	38.27	1	214	48	251	219	0	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAE8581159.1	GCA_905237085.1	cytosol	K02873	1.90E-81	274.6	38.27	1	214	48	251	219	0	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAE8581498.1	GCA_905237085.1	cytosol	K02866	2.10E-110	369.8	95.23	1	202	50	256	211	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8582557.1	GCA_905237085.1	cytosol	K02932	3.70E-126	422.6	152.2	1	307	76	366	313	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAE8582618.1	GCA_905237085.1	cytosol	K02932	8.50E-127	424.7	152.2	1	307	76	366	313	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAE8582648.1	GCA_905237085.1	cytosol	K02993	4.90E-74	250.3	75	1	191	42	232	193	0	True	False	RP-S7e, RPS7; small subunit ribosomal protein S7e
+CAE8582701.1	GCA_905237085.1	cytosol	K02873	3.30E-81	273.8	38.27	1	214	48	251	219	0	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAE8582704.1	GCA_905237085.1	cytosol	K02873	5.50E-82	276.4	38.27	1	214	48	251	219	0	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAE8582705.1	GCA_905237085.1	cytosol	K02873	5.50E-82	276.4	38.27	1	214	48	251	219	0	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAE8582706.1	GCA_905237085.1	cytosol	K02873	5.50E-82	276.4	38.27	1	214	48	251	219	0	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAE8582731.1	GCA_905237085.1	cytosol	K02866	9.40E-115	384.0	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8582839.1	GCA_905237085.1	cytosol	K02930	7.40E-169	563.7	92.3	1	398	100	495	407	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAE8583464.1	GCA_905237085.1	cytosol	K02960	7.70E-79	265.2	157.47	957	1109	30	183	1109	956	True	True	RP-S16e, RPS16; small subunit ribosomal protein S16e
+CAE8583582.1	GCA_905237085.1	cytosol	K02866	5.80E-116	388.0	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8584199.1	GCA_905237085.1	cytosol	K02932	1.60E-127	427.2	152.2	1	307	76	366	313	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAE8584201.1	GCA_905237085.1	cytosol	K02932	1.80E-127	427.0	152.2	1	307	76	366	313	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAE8584203.1	GCA_905237085.1	cytosol	K02932	2.10E-127	426.8	152.2	1	307	76	366	313	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAE8584447.1	GCA_905237085.1	cytosol	K02993	4.40E-71	240.6	75	1	187	42	228	351	0	True	False	RP-S7e, RPS7; small subunit ribosomal protein S7e
+CAE8585453.1	GCA_905237085.1	cytosol	K02960	6.60E-80	268.7	157.47	40	186	36	183	186	39	True	True	RP-S16e, RPS16; small subunit ribosomal protein S16e
+CAE8585673.1	GCA_905237085.1	cytosol	K02932	1.00E-127	427.8	152.2	1	307	76	366	313	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAE8587143.1	GCA_905237085.1	cytosol	K02981	2.90E-127	425.6	250.33	4	262	56	310	267	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE8587277.1	GCA_905237085.1	cytosol	K02932	9.80E-128	427.9	152.2	1	307	76	366	313	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAE8591509.1	GCA_905237085.1	cytosol	K02993	8.80E-71	239.6	75	27	220	40	229	694	26	False	True	RP-S7e, RPS7; small subunit ribosomal protein S7e
+CAE8591585.1	GCA_905237085.1	cytosol	K02995	2.50E-94	316.0	41.23	1	203	34	237	204	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAE8591824.1	GCA_905237085.1	cytosol	K02873	1.90E-78	264.8	38.27	1	214	48	251	219	0	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAE8591890.1	GCA_905237085.1	cytosol	K02993	1.40E-55	189.6	75	1	174	42	232	176	0	True	False	RP-S7e, RPS7; small subunit ribosomal protein S7e
+CAE8592101.1	GCA_905237085.1	cytosol	K02932	1.00E-93	315.6	152.2	1	285	76	366	291	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAE8593305.1	GCA_905237085.1	cytosol	K02932	2.20E-127	426.7	152.2	1	307	76	366	313	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAE8593306.1	GCA_905237085.1	cytosol	K02932	2.20E-127	426.7	152.2	1	307	76	366	313	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAE8593307.1	GCA_905237085.1	cytosol	K02932	6.80E-127	425.1	152.2	1	324	76	368	864	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAE8594131.1	GCA_905237085.1	cytosol	K02866	2.00E-115	386.2	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8594132.1	GCA_905237085.1	cytosol	K02866	2.00E-115	386.2	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8594133.1	GCA_905237085.1	cytosol	K02866	2.00E-115	386.2	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8594134.1	GCA_905237085.1	cytosol	K02866	2.00E-115	386.2	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8594135.1	GCA_905237085.1	cytosol	K02866	2.00E-115	386.2	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8594486.1	GCA_905237085.1	cytosol	K02981	6.60E-127	424.4	250.33	4	262	56	310	267	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE8595870.1	GCA_905237085.1	cytosol	K02932	8.50E-127	424.7	152.2	1	307	76	366	313	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAE8596064.1	GCA_905237085.1	cytosol	K02981	1.60E-126	423.1	250.33	4	260	56	310	265	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE8596065.1	GCA_905237085.1	cytosol	K02981	1.60E-126	423.1	250.33	4	260	56	310	265	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE8596066.1	GCA_905237085.1	cytosol	K02981	7.30E-127	424.3	250.33	4	262	56	310	267	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE8596068.1	GCA_905237085.1	cytosol	K02981	6.30E-127	424.5	250.33	4	262	56	310	267	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE8597182.1	GCA_905237085.1	cytosol	K02932	1.00E-127	427.8	152.2	1	307	76	366	313	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAE8597311.1	GCA_905237085.1	cytosol	K02866	5.80E-116	388.0	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8597872.1	GCA_905237085.1	cytosol	K02932	1.50E-127	427.2	152.2	1	307	76	366	313	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAE8598160.1	GCA_905237085.1	cytosol	K02981	7.30E-127	424.3	250.33	4	262	56	310	267	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE8598863.1	GCA_905237085.1	cytosol	K02981	9.10E-127	423.9	250.33	4	262	56	310	267	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE8599022.1	GCA_905237085.1	cytosol	K02910	4.70E-53	180.2	25.4	43	171	24	147	172	42	True	True	RP-L31e, RPL31; large subunit ribosomal protein L31e
+CAE8599068.1	GCA_905237085.1	cytosol	K02981	6.60E-127	424.4	250.33	4	262	56	310	267	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE8599108.1	GCA_905237085.1	cytosol	K02901	6.30E-52	176.6	63.97	559	693	33	160	709	558	True	True	RP-L27e, RPL27; large subunit ribosomal protein L27e
+CAE8599692.1	GCA_905237085.1	cytosol	K02997	2.20E-52	179.1	172.63	8	113	28	133	132	7	True	False	RP-S9e, RPS9; small subunit ribosomal protein S9e
+CAE8599697.1	GCA_905237085.1	cytosol	K02866	5.80E-116	388.0	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8599698.1	GCA_905237085.1	cytosol	K02866	5.80E-116	388.0	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8601167.1	GCA_905237085.1	cytosol	K02993	2.50E-74	251.3	75	1	191	42	232	193	0	True	False	RP-S7e, RPS7; small subunit ribosomal protein S7e
+CAE8601177.1	GCA_905237085.1	cytosol	K02866	2.00E-115	386.2	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8601178.1	GCA_905237085.1	cytosol	K02866	1.30E-115	386.8	95.23	237	447	46	256	453	236	True	True	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8601180.1	GCA_905237085.1	cytosol	K02866	2.00E-115	386.2	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8601414.1	GCA_905237085.1	cytosol	K02932	1.50E-127	427.2	152.2	1	307	76	366	313	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAE8601536.1	GCA_905237085.1	cytosol	K02932	1.20E-128	430.9	152.2	1	307	76	366	313	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAE8602248.1	GCA_905237085.1	cytosol	K02873	9.50E-82	275.6	38.27	1	214	48	251	219	0	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAE8602933.1	GCA_905237085.1	cytosol	K02901	1.50E-49	168.8	63.97	210	347	32	162	361	209	False	True	RP-L27e, RPL27; large subunit ribosomal protein L27e
+CAE8603294.1	GCA_905237085.1	cytosol	K02981	2.90E-127	425.6	250.33	20	280	54	310	285	19	False	True	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE8603303.1	GCA_905237085.1	cytosol	K02873	1.90E-80	271.4	38.27	1	214	48	251	219	0	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAE8603687.1	GCA_905237085.1	cytosol	K02997	7.00E-106	354.9	172.63	8	194	28	211	195	7	True	False	RP-S9e, RPS9; small subunit ribosomal protein S9e
+CAE8603688.1	GCA_905237085.1	cytosol	K02997	7.00E-106	354.9	172.63	8	194	28	211	195	7	True	False	RP-S9e, RPS9; small subunit ribosomal protein S9e
+CAE8603690.1	GCA_905237085.1	cytosol	K02997	7.00E-106	354.9	172.63	8	194	28	211	195	7	True	False	RP-S9e, RPS9; small subunit ribosomal protein S9e
+CAE8604048.1	GCA_905237085.1	cytosol	K02866	2.00E-115	386.2	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8604049.1	GCA_905237085.1	cytosol	K02866	2.00E-115	386.2	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8604050.1	GCA_905237085.1	cytosol	K02866	2.00E-115	386.2	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8604451.1	GCA_905237085.1	cytosol	K02932	2.50E-127	426.5	152.2	1	308	76	367	314	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAE8605095.1	GCA_905237085.1	cytosol	K02997	7.00E-106	354.9	172.63	8	194	28	211	195	7	True	False	RP-S9e, RPS9; small subunit ribosomal protein S9e
+CAE8605096.1	GCA_905237085.1	cytosol	K02997	7.00E-106	354.9	172.63	8	194	28	211	195	7	True	False	RP-S9e, RPS9; small subunit ribosomal protein S9e
+CAE8605097.1	GCA_905237085.1	cytosol	K02997	7.00E-106	354.9	172.63	8	194	28	211	195	7	True	False	RP-S9e, RPS9; small subunit ribosomal protein S9e
+CAE8605098.1	GCA_905237085.1	cytosol	K02997	7.00E-106	354.9	172.63	8	194	28	211	195	7	True	False	RP-S9e, RPS9; small subunit ribosomal protein S9e
+CAE8605783.1	GCA_905237085.1	cytosol	K02991	4.10E-110	369.0	54.6	1	228	24	256	231	0	True	False	RP-S6e, RPS6; small subunit ribosomal protein S6e
+CAE8605784.1	GCA_905237085.1	cytosol	K02991	1.20E-109	367.5	54.6	1	228	24	256	231	0	True	False	RP-S6e, RPS6; small subunit ribosomal protein S6e
+CAE8605785.1	GCA_905237085.1	cytosol	K02991	4.10E-110	369.0	54.6	1	228	24	256	231	0	True	False	RP-S6e, RPS6; small subunit ribosomal protein S6e
+CAE8605786.1	GCA_905237085.1	cytosol	K02991	4.10E-110	369.0	54.6	1	228	24	256	231	0	True	False	RP-S6e, RPS6; small subunit ribosomal protein S6e
+CAE8607893.1	GCA_905237085.1	cytosol	K02866	5.80E-116	388.0	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8607894.1	GCA_905237085.1	cytosol	K02866	5.80E-116	388.0	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8607895.1	GCA_905237085.1	cytosol	K02866	5.80E-116	388.0	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8607896.1	GCA_905237085.1	cytosol	K02866	1.90E-116	389.6	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8608200.1	GCA_905237085.1	cytosol	K02991	4.80E-110	368.8	54.6	1	229	24	257	232	0	True	False	RP-S6e, RPS6; small subunit ribosomal protein S6e
+CAE8610159.1	GCA_905237085.1	cytosol	K02997	7.00E-106	354.9	172.63	8	194	28	211	195	7	True	False	RP-S9e, RPS9; small subunit ribosomal protein S9e
+CAE8610573.1	GCA_905237085.1	cytosol	K02962	3.80E-73	247.1	30.53	453	644	40	219	653	452	True	True	RP-S17e, RPS17; small subunit ribosomal protein S17e
+CAE8611224.1	GCA_905237085.1	cytosol	K02993	1.60E-72	245.3	75	1	191	42	232	193	0	True	False	RP-S7e, RPS7; small subunit ribosomal protein S7e
+CAE8611273.1	GCA_905237085.1	cytosol	K02932	3.00E-126	422.9	152.2	1	308	76	367	314	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAE8611849.1	GCA_905237085.1	cytosol	K02991	7.80E-109	364.8	54.6	1	228	24	256	231	0	True	False	RP-S6e, RPS6; small subunit ribosomal protein S6e
+CAE8612207.1	GCA_905237085.1	cytosol	K02910	1.10E-51	175.8	25.4	1	121	25	147	122	0	True	False	RP-L31e, RPL31; large subunit ribosomal protein L31e
+CAE8612935.1	GCA_905237085.1	cytosol	K02993	3.60E-73	247.4	75	1	191	42	232	193	0	True	False	RP-S7e, RPS7; small subunit ribosomal protein S7e
+CAE8613225.1	GCA_905237085.1	cytosol	K02873	3.00E-80	270.7	38.27	1	214	48	251	219	0	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAE8613562.1	GCA_905237085.1	cytosol	K02910	1.10E-51	175.8	25.4	1	121	25	147	122	0	True	False	RP-L31e, RPL31; large subunit ribosomal protein L31e
+CAE8614114.1	GCA_905237085.1	cytosol	K02932	1.20E-128	430.9	152.2	1	307	76	366	313	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAE8614307.1	GCA_905237085.1	cytosol	K02997	1.20E-105	354.1	172.63	148	342	22	211	343	147	False	True	RP-S9e, RPS9; small subunit ribosomal protein S9e
+CAE8615019.1	GCA_905237085.1	cytosol	K02981	6.90E-127	424.3	250.33	4	262	56	310	267	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE8615139.1	GCA_905237085.1	cytosol	K02981	6.30E-127	424.5	250.33	4	262	56	310	267	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE8616607.1	GCA_905237085.1	cytosol	K02866	5.80E-116	388.0	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8617127.1	GCA_905237085.1	cytosol	K02991	7.40E-112	374.7	54.6	1	231	24	259	620	0	True	False	RP-S6e, RPS6; small subunit ribosomal protein S6e
+CAE8617574.1	GCA_905237085.1	cytosol	K02997	3.90E-65	221.0	172.63	8	128	28	148	139	7	True	False	RP-S9e, RPS9; small subunit ribosomal protein S9e
+CAE8618037.1	GCA_905237085.1	cytosol	K02981	7.30E-127	424.3	250.33	4	262	56	310	267	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE8618874.1	GCA_905237085.1	cytosol	K02910	1.10E-51	175.8	25.4	1	120	25	147	121	0	True	False	RP-L31e, RPL31; large subunit ribosomal protein L31e
+CAE8620384.1	GCA_905237085.1	cytosol	K02995	4.00E-94	315.4	41.23	1	203	34	237	204	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAE8620413.1	GCA_905237085.1	cytosol	K02873	1.30E-78	265.3	38.27	1	214	48	251	219	0	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAE8621135.1	GCA_905237085.1	cytosol	K02997	7.00E-106	354.9	172.63	8	194	28	211	195	7	True	False	RP-S9e, RPS9; small subunit ribosomal protein S9e
+CAE8621226.1	GCA_905237085.1	cytosol	K02991	4.10E-110	369.0	54.6	1	228	24	256	231	0	True	False	RP-S6e, RPS6; small subunit ribosomal protein S6e
+CAE8621368.1	GCA_905237085.1	cytosol	K02991	4.10E-110	369.0	54.6	1	228	24	256	231	0	True	False	RP-S6e, RPS6; small subunit ribosomal protein S6e
+CAE8621805.1	GCA_905237085.1	cytosol	K02995	2.50E-94	316.0	41.23	1	203	34	237	204	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAE8621905.1	GCA_905237085.1	cytosol	K02930	4.50E-169	564.4	92.3	1	396	100	493	407	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAE8622551.1	GCA_905237085.1	cytosol	K02932	3.70E-128	429.2	152.2	1	307	76	366	313	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAE8622987.1	GCA_905237085.1	cytosol	K02981	6.60E-127	424.4	250.33	4	262	56	310	267	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE8624342.1	GCA_905237085.1	cytosol	K02866	5.80E-116	388.0	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8624343.1	GCA_905237085.1	cytosol	K02866	5.80E-116	388.0	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8628192.1	GCA_905237085.1	cytosol	K02937	1.70E-103	347.5	98.5	13	282	51	311	282	12	True	False	RP-L7e, RPL7; large subunit ribosomal protein L7e
+CAE8628211.1	GCA_905237085.1	cytosol	K02981	7.30E-127	424.3	250.33	4	262	56	310	267	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE8628212.1	GCA_905237085.1	cytosol	K02981	7.30E-127	424.3	250.33	4	262	56	310	267	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE8630124.1	GCA_905237085.1	cytosol	K02997	7.00E-106	354.9	172.63	8	194	28	211	195	7	True	False	RP-S9e, RPS9; small subunit ribosomal protein S9e
+CAE8630231.1	GCA_905237085.1	cytosol	K02995	2.50E-94	316.0	41.23	1	203	34	237	204	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAE8631794.1	GCA_905237085.1	cytosol	K02995	4.40E-94	315.3	41.23	1	203	34	237	204	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAE8631795.1	GCA_905237085.1	cytosol	K02995	4.40E-94	315.3	41.23	1	203	34	237	204	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAE8631796.1	GCA_905237085.1	cytosol	K02995	1.20E-93	313.9	41.23	1	203	34	237	204	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAE8631797.1	GCA_905237085.1	cytosol	K02995	1.10E-93	313.9	41.23	1	203	34	237	204	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAE8632194.1	GCA_905237085.1	cytosol	K02995	6.40E-94	314.7	41.23	1	203	34	237	204	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAE8632877.1	GCA_905237085.1	cytosol	K02995	1.10E-93	313.9	41.23	1	203	34	237	204	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAE8632878.1	GCA_905237085.1	cytosol	K02995	1.10E-93	313.9	41.23	1	203	34	237	204	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAE8634046.1	GCA_905237085.1	cytosol	K02866	5.80E-116	388.0	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8634047.1	GCA_905237085.1	cytosol	K02866	5.80E-116	388.0	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8634048.1	GCA_905237085.1	cytosol	K02866	5.80E-116	388.0	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8634943.1	GCA_905237085.1	cytosol	K02866	5.80E-116	388.0	95.23	1	207	50	256	213	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAE8635022.1	GCA_905237085.1	cytosol	K02910	1.10E-51	175.8	25.4	1	121	25	147	122	0	True	False	RP-L31e, RPL31; large subunit ribosomal protein L31e
+CAE8635881.1	GCA_905237085.1	cytosol	K02993	2.90E-73	247.8	75	1	191	42	232	193	0	True	False	RP-S7e, RPS7; small subunit ribosomal protein S7e
+CAE8636533.1	GCA_905237085.1	cytosol	K02981	7.30E-127	424.3	250.33	4	262	56	310	267	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE8636535.1	GCA_905237085.1	cytosol	K02981	6.30E-127	424.5	250.33	4	262	56	310	267	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE8636538.1	GCA_905237085.1	cytosol	K02981	7.30E-127	424.3	250.33	4	262	56	310	267	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE8636539.1	GCA_905237085.1	cytosol	K02981	7.30E-127	424.3	250.33	4	262	56	310	267	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAE8637175.1	GCA_905237085.1	cytosol	K02993	9.20E-73	246.1	75	12	200	44	232	202	11	True	False	RP-S7e, RPS7; small subunit ribosomal protein S7e
+CAE8637317.1	GCA_905237085.1	cytosol	K02997	7.00E-106	354.9	172.63	8	194	28	211	195	7	True	False	RP-S9e, RPS9; small subunit ribosomal protein S9e
+CAE8637706.1	GCA_905237085.1	cytosol	K02873	2.10E-80	271.2	38.27	1	214	48	251	219	0	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAE8637884.1	GCA_905237085.1	cytosol	K02997	7.00E-106	354.9	172.63	8	194	28	211	195	7	True	False	RP-S9e, RPS9; small subunit ribosomal protein S9e
+CAE8638541.1	GCA_905237085.1	cytosol	K02930	2.30E-169	565.3	92.3	1	392	100	489	406	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAE8638887.1	GCA_905237085.1	cytosol	K02873	2.80E-81	274.1	38.27	1	214	48	251	219	0	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAE8642038.1	GCA_905237085.1	cytosol	K02960	4.20E-80	269.3	157.47	150	302	30	183	302	149	False	True	RP-S16e, RPS16; small subunit ribosomal protein S16e
+CAL1130399.1	GCA_947184155.2	cytosol	K02949	8.60E-83	278.3	156.13	155	323	36	204	579	154	True	True	RP-S11e, RPS11; small subunit ribosomal protein S11e
+CAL1131657.1	GCA_947184155.2	cytosol	K02873	8.40E-85	285.7	38.27	3	216	50	253	218	2	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAL1131658.1	GCA_947184155.2	cytosol	K02873	8.00E-85	285.8	38.27	3	217	50	254	222	2	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAL1135221.1	GCA_947184155.2	cytosol	K02932	1.10E-124	417.8	152.2	1	307	76	366	312	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAL1135277.1	GCA_947184155.2	cytosol	K02910	5.60E-52	176.7	25.4	3	120	29	147	121	2	True	False	RP-L31e, RPL31; large subunit ribosomal protein L31e
+CAL1136939.1	GCA_947184155.2	cytosol	K02910	5.30E-52	176.8	25.4	3	131	29	158	396	2	True	False	RP-L31e, RPL31; large subunit ribosomal protein L31e
+CAL1137694.1	GCA_947184155.2	cytosol	K02997	9.10E-98	328.3	172.63	6	179	27	199	741	5	True	False	RP-S9e, RPS9; small subunit ribosomal protein S9e
+CAL1138413.1	GCA_947184155.2	cytosol	K02995	2.40E-94	316.1	41.23	180	393	26	237	394	179	True	True	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAL1140890.1	GCA_947184155.2	cytosol	K02991	3.00E-106	356.3	54.6	1	230	24	256	233	0	True	False	RP-S6e, RPS6; small subunit ribosomal protein S6e
+CAL1142634.1	GCA_947184155.2	cytosol	K02985	5.80E-142	474.7	165.43	174	449	35	308	478	173	False	True	RP-S3e, RPS3; small subunit ribosomal protein S3e
+CAL1143737.1	GCA_947184155.2	cytosol	K02866	3.60E-106	355.8	95.23	1	207	50	258	215	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAL1145175.1	GCA_947184155.2	cytosol	K02985	1.20E-141	473.6	165.43	378	654	34	308	687	377	True	True	RP-S3e, RPS3; small subunit ribosomal protein S3e
+CAL1145190.1	GCA_947184155.2	cytosol	K02981	1.20E-122	410.4	250.33	196	450	54	309	720	195	True	True	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAL1145602.1	GCA_947184155.2	cytosol	K02995	5.00E-89	298.7	41.23	71	271	26	224	593	70	True	True	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAL1149998.1	GCA_947184155.2	cytosol	K02910	2.80E-53	181.0	25.4	824	945	27	147	946	823	True	True	RP-L31e, RPL31; large subunit ribosomal protein L31e
+CAL1157918.1	GCA_947184155.2	cytosol	K02873	6.80E-85	286.0	38.27	3	215	50	252	219	2	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAL1158176.1	GCA_947184155.2	cytosol	K02991	1.70E-110	370.2	54.6	1	229	24	255	236	0	True	False	RP-S6e, RPS6; small subunit ribosomal protein S6e
+CAL1162863.1	GCA_947184155.2	cytosol	K02991	1.70E-110	370.2	54.6	1	229	24	255	236	0	True	False	RP-S6e, RPS6; small subunit ribosomal protein S6e
+CAL1165714.1	GCA_947184155.2	cytosol	K02995	2.30E-96	322.7	41.23	1	206	34	237	207	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAL1167182.1	GCA_947184155.2	cytosol	K02981	1.20E-124	416.9	250.33	66	317	56	309	329	65	True	True	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAL1167183.1	GCA_947184155.2	cytosol	K02981	1.70E-124	416.5	250.33	66	317	56	309	321	65	True	True	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAL1168831.1	GCA_947184155.2	cytosol	K02993	2.80E-70	238.0	75	1	250	42	293	535	0	True	False	RP-S7e, RPS7; small subunit ribosomal protein S7e
+CAL1168834.1	GCA_947184155.2	cytosol	K02993	5.20E-71	240.3	75	1	191	42	232	193	0	True	False	RP-S7e, RPS7; small subunit ribosomal protein S7e
+CAL1171331.1	GCA_947184155.2	cytosol	K02930	3.40E-167	558.2	92.3	1	402	100	493	410	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAK8986483.1	GCA_963969995.1	cytosol	K02993	4.10E-50	171.7	75	1	174	42	232	176	0	True	False	RP-S7e, RPS7; small subunit ribosomal protein S7e
+CAK8986839.1	GCA_963969995.1	cytosol	K02873	1.40E-81	275.1	38.27	3	216	50	253	218	2	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAK8986892.1	GCA_963969995.1	cytosol	K02873	1.40E-81	275.1	38.27	3	216	50	253	218	2	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAK8988569.1	GCA_963969995.1	cytosol	K02995	8.30E-96	320.9	41.23	1	206	34	237	207	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAK8993712.1	GCA_963969995.1	cytosol	K02866	2.40E-108	363.0	95.23	1	207	50	258	215	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAK8993761.1	GCA_963969995.1	cytosol	K02866	2.40E-108	363.0	95.23	1	207	50	258	215	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAK9001230.1	GCA_963969995.1	cytosol	K02910	9.60E-47	159.7	25.4	1	153	25	147	154	0	True	False	RP-L31e, RPL31; large subunit ribosomal protein L31e
+CAK9001482.1	GCA_963969995.1	cytosol	K02866	2.40E-108	363.0	95.23	1	207	50	258	215	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAK9001588.1	GCA_963969995.1	cytosol	K02910	6.60E-53	179.8	25.4	1	120	25	147	121	0	True	False	RP-L31e, RPL31; large subunit ribosomal protein L31e
+CAK9004710.1	GCA_963969995.1	cytosol	K02930	4.60E-159	531.3	92.3	1	410	100	495	418	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAK9004738.1	GCA_963969995.1	cytosol	K02930	2.30E-162	542.2	92.3	1	402	100	493	409	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAK9004740.1	GCA_963969995.1	cytosol	K02930	2.10E-161	539.1	92.3	1	403	100	494	409	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAK9004742.1	GCA_963969995.1	cytosol	K02930	2.20E-161	539.0	92.3	1	402	100	493	409	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAK9004744.1	GCA_963969995.1	cytosol	K02930	2.10E-162	542.4	92.3	1	402	100	493	409	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAK9004745.1	GCA_963969995.1	cytosol	K02930	2.40E-161	538.9	92.3	1	402	100	493	409	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAK9004746.1	GCA_963969995.1	cytosol	K02930	2.40E-161	538.9	92.3	1	402	100	493	409	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAK9004747.1	GCA_963969995.1	cytosol	K02930	5.40E-161	537.7	92.3	1	403	100	494	409	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAK9004748.1	GCA_963969995.1	cytosol	K02930	9.60E-162	540.2	92.3	1	403	100	494	409	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAK9004749.1	GCA_963969995.1	cytosol	K02930	2.40E-161	538.9	92.3	1	402	100	493	409	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAK9004751.1	GCA_963969995.1	cytosol	K02930	2.30E-162	542.2	92.3	1	402	100	493	409	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAK9004752.1	GCA_963969995.1	cytosol	K02930	2.40E-161	538.9	92.3	1	402	100	493	409	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAK9004753.1	GCA_963969995.1	cytosol	K02930	9.60E-161	536.9	92.3	1	402	100	493	409	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAK9004754.1	GCA_963969995.1	cytosol	K02930	2.30E-162	542.2	92.3	1	402	100	493	409	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAK9004755.1	GCA_963969995.1	cytosol	K02930	2.30E-162	542.2	92.3	1	402	100	493	409	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAK9004756.1	GCA_963969995.1	cytosol	K02930	2.30E-162	542.2	92.3	1	402	100	493	409	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAK9005457.1	GCA_963969995.1	cytosol	K02981	1.50E-124	416.6	250.33	7	253	61	309	258	6	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAK9005458.1	GCA_963969995.1	cytosol	K02981	1.70E-124	416.5	250.33	5	251	61	309	256	4	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAK9006263.1	GCA_963969995.1	cytosol	K02993	8.20E-81	272.6	75	433	650	20	233	652	432	True	True	RP-S7e, RPS7; small subunit ribosomal protein S7e
+CAK9007097.1	GCA_963969995.1	cytosol	K02995	3.20E-64	217.4	41.23	1	203	34	223	214	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAK9021568.1	GCA_963969995.1	cytosol	K02966	9.70E-69	232.0	53.53	8	167	39	198	184	7	True	False	RP-S19e, RPS19; small subunit ribosomal protein S19e
+CAK9022998.1	GCA_963969995.1	cytosol	K02873	6.40E-85	286.1	38.27	3	216	50	253	218	2	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAK9027274.1	GCA_963969995.1	cytosol	K02905	4.90E-20	73.1	39.97	27	98	17	83	105	26	False	True	RP-L29e, RPL29; large subunit ribosomal protein L29e
+CAK9034812.1	GCA_963969995.1	cytosol	K02997	1.00E-104	351.1	172.63	6	191	27	211	192	5	True	False	RP-S9e, RPS9; small subunit ribosomal protein S9e
+CAK9057716.1	GCA_963969995.1	cytosol	K02932	5.30E-128	428.7	152.2	1	307	76	366	312	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAK9092461.1	GCA_963969995.1	cytosol	K02991	1.10E-111	374.2	54.6	1	230	24	256	236	0	True	False	RP-S6e, RPS6; small subunit ribosomal protein S6e
+CAK9092663.1	GCA_963969995.1	cytosol	K02995	1.40E-94	316.9	41.23	1	206	34	237	207	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAK9093393.1	GCA_963969995.1	cytosol	K02995	1.40E-94	316.9	41.23	1	206	34	237	207	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAK9097345.1	GCA_963969995.1	cytosol	K02873	9.60E-82	275.6	38.27	3	216	50	253	218	2	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAK9103220.1	GCA_963969995.1	cytosol	K02910	9.40E-52	176.0	25.4	3	120	29	147	121	2	True	False	RP-L31e, RPL31; large subunit ribosomal protein L31e
+CAK9103304.1	GCA_963969995.1	cytosol	K02910	9.40E-52	176.0	25.4	3	120	29	147	121	2	True	False	RP-L31e, RPL31; large subunit ribosomal protein L31e
+CAK9108212.1	GCA_963969995.1	cytosol	K02866	2.40E-108	363.0	95.23	1	207	50	258	215	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAK9108214.1	GCA_963969995.1	cytosol	K02866	4.40E-103	345.7	95.23	1	207	50	258	215	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAK9110739.1	GCA_963969995.1	cytosol	K02981	8.10E-126	420.8	250.33	58	335	45	309	340	57	True	True	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAK8986133.1	GCA_963970005.1	cytosol	K02995	8.30E-96	320.9	41.23	1	206	34	237	207	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAK8987554.1	GCA_963970005.1	cytosol	K02991	1.10E-111	374.2	54.6	1	230	24	256	236	0	True	False	RP-S6e, RPS6; small subunit ribosomal protein S6e
+CAK8996820.1	GCA_963970005.1	cytosol	K02866	8.80E-110	367.7	95.23	129	348	37	258	356	128	True	True	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAK8996862.1	GCA_963970005.1	cytosol	K02866	2.40E-108	363.0	95.23	1	207	50	258	215	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAK9003451.1	GCA_963970005.1	cytosol	K02995	5.60E-65	219.9	41.23	1	160	34	191	180	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAK9004129.1	GCA_963970005.1	cytosol	K02995	1.40E-94	316.9	41.23	1	206	34	237	207	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAK9013230.1	GCA_963970005.1	cytosol	K02930	4.00E-161	538.1	92.3	1	426	100	504	460	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAK9013232.1	GCA_963970005.1	cytosol	K02930	2.00E-162	542.4	92.3	1	403	100	494	409	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAK9013234.1	GCA_963970005.1	cytosol	K02930	2.40E-163	545.5	92.3	1	409	100	500	770	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAK9024527.1	GCA_963970005.1	cytosol	K02932	5.30E-128	428.7	152.2	1	307	76	366	312	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAK9035880.1	GCA_963970005.1	cytosol	K02960	3.80E-82	276.0	157.47	21	184	22	183	184	20	True	True	RP-S16e, RPS16; small subunit ribosomal protein S16e
+CAK9043003.1	GCA_963970005.1	cytosol	K02866	2.40E-108	363.0	95.23	1	207	50	258	215	0	True	False	RP-L10e, RPL10; large subunit ribosomal protein L10e
+CAK9045743.1	GCA_963970005.1	cytosol	K02932	3.40E-127	426.1	152.2	1	307	76	366	312	0	True	False	RP-L5e, RPL5; large subunit ribosomal protein L5e
+CAK9053208.1	GCA_963970005.1	cytosol	K02981	8.10E-126	420.8	250.33	58	335	45	309	340	57	True	True	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAK9055314.1	GCA_963970005.1	cytosol	K02981	3.50E-124	415.4	250.33	4	256	56	309	261	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAK9055315.1	GCA_963970005.1	cytosol	K02981	3.50E-124	415.4	250.33	4	256	56	309	261	3	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAK9069876.1	GCA_963970005.1	cytosol	K02981	1.70E-124	416.5	250.33	5	251	61	309	256	4	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAK9069878.1	GCA_963970005.1	cytosol	K02981	1.50E-124	416.6	250.33	7	253	61	309	258	6	True	False	RP-S2e, RPS2; small subunit ribosomal protein S2e
+CAK9071493.1	GCA_963970005.1	cytosol	K02873	1.20E-82	278.6	38.27	4	274	51	253	276	3	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAK9074141.1	GCA_963970005.1	cytosol	K02910	2.40E-55	187.7	25.4	54	182	16	147	183	53	True	True	RP-L31e, RPL31; large subunit ribosomal protein L31e
+CAK9074399.1	GCA_963970005.1	cytosol	K02910	2.40E-29	103.0	25.4	54	146	16	110	236	53	True	True	RP-L31e, RPL31; large subunit ribosomal protein L31e
+CAK9076821.1	GCA_963970005.1	cytosol	K02910	9.40E-52	176.0	25.4	3	120	29	147	121	2	True	False	RP-L31e, RPL31; large subunit ribosomal protein L31e
+CAK9080600.1	GCA_963970005.1	cytosol	K02966	5.10E-65	219.9	53.53	371	543	40	201	634	370	True	True	RP-S19e, RPS19; small subunit ribosomal protein S19e
+CAK9088572.1	GCA_963970005.1	cytosol	K02995	2.10E-92	309.8	41.23	1	208	34	238	209	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+CAK9094360.1	GCA_963970005.1	cytosol	K02930	4.60E-163	544.5	92.3	1	407	100	498	711	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAK9094361.1	GCA_963970005.1	cytosol	K02930	4.60E-163	544.5	92.3	1	407	100	498	711	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAK9094362.1	GCA_963970005.1	cytosol	K02930	4.60E-163	544.5	92.3	1	407	100	498	711	0	True	False	RP-L4e, RPL4; large subunit ribosomal protein L4e
+CAK9104151.1	GCA_963970005.1	cytosol	K02873	9.60E-82	275.6	38.27	3	216	50	253	218	2	True	False	RP-L13e, RPL13; large subunit ribosomal protein L13e
+CAK9118694.1	GCA_963970005.1	cytosol	K02995	8.30E-96	320.9	41.23	1	206	34	237	207	0	True	False	RP-S8e, RPS8; small subunit ribosomal protein S8e
+OLP76846.1	GCA_001939145.1	mitochondrion	K01682	0	1432.6	585.67	327	1172	5	846	1278	326	True	True	acnB; aconitate hydratase 2 / 2-methylisocitrate dehydratase [EC:4.2.1.3 4.2.1.99]
+OLP80981.1	GCA_001939145.1	mitochondrion	K00030	1.60E-107	360.7	419.97	215	611	73	420	1167	214	True	True	IDH3; isocitrate dehydrogenase (NAD+) [EC:1.1.1.41]
+OLP82657.1	GCA_001939145.1	mitochondrion	K02115	3.20E-87	293.7	245.57	43	378	68	356	460	42	True	True	ATPF1G, atpG; F-type H+-transporting ATPase subunit gamma
+OLP82667.1	GCA_001939145.1	mitochondrion	K02115	5.00E-87	293.1	245.57	127	462	68	356	517	126	True	True	ATPF1G, atpG; F-type H+-transporting ATPase subunit gamma
+OLP86456.1	GCA_001939145.1	mitochondrion	K02136	5.00E-92	309.9	317.53	807	1130	61	362	1131	806	True	True	ATPeF1G, ATP5C1, ATP3; F-type H+-transporting ATPase subunit gamma
+OLP93518.1	GCA_001939145.1	mitochondrion	K00026	2.40E-135	452.7	503.17	125	519	53	396	1154	124	True	True	MDH2; malate dehydrogenase [EC:1.1.1.37]
+OLP94745.1	GCA_001939145.1	mitochondrion	K02114	2.00E-32	113.2	93.63	1039	1207	42	206	1213	1038	True	True	ATPF1E, atpC; F-type H+-transporting ATPase subunit epsilon
+OLP95725.1	GCA_001939145.1	mitochondrion	K02115	2.00E-85	287.8	245.57	123	541	64	357	1786	122	True	True	ATPF1G, atpG; F-type H+-transporting ATPase subunit gamma
+OLP99646.1	GCA_001939145.1	mitochondrion	K00234	0	1132.0	1154.5	67	680	136	765	1911	66	True	True	SDHA, SDH1; succinate dehydrogenase (ubiquinone) flavoprotein subunit [EC:1.3.5.1]
+OLQ01740.1	GCA_001939145.1	mitochondrion	K02132	8.60E-291	966.7	988.73	54	580	82	603	589	53	True	True	ATPeF1A, ATP5A1, ATP1; F-type H+-transporting ATPase subunit alpha
+OLQ13841.1	GCA_001939145.1	mitochondrion	K00026	2.10E-133	446.4	503.17	5	331	80	396	882	4	True	False	MDH2; malate dehydrogenase [EC:1.1.1.37]
+CAE6917623.1	GCA_905221605.1	mitochondrion	K00234	0	1129.2	1154.5	30	626	137	749	626	29	True	True	SDHA, SDH1; succinate dehydrogenase (ubiquinone) flavoprotein subunit [EC:1.3.5.1]
+CAE7034163.1	GCA_905221605.1	mitochondrion	K02132	3.00E-289	961.6	988.73	8	526	91	603	535	7	True	False	ATPeF1A, ATP5A1, ATP1; F-type H+-transporting ATPase subunit alpha
+CAE7040342.1	GCA_905221605.1	mitochondrion	K01682	0	1467.4	585.67	36	882	5	847	889	35	True	True	acnB; aconitate hydratase 2 / 2-methylisocitrate dehydratase [EC:4.2.1.3 4.2.1.99]
+CAE7238264.1	GCA_905221605.1	mitochondrion	K00026	7.00E-129	431.4	503.17	19	339	80	392	344	18	True	True	MDH2; malate dehydrogenase [EC:1.1.1.37]
+CAE7252427.1	GCA_905221605.1	mitochondrion	K01682	0	1441.5	585.67	38	883	5	846	894	37	True	True	acnB; aconitate hydratase 2 / 2-methylisocitrate dehydratase [EC:4.2.1.3 4.2.1.99]
+CAE7354454.1	GCA_905221605.1	mitochondrion	K00658	3.60E-110	370.4	455.03	315	651	75	379	680	314	True	True	DLST, sucB; 2-oxoglutarate dehydrogenase E2 component (dihydrolipoamide succinyltransferase) [EC:2.3.1.61]
+CAE7380557.1	GCA_905221605.1	mitochondrion	K01647	1.20E-109	368.3	411.8	251	671	80	448	698	250	True	True	CS, gltA; citrate synthase [EC:2.3.3.1]
+CAE7452293.1	GCA_905221605.1	mitochondrion	K00026	4.60E-131	438.6	503.17	25	352	70	392	353	24	True	True	MDH2; malate dehydrogenase [EC:1.1.1.37]
+CAE7574529.1	GCA_905221605.1	mitochondrion	K00026	1.10E-130	437.3	503.17	293	620	79	395	1177	292	True	True	MDH2; malate dehydrogenase [EC:1.1.1.37]
+CAE7590873.1	GCA_905221605.1	mitochondrion	K00164	3.70E-297	989.3	1219.93	1757	2703	191	996	3111	1756	True	True	OGDH, sucA; 2-oxoglutarate dehydrogenase E1 component [EC:1.2.4.2]
+CAE7148725.1	GCA_905231915.1	mitochondrion	K27802	0	1537.0	1452.67	2	886	75	959	888	1	True	False	acnA; aconitate hydratase A / 2-methylisocitrate dehydratase [EC:4.2.1.3 4.2.1.99]
+CAE7216769.1	GCA_905231915.1	mitochondrion	K02115	1.60E-86	291.4	245.57	42	377	68	356	432	41	True	True	ATPF1G, atpG; F-type H+-transporting ATPase subunit gamma
+CAE7244313.1	GCA_905231915.1	mitochondrion	K00658	7.20E-178	594.0	455.03	2	432	74	456	433	1	True	False	DLST, sucB; 2-oxoglutarate dehydrogenase E2 component (dihydrolipoamide succinyltransferase) [EC:2.3.1.61]
+CAE7366862.1	GCA_905231915.1	mitochondrion	K01647	1.60E-137	460.2	411.8	23	421	89	454	432	22	True	True	CS, gltA; citrate synthase [EC:2.3.3.1]
+CAE7366873.1	GCA_905231915.1	mitochondrion	K00239	3.80E-232	772.8	612.9	2	544	63	585	775	1	True	False	sdhA, frdA; succinate dehydrogenase flavoprotein subunit [EC:1.3.5.1]
+CAE7413111.1	GCA_905231915.1	mitochondrion	K00026	3.20E-133	445.7	503.17	371	705	74	396	1256	370	True	True	MDH2; malate dehydrogenase [EC:1.1.1.37]
+CAE7438424.1	GCA_905231915.1	mitochondrion	K02115	7.30E-94	315.6	245.57	1	292	71	350	292	0	True	False	ATPF1G, atpG; F-type H+-transporting ATPase subunit gamma
+CAE7535686.1	GCA_905231915.1	mitochondrion	K01682	1.80E-221	738.1	585.67	39	525	5	487	525	38	True	True	acnB; aconitate hydratase 2 / 2-methylisocitrate dehydratase [EC:4.2.1.3 4.2.1.99]
+CAE7764006.1	GCA_905231915.1	mitochondrion	K00026	1.40E-135	453.5	503.17	125	519	53	396	1045	124	True	True	MDH2; malate dehydrogenase [EC:1.1.1.37]
+CAE7831214.1	GCA_905231915.1	mitochondrion	K02132	4.80E-291	967.5	988.73	90	628	70	603	637	89	True	True	ATPeF1A, ATP5A1, ATP1; F-type H+-transporting ATPase subunit alpha
+CAE7864999.1	GCA_905231915.1	mitochondrion	K00240	1.50E-65	222.0	161.57	12	274	41	272	279	11	True	False	sdhB, frdB; succinate dehydrogenase iron-sulfur subunit [EC:1.3.5.1]
+CAE7894424.1	GCA_905231915.1	mitochondrion	K02132	8.30E-291	966.7	988.73	183	728	68	606	1135	182	True	True	ATPeF1A, ATP5A1, ATP1; F-type H+-transporting ATPase subunit alpha
+CAE7940695.1	GCA_905231915.1	mitochondrion	K01647	2.00E-125	420.3	411.8	63	460	94	463	486	62	True	True	CS, gltA; citrate synthase [EC:2.3.3.1]
+CAE8584351.1	GCA_905237085.1	mitochondrion	K02132	1.20E-284	946.4	988.73	29	550	88	603	559	28	True	True	ATPeF1A, ATP5A1, ATP1; F-type H+-transporting ATPase subunit alpha
+CAE8584641.1	GCA_905237085.1	mitochondrion	K00417	1.90E-15	57.9	42.43	434	575	27	151	605	433	False	True	QCR7, UQCRB; ubiquinol-cytochrome c reductase subunit 7
+CAE8585457.1	GCA_905237085.1	mitochondrion	K01647	1.80E-110	371.0	411.8	50	457	92	448	470	49	True	True	CS, gltA; citrate synthase [EC:2.3.3.1]
+CAE8586644.1	GCA_905237085.1	mitochondrion	K02132	1.20E-284	946.4	988.73	29	550	88	603	559	28	True	True	ATPeF1A, ATP5A1, ATP1; F-type H+-transporting ATPase subunit alpha
+CAE8587207.1	GCA_905237085.1	mitochondrion	K00234	0	1125.7	1154.5	26	633	136	758	884	25	True	True	SDHA, SDH1; succinate dehydrogenase (ubiquinone) flavoprotein subunit [EC:1.3.5.1]
+CAE8587208.1	GCA_905237085.1	mitochondrion	K00234	0	1126.0	1154.5	26	623	136	749	623	25	True	True	SDHA, SDH1; succinate dehydrogenase (ubiquinone) flavoprotein subunit [EC:1.3.5.1]
+CAE8587209.1	GCA_905237085.1	mitochondrion	K00234	0	1125.7	1154.5	36	632	137	749	632	35	True	True	SDHA, SDH1; succinate dehydrogenase (ubiquinone) flavoprotein subunit [EC:1.3.5.1]
+CAE8593372.1	GCA_905237085.1	mitochondrion	K02115	9.60E-95	318.5	245.57	58	387	71	356	435	57	True	True	ATPF1G, atpG; F-type H+-transporting ATPase subunit gamma
+CAE8593373.1	GCA_905237085.1	mitochondrion	K02115	9.60E-95	318.5	245.57	58	387	71	356	435	57	True	True	ATPF1G, atpG; F-type H+-transporting ATPase subunit gamma
+CAE8594193.1	GCA_905237085.1	mitochondrion	K01647	1.10E-125	421.2	411.8	38	435	94	456	494	37	True	True	CS, gltA; citrate synthase [EC:2.3.3.1]
+CAE8597421.1	GCA_905237085.1	mitochondrion	K00235	6.80E-147	491.0	469.43	282	566	60	344	781	281	True	True	SDHB, SDH2; succinate dehydrogenase (ubiquinone) iron-sulfur subunit [EC:1.3.5.1]
+CAE8599192.1	GCA_905237085.1	mitochondrion	K00164	0	1235.2	1219.93	7	991	66	991	1011	6	False	False	OGDH, sucA; 2-oxoglutarate dehydrogenase E1 component [EC:1.2.4.2]
+CAE8603501.1	GCA_905237085.1	mitochondrion	K00031	3.90E-53	181.6	76.4	71	610	90	546	1113	70	False	True	IDH1, IDH2, icd; isocitrate dehydrogenase [EC:1.1.1.42]
+CAE8605742.1	GCA_905237085.1	mitochondrion	K02115	5.70E-94	315.9	245.57	46	394	61	356	442	45	True	True	ATPF1G, atpG; F-type H+-transporting ATPase subunit gamma
+CAE8606046.1	GCA_905237085.1	mitochondrion	K00026	3.10E-125	419.4	503.17	6	327	80	393	330	5	True	False	MDH2; malate dehydrogenase [EC:1.1.1.37]
+CAE8607616.1	GCA_905237085.1	mitochondrion	K00234	0	1127.7	1154.5	27	623	137	749	623	26	True	True	SDHA, SDH1; succinate dehydrogenase (ubiquinone) flavoprotein subunit [EC:1.3.5.1]
+CAE8610151.1	GCA_905237085.1	mitochondrion	K01682	0	1237.7	585.67	35	770	5	735	799	34	True	True	acnB; aconitate hydratase 2 / 2-methylisocitrate dehydratase [EC:4.2.1.3 4.2.1.99]
+CAE8611289.1	GCA_905237085.1	mitochondrion	K01647	1.00E-109	368.6	411.8	867	1333	72	448	1344	866	True	True	CS, gltA; citrate synthase [EC:2.3.3.1]
+CAE8617090.1	GCA_905237085.1	mitochondrion	K00234	0	1127.2	1154.5	28	624	137	749	624	27	True	True	SDHA, SDH1; succinate dehydrogenase (ubiquinone) flavoprotein subunit [EC:1.3.5.1]
+CAE8618239.1	GCA_905237085.1	mitochondrion	K00164	0	1236.8	1219.93	36	1022	64	991	1042	35	True	True	OGDH, sucA; 2-oxoglutarate dehydrogenase E1 component [EC:1.2.4.2]
+CAE8621441.1	GCA_905237085.1	mitochondrion	K00026	4.60E-129	432.0	503.17	67	406	62	390	412	66	True	True	MDH2; malate dehydrogenase [EC:1.1.1.37]
+CAE8622686.1	GCA_905237085.1	mitochondrion	K01647	1.10E-125	421.2	411.8	38	435	94	456	494	37	True	True	CS, gltA; citrate synthase [EC:2.3.3.1]
+CAE8624445.1	GCA_905237085.1	mitochondrion	K02132	1.40E-284	946.1	988.73	13	535	87	603	544	12	False	False	ATPeF1A, ATP5A1, ATP1; F-type H+-transporting ATPase subunit alpha
+CAE8626530.1	GCA_905237085.1	mitochondrion	K00026	2.50E-125	419.7	503.17	338	671	68	393	1883	337	True	True	MDH2; malate dehydrogenase [EC:1.1.1.37]
+CAE8627780.1	GCA_905237085.1	mitochondrion	K00658	5.40E-183	610.9	455.03	52	440	69	456	441	51	True	True	DLST, sucB; 2-oxoglutarate dehydrogenase E2 component (dihydrolipoamide succinyltransferase) [EC:2.3.1.61]
+CAE8628551.1	GCA_905237085.1	mitochondrion	K00026	1.60E-128	430.3	503.17	7	324	80	387	332	6	True	False	MDH2; malate dehydrogenase [EC:1.1.1.37]
+CAE8628843.1	GCA_905237085.1	mitochondrion	K00026	1.20E-127	427.3	503.17	25	352	70	390	354	24	True	True	MDH2; malate dehydrogenase [EC:1.1.1.37]
+CAE8629657.1	GCA_905237085.1	mitochondrion	K00234	0	1126.1	1154.5	26	623	136	749	623	25	True	True	SDHA, SDH1; succinate dehydrogenase (ubiquinone) flavoprotein subunit [EC:1.3.5.1]
+CAE8634113.1	GCA_905237085.1	mitochondrion	K02115	9.60E-95	318.5	245.57	58	387	71	356	435	57	True	True	ATPF1G, atpG; F-type H+-transporting ATPase subunit gamma
+CAE8634114.1	GCA_905237085.1	mitochondrion	K02115	9.60E-95	318.5	245.57	58	387	71	356	435	57	True	True	ATPF1G, atpG; F-type H+-transporting ATPase subunit gamma
+CAE8634115.1	GCA_905237085.1	mitochondrion	K02115	9.70E-95	318.5	245.57	58	387	71	356	435	57	True	True	ATPF1G, atpG; F-type H+-transporting ATPase subunit gamma
+CAE8634116.1	GCA_905237085.1	mitochondrion	K02115	9.60E-95	318.5	245.57	58	387	71	356	435	57	True	True	ATPF1G, atpG; F-type H+-transporting ATPase subunit gamma
+CAE8634536.1	GCA_905237085.1	mitochondrion	K01705	3.80E-272	907.0	508.07	683	1364	46	753	1365	682	True	True	LYS4; homoaconitate hydratase [EC:4.2.1.36]
+CAE8636868.1	GCA_905237085.1	mitochondrion	K01682	0	1356.4	585.67	2	838	30	844	841	1	False	False	acnB; aconitate hydratase 2 / 2-methylisocitrate dehydratase [EC:4.2.1.3 4.2.1.99]
+CAE8637675.1	GCA_905237085.1	mitochondrion	K00234	0	1125.8	1154.5	55	652	136	749	652	54	False	True	SDHA, SDH1; succinate dehydrogenase (ubiquinone) flavoprotein subunit [EC:1.3.5.1]
+CAE8637694.1	GCA_905237085.1	mitochondrion	K02132	1.70E-277	922.7	988.73	12	500	116	603	509	11	True	False	ATPeF1A, ATP5A1, ATP1; F-type H+-transporting ATPase subunit alpha
+CAE8637888.1	GCA_905237085.1	mitochondrion	K01647	2.40E-128	430.0	411.8	38	455	95	465	489	37	True	True	CS, gltA; citrate synthase [EC:2.3.3.1]
+CAE8641799.1	GCA_905237085.1	mitochondrion	K02114	7.10E-25	88.5	93.63	53	223	30	207	230	52	True	True	ATPF1E, atpC; F-type H+-transporting ATPase subunit epsilon
+CAE8643503.1	GCA_905237085.1	mitochondrion	K02132	3.00E-284	945.0	988.73	15	549	75	603	558	14	True	False	ATPeF1A, ATP5A1, ATP1; F-type H+-transporting ATPase subunit alpha
+CAL1124885.1	GCA_947184155.2	mitochondrion	K01647	4.20E-132	442.4	411.8	727	1168	58	454	1179	726	True	True	CS, gltA; citrate synthase [EC:2.3.3.1]
+CAL1124936.1	GCA_947184155.2	mitochondrion	K00239	9.40E-198	659.2	612.9	254	842	58	602	1881	253	True	True	sdhA, frdA; succinate dehydrogenase flavoprotein subunit [EC:1.3.5.1]
+CAL1125029.1	GCA_947184155.2	mitochondrion	K00239	1.40E-202	675.2	612.9	255	801	100	612	1038	254	True	True	sdhA, frdA; succinate dehydrogenase flavoprotein subunit [EC:1.3.5.1]
+CAL1125524.1	GCA_947184155.2	mitochondrion	K27802	0	1527.9	1452.67	7	904	75	957	977	6	True	False	acnA; aconitate hydratase A / 2-methylisocitrate dehydratase [EC:4.2.1.3 4.2.1.99]
+CAL1132654.1	GCA_947184155.2	mitochondrion	K02132	1.70E-289	962.4	988.73	16	539	87	604	547	15	True	True	ATPeF1A, ATP5A1, ATP1; F-type H+-transporting ATPase subunit alpha
+CAL1133237.1	GCA_947184155.2	mitochondrion	K02132	8.50E-271	900.6	988.73	23	566	85	579	587	22	True	True	ATPeF1A, ATP5A1, ATP1; F-type H+-transporting ATPase subunit alpha
+CAL1134270.1	GCA_947184155.2	mitochondrion	K00234	1.80E-300	999.5	1154.5	26	529	129	633	539	25	True	True	SDHA, SDH1; succinate dehydrogenase (ubiquinone) flavoprotein subunit [EC:1.3.5.1]
+CAL1134569.1	GCA_947184155.2	mitochondrion	K00234	0	1130.0	1154.5	30	630	133	749	630	29	True	True	SDHA, SDH1; succinate dehydrogenase (ubiquinone) flavoprotein subunit [EC:1.3.5.1]
+CAL1135924.1	GCA_947184155.2	mitochondrion	K01647	3.00E-126	423.1	411.8	31	444	95	465	555	30	True	True	CS, gltA; citrate synthase [EC:2.3.3.1]
+CAL1140950.1	GCA_947184155.2	mitochondrion	K02115	2.00E-87	294.4	245.57	47	463	75	374	960	46	True	True	ATPF1G, atpG; F-type H+-transporting ATPase subunit gamma
+CAL1143282.1	GCA_947184155.2	mitochondrion	K01682	0	1430.4	585.67	7	861	4	847	871	6	True	False	acnB; aconitate hydratase 2 / 2-methylisocitrate dehydratase [EC:4.2.1.3 4.2.1.99]
+CAL1143768.1	GCA_947184155.2	mitochondrion	K01647	1.00E-108	365.2	411.8	867	1395	52	449	1420	866	True	True	CS, gltA; citrate synthase [EC:2.3.3.1]
+CAL1145937.1	GCA_947184155.2	mitochondrion	K00234	0	1130.0	1154.5	39	640	132	749	640	38	True	True	SDHA, SDH1; succinate dehydrogenase (ubiquinone) flavoprotein subunit [EC:1.3.5.1]
+CAL1151264.1	GCA_947184155.2	mitochondrion	K00164	0	1254.2	1219.93	867	1865	62	992	1884	866	True	True	OGDH, sucA; 2-oxoglutarate dehydrogenase E1 component [EC:1.2.4.2]
+CAL1154393.1	GCA_947184155.2	mitochondrion	K00413	3.10E-37	129.3	44.57	492	664	40	206	1317	491	True	True	CYC1, CYT1, petC; ubiquinol-cytochrome c reductase cytochrome c1 subunit
+CAL1163110.1	GCA_947184155.2	mitochondrion	K00164	0	1041.4	1219.93	33	1010	123	984	1525	32	True	True	OGDH, sucA; 2-oxoglutarate dehydrogenase E1 component [EC:1.2.4.2]
+CAL1164183.1	GCA_947184155.2	mitochondrion	K00026	3.50E-130	435.7	503.17	19	338	80	391	342	18	True	True	MDH2; malate dehydrogenase [EC:1.1.1.37]
+CAL1164991.1	GCA_947184155.2	mitochondrion	K00026	6.50E-128	428.2	503.17	25	340	70	380	869	24	True	True	MDH2; malate dehydrogenase [EC:1.1.1.37]
+CAL1174009.1	GCA_947184155.2	mitochondrion	K00026	1.50E-132	443.5	503.17	1685	2020	75	392	2024	1684	True	True	MDH2; malate dehydrogenase [EC:1.1.1.37]
+CAK8994691.1	GCA_963969995.1	mitochondrion	K18159	1.50E-33	116.7	78.4	316	563	35	246	579	315	False	True	NDUFAF1, CIA30; NADH dehydrogenase [ubiquinone] 1 alpha subcomplex assembly factor 1
+CAK9012343.1	GCA_963969995.1	mitochondrion	K01647	3.60E-109	366.7	411.8	32	443	91	448	454	31	True	True	CS, gltA; citrate synthase [EC:2.3.3.1]
+CAK9012345.1	GCA_963969995.1	mitochondrion	K01647	3.30E-109	366.9	411.8	32	443	91	448	455	31	True	True	CS, gltA; citrate synthase [EC:2.3.3.1]
+CAK9015398.1	GCA_963969995.1	mitochondrion	K00234	0	1133.2	1154.5	21	624	130	749	624	20	True	True	SDHA, SDH1; succinate dehydrogenase (ubiquinone) flavoprotein subunit [EC:1.3.5.1]
+CAK9019221.1	GCA_963969995.1	mitochondrion	K00234	0	1139.4	1154.5	22	627	128	749	627	21	True	True	SDHA, SDH1; succinate dehydrogenase (ubiquinone) flavoprotein subunit [EC:1.3.5.1]
+CAK9019282.1	GCA_963969995.1	mitochondrion	K00234	0	1139.4	1154.5	22	627	128	749	627	21	True	True	SDHA, SDH1; succinate dehydrogenase (ubiquinone) flavoprotein subunit [EC:1.3.5.1]
+CAK9019393.1	GCA_963969995.1	mitochondrion	K00240	1.70E-58	198.8	161.57	1	240	40	265	248	0	True	False	sdhB, frdB; succinate dehydrogenase iron-sulfur subunit [EC:1.3.5.1]
+CAK9019952.1	GCA_963969995.1	mitochondrion	K00239	1.40E-197	658.6	612.9	254	836	58	597	1081	253	True	True	sdhA, frdA; succinate dehydrogenase flavoprotein subunit [EC:1.3.5.1]
+CAK9020019.1	GCA_963969995.1	mitochondrion	K00239	1.40E-197	658.6	612.9	254	836	58	597	1081	253	True	True	sdhA, frdA; succinate dehydrogenase flavoprotein subunit [EC:1.3.5.1]
+CAK9023442.1	GCA_963969995.1	mitochondrion	K00239	1.40E-197	658.6	612.9	254	836	58	597	1081	253	True	True	sdhA, frdA; succinate dehydrogenase flavoprotein subunit [EC:1.3.5.1]
+CAK9023444.1	GCA_963969995.1	mitochondrion	K00239	1.40E-197	658.6	612.9	254	836	58	597	1081	253	True	True	sdhA, frdA; succinate dehydrogenase flavoprotein subunit [EC:1.3.5.1]
+CAK9023445.1	GCA_963969995.1	mitochondrion	K00240	1.70E-58	198.8	161.57	1	240	40	265	248	0	True	False	sdhB, frdB; succinate dehydrogenase iron-sulfur subunit [EC:1.3.5.1]
+CAK9023446.1	GCA_963969995.1	mitochondrion	K00240	1.70E-58	198.8	161.57	1	240	40	265	248	0	True	False	sdhB, frdB; succinate dehydrogenase iron-sulfur subunit [EC:1.3.5.1]
+CAK9029770.1	GCA_963969995.1	mitochondrion	K00658	2.50E-175	585.6	455.03	49	430	77	456	431	48	False	True	DLST, sucB; 2-oxoglutarate dehydrogenase E2 component (dihydrolipoamide succinyltransferase) [EC:2.3.1.61]
+CAK9037431.1	GCA_963969995.1	mitochondrion	K01647	4.40E-127	425.8	411.8	10	424	77	455	432	9	True	False	CS, gltA; citrate synthase [EC:2.3.3.1]
+CAK9039425.1	GCA_963969995.1	mitochondrion	K00164	0	1361.5	1219.93	17	984	64	991	985	16	True	True	OGDH, sucA; 2-oxoglutarate dehydrogenase E1 component [EC:1.2.4.2]
+CAK9039427.1	GCA_963969995.1	mitochondrion	K00658	1.70E-189	632.4	455.03	104	497	76	456	498	103	True	True	DLST, sucB; 2-oxoglutarate dehydrogenase E2 component (dihydrolipoamide succinyltransferase) [EC:2.3.1.61]
+CAK9041929.1	GCA_963969995.1	mitochondrion	K00164	0	1361.5	1219.93	17	984	64	991	985	16	True	True	OGDH, sucA; 2-oxoglutarate dehydrogenase E1 component [EC:1.2.4.2]
+CAK9041931.1	GCA_963969995.1	mitochondrion	K00658	1.70E-189	632.4	455.03	104	497	76	456	498	103	True	True	DLST, sucB; 2-oxoglutarate dehydrogenase E2 component (dihydrolipoamide succinyltransferase) [EC:2.3.1.61]
+CAK9081987.1	GCA_963969995.1	mitochondrion	K01682	0	1448.0	585.67	34	879	5	847	889	33	True	True	acnB; aconitate hydratase 2 / 2-methylisocitrate dehydratase [EC:4.2.1.3 4.2.1.99]
+CAK9086843.1	GCA_963969995.1	mitochondrion	K02132	8.90E-284	943.5	988.73	1688	2184	97	584	2210	1687	True	True	ATPeF1A, ATP5A1, ATP1; F-type H+-transporting ATPase subunit alpha
+CAK9090438.1	GCA_963969995.1	mitochondrion	K00240	1.70E-58	198.8	161.57	1	240	40	265	248	0	True	False	sdhB, frdB; succinate dehydrogenase iron-sulfur subunit [EC:1.3.5.1]
+CAK9092010.1	GCA_963969995.1	mitochondrion	K01647	3.60E-109	366.7	411.8	32	443	91	448	454	31	True	True	CS, gltA; citrate synthase [EC:2.3.3.1]
+CAK9093426.1	GCA_963969995.1	mitochondrion	K01647	6.80E-129	431.8	411.8	45	439	94	461	468	44	True	True	CS, gltA; citrate synthase [EC:2.3.3.1]
+CAK9102099.1	GCA_963969995.1	mitochondrion	K00026	3.40E-135	452.2	503.17	49	417	28	392	421	48	True	True	MDH2; malate dehydrogenase [EC:1.1.1.37]
+CAK9102358.1	GCA_963969995.1	mitochondrion	K02132	3.40E-291	968.0	988.73	22	543	88	603	552	21	True	True	ATPeF1A, ATP5A1, ATP1; F-type H+-transporting ATPase subunit alpha
+CAK9102649.1	GCA_963969995.1	mitochondrion	K02132	3.10E-268	892.1	988.73	57	596	94	580	609	56	True	True	ATPeF1A, ATP5A1, ATP1; F-type H+-transporting ATPase subunit alpha
+CAK9109149.1	GCA_963969995.1	mitochondrion	K02115	7.30E-88	295.8	245.57	23	382	57	357	995	22	True	True	ATPF1G, atpG; F-type H+-transporting ATPase subunit gamma
+CAK9109567.1	GCA_963969995.1	mitochondrion	K00239	1.40E-197	658.6	612.9	254	836	58	597	1081	253	True	True	sdhA, frdA; succinate dehydrogenase flavoprotein subunit [EC:1.3.5.1]
+CAK9109573.1	GCA_963969995.1	mitochondrion	K00239	1.40E-197	658.6	612.9	254	836	58	597	1081	253	True	True	sdhA, frdA; succinate dehydrogenase flavoprotein subunit [EC:1.3.5.1]
+CAK9109578.1	GCA_963969995.1	mitochondrion	K00240	1.70E-58	198.8	161.57	1	240	40	265	248	0	True	False	sdhB, frdB; succinate dehydrogenase iron-sulfur subunit [EC:1.3.5.1]
+CAK9113535.1	GCA_963969995.1	mitochondrion	K00239	1.40E-197	658.6	612.9	254	836	58	597	1081	253	True	True	sdhA, frdA; succinate dehydrogenase flavoprotein subunit [EC:1.3.5.1]
+CAK8989595.1	GCA_963970005.1	mitochondrion	K00234	0	1133.2	1154.5	21	624	130	749	624	20	True	True	SDHA, SDH1; succinate dehydrogenase (ubiquinone) flavoprotein subunit [EC:1.3.5.1]
+CAK8989596.1	GCA_963970005.1	mitochondrion	K00234	0	1114.0	1154.5	21	646	130	749	646	20	True	True	SDHA, SDH1; succinate dehydrogenase (ubiquinone) flavoprotein subunit [EC:1.3.5.1]
+CAK9009462.1	GCA_963970005.1	mitochondrion	K01647	5.70E-111	372.7	411.8	627	1125	77	458	1291	626	True	True	CS, gltA; citrate synthase [EC:2.3.3.1]
+CAK9013758.1	GCA_963970005.1	mitochondrion	K02132	6.60E-289	960.4	988.73	181	697	88	603	706	180	True	True	ATPeF1A, ATP5A1, ATP1; F-type H+-transporting ATPase subunit alpha
+CAK9021910.1	GCA_963970005.1	mitochondrion	K00026	4.60E-127	425.4	503.17	5	347	80	396	624	4	True	False	MDH2; malate dehydrogenase [EC:1.1.1.37]
+CAK9022845.1	GCA_963970005.1	mitochondrion	K00026	6.90E-134	447.9	503.17	49	379	70	392	382	48	True	True	MDH2; malate dehydrogenase [EC:1.1.1.37]
+CAK9026145.1	GCA_963970005.1	mitochondrion	K00026	5.30E-126	421.9	503.17	19	338	80	391	343	18	True	True	MDH2; malate dehydrogenase [EC:1.1.1.37]
+CAK9043536.1	GCA_963970005.1	mitochondrion	K00234	0	1139.4	1154.5	22	627	128	749	627	21	True	True	SDHA, SDH1; succinate dehydrogenase (ubiquinone) flavoprotein subunit [EC:1.3.5.1]
+CAK9048657.1	GCA_963970005.1	mitochondrion	K00164	0	1052.3	1219.93	86	1071	123	994	1073	85	True	True	OGDH, sucA; 2-oxoglutarate dehydrogenase E1 component [EC:1.2.4.2]
+CAK9048995.1	GCA_963970005.1	mitochondrion	K02115	2.20E-87	294.3	245.57	23	373	57	356	2535	22	True	True	ATPF1G, atpG; F-type H+-transporting ATPase subunit gamma
+CAK9049002.1	GCA_963970005.1	mitochondrion	K02115	4.80E-87	293.1	245.57	23	373	57	356	2837	22	True	True	ATPF1G, atpG; F-type H+-transporting ATPase subunit gamma
+CAK9058823.1	GCA_963970005.1	mitochondrion	K00164	0	1170.4	1219.93	23	939	62	930	986	22	True	True	OGDH, sucA; 2-oxoglutarate dehydrogenase E1 component [EC:1.2.4.2]
+CAK9058825.1	GCA_963970005.1	mitochondrion	K00164	0	1250.9	1219.93	23	1017	62	994	1034	22	True	True	OGDH, sucA; 2-oxoglutarate dehydrogenase E1 component [EC:1.2.4.2]
+CAK9058997.1	GCA_963970005.1	mitochondrion	K00164	0	1170.6	1219.93	23	939	62	930	986	22	True	True	OGDH, sucA; 2-oxoglutarate dehydrogenase E1 component [EC:1.2.4.2]
+CAK9064171.1	GCA_963970005.1	mitochondrion	K02132	3.40E-291	968.0	988.73	22	543	88	603	552	21	True	True	ATPeF1A, ATP5A1, ATP1; F-type H+-transporting ATPase subunit alpha
+CAK9078540.1	GCA_963970005.1	mitochondrion	K01682	0	1452.1	585.67	34	879	5	847	889	33	True	True	acnB; aconitate hydratase 2 / 2-methylisocitrate dehydratase [EC:4.2.1.3 4.2.1.99]
+CAK9100491.1	GCA_963970005.1	mitochondrion	K02115	2.20E-88	297.6	245.57	50	376	73	356	428	49	True	True	ATPF1G, atpG; F-type H+-transporting ATPase subunit gamma
+CAK9106441.1	GCA_963970005.1	mitochondrion	K01647	6.80E-129	431.8	411.8	45	439	94	461	468	44	True	True	CS, gltA; citrate synthase [EC:2.3.3.1]
+CAK9112254.1	GCA_963970005.1	mitochondrion	K00026	1.50E-134	450.1	503.17	23	352	69	392	353	22	True	True	MDH2; malate dehydrogenase [EC:1.1.1.37]
+OLP86809.1	GCA_001939145.1	peroxisome	K00232	5.20E-199	664.0	161.63	139	788	53	690	1768	138	True	True	E1.3.3.6, ACOX1, ACOX3; acyl-CoA oxidase [EC:1.3.3.6]
+OLP94460.1	GCA_001939145.1	peroxisome	K00273	6.80E-50	171.0	129.4	4	364	31	354	364	3	True	False	DAO, aao; D-amino-acid oxidase [EC:1.4.3.3]
+OLQ03591.1	GCA_001939145.1	peroxisome	K00232	4.90E-57	194.4	161.63	114	592	115	590	613	113	True	True	E1.3.3.6, ACOX1, ACOX3; acyl-CoA oxidase [EC:1.3.3.6]
+CAE7299335.1	GCA_905221605.1	peroxisome	K00273	8.80E-78	262.9	129.4	6	439	35	396	546	5	True	False	DAO, aao; D-amino-acid oxidase [EC:1.4.3.3]
+CAE7321387.1	GCA_905221605.1	peroxisome	K00273	9.10E-39	134.3	129.4	2	316	34	287	1699	1	True	False	DAO, aao; D-amino-acid oxidase [EC:1.4.3.3]
+CAE7266324.1	GCA_905231915.1	peroxisome	K00273	9.40E-63	213.4	129.4	4	389	31	354	389	3	True	False	DAO, aao; D-amino-acid oxidase [EC:1.4.3.3]
+CAE8585568.1	GCA_905237085.1	peroxisome	K00232	2.10E-140	470.2	161.63	31	654	55	668	1278	30	True	True	E1.3.3.6, ACOX1, ACOX3; acyl-CoA oxidase [EC:1.3.3.6]
+CAE8592492.1	GCA_905237085.1	peroxisome	K00232	1.00E-168	563.8	161.63	782	1534	49	737	2845	781	False	True	E1.3.3.6, ACOX1, ACOX3; acyl-CoA oxidase [EC:1.3.3.6]
+CAE8601752.1	GCA_905237085.1	peroxisome	K00232	4.80E-150	502.0	161.63	4	667	92	696	689	3	True	False	E1.3.3.6, ACOX1, ACOX3; acyl-CoA oxidase [EC:1.3.3.6]
+CAE8604966.1	GCA_905237085.1	peroxisome	K00232	1.10E-158	530.5	161.63	10	718	52	696	742	9	True	False	E1.3.3.6, ACOX1, ACOX3; acyl-CoA oxidase [EC:1.3.3.6]
+CAE8610471.1	GCA_905237085.1	peroxisome	K00232	5.40E-141	472.1	161.63	31	653	55	668	710	30	True	True	E1.3.3.6, ACOX1, ACOX3; acyl-CoA oxidase [EC:1.3.3.6]
+CAE8615010.1	GCA_905237085.1	peroxisome	K00232	9.60E-150	501.0	161.63	3	657	91	694	688	2	True	False	E1.3.3.6, ACOX1, ACOX3; acyl-CoA oxidase [EC:1.3.3.6]
+CAL1126741.1	GCA_947184155.2	peroxisome	K00232	1.90E-200	668.7	161.63	2429	3172	60	704	5043	2428	True	True	E1.3.3.6, ACOX1, ACOX3; acyl-CoA oxidase [EC:1.3.3.6]
+CAK9007415.1	GCA_963969995.1	peroxisome	K00232	7.50E-58	197.1	161.63	118	612	94	589	633	117	False	True	E1.3.3.6, ACOX1, ACOX3; acyl-CoA oxidase [EC:1.3.3.6]
+CAK9016961.1	GCA_963969995.1	peroxisome	K00232	1.00E-64	219.8	161.63	22	478	107	582	489	21	True	True	E1.3.3.6, ACOX1, ACOX3; acyl-CoA oxidase [EC:1.3.3.6]
+CAK9039316.1	GCA_963969995.1	peroxisome	K03781	4.20E-199	664.1	80.17	85	561	97	562	580	84	True	True	katE, CAT, catB, srpA; catalase [EC:1.11.1.6]
+CAK9041836.1	GCA_963969995.1	peroxisome	K03781	4.20E-199	664.1	80.17	85	561	97	562	580	84	True	True	katE, CAT, catB, srpA; catalase [EC:1.11.1.6]
+CAK9043519.1	GCA_963969995.1	peroxisome	K00232	4.50E-66	224.3	161.63	33	435	106	513	481	32	True	True	E1.3.3.6, ACOX1, ACOX3; acyl-CoA oxidase [EC:1.3.3.6]
+CAK9057602.1	GCA_963969995.1	peroxisome	K00273	7.00E-72	243.5	129.4	2	365	34	351	370	1	True	False	DAO, aao; D-amino-acid oxidase [EC:1.4.3.3]
+CAK9057637.1	GCA_963969995.1	peroxisome	K00232	5.30E-202	673.8	161.63	5	656	55	696	1283	4	True	False	E1.3.3.6, ACOX1, ACOX3; acyl-CoA oxidase [EC:1.3.3.6]
+CAK9114223.1	GCA_963969995.1	peroxisome	K00232	1.40E-176	589.8	161.63	26	688	55	691	719	25	True	True	E1.3.3.6, ACOX1, ACOX3; acyl-CoA oxidase [EC:1.3.3.6]
+CAK9072805.1	GCA_963970005.1	peroxisome	K00232	4.70E-199	664.1	161.63	5	671	55	694	1319	4	True	False	E1.3.3.6, ACOX1, ACOX3; acyl-CoA oxidase [EC:1.3.3.6]
+CAK9075401.1	GCA_963970005.1	peroxisome	K00232	3.90E-60	204.7	161.63	70	470	89	485	530	69	True	True	E1.3.3.6, ACOX1, ACOX3; acyl-CoA oxidase [EC:1.3.3.6]
+CAK9116516.1	GCA_963970005.1	peroxisome	K00232	4.50E-58	197.9	161.63	143	638	94	590	968	142	True	True	E1.3.3.6, ACOX1, ACOX3; acyl-CoA oxidase [EC:1.3.3.6]
+OLP91352.1	GCA_001939145.1	plasma_membrane	K01535	1.30E-247	825.3	585.47	35	891	99	904	1373	34	True	True	PMA1, PMA2; H+-transporting ATPase [EC:7.1.2.1]
+CAE7264577.1	GCA_905221605.1	plasma_membrane	K01535	1.80E-227	758.5	585.47	20	924	98	922	962	19	True	True	PMA1, PMA2; H+-transporting ATPase [EC:7.1.2.1]
+CAE7316578.1	GCA_905221605.1	plasma_membrane	K01535	7.00E-252	839.4	585.47	22	880	94	896	930	21	True	True	PMA1, PMA2; H+-transporting ATPase [EC:7.1.2.1]
+CAE7512503.1	GCA_905221605.1	plasma_membrane	K01535	1.60E-251	838.2	585.47	47	907	92	896	959	46	True	True	PMA1, PMA2; H+-transporting ATPase [EC:7.1.2.1]
+CAE7292687.1	GCA_905231915.1	plasma_membrane	K01535	1.10E-214	716.1	585.47	1	859	138	923	915	0	True	False	PMA1, PMA2; H+-transporting ATPase [EC:7.1.2.1]
+CAE7404220.1	GCA_905231915.1	plasma_membrane	K01535	1.10E-242	808.9	585.47	81	893	100	886	1297	80	True	True	PMA1, PMA2; H+-transporting ATPase [EC:7.1.2.1]
+CAE8590112.1	GCA_905237085.1	plasma_membrane	K06188	2.70E-64	217.9	267.57	145	393	58	281	406	144	True	True	aqpZ, aqpM, AQP9; aquaporin
+CAE8599884.1	GCA_905237085.1	plasma_membrane	K01535	7.30E-241	802.9	585.47	95	894	100	870	900	94	True	True	PMA1, PMA2; H+-transporting ATPase [EC:7.1.2.1]
+CAE8620085.1	GCA_905237085.1	plasma_membrane	K21407	4.80E-77	260.4	301.8	31	373	78	418	373	30	True	True	APMAP; adipocyte plasma membrane-associated protein
+CAL1170237.1	GCA_947184155.2	plasma_membrane	K01535	1.30E-233	778.9	585.47	426	1449	85	960	2768	425	True	True	PMA1, PMA2; H+-transporting ATPase [EC:7.1.2.1]
+CAL1172295.1	GCA_947184155.2	plasma_membrane	K01535	9.50E-245	815.7	585.47	64	885	99	889	971	63	True	True	PMA1, PMA2; H+-transporting ATPase [EC:7.1.2.1]
+CAK9023964.1	GCA_963969995.1	plasma_membrane	K01535	1.30E-254	848.3	585.47	32	892	99	907	929	31	True	True	PMA1, PMA2; H+-transporting ATPase [EC:7.1.2.1]
+CAK9056491.1	GCA_963969995.1	plasma_membrane	K01535	4.40E-254	846.6	585.47	32	888	99	903	929	31	True	True	PMA1, PMA2; H+-transporting ATPase [EC:7.1.2.1]
+CAK9066096.1	GCA_963969995.1	plasma_membrane	K01535	2.80E-246	820.8	585.47	68	882	100	882	1381	67	True	True	PMA1, PMA2; H+-transporting ATPase [EC:7.1.2.1]
+CAK9067332.1	GCA_963969995.1	plasma_membrane	K01535	8.10E-247	822.6	585.47	32	903	99	903	944	31	True	True	PMA1, PMA2; H+-transporting ATPase [EC:7.1.2.1]
+CAK9101015.1	GCA_963969995.1	plasma_membrane	K01535	2.50E-229	764.7	585.47	11	924	91	924	972	10	True	False	PMA1, PMA2; H+-transporting ATPase [EC:7.1.2.1]
+CAK9101060.1	GCA_963969995.1	plasma_membrane	K01535	2.40E-228	761.4	585.47	11	923	91	923	972	10	True	False	PMA1, PMA2; H+-transporting ATPase [EC:7.1.2.1]
+CAK9113772.1	GCA_963969995.1	plasma_membrane	K01535	1.80E-254	847.9	585.47	32	901	99	917	1480	31	True	True	PMA1, PMA2; H+-transporting ATPase [EC:7.1.2.1]
+CAK8989155.1	GCA_963970005.1	plasma_membrane	K01535	1.00E-224	749.4	585.47	154	1514	78	1156	1553	153	True	True	PMA1, PMA2; H+-transporting ATPase [EC:7.1.2.1]
+CAK8989292.1	GCA_963970005.1	plasma_membrane	K01535	3.90E-228	760.7	585.47	11	923	91	923	972	10	True	False	PMA1, PMA2; H+-transporting ATPase [EC:7.1.2.1]
+CAK9066522.1	GCA_963970005.1	plasma_membrane	K01535	7.70E-229	763.0	585.47	76	955	100	882	1341	75	True	True	PMA1, PMA2; H+-transporting ATPase [EC:7.1.2.1]
+CAK9066834.1	GCA_963970005.1	plasma_membrane	K01535	6.60E-247	822.9	585.47	749	1570	100	889	1652	748	True	True	PMA1, PMA2; H+-transporting ATPase [EC:7.1.2.1]
+CAK9115379.1	GCA_963970005.1	plasma_membrane	K01535	1.50E-253	844.9	585.47	32	889	99	903	930	31	True	True	PMA1, PMA2; H+-transporting ATPase [EC:7.1.2.1]
+CAK9115557.1	GCA_963970005.1	plasma_membrane	K01535	4.40E-254	846.6	585.47	32	888	99	903	929	31	True	True	PMA1, PMA2; H+-transporting ATPase [EC:7.1.2.1]
+CAK9118467.1	GCA_963970005.1	plasma_membrane	K01535	1.10E-255	851.9	585.47	32	885	99	918	1473	31	True	True	PMA1, PMA2; H+-transporting ATPase [EC:7.1.2.1]
+OLP79648.1	GCA_001939145.1	plastid	K02716	6.40E-96	322.4	105.33	58	323	69	334	325	57	True	True	psbO; photosystem II oxygen-evolving enhancer protein 1
+OLP79983.1	GCA_001939145.1	plastid	K02636	2.10E-55	189.0	112.37	314	522	48	231	1617	313	True	True	petC; cytochrome b6-f complex iron-sulfur subunit [EC:7.1.1.6]
+OLP80324.1	GCA_001939145.1	plastid	K02720	1.80E-47	161.6	121.9	1503	1648	21	170	1945	1502	True	True	psbV; photosystem II cytochrome c550
+OLP82291.1	GCA_001939145.1	plastid	K02719	2.10E-31	109.3	105.6	57	189	7	142	189	56	True	True	psbU; photosystem II PsbU protein
+OLP82292.1	GCA_001939145.1	plastid	K02719	2.10E-31	109.3	105.6	57	189	7	142	189	56	True	True	psbU; photosystem II PsbU protein
+OLP82293.1	GCA_001939145.1	plastid	K02719	2.00E-29	102.8	105.6	57	187	7	140	269	56	True	True	psbU; photosystem II PsbU protein
+OLP84698.1	GCA_001939145.1	plastid	K00855	1.10E-112	377.8	214.23	88	446	80	408	1089	87	True	True	PRK, prk; phosphoribulokinase [EC:2.7.1.19]
+OLP88307.1	GCA_001939145.1	plastid	K01100	1.30E-129	434.1	337.8	67	392	43	363	394	66	True	True	E3.1.3.37; sedoheptulose-bisphosphatase [EC:3.1.3.37]
+OLP90343.1	GCA_001939145.1	plastid	K02694	5.70E-45	154.4	107.03	74	266	36	210	496	73	True	True	psaF; photosystem I subunit III
+OLQ01873.1	GCA_001939145.1	plastid	K01100	9.70E-129	431.2	337.8	76	405	42	363	407	75	True	True	E3.1.3.37; sedoheptulose-bisphosphatase [EC:3.1.3.37]
+OLQ02080.1	GCA_001939145.1	plastid	K02719	3.10E-32	111.9	105.6	78	205	12	142	205	77	True	True	psbU; photosystem II PsbU protein
+OLQ02081.1	GCA_001939145.1	plastid	K02719	2.70E-30	105.7	105.6	61	185	13	140	329	60	True	True	psbU; photosystem II PsbU protein
+CAE7229721.1	GCA_905221605.1	plastid	K02719	1.40E-32	113.1	105.6	63	188	14	142	188	62	True	True	psbU; photosystem II PsbU protein
+CAE7229726.1	GCA_905221605.1	plastid	K02719	1.40E-32	113.1	105.6	63	188	14	142	188	62	True	True	psbU; photosystem II PsbU protein
+CAE7229731.1	GCA_905221605.1	plastid	K02719	2.40E-32	112.3	105.6	97	222	14	142	222	96	True	True	psbU; photosystem II PsbU protein
+CAE7229735.1	GCA_905221605.1	plastid	K02719	1.40E-32	113.1	105.6	63	188	14	142	188	62	True	True	psbU; photosystem II PsbU protein
+CAE7229740.1	GCA_905221605.1	plastid	K02719	1.40E-32	113.1	105.6	63	188	14	142	188	62	True	True	psbU; photosystem II PsbU protein
+CAE7229747.1	GCA_905221605.1	plastid	K02719	1.40E-32	113.1	105.6	63	188	14	142	188	62	True	True	psbU; photosystem II PsbU protein
+CAE7279782.1	GCA_905221605.1	plastid	K02720	1.60E-53	181.4	121.9	76	225	24	173	226	75	True	True	psbV; photosystem II cytochrome c550
+CAE7333727.1	GCA_905221605.1	plastid	K02719	3.20E-27	95.7	105.6	717	840	14	142	840	716	True	True	psbU; photosystem II PsbU protein
+CAE7415464.1	GCA_905221605.1	plastid	K02720	2.50E-49	167.7	121.9	206	364	18	173	365	205	True	True	psbV; photosystem II cytochrome c550
+CAE7415479.1	GCA_905221605.1	plastid	K02720	1.00E-48	165.8	121.9	341	495	21	173	496	340	True	True	psbV; photosystem II cytochrome c550
+CAE7449733.1	GCA_905221605.1	plastid	K01100	1.10E-124	417.8	337.8	66	388	37	355	511	65	True	True	E3.1.3.37; sedoheptulose-bisphosphatase [EC:3.1.3.37]
+CAE7550460.1	GCA_905221605.1	plastid	K00855	3.00E-117	392.9	214.23	109	448	69	404	450	108	True	True	PRK, prk; phosphoribulokinase [EC:2.7.1.19]
+CAE7616486.1	GCA_905221605.1	plastid	K02694	7.90E-45	153.9	107.03	72	267	34	212	276	71	True	True	psaF; photosystem I subunit III
+CAE7616502.1	GCA_905221605.1	plastid	K02694	7.90E-45	153.9	107.03	72	267	34	212	276	71	True	True	psaF; photosystem I subunit III
+CAE7287242.1	GCA_905231915.1	plastid	K00855	1.30E-118	397.4	214.23	88	406	80	404	408	87	True	True	PRK, prk; phosphoribulokinase [EC:2.7.1.19]
+CAE7416228.1	GCA_905231915.1	plastid	K02636	1.30E-56	193.0	112.37	12	219	43	222	220	11	True	False	petC; cytochrome b6-f complex iron-sulfur subunit [EC:7.1.1.6]
+CAE7417340.1	GCA_905231915.1	plastid	K02719	8.80E-32	110.5	105.6	14	146	7	142	146	13	False	False	psbU; photosystem II PsbU protein
+CAE7463195.1	GCA_905231915.1	plastid	K01100	9.70E-129	431.2	337.8	76	405	42	363	407	75	True	True	E3.1.3.37; sedoheptulose-bisphosphatase [EC:3.1.3.37]
+CAE7762028.1	GCA_905231915.1	plastid	K00855	2.00E-117	393.5	214.23	91	409	80	404	411	90	True	True	PRK, prk; phosphoribulokinase [EC:2.7.1.19]
+CAE7836148.1	GCA_905231915.1	plastid	K02720	2.70E-47	161.1	121.9	75	245	9	173	246	74	False	True	psbV; photosystem II cytochrome c550
+CAE7944191.1	GCA_905231915.1	plastid	K01100	1.30E-129	434.0	337.8	73	398	43	363	400	72	True	True	E3.1.3.37; sedoheptulose-bisphosphatase [EC:3.1.3.37]
+CAE8585744.1	GCA_905237085.1	plastid	K02720	5.20E-52	176.5	121.9	74	223	21	173	224	73	True	True	psbV; photosystem II cytochrome c550
+CAE8585745.1	GCA_905237085.1	plastid	K02720	5.20E-52	176.5	121.9	74	223	21	173	224	73	True	True	psbV; photosystem II cytochrome c550
+CAE8585746.1	GCA_905237085.1	plastid	K02720	5.30E-52	176.4	121.9	74	223	21	173	224	73	True	True	psbV; photosystem II cytochrome c550
+CAE8585747.1	GCA_905237085.1	plastid	K02720	5.20E-52	176.5	121.9	74	223	21	173	224	73	True	True	psbV; photosystem II cytochrome c550
+CAE8585748.1	GCA_905237085.1	plastid	K02720	5.30E-52	176.4	121.9	74	223	21	173	224	73	True	True	psbV; photosystem II cytochrome c550
+CAE8588565.1	GCA_905237085.1	plastid	K08902	4.20E-32	112.0	58.97	98	272	23	165	272	97	True	True	psb27; photosystem II Psb27 protein
+CAE8590304.1	GCA_905237085.1	plastid	K02720	3.20E-51	173.9	121.9	80	225	25	173	226	79	False	True	psbV; photosystem II cytochrome c550
+CAE8597045.1	GCA_905237085.1	plastid	K01100	2.90E-126	423.0	337.8	86	412	43	362	413	85	True	True	E3.1.3.37; sedoheptulose-bisphosphatase [EC:3.1.3.37]
+CAE8597046.1	GCA_905237085.1	plastid	K01100	2.90E-126	423.0	337.8	86	412	43	362	413	85	True	True	E3.1.3.37; sedoheptulose-bisphosphatase [EC:3.1.3.37]
+CAE8598954.1	GCA_905237085.1	plastid	K00855	6.80E-110	368.7	214.23	89	411	77	402	413	88	True	True	PRK, prk; phosphoribulokinase [EC:2.7.1.19]
+CAE8600159.1	GCA_905237085.1	plastid	K02694	4.70E-42	144.9	107.03	74	260	36	213	269	73	True	True	psaF; photosystem I subunit III
+CAE8600160.1	GCA_905237085.1	plastid	K02694	4.70E-42	144.9	107.03	74	260	36	213	269	73	True	True	psaF; photosystem I subunit III
+CAE8600161.1	GCA_905237085.1	plastid	K02694	4.90E-42	144.8	107.03	75	261	36	213	270	74	True	True	psaF; photosystem I subunit III
+CAE8600162.1	GCA_905237085.1	plastid	K02694	4.70E-42	144.9	107.03	74	260	36	213	269	73	True	True	psaF; photosystem I subunit III
+CAE8600163.1	GCA_905237085.1	plastid	K02694	5.00E-42	144.8	107.03	74	260	36	213	269	73	True	True	psaF; photosystem I subunit III
+CAE8601983.1	GCA_905237085.1	plastid	K00855	2.80E-109	366.6	214.23	88	415	71	402	417	87	True	True	PRK, prk; phosphoribulokinase [EC:2.7.1.19]
+CAE8604035.1	GCA_905237085.1	plastid	K00855	9.10E-109	364.9	214.23	90	411	77	402	413	89	True	True	PRK, prk; phosphoribulokinase [EC:2.7.1.19]
+CAE8604036.1	GCA_905237085.1	plastid	K00855	1.40E-108	364.3	214.23	89	411	77	402	413	88	True	True	PRK, prk; phosphoribulokinase [EC:2.7.1.19]
+CAE8606358.1	GCA_905237085.1	plastid	K01100	2.90E-126	423.0	337.8	86	412	43	362	413	85	True	True	E3.1.3.37; sedoheptulose-bisphosphatase [EC:3.1.3.37]
+CAE8606359.1	GCA_905237085.1	plastid	K01100	2.90E-126	423.0	337.8	86	412	43	362	413	85	True	True	E3.1.3.37; sedoheptulose-bisphosphatase [EC:3.1.3.37]
+CAE8607293.1	GCA_905237085.1	plastid	K02716	5.10E-91	306.2	105.33	71	338	69	336	342	70	True	True	psbO; photosystem II oxygen-evolving enhancer protein 1
+CAE8609312.1	GCA_905237085.1	plastid	K02720	2.50E-51	174.2	121.9	72	221	21	173	222	71	True	True	psbV; photosystem II cytochrome c550
+CAE8609313.1	GCA_905237085.1	plastid	K02720	2.50E-51	174.2	121.9	72	221	21	173	222	71	True	True	psbV; photosystem II cytochrome c550
+CAE8609315.1	GCA_905237085.1	plastid	K02720	2.50E-51	174.2	121.9	72	221	21	173	222	71	True	True	psbV; photosystem II cytochrome c550
+CAE8609880.1	GCA_905237085.1	plastid	K02719	3.20E-29	102.2	105.6	70	195	14	142	195	69	True	True	psbU; photosystem II PsbU protein
+CAE8610045.1	GCA_905237085.1	plastid	K00855	2.20E-108	363.7	214.23	89	411	77	402	413	88	True	True	PRK, prk; phosphoribulokinase [EC:2.7.1.19]
+CAE8610046.1	GCA_905237085.1	plastid	K00855	5.20E-109	365.8	214.23	89	411	77	402	413	88	True	True	PRK, prk; phosphoribulokinase [EC:2.7.1.19]
+CAE8615313.1	GCA_905237085.1	plastid	K02716	3.40E-91	306.8	105.33	69	340	65	336	344	68	True	True	psbO; photosystem II oxygen-evolving enhancer protein 1
+CAE8615608.1	GCA_905237085.1	plastid	K00855	5.80E-109	365.6	214.23	12	327	80	402	329	11	True	False	PRK, prk; phosphoribulokinase [EC:2.7.1.19]
+CAE8617427.1	GCA_905237085.1	plastid	K02719	1.70E-29	103.1	105.6	68	193	14	142	193	67	True	True	psbU; photosystem II PsbU protein
+CAE8617428.1	GCA_905237085.1	plastid	K02719	4.60E-29	101.7	105.6	68	193	14	142	193	67	True	True	psbU; photosystem II PsbU protein
+CAE8617429.1	GCA_905237085.1	plastid	K02719	4.60E-29	101.7	105.6	68	193	14	142	193	67	True	True	psbU; photosystem II PsbU protein
+CAE8617430.1	GCA_905237085.1	plastid	K02719	2.10E-28	99.5	105.6	68	193	14	142	193	67	True	True	psbU; photosystem II PsbU protein
+CAE8620116.1	GCA_905237085.1	plastid	K00855	1.40E-108	364.4	214.23	90	411	77	402	413	89	True	True	PRK, prk; phosphoribulokinase [EC:2.7.1.19]
+CAE8620117.1	GCA_905237085.1	plastid	K00855	1.10E-108	364.6	214.23	89	410	77	402	412	88	True	True	PRK, prk; phosphoribulokinase [EC:2.7.1.19]
+CAE8620118.1	GCA_905237085.1	plastid	K00855	1.40E-108	364.4	214.23	90	411	77	402	413	89	True	True	PRK, prk; phosphoribulokinase [EC:2.7.1.19]
+CAE8620119.1	GCA_905237085.1	plastid	K00855	1.30E-108	364.4	214.23	88	410	77	402	412	87	True	True	PRK, prk; phosphoribulokinase [EC:2.7.1.19]
+CAE8620120.1	GCA_905237085.1	plastid	K00855	1.20E-108	364.5	214.23	90	411	77	402	413	89	True	True	PRK, prk; phosphoribulokinase [EC:2.7.1.19]
+CAE8620201.1	GCA_905237085.1	plastid	K02694	4.60E-42	144.9	107.03	74	260	36	213	269	73	True	True	psaF; photosystem I subunit III
+CAE8620202.1	GCA_905237085.1	plastid	K02694	4.70E-42	144.9	107.03	74	260	36	213	269	73	True	True	psaF; photosystem I subunit III
+CAE8620203.1	GCA_905237085.1	plastid	K02694	4.90E-42	144.8	107.03	75	261	36	213	270	74	True	True	psaF; photosystem I subunit III
+CAE8620204.1	GCA_905237085.1	plastid	K02694	4.70E-42	144.9	107.03	74	260	36	213	269	73	True	True	psaF; photosystem I subunit III
+CAE8620205.1	GCA_905237085.1	plastid	K02694	4.70E-42	144.9	107.03	74	260	36	213	269	73	True	True	psaF; photosystem I subunit III
+CAE8623482.1	GCA_905237085.1	plastid	K02716	5.10E-91	306.2	105.33	71	338	69	336	342	70	True	True	psbO; photosystem II oxygen-evolving enhancer protein 1
+CAE8628627.1	GCA_905237085.1	plastid	K02636	1.00E-34	120.9	112.37	80	233	42	203	235	79	True	True	petC; cytochrome b6-f complex iron-sulfur subunit [EC:7.1.1.6]
+CAE8629784.1	GCA_905237085.1	plastid	K02720	4.90E-52	176.5	121.9	71	220	21	173	221	70	True	True	psbV; photosystem II cytochrome c550
+CAE8632202.1	GCA_905237085.1	plastid	K08902	4.20E-32	112.0	58.97	99	272	24	165	272	98	True	True	psb27; photosystem II Psb27 protein
+CAE8641774.1	GCA_905237085.1	plastid	K08902	4.20E-32	112.0	58.97	99	272	24	165	272	98	True	True	psb27; photosystem II Psb27 protein
+CAE8643733.1	GCA_905237085.1	plastid	K02719	1.60E-29	103.1	105.6	68	193	14	142	193	67	True	True	psbU; photosystem II PsbU protein
+CAE8643734.1	GCA_905237085.1	plastid	K02719	4.60E-29	101.7	105.6	68	193	14	142	193	67	True	True	psbU; photosystem II PsbU protein
+CAE8643735.1	GCA_905237085.1	plastid	K02719	4.60E-29	101.7	105.6	68	193	14	142	193	67	True	True	psbU; photosystem II PsbU protein
+CAE8643736.1	GCA_905237085.1	plastid	K02719	2.10E-28	99.5	105.6	68	193	14	142	193	67	True	True	psbU; photosystem II PsbU protein
+CAE8643737.1	GCA_905237085.1	plastid	K02719	2.10E-28	99.5	105.6	68	193	14	142	193	67	True	True	psbU; photosystem II PsbU protein
+CAE8643738.1	GCA_905237085.1	plastid	K02719	2.10E-28	99.5	105.6	68	193	14	142	193	67	True	True	psbU; photosystem II PsbU protein
+CAE8643739.1	GCA_905237085.1	plastid	K02719	2.10E-28	99.5	105.6	69	193	15	142	193	68	True	True	psbU; photosystem II PsbU protein
+CAE8643812.1	GCA_905237085.1	plastid	K00855	6.80E-110	368.7	214.23	89	411	77	402	413	88	True	True	PRK, prk; phosphoribulokinase [EC:2.7.1.19]
+CAL1131065.1	GCA_947184155.2	plastid	K02720	4.60E-50	170.1	121.9	67	215	22	174	414	66	True	True	psbV; photosystem II cytochrome c550
+CAL1131070.1	GCA_947184155.2	plastid	K02720	6.40E-51	172.9	121.9	53	201	22	174	201	52	True	True	psbV; photosystem II cytochrome c550
+CAL1131073.1	GCA_947184155.2	plastid	K02720	1.80E-49	168.2	121.9	694	841	23	174	841	693	True	True	psbV; photosystem II cytochrome c550
+CAL1131086.1	GCA_947184155.2	plastid	K02720	6.60E-51	172.9	121.9	67	215	22	174	215	66	True	True	psbV; photosystem II cytochrome c550
+CAL1136211.1	GCA_947184155.2	plastid	K00855	2.40E-115	386.6	214.23	862	1182	78	404	1184	861	True	True	PRK, prk; phosphoribulokinase [EC:2.7.1.19]
+CAL1136215.1	GCA_947184155.2	plastid	K00855	8.60E-119	398.0	214.23	91	418	78	404	420	90	True	True	PRK, prk; phosphoribulokinase [EC:2.7.1.19]
+CAL1136287.1	GCA_947184155.2	plastid	K02716	2.80E-95	320.3	105.33	57	324	67	334	326	56	True	True	psbO; photosystem II oxygen-evolving enhancer protein 1
+CAL1136293.1	GCA_947184155.2	plastid	K02716	2.80E-95	320.3	105.33	57	324	67	334	326	56	True	True	psbO; photosystem II oxygen-evolving enhancer protein 1
+CAL1136296.1	GCA_947184155.2	plastid	K02716	3.20E-95	320.1	105.33	57	324	67	334	326	56	True	True	psbO; photosystem II oxygen-evolving enhancer protein 1
+CAL1136299.1	GCA_947184155.2	plastid	K02716	2.80E-95	320.3	105.33	57	324	67	334	326	56	True	True	psbO; photosystem II oxygen-evolving enhancer protein 1
+CAL1136301.1	GCA_947184155.2	plastid	K02716	1.00E-92	311.8	105.33	56	327	66	334	329	55	True	True	psbO; photosystem II oxygen-evolving enhancer protein 1
+CAL1146491.1	GCA_947184155.2	plastid	K01100	1.40E-124	417.5	337.8	78	391	47	355	1724	77	True	True	E3.1.3.37; sedoheptulose-bisphosphatase [EC:3.1.3.37]
+CAL1165894.1	GCA_947184155.2	plastid	K02692	1.00E-48	167.0	148.53	283	526	42	261	601	282	True	True	psaD; photosystem I subunit II
+CAL1166608.1	GCA_947184155.2	plastid	K02719	2.80E-33	115.3	105.6	60	184	14	142	184	59	True	True	psbU; photosystem II PsbU protein
+CAL1167978.1	GCA_947184155.2	plastid	K02716	5.40E-94	316.0	105.33	57	323	67	333	751	56	True	True	psbO; photosystem II oxygen-evolving enhancer protein 1
+CAL1172623.1	GCA_947184155.2	plastid	K02719	1.00E-32	113.5	105.6	59	188	9	142	188	58	True	True	psbU; photosystem II PsbU protein
+CAK8989063.1	GCA_963969995.1	plastid	K02720	1.80E-52	178.0	121.9	74	215	30	174	215	73	True	True	psbV; photosystem II cytochrome c550
+CAK8989065.1	GCA_963969995.1	plastid	K02720	2.10E-52	177.7	121.9	74	215	30	174	215	73	True	True	psbV; photosystem II cytochrome c550
+CAK8989067.1	GCA_963969995.1	plastid	K02720	2.10E-52	177.7	121.9	74	215	30	174	215	73	True	True	psbV; photosystem II cytochrome c550
+CAK8989069.1	GCA_963969995.1	plastid	K02720	1.80E-52	178.0	121.9	74	215	30	174	215	73	True	True	psbV; photosystem II cytochrome c550
+CAK8989071.1	GCA_963969995.1	plastid	K02720	1.80E-52	178.0	121.9	74	215	30	174	215	73	True	True	psbV; photosystem II cytochrome c550
+CAK8989073.1	GCA_963969995.1	plastid	K02720	1.80E-52	178.0	121.9	74	215	30	174	215	73	True	True	psbV; photosystem II cytochrome c550
+CAK8989075.1	GCA_963969995.1	plastid	K02720	2.10E-52	177.7	121.9	74	215	30	174	215	73	True	True	psbV; photosystem II cytochrome c550
+CAK8989077.1	GCA_963969995.1	plastid	K02720	1.80E-52	178.0	121.9	74	215	30	174	215	73	True	True	psbV; photosystem II cytochrome c550
+CAK8989079.1	GCA_963969995.1	plastid	K02720	2.10E-52	177.7	121.9	74	215	30	174	215	73	True	True	psbV; photosystem II cytochrome c550
+CAK8989081.1	GCA_963969995.1	plastid	K02720	1.80E-52	178.0	121.9	74	215	30	174	215	73	True	True	psbV; photosystem II cytochrome c550
+CAK8989083.1	GCA_963969995.1	plastid	K02720	1.80E-52	178.0	121.9	74	215	30	174	215	73	True	True	psbV; photosystem II cytochrome c550
+CAK8989247.1	GCA_963969995.1	plastid	K02720	8.20E-49	166.0	121.9	705	840	30	168	1013	704	True	True	psbV; photosystem II cytochrome c550
+CAK9012986.1	GCA_963969995.1	plastid	K02719	1.00E-32	113.5	105.6	61	184	15	142	184	60	True	True	psbU; photosystem II PsbU protein
+CAK9025087.1	GCA_963969995.1	plastid	K02716	1.90E-94	317.5	105.33	50	329	55	334	331	49	True	True	psbO; photosystem II oxygen-evolving enhancer protein 1
+CAK9055489.1	GCA_963969995.1	plastid	K02720	5.00E-43	147.2	121.9	21	136	31	149	149	20	True	True	psbV; photosystem II cytochrome c550
+CAK9055512.1	GCA_963969995.1	plastid	K02720	5.00E-43	147.2	121.9	21	136	31	149	149	20	True	True	psbV; photosystem II cytochrome c550
+CAK9078599.1	GCA_963969995.1	plastid	K00855	7.00E-117	391.7	214.23	528	846	79	403	847	527	True	True	PRK, prk; phosphoribulokinase [EC:2.7.1.19]
+CAK9081463.1	GCA_963969995.1	plastid	K01100	2.30E-128	429.9	337.8	61	403	30	363	405	60	True	True	E3.1.3.37; sedoheptulose-bisphosphatase [EC:3.1.3.37]
+CAK9109217.1	GCA_963969995.1	plastid	K02716	4.40E-92	309.7	105.33	53	322	65	334	324	52	True	True	psbO; photosystem II oxygen-evolving enhancer protein 1
+CAK9005868.1	GCA_963970005.1	plastid	K01100	4.80E-125	419.0	337.8	61	394	30	354	423	60	True	True	E3.1.3.37; sedoheptulose-bisphosphatase [EC:3.1.3.37]
+CAK9006207.1	GCA_963970005.1	plastid	K01100	2.30E-128	429.9	337.8	61	403	30	363	405	60	True	True	E3.1.3.37; sedoheptulose-bisphosphatase [EC:3.1.3.37]
+CAK9012866.1	GCA_963970005.1	plastid	K02716	4.40E-92	309.7	105.33	53	322	65	334	324	52	True	True	psbO; photosystem II oxygen-evolving enhancer protein 1
+CAK9013293.1	GCA_963970005.1	plastid	K02716	4.40E-92	309.7	105.33	53	322	65	334	324	52	True	True	psbO; photosystem II oxygen-evolving enhancer protein 1
+CAK9026519.1	GCA_963970005.1	plastid	K02719	1.00E-32	113.5	105.6	61	184	15	142	184	60	True	True	psbU; photosystem II PsbU protein
+CAK9030633.1	GCA_963970005.1	plastid	K02720	2.10E-52	177.7	121.9	74	215	30	174	215	73	True	True	psbV; photosystem II cytochrome c550
+CAK9030634.1	GCA_963970005.1	plastid	K02720	2.10E-52	177.7	121.9	74	215	30	174	215	73	True	True	psbV; photosystem II cytochrome c550
+CAK9030839.1	GCA_963970005.1	plastid	K02719	1.00E-32	113.5	105.6	61	184	15	142	184	60	True	True	psbU; photosystem II PsbU protein
+CAK9033065.1	GCA_963970005.1	plastid	K02636	5.80E-59	200.7	112.37	21	246	44	222	246	20	True	True	petC; cytochrome b6-f complex iron-sulfur subunit [EC:7.1.1.6]
+CAK9075685.1	GCA_963970005.1	plastid	K00855	2.70E-112	376.6	214.23	47	365	79	396	375	46	False	True	PRK, prk; phosphoribulokinase [EC:2.7.1.19]
+CAK9077073.1	GCA_963970005.1	plastid	K02719	7.10E-33	114.0	105.6	14	144	8	142	144	13	True	False	psbU; photosystem II PsbU protein
+CAK9106739.1	GCA_963970005.1	plastid	K02716	1.50E-89	301.3	105.33	50	318	55	323	320	49	True	True	psbO; photosystem II oxygen-evolving enhancer protein 1
+CAK9114539.1	GCA_963970005.1	plastid	K02716	1.90E-94	317.5	105.33	50	329	55	334	331	49	True	True	psbO; photosystem II oxygen-evolving enhancer protein 1
+OLP82331.1	GCA_001939145.1	secreted	K01176	1.50E-114	384.6	239.4	2449	2918	94	510	2931	2448	True	True	AMY, amyA, malS; alpha-amylase [EC:3.2.1.1]
+OLP88390.1	GCA_001939145.1	secreted	K01379	1.10E-131	440.9	551.07	279	752	53	432	1912	278	True	True	CTSD; cathepsin D [EC:3.4.23.5]
+OLP90217.1	GCA_001939145.1	secreted	K01176	1.80E-66	225.7	239.4	1193	1669	93	460	3696	1192	True	True	AMY, amyA, malS; alpha-amylase [EC:3.2.1.1]
+OLP90340.1	GCA_001939145.1	secreted	K01275	7.30E-125	418.6	270.97	2159	2664	89	535	2680	2158	True	True	CTSC; cathepsin C [EC:3.4.14.1]
+OLQ01547.1	GCA_001939145.1	secreted	K01176	3.20E-57	195.2	239.4	553	1340	113	548	1397	552	True	True	AMY, amyA, malS; alpha-amylase [EC:3.2.1.1]
+CAE7202391.1	GCA_905221605.1	secreted	K01176	2.30E-83	281.6	239.4	919	1367	93	460	1408	918	True	True	AMY, amyA, malS; alpha-amylase [EC:3.2.1.1]
+CAE7248497.1	GCA_905221605.1	secreted	K01275	2.80E-137	459.6	270.97	7	497	91	536	509	6	True	False	CTSC; cathepsin C [EC:3.4.14.1]
+CAE7347352.1	GCA_905221605.1	secreted	K01363	2.10E-57	195.9	231.2	29	411	64	426	451	28	True	True	CTSB; cathepsin B [EC:3.4.22.1]
+CAE7404224.1	GCA_905221605.1	secreted	K01674	1.40E-62	212.7	242.67	51	307	48	299	318	50	True	True	cah; carbonic anhydrase [EC:4.2.1.1]
+CAE7243306.1	GCA_905231915.1	secreted	K01176	2.00E-57	195.8	239.4	341	920	94	471	1058	340	True	True	AMY, amyA, malS; alpha-amylase [EC:3.2.1.1]
+CAE7353421.1	GCA_905231915.1	secreted	K01275	1.80E-125	420.6	270.97	12	512	92	533	515	11	True	False	CTSC; cathepsin C [EC:3.4.14.1]
+CAE7888340.1	GCA_905231915.1	secreted	K01366	7.80E-99	332.0	405.27	23	331	80	387	366	22	True	True	CTSH; cathepsin H [EC:3.4.22.16]
+CAE8637643.1	GCA_905237085.1	secreted	K01275	8.80E-131	438.1	270.97	17	514	88	535	526	16	True	True	CTSC; cathepsin C [EC:3.4.14.1]
+CAL1133328.1	GCA_947184155.2	secreted	K08568	6.30E-93	312.6	252.93	813	1135	72	356	1485	812	True	True	CTSZ; cathepsin X [EC:3.4.18.1]
+CAL1138639.1	GCA_947184155.2	secreted	K01275	9.60E-102	342.3	270.97	105	581	84	488	673	104	True	True	CTSC; cathepsin C [EC:3.4.14.1]
+CAL1141511.1	GCA_947184155.2	secreted	K01363	4.20E-54	185.0	231.2	49	470	35	382	1133	48	True	True	CTSB; cathepsin B [EC:3.4.22.1]
+CAL1168714.1	GCA_947184155.2	secreted	K01176	2.50E-67	228.6	239.4	287	1048	93	514	1677	286	True	True	AMY, amyA, malS; alpha-amylase [EC:3.2.1.1]
+CAK9048154.1	GCA_963969995.1	secreted	K01275	5.90E-130	435.4	270.97	4	522	91	550	550	3	True	False	CTSC; cathepsin C [EC:3.4.14.1]
+CAK9064928.1	GCA_963969995.1	secreted	K01363	1.40E-59	203.1	231.2	95	642	71	471	743	94	True	True	CTSB; cathepsin B [EC:3.4.22.1]
+CAK9108861.1	GCA_963969995.1	secreted	K01275	3.20E-125	419.8	270.97	5	485	92	533	502	4	True	False	CTSC; cathepsin C [EC:3.4.14.1]
+CAK9017681.1	GCA_963970005.1	secreted	K01176	1.50E-67	229.3	239.4	166	532	44	384	600	165	True	True	AMY, amyA, malS; alpha-amylase [EC:3.2.1.1]
+CAK9047979.1	GCA_963970005.1	secreted	K01275	5.90E-130	435.4	270.97	4	522	91	550	550	3	True	False	CTSC; cathepsin C [EC:3.4.14.1]
+CAK9058847.1	GCA_963970005.1	secreted	K01673	2.00E-08	33.9	18.5	72	395	52	280	547	71	True	True	cynT, can; carbonic anhydrase [EC:4.2.1.1]
+CAK9059015.1	GCA_963970005.1	secreted	K01673	1.90E-08	34.0	18.5	72	395	52	280	547	71	True	True	cynT, can; carbonic anhydrase [EC:4.2.1.1]
+CAK9066807.1	GCA_963970005.1	secreted	K01176	7.30E-106	355.9	239.4	332	854	96	513	889	331	True	True	AMY, amyA, malS; alpha-amylase [EC:3.2.1.1]
+CAK9078368.1	GCA_963970005.1	secreted	K01365	3.50E-123	412.6	514.47	21	373	79	427	379	20	True	True	CTSL; cathepsin L [EC:3.4.22.15]
+CAK9113803.1	GCA_963970005.1	secreted	K01275	2.30E-125	420.2	270.97	5	486	92	534	506	4	True	False	CTSC; cathepsin C [EC:3.4.14.1]
+CAK9113887.1	GCA_963970005.1	secreted	K01363	2.10E-59	202.5	231.2	104	669	71	470	771	103	True	True	CTSB; cathepsin B [EC:3.4.22.1]

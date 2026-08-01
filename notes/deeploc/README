@@ -1,0 +1,57 @@
+symbiont_marker_categorization.tsv: Claude categorization of proteins based on KO match
+symbiont_marker_deeploc.csv: DeepLoc 2.1 output
+symbiont_marker_proteins.faa: Fasta sequences of the relevant proteins
+
+All protein sequences are NCBI reference protein sequences with good KO matches.
+
+Below is Claude's summary of this work.
+
+What the exercise did. We tested whether DeepLoc 2.1 can read the targeting
+leaders of Symbiodiniaceae proteins by building a native control set with
+compartment labels that do not depend on any localization predictor. We took
+657 proteins across seven symbiont genomes whose compartment was fixed by KO
+orthology (function-lock) — cytosolic ribosomal proteins, mitochondrial
+respiratory-chain subunits, plastid Calvin-cycle and photosystem proteins,
+secreted/ER/membrane/peroxisomal markers — and ran them through DeepLoc, then
+compared DeepLoc's top-1 localization against the function-lock label. Overall
+agreement was 60.7% with Cohen's κ = 0.474 (moderate; chance expectation
+25.4%). The association was highly significant but strongly
+compartment-specific, which is the actual result.
+
+What we learned about DeepLoc on symbionts. Performance splits by compartment.
+DeepLoc is reliable at the leaderless/secretory-cleaved end — cytosol 91%
+recall, ER 100% (n=7) — and on the Signals axis it recovers a mitochondrial
+transit peptide in only 43% of true mitochondrial proteins. It fails
+systematically on plastid proteins: 94 of 137 function-locked plastid markers
+were called Golgi apparatus, and the Signals axis almost never reported a
+transit peptide for them, instead reporting a signal peptide or nothing. The
+consistent interpretation is that DeepLoc reads the signal-peptide start of the
+dinoflagellate bipartite (SP+transit) plastid leader as secretory-pathway entry
+and does not recognize the plastid transit portion — expected for a model not
+trained on peridinin-plastid targeting. Reading the confusion matrix by column
+rather than row, the calibration is still usable: a Plastid call had 100%
+precision and true mitochondrial proteins never landed in the Plastid or
+Extracellular columns (0/143), so those calls carry specific meaning even
+though recall is poor.
+
+The baseline we do not have. This test was run only on Symbiodiniaceae. We did
+not run the same function-lock control panel on coral hosts or any other
+lineage, so we cannot separate "DeepLoc is bad at symbiont plastid leaders
+specifically" from "DeepLoc has this error structure more broadly." DeepLoc's
+published benchmarks are on curated, largely model-organism proteins and are
+not a substitute for a same-style function-lock test on a comparison clade.
+Concretely, the plastid→Golgi collapse is consistent with a
+dinoflagellate-specific bipartite-leader confound, but without a coral-host (or
+land-plant/green-algal) control run we cannot confirm it is lineage-specific
+rather than a general DeepLoc weakness on plastid/bipartite leaders. The 60.7%
+overall figure is therefore an internal calibration for these seven symbiont
+genomes, not a claim about DeepLoc's relative accuracy across hosts. The clean
+way to close that gap is to repeat this exact protocol — KO function-lock,
+native controls, same seven-class panel — on a coral-host proteome and compare
+the per-compartment recall and precision matrices.
+
+Weakest link: the small control classes (ER n=7, secreted n=28, peroxisome
+n=24) have wide intervals, so the headline numbers rest on the three large
+classes (cytosol 293, mitochondrion 143, plastid 137). The baseline caveat
+above is the dominant open question, and the validating experiment is the
+coral-host replicate of this same test.
