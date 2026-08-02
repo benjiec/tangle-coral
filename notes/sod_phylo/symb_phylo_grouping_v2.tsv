@@ -1,0 +1,14 @@
+transcript	group	group_desc	fingerprint_metal	nearest_annot_ref	nn_taxon	nn_metal	nn_dist
+orbicella_symb_TRINITY_DN78611_c0_g2_i1.p1	A	secreted (SP-only leader)	Mn	Q42684_gree	Chlamydomonas_reinhardtii	Mn	0.782
+pseudodiploria_symb_TRINITY_DN348117_c0_g1_i1.p1	A	secreted (SP-only leader)	Mn	Q42684_gree	Chlamydomonas_reinhardtii	Mn	0.829
+siderastrea_symb_TRINITY_DN8493_c0_g1_i1.p1	A	secreted (SP-only leader)	Mn	Q42684_gree	Chlamydomonas_reinhardtii	Mn	0.826
+c_goreaui_TRINITY_DN626_c0_g1_i2.p1	B	plastid-type (bipartite SP+TP leader)	Mn	B7G0L6_diat	Phaeodactylum_tricornutum_(str	Fe	0.626
+c_goreaui_TRINITY_DN626_c0_g1_i4.p1	B	plastid-type (bipartite SP+TP leader)	Mn	B7G0L6_diat	Phaeodactylum_tricornutum_(str	Fe	0.615
+orbicella_symb_TRINITY_DN188752_c0_g3_i1.p1	B	plastid-type (bipartite SP+TP leader)	Mn	B7G0L6_diat	Phaeodactylum_tricornutum_(str	Fe	0.609
+orbicella_symb_TRINITY_DN188752_c0_g3_i4.p1	B	plastid-type (bipartite SP+TP leader)	Mn	B7G0L6_diat	Phaeodactylum_tricornutum_(str	Fe	0.631
+orbicella_symb_TRINITY_DN393612_c0_g1_i1.p1_with_leader_u60_PF00081_M	B	plastid-type (bipartite SP+TP leader)	Mn	B7G0L6_diat	Phaeodactylum_tricornutum_(str	Fe	0.685
+orbicella_symb_TRINITY_DN78611_c0_g1_i1.p1_with_leader_u58_PF00081_M	B	plastid-type (bipartite SP+TP leader)	Mn	B7G0L6_diat	Phaeodactylum_tricornutum_(str	Fe	0.663
+pseudodiploria_symb_TRINITY_DN172781_c0_g1_i2.p1	B	plastid-type (bipartite SP+TP leader)	Mn	B7G0L6_diat	Phaeodactylum_tricornutum_(str	Fe	0.595
+pseudodiploria_symb_TRINITY_DN172781_c0_g1_i4.p1	B	plastid-type (bipartite SP+TP leader)	Mn	B7G0L6_diat	Phaeodactylum_tricornutum_(str	Fe	0.598
+siderastrea_symb_TRINITY_DN405006_c0_g1_i1.p1_with_leader_u54_PF00081_M	B	plastid-type (bipartite SP+TP leader)	Mn	B7G0L6_diat	Phaeodactylum_tricornutum_(str	Fe	0.598
+siderastrea_symb_TRINITY_DN405006_c0_g1_i4.p1	B	plastid-type (bipartite SP+TP leader)	Mn	B7G0L6_diat	Phaeodactylum_tricornutum_(str	Fe	0.595
