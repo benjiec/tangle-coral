@@ -5,7 +5,7 @@ rule_tangle_curated = Rules(
     Leader().upstreamOfPfam("PF00081").betweenAA(-70,-15)
 
     # requires SP+cTP architecture
-    & HMMAlignment("algae_sp_ctp_sod2.hmm").covers(2, 50).between(1, 60)
+    & HMMAlignment("algae_sp_ctp_sod2.hmm").spans(3, 50).between(1, 60)
 
     # required domains
     & Pfam.matches("PF00081")
