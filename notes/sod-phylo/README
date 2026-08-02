@@ -1,0 +1,43 @@
+Independent phylogenetic test of the metal identity and grouping of 11 K04564
+(Fe/Mn-SOD) transcripts recovered from four coral hosts' Symbiodiniaceae
+symbionts (orbicella, pseudodiploria, siderastrea). The tree uses only the
+conserved mature domain, so it is independent of both the metal-residue
+fingerprint and the DeepLoc/leader-based localization analysis. Pipeline: MAFFT
+L-INS-i alignment → trimAl -gappyout (438 → 185 columns; divergent N-terminal
+leaders and insertions removed) → IQ-TREE ModelFinder (best model WAG+R4 by
+BIC), 1000 ultrafast bootstrap + 1000 SH-aLRT replicates, midpoint-rooted.
+Reference panel: 21 Fe + 21 Mn UniProt-annotated SODs (balanced by cofactor),
+plus same-KO red-algal, brown-algal, and diatom sequences and the Lingulodinium
+polyedra FeSOD (Q9AXR7, the proposed dual-target case).
+
+Result. The 11 transcripts are monophyletic and split into the same two groups
+the leader/DeepLoc analysis found. Group A (3 secreted/Extracellular
+transcripts) forms a tight clade (SH-aLRT 99.9 / UFBoot 100) whose nearest
+annotated homolog is a green-algal (Chlamydomonas) Mn-SOD — concordant with the
+fingerprint's Mn call. Group B (8 Plastid/Unassigned transcripts) is sister to
+two diatom Fe-SODs (Phaeodactylum tricornutum, Eolimna minima; containing clade
+UFBoot 100) within a stramenopile Fe-SOD neighborhood — which conflicts with
+the fingerprint's Mn call. Long-branch attraction was checked and ruled out
+(symbiont tip branches are short, median 0.005 vs 0.092 subs/site for
+references); Fe and Mn references segregate into a few strong local blocks (4
+Fe↔Mn transitions across tip order), so neighborhood placement is informative.
+
+Interpretation for annotation. Group A → Mn-SOD (two independent lines agree,
+~85% confidence). Group B → metal unresolved: label conservatively as
+"Fe/Mn-type SOD, fingerprint Mn vs. phylogeny Fe-neighborhood," not Mn on the
+fingerprint alone. The two methods measure different things (metal-coordinating
+residues vs. whole-domain ancestry) and Fe/Mn-SODs switch metal among close
+homologs, so neither is decisive here. The tie-breaking test is to score the
+canonical Fe-vs-Mn specificity/discriminant residues of Group B against the
+diatom Fe-SODs and the Mn references at those columns specifically.
+
+sod_phylogeny.png — annotated ML tree; Fe refs red, Mn refs blue, 11 symbiont
+transcripts shaded and bracketed into Groups A and B; UFBoot ≥80 shown.
+
+symb_phylo_grouping.tsv — per-transcript group assignment, fingerprint metal,
+nearest annotated tree neighbor and its metal.
+
+sod_ML.treefile — Newick tree with SH-aLRT/UFBoot support values.
+
+sod_alignment_trimmed.faa — 185-column trimAl-trimmed mature-domain alignment
+the tree was inferred from.
