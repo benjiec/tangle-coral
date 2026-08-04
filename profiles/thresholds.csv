@@ -1,3 +1,4 @@
 model,threshold
-mt_MnSOD_cnidaria_thresholds.tsv,350.7
-sp_MnSOD_cnidaria_thresholds.tsv,316.4
+mt_MnSOD_cnidaria,350.7
+sp_MnSOD_cnidaria,316.4
+sp_ctp_MnFeSOD_algae,487
