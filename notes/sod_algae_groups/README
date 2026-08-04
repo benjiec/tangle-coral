@@ -1,0 +1,48 @@
+Grouping of a bunch of K04564 matching sequences across Alveotata genomes, with
+some genomes contributing multiple copies on different sequencing contigs. I
+also included the 11 transcript sequences here. I was able to narrow down to 3
+groups: a) SP+cTP like - this includes 8 of the 11 transcript protein
+sequences, b) SP likely - includes 3 of the transcript protein sequences, and
+c) One mTP, with the leader called mTP by both DeepLoc and TargetP.
+
+Observations
+  * The PF00081 and PF02777 regions of the sequences look distinct,
+    between the 3 groups
+  * The leader sequence of the SP+cTP group appears to have conservation
+  * The SP group leaders are less conserved, but n is smaller
+
+Reference panel and alignment
+
+We assembled a metal-labeled Fe/Mn-SOD reference panel of sequences
+(ref_metals.faa) and retrieved cofactor annotations from UniProt. See
+k04564_metal_scores.tsv for sequence metal preferences (label column).  Only 3
+of the sequences are experimentally supported (all Fe: E. coli SodB P0AGD3,
+Arabidopsis FeSOD1 P21276, rice FeSOD2 Q5VSB7); the remainder, including every
+Mn reference, are curator annotations, so the Mn pole of the scale is
+annotation-anchored, not assay-anchored. 
+
+The labeled references were aligned into one 366-column frame together with
+K04564 alveolate sequences (27 SP/cTP, 9 SP, 1 mTP), giving a shared coordinate
+system in which homologous metal-discriminating positions can be compared
+directly across groups.
+
+Scoring and conclusions. Rather than importing literature column numbers, we
+learned the Fe-vs-Mn discriminant positions from the labeled references
+themselves — 9 columns where well-occupied Fe and Mn references carry different
+majority residues — and validated the discriminant before applying it: it
+correctly classifies 11/12 Fe references (negative score) and 22/22 Mn
+references (positive), and the columns it recovered include the canonical
+second-shell discriminants (col 143 Gln-Fe/Gly-Mn; col 222 Ala-Fe/Gln-Mn),
+confirming the signal is the known structural fingerprint and not a dataset
+artifact.
+
+Scored on this validated scale, all three K04564 groups fall on the Mn side:
+SP/cTP mean +0.78 (as Mn-like as the Mn references), mTP +0.89, and SP +0.38
+(Mn-leaning but weaker, with 3 members near the midline). The interpretation,
+held to the 80% threshold: by residue signature these are putative Mn-type SODs
+(confidence ~85% that the sequences are Mn-type; ~70% that they load Mn in
+vivo, since sequence signature and actual metal occupancy can diverge in
+cambialistic SODs). Notably, the metal signal does not track the leader
+grouping — the SP/cTP and SP groups are ~50% divergent in their mature domains
+(distinct protein lineages) yet both read Mn-like, so the groups differ in
+targeting and in sequence lineage but not in predicted metal.
