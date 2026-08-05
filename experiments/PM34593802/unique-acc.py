@@ -1,6 +1,6 @@
 import argparse
 from pathlib import Path
-from needle.seq import read_fasta_as_dict, write_fasta_from_dict
+from tangle.sequence import read_fasta_as_dict, write_fasta_from_dict
 
 parser = argparse.ArgumentParser()
 parser.add_argument("fna")
