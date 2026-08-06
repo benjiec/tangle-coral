@@ -1,0 +1,1 @@
+docker run --rm --platform linux/amd64 -v /Users/benjie/git/tangle/play/res-sp_MnFeSOD_algae/Leader_.upstreamOfPfam_PF00081_.betweenAA_-35_-15_.is_SP:/data local-targetp:2.0 -fasta /data/query.faa -org non-pl -format short -stdout
