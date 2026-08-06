@@ -197,5 +197,5 @@ siderastrea_symb_TRINITY_DN475799_c0_g1_i1.p1             -            109 K0456
 # Target file:     res-sp_ctp_MnFeSOD_algae/input.faa
 # Option settings: hmmsearch --domtblout res-sp_ctp_MnFeSOD_algae/ko.domtblout assets/k04564.hmm res-sp_ctp_MnFeSOD_algae/input.faa 
 # Current dir:     /Users/benjie/git/tangle/play
-# Date:            Thu Aug  6 10:27:24 2026
+# Date:            Thu Aug  6 12:57:52 2026
 # [ok]

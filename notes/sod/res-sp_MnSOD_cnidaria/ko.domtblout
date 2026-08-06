@@ -118,5 +118,5 @@ CALNXI010000019.1_K04564_88477d8a -             35 K04564               -       
 # Target file:     res-sp_MnSOD_cnidaria/input.faa
 # Option settings: hmmsearch --domtblout res-sp_MnSOD_cnidaria/ko.domtblout assets/k04564.hmm res-sp_MnSOD_cnidaria/input.faa 
 # Current dir:     /Users/benjie/git/tangle/play
-# Date:            Thu Aug  6 09:04:34 2026
+# Date:            Thu Aug  6 12:39:06 2026
 # [ok]

@@ -214,5 +214,5 @@ a_tenuis_TRINITY_DN8520_c0_g2_i1.p1 -            157 Sod_Fe_C             PF0277
 # Target file:     res-mt_MnSOD_cnidaria/input.faa
 # Option settings: hmmsearch --domtblout res-mt_MnSOD_cnidaria/pfam.domtblout --cut_ga assets/pfam.hmm res-mt_MnSOD_cnidaria/input.faa 
 # Current dir:     /Users/benjie/git/tangle/play
-# Date:            Thu Aug  6 08:47:02 2026
+# Date:            Thu Aug  6 12:45:02 2026
 # [ok]

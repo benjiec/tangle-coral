@@ -1,100 +1,100 @@
-protein accession	sequence accession	genome accession	contig accession	pass all	Leader().upstreamOfPfam('PF00081').betweenAA(-35, -15).is_SP()	Pfam.matches('PF00081')	Pfam.matches('PF02777')	KO.matches('K04564')	HMMAlignment('k04564.hmm').is_at('H', 61)	HMMAlignment('k04564.hmm').is_at('H', 106)	HMMAlignment('k04564.hmm').is_at('D', 187)	HMMAlignment('k04564.hmm').is_at('H', 191)	HMMAlignment('k04564.hmm').matches_regex('[QDK]', 196)	TFMotifs.has_within(20, 'GM.5.0.Rel', 'GM.5.0.bZIP', min_score_threshold=8)	Leader.call('noTP')	Leader.call('mTP')	Leader.call('SP')
-MPSW01001707.1_K04564_7b9e297c	MPSW01001707.1_K04564_7b9e297c_with_leader_u26_PF00081_M	GCA_001896105.1	MPSW01001707.1	false	false	true	true	true	true	true	true	true	true	yes	20	61	19
-RDEB01000110.1_K04564_86e229fd	RDEB01000110.1_K04564_86e229fd_with_leader_u26_PF00081_M	GCA_006542545.1	RDEB01000110.1	false	false	true	true	true	true	true	true	true	true	yes	2	98	0
-BLAZ01000169.1_K04564_9f65b912	BLAZ01000169.1_K04564_9f65b912_with_leader_u27_PF00081_M	GCA_014633955.1	BLAZ01000169.1	false	false	true	true	true	true	true	true	true	true	too_far	2	98	0
-BLEZ01003184.1_K04564_dc8bf6ad	BLEZ01003184.1_K04564_dc8bf6ad_with_leader_u27_PF00081_M	GCA_014633975.1	BLEZ01003184.1	false	false	true	true	true	true	true	true	true	true	too_far	5	95	0
-BLFE01002088.1_K04564_10e43317	BLFE01002088.1_K04564_10e43317_with_leader_u27_PF00081_M	GCA_014634605.1	BLFE01002088.1	false	false	true	true	true	true	true	true	true	true	yes	2	98	0
-JAJLRJ010000007.1_K04564_fcb962ee	JAJLRJ010000007.1_K04564_fcb962ee_with_leader_u25_PF00081_M	GCA_024195265.1	JAJLRJ010000007.1	false	false	true	true	true	true	true	true	true	true	yes	0	99	1
-KAJ7371307.1	KAJ7371307.1	GCA_029204205.1	MU826849.1	false	false	true	true	true	true	true	true	true	true	yes	1	95	4
-KAJ7390115.1	KAJ7390115.1	GCA_029204205.1	MU825420.1	true	true	true	true	true	true	true	true	true	true	yes	5	0	95
-MU825420.1_K04564_3d91ab54	MU825420.1_K04564_3d91ab54_with_leader_u34_PF00081_M	GCA_029204205.1	MU825420.1	true	true	true	true	true	true	true	true	true	true	yes	5	0	95
-MU826849.1_K04564_291d850d	MU826849.1_K04564_291d850d_with_leader_u26_PF00081_M	GCA_029204205.1	MU826849.1	false	false	true	true	true	true	true	true	true	true	yes	1	95	4
-JARQWQ010000030.1_K04564_a7361c5a	JARQWQ010000030.1_K04564_a7361c5a_with_leader_u27_PF00081_M	GCA_032359415.1	JARQWQ010000030.1	false	false	true	true	true	true	true	true	true	true	too_far	3	97	0
-KAK2562129.1	KAK2562129.1	GCA_032359415.1	JARQWQ010000030.1	false	false	true	true	true	true	false	true	true	true	too_far	1	99	0
-KAK2562129.1	KAK2562129.1_with_leader_u27_PF00081_M	GCA_032359415.1	JARQWQ010000030.1	false	false	true	true	true	true	false	true	true	true	too_far	3	97	0
-JAUJYZ010000740.1_K04564_87e6c451	JAUJYZ010000740.1_K04564_87e6c451_with_leader_u26_PF00081_anchor_M	GCA_033675265.1	JAUJYZ010000740.1	false	false	true	true	true	true	true	true	true	true	yes	2	97	0
-JAUJYZ010000745.1_K04564_47603ed6	JAUJYZ010000745.1_K04564_47603ed6_with_leader_u31_PF00081_M	GCA_033675265.1	JAUJYZ010000745.1	true	true	true	true	true	true	true	true	true	true	yes	0	0	100
-KAK3736516.1	KAK3736516.1	GCA_033675265.1	JAUJYZ010000745.1	true	true	true	true	true	true	true	true	true	true	yes	0	0	100
-KAK3736644.1	KAK3736644.1	GCA_033675265.1	JAUJYZ010000740.1	false	false	true	true	true	true	true	true	true	true	yes	3	97	0
-CM106374.1_K04564_529830d2	CM106374.1_K04564_529830d2_with_leader_u26_PF00081_M	GCA_047906015.2	CM106374.1	false	false	true	true	true	true	true	true	true	true	yes	3	85	12
-CM106378.1_K04564_64fa28d1	CM106378.1_K04564_64fa28d1_with_leader_u33_PF00081_M	GCA_047906015.2	CM106378.1	true	true	true	true	true	true	true	true	true	true	yes	1	0	99
-CAB3989857.1	CAB3989857.1	GCA_902702795.2	CACRXK020001562.1	true	true	true	true	true	true	true	true	true	true	yes	0	0	100
-CAB3994625.1	CAB3994625.1	GCA_902702795.2	CACRXK020002501.1	false	false	true	false	true	true	false	false	false	false	missing_GM.5.0.Rel	1	74	26
-CACRXK020001562.1_K04564_ba438d0e	CACRXK020001562.1_K04564_ba438d0e_with_leader_u35_PF00081_M	GCA_902702795.2	CACRXK020001562.1	true	true	true	true	true	true	true	true	true	true	yes	0	0	100
-CACRXK020002501.1_K04564_f2b5b9d1	CACRXK020002501.1_K04564_f2b5b9d1_with_leader_u28_PF00081_M	GCA_902702795.2	CACRXK020002501.1	false	false	true	false	true	true	false	false	false	false	missing_GM.5.0.Rel	1	72	27
-CAH3015114.1	CAH3015114.1_with_leader_u26_PF00081_M	GCA_942486025.1	CALNXI010000019.1	false	false	true	true	true	true	true	true	true	true	yes	3	64	33
-CAH3015114.1	CAH3015114.1_with_leader_u17_PF00081_M	GCA_942486025.1	CALNXI010000019.1	true	true	true	true	true	true	true	true	true	true	yes	20	2	78
-CALNXI010000019.1_K04564_9c58f698	CALNXI010000019.1_K04564_9c58f698_with_leader_u26_PF00081_M	GCA_942486025.1	CALNXI010000019.1	false	false	true	true	true	true	true	true	true	true	yes	3	63	34
-CALNXI010000019.1_K04564_9c58f698	CALNXI010000019.1_K04564_9c58f698_with_leader_u17_PF00081_M	GCA_942486025.1	CALNXI010000019.1	true	true	true	true	true	true	true	true	true	true	yes	23	2	75
-CAH3113625.1	CAH3113625.1	GCA_942486035.1	CALNXK010000026.1	true	true	true	true	true	true	true	true	true	true	yes	4	0	96
-CAH3121122.1	CAH3121122.1	GCA_942486035.1	CALNXK010000035.1	false	false	true	true	true	true	true	true	true	true	yes	3	66	32
-CAH3121122.1	CAH3121122.1_with_leader_u17_PF00081_M	GCA_942486035.1	CALNXK010000035.1	true	true	true	true	true	true	true	true	true	true	yes	20	2	78
-CALNXK010000026.1_K04564_ed584393	CALNXK010000026.1_K04564_ed584393_with_leader_u35_PF00081_anchor_M	GCA_942486035.1	CALNXK010000026.1	true	true	true	true	true	true	true	true	true	true	yes	3	0	97
-CALNXK010000035.1_K04564_4c740ac6	CALNXK010000035.1_K04564_4c740ac6_with_leader_u26_PF00081_M	GCA_942486035.1	CALNXK010000035.1	false	false	true	true	true	true	true	true	true	true	yes	3	64	33
-CALNXK010000035.1_K04564_4c740ac6	CALNXK010000035.1_K04564_4c740ac6_with_leader_u17_PF00081_M	GCA_942486035.1	CALNXK010000035.1	true	true	true	true	true	true	true	true	true	true	yes	23	2	75
-CAH3154858.1	CAH3154858.1	GCA_942486045.1	CALNXJ010000056.1	false	false	true	true	true	true	true	true	true	true	yes	18	76	6
-CALNXJ010000056.1_K04564_bcab822f	CALNXJ010000056.1_K04564_bcab822f_with_leader_u26_PF00081_M	GCA_942486045.1	CALNXJ010000056.1	false	false	true	true	true	true	true	true	true	true	yes	19	75	6
-OZ116702.1_K04564_7a632fe8	OZ116702.1_K04564_7a632fe8_with_leader_u26_PF00081_M	GCA_964199315.1	OZ116702.1	false	false	true	true	true	true	true	true	true	true	yes	21	61	18
-NW_001830281.1_K04564_aabf75a2	NW_001830281.1_K04564_aabf75a2_with_leader_u16_PF00081_M	GCF_000209225.1	NW_001830281.1	false	false	true	true	true	true	true	true	true	false	too_far	99	0	0
-NW_001834379.1_K04564_218b7627	NW_001834379.1_K04564_218b7627_with_leader_u35_PF00081_M	GCF_000209225.1	NW_001834379.1	true	true	true	true	true	true	true	true	true	true	yes	0	0	100
-NW_001834409.1_K04564_dd4ebe9b	NW_001834409.1_K04564_dd4ebe9b_with_leader_u23_PF00081_M	GCF_000209225.1	NW_001834409.1	false	false	true	true	true	true	true	true	true	true	yes	0	100	0
-XP_001641079.1	XP_001641079.1	GCF_000209225.1	NW_001834409.1	false	false	true	true	true	true	true	true	true	true	yes	0	100	0
-XP_032242609.1	XP_032242609.1	GCF_000209225.1	NW_001834379.1	true	true	true	true	true	true	true	true	true	true	yes	0	0	100
-NW_015441130.1_K04564_74b04aa7	NW_015441130.1_K04564_74b04aa7_with_leader_u27_PF00081_M	GCF_000222465.1	NW_015441130.1	false	false	true	false	true	true	true	false	false	false	yes	6	94	0
-XP_015756014.1	XP_015756014.1	GCF_000222465.1	NW_015441130.1	false	false	true	false	true	true	true	false	false	false	yes	6	94	0
-NW_018384609.1_K04564_9ada1ad3	NW_018384609.1_K04564_9ada1ad3_with_leader_u26_PF00081_M	GCF_001417965.1	NW_018384609.1	false	false	true	true	true	true	true	true	true	true	yes	6	94	1
-NW_018385051.1_K04564_bf905449	NW_018385051.1_K04564_bf905449_with_leader_u32_PF00081_M	GCF_001417965.1	NW_018385051.1	true	true	true	true	true	true	true	true	true	true	yes	0	0	100
-XP_020892835.1	XP_020892835.1	GCF_001417965.1	NW_018384609.1	false	false	true	true	true	true	true	true	true	true	yes	7	93	1
-XP_020896468.1	XP_020896468.1	GCF_001417965.1	NW_018385051.1	true	true	true	true	true	true	true	true	true	true	yes	0	0	100
-NW_018149988.1_K04564_d6a2d83a	NW_018149988.1_K04564_d6a2d83a_with_leader_u26_PF00081_M	GCF_002042975.1	NW_018149988.1	false	false	true	true	true	true	true	true	true	true	yes	20	61	19
-XP_020624989.1	XP_020624989.1	GCF_002042975.1	NW_018149988.1	false	false	true	true	true	true	true	true	true	true	yes	18	65	17
-NW_019217915.1_K04564_8c7a1a6e	NW_019217915.1_K04564_8c7a1a6e_with_leader_u35_PF00081_M	GCF_002571385.2	NW_019217915.1	true	true	true	true	true	true	true	true	true	true	yes	4	0	96
-NW_019218106.1_K04564_a8e289e7	NW_019218106.1_K04564_a8e289e7_with_leader_u26_PF00081_M	GCF_002571385.2	NW_019218106.1	false	false	true	true	true	true	true	true	true	true	yes	27	66	7
-NW_019218106.1_K04564_a8e289e7	NW_019218106.1_K04564_a8e289e7_with_leader_u25_PF00081_M	GCF_002571385.2	NW_019218106.1	false	false	true	true	true	true	true	true	true	true	yes	72	20	8
-XP_022789717.1	XP_022789717.1	GCF_002571385.2	NW_019217915.1	true	true	true	true	true	true	true	true	true	true	yes	4	0	96
-XP_022799031.1	XP_022799031.1	GCF_002571385.2	NW_019218106.1	false	false	true	true	true	true	true	true	true	true	yes	26	68	6
-XP_022799031.1	XP_022799031.1_with_leader_u25_PF00081_M	GCF_002571385.2	NW_019218106.1	false	false	true	true	true	true	true	true	true	true	yes	72	21	7
-NW_020845403.1_K04564_b41b5453	NW_020845403.1_K04564_b41b5453_with_leader_u26_PF00081_M	GCF_003704095.1	NW_020845403.1	false	false	true	true	true	true	true	true	true	true	yes	20	72	8
-XP_027044652.1	XP_027044652.1	GCF_003704095.1	NW_020845403.1	false	false	true	true	true	true	true	false	false	false	yes	19	72	9
-XP_027045969.1	XP_027045969.1	GCF_003704095.1	NW_020845583.1	true	true	true	true	true	true	true	true	true	true	too_far	1	0	99
-NW_021126546.1_K04564_2e4adbc0	NW_021126546.1_K04564_2e4adbc0_with_leader_u27_PF00081_M	GCF_004143615.1	NW_021126546.1	false	false	true	true	true	true	true	true	true	true	too_far	3	97	0
-NW_021163045.1_K04564_93184bc0	NW_021163045.1_K04564_93184bc0_with_leader_u35_PF00081_M	GCF_004324835.1	NW_021163045.1	true	true	true	true	true	true	true	true	true	true	too_far	0	0	100
-NW_021163057.1_K04564_58bba69c	NW_021163057.1_K04564_58bba69c_with_leader_u28_PF00081_M	GCF_004324835.1	NW_021163057.1	false	false	true	true	true	true	true	true	true	true	too_far	1	99	0
-XP_028402961.1	XP_028402961.1	GCF_004324835.1	NW_021163045.1	true	true	true	true	true	true	true	true	true	true	too_far	0	0	100
-XP_028405302.1	XP_028405302.1_with_leader_u28_PF00081_M	GCF_004324835.1	NW_021163057.1	false	false	true	true	true	true	true	true	true	true	too_far	1	98	0
-NW_022259326.1_K04564_c5c784a5	NW_022259326.1_K04564_c5c784a5_with_leader_u26_PF00081_M	GCF_009602425.1	NW_022259326.1	false	false	true	true	true	true	true	true	true	true	yes	9	88	3
-NW_022259448.1_K04564_94b23c3f	NW_022259448.1_K04564_94b23c3f_with_leader_u34_PF00081_M	GCF_009602425.1	NW_022259448.1	false	true	true	false	true	true	false	false	false	false	missing_GM.5.0.Rel	0	0	100
-XP_031555730.1	XP_031555730.1	GCF_009602425.1	NW_022259326.1	false	false	true	true	true	true	true	true	true	true	yes	11	87	2
-XP_031556222.1	XP_031556222.1	GCF_009602425.1	NW_022259448.1	false	true	true	false	true	true	true	false	false	false	too_far	0	0	100
-XP_065051554.1	XP_065051554.1	GCF_013076305.1	NW_027019302.1	true	true	true	true	true	true	true	true	true	true	too_far	1	0	99
-XP_065052710.1	XP_065052710.1	GCF_013076305.1	NW_027019306.1	false	false	true	true	true	true	true	true	true	true	yes	2	98	0
-NC_058072.1_K04564_d76f083e	NC_058072.1_K04564_d76f083e_with_leader_u27_PF00081_M	GCF_013753865.1	NC_058072.1	false	false	true	true	true	true	true	true	true	true	too_far	3	97	0
-NC_058072.1_K04564_e7306cec	NC_058072.1_K04564_e7306cec_with_leader_u27_PF00081_M	GCF_013753865.1	NC_058072.1	false	false	true	true	true	true	true	true	true	true	too_far	3	97	0
-XP_029200276.2	XP_029200276.2	GCF_013753865.1	NC_058072.1	false	false	true	true	true	true	true	true	true	true	too_far	4	96	0
-XP_044179376.1	XP_044179376.1	GCF_013753865.1	NC_058072.1	false	false	true	true	true	true	true	true	true	true	too_far	4	96	0
-NW_025813402.1_K04564_d3bead77	NW_025813402.1_K04564_d3bead77_with_leader_u26_PF00081_M	GCF_021976095.1	NW_025813402.1	false	false	true	true	true	true	true	true	true	true	too_far	12	88	0
-NW_025813488.1_K04564_dc28fde6	NW_025813488.1_K04564_dc28fde6_with_leader_u35_PF00081_M	GCF_021976095.1	NW_025813488.1	false	true	true	true	true	false	true	true	false	true	yes	2	0	98
-NW_025813488.1_K04564_dc28fde6	NW_025813488.1_K04564_dc28fde6_with_leader_u26_PF00081_M	GCF_021976095.1	NW_025813488.1	false	false	true	true	true	false	true	true	false	true	yes	100	0	0
-XP_046848022.1	XP_046848022.1	GCF_021976095.1	NW_025813402.1	false	false	true	true	true	true	true	true	true	true	too_far	12	88	0
-NW_026709483.1_K04564_f6c44c1b	NW_026709483.1_K04564_f6c44c1b_with_leader_u35_PF00081_M	GCF_030620025.1	NW_026709483.1	true	true	true	true	true	true	true	true	true	true	yes	3	0	97
-NW_026710474.1_K04564_6393b7b3	NW_026710474.1_K04564_6393b7b3_with_leader_u26_PF00081_M	GCF_030620025.1	NW_026710474.1	false	false	true	true	true	true	true	true	true	true	too_far	12	61	27
-XP_058945240.1	XP_058945240.1	GCF_030620025.1	NW_026709483.1	true	true	true	true	true	true	true	true	true	true	yes	3	0	97
-XP_058961470.1	XP_058961470.1	GCF_030620025.1	NW_026710474.1	false	false	true	true	true	true	true	true	true	true	too_far	14	59	27
-NC_090047.1_K04564_9ff9e7e6	NC_090047.1_K04564_9ff9e7e6_with_leader_u27_PF00081_M	GCF_036669905.1	NC_090047.1	false	false	true	true	true	true	true	true	true	true	too_far	3	96	0
-XP_067022095.1	XP_067022095.1	GCF_036669905.1	NC_090047.1	false	false	true	true	true	true	true	true	true	true	too_far	4	96	0
-NC_089313.1_K04564_d4ce240d	NC_089313.1_K04564_d4ce240d_with_leader_u35_PF00081_M	GCF_036669915.1	NC_089313.1	true	true	true	true	true	true	true	true	true	true	yes	3	0	97
-NC_089321.1_K04564_80b85b49	NC_089321.1_K04564_80b85b49_with_leader_u26_PF00081_M	GCF_036669915.1	NC_089321.1	false	false	true	true	true	true	true	true	true	true	yes	11	61	28
-XP_058945240.2	XP_058945240.2	GCF_036669915.1	NC_089313.1	true	true	true	true	true	true	true	true	true	true	yes	3	0	97
-NC_090883.1_K04564_15cd5c3b	NC_090883.1_K04564_15cd5c3b_with_leader_u26_PF00081_M	GCF_036669925.1	NC_090883.1	false	false	true	true	true	true	true	true	true	true	yes	2	98	0
-XP_068741652.1	XP_068741652.1	GCF_036669925.1	NC_090883.1	false	false	true	true	true	true	true	true	true	true	yes	3	97	0
-NC_090876.1_K04564_d2caed50	NC_090876.1_K04564_d2caed50_with_leader_u26_PF00081_M	GCF_036669935.1	NC_090876.1	false	false	true	true	true	true	true	true	true	true	yes	2	97	0
-XP_068715352.1	XP_068715352.1	GCF_036669935.1	NC_090876.1	false	false	true	true	true	true	true	true	true	true	yes	3	97	0
-NC_088930.1_K04564_c6107477	NC_088930.1_K04564_c6107477_with_leader_u22_PF00081_M	GCF_038396675.1	NC_088930.1	false	false	true	true	true	true	true	true	true	true	too_far	3	97	0
-NP_001296665.1	NP_001296665.1	GCF_038396675.1	NC_088930.1	false	false	true	true	true	true	true	true	true	true	too_far	6	94	0
-NC_064035.1_K04564_8bf6ddb6	NC_064035.1_K04564_8bf6ddb6_with_leader_u35_PF00081_M	GCF_932526225.1	NC_064035.1	true	true	true	true	true	true	true	true	true	true	yes	0	0	100
-NC_064035.1_K04564_e2e0e4b8	NC_064035.1_K04564_e2e0e4b8_with_leader_u23_PF00081_M	GCF_932526225.1	NC_064035.1	false	false	true	true	true	true	true	true	true	true	yes	0	100	0
-XP_048580243.1	XP_048580243.1	GCF_932526225.1	NC_064035.1	true	true	true	true	true	true	true	true	true	true	yes	0	0	100
-NC_133203.1_K04564_101605b8	NC_133203.1_K04564_101605b8_with_leader_u26_PF00081_M	GCF_958299795.1	NC_133203.1	false	false	true	true	true	true	true	true	true	true	yes	3	63	34
-NC_133203.1_K04564_101605b8	NC_133203.1_K04564_101605b8_with_leader_u17_PF00081_M	GCF_958299795.1	NC_133203.1	true	true	true	true	true	true	true	true	true	true	yes	24	2	75
-XP_073236307.1	XP_073236307.1	GCF_958299795.1	NC_133203.1	false	false	true	true	true	true	true	true	true	true	yes	3	64	33
-XP_073236307.1	XP_073236307.1_with_leader_u17_PF00081_M	GCF_958299795.1	NC_133203.1	true	true	true	true	true	true	true	true	true	true	yes	21	2	77
+protein accession	sequence accession	genome accession	contig accession	pass all	Leader().upstreamOfPfam('PF00081').betweenAA(-35, -15).is_SP(deeploc=True)	Pfam.matches('PF00081')	Pfam.matches('PF02777')	KO.matches('K04564', bound_cterm=True)	HMMAlignment('k04564.hmm').is_at('H', 61)	HMMAlignment('k04564.hmm').is_at('H', 106)	HMMAlignment('k04564.hmm').is_at('D', 187)	HMMAlignment('k04564.hmm').is_at('H', 191)	HMMAlignment('k04564.hmm').matches_regex('[QDK]', 196)	TFMotifs.has_within(20, 'GM.5.0.Rel', 'GM.5.0.bZIP', min_score_threshold=8)	Leader.call('mTP')	Leader.call('SP')	Leader.localization	Leader.call('Cell membrane')	Leader.call('Cytoplasm')	Leader.call('Endoplasmic reticulum')	Leader.call('Extracellular')	Leader.call('Golgi apparatus')	Leader.call('Lipid anchor')	Leader.call('Lysosome/Vacuole')	Leader.call('Mitochondrion')	Leader.call('Nucleus')	Leader.call('Peripheral')	Leader.call('Peroxisome')	Leader.call('Plastid')	Leader.call('Soluble')	Leader.call('Transmembrane')
+MPSW01001707.1_K04564_7b9e297c	MPSW01001707.1_K04564_7b9e297c_with_leader_u26_PF00081_M	GCA_001896105.1	MPSW01001707.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	9	17	4	3	4	9	6	82	9	55	3	1	71	9
+RDEB01000110.1_K04564_86e229fd	RDEB01000110.1_K04564_86e229fd_with_leader_u26_PF00081_M	GCA_006542545.1	RDEB01000110.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	9	14	2	2	4	6	7	86	7	49	1	1	67	15
+BLAZ01000169.1_K04564_9f65b912	BLAZ01000169.1_K04564_9f65b912_with_leader_u27_PF00081_M	GCA_014633955.1	BLAZ01000169.1	false	false	true	true	true	true	true	true	true	true	too_far	100	0	Mitochondrion	8	20	3	4	6	5	9	93	6	50	1	1	69	11
+BLEZ01003184.1_K04564_dc8bf6ad	BLEZ01003184.1_K04564_dc8bf6ad_with_leader_u27_PF00081_M	GCA_014633975.1	BLEZ01003184.1	false	false	true	true	true	true	true	true	true	true	too_far	100	0	Mitochondrion	9	17	2	3	4	5	8	91	7	45	2	2	67	12
+BLFE01002088.1_K04564_10e43317	BLFE01002088.1_K04564_10e43317_with_leader_u27_PF00081_M	GCA_014634605.1	BLFE01002088.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	8	18	3	4	6	6	7	93	7	50	1	1	67	11
+JAJLRJ010000007.1_K04564_fcb962ee	JAJLRJ010000007.1_K04564_fcb962ee_with_leader_u25_PF00081_M	GCA_024195265.1	JAJLRJ010000007.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	10	16	3	3	4	9	7	89	10	57	2	1	70	10
+KAJ7371307.1	KAJ7371307.1	GCA_029204205.1	MU826849.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	10	16	2	3	3	8	6	86	10	55	2	1	72	7
+KAJ7390115.1	KAJ7390115.1	GCA_029204205.1	MU825420.1	true	true	true	true	true	true	true	true	true	true	yes	0	100	Endoplasmic reticulum	10	20	85	59	31	8	50	11	6	44	1	1	70	7
+MU825420.1_K04564_3d91ab54	MU825420.1_K04564_3d91ab54_with_leader_u34_PF00081_M	GCA_029204205.1	MU825420.1	true	true	true	true	true	true	true	true	true	true	yes	0	100	Lysosome/Vacuole	8	21	48	51	37	6	53	8	8	43	0	10	70	15
+MU826849.1_K04564_291d850d	MU826849.1_K04564_291d850d_with_leader_u26_PF00081_M	GCA_029204205.1	MU826849.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	11	14	2	3	2	7	5	87	9	49	2	1	74	8
+JARQWQ010000030.1_K04564_a7361c5a	JARQWQ010000030.1_K04564_a7361c5a_with_leader_u27_PF00081_M	GCA_032359415.1	JARQWQ010000030.1	false	false	true	true	true	true	true	true	true	true	too_far	100	0	Mitochondrion	9	17	2	4	4	6	7	93	7	47	1	1	68	11
+KAK2562129.1	KAK2562129.1	GCA_032359415.1	JARQWQ010000030.1	false	false	true	true	true	true	false	true	true	true	too_far	100	0	Mitochondrion	6	19	3	8	7	6	7	86	9	54	0	1	71	7
+KAK2562129.1	KAK2562129.1_with_leader_u27_PF00081_M	GCA_032359415.1	JARQWQ010000030.1	false	false	true	true	true	true	false	true	true	true	too_far	100	0	Mitochondrion	6	16	2	4	5	6	7	93	6	52	1	1	71	7
+JAUJYZ010000740.1_K04564_87e6c451	JAUJYZ010000740.1_K04564_87e6c451_with_leader_u26_PF00081_anchor_M	GCA_033675265.1	JAUJYZ010000740.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	9	13	2	3	2	8	4	83	11	53	3	3	69	8
+JAUJYZ010000745.1_K04564_47603ed6	JAUJYZ010000745.1_K04564_47603ed6_with_leader_u31_PF00081_M	GCA_033675265.1	JAUJYZ010000745.1	true	true	true	true	true	true	true	true	true	true	yes	0	100	Extracellular	14	24	33	69	28	9	56	5	4	38	0	0	78	9
+KAK3736516.1	KAK3736516.1	GCA_033675265.1	JAUJYZ010000745.1	true	true	true	true	true	true	true	true	true	true	yes	0	100	Endoplasmic reticulum	16	23	76	58	29	8	41	10	5	34	1	0	74	7
+KAK3736644.1	KAK3736644.1	GCA_033675265.1	JAUJYZ010000740.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	8	12	1	4	2	8	4	85	11	55	2	3	69	8
+CM106374.1_K04564_529830d2	CM106374.1_K04564_529830d2_with_leader_u26_PF00081_M	GCA_047906015.2	CM106374.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	10	16	2	4	3	8	4	89	9	51	2	1	73	8
+CM106378.1_K04564_64fa28d1	CM106378.1_K04564_64fa28d1_with_leader_u33_PF00081_M	GCA_047906015.2	CM106378.1	true	true	true	true	true	true	true	true	true	true	yes	0	100	Extracellular	9	19	38	59	32	7	56	7	5	38	0	5	77	11
+CAB3989857.1	CAB3989857.1	GCA_902702795.2	CACRXK020001562.1	true	true	true	true	true	true	true	true	true	true	yes	0	100	Endoplasmic reticulum	10	29	84	52	32	9	42	16	6	39	1	0	71	7
+CAB3994625.1	CAB3994625.1	GCA_902702795.2	CACRXK020002501.1	false	false	true	false	true	true	false	false	false	false	missing_GM.5.0.Rel	100	0	Mitochondrion	8	13	2	3	5	6	7	93	6	73	1	1	66	13
+CACRXK020001562.1_K04564_ba438d0e	CACRXK020001562.1_K04564_ba438d0e_with_leader_u35_PF00081_M	GCA_902702795.2	CACRXK020001562.1	true	true	true	true	true	true	true	true	true	true	yes	0	100	Extracellular	10	33	48	70	38	5	50	15	5	35	0	0	80	12
+CACRXK020002501.1_K04564_f2b5b9d1	CACRXK020002501.1_K04564_f2b5b9d1_with_leader_u28_PF00081_M	GCA_902702795.2	CACRXK020002501.1	false	false	true	false	true	true	false	false	false	false	missing_GM.5.0.Rel	100	0	Mitochondrion	9	12	2	3	6	6	8	93	6	75	1	1	66	13
+CAH3015114.1	CAH3015114.1_with_leader_u26_PF00081_M	GCA_942486025.1	CALNXI010000019.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	10	18	3	6	5	8	7	89	8	46	1	1	71	9
+CAH3015114.1	CAH3015114.1_with_leader_u17_PF00081_M	GCA_942486025.1	CALNXI010000019.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	8	14	3	12	3	6	7	83	10	45	2	2	72	8
+CALNXI010000019.1_K04564_9c58f698	CALNXI010000019.1_K04564_9c58f698_with_leader_u26_PF00081_M	GCA_942486025.1	CALNXI010000019.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	10	18	3	5	5	6	6	88	8	48	1	1	70	11
+CALNXI010000019.1_K04564_9c58f698	CALNXI010000019.1_K04564_9c58f698_with_leader_u17_PF00081_M	GCA_942486025.1	CALNXI010000019.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	8	14	2	11	3	5	6	83	10	48	2	2	71	9
+CAH3113625.1	CAH3113625.1	GCA_942486035.1	CALNXK010000026.1	true	true	true	true	true	true	true	true	true	true	yes	0	100	Endoplasmic reticulum	14	21	77	59	31	7	45	9	5	43	2	1	73	7
+CAH3121122.1	CAH3121122.1	GCA_942486035.1	CALNXK010000035.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	10	18	3	6	6	8	7	89	8	46	1	1	71	9
+CAH3121122.1	CAH3121122.1_with_leader_u17_PF00081_M	GCA_942486035.1	CALNXK010000035.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	8	14	3	12	3	7	7	84	10	45	2	2	72	8
+CALNXK010000026.1_K04564_ed584393	CALNXK010000026.1_K04564_ed584393_with_leader_u35_PF00081_anchor_M	GCA_942486035.1	CALNXK010000026.1	true	true	true	true	true	true	true	true	true	true	yes	0	100	Lysosome/Vacuole	10	20	36	57	36	4	60	8	5	46	3	8	78	11
+CALNXK010000035.1_K04564_4c740ac6	CALNXK010000035.1_K04564_4c740ac6_with_leader_u26_PF00081_M	GCA_942486035.1	CALNXK010000035.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	10	17	2	5	5	6	6	89	8	49	1	1	70	11
+CALNXK010000035.1_K04564_4c740ac6	CALNXK010000035.1_K04564_4c740ac6_with_leader_u17_PF00081_M	GCA_942486035.1	CALNXK010000035.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	7	14	2	11	3	5	6	85	10	48	2	2	71	9
+CAH3154858.1	CAH3154858.1	GCA_942486045.1	CALNXJ010000056.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	9	18	4	3	3	7	8	83	10	54	4	2	69	9
+CALNXJ010000056.1_K04564_bcab822f	CALNXJ010000056.1_K04564_bcab822f_with_leader_u26_PF00081_M	GCA_942486045.1	CALNXJ010000056.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	11	17	4	3	3	5	7	79	9	49	4	6	68	13
+OZ116702.1_K04564_7a632fe8	OZ116702.1_K04564_7a632fe8_with_leader_u26_PF00081_M	GCA_964199315.1	OZ116702.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	8	15	3	4	4	8	5	88	8	56	2	2	72	9
+NW_001830281.1_K04564_aabf75a2	NW_001830281.1_K04564_aabf75a2_with_leader_u16_PF00081_M	GCF_000209225.1	NW_001830281.1	false	false	true	true	true	true	true	true	true	false	too_far	0	0	Cytoplasm|Extracellular	14	62	9	63	6	8	6	17	35	49	11	5	81	6
+NW_001834379.1_K04564_218b7627	NW_001834379.1_K04564_218b7627_with_leader_u35_PF00081_M	GCF_000209225.1	NW_001834379.1	true	true	true	true	true	true	true	true	true	true	yes	0	100	Extracellular|Lysosome/Vacuole	14	17	43	67	37	5	70	6	5	37	0	3	74	15
+NW_001834409.1_K04564_dd4ebe9b	NW_001834409.1_K04564_dd4ebe9b_with_leader_u23_PF00081_M	GCF_000209225.1	NW_001834409.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	8	15	1	3	2	8	5	89	9	54	2	1	72	7
+XP_001641079.1	XP_001641079.1	GCF_000209225.1	NW_001834409.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	7	14	1	3	2	9	5	89	9	56	2	1	67	8
+XP_032242609.1	XP_032242609.1	GCF_000209225.1	NW_001834379.1	true	true	true	true	true	true	true	true	true	true	yes	0	100	Extracellular|Endoplasmic reticulum	11	21	73	64	35	7	55	12	5	38	1	1	72	8
+NW_015441130.1_K04564_74b04aa7	NW_015441130.1_K04564_74b04aa7_with_leader_u27_PF00081_M	GCF_000222465.1	NW_015441130.1	false	false	true	false	true	true	true	false	false	false	yes	100	0	Mitochondrion	9	13	2	5	4	4	4	94	6	73	1	1	71	9
+XP_015756014.1	XP_015756014.1	GCF_000222465.1	NW_015441130.1	false	false	true	false	true	true	true	false	false	false	yes	100	0	Mitochondrion	8	13	2	5	4	4	4	94	6	70	1	1	70	10
+NW_018384609.1_K04564_9ada1ad3	NW_018384609.1_K04564_9ada1ad3_with_leader_u26_PF00081_M	GCF_001417965.1	NW_018384609.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	11	14	2	2	2	8	5	83	9	45	3	2	67	13
+NW_018385051.1_K04564_bf905449	NW_018385051.1_K04564_bf905449_with_leader_u32_PF00081_M	GCF_001417965.1	NW_018385051.1	true	true	true	true	true	true	true	true	true	true	yes	0	100	Extracellular	19	18	38	84	34	6	34	10	3	38	0	0	76	13
+XP_020892835.1	XP_020892835.1	GCF_001417965.1	NW_018384609.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	11	11	2	3	2	9	5	85	9	55	4	2	70	8
+XP_020896468.1	XP_020896468.1	GCF_001417965.1	NW_018385051.1	true	true	true	true	true	true	true	true	true	true	yes	0	100	Extracellular|Endoplasmic reticulum	16	21	77	63	27	7	35	13	5	34	1	0	74	7
+NW_018149988.1_K04564_d6a2d83a	NW_018149988.1_K04564_d6a2d83a_with_leader_u26_PF00081_M	GCF_002042975.1	NW_018149988.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	9	17	4	3	4	9	6	82	9	55	3	1	71	9
+XP_020624989.1	XP_020624989.1	GCF_002042975.1	NW_018149988.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	8	13	4	4	4	12	7	88	9	58	3	2	72	6
+NW_019217915.1_K04564_8c7a1a6e	NW_019217915.1_K04564_8c7a1a6e_with_leader_u35_PF00081_M	GCF_002571385.2	NW_019217915.1	true	true	true	true	true	true	true	true	true	true	yes	0	100	Lysosome/Vacuole	12	27	32	52	43	8	55	5	6	35	1	4	73	16
+NW_019218106.1_K04564_a8e289e7	NW_019218106.1_K04564_a8e289e7_with_leader_u26_PF00081_M	GCF_002571385.2	NW_019218106.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	11	18	4	2	2	4	7	81	11	51	5	8	67	13
+NW_019218106.1_K04564_a8e289e7	NW_019218106.1_K04564_a8e289e7_with_leader_u25_PF00081_M	GCF_002571385.2	NW_019218106.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	9	18	4	2	2	5	7	77	11	51	6	11	67	13
+XP_022789717.1	XP_022789717.1	GCF_002571385.2	NW_019217915.1	true	true	true	true	true	true	true	true	true	true	yes	0	100	Extracellular|Endoplasmic reticulum	14	22	77	70	34	11	41	9	4	40	1	1	72	9
+XP_022799031.1	XP_022799031.1	GCF_002571385.2	NW_019218106.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	9	18	3	3	3	6	7	84	10	55	5	5	68	9
+XP_022799031.1	XP_022799031.1_with_leader_u25_PF00081_M	GCF_002571385.2	NW_019218106.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	8	18	4	3	2	6	7	82	10	55	7	6	68	9
+NW_020845403.1_K04564_b41b5453	NW_020845403.1_K04564_b41b5453_with_leader_u26_PF00081_M	GCF_003704095.1	NW_020845403.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	10	15	4	2	3	5	7	81	9	46	4	7	64	13
+XP_027044652.1	XP_027044652.1	GCF_003704095.1	NW_020845403.1	false	false	true	true	true	true	true	false	false	false	yes	100	0	Mitochondrion	9	15	4	3	3	7	7	85	9	69	3	3	70	12
+XP_027045969.1	XP_027045969.1	GCF_003704095.1	NW_020845583.1	true	true	true	true	true	true	true	true	true	true	too_far	0	100	Endoplasmic reticulum	13	27	79	61	34	10	38	13	5	41	1	1	72	9
+NW_021126546.1_K04564_2e4adbc0	NW_021126546.1_K04564_2e4adbc0_with_leader_u27_PF00081_M	GCF_004143615.1	NW_021126546.1	false	false	true	true	true	true	true	true	true	true	too_far	100	0	Mitochondrion	9	16	2	3	4	5	7	93	7	46	1	1	67	13
+NW_021163045.1_K04564_93184bc0	NW_021163045.1_K04564_93184bc0_with_leader_u35_PF00081_M	GCF_004324835.1	NW_021163045.1	true	true	true	true	true	true	true	true	true	true	too_far	0	100	Extracellular|Lysosome/Vacuole	11	27	47	65	45	6	64	7	4	37	0	1	77	15
+NW_021163057.1_K04564_58bba69c	NW_021163057.1_K04564_58bba69c_with_leader_u28_PF00081_M	GCF_004324835.1	NW_021163057.1	false	false	true	true	true	true	true	true	true	true	too_far	100	0	Mitochondrion	8	16	1	4	3	6	7	87	8	61	2	1	65	10
+XP_028402961.1	XP_028402961.1	GCF_004324835.1	NW_021163045.1	true	true	true	true	true	true	true	true	true	true	too_far	0	100	Endoplasmic reticulum	11	26	82	53	34	9	47	11	6	37	1	0	71	7
+XP_028405302.1	XP_028405302.1_with_leader_u28_PF00081_M	GCF_004324835.1	NW_021163057.1	false	false	true	true	true	true	true	true	true	true	too_far	100	0	Mitochondrion	8	17	2	3	4	13	7	90	8	63	3	1	68	9
+NW_022259326.1_K04564_c5c784a5	NW_022259326.1_K04564_c5c784a5_with_leader_u26_PF00081_M	GCF_009602425.1	NW_022259326.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	9	16	3	2	3	7	8	85	8	48	3	2	67	10
+NW_022259448.1_K04564_94b23c3f	NW_022259448.1_K04564_94b23c3f_with_leader_u34_PF00081_M	GCF_009602425.1	NW_022259448.1	false	true	true	false	true	true	false	false	false	false	missing_GM.5.0.Rel	0	100	Lysosome/Vacuole	7	18	36	58	45	12	65	5	6	34	0	2	86	7
+XP_031555730.1	XP_031555730.1	GCF_009602425.1	NW_022259326.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	8	13	3	3	3	11	7	88	8	51	3	1	70	8
+XP_031556222.1	XP_031556222.1	GCF_009602425.1	NW_022259448.1	false	true	true	false	true	true	true	false	false	false	too_far	0	100	Extracellular|Lysosome/Vacuole	11	24	46	70	49	8	67	5	3	45	0	0	79	9
+XP_065051554.1	XP_065051554.1	GCF_013076305.1	NW_027019302.1	true	true	true	true	true	true	true	true	true	true	too_far	0	100	Endoplasmic reticulum|Lysosome/Vacuole	12	24	67	50	43	10	63	12	5	42	1	1	70	7
+XP_065052710.1	XP_065052710.1	GCF_013076305.1	NW_027019306.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	6	11	2	3	3	5	5	89	8	58	2	1	70	9
+NC_058072.1_K04564_d76f083e	NC_058072.1_K04564_d76f083e_with_leader_u27_PF00081_M	GCF_013753865.1	NC_058072.1	false	false	true	true	true	true	true	true	true	true	too_far	100	0	Mitochondrion	8	18	2	4	4	5	7	93	7	45	1	1	68	11
+NC_058072.1_K04564_e7306cec	NC_058072.1_K04564_e7306cec_with_leader_u27_PF00081_M	GCF_013753865.1	NC_058072.1	false	false	true	true	true	true	true	true	true	true	too_far	100	0	Mitochondrion	8	16	2	3	4	5	7	92	7	45	1	1	68	12
+XP_029200276.2	XP_029200276.2	GCF_013753865.1	NC_058072.1	false	false	true	true	true	true	true	true	true	true	too_far	100	0	Mitochondrion	6	15	2	4	4	6	7	93	7	53	1	1	69	8
+XP_044179376.1	XP_044179376.1	GCF_013753865.1	NC_058072.1	false	false	true	true	true	true	true	true	true	true	too_far	100	0	Mitochondrion	6	15	2	4	4	6	7	92	7	51	1	1	68	8
+NW_025813402.1_K04564_d3bead77	NW_025813402.1_K04564_d3bead77_with_leader_u26_PF00081_M	GCF_021976095.1	NW_025813402.1	false	false	true	true	true	true	true	true	true	true	too_far	100	0	Mitochondrion	6	16	2	1	2	4	5	87	11	50	6	3	69	14
+NW_025813488.1_K04564_dc28fde6	NW_025813488.1_K04564_dc28fde6_with_leader_u35_PF00081_M	GCF_021976095.1	NW_025813488.1	false	true	true	true	true	false	true	true	false	true	yes	0	100	Extracellular	16	25	56	65	36	5	51	8	7	35	0	3	78	16
+NW_025813488.1_K04564_dc28fde6	NW_025813488.1_K04564_dc28fde6_with_leader_u26_PF00081_M	GCF_021976095.1	NW_025813488.1	false	false	true	true	true	false	true	true	false	true	yes	0	0	Cytoplasm	8	52	22	33	14	5	19	29	12	40	0	1	75	16
+XP_046848022.1	XP_046848022.1	GCF_021976095.1	NW_025813402.1	false	false	true	true	true	true	true	true	true	true	too_far	100	0	Mitochondrion	5	16	2	1	3	7	5	86	11	59	9	2	70	9
+NW_026709483.1_K04564_f6c44c1b	NW_026709483.1_K04564_f6c44c1b_with_leader_u35_PF00081_M	GCF_030620025.1	NW_026709483.1	true	true	true	true	true	true	true	true	true	true	yes	0	100	Extracellular	7	38	40	57	57	7	53	11	7	38	0	2	75	16
+NW_026710474.1_K04564_6393b7b3	NW_026710474.1_K04564_6393b7b3_with_leader_u26_PF00081_M	GCF_030620025.1	NW_026710474.1	false	false	true	true	true	true	true	true	true	true	too_far	100	0	Mitochondrion	9	15	4	3	3	5	6	84	9	51	4	3	72	10
+XP_058945240.1	XP_058945240.1	GCF_030620025.1	NW_026709483.1	true	true	true	true	true	true	true	true	true	true	yes	0	100	Endoplasmic reticulum	15	29	79	58	36	9	44	12	5	39	1	1	72	9
+XP_058961470.1	XP_058961470.1	GCF_030620025.1	NW_026710474.1	false	false	true	true	true	true	true	true	true	true	too_far	100	0	Mitochondrion	8	17	3	3	3	7	7	84	9	52	3	2	69	9
+NC_090047.1_K04564_9ff9e7e6	NC_090047.1_K04564_9ff9e7e6_with_leader_u27_PF00081_M	GCF_036669905.1	NC_090047.1	false	false	true	true	true	true	true	true	true	true	too_far	100	0	Mitochondrion	8	18	3	4	5	5	7	93	7	45	1	1	68	12
+XP_067022095.1	XP_067022095.1	GCF_036669905.1	NC_090047.1	false	false	true	true	true	true	true	true	true	true	too_far	100	0	Mitochondrion	6	15	2	4	4	6	7	93	7	51	1	1	68	8
+NC_089313.1_K04564_d4ce240d	NC_089313.1_K04564_d4ce240d_with_leader_u35_PF00081_M	GCF_036669915.1	NC_089313.1	true	true	true	true	true	true	true	true	true	true	yes	0	100	Lysosome/Vacuole	7	38	42	55	58	7	53	11	8	39	1	2	74	17
+NC_089321.1_K04564_80b85b49	NC_089321.1_K04564_80b85b49_with_leader_u26_PF00081_M	GCF_036669915.1	NC_089321.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	9	16	4	3	3	5	7	82	8	49	3	5	69	12
+XP_058945240.2	XP_058945240.2	GCF_036669915.1	NC_089313.1	true	true	true	true	true	true	true	true	true	true	yes	0	100	Endoplasmic reticulum	15	29	79	59	37	9	44	12	5	39	1	1	72	9
+NC_090883.1_K04564_15cd5c3b	NC_090883.1_K04564_15cd5c3b_with_leader_u26_PF00081_M	GCF_036669925.1	NC_090883.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	10	14	2	2	4	6	7	87	7	50	1	1	65	16
+XP_068741652.1	XP_068741652.1	GCF_036669925.1	NC_090883.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	9	13	2	3	4	7	6	89	8	54	2	1	69	11
+NC_090876.1_K04564_d2caed50	NC_090876.1_K04564_d2caed50_with_leader_u26_PF00081_M	GCF_036669935.1	NC_090876.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	10	15	2	3	5	6	8	88	6	50	1	1	66	15
+XP_068715352.1	XP_068715352.1	GCF_036669935.1	NC_090876.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	10	15	3	3	5	7	7	90	8	53	1	1	69	10
+NC_088930.1_K04564_c6107477	NC_088930.1_K04564_c6107477_with_leader_u22_PF00081_M	GCF_038396675.1	NC_088930.1	false	false	true	true	true	true	true	true	true	true	too_far	100	0	Mitochondrion	7	13	1	4	3	5	6	88	6	44	1	1	69	13
+NP_001296665.1	NP_001296665.1	GCF_038396675.1	NC_088930.1	false	false	true	true	true	true	true	true	true	true	too_far	100	0	Mitochondrion	5	12	1	5	4	5	6	89	7	51	1	1	74	9
+NC_064035.1_K04564_8bf6ddb6	NC_064035.1_K04564_8bf6ddb6_with_leader_u35_PF00081_M	GCF_932526225.1	NC_064035.1	true	true	true	true	true	true	true	true	true	true	yes	0	100	Extracellular|Lysosome/Vacuole	14	17	43	67	37	5	70	6	5	37	0	3	74	15
+NC_064035.1_K04564_e2e0e4b8	NC_064035.1_K04564_e2e0e4b8_with_leader_u23_PF00081_M	GCF_932526225.1	NC_064035.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	8	15	1	3	2	8	5	89	9	54	2	1	72	7
+XP_048580243.1	XP_048580243.1	GCF_932526225.1	NC_064035.1	true	true	true	true	true	true	true	true	true	true	yes	0	100	Extracellular|Endoplasmic reticulum	11	21	73	64	35	7	55	12	5	38	1	1	72	8
+NC_133203.1_K04564_101605b8	NC_133203.1_K04564_101605b8_with_leader_u26_PF00081_M	GCF_958299795.1	NC_133203.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	10	18	3	5	5	6	6	88	8	48	1	1	70	11
+NC_133203.1_K04564_101605b8	NC_133203.1_K04564_101605b8_with_leader_u17_PF00081_M	GCF_958299795.1	NC_133203.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	7	14	3	11	3	5	6	83	10	48	2	2	71	9
+XP_073236307.1	XP_073236307.1	GCF_958299795.1	NC_133203.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	10	18	4	6	6	8	7	89	8	46	1	1	71	9
+XP_073236307.1	XP_073236307.1_with_leader_u17_PF00081_M	GCF_958299795.1	NC_133203.1	false	false	true	true	true	true	true	true	true	true	yes	100	0	Mitochondrion	8	14	3	12	3	6	7	83	10	45	2	2	72	8

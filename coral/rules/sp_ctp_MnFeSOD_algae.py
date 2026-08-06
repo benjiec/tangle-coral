@@ -1,7 +1,7 @@
 from sieve.rules import HMMAlignment, KO, Leader, Pfam, Rules, TFMotifs
 
 rule = Rules(
-    Leader().upstreamOfPfam("PF00081").betweenAA(-70,-15)
+    Leader().upstreamOfPfam("PF00081").betweenAA(-70,-15).is_SP(deeploc=True)
 
     # requires SP+cTP architecture
     & HMMAlignment("algae_sod2_sp_ctp_leader.hmm").spans(3, 50).between(1, 60)

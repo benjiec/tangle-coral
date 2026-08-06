@@ -1,7 +1,7 @@
 from sieve.rules import HMMAlignment, KO, Leader, Pfam, Rules, TFMotifs
 
 rule = Rules(
-    Leader().upstreamOfPfam("PF00081").betweenAA(-35,-15).is_SP()
+    Leader().upstreamOfPfam("PF00081").betweenAA(-35,-15).is_SP(deeploc=True)
 
     # required domains
     & Pfam.matches("PF00081")

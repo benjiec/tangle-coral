@@ -365,5 +365,5 @@ CAJNJA010039315.1_K04564_078188b5                         -            152 Sod_F
 # Target file:     res-sp_ctp_MnFeSOD_algae/input.faa
 # Option settings: hmmsearch --domtblout res-sp_ctp_MnFeSOD_algae/pfam.domtblout --cut_ga assets/pfam.hmm res-sp_ctp_MnFeSOD_algae/input.faa 
 # Current dir:     /Users/benjie/git/tangle/play
-# Date:            Thu Aug  6 10:27:23 2026
+# Date:            Thu Aug  6 12:57:52 2026
 # [ok]
