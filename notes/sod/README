@@ -1,0 +1,54 @@
+## mt_MnSOD_cnidaria
+
+python3 ../sieve/scripts/ko-find-matches.py K04564 --taxon cnidaria | \
+  PYTHONPATH=../coral python3 ../sieve/scripts/build-protein-artifacts.py \
+    --rule coral.rules.mt_MnSOD_cnidaria.rule_tangle_curated \
+    --artifacts-dir res-mt_MnSOD_cnidaria
+
+PYTHONPATH=../coral python3 ../sieve/scripts/check-artifacts-by-rules.py \
+  --rule coral.rules.mt_MnSOD_cnidaria.rule_tangle_curated \
+  --artifacts-dir res-mt_MnSOD_cnidaria \
+  --pfam-hmm assets/pfam.hmm \
+  --ko-hmm assets/k04564.hmm \
+  --ko-thresholds assets/k04564_threshold.tsv
+
+../sieve/scripts/rule-results-to-fasta.py \
+  --artifacts-dir res-mt_MnSOD_cnidaria \
+  --output mt_MnSOD_cnidaria.faa
+
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/mt_MnSOD_cnidaria.faa -out /app/mt_MnSOD_cnidaria.msa
+hmmbuild mt_MnSOD_cnidaria.hmm mt_MnSOD_cnidaria.msa
+
+PYTHONPATH=../coral sieve-py ../sieve/scripts/hmmsearch-threshold.py \
+  --hmm mt_MnSOD_cnidaria.hmm \
+  --artifacts-dir res-mt_MnSOD_cnidaria \
+  --output mt_MnSOD_cnidaria_thresholds.tsv
+
+
+## sp_MnSOD_cnidaria
+
+python3 ../sieve/scripts/ko-find-matches.py K04564 --taxon cnidaria | \
+  PYTHONPATH=../coral python3 ../sieve/scripts/build-protein-artifacts.py \
+    --rule coral.rules.sp_MnSOD_cnidaria.rule_tangle_curated \
+    --artifacts-dir res-sp_MnSOD_cnidaria
+    
+PYTHONPATH=../coral python3 ../sieve/scripts/check-artifacts-by-rules.py \
+  --rule coral.rules.sp_MnSOD_cnidaria.rule_tangle_curated \
+  --artifacts-dir res-sp_MnSOD_cnidaria \
+  --pfam-hmm assets/pfam.hmm \
+  --ko-hmm assets/k04564.hmm \
+  --ko-thresholds assets/k04564_threshold.tsv
+
+../sieve/scripts/rule-results-to-fasta.py \
+  --artifacts-dir res-sp_MnSOD_cnidaria \
+  --output sp_MnSOD_cnidaria.faa
+
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/sp_MnSOD_cnidaria.faa -out /app/sp_MnSOD_cnidaria.msa
+hmmbuild sp_MnSOD_cnidaria.hmm sp_MnSOD_cnidaria.msa
+  
+PYTHONPATH=../coral sieve-py ../sieve/scripts/hmmsearch-threshold.py \
+  --hmm sp_MnSOD_cnidaria.hmm \
+  --artifacts-dir res-sp_MnSOD_cnidaria \
+  --output sp_MnSOD_cnidaria_thresholds.tsv
+
+
