@@ -99,3 +99,20 @@ PYTHONPATH=../coral sieve-py ../sieve/scripts/hmmsearch-threshold.py \
   --artifacts-dir res-sp_ctp_MnFeSOD_algae \
   --output sp_ctp_MnFeSOD_algae_thresholds.tsv
 
+
+# Alignment and IQ tree
+
+Run the following for each group, to generate bounded mature protein sequences
+
+sieve-py ../sieve/scripts/bound-fasta-by-hmms.py \
+  --n-hmm assets/pf00081.hmm \
+  --c-hmm assets/pf02777.hmm \
+  --fasta mt_MnSOD_cnidaria.faa --n-position 3 --c-position 100 --acc-desc mT_cnidaria > mt_MnSOD_cnidaria_mature.faa
+
+And for the reference
+
+sieve-py ../sieve/scripts/bound-fasta-by-hmms.py \
+  --n-hmm assets/pf00081.hmm \
+  --c-hmm assets/pf02777.hmm \
+  --fasta reference.faa --n-position 3 --c-position 100 > reference_mature.faa
+
