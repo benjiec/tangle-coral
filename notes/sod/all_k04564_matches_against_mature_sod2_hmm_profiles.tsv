@@ -1,0 +1,115 @@
+target name	accession	tlen	query name	accession	qlen	seq e-value	seq score	reason	seq bias	dom #	dom total	dom c-Evalue	dom i-Evalue	dom score	dom bias	hmm from	hmm to	ali from	ali to	env from	env to	acc	description
+CAL1168155.1_bounded_58-250|query	-	193	sp_ctp_MnFeSOD_algae_mature	-	193	9.10E-141	459.1		2.1	1	1	1.00E-140	1.00E-140	459	2.1	1	193	1	193	1	193	1	-
+orbicella_symb_TRINITY_DN188752_c0_g3_i1.p1_bounded_58-250|query	-	193	sp_ctp_MnFeSOD_algae_mature	-	193	9.40E-141	459.1		2.3	1	1	1.00E-140	1.00E-140	458.9	2.3	1	193	1	193	1	193	1	-
+c_goreaui_TRINITY_DN626_c0_g1_i2.p1_bounded_56-248|query	-	193	sp_ctp_MnFeSOD_algae_mature	-	193	1.10E-140	458.8		2.5	1	1	1.20E-140	1.20E-140	458.7	2.5	1	193	1	193	1	193	1	-
+CAL1168149.1_bounded_58-250|query	-	193	sp_ctp_MnFeSOD_algae_mature	-	193	2.00E-140	458		2.8	1	1	2.20E-140	2.20E-140	457.8	2.8	1	193	1	193	1	193	1	-
+CAK9091470.1_bounded_664-856|query	-	193	sp_ctp_MnFeSOD_algae_mature	-	193	4.80E-140	456.7		2.1	1	1	5.30E-140	5.30E-140	456.6	2.1	1	193	1	193	1	193	1	-
+DF239687.1_K04564_210fd9cb_bounded_4-196|query	-	193	sp_ctp_MnFeSOD_algae_mature	-	193	7.00E-140	456.2		1.9	1	1	7.80E-140	7.80E-140	456.1	1.9	1	193	1	193	1	193	1	-
+BGPT01004387.1_K04564_42ae3337_bounded_4-197|query	-	194	sp_ctp_MnFeSOD_algae_mature	-	193	4.40E-139	453.6		2.6	1	1	4.90E-139	4.90E-139	453.5	2.6	1	193	1	194	1	194	0.99	-
+orbicella_symb_TRINITY_DN78611_c0_g1_i1.p1_bounded_81-273|query	-	193	sp_ctp_MnFeSOD_algae_mature	-	193	3.90E-138	450.5		1.2	1	1	4.40E-138	4.40E-138	450.4	1.2	1	193	1	193	1	193	1	-
+siderastrea_symb_TRINITY_DN405006_c0_g1_i4.p1_bounded_57-249|query	-	193	sp_ctp_MnFeSOD_algae_mature	-	193	3.80E-138	450.5		2.5	1	1	4.30E-138	4.30E-138	450.4	2.5	1	193	1	193	1	193	1	-
+OLP99006.1_bounded_1003-1195|query	-	193	sp_ctp_MnFeSOD_algae_mature	-	193	8.00E-138	449.5		2.1	1	1	8.90E-138	8.90E-138	449.3	2.1	1	193	1	193	1	193	1	-
+DF239687.1_K04564_8557d9bb_bounded_4-196|query	-	193	sp_ctp_MnFeSOD_algae_mature	-	193	9.20E-138	449.3		2.4	1	1	1.00E-137	1.00E-137	449.1	2.4	1	193	1	193	1	193	1	-
+OLP88777.1_bounded_1735-1927|query	-	193	sp_ctp_MnFeSOD_algae_mature	-	193	1.60E-136	445.3		1.3	1	1	1.80E-136	1.80E-136	445.1	1.3	1	193	1	193	1	193	1	-
+BGPT01000358.1_K04564_070be8c8_bounded_4-202|query	-	199	sp_ctp_MnFeSOD_algae_mature	-	193	2.00E-136	445		11.9	1	1	4.00E-135	4.00E-135	440.7	11.9	1	193	1	199	1	199	0.97	-
+orbicella_symb_TRINITY_DN393612_c0_g1_i1.p1_bounded_78-270|query	-	193	sp_ctp_MnFeSOD_algae_mature	-	193	1.90E-135	441.8		2.2	1	1	2.10E-135	2.10E-135	441.6	2.2	1	193	1	193	1	193	1	-
+orbicella_symb_TRINITY_DN78611_c0_g2_i1.p1_bounded_30-226|query	-	197	sp_MnFeSOD_algae_mature	-	197	5.50E-133	433.6		2.6	1	1	6.10E-133	6.10E-133	433.4	2.6	1	197	1	197	1	197	1	-
+OLP79028.1_bounded_811-1007|query	-	197	sp_MnFeSOD_algae_mature	-	197	1.20E-132	432.4		2.4	1	1	1.30E-132	1.30E-132	432.3	2.4	1	197	1	197	1	197	1	-
+CAE7459428.1_bounded_187-390|query	-	204	sp_ctp_MnFeSOD_algae_mature	-	193	2.90E-132	431.3	Would have counted as a hit but upstream of CAE7459428.1 the SP signal was weak. If counted, the threshold would have been lowered to here.	6.4	1	1	7.60E-132	7.60E-132	430	6.4	1	193	1	204	1	204	0.98	-
+CAK9100252.1_bounded_24-220|query	-	197	sp_MnFeSOD_algae_mature	-	197	1.00E-130	426.2		0.7	1	1	1.10E-130	1.10E-130	426	0.7	1	197	1	197	1	197	1	-
+siderastrea_symb_TRINITY_DN8493_c0_g1_i1.p1_bounded_19-217|query	-	199	sp_MnFeSOD_algae_mature	-	197	1.70E-129	422.1		1.4	1	1	1.90E-129	1.90E-129	422	1.4	1	197	1	199	1	199	0.99	-
+pseudodiploria_symb_TRINITY_DN348117_c0_g1_i1.p1_bounded_42-240|query	-	199	sp_MnFeSOD_algae_mature	-	197	3.00E-129	421.3		1.3	1	1	3.40E-129	3.40E-129	421.2	1.3	1	197	1	199	1	199	0.99	-
+CAJNDS010002544.1_K04564_89a3bd15_bounded_2-196|query	-	195	sp_ctp_MnFeSOD_algae_mature	-	193	2.90E-124	405.3	Similar to CAE7459428.1, but with XXX	1.3	1	1	3.20E-124	3.20E-124	405.1	1.3	1	193	1	195	1	195	0.97	-
+LSRX01000795.1_K04564_1fcb6a32_bounded_2-191|query	-	190	sp_ctp_MnFeSOD_algae_mature	-	193	4.00E-121	395	Similar to CAE7459428.1, but with XXX	1.9	1	1	4.50E-121	4.50E-121	394.8	1.9	1	193	1	190	1	190	0.97	-
+BGNK01003376.1_K04564_a3776c6c_bounded_2-191|query	-	190	sp_ctp_MnFeSOD_algae_mature	-	193	5.10E-120	391.4	Similar to CAE7459428.1, but with XXX	2.9	1	1	5.80E-120	5.80E-120	391.2	2.9	1	193	1	190	1	190	0.97	-
+CAH3154858.1_bounded_29-215|query	-	187	mt_MnSOD_cnidaria_mature	-	187	2.10E-117	382.5		0.4	1	1	2.30E-117	2.30E-117	382.4	0.4	1	187	1	187	1	187	1	-
+CAH3121122.1_bounded_29-215|query	-	187	mt_MnSOD_cnidaria_mature	-	187	3.30E-117	381.9		0.5	1	1	3.60E-117	3.60E-117	381.7	0.5	1	187	1	187	1	187	1	-
+CAH3015114.1_bounded_65-251|query	-	187	mt_MnSOD_cnidaria_mature	-	187	4.70E-117	381.4		0.5	1	1	5.20E-117	5.20E-117	381.2	0.5	1	187	1	187	1	187	1	-
+XP_073236307.1_bounded_29-215|query	-	187	mt_MnSOD_cnidaria_mature	-	187	7.30E-117	380.8		0.4	1	1	8.10E-117	8.10E-117	380.6	0.4	1	187	1	187	1	187	1	-
+KAJ7371307.1_bounded_29-215|query	-	187	mt_MnSOD_cnidaria_mature	-	187	8.60E-117	380.5		0.6	1	1	9.60E-117	9.60E-117	380.4	0.6	1	187	1	187	1	187	1	-
+XP_020624989.1_bounded_29-215|query	-	187	mt_MnSOD_cnidaria_mature	-	187	1.70E-116	379.6		0.9	1	1	1.90E-116	1.90E-116	379.4	0.9	1	187	1	187	1	187	1	-
+XP_022799031.1_bounded_29-215|query	-	187	mt_MnSOD_cnidaria_mature	-	187	3.10E-116	378.7		0.3	1	1	3.50E-116	3.50E-116	378.6	0.3	1	187	1	187	1	187	1	-
+XP_031555730.1_bounded_29-215|query	-	187	mt_MnSOD_cnidaria_mature	-	187	1.00E-115	377		0.4	1	1	1.20E-115	1.20E-115	376.9	0.4	1	187	1	187	1	187	1	-
+XP_058945240.2_bounded_38-240|query	-	203	sp_MnSOD_cnidaria_mature	-	202	1.90E-115	376.5		0.6	1	1	2.10E-115	2.10E-115	376.3	0.6	1	202	1	203	1	203	0.99	-
+XP_027045969.1_bounded_38-240|query	-	203	sp_MnSOD_cnidaria_mature	-	202	2.50E-115	376.1		0.4	1	1	2.80E-115	2.80E-115	375.9	0.4	1	202	1	203	1	203	0.99	-
+XP_058945240.1_bounded_38-240|query	-	203	sp_MnSOD_cnidaria_mature	-	202	2.60E-115	376		0.5	1	1	2.90E-115	2.90E-115	375.9	0.5	1	202	1	203	1	203	0.99	-
+CAH3109050.1_bounded_39-241|query	-	203	sp_MnSOD_cnidaria_mature	-	202	4.90E-115	375.1		0.7	1	1	5.50E-115	5.50E-115	374.9	0.7	1	202	1	203	1	203	0.99	-
+XP_001641079.1_bounded_26-212|query	-	187	mt_MnSOD_cnidaria_mature	-	187	7.20E-115	374.3		0.1	1	1	8.00E-115	8.00E-115	374.1	0.1	1	187	1	187	1	187	1	-
+XP_020892835.1_bounded_29-215|query	-	187	mt_MnSOD_cnidaria_mature	-	187	2.90E-114	372.3		0.6	1	1	3.20E-114	3.20E-114	372.1	0.6	1	187	1	187	1	187	1	-
+KAK3736644.1_bounded_29-215|query	-	187	mt_MnSOD_cnidaria_mature	-	187	6.60E-114	371.1		0.6	1	1	7.30E-114	7.30E-114	371	0.6	2	187	2	187	1	187	0.99	-
+CM106374.1_K04564_529830d2_bounded_4-188|query	-	185	mt_MnSOD_cnidaria_mature	-	187	9.40E-114	370.6		1.1	1	1	1.00E-113	1.00E-113	370.5	1.1	1	187	1	185	1	185	0.99	-
+XP_068715352.1_bounded_29-216|query	-	188	mt_MnSOD_cnidaria_mature	-	187	2.80E-112	365.8		0.5	1	1	3.10E-112	3.10E-112	365.7	0.5	1	187	1	188	1	188	0.99	-
+XP_022789717.1_bounded_38-240|query	-	203	sp_MnSOD_cnidaria_mature	-	202	5.10E-112	365.3		0.6	1	1	5.70E-112	5.70E-112	365.1	0.6	1	202	1	203	1	203	0.99	-
+MU826849.1_K04564_291d850d_bounded_4-188|query	-	185	mt_MnSOD_cnidaria_mature	-	187	7.40E-112	364.4		0.8	1	1	8.30E-112	8.30E-112	364.3	0.8	1	187	1	185	1	185	0.99	-
+XP_068741652.1_bounded_29-216|query	-	188	mt_MnSOD_cnidaria_mature	-	187	9.80E-112	364		0.4	1	1	1.10E-111	1.10E-111	363.9	0.4	1	187	1	188	1	188	0.99	-
+JAJLRJ010000007.1_K04564_fcb962ee_bounded_4-188|query	-	185	mt_MnSOD_cnidaria_mature	-	187	1.20E-111	363.8		0.4	1	1	1.30E-111	1.30E-111	363.6	0.4	1	187	1	185	1	185	0.99	-
+XP_065052710.1_bounded_27-213|query	-	187	mt_MnSOD_cnidaria_mature	-	187	1.20E-111	363.8		0.2	1	1	1.30E-111	1.30E-111	363.6	0.2	1	187	1	187	1	187	1	-
+CALNXK010000035.1_K04564_4c740ac6_bounded_4-187|query	-	184	mt_MnSOD_cnidaria_mature	-	187	2.10E-111	363		0.3	1	1	2.30E-111	2.30E-111	362.8	0.3	1	187	1	184	1	184	0.99	-
+CALNXI010000019.1_K04564_9c58f698_bounded_4-187|query	-	184	mt_MnSOD_cnidaria_mature	-	187	3.00E-111	362.5		0.3	1	1	3.30E-111	3.30E-111	362.3	0.3	1	187	1	184	1	184	0.99	-
+NC_133203.1_K04564_101605b8_bounded_4-187|query	-	184	mt_MnSOD_cnidaria_mature	-	187	4.70E-111	361.8		0.3	1	1	5.30E-111	5.30E-111	361.7	0.3	1	187	1	184	1	184	0.99	-
+KAK3736516.1_bounded_34-235|query	-	202	sp_MnSOD_cnidaria_mature	-	202	1.10E-110	360.9		0.6	1	1	1.20E-110	1.20E-110	360.7	0.6	1	202	1	202	1	202	0.99	-
+NW_026710474.1_K04564_6393b7b3_bounded_4-184|query	-	181	mt_MnSOD_cnidaria_mature	-	187	1.80E-110	359.9		0.6	1	1	2.00E-110	2.00E-110	359.8	0.6	1	187	1	181	1	181	0.99	-
+KAJ7390115.1_bounded_37-242|query	-	206	sp_MnSOD_cnidaria_mature	-	202	3.70E-110	359.2		0.1	1	1	4.20E-110	4.20E-110	359	0.1	1	202	1	206	1	206	0.99	-
+NW_001834409.1_K04564_dd4ebe9b_bounded_13-194|query	-	182	mt_MnSOD_cnidaria_mature	-	187	1.20E-109	357.2		0.4	1	1	1.30E-109	1.30E-109	357.1	0.4	1	187	1	182	1	182	0.99	-
+XP_020896468.1_bounded_35-236|query	-	202	sp_MnSOD_cnidaria_mature	-	202	2.40E-109	356.6		1	1	1	2.60E-109	2.60E-109	356.4	1	1	202	1	202	1	202	1	-
+XP_067022095.1_bounded_30-216|query	-	187	mt_MnSOD_cnidaria_mature	-	187	6.90E-109	354.8		0.4	1	1	7.60E-109	7.60E-109	354.6	0.4	1	187	1	187	1	187	1	-
+OZ116702.1_K04564_7a632fe8_bounded_4-191|query	-	188	mt_MnSOD_cnidaria_mature	-	187	8.20E-109	354.5		0.4	1	1	9.30E-109	9.30E-109	354.3	0.4	1	187	1	188	1	188	0.97	-
+CAH3113625.1_bounded_38-240|query	-	203	sp_MnSOD_cnidaria_mature	-	202	1.10E-108	354.4		0.2	1	1	1.20E-108	1.20E-108	354.2	0.2	1	202	1	203	1	203	0.99	-
+MPSW01001707.1_K04564_7b9e297c_bounded_4-191|query	-	188	mt_MnSOD_cnidaria_mature	-	187	2.20E-108	353.1		0.8	1	1	2.50E-108	2.50E-108	352.9	0.8	1	187	1	188	1	188	0.97	-
+XP_044179376.1_bounded_30-216|query	-	187	mt_MnSOD_cnidaria_mature	-	187	2.50E-108	353		0.4	1	1	2.70E-108	2.70E-108	352.8	0.4	1	187	1	187	1	187	1	-
+CAH3167338.1_bounded_40-242|query	-	203	sp_MnSOD_cnidaria_mature	-	202	4.20E-108	352.5		0.2	1	1	4.70E-108	4.70E-108	352.3	0.2	1	202	1	203	1	203	0.99	-
+XP_032242609.1_bounded_38-239|query	-	202	sp_MnSOD_cnidaria_mature	-	202	4.40E-108	352.4		1	1	1	4.90E-108	4.90E-108	352.3	1	1	202	1	202	1	202	1	-
+XP_029200276.2_bounded_30-216|query	-	187	mt_MnSOD_cnidaria_mature	-	187	3.90E-108	352.3		0.4	1	1	4.30E-108	4.30E-108	352.2	0.4	1	187	1	187	1	187	1	-
+XP_073230536.1_bounded_40-242|query	-	203	sp_MnSOD_cnidaria_mature	-	202	9.30E-108	351.3		0.1	1	1	1.00E-107	1.00E-107	351.2	0.1	1	202	1	203	1	203	0.99	-
+JAUJYZ010000740.1_K04564_87e6c451_bounded_12-192|query	-	181	mt_MnSOD_cnidaria_mature	-	187	1.80E-107	350.2		0.9	1	1	2.00E-107	2.00E-107	350	0.9	2	187	2	181	1	181	0.99	-
+XP_046848022.1_bounded_29-215|query	-	187	mt_MnSOD_cnidaria_mature	-	187	1.80E-107	350.1		0.6	1	1	2.00E-107	2.00E-107	350	0.6	1	187	1	187	1	187	1	-
+XP_020623159.1_bounded_41-242|query	-	202	sp_MnSOD_cnidaria_mature	-	202	3.20E-107	349.6		0	1	1	3.50E-107	3.50E-107	349.5	0	1	202	1	202	1	202	1	-
+NP_001296665.1_bounded_25-211|query	-	187	mt_MnSOD_cnidaria_mature	-	187	3.50E-106	345.9		0.2	1	1	3.90E-106	3.90E-106	345.8	0.2	1	187	1	187	1	187	1	-
+NW_022259326.1_K04564_c5c784a5_bounded_12-197|query	-	186	mt_MnSOD_cnidaria_mature	-	187	3.60E-106	345.9		1	1	1	4.00E-106	4.00E-106	345.7	1	1	187	1	186	1	186	0.95	-
+CALNXJ010000056.1_K04564_bcab822f_bounded_4-186|query	-	183	mt_MnSOD_cnidaria_mature	-	187	5.30E-106	345.3		0.9	1	1	5.90E-106	5.90E-106	345.2	0.9	1	187	1	183	1	183	0.95	-
+NW_020845403.1_K04564_b41b5453_bounded_4-196|query	-	193	mt_MnSOD_cnidaria_mature	-	187	1.70E-105	343.7		1.4	1	1	2.80E-105	2.80E-105	343	1.4	1	187	1	193	1	193	0.97	-
+NC_089321.1_K04564_80b85b49_bounded_4-184|query	-	181	mt_MnSOD_cnidaria_mature	-	187	1.90E-105	343.5		1.2	1	1	2.20E-105	2.20E-105	343.4	1.2	1	187	1	181	1	181	0.94	-
+NW_019218106.1_K04564_a8e289e7_bounded_4-187|query	-	184	mt_MnSOD_cnidaria_mature	-	187	2.20E-105	343.3		0.9	1	1	2.50E-105	2.50E-105	343.2	0.9	1	187	1	184	1	184	0.99	-
+NW_018384609.1_K04564_9ada1ad3_bounded_4-187|query	-	184	mt_MnSOD_cnidaria_mature	-	187	1.90E-104	340.3		1.4	1	1	2.10E-104	2.10E-104	340.1	1.4	1	187	1	184	1	184	0.99	-
+NW_026709483.1_K04564_f6c44c1b_bounded_4-194|query	-	191	sp_MnSOD_cnidaria_mature	-	202	2.20E-102	333.8		1.9	1	1	3.60E-102	3.60E-102	333.1	1.9	1	202	1	191	1	191	0.96	-
+NC_089313.1_K04564_d4ce240d_bounded_4-193|query	-	190	sp_MnSOD_cnidaria_mature	-	202	3.00E-102	333.4		2.2	1	1	5.70E-102	5.70E-102	332.4	2.2	1	202	1	190	1	190	0.97	-
+XP_065051554.1_bounded_37-238|query	-	202	sp_MnSOD_cnidaria_mature	-	202	4.60E-102	332.8		1.5	1	1	5.10E-102	5.10E-102	332.6	1.5	2	202	2	202	1	202	0.99	-
+CALNXJ010000011.1_K04564_5e644e17_bounded_4-193|query	-	190	sp_MnSOD_cnidaria_mature	-	202	8.20E-102	331.9		2.4	1	1	1.60E-101	1.60E-101	331	2.4	1	202	1	190	1	190	0.97	-
+NC_090876.1_K04564_d2caed50_bounded_4-186|query	-	183	mt_MnSOD_cnidaria_mature	-	187	8.70E-102	331.6		1	1	1	9.70E-102	9.70E-102	331.4	1	1	187	1	183	1	183	0.94	-
+BLEZ01003184.1_K04564_dc8bf6ad_bounded_4-187|query	-	184	mt_MnSOD_cnidaria_mature	-	187	1.80E-101	330.6		0.8	1	1	2.00E-101	2.00E-101	330.4	0.8	1	187	1	184	1	184	0.95	-
+RDEB01000110.1_K04564_86e229fd_bounded_4-186|query	-	183	mt_MnSOD_cnidaria_mature	-	187	2.20E-101	330.3		1.1	1	1	2.50E-101	2.50E-101	330.1	1.1	1	187	1	183	1	183	0.94	-
+NC_058072.1_K04564_e7306cec_bounded_4-187|query	-	184	mt_MnSOD_cnidaria_mature	-	187	2.30E-101	330.2		0.8	1	1	2.60E-101	2.60E-101	330.1	0.8	1	187	1	184	1	184	0.95	-
+NC_090883.1_K04564_15cd5c3b_bounded_4-186|query	-	183	mt_MnSOD_cnidaria_mature	-	187	3.00E-101	329.9		0.9	1	1	3.30E-101	3.30E-101	329.7	0.9	1	187	1	183	1	183	0.94	-
+XP_028402961.1_bounded_38-241|query	-	204	sp_MnSOD_cnidaria_mature	-	202	9.30E-101	328.5		1.8	1	1	1.00E-100	1.00E-100	328.3	1.8	1	202	1	204	1	204	0.99	-
+NC_090047.1_K04564_9ff9e7e6_bounded_4-185|query	-	182	mt_MnSOD_cnidaria_mature	-	187	1.20E-100	327.9		1	1	1	1.30E-100	1.30E-100	327.7	1	1	187	1	182	1	182	0.94	-
+JARQWQ010000030.1_K04564_a7361c5a_bounded_4-185|query	-	182	mt_MnSOD_cnidaria_mature	-	187	3.20E-100	326.5		1.1	1	1	3.60E-100	3.60E-100	326.3	1.1	1	187	1	182	1	182	0.94	-
+NC_058072.1_K04564_d76f083e_bounded_4-185|query	-	182	mt_MnSOD_cnidaria_mature	-	187	4.30E-100	326.1		1	1	1	4.80E-100	4.80E-100	325.9	1	1	187	1	182	1	182	0.94	-
+BLFE01002088.1_K04564_10e43317_bounded_4-185|query	-	182	mt_MnSOD_cnidaria_mature	-	187	4.60E-100	326		0.9	1	1	5.20E-100	5.20E-100	325.8	0.9	1	187	1	182	1	182	0.94	-
+CAB3989857.1_bounded_38-241|query	-	204	sp_MnSOD_cnidaria_mature	-	202	5.90E-100	325.9		4.8	1	1	6.60E-100	6.60E-100	325.7	4.8	1	202	1	204	1	204	0.99	-
+BLAZ01000169.1_K04564_9f65b912_bounded_4-185|query	-	182	mt_MnSOD_cnidaria_mature	-	187	2.60E-99	323.6		0.9	1	1	2.90E-99	2.90E-99	323.4	0.9	1	187	1	182	1	182	0.94	-
+NW_021163057.1_K04564_58bba69c_bounded_4-187|query	-	184	mt_MnSOD_cnidaria_mature	-	187	8.80E-99	321.8		0.8	1	1	9.80E-99	9.80E-99	321.7	0.8	1	187	1	184	1	184	0.99	-
+NW_019217915.1_K04564_8c7a1a6e_bounded_2-189|query	-	188	sp_MnSOD_cnidaria_mature	-	202	2.50E-98	320.5		4.7	1	1	1.70E-97	1.70E-97	317.8	4.7	1	202	1	188	1	188	0.97	-
+CM106378.1_K04564_64fa28d1_bounded_4-190|query	-	187	sp_MnSOD_cnidaria_mature	-	202	1.50E-97	318.1		4.3	1	1	2.50E-96	2.50E-96	314	4.3	1	202	1	187	1	187	0.96	-
+NC_088930.1_K04564_c6107477_bounded_12-195|query	-	184	mt_MnSOD_cnidaria_mature	-	187	1.60E-97	317.7		1.7	1	1	1.80E-97	1.80E-97	317.6	1.7	1	187	1	184	1	184	0.95	-
+NW_025813402.1_K04564_d3bead77_bounded_4-187|query	-	184	mt_MnSOD_cnidaria_mature	-	187	2.30E-97	317.2		1.7	1	1	2.60E-97	2.60E-97	317	1.7	1	187	1	184	1	184	0.99	-
+MU825420.1_K04564_3d91ab54_bounded_4-194|query	-	191	sp_MnSOD_cnidaria_mature	-	202	3.00E-97	317.1		2.2	1	1	1.80E-96	1.80E-96	314.5	2.2	1	202	1	191	1	191	0.95	-
+OZ116712.1_K04564_f67ada29_bounded_4-189|query	-	186	sp_MnSOD_cnidaria_mature	-	202	1.50E-95	311.5		1.9	1	1	3.90E-94	3.90E-94	306.9	1.9	1	202	1	186	1	186	0.96	-
+CALNXK010000026.1_K04564_ed584393_bounded_14-200|query	-	187	sp_MnSOD_cnidaria_mature	-	202	3.20E-95	310.4		5.8	1	1	9.90E-94	9.90E-94	305.5	5.8	1	202	1	187	1	187	0.96	-
+MPSW01000651.1_K04564_015d9ebc_bounded_4-189|query	-	186	sp_MnSOD_cnidaria_mature	-	202	1.00E-94	308.8		1.6	1	1	2.70E-93	2.70E-93	304.1	1.6	1	202	1	186	1	186	0.96	-
+CALNXI010001387.1_K04564_b0e36d4a_bounded_4-190|query	-	187	sp_MnSOD_cnidaria_mature	-	202	1.90E-94	307.9		6.5	1	1	6.00E-93	6.00E-93	303	6.5	1	202	1	187	1	187	0.96	-
+JAJLRJ010000014.1_K04564_3e2b9a48_bounded_4-191|query	-	188	sp_MnSOD_cnidaria_mature	-	202	2.50E-94	307.5		4.8	1	1	1.40E-93	1.40E-93	305.1	4.8	1	202	1	188	1	188	0.96	-
+NC_133214.1_K04564_27a93157_bounded_15-201|query	-	187	sp_MnSOD_cnidaria_mature	-	202	6.40E-94	306.2		5.9	1	1	2.00E-92	2.00E-92	301.3	5.9	1	202	1	187	1	187	0.96	-
+JAUJYZ010000745.1_K04564_47603ed6_bounded_4-189|query	-	186	sp_MnSOD_cnidaria_mature	-	202	2.40E-93	304.3		7.3	1	1	7.40E-92	7.40E-92	299.4	7.3	1	202	1	186	1	186	0.96	-
+NW_021126546.1_K04564_2e4adbc0_bounded_4-187|query	-	184	mt_MnSOD_cnidaria_mature	-	187	3.50E-93	303.5		1.2	1	1	3.90E-93	3.90E-93	303.4	1.2	1	187	1	184	1	184	0.94	-
+OZ257276.1_K04564_a64e3044_bounded_3-188|query	-	186	sp_ctp_MnFeSOD_algae_mature	-	193	1.30E-92	302	Unknown	1	1	1	1.80E-92	1.80E-92	301.5	1	1	192	1	185	1	186	0.91	-
+CAJNDS010002396.1_K04564_39524e3c_bounded_4-186|query	-	183	sp_ctp_MnFeSOD_algae_mature	-	193	4.00E-92	300.4	~same as OZ25276.1	2.8	1	1	5.70E-92	5.70E-92	299.9	2.8	1	192	1	182	1	183	0.9	-
+NW_001834379.1_K04564_218b7627_bounded_10-195|query	-	186	sp_MnSOD_cnidaria_mature	-	202	3.90E-91	297.1		8.7	1	1	1.20E-89	1.20E-89	292.2	8.7	1	202	1	186	1	186	0.96	-
+NW_018385051.1_K04564_bf905449_bounded_4-188|query	-	185	sp_MnSOD_cnidaria_mature	-	202	9.10E-91	295.9		7.9	1	1	2.40E-89	2.40E-89	291.2	7.9	1	202	1	185	1	185	0.96	-
+CAK9047237.1_bounded_148-336|query	-	189	mt_MnSOD_cnidaria_mature	-	187	1.10E-85	279.1	Unknown	0.1	1	1	1.20E-85	1.20E-85	278.9	0.1	2	187	2	189	1	189	0.97	-
+CAXAMM010020073.1_K04564_521e95f5_bounded_2-189|query	-	188	mt_MnSOD_cnidaria_mature	-	187	2.10E-85	278.2	~same as CAXAMM010020073.1	0.2	1	1	2.30E-85	2.30E-85	278.1	0.2	2	187	2	188	1	188	0.97	-
+NW_021163045.1_K04564_93184bc0_bounded_10-196|query	-	187	sp_MnSOD_cnidaria_mature	-	202	6.00E-85	276.9		6.2	1	1	2.40E-83	2.40E-83	271.7	6.2	1	202	1	187	1	187	0.96	-
+CACRXK020001562.1_K04564_ba438d0e_bounded_4-190|query	-	187	sp_MnSOD_cnidaria_mature	-	202	7.90E-83	270		10.8	1	1	4.40E-81	4.40E-81	264.2	10.8	1	202	1	187	1	187	0.95	-
+CAMXCT020000001.1_K04564_24b48a7d_bounded_14-203|query	-	190	sp_MnFeSOD_algae_mature	-	197	4.50E-67	218.4	Unknown	0.1	1	1	5.30E-67	5.30E-67	218.2	0.1	2	197	2	190	1	190	0.94	-
+JAUTBS010441823.1_K04564_f032f926_bounded_4-190|query	-	187	sp_ctp_MnFeSOD_algae_mature	-	193	1.50E-58	190.8	Unknown	0.8	1	1	1.70E-58	1.70E-58	190.6	0.8	1	193	1	187	1	187	0.93	-
+CAJNJA010064252.1_K04564_35c86fa4_bounded_6-194|query	-	189	sp_ctp_MnFeSOD_algae_mature	-	193	9.80E-50	162.1	Unknown	3	1	1	1.10E-49	1.10E-49	161.9	3	2	191	2	187	1	189	0.86	-
+CAE7835006.1_bounded_4-187|query	-	184	sp_MnSOD_cnidaria_mature	-	202	1.50E-46	151.5	Unknown	1.8	1	1	9.70E-46	9.70E-46	148.9	1.8	2	200	2	182	1	184	0.92	-
