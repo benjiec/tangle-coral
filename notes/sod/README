@@ -58,7 +58,7 @@ PYTHONPATH=../coral sieve-py ../sieve/scripts/hmmsearch-threshold.py \
 
 # sp_ctp_MnFeSOD (can modify for sp_MnFeSOD)
 
-python3 ../sieve/scripts/ko-find-matches.py K04564 --taxon alveolata | \
+python3 ../sieve/scripts/ko-find-matches.py K04564 --taxon symbiodiniaceae | \
   PYTHONPATH=../coral python3 ../sieve/scripts/build-protein-artifacts.py \
     --rule coral.rules.sp_ctp_MnFeSOD_algae.rule \
     --artifacts-dir res-sp_ctp_MnFeSOD_algae
@@ -75,7 +75,21 @@ PYTHONPATH=../coral python3 ../sieve/scripts/build-fasta-artifacts.py \
     --artifacts-dir res-sp_ctp_MnFeSOD_algae \
     --ko-hmm assets/k04564.hmm \
     --pfam-hmm assets/pfam.hmm \
-    --fasta transcripts_PM38.faa
+    --fasta transcripts_PM31.faa
+
+PYTHONPATH=../coral python3 ../sieve/scripts/build-fasta-artifacts.py \
+    --rule coral.rules.sp_ctp_MnFeSOD_algae.rule \
+    --artifacts-dir res-sp_ctp_MnFeSOD_algae \
+    --ko-hmm assets/k04564.hmm \
+    --pfam-hmm assets/pfam.hmm \
+    --fasta transcripts_PM35.faa
+
+PYTHONPATH=../coral python3 ../sieve/scripts/build-fasta-artifacts.py \
+    --rule coral.rules.sp_ctp_MnFeSOD_algae.rule \
+    --artifacts-dir res-sp_ctp_MnFeSOD_algae \
+    --ko-hmm assets/k04564.hmm \
+    --pfam-hmm assets/pfam.hmm \
+    --fasta transcripts_PM36.faa
 
 PYTHONPATH=../coral python3 ../sieve/scripts/check-artifacts-by-rules.py \
   --rule coral.rules.sp_ctp_MnFeSOD_algae.rule \

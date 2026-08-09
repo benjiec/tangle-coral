@@ -30,13 +30,6 @@ CAJNJA010039315.1_K04564_078188b5	GCA_905231915.1
 CAJNJA010049029.1_K04564_31328c11	GCA_905231915.1				
 CAJNJA010052942.1_K04564_06e367ea	GCA_905231915.1				
 CAJNJA010064252.1_K04564_35c86fa4	GCA_905231915.1				
-CAE8598837.1	GCA_905237085.1				
-CAE8601289.1	GCA_905237085.1				
-CAE8604820.1	GCA_905237085.1				
-CAE8614366.1	GCA_905237085.1				
-CAE8627582.1	GCA_905237085.1	CAE8627582.1_with_leader_u15_PF00081_M_to_K04564_542	u15_PF00081	-15	542
-CAE8628319.1	GCA_905237085.1	CAE8628319.1_to_K04564_235		1	235
-CAE8631912.1	GCA_905237085.1	CAE8631912.1_with_leader_u15_PF00081_M_to_K04564_263	u15_PF00081	-15	263
 CAL1167723.1	GCA_947184155.2	CAL1167723.1_with_leader_u21_PF00081_M_to_K04564_350	u21_PF00081	-21	350
 CAL1168149.1	GCA_947184155.2				
 CAL1168155.1	GCA_947184155.2				
@@ -95,104 +88,12 @@ orbicella_symb_TRINITY_DN319259_c0_g1_i1.p2
 orbicella_symb_TRINITY_DN196811_c0_g2_i1.p2					
 c_goreaui_TRINITY_DN626_c0_g1_i2.p1					
 c_goreaui_TRINITY_DN626_c0_g1_i4.p1					
-cladocopium_proliferum_Levin_TRINITY_DN110028_c0_g1_i1.p1					
-cladocopium_proliferum_Levin_TRINITY_DN131539_c0_g1_i1.p1					
-cladocopium_proliferum_Levin_TRINITY_DN146221_c0_g1_i1.p1		cladocopium_proliferum_Levin_TRINITY_DN146221_c0_g1_i1.p1_with_leader_u26_PF00081_M_to_K04564_322	u26_PF00081	-26	322
-cladocopium_proliferum_Levin_TRINITY_DN146173_c0_g1_i4.p1					
-cladocopium_proliferum_Levin_TRINITY_DN146173_c0_g1_i5.p1					
-cladocopium_proliferum_Levin_TRINITY_DN146173_c0_g1_i6.p1					
-cladocopium_proliferum_Levin_TRINITY_DN146173_c0_g1_i7.p1					
-cladocopium_proliferum_Levin_TRINITY_DN146173_c0_g1_i1.p1					
-cladocopium_proliferum_Levin_TRINITY_DN146173_c0_g1_i2.p1					
-cladocopium_proliferum_Levin_TRINITY_DN146173_c0_g1_i3.p1					
-cladocopium_proliferum_Levin_TRINITY_DN137752_c0_g1_i4.p1		cladocopium_proliferum_Levin_TRINITY_DN137752_c0_g1_i4.p1_to_K04564_209		1	209
-cladocopium_proliferum_Levin_TRINITY_DN137752_c0_g1_i4.p1		cladocopium_proliferum_Levin_TRINITY_DN137752_c0_g1_i4.p1_with_leader_u30_PF00081_M_to_K04564_209	u30_PF00081	-30	209
-cladocopium_proliferum_Levin_TRINITY_DN137752_c0_g1_i1.p1					
-cladocopium_proliferum_Levin_TRINITY_DN137752_c0_g1_i3.p1		cladocopium_proliferum_Levin_TRINITY_DN137752_c0_g1_i3.p1_to_K04564_210		1	210
-cladocopium_proliferum_Levin_TRINITY_DN137752_c0_g1_i3.p1		cladocopium_proliferum_Levin_TRINITY_DN137752_c0_g1_i3.p1_with_leader_u30_PF00081_M_to_K04564_210	u30_PF00081	-30	210
-cladocopium_proliferum_Levin_TRINITY_DN136565_c0_g1_i1.p1					
-cladocopium_proliferum_Levin_TRINITY_DN139305_c0_g1_i1.p1		cladocopium_proliferum_Levin_TRINITY_DN139305_c0_g1_i1.p1_to_K04564_230		1	230
-cladocopium_proliferum_Levin_TRINITY_DN139305_c0_g1_i1.p1		cladocopium_proliferum_Levin_TRINITY_DN139305_c0_g1_i1.p1_with_leader_u26_PF00081_M_to_K04564_230	u26_PF00081	-26	230
-cladocopium_proliferum_Levin_TRINITY_DN139305_c0_g1_i1.p1		cladocopium_proliferum_Levin_TRINITY_DN139305_c0_g1_i1.p1_with_leader_u17_PF00081_M_to_K04564_230	u17_PF00081	-17	230
-cladocopium_proliferum_Levin_TRINITY_DN86499_c0_g1_i1.p1		cladocopium_proliferum_Levin_TRINITY_DN86499_c0_g1_i1.p1_to_K04564_238		1	238
-cladocopium_proliferum_Levin_TRINITY_DN86499_c0_g1_i1.p1		cladocopium_proliferum_Levin_TRINITY_DN86499_c0_g1_i1.p1_with_leader_u17_PF00081_M_to_K04564_238	u17_PF00081	-17	238
-cladocopium_proliferum_Levin_TRINITY_DN52379_c0_g1_i1.p2					
-cladocopium_proliferum_ss27_TRINITY_DN29038_c0_g1_i1.p2					
-cladocopium_proliferum_ss27_TRINITY_DN29038_c0_g2_i1.p1					
-cladocopium_proliferum_ss27_TRINITY_DN57230_c0_g1_i1.p1		cladocopium_proliferum_ss27_TRINITY_DN57230_c0_g1_i1.p1_to_K04564_244		1	244
-cladocopium_proliferum_ss27_TRINITY_DN57230_c0_g1_i1.p1		cladocopium_proliferum_ss27_TRINITY_DN57230_c0_g1_i1.p1_with_leader_u17_PF00081_M_to_K04564_244	u17_PF00081	-17	244
-cladocopium_proliferum_ss27_TRINITY_DN70772_c0_g2_i1.p1					
-cladocopium_proliferum_ss27_TRINITY_DN76687_c0_g1_i1.p1					
-cladocopium_proliferum_ss31_TRINITY_DN56538_c0_g2_i1.p1					
-cladocopium_proliferum_ss31_TRINITY_DN56538_c0_g2_i3.p1					
-cladocopium_proliferum_ss31_TRINITY_DN65052_c0_g1_i1.p1					
-cladocopium_proliferum_ss31_TRINITY_DN71358_c0_g1_i4.p1					
-cladocopium_proliferum_wt27_TRINITY_DN75186_c0_g1_i1.p1					
-cladocopium_proliferum_wt31_TRINITY_DN60502_c0_g1_i1.p1		cladocopium_proliferum_wt31_TRINITY_DN60502_c0_g1_i1.p1_with_leader_u30_PF00081_M_to_K04564_256	u30_PF00081	-30	256
-cladocopium_proliferum_wt31_TRINITY_DN61048_c0_g1_i2.p1		cladocopium_proliferum_wt31_TRINITY_DN61048_c0_g1_i2.p1_to_K04564_245		1	245
-cladocopium_proliferum_wt31_TRINITY_DN61048_c0_g1_i2.p1		cladocopium_proliferum_wt31_TRINITY_DN61048_c0_g1_i2.p1_with_leader_u17_PF00081_M_to_K04564_245	u17_PF00081	-17	245
-cladocopium_proliferum_wt31_TRINITY_DN73029_c0_g1_i1.p1		cladocopium_proliferum_wt31_TRINITY_DN73029_c0_g1_i1.p1_to_K04564_227		1	227
-cladocopium_proliferum_wt31_TRINITY_DN83562_c0_g3_i1.p1					
-cladocopium_proliferum_wt31_TRINITY_DN89382_c0_g1_i1.p1					
-durusdinium_trenchii_TRINITY_DN22061_c0_g1_i1.p1		durusdinium_trenchii_TRINITY_DN22061_c0_g1_i1.p1_with_leader_u21_PF00081_M_to_K04564_256	u21_PF00081	-21	256
-durusdinium_trenchii_TRINITY_DN126028_c0_g1_i1.p2		durusdinium_trenchii_TRINITY_DN126028_c0_g1_i1.p2_with_leader_u19_PF00081_M_to_K04564_244	u19_PF00081	-19	244
-durusdinium_trenchii_TRINITY_DN136041_c0_g2_i1.p1					
-durusdinium_trenchii_TRINITY_DN136041_c0_g3_i1.p2					
-durusdinium_trenchii_TRINITY_DN152488_c1_g1_i1.p1		durusdinium_trenchii_TRINITY_DN152488_c1_g1_i1.p1_with_leader_u18_PF00081_M_to_K04564_277	u18_PF00081	-18	277
-durusdinium_trenchii_TRINITY_DN155815_c0_g2_i1.p1		durusdinium_trenchii_TRINITY_DN155815_c0_g2_i1.p1_to_K04564_245		1	245
-durusdinium_trenchii_TRINITY_DN155815_c0_g2_i1.p1		durusdinium_trenchii_TRINITY_DN155815_c0_g2_i1.p1_with_leader_u32_PF00081_M_to_K04564_245	u32_PF00081	-32	245
-durusdinium_trenchii_TRINITY_DN160370_c0_g1_i1.p1		durusdinium_trenchii_TRINITY_DN160370_c0_g1_i1.p1_to_K04564_222		1	222
-durusdinium_trenchii_TRINITY_DN160635_c0_g1_i1.p1		durusdinium_trenchii_TRINITY_DN160635_c0_g1_i1.p1_with_leader_u18_PF00081_M_to_K04564_277	u18_PF00081	-18	277
-durusdinium_trenchii_TRINITY_DN160635_c0_g1_i2.p1		durusdinium_trenchii_TRINITY_DN160635_c0_g1_i2.p1_with_leader_u18_PF00081_M_to_K04564_277	u18_PF00081	-18	277
-durusdinium_trenchii_TRINITY_DN268006_c0_g1_i1.p1					
-prorocentrum_cordatum_20_ex_TRINITY_DN5632_c0_g1_i3.p1					
-prorocentrum_cordatum_20_ex_TRINITY_DN5632_c0_g1_i4.p1					
-prorocentrum_cordatum_20_ex_TRINITY_DN5632_c0_g1_i8.p1					
-prorocentrum_cordatum_20_ex_TRINITY_DN5632_c0_g1_i9.p1					
-prorocentrum_cordatum_20_ex_TRINITY_DN11657_c0_g1_i1.p1					
-prorocentrum_cordatum_20_ex_TRINITY_DN11657_c0_g1_i2.p1					
-prorocentrum_cordatum_20_ex_TRINITY_DN11657_c0_g1_i3.p1					
-prorocentrum_cordatum_20_ex_TRINITY_DN11657_c0_g1_i4.p1					
-prorocentrum_cordatum_20_ex_TRINITY_DN23936_c1_g1_i1.p1		prorocentrum_cordatum_20_ex_TRINITY_DN23936_c1_g1_i1.p1_with_leader_u18_PF00081_M_to_K04564_281	u18_PF00081	-18	281
-prorocentrum_cordatum_20_ex_TRINITY_DN23936_c1_g1_i4.p1		prorocentrum_cordatum_20_ex_TRINITY_DN23936_c1_g1_i4.p1_with_leader_u18_PF00081_M_to_K04564_238	u18_PF00081	-18	238
-prorocentrum_cordatum_20_ex_TRINITY_DN23936_c1_g1_i5.p1		prorocentrum_cordatum_20_ex_TRINITY_DN23936_c1_g1_i5.p1_with_leader_u18_PF00081_M_to_K04564_258	u18_PF00081	-18	258
-prorocentrum_cordatum_20_ex_TRINITY_DN172755_c0_g1_i1.p2					
-prorocentrum_cordatum_20_st_TRINITY_DN3050_c0_g1_i10.p1					
-prorocentrum_cordatum_20_st_TRINITY_DN3050_c0_g1_i2.p1					
-prorocentrum_cordatum_20_st_TRINITY_DN3050_c0_g1_i4.p1					
-prorocentrum_cordatum_20_st_TRINITY_DN3050_c0_g1_i5.p1					
-prorocentrum_cordatum_20_st_TRINITY_DN3050_c0_g1_i7.p1					
-prorocentrum_cordatum_20_st_TRINITY_DN3050_c1_g1_i1.p1					
-prorocentrum_cordatum_20_st_TRINITY_DN3050_c1_g1_i2.p1					
-prorocentrum_cordatum_20_st_TRINITY_DN3050_c1_g1_i3.p1					
-prorocentrum_cordatum_20_st_TRINITY_DN21937_c0_g3_i1.p2		prorocentrum_cordatum_20_st_TRINITY_DN21937_c0_g3_i1.p2_with_leader_u18_PF00081_M_to_K04564_260	u18_PF00081	-18	260
-prorocentrum_cordatum_26_ex_TRINITY_DN563_c1_g1_i1.p1					
-prorocentrum_cordatum_26_ex_TRINITY_DN563_c1_g1_i2.p1					
-prorocentrum_cordatum_26_ex_TRINITY_DN563_c1_g1_i4.p1					
-prorocentrum_cordatum_26_ex_TRINITY_DN563_c1_g1_i5.p1					
-prorocentrum_cordatum_26_ex_TRINITY_DN563_c1_g1_i6.p1					
-prorocentrum_cordatum_26_ex_TRINITY_DN563_c1_g1_i7.p1					
-prorocentrum_cordatum_26_ex_TRINITY_DN563_c1_g1_i8.p1					
-prorocentrum_cordatum_26_ex_TRINITY_DN18142_c0_g1_i1.p1		prorocentrum_cordatum_26_ex_TRINITY_DN18142_c0_g1_i1.p1_with_leader_u18_PF00081_M_to_K04564_259	u18_PF00081	-18	259
-prorocentrum_cordatum_26_ex_TRINITY_DN230472_c0_g1_i1.p1					
-prorocentrum_cordatum_26_st_TRINITY_DN2417_c0_g1_i1.p1					
-prorocentrum_cordatum_26_st_TRINITY_DN2417_c0_g1_i12.p1					
-prorocentrum_cordatum_26_st_TRINITY_DN2417_c0_g1_i3.p1					
-prorocentrum_cordatum_26_st_TRINITY_DN2417_c0_g1_i4.p1					
-prorocentrum_cordatum_26_st_TRINITY_DN2417_c0_g1_i5.p1					
-prorocentrum_cordatum_26_st_TRINITY_DN2417_c0_g1_i9.p1					
-prorocentrum_cordatum_26_st_TRINITY_DN46994_c0_g1_i1.p2		prorocentrum_cordatum_26_st_TRINITY_DN46994_c0_g1_i1.p2_with_leader_u18_PF00081_M_to_K04564_261	u18_PF00081	-18	261
-prorocentrum_cordatum_30_ex_TRINITY_DN8231_c0_g2_i2.p1					
-prorocentrum_cordatum_30_ex_TRINITY_DN8231_c0_g2_i3.p1					
-prorocentrum_cordatum_30_ex_TRINITY_DN8231_c0_g2_i5.p1					
-prorocentrum_cordatum_30_ex_TRINITY_DN8231_c0_g2_i6.p1					
-prorocentrum_cordatum_30_ex_TRINITY_DN8231_c0_g1_i2.p1					
-prorocentrum_cordatum_30_ex_TRINITY_DN8231_c0_g1_i6.p1					
-prorocentrum_cordatum_30_st_TRINITY_DN1586_c0_g1_i10.p1					
-prorocentrum_cordatum_30_st_TRINITY_DN1586_c0_g1_i12.p1					
-prorocentrum_cordatum_30_st_TRINITY_DN1586_c0_g1_i7.p1					
-prorocentrum_cordatum_30_st_TRINITY_DN1586_c0_g1_i9.p1					
-prorocentrum_cordatum_30_st_TRINITY_DN2557_c0_g1_i1.p1					
-prorocentrum_cordatum_30_st_TRINITY_DN2557_c0_g1_i2.p1					
-prorocentrum_cordatum_30_st_TRINITY_DN3926_c0_g1_i1.p1		prorocentrum_cordatum_30_st_TRINITY_DN3926_c0_g1_i1.p1_with_leader_u18_PF00081_M_to_K04564_260	u18_PF00081	-18	260
-prorocentrum_cordatum_30_st_TRINITY_DN74554_c0_g1_i1.p2					
+TRINITY_DN30502_c0_g1_i4.p1		TRINITY_DN30502_c0_g1_i4.p1_with_leader_u18_PF00081_M_to_K04564_273	u18_PF00081	-18	273
+TRINITY_DN30502_c0_g1_i1.p1		TRINITY_DN30502_c0_g1_i1.p1_with_leader_u18_PF00081_M_to_K04564_270	u18_PF00081	-18	270
+TRINITY_DN30502_c0_g1_i3.p1		TRINITY_DN30502_c0_g1_i3.p1_with_leader_u18_PF00081_M_to_K04564_273	u18_PF00081	-18	273
+TRINITY_DN30502_c0_g1_i2.p1		TRINITY_DN30502_c0_g1_i2.p1_with_leader_u18_PF00081_M_to_K04564_270	u18_PF00081	-18	270
+d_trenchii_TRINITY_DN533_c0_g1_i4.p1		d_trenchii_TRINITY_DN533_c0_g1_i4.p1_with_leader_u18_PF00081_M_to_K04564_257	u18_PF00081	-18	257
+d_trenchii_TRINITY_DN32906_c0_g1_i1.p1		d_trenchii_TRINITY_DN32906_c0_g1_i1.p1_with_leader_u21_PF00081_M_to_K04564_249	u21_PF00081	-21	249
+evm.model.scf7180000353951.8_evm.model.scf7180000353951.9_evm.model.scf7180000353951.9.1.60e71e6c.1.60f65222					
+evm.model.scf7180000353951.10					
+evm.model.scf7180000356577.1		evm.model.scf7180000356577.1_with_leader_u21_PF00081_M_to_K04564_350	u21_PF00081	-21	350
