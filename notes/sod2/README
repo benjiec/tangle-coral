@@ -119,7 +119,6 @@ PYTHONPATH=../coral sieve-py ../sieve/scripts/hmmsearch-threshold.py \
 
 # Model Analysis
 
-
 ## Generating Mature Sequences of the Catalytic Region
 
 Run the following for each group, to generate bounded mature protein sequences
@@ -163,3 +162,31 @@ HMM search on the above sod_tree.faa file generated sod_tree-mature_hmm.tsv
 hmmsearch --domtblout sod_tree-mature_hmm.txt ~/git/tangle/play/assets/sod_mature_all.hmm sod_tree.faa
 python3 ../../../sieve/scripts/domtbl-tsv.py sod_tree-mature_hmm.txt > sod_tree-mature_hmm.tsv
 
+
+# Summarize Sequences and Taxonomy
+
+Use the following to generate a summary.tsv that can be joined with genomes.tsv
+
+sieve-py ../../../sieve/scripts/summarize-artifacts.py  \
+  --artifacts-dir res-mt_MnSOD_cnidaria \
+  --category mt_cnidaria \
+  --hmm ../../profiles/mt_MnSOD_cnidaria_mature.hmm \
+  --output summary.tsv
+
+sieve-py ../../../sieve/scripts/summarize-artifacts.py \
+  --artifacts-dir res-sp_MnSOD_cnidaria \
+  --category sp_cnidaria \
+  --hmm ../../profiles/sp_MnSOD_cnidaria_mature.hmm \
+  --output summary.tsv
+
+sieve-py ../../../sieve/scripts/summarize-artifacts.py \
+  --artifacts-dir res-sp_ctp_MnFeSOD_algae \
+  --category sp_ctp_algae \
+  --hmm ../../profiles/sp_ctp_MnFeSOD_algae_mature.hmm \
+  --output summary.tsv
+
+sieve-py ../../../sieve/scripts/summarize-artifacts.py \
+  --artifacts-dir res-sp_MnFeSOD_algae \
+  --category sp_algae \
+  --hmm ../../profiles/sp_MnFeSOD_algae_mature.hmm \
+  --output summary.tsv
