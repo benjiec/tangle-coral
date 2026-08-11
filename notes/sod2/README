@@ -121,11 +121,6 @@ Then run iqtree
 
 The .contree or .treefile can be visualized at https://itol.embl.de/upload.cgi
 
-HMM search on the above sod_tree.faa file generated sod_tree-mature_hmm.tsv
-
-hmmsearch --domtblout sod_tree-mature_hmm.txt ~/git/tangle/play/assets/sod_mature_all.hmm sod_tree.faa
-python3 ../../../sieve/scripts/domtbl-tsv.py sod_tree-mature_hmm.txt > sod_tree-mature_hmm.tsv
-
 
 # Summarize Sequences and Taxonomy
 
