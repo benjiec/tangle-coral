@@ -1,11 +1,18 @@
 # Model / Profile Construction
 
-## mt_MnSOD_cnidaria
+## mt_MnSOD_cnidaria and sp_MnSOD_cnidaria (please update names)
 
 python3 ../sieve/scripts/ko-find-matches.py K04564 --taxon cnidaria | \
   PYTHONPATH=../coral python3 ../sieve/scripts/build-protein-artifacts.py \
     --rule coral.rules.mt_MnSOD_cnidaria.rule_tangle_curated \
     --artifacts-dir res-mt_MnSOD_cnidaria
+
+PYTHONPATH=../coral python3 ../sieve/scripts/build-fasta-artifacts.py \
+    --rule coral.rules.mt_MnSOD_cnidaria.rule \
+    --artifacts-dir res-mt_MnSOD_cnidaria \
+    --ko-hmm assets/k04564.hmm \
+    --pfam-hmm assets/pfam.hmm \
+    --fasta transcripts_host_PM34593802.faa
 
 PYTHONPATH=../coral python3 ../sieve/scripts/check-artifacts-by-rules.py \
   --rule coral.rules.mt_MnSOD_cnidaria.rule_tangle_curated \
@@ -29,36 +36,7 @@ PYTHONPATH=../coral sieve-py ../sieve/scripts/hmmsearch-threshold.py \
   --output mt_MnSOD_cnidaria_thresholds.tsv
 
 
-## sp_MnSOD_cnidaria
-
-python3 ../sieve/scripts/ko-find-matches.py K04564 --taxon cnidaria | \
-  PYTHONPATH=../coral python3 ../sieve/scripts/build-protein-artifacts.py \
-    --rule coral.rules.sp_MnSOD_cnidaria.rule_tangle_curated \
-    --artifacts-dir res-sp_MnSOD_cnidaria
-    
-PYTHONPATH=../coral python3 ../sieve/scripts/check-artifacts-by-rules.py \
-  --rule coral.rules.sp_MnSOD_cnidaria.rule_tangle_curated \
-  --artifacts-dir res-sp_MnSOD_cnidaria \
-  --pfam-hmm assets/pfam.hmm \
-  --ko-hmm assets/k04564.hmm \
-  --ko-thresholds assets/k04564_threshold.tsv \
-  --deeploc-csv res-sp_MnSOD_cnidaria.deeploc.csv
-
-../sieve/scripts/rule-results-to-fasta.py \
-  --artifacts-dir res-sp_MnSOD_cnidaria \
-  --output sp_MnSOD_cnidaria_all.faa
-
-python3 ../sieve/scripts/fasta-unique-sequences.py sp_MnSOD_cnidaria_all.faa sp_MnSOD_cnidaria.faa
-docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/sp_MnSOD_cnidaria.faa -out /app/sp_MnSOD_cnidaria.msa
-hmmbuild sp_MnSOD_cnidaria.hmm sp_MnSOD_cnidaria.msa
-  
-PYTHONPATH=../coral sieve-py ../sieve/scripts/hmmsearch-threshold.py \
-  --hmm sp_MnSOD_cnidaria.hmm \
-  --artifacts-dir res-sp_MnSOD_cnidaria \
-  --output sp_MnSOD_cnidaria_thresholds.tsv
-
-
-## sp_ctp_MnFeSOD (can modify for sp_MnFeSOD)
+## sp_ctp_MnFeSOD and sp_MnFeSOD (please update names)
 
 python3 ../sieve/scripts/ko-find-matches.py K04564 --taxon symbiodiniaceae | \
   PYTHONPATH=../coral python3 ../sieve/scripts/build-protein-artifacts.py \
@@ -70,28 +48,11 @@ PYTHONPATH=../coral python3 ../sieve/scripts/build-fasta-artifacts.py \
     --artifacts-dir res-sp_ctp_MnFeSOD_algae \
     --ko-hmm assets/k04564.hmm \
     --pfam-hmm assets/pfam.hmm \
-    --fasta transcripts_PM32_PM34.faa
-
-PYTHONPATH=../coral python3 ../sieve/scripts/build-fasta-artifacts.py \
-    --rule coral.rules.sp_ctp_MnFeSOD_algae.rule \
-    --artifacts-dir res-sp_ctp_MnFeSOD_algae \
-    --ko-hmm assets/k04564.hmm \
-    --pfam-hmm assets/pfam.hmm \
-    --fasta transcripts_PM31.faa
-
-PYTHONPATH=../coral python3 ../sieve/scripts/build-fasta-artifacts.py \
-    --rule coral.rules.sp_ctp_MnFeSOD_algae.rule \
-    --artifacts-dir res-sp_ctp_MnFeSOD_algae \
-    --ko-hmm assets/k04564.hmm \
-    --pfam-hmm assets/pfam.hmm \
-    --fasta transcripts_PM35.faa
-
-PYTHONPATH=../coral python3 ../sieve/scripts/build-fasta-artifacts.py \
-    --rule coral.rules.sp_ctp_MnFeSOD_algae.rule \
-    --artifacts-dir res-sp_ctp_MnFeSOD_algae \
-    --ko-hmm assets/k04564.hmm \
-    --pfam-hmm assets/pfam.hmm \
-    --fasta transcripts_PM36.faa
+    --fasta transcripts_symb_PM31693775.faa \
+    --fasta transcripts_symb_PM32426508.faa \
+    --fasta transcripts_symb_PM34593802.faa \
+    --fasta transcripts_symb_PM35383179.faa \
+    --fasta transcripts_symb_PM36014080.faa
 
 PYTHONPATH=../coral python3 ../sieve/scripts/check-artifacts-by-rules.py \
   --rule coral.rules.sp_ctp_MnFeSOD_algae.rule \
