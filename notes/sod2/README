@@ -1,6 +1,6 @@
 # Model / Profile Construction
 
-## mt_MnSOD_cnidaria and sp_MnSOD_cnidaria (please update names)
+## mt_MnSOD_cnidaria and sp_MnFeSOD_cnidaria (please update names)
 
 python3 ../sieve/scripts/ko-find-matches.py K04564 --taxon cnidaria | \
   PYTHONPATH=../coral python3 ../sieve/scripts/build-protein-artifacts.py \
@@ -104,20 +104,20 @@ mature HMMs on all mature sequences. It's pretty obvious.
 
 ## Sequence Concordance and Evolutionary Clades
 
-Combined the mature.faa files into sod_tree_all.faa, then cluster
+Combined the mature.faa files into mature_all.faa, then cluster
 
 docker run --rm \
   --mount type=bind,source="$PWD",target=/work \
   ghcr.io/soedinglab/mmseqs2 \
-  easy-cluster /work/sod_tree_all.faa /work/sod_tree_all.faa /tmp \
+  easy-cluster /work/mature_all.faa /work/mature_all /tmp \
   --min-seq-id 0.98 -c 0.9 --cov-mode 0 --cluster-mode 2
 
-mv sod_tree_all.faa_rep_seq.fasta sod_tree.faa
-docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/sod_tree.faa -out /app/sod_tree.msa
+mv mature_all_rep_seq.fasta mature_all.clustered.faa
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/mature_all.clustered.faa -out /app/mature_all.clustered.msa
 
 Then run iqtree
 
-~/iqtree-3.1.3-macOS/bin/iqtree3 -s sod_tree.msa -B 1000 --alrt 1000
+~/iqtree-3.1.3-macOS/bin/iqtree3 -s mature_all.clustered.msa -B 1000 --alrt 1000
 
 The .contree or .treefile can be visualized at https://itol.embl.de/upload.cgi
 
@@ -131,16 +131,16 @@ python3 ../../../sieve/scripts/domtbl-tsv.py sod_tree-mature_hmm.txt > sod_tree-
 
 Use the following to generate a summary.tsv that can be joined with genomes.tsv
 
-sieve-py ../../../sieve/scripts/summarize-artifacts.py  \
+sieve-py ../../../sieve/scripts/summarize-artifacts.py \
   --artifacts-dir res-mt_MnSOD_cnidaria \
   --category mt_cnidaria \
   --hmm ../../profiles/mt_MnSOD_cnidaria_mature.hmm \
   --output summary.tsv
 
 sieve-py ../../../sieve/scripts/summarize-artifacts.py \
-  --artifacts-dir res-sp_MnSOD_cnidaria \
+  --artifacts-dir res-sp_MnFeSOD_cnidaria \
   --category sp_cnidaria \
-  --hmm ../../profiles/sp_MnSOD_cnidaria_mature.hmm \
+  --hmm ../../profiles/sp_MnFeSOD_cnidaria_mature.hmm \
   --output summary.tsv
 
 sieve-py ../../../sieve/scripts/summarize-artifacts.py \
