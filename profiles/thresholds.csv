@@ -1,9 +1,9 @@
 model,threshold
-mt_MnSOD_cnidaria,350.2
-sp_MnSOD_cnidaria,314
+mt_MnSOD_cnidaria,348.6
+sp_MnSOD_cnidaria,298.6
 sp_MnFeSOD_algae,457.8
 sp_ctp_MnFeSOD_algae,549.7
-mt_MnSOD_cnidaria_mature,303
-sp_MnSOD_cnidaria_mature,270
-sp_MnFeSOD_algae_mature,421
-sp_ctp_MnFeSOD_algae_mature,441
+mt_MnSOD_cnidaria_mature,303.5
+sp_MnSOD_cnidaria_mature,262.4
+sp_MnFeSOD_algae_mature,421.3
+sp_ctp_MnFeSOD_algae_mature,441.8

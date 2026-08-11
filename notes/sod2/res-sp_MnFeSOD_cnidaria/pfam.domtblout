@@ -225,8 +225,8 @@ a_tenuis_TRINITY_DN8520_c0_g2_i1.p1|acropora_tenuis                      -      
 # Version:         3.4 (Aug 2023)
 # Pipeline mode:   SEARCH
 # Query file:      assets/pfam.hmm
-# Target file:     res-mt_MnSOD_cnidaria/input.faa
-# Option settings: hmmsearch --domtblout res-mt_MnSOD_cnidaria/pfam.domtblout --cut_ga assets/pfam.hmm res-mt_MnSOD_cnidaria/input.faa 
+# Target file:     res-sp_MnFeSOD_cnidaria/input.faa
+# Option settings: hmmsearch --domtblout res-sp_MnFeSOD_cnidaria/pfam.domtblout --cut_ga assets/pfam.hmm res-sp_MnFeSOD_cnidaria/input.faa 
 # Current dir:     /Users/benjie/git/tangle/play
-# Date:            Tue Aug 11 13:03:09 2026
+# Date:            Tue Aug 11 13:37:09 2026
 # [ok]

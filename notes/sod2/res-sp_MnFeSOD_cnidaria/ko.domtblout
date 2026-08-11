@@ -123,8 +123,8 @@ CALNXI010000019.1_K04564_88477d8a                                        -      
 # Version:         3.4 (Aug 2023)
 # Pipeline mode:   SEARCH
 # Query file:      assets/k04564.hmm
-# Target file:     res-mt_MnSOD_cnidaria/input.faa
-# Option settings: hmmsearch --domtblout res-mt_MnSOD_cnidaria/ko.domtblout assets/k04564.hmm res-mt_MnSOD_cnidaria/input.faa 
+# Target file:     res-sp_MnFeSOD_cnidaria/input.faa
+# Option settings: hmmsearch --domtblout res-sp_MnFeSOD_cnidaria/ko.domtblout assets/k04564.hmm res-sp_MnFeSOD_cnidaria/input.faa 
 # Current dir:     /Users/benjie/git/tangle/play
-# Date:            Tue Aug 11 13:03:09 2026
+# Date:            Tue Aug 11 13:37:09 2026
 # [ok]

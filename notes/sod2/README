@@ -4,7 +4,7 @@
 
 python3 ../sieve/scripts/ko-find-matches.py K04564 --taxon cnidaria | \
   PYTHONPATH=../coral python3 ../sieve/scripts/build-protein-artifacts.py \
-    --rule coral.rules.mt_MnSOD_cnidaria.rule_tangle_curated \
+    --rule coral.rules.mt_MnSOD_cnidaria.rule \
     --artifacts-dir res-mt_MnSOD_cnidaria
 
 PYTHONPATH=../coral python3 ../sieve/scripts/build-fasta-artifacts.py \
@@ -15,7 +15,7 @@ PYTHONPATH=../coral python3 ../sieve/scripts/build-fasta-artifacts.py \
     --fasta transcripts_host_PM34593802.faa
 
 PYTHONPATH=../coral python3 ../sieve/scripts/check-artifacts-by-rules.py \
-  --rule coral.rules.mt_MnSOD_cnidaria.rule_tangle_curated \
+  --rule coral.rules.mt_MnSOD_cnidaria.rule \
   --artifacts-dir res-mt_MnSOD_cnidaria \
   --pfam-hmm assets/pfam.hmm \
   --ko-hmm assets/k04564.hmm \
@@ -97,6 +97,9 @@ sieve-py ../sieve/scripts/bound-fasta-by-hmms.py \
   --fasta reference.faa --n-position 3 --c-position 100 > reference_mature.faa
 
 Generate .hmm profiles for each category's mature sequences, e.g. mt_MnSOD_cnidaria_mature.hmm
+
+To determine the threshold scores for the mature HMMs, run hmmsearch with all
+mature HMMs on all mature sequences. It's pretty obvious.
 
 
 ## Sequence Concordance and Evolutionary Clades

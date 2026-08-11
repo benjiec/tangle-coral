@@ -67,33 +67,33 @@ CAXAMN010027806.1_K04564_f0a63ebd	GCA_963970005.1	CAXAMN010027806.1_K04564_f0a63
 OZ257276.1_K04564_a64e3044	GCA_965279495.1				
 OZ257276.1_K04564_ace37290	GCA_965279495.1	OZ257276.1_K04564_ace37290_with_leader_u31_PF00081_M_to_K04564_198	u31_PF00081	-31	198
 OZ257313.1_K04564_a15fd385	GCA_965279495.1				
-siderastrea_symb_TRINITY_DN604900_c0_g1_i1.p1					
-siderastrea_symb_TRINITY_DN405006_c0_g1_i1.p1					
-siderastrea_symb_TRINITY_DN405006_c0_g1_i4.p1					
-siderastrea_symb_TRINITY_DN475799_c0_g1_i1.p1					
-siderastrea_symb_TRINITY_DN8493_c0_g1_i1.p1		siderastrea_symb_TRINITY_DN8493_c0_g1_i1.p1_to_K04564_227		1	227
-siderastrea_symb_TRINITY_DN700764_c0_g1_i1.p1					
-pseudodiploria_symb_TRINITY_DN348117_c0_g1_i1.p1		pseudodiploria_symb_TRINITY_DN348117_c0_g1_i1.p1_with_leader_u16_PF00081_M_to_K04564_250	u16_PF00081	-16	250
-pseudodiploria_symb_TRINITY_DN172781_c0_g1_i2.p1					
-pseudodiploria_symb_TRINITY_DN172781_c0_g1_i4.p1					
-orbicella_symb_TRINITY_DN78611_c0_g1_i1.p1					
-orbicella_symb_TRINITY_DN78611_c0_g2_i1.p1		orbicella_symb_TRINITY_DN78611_c0_g2_i1.p1_to_K04564_236		1	236
-orbicella_symb_TRINITY_DN78611_c0_g2_i1.p1		orbicella_symb_TRINITY_DN78611_c0_g2_i1.p1_with_leader_u20_PF00081_M_to_K04564_236	u20_PF00081	-20	236
-orbicella_symb_TRINITY_DN241331_c0_g1_i1.p1		orbicella_symb_TRINITY_DN241331_c0_g1_i1.p1_to_K04564_147		1	147
-orbicella_symb_TRINITY_DN241331_c0_g1_i1.p1		orbicella_symb_TRINITY_DN241331_c0_g1_i1.p1_with_leader_u17_PF00081_M_to_K04564_147	u17_PF00081	-17	147
-orbicella_symb_TRINITY_DN188752_c0_g3_i1.p1					
-orbicella_symb_TRINITY_DN188752_c0_g3_i4.p1					
-orbicella_symb_TRINITY_DN393612_c0_g1_i1.p1		orbicella_symb_TRINITY_DN393612_c0_g1_i1.p1_with_leader_u31_PF00081_M_to_K04564_278	u31_PF00081	-31	278
-orbicella_symb_TRINITY_DN319259_c0_g1_i1.p2					
-orbicella_symb_TRINITY_DN196811_c0_g2_i1.p2					
-c_goreaui_TRINITY_DN626_c0_g1_i2.p1					
-c_goreaui_TRINITY_DN626_c0_g1_i4.p1					
-TRINITY_DN30502_c0_g1_i4.p1		TRINITY_DN30502_c0_g1_i4.p1_with_leader_u18_PF00081_M_to_K04564_273	u18_PF00081	-18	273
-TRINITY_DN30502_c0_g1_i1.p1		TRINITY_DN30502_c0_g1_i1.p1_with_leader_u18_PF00081_M_to_K04564_270	u18_PF00081	-18	270
-TRINITY_DN30502_c0_g1_i3.p1		TRINITY_DN30502_c0_g1_i3.p1_with_leader_u18_PF00081_M_to_K04564_273	u18_PF00081	-18	273
-TRINITY_DN30502_c0_g1_i2.p1		TRINITY_DN30502_c0_g1_i2.p1_with_leader_u18_PF00081_M_to_K04564_270	u18_PF00081	-18	270
-d_trenchii_TRINITY_DN533_c0_g1_i4.p1		d_trenchii_TRINITY_DN533_c0_g1_i4.p1_with_leader_u18_PF00081_M_to_K04564_257	u18_PF00081	-18	257
-d_trenchii_TRINITY_DN32906_c0_g1_i1.p1		d_trenchii_TRINITY_DN32906_c0_g1_i1.p1_with_leader_u21_PF00081_M_to_K04564_249	u21_PF00081	-21	249
-evm.model.scf7180000353951.8_evm.model.scf7180000353951.9_evm.model.scf7180000353951.9.1.60e71e6c.1.60f65222					
-evm.model.scf7180000353951.10					
-evm.model.scf7180000356577.1		evm.model.scf7180000356577.1_with_leader_u21_PF00081_M_to_K04564_350	u21_PF00081	-21	350
+TRINITY_DN30502_c0_g1_i4.p1|durusdinium_trenchii		TRINITY_DN30502_c0_g1_i4.p1_with_leader_u18_PF00081_M_to_K04564_273|durusdinium_trenchii	u18_PF00081	-18	273
+TRINITY_DN30502_c0_g1_i1.p1|durusdinium_trenchii		TRINITY_DN30502_c0_g1_i1.p1_with_leader_u18_PF00081_M_to_K04564_270|durusdinium_trenchii	u18_PF00081	-18	270
+TRINITY_DN30502_c0_g1_i3.p1|durusdinium_trenchii		TRINITY_DN30502_c0_g1_i3.p1_with_leader_u18_PF00081_M_to_K04564_273|durusdinium_trenchii	u18_PF00081	-18	273
+TRINITY_DN30502_c0_g1_i2.p1|durusdinium_trenchii		TRINITY_DN30502_c0_g1_i2.p1_with_leader_u18_PF00081_M_to_K04564_270|durusdinium_trenchii	u18_PF00081	-18	270
+c_goreaui_TRINITY_DN626_c0_g1_i2.p1|cladocopium_goreaui					
+c_goreaui_TRINITY_DN626_c0_g1_i4.p1|cladocopium_goreaui					
+siderastrea_symb_TRINITY_DN604900_c0_g1_i1.p1|breviolum_b5					
+siderastrea_symb_TRINITY_DN405006_c0_g1_i1.p1|breviolum_b5					
+siderastrea_symb_TRINITY_DN405006_c0_g1_i4.p1|breviolum_b5					
+siderastrea_symb_TRINITY_DN475799_c0_g1_i1.p1|breviolum_b5					
+siderastrea_symb_TRINITY_DN8493_c0_g1_i1.p1|breviolum_b5		siderastrea_symb_TRINITY_DN8493_c0_g1_i1.p1_to_K04564_227|breviolum_b5		1	227
+siderastrea_symb_TRINITY_DN700764_c0_g1_i1.p1|breviolum_b5					
+pseudodiploria_symb_TRINITY_DN348117_c0_g1_i1.p1|symbiodinium_a3		pseudodiploria_symb_TRINITY_DN348117_c0_g1_i1.p1_with_leader_u16_PF00081_M_to_K04564_250|symbiodinium_a3	u16_PF00081	-16	250
+pseudodiploria_symb_TRINITY_DN172781_c0_g1_i2.p1|symbiodinium_a3					
+pseudodiploria_symb_TRINITY_DN172781_c0_g1_i4.p1|symbiodinium_a3					
+orbicella_symb_TRINITY_DN78611_c0_g1_i1.p1|breviolum_faviinorum					
+orbicella_symb_TRINITY_DN78611_c0_g2_i1.p1|breviolum_faviinorum		orbicella_symb_TRINITY_DN78611_c0_g2_i1.p1_to_K04564_236|breviolum_faviinorum		1	236
+orbicella_symb_TRINITY_DN78611_c0_g2_i1.p1|breviolum_faviinorum		orbicella_symb_TRINITY_DN78611_c0_g2_i1.p1_with_leader_u20_PF00081_M_to_K04564_236|breviolum_faviinorum	u20_PF00081	-20	236
+orbicella_symb_TRINITY_DN241331_c0_g1_i1.p1|breviolum_faviinorum		orbicella_symb_TRINITY_DN241331_c0_g1_i1.p1_to_K04564_147|breviolum_faviinorum		1	147
+orbicella_symb_TRINITY_DN241331_c0_g1_i1.p1|breviolum_faviinorum		orbicella_symb_TRINITY_DN241331_c0_g1_i1.p1_with_leader_u17_PF00081_M_to_K04564_147|breviolum_faviinorum	u17_PF00081	-17	147
+orbicella_symb_TRINITY_DN188752_c0_g3_i1.p1|breviolum_faviinorum					
+orbicella_symb_TRINITY_DN188752_c0_g3_i4.p1|breviolum_faviinorum					
+orbicella_symb_TRINITY_DN393612_c0_g1_i1.p1|breviolum_faviinorum		orbicella_symb_TRINITY_DN393612_c0_g1_i1.p1_with_leader_u31_PF00081_M_to_K04564_278|breviolum_faviinorum	u31_PF00081	-31	278
+orbicella_symb_TRINITY_DN319259_c0_g1_i1.p2|breviolum_faviinorum					
+orbicella_symb_TRINITY_DN196811_c0_g2_i1.p2|breviolum_faviinorum					
+d_trenchii_TRINITY_DN533_c0_g1_i4.p1|durusdinium_trenchii		d_trenchii_TRINITY_DN533_c0_g1_i4.p1_with_leader_u18_PF00081_M_to_K04564_257|durusdinium_trenchii	u18_PF00081	-18	257
+d_trenchii_TRINITY_DN32906_c0_g1_i1.p1|durusdinium_trenchii		d_trenchii_TRINITY_DN32906_c0_g1_i1.p1_with_leader_u21_PF00081_M_to_K04564_249|durusdinium_trenchii	u21_PF00081	-21	249
+evm.model.scf7180000353951.8_evm.model.scf7180000353951.9_evm.model.scf7180000353951.9.1.60e71e6c.1.60f65222|cladocopium_goreaui					
+evm.model.scf7180000353951.10|cladocopium_goreaui					
+evm.model.scf7180000356577.1|cladocopium_goreaui		evm.model.scf7180000356577.1_with_leader_u21_PF00081_M_to_K04564_350|cladocopium_goreaui	u21_PF00081	-21	350

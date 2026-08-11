@@ -1,1 +1,0 @@
-gimme scan /Users/benjie/git/tangle/play/res-sp_MnSOD_cnidaria/TFMotifs.has_within_20_GM.5.0.Rel_GM.5.0.bZIP_min_score_threshold_8/locus.fna -b -c 0.85
