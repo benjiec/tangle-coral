@@ -149,3 +149,5 @@ sieve-py ../../../sieve/scripts/summarize-artifacts.py \
   --category sp_algae \
   --hmm ../../profiles/sp_MnFeSOD_algae_mature.hmm \
   --output summary.tsv
+
+Filter out summary.tsv to only those that passed, that's the summary.tsv used to make the Tableau file.
