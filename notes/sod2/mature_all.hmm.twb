@@ -1,0 +1,879 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20261.26.0512.1636                               -->
+<workbook original-version='18.1' source-build='2026.1.2 (20261.26.0512.1636)' source-platform='mac' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AnimationOnByDefault />
+    <MarkAnimation />
+    <ObjectModelEncapsulateLegacy />
+    <ObjectModelTableType />
+    <SchemaViewerObjectModel />
+    <SheetIdentifierTracking />
+    <SortTagCleanup />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='mature_all.hmm' inline='true' name='federated.1vh82011jyaqqe1cwih8711qqszz' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='mature_all.hmm' name='textscan.15suy960b6rbni1cj32ce00hiy7d'>
+            <connection class='textscan' directory='/Users/benjie/git/tangle/coral/notes/sod2' filename='mature_all.hmm.tsv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation connection='textscan.15suy960b6rbni1cj32ce00hiy7d' name='mature_all.hmm.tsv' table='[mature_all.hmm#tsv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
+            <column datatype='string' name='target name' ordinal='0' />
+            <column datatype='string' name='accession' ordinal='1' />
+            <column datatype='integer' name='tlen' ordinal='2' />
+            <column datatype='string' name='query name' ordinal='3' />
+            <column datatype='string' name='accession 1' ordinal='4' />
+            <column datatype='integer' name='qlen' ordinal='5' />
+            <column datatype='real' name='seq e-value' ordinal='6' />
+            <column datatype='real' name='seq score' ordinal='7' />
+            <column datatype='real' name='seq bias' ordinal='8' />
+            <column datatype='integer' name='dom #' ordinal='9' />
+            <column datatype='integer' name='dom total' ordinal='10' />
+            <column datatype='real' name='dom c-Evalue' ordinal='11' />
+            <column datatype='real' name='dom i-Evalue' ordinal='12' />
+            <column datatype='real' name='dom score' ordinal='13' />
+            <column datatype='real' name='dom bias' ordinal='14' />
+            <column datatype='integer' name='hmm from' ordinal='15' />
+            <column datatype='integer' name='hmm to' ordinal='16' />
+            <column datatype='integer' name='ali from' ordinal='17' />
+            <column datatype='integer' name='ali to' ordinal='18' />
+            <column datatype='integer' name='env from' ordinal='19' />
+            <column datatype='integer' name='env to' ordinal='20' />
+            <column datatype='real' name='acc' ordinal='21' />
+            <column datatype='string' name='description' ordinal='22' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;\\t&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target name</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[target name]</local-name>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias>target name</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>accession</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[accession]</local-name>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias>accession</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>tlen</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[tlen]</local-name>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias>tlen</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query name</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[query name]</local-name>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias>query name</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>accession 1</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[accession 1]</local-name>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias>accession 1</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>qlen</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[qlen]</local-name>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias>qlen</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>seq e-value</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[seq e-value]</local-name>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias>seq e-value</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>seq score</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[seq score]</local-name>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias>seq score</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>seq bias</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[seq bias]</local-name>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias>seq bias</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>dom #</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[dom #]</local-name>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias>dom #</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>dom total</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[dom total]</local-name>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias>dom total</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>dom c-Evalue</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[dom c-Evalue]</local-name>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias>dom c-Evalue</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>dom i-Evalue</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[dom i-Evalue]</local-name>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias>dom i-Evalue</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>dom score</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[dom score]</local-name>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias>dom score</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>dom bias</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[dom bias]</local-name>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias>dom bias</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>hmm from</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[hmm from]</local-name>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias>hmm from</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>hmm to</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[hmm to]</local-name>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias>hmm to</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ali from</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[ali from]</local-name>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias>ali from</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>ali to</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[ali to]</local-name>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias>ali to</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>env from</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[env from]</local-name>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias>env from</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>env to</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[env to]</local-name>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias>env to</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>acc</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[acc]</local-name>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias>acc</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>description</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[description]</local-name>
+            <parent-name>[mature_all.hmm.tsv]</parent-name>
+            <remote-alias>description</remote-alias>
+            <ordinal>22</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Protein Group' datatype='string' name='[Calculation_2400886582890496]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='IF SPLIT([target name], &quot;|&quot;, 3) == &quot;&quot; THEN&#10;  SPLIT([target name], &quot;|&quot;, 2)&#10;ELSE&#10;  SPLIT([target name], &quot;|&quot;, 3)&#10;END' />
+      </column>
+      <column caption='HMM Profile' datatype='string' name='[Calculation_2400886584139777]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='CASE [query name]&#10;  WHEN &quot;mt_MnSOD_cnidaria_mature&quot; THEN &quot;mT_cnidaria&quot;&#10;  WHEN &quot;sp_MnFeSOD_cnidaria_mature&quot; THEN &quot;SP_cnidaria&quot;&#10;  WHEN &quot;sp_ctp_MnFeSOD_algae_mature&quot; THEN &quot;SP_cTP_algae&quot;&#10;  WHEN &quot;sp_MnFeSOD_algae_mature&quot; THEN &quot;SP_algae&quot;&#10;END' />
+      </column>
+      <column caption='mature_all.hmm.tsv' datatype='table' name='[__tableau_internal_object_id__].[mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53]' role='measure' type='quantitative' />
+      <column caption='Acc' datatype='real' name='[acc]' role='measure' type='quantitative' />
+      <column caption='Accession 1' datatype='string' name='[accession 1]' role='dimension' type='nominal' />
+      <column caption='Accession' datatype='string' name='[accession]' role='dimension' type='nominal' />
+      <column caption='Ali From' datatype='integer' name='[ali from]' role='measure' type='quantitative' />
+      <column caption='Ali To' datatype='integer' name='[ali to]' role='measure' type='quantitative' />
+      <column caption='Description' datatype='string' name='[description]' role='dimension' type='nominal' />
+      <column caption='Dom #' datatype='integer' name='[dom #]' role='measure' type='quantitative' />
+      <column caption='Dom Bias' datatype='real' name='[dom bias]' role='measure' type='quantitative' />
+      <column caption='Dom Score' datatype='real' name='[dom score]' role='measure' type='quantitative' />
+      <column caption='Dom Total' datatype='integer' name='[dom total]' role='measure' type='quantitative' />
+      <column caption='Env From' datatype='integer' name='[env from]' role='measure' type='quantitative' />
+      <column caption='Env To' datatype='integer' name='[env to]' role='measure' type='quantitative' />
+      <column caption='Hmm From' datatype='integer' name='[hmm from]' role='measure' type='quantitative' />
+      <column caption='Hmm To' datatype='integer' name='[hmm to]' role='measure' type='quantitative' />
+      <column caption='Qlen' datatype='integer' name='[qlen]' role='measure' type='quantitative' />
+      <column caption='Query Name' datatype='string' name='[query name]' role='dimension' type='nominal' />
+      <column caption='Seq Bias' datatype='real' name='[seq bias]' role='measure' type='quantitative' />
+      <column caption='Seq E-Value' datatype='real' name='[seq e-value]' role='measure' type='quantitative' />
+      <column caption='Seq Score' datatype='real' name='[seq score]' role='measure' type='quantitative' />
+      <column caption='Target Name' datatype='string' name='[target name]' role='dimension' type='nominal' />
+      <column caption='Tlen' datatype='integer' name='[tlen]' role='measure' type='quantitative' />
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <field-sort-info field-sort-order-type='custom-order'>
+        <field-sort-custom-order field='target name' />
+        <field-sort-custom-order field='accession' />
+        <field-sort-custom-order field='tlen' />
+        <field-sort-custom-order field='query name' />
+        <field-sort-custom-order field='Calculation_2400886584139777' />
+        <field-sort-custom-order field='Calculation_2400886582890496' />
+        <field-sort-custom-order field='accession 1' />
+        <field-sort-custom-order field='qlen' />
+        <field-sort-custom-order field='seq e-value' />
+        <field-sort-custom-order field='seq score' />
+        <field-sort-custom-order field='seq bias' />
+        <field-sort-custom-order field='dom #' />
+        <field-sort-custom-order field='dom total' />
+        <field-sort-custom-order field='dom c-Evalue' />
+        <field-sort-custom-order field='dom i-Evalue' />
+        <field-sort-custom-order field='dom score' />
+        <field-sort-custom-order field='dom bias' />
+        <field-sort-custom-order field='hmm from' />
+        <field-sort-custom-order field='hmm to' />
+        <field-sort-custom-order field='ali from' />
+        <field-sort-custom-order field='ali to' />
+        <field-sort-custom-order field='env from' />
+        <field-sort-custom-order field='env to' />
+        <field-sort-custom-order field='acc' />
+        <field-sort-custom-order field='description' />
+        <field-sort-custom-order field='Geometry (generated)' />
+        <field-sort-custom-order field='Latitude (generated)' />
+        <field-sort-custom-order field='Longitude (generated)' />
+        <field-sort-custom-order field=':Measure Names' />
+        <field-sort-custom-order field='Multiple Values' />
+      </field-sort-info>
+      <object-graph>
+        <objects>
+          <object caption='mature_all.hmm.tsv' id='mature_all.hmm.tsv_5418599FAA654650874E1312E7E46B53'>
+            <properties context=''>
+              <relation connection='textscan.15suy960b6rbni1cj32ce00hiy7d' name='mature_all.hmm.tsv' table='[mature_all.hmm#tsv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
+                  <column datatype='string' name='target name' ordinal='0' />
+                  <column datatype='string' name='accession' ordinal='1' />
+                  <column datatype='integer' name='tlen' ordinal='2' />
+                  <column datatype='string' name='query name' ordinal='3' />
+                  <column datatype='string' name='accession 1' ordinal='4' />
+                  <column datatype='integer' name='qlen' ordinal='5' />
+                  <column datatype='real' name='seq e-value' ordinal='6' />
+                  <column datatype='real' name='seq score' ordinal='7' />
+                  <column datatype='real' name='seq bias' ordinal='8' />
+                  <column datatype='integer' name='dom #' ordinal='9' />
+                  <column datatype='integer' name='dom total' ordinal='10' />
+                  <column datatype='real' name='dom c-Evalue' ordinal='11' />
+                  <column datatype='real' name='dom i-Evalue' ordinal='12' />
+                  <column datatype='real' name='dom score' ordinal='13' />
+                  <column datatype='real' name='dom bias' ordinal='14' />
+                  <column datatype='integer' name='hmm from' ordinal='15' />
+                  <column datatype='integer' name='hmm to' ordinal='16' />
+                  <column datatype='integer' name='ali from' ordinal='17' />
+                  <column datatype='integer' name='ali to' ordinal='18' />
+                  <column datatype='integer' name='env from' ordinal='19' />
+                  <column datatype='integer' name='env to' ordinal='20' />
+                  <column datatype='real' name='acc' ordinal='21' />
+                  <column datatype='string' name='description' ordinal='22' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+        </objects>
+      </object-graph>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='HMM Score Pattern'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='mature_all.hmm' name='federated.1vh82011jyaqqe1cwih8711qqszz' />
+          </datasources>
+          <datasource-dependencies datasource='federated.1vh82011jyaqqe1cwih8711qqszz'>
+            <column caption='Protein Group' datatype='string' name='[Calculation_2400886582890496]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='IF SPLIT([target name], &quot;|&quot;, 3) == &quot;&quot; THEN&#10;  SPLIT([target name], &quot;|&quot;, 2)&#10;ELSE&#10;  SPLIT([target name], &quot;|&quot;, 3)&#10;END' />
+            </column>
+            <column caption='HMM Profile' datatype='string' name='[Calculation_2400886584139777]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='CASE [query name]&#10;  WHEN &quot;mt_MnSOD_cnidaria_mature&quot; THEN &quot;mT_cnidaria&quot;&#10;  WHEN &quot;sp_MnFeSOD_cnidaria_mature&quot; THEN &quot;SP_cnidaria&quot;&#10;  WHEN &quot;sp_ctp_MnFeSOD_algae_mature&quot; THEN &quot;SP_cTP_algae&quot;&#10;  WHEN &quot;sp_MnFeSOD_algae_mature&quot; THEN &quot;SP_algae&quot;&#10;END' />
+            </column>
+            <column-instance column='[Calculation_2400886582890496]' derivation='None' name='[none:Calculation_2400886582890496:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Calculation_2400886584139777]' derivation='None' name='[none:Calculation_2400886584139777:nk]' pivot='key' type='nominal' />
+            <column-instance column='[query name]' derivation='None' name='[none:query name:nk]' pivot='key' type='nominal' />
+            <column-instance column='[seq score]' derivation='None' name='[none:seq score:qk]' pivot='key' type='quantitative' />
+            <column caption='Query Name' datatype='string' name='[query name]' role='dimension' type='nominal' />
+            <column caption='Seq Score' datatype='real' name='[seq score]' role='measure' type='quantitative' />
+            <column caption='Target Name' datatype='string' name='[target name]' role='dimension' type='nominal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.1vh82011jyaqqe1cwih8711qqszz].[none:Calculation_2400886582890496:nk]'>
+            <groupfilter function='except' user:ui-domain='relevant' user:ui-enumeration='exclusive' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[none:Calculation_2400886582890496:nk]' />
+              <groupfilter function='member' level='[none:Calculation_2400886582890496:nk]' member='&quot;&quot;' />
+            </groupfilter>
+          </filter>
+          <manual-sort column='[federated.1vh82011jyaqqe1cwih8711qqszz].[none:Calculation_2400886582890496:nk]' direction='ASC'>
+            <dictionary>
+              <bucket>&quot;mT_cnidaria&quot;</bucket>
+              <bucket>&quot;SP_cnidaria&quot;</bucket>
+              <bucket>&quot;SP_cTP_algae&quot;</bucket>
+              <bucket>&quot;SP_algae&quot;</bucket>
+            </dictionary>
+          </manual-sort>
+          <manual-sort column='[federated.1vh82011jyaqqe1cwih8711qqszz].[none:Calculation_2400886584139777:nk]' direction='ASC'>
+            <dictionary>
+              <bucket>&quot;mT_cnidaria&quot;</bucket>
+              <bucket>&quot;SP_cnidaria&quot;</bucket>
+              <bucket>&quot;SP_cTP_algae&quot;</bucket>
+              <bucket>&quot;SP_algae&quot;</bucket>
+            </dictionary>
+          </manual-sort>
+          <filter class='categorical' column='[federated.1vh82011jyaqqe1cwih8711qqszz].[none:query name:nk]'>
+            <groupfilter function='except' user:ui-domain='relevant' user:ui-enumeration='exclusive' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[none:query name:nk]' />
+              <groupfilter function='member' level='[none:query name:nk]' member='%null%' />
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.1vh82011jyaqqe1cwih8711qqszz].[none:query name:nk]</column>
+            <column>[federated.1vh82011jyaqqe1cwih8711qqszz].[none:Calculation_2400886582890496:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='axis'>
+            <encoding attr='space' class='0' field='[federated.1vh82011jyaqqe1cwih8711qqszz].[none:seq score:qk]' field-type='quantitative' min='0.0' range-type='fixedmin' scope='rows' type='space' />
+          </style-rule>
+          <style-rule element='header'>
+            <format attr='width' field='[federated.1vh82011jyaqqe1cwih8711qqszz].[none:Calculation_2400886582890496:nk]' value='108' />
+          </style-rule>
+          <style-rule element='label'>
+            <format attr='text-orientation' field='[federated.1vh82011jyaqqe1cwih8711qqszz].[none:query name:nk]' value='-90' />
+            <format attr='text-orientation' field='[federated.1vh82011jyaqqe1cwih8711qqszz].[none:Calculation_2400886584139777:nk]' value='-90' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows>([federated.1vh82011jyaqqe1cwih8711qqszz].[none:Calculation_2400886582890496:nk] * [federated.1vh82011jyaqqe1cwih8711qqszz].[none:seq score:qk])</rows>
+        <cols>[federated.1vh82011jyaqqe1cwih8711qqszz].[none:Calculation_2400886584139777:nk]</cols>
+      </table>
+      <simple-id uuid='{0A10CC2F-17EE-446C-A2D1-56764E121B81}' />
+    </worksheet>
+  </worksheets>
+  <windows source-height='30'>
+    <window class='worksheet' maximized='true' name='HMM Score Pattern'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.1vh82011jyaqqe1cwih8711qqszz].[none:Calculation_2400886582890496:nk]</field>
+            <field>[federated.1vh82011jyaqqe1cwih8711qqszz].[none:Calculation_2400886584139777:nk]</field>
+            <field>[federated.1vh82011jyaqqe1cwih8711qqszz].[none:query name:nk]</field>
+            <field>[federated.1vh82011jyaqqe1cwih8711qqszz].[none:target name:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{888DB636-5A08-4414-B835-B6C5311DC389}' />
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='384' name='HMM Score Pattern' width='384'>
+      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
+      1SvlAAAAAElFTkSuQmCC
+    </thumbnail>
+  </thumbnails>
+</workbook>
