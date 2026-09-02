@@ -1,10 +1,10 @@
 {
-  "channel_set_fingerprint": "9319c00b2694df2f54c8e4372aa877f192c5b22e5280b2cab4e0678c28fa6098",
+  "channel_set_fingerprint": "f89fdac3719a1c7ecc5b5d6182e22383e2a97e9bc42f378dfab92a15457665c2",
   "channels": [
     {
       "background": {
-        "bg_mu": 0.06273772388139162,
-        "bg_sigma": 0.05365702858377091
+        "bg_mu": 0.06363493092219255,
+        "bg_sigma": 0.05287139349784313
       },
       "definition": {
         "arguments": {
@@ -17,8 +17,8 @@
     },
     {
       "background": {
-        "bg_mu": -0.4624616362013984,
-        "bg_sigma": 0.6571688436316895
+        "bg_mu": -0.4203628482143345,
+        "bg_sigma": 0.6821031919255222
       },
       "definition": {
         "arguments": {
@@ -52,8 +52,8 @@
     },
     {
       "background": {
-        "bg_mu": 3.5592439288105036,
-        "bg_sigma": 0.27478146777098467
+        "bg_mu": 3.5712011144171654,
+        "bg_sigma": 0.2750496773496731
       },
       "definition": {
         "arguments": {
@@ -65,8 +65,8 @@
     },
     {
       "background": {
-        "bg_mu": 0.12920335150140752,
-        "bg_sigma": 0.10655685851291564
+        "bg_mu": 0.11934139293715641,
+        "bg_sigma": 0.10745442741698835
       },
       "definition": {
         "arguments": {
@@ -100,8 +100,8 @@
     },
     {
       "background": {
-        "bg_mu": 0.3278041985093182,
-        "bg_sigma": 0.13097291401622574
+        "bg_mu": 0.31905673731654693,
+        "bg_sigma": 0.13033749298268016
       },
       "definition": {
         "arguments": {
@@ -114,8 +114,8 @@
     },
     {
       "background": {
-        "bg_mu": -0.006865518319020298,
-        "bg_sigma": 0.1252063846836307
+        "bg_mu": -0.004639841568066645,
+        "bg_sigma": 0.12520723145662888
       },
       "definition": {
         "arguments": {
@@ -127,8 +127,8 @@
     },
     {
       "background": {
-        "bg_mu": -0.46252374607299945,
-        "bg_sigma": 0.7883645308699905
+        "bg_mu": -0.42045939507554997,
+        "bg_sigma": 0.8144276236417911
       },
       "definition": {
         "arguments": {
@@ -162,8 +162,8 @@
     },
     {
       "background": {
-        "bg_mu": 0.12921060305439616,
-        "bg_sigma": 0.1242885588145457
+        "bg_mu": 0.11936099664586827,
+        "bg_sigma": 0.1253969113280028
       },
       "definition": {
         "arguments": {
@@ -197,26 +197,37 @@
     },
     {
       "background": {
-        "bg_mu": 0.20160404021028214,
-        "bg_sigma": 0.10678437095491185
+        "bg_mu": 0.3259401268300289,
+        "bg_sigma": 0.10594309161137505
       },
       "definition": {
         "arguments": {
-          "radius": 8,
-          "residues": "FLVW"
+          "radius": 14,
+          "residues": "DEFLVW"
         },
         "short_name": "TAD_comp",
         "type": "composition_bias"
       }
     },
     {
+      "background": null,
+      "definition": {
+        "arguments": {
+          "flags": 0,
+          "pattern": "[FDAWV]..[ILVWY][FDAWV]..[FDAWV]"
+        },
+        "short_name": "TAD_motif",
+        "type": "short_motif"
+      }
+    },
+    {
       "background": {
-        "bg_mu": -0.00685823237491378,
-        "bg_sigma": 0.1312986645021391
+        "bg_mu": -0.00467317104731601,
+        "bg_sigma": 0.10509201215080241
       },
       "definition": {
         "arguments": {
-          "radius": 8
+          "radius": 14
         },
         "short_name": "TAD_netcharge",
         "type": "net_charge"
@@ -224,12 +235,12 @@
     },
     {
       "background": {
-        "bg_mu": -0.4625947116568922,
-        "bg_sigma": 0.8208202380572368
+        "bg_mu": -0.4202828548028416,
+        "bg_sigma": 0.7089211853666822
       },
       "definition": {
         "arguments": {
-          "radius": 8,
+          "radius": 14,
           "scale": {
             "A": 1.8,
             "C": 2.5,
@@ -259,8 +270,8 @@
     },
     {
       "background": {
-        "bg_mu": 0.16232534158151155,
-        "bg_sigma": 0.08741110546768185
+        "bg_mu": 0.16234277327664018,
+        "bg_sigma": 0.08760648618368776
       },
       "definition": {
         "arguments": {
@@ -295,8 +306,8 @@
     },
     {
       "background": {
-        "bg_mu": 0.006460926430752663,
-        "bg_sigma": 0.015194429537892675
+        "bg_mu": 0.006026006721894302,
+        "bg_sigma": 0.014748921992610898
       },
       "definition": {
         "arguments": {
@@ -320,8 +331,8 @@
     },
     {
       "background": {
-        "bg_mu": -0.462512606737205,
-        "bg_sigma": 0.6354741126234217
+        "bg_mu": -0.42046643103518994,
+        "bg_sigma": 0.6601921214135285
       },
       "definition": {
         "arguments": {
@@ -355,8 +366,8 @@
     },
     {
       "background": {
-        "bg_mu": 0.12920644344631033,
-        "bg_sigma": 0.10359628400172606
+        "bg_mu": 0.11935119251079068,
+        "bg_sigma": 0.10445683217216721
       },
       "definition": {
         "arguments": {
