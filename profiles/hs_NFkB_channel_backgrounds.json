@@ -1,0 +1,394 @@
+{
+  "channel_set_fingerprint": "9319c00b2694df2f54c8e4372aa877f192c5b22e5280b2cab4e0678c28fa6098",
+  "channels": [
+    {
+      "background": {
+        "bg_mu": 0.06273772388139162,
+        "bg_sigma": 0.05365702858377091
+      },
+      "definition": {
+        "arguments": {
+          "radius": 16,
+          "residues": "G"
+        },
+        "short_name": "GRR_comp",
+        "type": "composition_bias"
+      }
+    },
+    {
+      "background": {
+        "bg_mu": -0.4624616362013984,
+        "bg_sigma": 0.6571688436316895
+      },
+      "definition": {
+        "arguments": {
+          "radius": 16,
+          "scale": {
+            "A": 1.8,
+            "C": 2.5,
+            "D": -3.5,
+            "E": -3.5,
+            "F": 2.8,
+            "G": -0.4,
+            "H": -3.2,
+            "I": 4.5,
+            "K": -3.9,
+            "L": 3.8,
+            "M": 1.9,
+            "N": -3.5,
+            "P": -1.6,
+            "Q": -3.5,
+            "R": -4.5,
+            "S": -0.8,
+            "T": -0.7,
+            "V": 4.2,
+            "W": -0.9,
+            "Y": -1.3
+          }
+        },
+        "short_name": "GRR_hydropathy",
+        "type": "hydropathy"
+      }
+    },
+    {
+      "background": {
+        "bg_mu": 3.5592439288105036,
+        "bg_sigma": 0.27478146777098467
+      },
+      "definition": {
+        "arguments": {
+          "radius": 16
+        },
+        "short_name": "GRR_entropy",
+        "type": "sequence_entropy"
+      }
+    },
+    {
+      "background": {
+        "bg_mu": 0.12920335150140752,
+        "bg_sigma": 0.10655685851291564
+      },
+      "definition": {
+        "arguments": {
+          "radius": 16,
+          "scale": {
+            "A": 0.06,
+            "C": 0.02,
+            "D": 0.192,
+            "E": 0.736,
+            "F": -0.697,
+            "G": 0.166,
+            "H": 0.303,
+            "I": -0.486,
+            "K": 0.586,
+            "L": -0.326,
+            "M": -0.397,
+            "N": 0.007,
+            "P": 0.987,
+            "Q": 0.318,
+            "R": 0.18,
+            "S": 0.341,
+            "T": 0.059,
+            "V": -0.121,
+            "W": -0.884,
+            "Y": -0.51
+          }
+        },
+        "short_name": "GRR_disorder",
+        "type": "disorder_propensity"
+      }
+    },
+    {
+      "background": {
+        "bg_mu": 0.3278041985093182,
+        "bg_sigma": 0.13097291401622574
+      },
+      "definition": {
+        "arguments": {
+          "radius": 9,
+          "residues": "DEPST"
+        },
+        "short_name": "PEST_comp",
+        "type": "composition_bias"
+      }
+    },
+    {
+      "background": {
+        "bg_mu": -0.006865518319020298,
+        "bg_sigma": 0.1252063846836307
+      },
+      "definition": {
+        "arguments": {
+          "radius": 9
+        },
+        "short_name": "PEST_netcharge",
+        "type": "net_charge"
+      }
+    },
+    {
+      "background": {
+        "bg_mu": -0.46252374607299945,
+        "bg_sigma": 0.7883645308699905
+      },
+      "definition": {
+        "arguments": {
+          "radius": 9,
+          "scale": {
+            "A": 1.8,
+            "C": 2.5,
+            "D": -3.5,
+            "E": -3.5,
+            "F": 2.8,
+            "G": -0.4,
+            "H": -3.2,
+            "I": 4.5,
+            "K": -3.9,
+            "L": 3.8,
+            "M": 1.9,
+            "N": -3.5,
+            "P": -1.6,
+            "Q": -3.5,
+            "R": -4.5,
+            "S": -0.8,
+            "T": -0.7,
+            "V": 4.2,
+            "W": -0.9,
+            "Y": -1.3
+          }
+        },
+        "short_name": "PEST_hydropathy",
+        "type": "hydropathy"
+      }
+    },
+    {
+      "background": {
+        "bg_mu": 0.12921060305439616,
+        "bg_sigma": 0.1242885588145457
+      },
+      "definition": {
+        "arguments": {
+          "radius": 9,
+          "scale": {
+            "A": 0.06,
+            "C": 0.02,
+            "D": 0.192,
+            "E": 0.736,
+            "F": -0.697,
+            "G": 0.166,
+            "H": 0.303,
+            "I": -0.486,
+            "K": 0.586,
+            "L": -0.326,
+            "M": -0.397,
+            "N": 0.007,
+            "P": 0.987,
+            "Q": 0.318,
+            "R": 0.18,
+            "S": 0.341,
+            "T": 0.059,
+            "V": -0.121,
+            "W": -0.884,
+            "Y": -0.51
+          }
+        },
+        "short_name": "PEST_disorder",
+        "type": "disorder_propensity"
+      }
+    },
+    {
+      "background": {
+        "bg_mu": 0.20160404021028214,
+        "bg_sigma": 0.10678437095491185
+      },
+      "definition": {
+        "arguments": {
+          "radius": 8,
+          "residues": "FLVW"
+        },
+        "short_name": "TAD_comp",
+        "type": "composition_bias"
+      }
+    },
+    {
+      "background": {
+        "bg_mu": -0.00685823237491378,
+        "bg_sigma": 0.1312986645021391
+      },
+      "definition": {
+        "arguments": {
+          "radius": 8
+        },
+        "short_name": "TAD_netcharge",
+        "type": "net_charge"
+      }
+    },
+    {
+      "background": {
+        "bg_mu": -0.4625947116568922,
+        "bg_sigma": 0.8208202380572368
+      },
+      "definition": {
+        "arguments": {
+          "radius": 8,
+          "scale": {
+            "A": 1.8,
+            "C": 2.5,
+            "D": -3.5,
+            "E": -3.5,
+            "F": 2.8,
+            "G": -0.4,
+            "H": -3.2,
+            "I": 4.5,
+            "K": -3.9,
+            "L": 3.8,
+            "M": 1.9,
+            "N": -3.5,
+            "P": -1.6,
+            "Q": -3.5,
+            "R": -4.5,
+            "S": -0.8,
+            "T": -0.7,
+            "V": 4.2,
+            "W": -0.9,
+            "Y": -1.3
+          }
+        },
+        "short_name": "TAD_hydropathy",
+        "type": "hydropathy"
+      }
+    },
+    {
+      "background": {
+        "bg_mu": 0.16232534158151155,
+        "bg_sigma": 0.08741110546768185
+      },
+      "definition": {
+        "arguments": {
+          "angle": 100.0,
+          "radius": 6,
+          "scale": {
+            "A": 0.25,
+            "C": 0.04,
+            "D": -0.72,
+            "E": -0.62,
+            "F": 0.61,
+            "G": 0.16,
+            "H": -0.4,
+            "I": 0.73,
+            "K": -1.1,
+            "L": 0.53,
+            "M": 0.26,
+            "N": -0.64,
+            "P": -0.07,
+            "Q": -0.69,
+            "R": -1.76,
+            "S": -0.26,
+            "T": -0.18,
+            "V": 0.54,
+            "W": 0.37,
+            "Y": 0.02
+          }
+        },
+        "short_name": "TAD_hydrophobic_moment",
+        "type": "hydrophobic_moment"
+      }
+    },
+    {
+      "background": {
+        "bg_mu": 0.006460926430752663,
+        "bg_sigma": 0.015194429537892675
+      },
+      "definition": {
+        "arguments": {
+          "dipeptide": "SP",
+          "radius": 18
+        },
+        "short_name": "sp_dipeptide",
+        "type": "dipeptide_frequency"
+      }
+    },
+    {
+      "background": null,
+      "definition": {
+        "arguments": {
+          "flags": 0,
+          "pattern": "[PV].I.[IT][FD]"
+        },
+        "short_name": "NHR_motif",
+        "type": "short_motif"
+      }
+    },
+    {
+      "background": {
+        "bg_mu": -0.462512606737205,
+        "bg_sigma": 0.6354741126234217
+      },
+      "definition": {
+        "arguments": {
+          "radius": 18,
+          "scale": {
+            "A": 1.8,
+            "C": 2.5,
+            "D": -3.5,
+            "E": -3.5,
+            "F": 2.8,
+            "G": -0.4,
+            "H": -3.2,
+            "I": 4.5,
+            "K": -3.9,
+            "L": 3.8,
+            "M": 1.9,
+            "N": -3.5,
+            "P": -1.6,
+            "Q": -3.5,
+            "R": -4.5,
+            "S": -0.8,
+            "T": -0.7,
+            "V": 4.2,
+            "W": -0.9,
+            "Y": -1.3
+          }
+        },
+        "short_name": "NHR_hydropathy",
+        "type": "hydropathy"
+      }
+    },
+    {
+      "background": {
+        "bg_mu": 0.12920644344631033,
+        "bg_sigma": 0.10359628400172606
+      },
+      "definition": {
+        "arguments": {
+          "radius": 18,
+          "scale": {
+            "A": 0.06,
+            "C": 0.02,
+            "D": 0.192,
+            "E": 0.736,
+            "F": -0.697,
+            "G": 0.166,
+            "H": 0.303,
+            "I": -0.486,
+            "K": 0.586,
+            "L": -0.326,
+            "M": -0.397,
+            "N": 0.007,
+            "P": 0.987,
+            "Q": 0.318,
+            "R": 0.18,
+            "S": 0.341,
+            "T": 0.059,
+            "V": -0.121,
+            "W": -0.884,
+            "Y": -0.51
+          }
+        },
+        "short_name": "NHR_disorder",
+        "type": "disorder_propensity"
+      }
+    }
+  ],
+  "file_type": "sieve-channel-backgrounds",
+  "schema_version": 1
+}
