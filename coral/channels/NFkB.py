@@ -22,11 +22,11 @@ channels = ChannelSet([
     DisorderPropensityChannel("PEST_disorder", radius=9),
 
     # TAD
-    CompositionBiasChannel("TAD_comp", radius=8, residues="FLWVDE"),
+    CompositionBiasChannel("TAD_comp", radius=14, residues="FLWVDE"),
     ShortMotifChannel("TAD_motif", r"[FDAWV]..[ILVWY][FDAWV]..[FDAWV]"),
-    NetChargeChannel("TAD_netcharge", radius=8),
-    HydropathyChannel("TAD_hydropathy", radius=8),
-    HydrophobicMomentChannel("TAD_hydrophobic_moment", radius=6),
+    NetChargeChannel("TAD_netcharge", radius=14),
+    HydropathyChannel("TAD_hydropathy", radius=14),
+    HydrophobicMomentChannel("TAD_hydrophobic_moment", radius=6),  # radius stays 6 for all hydrophobic moment computations
 
     # NHR
     DipeptideFrequencyChannel("sp_dipeptide", radius=18, dipeptide="SP"),
