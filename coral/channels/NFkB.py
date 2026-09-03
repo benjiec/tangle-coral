@@ -30,7 +30,7 @@ channels = ChannelSet([
 
     # NHR
     DipeptideFrequencyChannel("sp_dipeptide", radius=18, dipeptide="SP"),
-    ShortMotifChannel("NHR_motif", r"[PV].I.[IT][FD]"),
+    ShortMotifChannel("NHR_motif", r"[PV].I.[IT]"),
     HydropathyChannel("NHR_hydropathy", radius=18),
     DisorderPropensityChannel("NHR_disorder", radius=18),
 ])
