@@ -1,0 +1,37 @@
+sieve-py ../sieve/scripts/ko-find-matches.py K09253 --taxon "Homo sapiens" -o hs_K09253.faa
+sieve-py ../sieve/scripts/ko-find-matches.py K09254 --taxon "Homo sapiens" -o hs_K09254.faa
+sieve-py ../sieve/scripts/ko-find-matches.py K04469 --taxon "Homo sapiens" -o hs_K04469.faa 
+sieve-py ../sieve/scripts/ko-find-matches.py K04735 --taxon "Homo sapiens" -o hs_K04735.faa
+sieve-py ../sieve/scripts/ko-find-matches.py K02580 --taxon "Homo sapiens" -o hs_K02580.faa
+
+sieve-py ../sieve/scripts/ko-find-matches.py K04446 --taxon "Homo sapiens" -o hs_K04446.faa
+sieve-py ../sieve/scripts/ko-find-matches.py K17332 --taxon "Homo sapiens" -o hs_K17332.faa
+sieve-py ../sieve/scripts/ko-find-matches.py K17333 --taxon "Homo sapiens" -o hs_K17333.faa
+sieve-py ../sieve/scripts/ko-find-matches.py K17334 --taxon "Homo sapiens" -o hs_K17334.faa
+sieve-py ../sieve/scripts/ko-find-matches.py K17335 --taxon "Homo sapiens" -o hs_K17335.faa
+
+PYTHONPATH=../coral ../sieve/scripts/compute-channel-backgrounds.py human.faa \
+  -c coral.channels.NFkB.channels \
+  -o hs_NFkB_channel_backgrounds.json
+
+PYTHONPATH=../coral ../sieve/scripts/compute-protein-channels.py hs_K02580.faa \
+  -c coral.channels.NFkB.channels \
+  -b hs_NFkB_channel_backgrounds.json \
+  -o channels.tsv
+
+docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/hs_K04735.faa /work/hs_K04735_cluster /tmp
+
+sieve-py ../sieve/scripts/pfam-find-matches.py PF00554 \
+  --taxon cnidaria \
+  -o cn_PF00554.faa
+
+PYTHONPATH=../coral ../sieve/scripts/compute-protein-channels.py cn_PF00554.faa \
+  -c coral.channels.NFkB.channels \
+  -b hs_NFkB_channel_backgrounds.json \
+  -o channel_query.tsv
+
+docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/cn_PF00554.faa /work/cn_PF00554 /tmp -c 0.9
+echo "Cluster Repr\tCluster Member" | cat - cn_PF00554_cluster.tsv > channel_query_clusters.tsv
+
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/x.faa -out /app/x.msa
+

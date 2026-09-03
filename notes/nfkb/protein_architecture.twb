@@ -1,0 +1,2834 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20261.26.0512.1636                               -->
+<workbook original-version='18.1' source-build='2026.1.2 (20261.26.0512.1636)' source-platform='mac' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AnimationOnByDefault />
+    <IntuitiveSorting />
+    <IntuitiveSorting_SP2 />
+    <MarkAnimation />
+    <ObjectModelEncapsulateLegacy />
+    <ObjectModelTableType />
+    <RelationshipCalculations />
+    <SchemaViewerObjectModel />
+    <SheetIdentifierTracking />
+    <SortTagCleanup />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='protein_pfam+' inline='true' name='federated.00d09ka0qk00v41caiav90lqeobd' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='protein_pfam' name='textscan.0t3dk8003oila416sq7r00rnwnhg'>
+            <connection class='textscan' directory='/Users/benjie/git/tangle/play' filename='protein_pfam.tsv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation type='collection'>
+          <relation connection='textscan.0t3dk8003oila416sq7r00rnwnhg' name='protein_pfam.tsv' table='[protein_pfam#tsv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
+              <column datatype='string' name='detection_type' ordinal='0' />
+              <column datatype='string' name='detection_method' ordinal='1' />
+              <column datatype='string' name='batch' ordinal='2' />
+              <column datatype='string' name='query_accession' ordinal='3' />
+              <column datatype='string' name='query_database' ordinal='4' />
+              <column datatype='string' name='query_type' ordinal='5' />
+              <column datatype='string' name='target_accession' ordinal='6' />
+              <column datatype='string' name='target_database' ordinal='7' />
+              <column datatype='string' name='target_type' ordinal='8' />
+              <column datatype='string' name='target_model' ordinal='9' />
+              <column datatype='integer' name='query_start' ordinal='10' />
+              <column datatype='integer' name='query_end' ordinal='11' />
+              <column datatype='integer' name='target_start' ordinal='12' />
+              <column datatype='integer' name='target_end' ordinal='13' />
+              <column datatype='real' name='evalue' ordinal='14' />
+              <column datatype='real' name='bitscore' ordinal='15' />
+              <column datatype='string' name='bitscore_threshold' ordinal='16' />
+              <column datatype='string' name='custom_metric_name' ordinal='17' />
+              <column datatype='string' name='custom_metric_value' ordinal='18' />
+            </columns>
+          </relation>
+          <relation connection='textscan.0t3dk8003oila416sq7r00rnwnhg' name='genomes.tsv' table='[genomes#tsv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
+              <column datatype='string' name='Genome Accession' ordinal='0' />
+              <column datatype='string' name='Genome Name' ordinal='1' />
+              <column datatype='integer' name='TaxID' ordinal='2' />
+              <column datatype='string' name='Organism' ordinal='3' />
+              <column datatype='string' name='Domain' ordinal='4' />
+              <column datatype='string' name='Kingdom' ordinal='5' />
+              <column datatype='string' name='Phylum' ordinal='6' />
+              <column datatype='string' name='Class' ordinal='7' />
+              <column datatype='string' name='Order' ordinal='8' />
+              <column datatype='string' name='Family' ordinal='9' />
+              <column datatype='string' name='Genus' ordinal='10' />
+              <column datatype='string' name='Species' ordinal='11' />
+            </columns>
+          </relation>
+          <relation connection='textscan.0t3dk8003oila416sq7r00rnwnhg' name='protein_ko_assigned.tsv' table='[protein_ko_assigned#tsv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
+              <column datatype='string' name='detection_type' ordinal='0' />
+              <column datatype='string' name='detection_method' ordinal='1' />
+              <column datatype='string' name='batch' ordinal='2' />
+              <column datatype='string' name='query_accession' ordinal='3' />
+              <column datatype='string' name='query_database' ordinal='4' />
+              <column datatype='string' name='query_type' ordinal='5' />
+              <column datatype='string' name='target_accession' ordinal='6' />
+              <column datatype='string' name='target_database' ordinal='7' />
+              <column datatype='string' name='target_type' ordinal='8' />
+              <column datatype='string' name='target_model' ordinal='9' />
+              <column datatype='integer' name='query_start' ordinal='10' />
+              <column datatype='integer' name='query_end' ordinal='11' />
+              <column datatype='integer' name='target_start' ordinal='12' />
+              <column datatype='integer' name='target_end' ordinal='13' />
+              <column datatype='real' name='evalue' ordinal='14' />
+              <column datatype='real' name='bitscore' ordinal='15' />
+              <column datatype='real' name='bitscore_threshold' ordinal='16' />
+              <column datatype='string' name='custom_metric_name' ordinal='17' />
+              <column datatype='real' name='custom_metric_value' ordinal='18' />
+            </columns>
+          </relation>
+          <relation connection='textscan.0t3dk8003oila416sq7r00rnwnhg' name='protein_pfam.tsv1' table='[protein_pfam#tsv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
+              <column datatype='string' name='detection_type' ordinal='0' />
+              <column datatype='string' name='detection_method' ordinal='1' />
+              <column datatype='string' name='batch' ordinal='2' />
+              <column datatype='string' name='query_accession' ordinal='3' />
+              <column datatype='string' name='query_database' ordinal='4' />
+              <column datatype='string' name='query_type' ordinal='5' />
+              <column datatype='string' name='target_accession' ordinal='6' />
+              <column datatype='string' name='target_database' ordinal='7' />
+              <column datatype='string' name='target_type' ordinal='8' />
+              <column datatype='string' name='target_model' ordinal='9' />
+              <column datatype='integer' name='query_start' ordinal='10' />
+              <column datatype='integer' name='query_end' ordinal='11' />
+              <column datatype='integer' name='target_start' ordinal='12' />
+              <column datatype='integer' name='target_end' ordinal='13' />
+              <column datatype='real' name='evalue' ordinal='14' />
+              <column datatype='real' name='bitscore' ordinal='15' />
+              <column datatype='string' name='bitscore_threshold' ordinal='16' />
+              <column datatype='string' name='custom_metric_name' ordinal='17' />
+              <column datatype='string' name='custom_metric_value' ordinal='18' />
+            </columns>
+          </relation>
+          <relation connection='textscan.0t3dk8003oila416sq7r00rnwnhg' name='Pfam-A.clans.tsv' table='[Pfam-A.clans#tsv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
+              <column datatype='string' name='Pfam ID' ordinal='0' />
+              <column datatype='string' name='Clan ID' ordinal='1' />
+              <column datatype='string' name='Name1' ordinal='2' />
+              <column datatype='string' name='Name2' ordinal='3' />
+              <column datatype='string' name='Description' ordinal='4' />
+            </columns>
+          </relation>
+        </relation>
+        <cols>
+          <map key='[Clan ID]' value='[Pfam-A.clans.tsv].[Clan ID]' />
+          <map key='[Class]' value='[genomes.tsv].[Class]' />
+          <map key='[Description]' value='[Pfam-A.clans.tsv].[Description]' />
+          <map key='[Domain]' value='[genomes.tsv].[Domain]' />
+          <map key='[Family]' value='[genomes.tsv].[Family]' />
+          <map key='[Genome Accession]' value='[genomes.tsv].[Genome Accession]' />
+          <map key='[Genome Name]' value='[genomes.tsv].[Genome Name]' />
+          <map key='[Genus]' value='[genomes.tsv].[Genus]' />
+          <map key='[Kingdom]' value='[genomes.tsv].[Kingdom]' />
+          <map key='[Name1]' value='[Pfam-A.clans.tsv].[Name1]' />
+          <map key='[Name2]' value='[Pfam-A.clans.tsv].[Name2]' />
+          <map key='[Order]' value='[genomes.tsv].[Order]' />
+          <map key='[Organism]' value='[genomes.tsv].[Organism]' />
+          <map key='[Pfam ID]' value='[Pfam-A.clans.tsv].[Pfam ID]' />
+          <map key='[Phylum]' value='[genomes.tsv].[Phylum]' />
+          <map key='[Species]' value='[genomes.tsv].[Species]' />
+          <map key='[TaxID]' value='[genomes.tsv].[TaxID]' />
+          <map key='[batch (protein_ko_assigned.tsv)]' value='[protein_ko_assigned.tsv].[batch]' />
+          <map key='[batch (protein_pfam.tsv1)]' value='[protein_pfam.tsv1].[batch]' />
+          <map key='[batch]' value='[protein_pfam.tsv].[batch]' />
+          <map key='[bitscore (protein_ko_assigned.tsv)]' value='[protein_ko_assigned.tsv].[bitscore]' />
+          <map key='[bitscore (protein_pfam.tsv1)]' value='[protein_pfam.tsv1].[bitscore]' />
+          <map key='[bitscore]' value='[protein_pfam.tsv].[bitscore]' />
+          <map key='[bitscore_threshold (protein_ko_assigned.tsv)]' value='[protein_ko_assigned.tsv].[bitscore_threshold]' />
+          <map key='[bitscore_threshold (protein_pfam.tsv1)]' value='[protein_pfam.tsv1].[bitscore_threshold]' />
+          <map key='[bitscore_threshold]' value='[protein_pfam.tsv].[bitscore_threshold]' />
+          <map key='[custom_metric_name (protein_ko_assigned.tsv)]' value='[protein_ko_assigned.tsv].[custom_metric_name]' />
+          <map key='[custom_metric_name (protein_pfam.tsv1)]' value='[protein_pfam.tsv1].[custom_metric_name]' />
+          <map key='[custom_metric_name]' value='[protein_pfam.tsv].[custom_metric_name]' />
+          <map key='[custom_metric_value (protein_ko_assigned.tsv)]' value='[protein_ko_assigned.tsv].[custom_metric_value]' />
+          <map key='[custom_metric_value (protein_pfam.tsv1)]' value='[protein_pfam.tsv1].[custom_metric_value]' />
+          <map key='[custom_metric_value]' value='[protein_pfam.tsv].[custom_metric_value]' />
+          <map key='[detection_method (protein_ko_assigned.tsv)]' value='[protein_ko_assigned.tsv].[detection_method]' />
+          <map key='[detection_method (protein_pfam.tsv1)]' value='[protein_pfam.tsv1].[detection_method]' />
+          <map key='[detection_method]' value='[protein_pfam.tsv].[detection_method]' />
+          <map key='[detection_type (protein_ko_assigned.tsv)]' value='[protein_ko_assigned.tsv].[detection_type]' />
+          <map key='[detection_type (protein_pfam.tsv1)]' value='[protein_pfam.tsv1].[detection_type]' />
+          <map key='[detection_type]' value='[protein_pfam.tsv].[detection_type]' />
+          <map key='[evalue (protein_ko_assigned.tsv)]' value='[protein_ko_assigned.tsv].[evalue]' />
+          <map key='[evalue (protein_pfam.tsv1)]' value='[protein_pfam.tsv1].[evalue]' />
+          <map key='[evalue]' value='[protein_pfam.tsv].[evalue]' />
+          <map key='[query_accession (protein_ko_assigned.tsv)]' value='[protein_ko_assigned.tsv].[query_accession]' />
+          <map key='[query_accession (protein_pfam.tsv1)]' value='[protein_pfam.tsv1].[query_accession]' />
+          <map key='[query_accession]' value='[protein_pfam.tsv].[query_accession]' />
+          <map key='[query_database (protein_ko_assigned.tsv)]' value='[protein_ko_assigned.tsv].[query_database]' />
+          <map key='[query_database (protein_pfam.tsv1)]' value='[protein_pfam.tsv1].[query_database]' />
+          <map key='[query_database]' value='[protein_pfam.tsv].[query_database]' />
+          <map key='[query_end (protein_ko_assigned.tsv)]' value='[protein_ko_assigned.tsv].[query_end]' />
+          <map key='[query_end (protein_pfam.tsv1)]' value='[protein_pfam.tsv1].[query_end]' />
+          <map key='[query_end]' value='[protein_pfam.tsv].[query_end]' />
+          <map key='[query_start (protein_ko_assigned.tsv)]' value='[protein_ko_assigned.tsv].[query_start]' />
+          <map key='[query_start (protein_pfam.tsv1)]' value='[protein_pfam.tsv1].[query_start]' />
+          <map key='[query_start]' value='[protein_pfam.tsv].[query_start]' />
+          <map key='[query_type (protein_ko_assigned.tsv)]' value='[protein_ko_assigned.tsv].[query_type]' />
+          <map key='[query_type (protein_pfam.tsv1)]' value='[protein_pfam.tsv1].[query_type]' />
+          <map key='[query_type]' value='[protein_pfam.tsv].[query_type]' />
+          <map key='[target_accession (protein_ko_assigned.tsv)]' value='[protein_ko_assigned.tsv].[target_accession]' />
+          <map key='[target_accession (protein_pfam.tsv1)]' value='[protein_pfam.tsv1].[target_accession]' />
+          <map key='[target_accession]' value='[protein_pfam.tsv].[target_accession]' />
+          <map key='[target_database (protein_ko_assigned.tsv)]' value='[protein_ko_assigned.tsv].[target_database]' />
+          <map key='[target_database (protein_pfam.tsv1)]' value='[protein_pfam.tsv1].[target_database]' />
+          <map key='[target_database]' value='[protein_pfam.tsv].[target_database]' />
+          <map key='[target_end (protein_ko_assigned.tsv)]' value='[protein_ko_assigned.tsv].[target_end]' />
+          <map key='[target_end (protein_pfam.tsv1)]' value='[protein_pfam.tsv1].[target_end]' />
+          <map key='[target_end]' value='[protein_pfam.tsv].[target_end]' />
+          <map key='[target_model (protein_ko_assigned.tsv)]' value='[protein_ko_assigned.tsv].[target_model]' />
+          <map key='[target_model (protein_pfam.tsv1)]' value='[protein_pfam.tsv1].[target_model]' />
+          <map key='[target_model]' value='[protein_pfam.tsv].[target_model]' />
+          <map key='[target_start (protein_ko_assigned.tsv)]' value='[protein_ko_assigned.tsv].[target_start]' />
+          <map key='[target_start (protein_pfam.tsv1)]' value='[protein_pfam.tsv1].[target_start]' />
+          <map key='[target_start]' value='[protein_pfam.tsv].[target_start]' />
+          <map key='[target_type (protein_ko_assigned.tsv)]' value='[protein_ko_assigned.tsv].[target_type]' />
+          <map key='[target_type (protein_pfam.tsv1)]' value='[protein_pfam.tsv1].[target_type]' />
+          <map key='[target_type]' value='[protein_pfam.tsv].[target_type]' />
+        </cols>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;\\t&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;\\t&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[protein_ko_assigned.tsv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;\\t&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[protein_pfam.tsv1]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;\\t&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Pfam-A.clans.tsv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;\\t&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>detection_type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[detection_type]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>detection_type</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>detection_method</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[detection_method]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>detection_method</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>batch</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[batch]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>batch</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_accession</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[query_accession]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>query_accession</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_database</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[query_database]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>query_database</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[query_type]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>query_type</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_accession</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[target_accession]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>target_accession</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_database</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[target_database]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>target_database</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[target_type]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>target_type</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_model</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[target_model]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>target_model</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <approx-count>1</approx-count>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_start</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[query_start]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>query_start</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_end</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[query_end]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>query_end</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_start</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[target_start]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>target_start</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_end</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[target_end]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>target_end</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>evalue</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[evalue]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>evalue</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bitscore</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[bitscore]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>bitscore</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bitscore_threshold</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[bitscore_threshold]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>bitscore_threshold</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <approx-count>1</approx-count>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>custom_metric_name</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[custom_metric_name]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>custom_metric_name</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <approx-count>1</approx-count>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>custom_metric_value</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[custom_metric_value]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>custom_metric_value</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <approx-count>1</approx-count>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Genome Accession</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Genome Accession]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>Genome Accession</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[genomes.tsv_4727E2D024DF476BAAC952ACDBBA7E2C]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Genome Name</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Genome Name]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>Genome Name</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[genomes.tsv_4727E2D024DF476BAAC952ACDBBA7E2C]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>TaxID</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[TaxID]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>TaxID</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[genomes.tsv_4727E2D024DF476BAAC952ACDBBA7E2C]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Organism</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Organism]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>Organism</remote-alias>
+            <ordinal>22</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[genomes.tsv_4727E2D024DF476BAAC952ACDBBA7E2C]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Domain</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Domain]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>Domain</remote-alias>
+            <ordinal>23</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[genomes.tsv_4727E2D024DF476BAAC952ACDBBA7E2C]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Kingdom</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Kingdom]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>Kingdom</remote-alias>
+            <ordinal>24</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[genomes.tsv_4727E2D024DF476BAAC952ACDBBA7E2C]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Phylum</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Phylum]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>Phylum</remote-alias>
+            <ordinal>25</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[genomes.tsv_4727E2D024DF476BAAC952ACDBBA7E2C]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Class</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Class]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>Class</remote-alias>
+            <ordinal>26</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[genomes.tsv_4727E2D024DF476BAAC952ACDBBA7E2C]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Order</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Order]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>Order</remote-alias>
+            <ordinal>27</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[genomes.tsv_4727E2D024DF476BAAC952ACDBBA7E2C]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Family</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Family]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>Family</remote-alias>
+            <ordinal>28</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[genomes.tsv_4727E2D024DF476BAAC952ACDBBA7E2C]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Genus</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Genus]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>Genus</remote-alias>
+            <ordinal>29</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[genomes.tsv_4727E2D024DF476BAAC952ACDBBA7E2C]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Species</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Species]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>Species</remote-alias>
+            <ordinal>30</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[genomes.tsv_4727E2D024DF476BAAC952ACDBBA7E2C]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>detection_type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[detection_type (protein_ko_assigned.tsv)]</local-name>
+            <parent-name>[protein_ko_assigned.tsv]</parent-name>
+            <remote-alias>detection_type</remote-alias>
+            <ordinal>31</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_ko_assigned.tsv_D1384BB22F47414BA0B5A953AF11B1C7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>detection_method</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[detection_method (protein_ko_assigned.tsv)]</local-name>
+            <parent-name>[protein_ko_assigned.tsv]</parent-name>
+            <remote-alias>detection_method</remote-alias>
+            <ordinal>32</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_ko_assigned.tsv_D1384BB22F47414BA0B5A953AF11B1C7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>batch</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[batch (protein_ko_assigned.tsv)]</local-name>
+            <parent-name>[protein_ko_assigned.tsv]</parent-name>
+            <remote-alias>batch</remote-alias>
+            <ordinal>33</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_ko_assigned.tsv_D1384BB22F47414BA0B5A953AF11B1C7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_accession</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[query_accession (protein_ko_assigned.tsv)]</local-name>
+            <parent-name>[protein_ko_assigned.tsv]</parent-name>
+            <remote-alias>query_accession</remote-alias>
+            <ordinal>34</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_ko_assigned.tsv_D1384BB22F47414BA0B5A953AF11B1C7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_database</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[query_database (protein_ko_assigned.tsv)]</local-name>
+            <parent-name>[protein_ko_assigned.tsv]</parent-name>
+            <remote-alias>query_database</remote-alias>
+            <ordinal>35</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_ko_assigned.tsv_D1384BB22F47414BA0B5A953AF11B1C7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[query_type (protein_ko_assigned.tsv)]</local-name>
+            <parent-name>[protein_ko_assigned.tsv]</parent-name>
+            <remote-alias>query_type</remote-alias>
+            <ordinal>36</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_ko_assigned.tsv_D1384BB22F47414BA0B5A953AF11B1C7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_accession</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[target_accession (protein_ko_assigned.tsv)]</local-name>
+            <parent-name>[protein_ko_assigned.tsv]</parent-name>
+            <remote-alias>target_accession</remote-alias>
+            <ordinal>37</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_ko_assigned.tsv_D1384BB22F47414BA0B5A953AF11B1C7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_database</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[target_database (protein_ko_assigned.tsv)]</local-name>
+            <parent-name>[protein_ko_assigned.tsv]</parent-name>
+            <remote-alias>target_database</remote-alias>
+            <ordinal>38</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_ko_assigned.tsv_D1384BB22F47414BA0B5A953AF11B1C7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[target_type (protein_ko_assigned.tsv)]</local-name>
+            <parent-name>[protein_ko_assigned.tsv]</parent-name>
+            <remote-alias>target_type</remote-alias>
+            <ordinal>39</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_ko_assigned.tsv_D1384BB22F47414BA0B5A953AF11B1C7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_model</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[target_model (protein_ko_assigned.tsv)]</local-name>
+            <parent-name>[protein_ko_assigned.tsv]</parent-name>
+            <remote-alias>target_model</remote-alias>
+            <ordinal>40</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <approx-count>1</approx-count>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_ko_assigned.tsv_D1384BB22F47414BA0B5A953AF11B1C7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_start</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[query_start (protein_ko_assigned.tsv)]</local-name>
+            <parent-name>[protein_ko_assigned.tsv]</parent-name>
+            <remote-alias>query_start</remote-alias>
+            <ordinal>41</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_ko_assigned.tsv_D1384BB22F47414BA0B5A953AF11B1C7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_end</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[query_end (protein_ko_assigned.tsv)]</local-name>
+            <parent-name>[protein_ko_assigned.tsv]</parent-name>
+            <remote-alias>query_end</remote-alias>
+            <ordinal>42</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_ko_assigned.tsv_D1384BB22F47414BA0B5A953AF11B1C7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_start</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[target_start (protein_ko_assigned.tsv)]</local-name>
+            <parent-name>[protein_ko_assigned.tsv]</parent-name>
+            <remote-alias>target_start</remote-alias>
+            <ordinal>43</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_ko_assigned.tsv_D1384BB22F47414BA0B5A953AF11B1C7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_end</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[target_end (protein_ko_assigned.tsv)]</local-name>
+            <parent-name>[protein_ko_assigned.tsv]</parent-name>
+            <remote-alias>target_end</remote-alias>
+            <ordinal>44</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_ko_assigned.tsv_D1384BB22F47414BA0B5A953AF11B1C7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>evalue</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[evalue (protein_ko_assigned.tsv)]</local-name>
+            <parent-name>[protein_ko_assigned.tsv]</parent-name>
+            <remote-alias>evalue</remote-alias>
+            <ordinal>45</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_ko_assigned.tsv_D1384BB22F47414BA0B5A953AF11B1C7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bitscore</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[bitscore (protein_ko_assigned.tsv)]</local-name>
+            <parent-name>[protein_ko_assigned.tsv]</parent-name>
+            <remote-alias>bitscore</remote-alias>
+            <ordinal>46</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_ko_assigned.tsv_D1384BB22F47414BA0B5A953AF11B1C7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bitscore_threshold</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[bitscore_threshold (protein_ko_assigned.tsv)]</local-name>
+            <parent-name>[protein_ko_assigned.tsv]</parent-name>
+            <remote-alias>bitscore_threshold</remote-alias>
+            <ordinal>47</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_ko_assigned.tsv_D1384BB22F47414BA0B5A953AF11B1C7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>custom_metric_name</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[custom_metric_name (protein_ko_assigned.tsv)]</local-name>
+            <parent-name>[protein_ko_assigned.tsv]</parent-name>
+            <remote-alias>custom_metric_name</remote-alias>
+            <ordinal>48</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_ko_assigned.tsv_D1384BB22F47414BA0B5A953AF11B1C7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>custom_metric_value</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[custom_metric_value (protein_ko_assigned.tsv)]</local-name>
+            <parent-name>[protein_ko_assigned.tsv]</parent-name>
+            <remote-alias>custom_metric_value</remote-alias>
+            <ordinal>49</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_ko_assigned.tsv_D1384BB22F47414BA0B5A953AF11B1C7]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>detection_type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[detection_type (protein_pfam.tsv1)]</local-name>
+            <parent-name>[protein_pfam.tsv1]</parent-name>
+            <remote-alias>detection_type</remote-alias>
+            <ordinal>50</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_73F79C4D42564294A63336579A5B23D3]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>detection_method</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[detection_method (protein_pfam.tsv1)]</local-name>
+            <parent-name>[protein_pfam.tsv1]</parent-name>
+            <remote-alias>detection_method</remote-alias>
+            <ordinal>51</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_73F79C4D42564294A63336579A5B23D3]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>batch</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[batch (protein_pfam.tsv1)]</local-name>
+            <parent-name>[protein_pfam.tsv1]</parent-name>
+            <remote-alias>batch</remote-alias>
+            <ordinal>52</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_73F79C4D42564294A63336579A5B23D3]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_accession</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[query_accession (protein_pfam.tsv1)]</local-name>
+            <parent-name>[protein_pfam.tsv1]</parent-name>
+            <remote-alias>query_accession</remote-alias>
+            <ordinal>53</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_73F79C4D42564294A63336579A5B23D3]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_database</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[query_database (protein_pfam.tsv1)]</local-name>
+            <parent-name>[protein_pfam.tsv1]</parent-name>
+            <remote-alias>query_database</remote-alias>
+            <ordinal>54</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_73F79C4D42564294A63336579A5B23D3]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[query_type (protein_pfam.tsv1)]</local-name>
+            <parent-name>[protein_pfam.tsv1]</parent-name>
+            <remote-alias>query_type</remote-alias>
+            <ordinal>55</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_73F79C4D42564294A63336579A5B23D3]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_accession</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[target_accession (protein_pfam.tsv1)]</local-name>
+            <parent-name>[protein_pfam.tsv1]</parent-name>
+            <remote-alias>target_accession</remote-alias>
+            <ordinal>56</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_73F79C4D42564294A63336579A5B23D3]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_database</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[target_database (protein_pfam.tsv1)]</local-name>
+            <parent-name>[protein_pfam.tsv1]</parent-name>
+            <remote-alias>target_database</remote-alias>
+            <ordinal>57</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_73F79C4D42564294A63336579A5B23D3]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[target_type (protein_pfam.tsv1)]</local-name>
+            <parent-name>[protein_pfam.tsv1]</parent-name>
+            <remote-alias>target_type</remote-alias>
+            <ordinal>58</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_73F79C4D42564294A63336579A5B23D3]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_model</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[target_model (protein_pfam.tsv1)]</local-name>
+            <parent-name>[protein_pfam.tsv1]</parent-name>
+            <remote-alias>target_model</remote-alias>
+            <ordinal>59</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <approx-count>1</approx-count>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_73F79C4D42564294A63336579A5B23D3]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_start</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[query_start (protein_pfam.tsv1)]</local-name>
+            <parent-name>[protein_pfam.tsv1]</parent-name>
+            <remote-alias>query_start</remote-alias>
+            <ordinal>60</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_pfam.tsv_73F79C4D42564294A63336579A5B23D3]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_end</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[query_end (protein_pfam.tsv1)]</local-name>
+            <parent-name>[protein_pfam.tsv1]</parent-name>
+            <remote-alias>query_end</remote-alias>
+            <ordinal>61</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_pfam.tsv_73F79C4D42564294A63336579A5B23D3]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_start</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[target_start (protein_pfam.tsv1)]</local-name>
+            <parent-name>[protein_pfam.tsv1]</parent-name>
+            <remote-alias>target_start</remote-alias>
+            <ordinal>62</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_pfam.tsv_73F79C4D42564294A63336579A5B23D3]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_end</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[target_end (protein_pfam.tsv1)]</local-name>
+            <parent-name>[protein_pfam.tsv1]</parent-name>
+            <remote-alias>target_end</remote-alias>
+            <ordinal>63</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_pfam.tsv_73F79C4D42564294A63336579A5B23D3]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>evalue</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[evalue (protein_pfam.tsv1)]</local-name>
+            <parent-name>[protein_pfam.tsv1]</parent-name>
+            <remote-alias>evalue</remote-alias>
+            <ordinal>64</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_pfam.tsv_73F79C4D42564294A63336579A5B23D3]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bitscore</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[bitscore (protein_pfam.tsv1)]</local-name>
+            <parent-name>[protein_pfam.tsv1]</parent-name>
+            <remote-alias>bitscore</remote-alias>
+            <ordinal>65</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_pfam.tsv_73F79C4D42564294A63336579A5B23D3]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bitscore_threshold</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[bitscore_threshold (protein_pfam.tsv1)]</local-name>
+            <parent-name>[protein_pfam.tsv1]</parent-name>
+            <remote-alias>bitscore_threshold</remote-alias>
+            <ordinal>66</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <approx-count>1</approx-count>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_73F79C4D42564294A63336579A5B23D3]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>custom_metric_name</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[custom_metric_name (protein_pfam.tsv1)]</local-name>
+            <parent-name>[protein_pfam.tsv1]</parent-name>
+            <remote-alias>custom_metric_name</remote-alias>
+            <ordinal>67</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <approx-count>1</approx-count>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_73F79C4D42564294A63336579A5B23D3]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>custom_metric_value</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[custom_metric_value (protein_pfam.tsv1)]</local-name>
+            <parent-name>[protein_pfam.tsv1]</parent-name>
+            <remote-alias>custom_metric_value</remote-alias>
+            <ordinal>68</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <approx-count>1</approx-count>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_73F79C4D42564294A63336579A5B23D3]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Pfam ID</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Pfam ID]</local-name>
+            <parent-name>[Pfam-A.clans.tsv]</parent-name>
+            <remote-alias>Pfam ID</remote-alias>
+            <ordinal>69</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[Pfam-A.clans.tsv_5CC76181548A41AB972C523B05FCE274]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Clan ID</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Clan ID]</local-name>
+            <parent-name>[Pfam-A.clans.tsv]</parent-name>
+            <remote-alias>Clan ID</remote-alias>
+            <ordinal>70</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[Pfam-A.clans.tsv_5CC76181548A41AB972C523B05FCE274]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Name1</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Name1]</local-name>
+            <parent-name>[Pfam-A.clans.tsv]</parent-name>
+            <remote-alias>Name1</remote-alias>
+            <ordinal>71</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[Pfam-A.clans.tsv_5CC76181548A41AB972C523B05FCE274]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Name2</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Name2]</local-name>
+            <parent-name>[Pfam-A.clans.tsv]</parent-name>
+            <remote-alias>Name2</remote-alias>
+            <ordinal>72</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[Pfam-A.clans.tsv_5CC76181548A41AB972C523B05FCE274]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Description</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Description]</local-name>
+            <parent-name>[Pfam-A.clans.tsv]</parent-name>
+            <remote-alias>Description</remote-alias>
+            <ordinal>73</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[Pfam-A.clans.tsv_5CC76181548A41AB972C523B05FCE274]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Lowest E-value Rank' datatype='integer' name='[Calculation_0036393756078080]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='{FIXED [query_accession (protein_ko_assigned.tsv)],&#10;       [query_database (protein_ko_assigned.tsv)]: MIN(&#10;&#10;IF [bitscore (protein_ko_assigned.tsv)] &gt;= [bitscore_threshold (protein_ko_assigned.tsv)]&#10;THEN INT([custom_metric_value (protein_ko_assigned.tsv)])&#10;ELSE NULL END&#10;)}' />
+      </column>
+      <column caption='Min Pfam Start' datatype='integer' name='[Calculation_0858897303928835]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='{FIXED [query_accession]: MIN([query_start (protein_pfam.tsv1)])}' />
+      </column>
+      <column caption='Match Length' datatype='integer' name='[Calculation_1310520663515136]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='[query_end (protein_pfam.tsv1)]-[query_start (protein_pfam.tsv1)]+1' />
+      </column>
+      <column caption='Assigned KO' datatype='string' name='[Calculation_1318698290372608]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='{FIXED [query_accession],[query_database]: MAX(&#10;&#10;IF INT([custom_metric_value (protein_ko_assigned.tsv)]) == [Calculation_0036393756078080]&#10;THEN [target_accession (protein_ko_assigned.tsv)]&#10;ELSE NULL END&#10;&#10;)}' />
+      </column>
+      <column datatype='string' name='[Pfam ID]' role='dimension' type='nominal' />
+      <column caption='Tax ID' datatype='integer' name='[TaxID]' role='dimension' type='ordinal' />
+      <column caption='Pfam-A.clans.tsv' datatype='table' name='[__tableau_internal_object_id__].[Pfam-A.clans.tsv_5CC76181548A41AB972C523B05FCE274]' role='measure' type='quantitative' />
+      <column caption='genomes.tsv' datatype='table' name='[__tableau_internal_object_id__].[genomes.tsv_4727E2D024DF476BAAC952ACDBBA7E2C]' role='measure' type='quantitative' />
+      <column caption='protein_ko_assigned.tsv' datatype='table' name='[__tableau_internal_object_id__].[protein_ko_assigned.tsv_D1384BB22F47414BA0B5A953AF11B1C7]' role='measure' type='quantitative' />
+      <column caption='protein_pfam.tsv1' datatype='table' name='[__tableau_internal_object_id__].[protein_pfam.tsv_73F79C4D42564294A63336579A5B23D3]' role='measure' type='quantitative' />
+      <column caption='protein_pfam.tsv' datatype='table' name='[__tableau_internal_object_id__].[protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006]' role='measure' type='quantitative' />
+      <column caption='Batch (Protein Ko Assigned.Tsv)' datatype='string' name='[batch (protein_ko_assigned.tsv)]' role='dimension' type='nominal' />
+      <column caption='Batch (Protein Pfam.Tsv1)' datatype='string' name='[batch (protein_pfam.tsv1)]' role='dimension' type='nominal' />
+      <column caption='Batch' datatype='string' name='[batch]' role='dimension' type='nominal' />
+      <column caption='Bitscore (Protein Ko Assigned.Tsv)' datatype='real' name='[bitscore (protein_ko_assigned.tsv)]' role='measure' type='quantitative' />
+      <column caption='Bitscore (Protein Pfam.Tsv1)' datatype='real' name='[bitscore (protein_pfam.tsv1)]' role='measure' type='quantitative' />
+      <column caption='Bitscore' datatype='real' name='[bitscore]' role='measure' type='quantitative' />
+      <column caption='Bitscore Threshold (Protein Ko Assigned.Tsv)' datatype='real' name='[bitscore_threshold (protein_ko_assigned.tsv)]' role='measure' type='quantitative' />
+      <column caption='Bitscore Threshold (Protein Pfam.Tsv1)' datatype='string' name='[bitscore_threshold (protein_pfam.tsv1)]' role='dimension' type='nominal' />
+      <column caption='Bitscore Threshold' datatype='string' name='[bitscore_threshold]' role='dimension' type='nominal' />
+      <column caption='Custom Metric Name (Protein Ko Assigned.Tsv)' datatype='string' name='[custom_metric_name (protein_ko_assigned.tsv)]' role='dimension' type='nominal' />
+      <column caption='Custom Metric Name (Protein Pfam.Tsv1)' datatype='string' name='[custom_metric_name (protein_pfam.tsv1)]' role='dimension' type='nominal' />
+      <column caption='Custom Metric Name' datatype='string' name='[custom_metric_name]' role='dimension' type='nominal' />
+      <column caption='Custom Metric Value (Protein Ko Assigned.Tsv)' datatype='real' name='[custom_metric_value (protein_ko_assigned.tsv)]' role='measure' type='quantitative' />
+      <column caption='Custom Metric Value (Protein Pfam.Tsv1)' datatype='string' name='[custom_metric_value (protein_pfam.tsv1)]' role='dimension' type='nominal' />
+      <column caption='Custom Metric Value' datatype='string' name='[custom_metric_value]' role='dimension' type='nominal' />
+      <column caption='Detection Method (Protein Ko Assigned.Tsv)' datatype='string' name='[detection_method (protein_ko_assigned.tsv)]' role='dimension' type='nominal' />
+      <column caption='Detection Method (Protein Pfam.Tsv1)' datatype='string' name='[detection_method (protein_pfam.tsv1)]' role='dimension' type='nominal' />
+      <column caption='Detection Method' datatype='string' name='[detection_method]' role='dimension' type='nominal' />
+      <column caption='Detection Type (Protein Ko Assigned.Tsv)' datatype='string' name='[detection_type (protein_ko_assigned.tsv)]' role='dimension' type='nominal' />
+      <column caption='Detection Type (Protein Pfam.Tsv1)' datatype='string' name='[detection_type (protein_pfam.tsv1)]' role='dimension' type='nominal' />
+      <column caption='Detection Type' datatype='string' name='[detection_type]' role='dimension' type='nominal' />
+      <column caption='Evalue (Protein Ko Assigned.Tsv)' datatype='real' name='[evalue (protein_ko_assigned.tsv)]' role='measure' type='quantitative' />
+      <column caption='Evalue (Protein Pfam.Tsv1)' datatype='real' name='[evalue (protein_pfam.tsv1)]' role='measure' type='quantitative' />
+      <column caption='Evalue' datatype='real' name='[evalue]' role='measure' type='quantitative' />
+      <column caption='Query Accession (Protein Ko Assigned.Tsv)' datatype='string' name='[query_accession (protein_ko_assigned.tsv)]' role='dimension' type='nominal' />
+      <column caption='Query Accession (Protein Pfam.Tsv1)' datatype='string' name='[query_accession (protein_pfam.tsv1)]' role='dimension' type='nominal' />
+      <column caption='Query Accession' datatype='string' name='[query_accession]' role='dimension' type='nominal' />
+      <column caption='Query Database (Protein Ko Assigned.Tsv)' datatype='string' name='[query_database (protein_ko_assigned.tsv)]' role='dimension' type='nominal' />
+      <column caption='Query Database (Protein Pfam.Tsv1)' datatype='string' name='[query_database (protein_pfam.tsv1)]' role='dimension' type='nominal' />
+      <column caption='Query Database' datatype='string' name='[query_database]' role='dimension' type='nominal' />
+      <column caption='Query End (Protein Ko Assigned.Tsv)' datatype='integer' name='[query_end (protein_ko_assigned.tsv)]' role='measure' type='quantitative' />
+      <column caption='Protein End' datatype='integer' name='[query_end (protein_pfam.tsv1)]' role='measure' type='quantitative' />
+      <column caption='Query End' datatype='integer' name='[query_end]' role='measure' type='quantitative' />
+      <column caption='Query Start (Protein Ko Assigned.Tsv)' datatype='integer' name='[query_start (protein_ko_assigned.tsv)]' role='measure' type='quantitative' />
+      <column caption='Protein Start' datatype='integer' name='[query_start (protein_pfam.tsv1)]' role='measure' type='quantitative' />
+      <column caption='Query Start' datatype='integer' name='[query_start]' role='measure' type='quantitative' />
+      <column caption='Query Type (Protein Ko Assigned.Tsv)' datatype='string' name='[query_type (protein_ko_assigned.tsv)]' role='dimension' type='nominal' />
+      <column caption='Query Type (Protein Pfam.Tsv1)' datatype='string' name='[query_type (protein_pfam.tsv1)]' role='dimension' type='nominal' />
+      <column caption='Query Type' datatype='string' name='[query_type]' role='dimension' type='nominal' />
+      <column caption='Target Accession (Protein Ko Assigned.Tsv)' datatype='string' name='[target_accession (protein_ko_assigned.tsv)]' role='dimension' type='nominal' />
+      <column caption='Target Accession (Protein Pfam.Tsv1)' datatype='string' name='[target_accession (protein_pfam.tsv1)]' role='dimension' type='nominal' />
+      <column caption='Target Accession' datatype='string' name='[target_accession]' role='dimension' type='nominal' />
+      <column caption='Target Database (Protein Ko Assigned.Tsv)' datatype='string' name='[target_database (protein_ko_assigned.tsv)]' role='dimension' type='nominal' />
+      <column caption='Target Database (Protein Pfam.Tsv1)' datatype='string' name='[target_database (protein_pfam.tsv1)]' role='dimension' type='nominal' />
+      <column caption='Target Database' datatype='string' name='[target_database]' role='dimension' type='nominal' />
+      <column caption='Target End (Protein Ko Assigned.Tsv)' datatype='integer' name='[target_end (protein_ko_assigned.tsv)]' role='measure' type='quantitative' />
+      <column caption='HMM End' datatype='integer' name='[target_end (protein_pfam.tsv1)]' role='measure' type='quantitative' />
+      <column caption='Target End' datatype='integer' name='[target_end]' role='measure' type='quantitative' />
+      <column caption='Target Model (Protein Ko Assigned.Tsv)' datatype='string' name='[target_model (protein_ko_assigned.tsv)]' role='dimension' type='nominal' />
+      <column caption='Target Model (Protein Pfam.Tsv1)' datatype='string' name='[target_model (protein_pfam.tsv1)]' role='dimension' type='nominal' />
+      <column caption='Target Model' datatype='string' name='[target_model]' role='dimension' type='nominal' />
+      <column caption='Target Start (Protein Ko Assigned.Tsv)' datatype='integer' name='[target_start (protein_ko_assigned.tsv)]' role='measure' type='quantitative' />
+      <column caption='HMM Start' datatype='integer' name='[target_start (protein_pfam.tsv1)]' role='measure' type='quantitative' />
+      <column caption='Target Start' datatype='integer' name='[target_start]' role='measure' type='quantitative' />
+      <column caption='Target Type (Protein Ko Assigned.Tsv)' datatype='string' name='[target_type (protein_ko_assigned.tsv)]' role='dimension' type='nominal' />
+      <column caption='Target Type (Protein Pfam.Tsv1)' datatype='string' name='[target_type (protein_pfam.tsv1)]' role='dimension' type='nominal' />
+      <column caption='Target Type' datatype='string' name='[target_type]' role='dimension' type='nominal' />
+      <column-instance column='[Pfam ID]' derivation='None' name='[none:Pfam ID:nk]' pivot='key' type='nominal' />
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[none:Pfam ID:nk]' type='palette'>
+            <map to='#499894'>
+              <bucket>&quot;PF13637&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;PF00023&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;PF01833&quot;</bucket>
+            </map>
+            <map to='#79706e'>
+              <bucket>&quot;PF16180&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;PF13857&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;PF08477&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;PF00531&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;PF12796&quot;</bucket>
+            </map>
+            <map to='#bab0ac'>
+              <bucket>&quot;PF16181&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;PF16095&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;PF13606&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;PF00554&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;PF16179&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;PF00791&quot;</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <field-sort-info field-sort-order-type='custom-order'>
+        <field-sort-custom-order field='detection_type (protein_pfam.tsv1)' />
+        <field-sort-custom-order field='detection_method (protein_pfam.tsv1)' />
+        <field-sort-custom-order field='batch (protein_pfam.tsv1)' />
+        <field-sort-custom-order field='query_accession (protein_pfam.tsv1)' />
+        <field-sort-custom-order field='query_database (protein_pfam.tsv1)' />
+        <field-sort-custom-order field='query_type (protein_pfam.tsv1)' />
+        <field-sort-custom-order field='target_accession (protein_pfam.tsv1)' />
+        <field-sort-custom-order field='target_database (protein_pfam.tsv1)' />
+        <field-sort-custom-order field='target_type (protein_pfam.tsv1)' />
+        <field-sort-custom-order field='target_model (protein_pfam.tsv1)' />
+        <field-sort-custom-order field='query_start (protein_pfam.tsv1)' />
+        <field-sort-custom-order field='query_end (protein_pfam.tsv1)' />
+        <field-sort-custom-order field='Calculation_1310520663515136' />
+        <field-sort-custom-order field='target_start (protein_pfam.tsv1)' />
+        <field-sort-custom-order field='target_end (protein_pfam.tsv1)' />
+        <field-sort-custom-order field='evalue (protein_pfam.tsv1)' />
+        <field-sort-custom-order field='bitscore (protein_pfam.tsv1)' />
+        <field-sort-custom-order field='bitscore_threshold (protein_pfam.tsv1)' />
+        <field-sort-custom-order field='custom_metric_name (protein_pfam.tsv1)' />
+        <field-sort-custom-order field='custom_metric_value (protein_pfam.tsv1)' />
+      </field-sort-info>
+      <object-graph>
+        <objects>
+          <object caption='Pfam-A.clans.tsv' id='Pfam-A.clans.tsv_5CC76181548A41AB972C523B05FCE274'>
+            <properties context=''>
+              <relation connection='textscan.0t3dk8003oila416sq7r00rnwnhg' name='Pfam-A.clans.tsv' table='[Pfam-A.clans#tsv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
+                  <column datatype='string' name='Pfam ID' ordinal='0' />
+                  <column datatype='string' name='Clan ID' ordinal='1' />
+                  <column datatype='string' name='Name1' ordinal='2' />
+                  <column datatype='string' name='Name2' ordinal='3' />
+                  <column datatype='string' name='Description' ordinal='4' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+          <object caption='genomes.tsv' id='genomes.tsv_4727E2D024DF476BAAC952ACDBBA7E2C'>
+            <properties context=''>
+              <relation connection='textscan.0t3dk8003oila416sq7r00rnwnhg' name='genomes.tsv' table='[genomes#tsv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
+                  <column datatype='string' name='Genome Accession' ordinal='0' />
+                  <column datatype='string' name='Genome Name' ordinal='1' />
+                  <column datatype='integer' name='TaxID' ordinal='2' />
+                  <column datatype='string' name='Organism' ordinal='3' />
+                  <column datatype='string' name='Domain' ordinal='4' />
+                  <column datatype='string' name='Kingdom' ordinal='5' />
+                  <column datatype='string' name='Phylum' ordinal='6' />
+                  <column datatype='string' name='Class' ordinal='7' />
+                  <column datatype='string' name='Order' ordinal='8' />
+                  <column datatype='string' name='Family' ordinal='9' />
+                  <column datatype='string' name='Genus' ordinal='10' />
+                  <column datatype='string' name='Species' ordinal='11' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+          <object caption='protein_ko_assigned.tsv' id='protein_ko_assigned.tsv_D1384BB22F47414BA0B5A953AF11B1C7'>
+            <properties context=''>
+              <relation connection='textscan.0t3dk8003oila416sq7r00rnwnhg' name='protein_ko_assigned.tsv' table='[protein_ko_assigned#tsv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
+                  <column datatype='string' name='detection_type' ordinal='0' />
+                  <column datatype='string' name='detection_method' ordinal='1' />
+                  <column datatype='string' name='batch' ordinal='2' />
+                  <column datatype='string' name='query_accession' ordinal='3' />
+                  <column datatype='string' name='query_database' ordinal='4' />
+                  <column datatype='string' name='query_type' ordinal='5' />
+                  <column datatype='string' name='target_accession' ordinal='6' />
+                  <column datatype='string' name='target_database' ordinal='7' />
+                  <column datatype='string' name='target_type' ordinal='8' />
+                  <column datatype='string' name='target_model' ordinal='9' />
+                  <column datatype='integer' name='query_start' ordinal='10' />
+                  <column datatype='integer' name='query_end' ordinal='11' />
+                  <column datatype='integer' name='target_start' ordinal='12' />
+                  <column datatype='integer' name='target_end' ordinal='13' />
+                  <column datatype='real' name='evalue' ordinal='14' />
+                  <column datatype='real' name='bitscore' ordinal='15' />
+                  <column datatype='real' name='bitscore_threshold' ordinal='16' />
+                  <column datatype='string' name='custom_metric_name' ordinal='17' />
+                  <column datatype='real' name='custom_metric_value' ordinal='18' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+          <object caption='protein_pfam.tsv1' id='protein_pfam.tsv_73F79C4D42564294A63336579A5B23D3'>
+            <properties context=''>
+              <relation connection='textscan.0t3dk8003oila416sq7r00rnwnhg' name='protein_pfam.tsv1' table='[protein_pfam#tsv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
+                  <column datatype='string' name='detection_type' ordinal='0' />
+                  <column datatype='string' name='detection_method' ordinal='1' />
+                  <column datatype='string' name='batch' ordinal='2' />
+                  <column datatype='string' name='query_accession' ordinal='3' />
+                  <column datatype='string' name='query_database' ordinal='4' />
+                  <column datatype='string' name='query_type' ordinal='5' />
+                  <column datatype='string' name='target_accession' ordinal='6' />
+                  <column datatype='string' name='target_database' ordinal='7' />
+                  <column datatype='string' name='target_type' ordinal='8' />
+                  <column datatype='string' name='target_model' ordinal='9' />
+                  <column datatype='integer' name='query_start' ordinal='10' />
+                  <column datatype='integer' name='query_end' ordinal='11' />
+                  <column datatype='integer' name='target_start' ordinal='12' />
+                  <column datatype='integer' name='target_end' ordinal='13' />
+                  <column datatype='real' name='evalue' ordinal='14' />
+                  <column datatype='real' name='bitscore' ordinal='15' />
+                  <column datatype='string' name='bitscore_threshold' ordinal='16' />
+                  <column datatype='string' name='custom_metric_name' ordinal='17' />
+                  <column datatype='string' name='custom_metric_value' ordinal='18' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+          <object caption='protein_pfam.tsv' id='protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006'>
+            <properties context=''>
+              <relation connection='textscan.0t3dk8003oila416sq7r00rnwnhg' name='protein_pfam.tsv' table='[protein_pfam#tsv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
+                  <column datatype='string' name='detection_type' ordinal='0' />
+                  <column datatype='string' name='detection_method' ordinal='1' />
+                  <column datatype='string' name='batch' ordinal='2' />
+                  <column datatype='string' name='query_accession' ordinal='3' />
+                  <column datatype='string' name='query_database' ordinal='4' />
+                  <column datatype='string' name='query_type' ordinal='5' />
+                  <column datatype='string' name='target_accession' ordinal='6' />
+                  <column datatype='string' name='target_database' ordinal='7' />
+                  <column datatype='string' name='target_type' ordinal='8' />
+                  <column datatype='string' name='target_model' ordinal='9' />
+                  <column datatype='integer' name='query_start' ordinal='10' />
+                  <column datatype='integer' name='query_end' ordinal='11' />
+                  <column datatype='integer' name='target_start' ordinal='12' />
+                  <column datatype='integer' name='target_end' ordinal='13' />
+                  <column datatype='real' name='evalue' ordinal='14' />
+                  <column datatype='real' name='bitscore' ordinal='15' />
+                  <column datatype='string' name='bitscore_threshold' ordinal='16' />
+                  <column datatype='string' name='custom_metric_name' ordinal='17' />
+                  <column datatype='string' name='custom_metric_value' ordinal='18' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+        </objects>
+        <relationships>
+          <relationship>
+            <expression op='='>
+              <expression op='LEFT([target_accession (protein_pfam.tsv1)],7)' />
+              <expression op='[Pfam ID]' />
+            </expression>
+            <first-end-point object-id='protein_pfam.tsv_73F79C4D42564294A63336579A5B23D3' />
+            <second-end-point object-id='Pfam-A.clans.tsv_5CC76181548A41AB972C523B05FCE274' />
+          </relationship>
+          <relationship>
+            <expression op='='>
+              <expression op='[query_database]' />
+              <expression op='[Genome Accession]' />
+            </expression>
+            <first-end-point object-id='protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006' />
+            <second-end-point object-id='genomes.tsv_4727E2D024DF476BAAC952ACDBBA7E2C' />
+          </relationship>
+          <relationship>
+            <expression op='AND'>
+              <expression op='='>
+                <expression op='[query_accession]' />
+                <expression op='[query_accession (protein_ko_assigned.tsv)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[query_database]' />
+                <expression op='[query_database (protein_ko_assigned.tsv)]' />
+              </expression>
+            </expression>
+            <first-end-point object-id='protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006' />
+            <second-end-point object-id='protein_ko_assigned.tsv_D1384BB22F47414BA0B5A953AF11B1C7' />
+          </relationship>
+          <relationship>
+            <expression op='AND'>
+              <expression op='='>
+                <expression op='[query_accession]' />
+                <expression op='[query_accession (protein_pfam.tsv1)]' />
+              </expression>
+              <expression op='='>
+                <expression op='[query_database]' />
+                <expression op='[query_database (protein_pfam.tsv1)]' />
+              </expression>
+            </expression>
+            <first-end-point object-id='protein_pfam.tsv_C8E489CEA6464C9A872A35845C6C3006' />
+            <second-end-point object-id='protein_pfam.tsv_73F79C4D42564294A63336579A5B23D3' />
+          </relationship>
+        </relationships>
+      </object-graph>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='Seed: PF00554'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='protein_pfam+' name='federated.00d09ka0qk00v41caiav90lqeobd' />
+          </datasources>
+          <datasource-dependencies datasource='federated.00d09ka0qk00v41caiav90lqeobd'>
+            <column caption='Lowest E-value Rank' datatype='integer' name='[Calculation_0036393756078080]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='{FIXED [query_accession (protein_ko_assigned.tsv)],&#10;       [query_database (protein_ko_assigned.tsv)]: MIN(&#10;&#10;IF [bitscore (protein_ko_assigned.tsv)] &gt;= [bitscore_threshold (protein_ko_assigned.tsv)]&#10;THEN INT([custom_metric_value (protein_ko_assigned.tsv)])&#10;ELSE NULL END&#10;)}' />
+            </column>
+            <column caption='Match Length' datatype='integer' name='[Calculation_1310520663515136]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='[query_end (protein_pfam.tsv1)]-[query_start (protein_pfam.tsv1)]+1' />
+            </column>
+            <column caption='Assigned KO' datatype='string' name='[Calculation_1318698290372608]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='{FIXED [query_accession],[query_database]: MAX(&#10;&#10;IF INT([custom_metric_value (protein_ko_assigned.tsv)]) == [Calculation_0036393756078080]&#10;THEN [target_accession (protein_ko_assigned.tsv)]&#10;ELSE NULL END&#10;&#10;)}' />
+            </column>
+            <column datatype='string' name='[Class]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Description]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Domain]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Family]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Genome Accession]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Genus]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Kingdom]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Name1]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Name2]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Order]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Organism]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Pfam ID]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Phylum]' role='dimension' type='nominal' />
+            <column caption='Bitscore (Protein Ko Assigned.Tsv)' datatype='real' name='[bitscore (protein_ko_assigned.tsv)]' role='measure' type='quantitative' />
+            <column caption='Bitscore Threshold (Protein Ko Assigned.Tsv)' datatype='real' name='[bitscore_threshold (protein_ko_assigned.tsv)]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_1318698290372608]' derivation='Count' name='[cnt:Calculation_1318698290372608:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[target_accession (protein_pfam.tsv1)]' derivation='Count' name='[cnt:target_accession (protein_pfam.tsv1):qk]' pivot='key' type='quantitative' />
+            <column caption='Custom Metric Value (Protein Ko Assigned.Tsv)' datatype='real' name='[custom_metric_value (protein_ko_assigned.tsv)]' role='measure' type='quantitative' />
+            <column-instance column='[query_start (protein_pfam.tsv1)]' derivation='Min' name='[min:query_start (protein_pfam.tsv1):qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1310520663515136]' derivation='None' name='[none:Calculation_1310520663515136:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1318698290372608]' derivation='None' name='[none:Calculation_1318698290372608:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Class]' derivation='None' name='[none:Class:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Description]' derivation='None' name='[none:Description:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Domain]' derivation='None' name='[none:Domain:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Family]' derivation='None' name='[none:Family:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Genome Accession]' derivation='None' name='[none:Genome Accession:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Genus]' derivation='None' name='[none:Genus:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Kingdom]' derivation='None' name='[none:Kingdom:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Name1]' derivation='None' name='[none:Name1:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Name2]' derivation='None' name='[none:Name2:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Order]' derivation='None' name='[none:Order:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Organism]' derivation='None' name='[none:Organism:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Pfam ID]' derivation='None' name='[none:Pfam ID:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Phylum]' derivation='None' name='[none:Phylum:nk]' pivot='key' type='nominal' />
+            <column-instance column='[query_accession]' derivation='None' name='[none:query_accession:nk]' pivot='key' type='nominal' />
+            <column-instance column='[query_start (protein_pfam.tsv1)]' derivation='None' name='[none:query_start (protein_pfam.tsv1):qk]' pivot='key' type='quantitative' />
+            <column-instance column='[target_accession (protein_pfam.tsv1)]' derivation='None' name='[none:target_accession (protein_pfam.tsv1):nk]' pivot='key' type='nominal' />
+            <column-instance column='[target_accession]' derivation='None' name='[none:target_accession:nk]' pivot='key' type='nominal' />
+            <column caption='Query Accession (Protein Ko Assigned.Tsv)' datatype='string' name='[query_accession (protein_ko_assigned.tsv)]' role='dimension' type='nominal' />
+            <column caption='Query Accession' datatype='string' name='[query_accession]' role='dimension' type='nominal' />
+            <column caption='Query Database (Protein Ko Assigned.Tsv)' datatype='string' name='[query_database (protein_ko_assigned.tsv)]' role='dimension' type='nominal' />
+            <column caption='Query Database' datatype='string' name='[query_database]' role='dimension' type='nominal' />
+            <column caption='Protein End' datatype='integer' name='[query_end (protein_pfam.tsv1)]' role='measure' type='quantitative' />
+            <column caption='Protein Start' datatype='integer' name='[query_start (protein_pfam.tsv1)]' role='measure' type='quantitative' />
+            <column caption='Target Accession (Protein Ko Assigned.Tsv)' datatype='string' name='[target_accession (protein_ko_assigned.tsv)]' role='dimension' type='nominal' />
+            <column caption='Target Accession (Protein Pfam.Tsv1)' datatype='string' name='[target_accession (protein_pfam.tsv1)]' role='dimension' type='nominal' />
+            <column caption='Target Accession' datatype='string' name='[target_accession]' role='dimension' type='nominal' />
+          </datasource-dependencies>
+          <computed-sort column='[federated.00d09ka0qk00v41caiav90lqeobd].[none:Calculation_1318698290372608:nk]' direction='ASC' using='[federated.00d09ka0qk00v41caiav90lqeobd].[cnt:Calculation_1318698290372608:qk]' />
+          <filter class='categorical' column='[federated.00d09ka0qk00v41caiav90lqeobd].[none:Class:nk]'>
+            <groupfilter function='except' user:ui-domain='relevant' user:ui-enumeration='exclusive' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[none:Class:nk]' />
+              <groupfilter function='union'>
+                <groupfilter function='member' level='[none:Class:nk]' member='&quot;Actinopteri&quot;' />
+                <groupfilter function='member' level='[none:Class:nk]' member='&quot;Ascidiacea&quot;' />
+                <groupfilter function='member' level='[none:Class:nk]' member='&quot;Aves&quot;' />
+                <groupfilter function='member' level='[none:Class:nk]' member='&quot;Lepidosauria&quot;' />
+              </groupfilter>
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.00d09ka0qk00v41caiav90lqeobd].[none:Phylum:nk]'>
+            <groupfilter function='except' user:ui-domain='relevant' user:ui-enumeration='exclusive' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[none:Phylum:nk]' />
+              <groupfilter function='union'>
+                <groupfilter function='member' level='[none:Phylum:nk]' member='&quot;Echinodermata&quot;' />
+                <groupfilter function='member' level='[none:Phylum:nk]' member='&quot;Porifera&quot;' />
+              </groupfilter>
+            </groupfilter>
+          </filter>
+          <computed-sort column='[federated.00d09ka0qk00v41caiav90lqeobd].[none:query_accession:nk]' direction='ASC' using='[federated.00d09ka0qk00v41caiav90lqeobd].[cnt:target_accession (protein_pfam.tsv1):qk]' />
+          <computed-sort column='[federated.00d09ka0qk00v41caiav90lqeobd].[none:target_accession (protein_pfam.tsv1):nk]' direction='ASC' using='[federated.00d09ka0qk00v41caiav90lqeobd].[min:query_start (protein_pfam.tsv1):qk]' />
+          <filter class='categorical' column='[federated.00d09ka0qk00v41caiav90lqeobd].[none:target_accession:nk]'>
+            <groupfilter expression='CONTAINS(LOWER([target_accession]), LOWER(&apos;PF00554&apos;))' function='filter' user:ui-enumeration='inclusive' user:ui-pattern-include-all-when-empty='true' user:ui-pattern_text='PF00554' user:ui-pattern_type='contains'>
+              <groupfilter function='level-members' level='[none:target_accession:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.00d09ka0qk00v41caiav90lqeobd].[none:target_accession:nk]</column>
+            <column>[federated.00d09ka0qk00v41caiav90lqeobd].[none:Class:nk]</column>
+            <column>[federated.00d09ka0qk00v41caiav90lqeobd].[none:Phylum:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.00d09ka0qk00v41caiav90lqeobd].[none:Pfam ID:nk]' />
+              <size column='[federated.00d09ka0qk00v41caiav90lqeobd].[none:Calculation_1310520663515136:qk]' />
+              <lod column='[federated.00d09ka0qk00v41caiav90lqeobd].[none:Name1:nk]' />
+              <lod column='[federated.00d09ka0qk00v41caiav90lqeobd].[none:Name2:nk]' />
+              <lod column='[federated.00d09ka0qk00v41caiav90lqeobd].[none:Description:nk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>([federated.00d09ka0qk00v41caiav90lqeobd].[none:Domain:nk] / ([federated.00d09ka0qk00v41caiav90lqeobd].[none:Kingdom:nk] / ([federated.00d09ka0qk00v41caiav90lqeobd].[none:Phylum:nk] / ([federated.00d09ka0qk00v41caiav90lqeobd].[none:Class:nk] / ([federated.00d09ka0qk00v41caiav90lqeobd].[none:Order:nk] / ([federated.00d09ka0qk00v41caiav90lqeobd].[none:Family:nk] / ([federated.00d09ka0qk00v41caiav90lqeobd].[none:Genus:nk] / ([federated.00d09ka0qk00v41caiav90lqeobd].[none:Organism:nk] / ([federated.00d09ka0qk00v41caiav90lqeobd].[none:Genome Accession:nk] / ([federated.00d09ka0qk00v41caiav90lqeobd].[none:Calculation_1318698290372608:nk] / ([federated.00d09ka0qk00v41caiav90lqeobd].[none:query_accession:nk] / [federated.00d09ka0qk00v41caiav90lqeobd].[none:target_accession (protein_pfam.tsv1):nk])))))))))))</rows>
+        <cols>[federated.00d09ka0qk00v41caiav90lqeobd].[none:query_start (protein_pfam.tsv1):qk]</cols>
+      </table>
+      <simple-id uuid='{E38F2C84-913D-425A-B14F-AD30D88ADAFC}' />
+    </worksheet>
+    <worksheet name='Seed: PF00554 Cnidaria'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='protein_pfam+' name='federated.00d09ka0qk00v41caiav90lqeobd' />
+          </datasources>
+          <datasource-dependencies datasource='federated.00d09ka0qk00v41caiav90lqeobd'>
+            <column caption='{FIXED [Query Accession]: MIN([Protein Start])}' datatype='integer' name='[Calculation_0858897303629826]' role='measure' type='quantitative' user:unnamed='Seed: PF00554 Cnidaria'>
+              <calculation class='tableau' formula='{FIXED [query_accession]: MIN([query_start (protein_pfam.tsv1)])}' />
+            </column>
+            <column caption='Match Length' datatype='integer' name='[Calculation_1310520663515136]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='[query_end (protein_pfam.tsv1)]-[query_start (protein_pfam.tsv1)]+1' />
+            </column>
+            <column datatype='string' name='[Class]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Description]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Name1]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Name2]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Pfam ID]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Phylum]' role='dimension' type='nominal' />
+            <column-instance column='[Calculation_0858897303629826]' derivation='Min' name='[min:Calculation_0858897303629826:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[query_start (protein_pfam.tsv1)]' derivation='Min' name='[min:query_start (protein_pfam.tsv1):qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1310520663515136]' derivation='None' name='[none:Calculation_1310520663515136:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Class]' derivation='None' name='[none:Class:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Description]' derivation='None' name='[none:Description:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Name1]' derivation='None' name='[none:Name1:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Name2]' derivation='None' name='[none:Name2:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Pfam ID]' derivation='None' name='[none:Pfam ID:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Phylum]' derivation='None' name='[none:Phylum:nk]' pivot='key' type='nominal' />
+            <column-instance column='[query_accession]' derivation='None' name='[none:query_accession:nk]' pivot='key' type='nominal' />
+            <column-instance column='[query_start (protein_pfam.tsv1)]' derivation='None' name='[none:query_start (protein_pfam.tsv1):qk]' pivot='key' type='quantitative' />
+            <column-instance column='[target_accession (protein_pfam.tsv1)]' derivation='None' name='[none:target_accession (protein_pfam.tsv1):nk]' pivot='key' type='nominal' />
+            <column-instance column='[target_accession]' derivation='None' name='[none:target_accession:nk]' pivot='key' type='nominal' />
+            <column caption='Query Accession' datatype='string' name='[query_accession]' role='dimension' type='nominal' />
+            <column caption='Protein End' datatype='integer' name='[query_end (protein_pfam.tsv1)]' role='measure' type='quantitative' />
+            <column caption='Protein Start' datatype='integer' name='[query_start (protein_pfam.tsv1)]' role='measure' type='quantitative' />
+            <column caption='Target Accession (Protein Pfam.Tsv1)' datatype='string' name='[target_accession (protein_pfam.tsv1)]' role='dimension' type='nominal' />
+            <column caption='Target Accession' datatype='string' name='[target_accession]' role='dimension' type='nominal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.00d09ka0qk00v41caiav90lqeobd].[none:Class:nk]'>
+            <groupfilter function='except' user:ui-domain='relevant' user:ui-enumeration='exclusive' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[none:Class:nk]' />
+              <groupfilter function='union'>
+                <groupfilter function='member' level='[none:Class:nk]' member='&quot;Actinopteri&quot;' />
+                <groupfilter function='member' level='[none:Class:nk]' member='&quot;Ascidiacea&quot;' />
+                <groupfilter function='member' level='[none:Class:nk]' member='&quot;Aves&quot;' />
+                <groupfilter function='member' level='[none:Class:nk]' member='&quot;Lepidosauria&quot;' />
+              </groupfilter>
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.00d09ka0qk00v41caiav90lqeobd].[none:Phylum:nk]'>
+            <groupfilter function='member' level='[none:Phylum:nk]' member='&quot;Cnidaria&quot;' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <computed-sort column='[federated.00d09ka0qk00v41caiav90lqeobd].[none:target_accession (protein_pfam.tsv1):nk]' direction='ASC' using='[federated.00d09ka0qk00v41caiav90lqeobd].[min:query_start (protein_pfam.tsv1):qk]' />
+          <filter class='categorical' column='[federated.00d09ka0qk00v41caiav90lqeobd].[none:target_accession:nk]'>
+            <groupfilter expression='CONTAINS(LOWER([target_accession]), LOWER(&apos;PF00554&apos;))' function='filter' user:ui-enumeration='inclusive' user:ui-pattern-include-all-when-empty='true' user:ui-pattern_text='PF00554' user:ui-pattern_type='contains'>
+              <groupfilter function='level-members' level='[none:target_accession:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+            </groupfilter>
+          </filter>
+          <shelf-sorts>
+            <shelf-sort-v2 dimension-to-sort='[federated.00d09ka0qk00v41caiav90lqeobd].[min:Calculation_0858897303629826:ok]' direction='ASC' measure-to-sort-by='[federated.00d09ka0qk00v41caiav90lqeobd].[min:Calculation_0858897303629826:ok]' shelf='rows' />
+          </shelf-sorts>
+          <slices>
+            <column>[federated.00d09ka0qk00v41caiav90lqeobd].[none:target_accession:nk]</column>
+            <column>[federated.00d09ka0qk00v41caiav90lqeobd].[none:Class:nk]</column>
+            <column>[federated.00d09ka0qk00v41caiav90lqeobd].[none:Phylum:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.00d09ka0qk00v41caiav90lqeobd].[none:Pfam ID:nk]' />
+              <size column='[federated.00d09ka0qk00v41caiav90lqeobd].[none:Calculation_1310520663515136:qk]' />
+              <lod column='[federated.00d09ka0qk00v41caiav90lqeobd].[none:Name1:nk]' />
+              <lod column='[federated.00d09ka0qk00v41caiav90lqeobd].[none:Name2:nk]' />
+              <lod column='[federated.00d09ka0qk00v41caiav90lqeobd].[none:Description:nk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>([federated.00d09ka0qk00v41caiav90lqeobd].[min:Calculation_0858897303629826:ok] / ([federated.00d09ka0qk00v41caiav90lqeobd].[none:query_accession:nk] / [federated.00d09ka0qk00v41caiav90lqeobd].[none:target_accession (protein_pfam.tsv1):nk]))</rows>
+        <cols>[federated.00d09ka0qk00v41caiav90lqeobd].[none:query_start (protein_pfam.tsv1):qk]</cols>
+      </table>
+      <simple-id uuid='{AEFAAE11-6FCB-49A6-AAD8-AA7E3A03A9C4}' />
+    </worksheet>
+    <worksheet name='Seed: PF00554 Cnidaria Protein Start'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='protein_pfam+' name='federated.00d09ka0qk00v41caiav90lqeobd' />
+          </datasources>
+          <datasource-dependencies datasource='federated.00d09ka0qk00v41caiav90lqeobd'>
+            <column caption='Min Pfam Start' datatype='integer' name='[Calculation_0858897303928835]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='{FIXED [query_accession]: MIN([query_start (protein_pfam.tsv1)])}' />
+            </column>
+            <column datatype='string' name='[Class]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Phylum]' role='dimension' type='nominal' />
+            <column-instance column='[query_accession]' derivation='CountD' name='[cum:ctd:query_accession:qk]' pivot='key' type='quantitative'>
+              <table-calc aggregation='Sum' ordering-type='Rows' type='CumTotal' />
+            </column-instance>
+            <column-instance column='[Calculation_0858897303928835]' derivation='None' name='[none:Calculation_0858897303928835:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Class]' derivation='None' name='[none:Class:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Phylum]' derivation='None' name='[none:Phylum:nk]' pivot='key' type='nominal' />
+            <column-instance column='[target_accession]' derivation='None' name='[none:target_accession:nk]' pivot='key' type='nominal' />
+            <column caption='Query Accession' datatype='string' name='[query_accession]' role='dimension' type='nominal' />
+            <column caption='Protein Start' datatype='integer' name='[query_start (protein_pfam.tsv1)]' role='measure' type='quantitative' />
+            <column caption='Target Accession' datatype='string' name='[target_accession]' role='dimension' type='nominal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.00d09ka0qk00v41caiav90lqeobd].[none:Class:nk]'>
+            <groupfilter function='except' user:ui-domain='relevant' user:ui-enumeration='exclusive' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[none:Class:nk]' />
+              <groupfilter function='union'>
+                <groupfilter function='member' level='[none:Class:nk]' member='&quot;Actinopteri&quot;' />
+                <groupfilter function='member' level='[none:Class:nk]' member='&quot;Ascidiacea&quot;' />
+                <groupfilter function='member' level='[none:Class:nk]' member='&quot;Aves&quot;' />
+                <groupfilter function='member' level='[none:Class:nk]' member='&quot;Lepidosauria&quot;' />
+              </groupfilter>
+            </groupfilter>
+          </filter>
+          <filter class='categorical' column='[federated.00d09ka0qk00v41caiav90lqeobd].[none:Phylum:nk]'>
+            <groupfilter function='member' level='[none:Phylum:nk]' member='&quot;Cnidaria&quot;' user:ui-domain='relevant' user:ui-enumeration='inclusive' user:ui-marker='enumerate' />
+          </filter>
+          <filter class='categorical' column='[federated.00d09ka0qk00v41caiav90lqeobd].[none:target_accession:nk]'>
+            <groupfilter expression='CONTAINS(LOWER([target_accession]), LOWER(&apos;PF00554&apos;))' function='filter' user:ui-enumeration='inclusive' user:ui-pattern-include-all-when-empty='true' user:ui-pattern_text='PF00554' user:ui-pattern_type='contains'>
+              <groupfilter function='level-members' level='[none:target_accession:nk]' user:ui-enumeration='all' user:ui-marker='enumerate' />
+            </groupfilter>
+          </filter>
+          <slices>
+            <column>[federated.00d09ka0qk00v41caiav90lqeobd].[none:target_accession:nk]</column>
+            <column>[federated.00d09ka0qk00v41caiav90lqeobd].[none:Class:nk]</column>
+            <column>[federated.00d09ka0qk00v41caiav90lqeobd].[none:Phylum:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Bar' />
+          </pane>
+        </panes>
+        <rows>[federated.00d09ka0qk00v41caiav90lqeobd].[cum:ctd:query_accession:qk]</rows>
+        <cols>[federated.00d09ka0qk00v41caiav90lqeobd].[none:Calculation_0858897303928835:qk]</cols>
+      </table>
+      <simple-id uuid='{E5ECB6AD-BE76-42C7-BD52-A26ADB1B2D72}' />
+    </worksheet>
+    <worksheet name='Taxonomy'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='protein_pfam+' name='federated.00d09ka0qk00v41caiav90lqeobd' />
+          </datasources>
+          <datasource-dependencies datasource='federated.00d09ka0qk00v41caiav90lqeobd'>
+            <column datatype='string' name='[Class]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Domain]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Family]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Genome Accession]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Genus]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Kingdom]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Order]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Phylum]' role='dimension' type='nominal' />
+            <column-instance column='[query_accession]' derivation='CountD' name='[ctd:query_accession:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[Class]' derivation='None' name='[none:Class:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Domain]' derivation='None' name='[none:Domain:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Family]' derivation='None' name='[none:Family:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Genome Accession]' derivation='None' name='[none:Genome Accession:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Genus]' derivation='None' name='[none:Genus:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Kingdom]' derivation='None' name='[none:Kingdom:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Order]' derivation='None' name='[none:Order:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Phylum]' derivation='None' name='[none:Phylum:nk]' pivot='key' type='nominal' />
+            <column caption='Query Accession' datatype='string' name='[query_accession]' role='dimension' type='nominal' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows>([federated.00d09ka0qk00v41caiav90lqeobd].[none:Domain:nk] / ([federated.00d09ka0qk00v41caiav90lqeobd].[none:Kingdom:nk] / ([federated.00d09ka0qk00v41caiav90lqeobd].[none:Phylum:nk] / ([federated.00d09ka0qk00v41caiav90lqeobd].[none:Class:nk] / ([federated.00d09ka0qk00v41caiav90lqeobd].[none:Order:nk] / ([federated.00d09ka0qk00v41caiav90lqeobd].[none:Family:nk] / ([federated.00d09ka0qk00v41caiav90lqeobd].[none:Genus:nk] / ([federated.00d09ka0qk00v41caiav90lqeobd].[none:Genome Accession:nk] / [federated.00d09ka0qk00v41caiav90lqeobd].[ctd:query_accession:ok]))))))))</rows>
+        <cols />
+      </table>
+      <simple-id uuid='{131C2B31-5BE5-48A0-8E48-31FB95DB22ED}' />
+    </worksheet>
+  </worksheets>
+  <windows source-height='30'>
+    <window class='worksheet' name='Taxonomy'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{A96FC4D2-8D56-4EEF-BB2A-3F43656060BB}' />
+    </window>
+    <window class='worksheet' name='Seed: PF00554'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.00d09ka0qk00v41caiav90lqeobd].[none:Pfam ID:nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <simple-id uuid='{93F5CFFB-052B-4FF0-8CC4-D44E0921131E}' />
+    </window>
+    <window class='worksheet' maximized='true' name='Seed: PF00554 Cnidaria'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.00d09ka0qk00v41caiav90lqeobd].[none:Pfam ID:nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.00d09ka0qk00v41caiav90lqeobd].[min:Calculation_0858897303629826:ok]</field>
+            <field>[federated.00d09ka0qk00v41caiav90lqeobd].[none:Calculation_0858897303457793:qk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{1026EAC7-9F1A-40ED-807F-379895767B5B}' />
+    </window>
+    <window class='worksheet' name='Seed: PF00554 Cnidaria Protein Start'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.00d09ka0qk00v41caiav90lqeobd].[min:Calculation_0858897303629826:ok]</field>
+            <field>[federated.00d09ka0qk00v41caiav90lqeobd].[none:Calculation_0858897303457793:qk]</field>
+            <field>[federated.00d09ka0qk00v41caiav90lqeobd].[none:Calculation_0858897303928835:ok]</field>
+            <field>[federated.00d09ka0qk00v41caiav90lqeobd].[none:query_accession:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{9C562C70-4992-4BAA-8366-F3471F3F47AE}' />
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='384' name='Seed: PF00554' width='384'>
+      iVBORw0KGgoAAAANSUhEUgAAAYAAAAGACAYAAACkx7W/AAAACXBIWXMAAA7DAAAOwwHHb6hk
+      AAATh0lEQVR4nO3c+1Ib9f/H8dfmQKCEcj6UtoAttLWlHsaxVsfq+IfjLXg5XopXoM7oOE49
+      VQF7AgsVgRYrh5BASCAckmzO+/3DYaenn21pbfX3fj5mOh0IST67m+zzs8sGx/M8TwAAcwIv
+      egAAgBeDAACAUQQAAIwiAABgFAEAAKMIAAAYRQAAwCgCAABGEQAAMIoAAIBRBAAAjCIAAGAU
+      AQAAo0J3f+F5nlZXV1/UWAAAz5HDn4MGAJv+9hRQOp3WxMSEJiYmlMvl7rktFoupWCzu+4lr
+      tZpqtdq+7y9JqVRKyWRSklStVjUzM/PAz1Sr1ad6jqfheZ4WFhZ07do15fN5LSwsPPZ9V1dX
+      lc1m7/nes1hnd0smk0qlUpKkcrmsubm5Z/bY8/Pzqlarisfj+36MtbU1TUxMaGlpSXfPU7LZ
+      rDKZzGM9xovc/k8qlUqpVqvJ8zz/df0oq6urKpfL93xvZ2dH29vb/td37tx5pq+bZ2V9fd1f
+      3vX19Rc9nH/c+vq6PM97bssbi8Ue+TN/G4C5uTkdPXpUQ0NDqq+vVz6fl+d5yufzWltbU6lU
+      kuu6qlQqSqVS/kLl83nt7u4qk8n4GziXy8l1XS0uLqpWq2l2dlbj4+PK5XLK5/NaXl5WpVJ5
+      ogWcm5vT9evXJUm3b9/WlStXJEkbGxtaX19XpVLRV199pWQyqWq1qvX1daVSKXme58fDdV2V
+      SiUtLi6qUqn4p8Eedwfzd2ZnZ5VOpzU0NKRisajl5WUtLS2pXC7L8zwtLS3569R1XW1ubsrz
+      PKXTad2+fVuu62p7e1vxeFye52lqakpTU1PK5/PK5XKKxWJPtYObnZ3119/c3JyuXbvm73zS
+      6bQkKZfLKZFIaHd3VysrK3JdV67ramNjQ+l0WqlUSplM5oH7xWIxOY6jUCikWq2mRCKhra2t
+      Jxrf3Nyc+vv7tba25q+Pve0SDAaVz+eVTCa1tbWlRCKhbDarWq2meDyu7e1tua6rr776yt/m
+      iUTC3zFubm4qmUzq33QA/Pvvv6tarcrzPP3222/+mPfWWzab1fLy8j3vl1AopEAgoFwup5WV
+      FeXzeQUCAQUCAf+1PDc3p1qtpkwmo0QiIc/zVK1Wtbi4qFKp9EKXd2//cPPmTXme5287Sdrd
+      3b1neavVqj/up5l8vijT09P+8u5t35WVFe3s7Ej6a3mXlpbkuq6WlpZUrVZVqVQeWN6trS2t
+      ra3J87x79g+u6yqZTGpzc1OSFA6HJf01kb/7/RyPx5XNZuV5noKffPLJJ//XgJeXl7W6uqp0
+      Oq2uri5dvXpVAwMDGh0dVSQSUWNjo0ZHR/XSSy9pYWFBS0tLCgQC+v777/2dWSqVUi6X08bG
+      hq5cuaKOjg5NTk4qGAwqm82qs7NTq6urqtVqmpiY0ODg4GOv0FgspmAwqK6uLs3MzKi5uVnR
+      aFS//fabv6NYXFxUW1ubDhw4oFgspj///FN1dXVyXVdjY2Pq6Ojw/7927Zq6urqUTqf166+/
+      6vDhw4pEIk+2le9y48YNXbhwQQ0NDQoEAhodHVVnZ6du376txcVFNTQ06OrVq+rr69Onn36q
+      hoYGZTIZra6uKpfLqaenR6urq3JdV3fu3FG5XFahUFB7e7vi8bgqlYqmpqZ07NixfY1veXlZ
+      gUBAPT09mp2dVVNTk3p7exWLxXT79m1Fo1H99NNPikajunjxorq6ujQ9Pa10Oq3t7W1dvXpV
+      0WhUN27cUH9/v+LxuG7duqWmpialUin19fVpcnJSBw8e1ObmpsbHx3X06FHV1dU91viWlpZ0
+      5MgR7e7uSpK+/vprOY6juro6bW5u6saNGwqHw/rhhx/U3t6uyclJdXR0KJPJaHx8XJ2dnfrj
+      jz/U0dGhRCKhnZ0dzczMqLW1VSMjI6qvr1dzc7NCodAjRvJ8zM/PKx6Pa2VlRblcTsViUdvb
+      25qfn1dra6u+/vprtbS06LvvvlNzc7NWVlaUTqfV3d2tzz77TB0dHbpx44YaGxuVzWY1PT3t
+      h/nEiRNaWFhQJpNRKpXy3y/j4+MaGhp6Ict769Ytra6u+hOLbDarfD6vmZkZdXZ26ssvv1RL
+      S4t++OEHRaNRJZNJTU9Pq7m5WVeuXNHg4KACgf/OdSyzs7NKJpOKxWIqFAra2tpSuVzWzZs3
+      dejQIX3xxRdqaWnRpUuX1NDQoM3NTU1OTqq1tVVXr171J5IXL15UQ0ODDh48qIWFBeVyOS0u
+      LiqRSMh1Xc3NzamtrU3T09MKh8Oan5/X2tqaGhsb9c0336itrU0TExPa2tp69FVAb775ps6f
+      P6/6+voHbvvss890/vx5ua6rRCKhcrmsnZ0dtbe368MPP9SZM2e0tLSkO3fuaGBgQN3d3Roa
+      GpLjOOru7tbRo0fV2tqqeDyu9fX1fVV9eHhYU1NT/k5lbxx7s5yuri6dOHFCxWLRv213d1fh
+      cFjHjh3ToUOH1NTUpOPHjysSiWhnZ0fxeFzlcvmB0177cfcMfXBwUCdOnJDjOKpUKjp58qT6
+      +/u1s7OjM2fO6M0331QymdTbb7+t3t5e1Wo1xWIxbW1tyXVddXd3q7+/X83NzYrH40qn03Jd
+      96nG9/LLL2tyclIHDhyQ9NcsZG89ZbNZtbS06PTp0xoYGNCpU6cUDocVDAY1PDys3t5enT17
+      Vs3Nzcpms0okEiqVSg+cutqboZdKJRUKhcceW6VS0eTkpBobG3XixAkNDQ3pnXfeUTAYlCQ1
+      NDRoeHhYfX19On36tA4cOHDPc9XV1amrq0vHjx9XPB5XLpdTKBSS4zjq6OhQLBZ74qPOf1Io
+      FNK5c+f01ltvKRKJKJ1O6/XXX9crr7yitbU1HTp0SCdPntRLL72koaGhe45eDh8+rFOnTqmh
+      ocH/Xrlc1tmzZ9XR0aFyueyHJZfLKZ1OK5lMKhQKvbCjoLq6Op07d07nzp1TXV2dtra29Oqr
+      r+rs2bNaX1/X4cOH/eUdHBxUrVZTMBjU0NCQ2tvbX+jRy35EIhF/eUOhkHZ2djQ8PKzTp08r
+      lUrpyJEjOnnypAYGBjQ0NKRKpaJwOKzBwUG1tLSoUqkoEomop6dHy8vLcl3X36a7u7sKBAJ6
+      +eWXNTw8rI2NDUny92WO48h1XfX09OjUqVOKRqM6efLkowNw+fJljYyMaHd3V+l0WqOjo/6M
+      7OOPP9bY2JjW1tZUqVT8DbI3o3IcR52dnXIcRw0NDUqlUhobG/NnXpOTk/4sxvO8fZ2nPHjw
+      oObn53Xq1ClJ0sDAgPL5vBzHUTQaVTgc1sjIiNLptD/GWq2mzz//XIVCQclkUvl8XpcvX5bn
+      edrY2JDjOA+cV92P1157TV9++aV+/PHHB05/NDU1aWRkRIuLi2ppafHXWXd3t7799ltNT0+r
+      Uqloa2vLPy3Q0tKiiYkJxeNxbW5u+oeT++U4jtra2jQ7O+uvv+3tbdVqtUe+uRzHuefrvXE+
+      7H77XaehUEjnz5/3Jw2PM1O//7lc19X169d1/PhxZbNZ1dXVyfM8VSoVVavVZxL5Z8VxHIXD
+      YT9SR48e1ffff+8fJT7pY4VCIf38889aXFxUoVBQNpv1J0e9vb2qVqtqbGx8YFs+L3vLGw6H
+      5TiOent79eOPP2p8fFyHDx9+6H1CoZDGxsaUyWSe6uj8Rbh/ebu7u3Xp0iVNTU3p0KFDD71P
+      IBDQL7/84k9aC4WC/9re3NzU7u6uf+q6Vqvp2rVr/pG2JB07dkzZbFaBQMCf5O3Z2Nh4squA
+      9t40D1vxhUJBkUjknhdTuVzWpUuX9MYbb6itrc0/T7U3kFKppGAw6P9iZO+c1dOq1WqqVqsK
+      h8PyPE/FYlH19fUPHaMkf1x7s6disfjQn9uPvZ3N/cvmeZ4/nvsPYwuFgurq6hQIBPx1tDfr
+      LZVK/nn1Z7nO7n/+/Sz/363fZ7lO/879z1Wr1VQulxWJRFSpVOQ4joLBoL8jfNzTUS9KsVhU
+      MBjc12mqvddYfX29HMdRsVhUOBz2X2+lUsnfGf1bFItFhUIh//V+v7vfq/+mce9XoVDwj6of
+      5mHLWy6XVavVFIlE7tk/XL58WWfOnFFTU9M962bv4pGHvYb+0ctAS6WSdnZ21NHR8U89BQBA
+      f10kcODAgSf6vQifAwAAo/47v0IHgP+4hYUF/5z9s7B3leB+EQAAeA4SiYR/ifLTXr23p7W1
+      VWNjY/u+/7/jAmgA+H9udnZWFy5c0Pj4uEZGRlQul/XRRx9pfn5ep0+f1u+//65QKKRYLKZ8
+      Pq9oNCrHcXThwgWNjo6qWCzq/PnzmpmZkeu6CgQCev/99+U4jn/Z85PiCAAAnoNqtepf3ffu
+      u++qt7dX2WzW/7MfyWRSmUxG77zzjlpaWvTuu+9K+utS0K6uLkl/fXjOdV198MEH/tWT0Wh0
+      35czEwAAeE72PuvkOI5/qWalUvH/3X+b4zhKJBLK5XJ6/fXX/dvu/plSqbTvz0RwCggAnoP2
+      9natr6/ryJEjCofD6unpUX19vaLRqEZHR9XX16doNKpQKKS+vj4Fg0ENDAyoq6tLt27d0h9/
+      /KH+/n7/w5YDAwNyHEfZbPahf6nhcXAZKAA8B5VKRWNjY3rvvfee2YfYFhYWVK1Wn+hvqN2N
+      AACAUfwOAACMIgAAYBQBAACjCAAAGEUAAMAoAgAARhEAADCKAACAUQQAAIwiAABgFAEAAKMI
+      AAAYRQAAwCgCAABGEQAAMIoAAIBRBAAAjCIAAGAUAQAAowgAABhFAADAKAIAAEYRAAAwigAA
+      gFEEAACMIgAAYBQBAACjCAAAGEUAAMAoAgAARhEAADCKAACAUQQAAIwiAABgFAEAAKMIAAAY
+      RQAAwCgCAABGEQAAMIoAAIBRBAAAjCIAAGAUAQAAowgAABhFAADAKAIAAEYRAAAwigAAgFEE
+      AACMIgAAYBQBAACjCAAAGEUAAMAoAgAARhEAADCKAACAUQQAAIwiAABgFAEAAKMIAAAYRQAA
+      wCgCAABGEQAAMIoAAIBRBAAAjCIAAGAUAQAAowgAABhFAADAKAIAAEYRAAAwigAAgFEEAACM
+      IgAAYBQBAACjCAAAGEUAAMAoAgAARhEAADCKAACAUQQAAIwiAABgFAEAAKMIAAAYRQAAwCgC
+      AABGEQAAMIoAAIBRBAAAjCIAAGAUAQAAowgAABhFAADAKAIAAEYRAAAwigAAgFEEAACMIgAA
+      YBQBAACjCAAAGEUAAMAoAgAARhEAADCKAACAUQQAAIwiAABgFAEAAKMIAAAYRQAAwCgCAABG
+      EQAAMIoAAIBRBAAAjCIAAGAUAQAAowgAABhFAADAKAIAAEYRAAAwigAAgFEEAACMIgAAYBQB
+      AACjCAAAGEUAAMAoAgAARhEAADCKAACAUQQAAIwiAABgFAEAAKMIAAAYRQAAwCgCAABGEQAA
+      MIoAAIBRBAAAjCIAAGAUAQAAowgAABhFAADAKAIAAEYRAAAwigAAgFEEAACMIgAAYBQBAACj
+      CAAAGEUAAMAoAgAARhEAADCKAACAUQQAAIwiAABgFAEAAKMIAAAYRQAAwCgCAABGEQAAMIoA
+      AIBRBAAAjCIAAGAUAQAAowgAABhFAADAKAIAAEYRAAAwigAAgFEEAACMIgAAYBQBAACjCAAA
+      GEUAAMAoAgAARhEAADCKAACAUQQAAIwiAABgFAEAAKMIAAAYRQAAwCgCAABGEQAAMIoAAIBR
+      BAAAjCIAAGAUAQAAowgAABhFAADAKAIAAEYRAAAwigAAgFEEAACMIgAAYBQBAACjCAAAGEUA
+      AMAoAgAARhEAADCKAACAUQQAAIwiAABgFAEAAKMIAAAYRQAAwCgCAABGEQAAMIoAAIBRBAAA
+      jCIAAGAUAQAAowgAABhFAADAKAIAAEYRAAAwigAAgFEEAACMIgAAYBQBAACjCAAAGEUAAMAo
+      AgAARhEAADCKAACAUQQAAIwiAABgFAEAAKMIAAAYRQAAwCgCAABGEQAAMIoAAIBRBAAAjCIA
+      AGAUAQAAowgAABhFAADAKAIAAEYRAAAwigAAgFEEAACMIgAAYBQBAACjCAAAGEUAAMAoAgAA
+      RhEAADCKAACAUQQAAIwiAABgFAEAAKMIAAAYRQAAwCgCAABGEQAAMIoAAIBRBAAAjCIAAGAU
+      AQAAowgAABhFAADAKAIAAEYRAAAwigAAgFEEAACMIgAAYBQBAACjCAAAGEUAAMAoAgAARhEA
+      ADCKAACAUQQAAIwiAABgFAEAAKMIAAAYRQAAwCgCAABGEQAAMIoAAIBRBAAAjCIAAGAUAQAA
+      owgAABhFAADAKAIAAEYRAAAwigAAgFEEAACMIgAAYBQBAACjCAAAGEUAAMAoAgAARhEAADCK
+      AACAUQQAAIwiAABgFAEAAKMIAAAYRQAAwCgCAABGEQAAMIoAAIBRBAAAjCIAAGAUAQAAowgA
+      ABhFAADAKAIAAEYRAAAwigAAgFEEAACMIgAAYBQBAACjCAAAGEUAAMAoAgAARhEAADCKAACA
+      UQQAAIwiAABgFAEAAKMIAAAYRQAAwCgCAABGEQAAMIoAAIBRBAAAjCIAAGAUAQAAowgAABhF
+      AADAKAIAAEYRAAAwigAAgFEEAACMIgAAYBQBAACjCAAAGEUAAMAoAgAARhEAADCKAACAUQQA
+      AIwiAABgFAEAAKMIAAAYRQAAwCgCAABGEQAAMIoAAIBR/wMcTavsHGDAYgAAAABJRU5ErkJg
+      gg==
+    </thumbnail>
+    <thumbnail height='384' name='Seed: PF00554 Cnidaria' width='384'>
+      iVBORw0KGgoAAAANSUhEUgAAAYAAAAGACAYAAACkx7W/AAAACXBIWXMAAA7DAAAOwwHHb6hk
+      AAAgAElEQVR4nOzdWVRUaZ73+2+MBAQyh0yCyCAyiAyCppqp4pBaWlXdvdbbU/Wp1Vdd9+fq
+      nKuT51yci3Nz7vrifVev7tPD6vV2V62qXElmOSCIA6QgigwyyDzPEARBzLHPBc1G0kwCAYkI
+      /X/WqrUqlYh49lb3P/azn//z0yiKoiCEEOKTow32AIQQQgSHFAAhhPhESQEQQohPlBQAsWte
+      r5eZmZlgD0MIsUtSAIQQ4hMlBUAIIT5RUgCEEOITJQVACCE+UVIAhBDiEyUFQAghPlFSAIQQ
+      4hMlBUAIIT5RUgCEEOITpXl7N1BFUZiamgrmeEQY8fv9mEwmIiIiDvyz5+fnSUpKOvDP/Sle
+      rxetVotWGzrfqTweDwaDIdjDUMk5Cszj8aDX69FoNAfyeRrZDlrsltfrxe12ExUVdeCfbbPZ
+      OHTo0E/+vnewAd9M14GNx+/3odFoD+wf7k74fF50Ov0HeW997hV0lvz3eo3b7Uav14dUAXC5
+      XEH5AvNT3G43BoPhwP4ebfu3Y+OOICYmhujoaLxeL6Ojo2RnZx/I4AKNbXx8nIyMDNxuN8vL
+      yywuLuJwOMjKyiI+Pn7Lz7tcLlpbW8nLy8NisbC8vExHRwe5ubkkJCTQ2dkJQEFBAQaDgefP
+      nxMfH09cXBwTExMApKenEx8fr75PUlIS4+PjjI2NcfLkSZaWlpibmwPg2LFj2O12xsbGOH36
+      NEajUR33xMQECQkJQblwfixcLtf2BWCoAU/7fxzgiEKT7wO9rzb2yHsXABF6ti3Fw8PDNDU1
+      MT8/j6IoPHz4kI6OjoMa27Y0Gg0zMzP09/dTX1+PyWRicHCQrKws6urq8Pm2/tWvr6+nqKiI
+      J0+e4PV6aWhooKqqiujoaMbHx4mIiCA3N5eIiAgePHhAYWEhqampxMfHk5ubi9/vx2q1qu/z
+      9OlT3G43c3NzFBUV8fjxYywWC7m5uSwuLrKyskJ3dzeFhYXU19er4xgYGKCpqYmlpaX3Pubm
+      5mZqa2v59ttvWV5e5ve//z0PHz7kzZs3DA8PU1NTw507d/D7/dy5c4eamhpGRkaYmpri66+/
+      pr6+HrvdTkNDA/X19bS2tgLr3zr+4R/+AZvNBqwXqYaGBu7evcv9+/eZmpqipqaGmpoaZmdn
+      9/CnJoQIJdsWgGPHjlFaWgqsX3CvXr1KdHT0gQxsJyoqKmhubiYpKYlDhw6h0+mIiIhAp9Nt
+      +TlFUdDr9cTGxpKens7Y2BjLy8s8evSIubk5VldXGRkZobOzE0VRmJ6e5vnz57x584aIiAhi
+      YmKYnp7m+PHj6vukpqbicrkoKyujp6eHtLQ0IiMjMZvNuN1uLBYLXq8XjUbD6uqqOpbc3FyK
+      i4t3dbxOp5MLFy5w/vx5enp6iI6O5tKlS+Tl5dHb28utW7dISkqir6+PpKQkbt68SV9fH9PT
+      01RUVHDp0iXMZjMOh4Pz589TUVGBoig0NjaSlZWF3+9XP+vcuXNcu3YNh8PB3NwcBQUFHD9+
+      XL3DCbZQum0XIlyFzmTcLrhcLgwGg/qtdHFxkfb2di5cuPBOEdi4uLlcLkwmE/n5+Vy9epWe
+      nh5OnTrFrVu3OHz4MD09PaSnp3PlyhWWlpZwu90MDQ1x7NixLe+zMZ95584dLBaLWijb2too
+      LS3FbDZz6tQp+vv70ev3Zx7W7/fz6NEjnj59Sn5+PtPT09TX1zM4OIhOp0Oj0WA2m1lYWCAm
+      JkY9B2lpaYyOjvK73/2OxcVFjhw5QlNTEzU1NYyPjxMdHY3ZbFaPTaPR4HK5+Prrr6msrCQp
+      KYn29na6urpITEzcl2PZK5fLFewhCBH2tr0yDQwM0NbWhlarxWg00t/fz8DAALGxsZw+ffqg
+      xvijFEWhvr6emzdv0t/fT19fHxaLhbNnz77zsxqNhvj4eOrq6rDb7aSkpNDS0kJjYyNRUVG8
+      fv2a2dlZFhcXuXjxIlarlUePHmG32zEYDHR1dXH79m00Gg1xcXHq+7jdboaHhzGZTKyurlJU
+      VMT09DSnT5/G7/czOjqK3W5Xp4Xm5+cB6OjowGQyYTKZ3uuCqtVq+eKLLzCZTCiKQkpKCpcv
+      XwbW/6wcDgdTU1MUFRXx+vVr0tPT0Wq16PV6zp49S19fH3Nzc6SmplJUVERNTQ1+vx+Xy8XQ
+      0BBarZbi4mJMJhO1tbXcuHGDyMhI6uvruXr1Kl6vl87OTlJSUvbnD1EIEVQf7SqgkZER9c7A
+      ZDJRXFysPvHXaDQoioLD4SAyMhKNRoPb7Uan06HT6VAUBafTSURExDsrFhRF2fI+23G73SiK
+      sm/TFSMjI6Snp6PX61EUhaGhIfWBvN1up7GxUb24d3Z2MjMzw7lz57BarXR1dREVFcWZM2d4
+      9eoVi4uLZGdnq6+fmJggMTGRoaEhcnJyaGxsVKfOKioqePbsGRqNhrNnz2IymYDQXgXkfPB/
+      yUPgD8j05f+NofAX7/UaWQUU2EGvAvpoC4D48IJZAAL1AUgB+LCkAHwYUgBE2AjlAnDQPB4P
+      Op1OLm7bkAIQ2EEXgND5kxDiPYTSP1ohwtWHaRMU4gML1AgmPkJOJ3Tvb3e3zusDvS7wDx4Q
+      nc8HWh3s9Qbg5CnYwepDKQBCiPDgcsLLF/v6lqF2Ady3UlRYLAXgY9Pc3MzKygoul4vz589T
+      X19PfHw86enpxMbGcv/+fa5du4bFYuHJkye43W6OHj2KxWKhtraWkpISsrOzefr0KT6fj/Hx
+      cW7fvq3+98WLF4mLiwOgu7ublpYWfv3rXzM1NcXLly/xeDycPn2a9PT0IJ8JmQISYj9IAQgj
+      G53ATqdzSycwgNVq5dSpU/h8PrXzuLy8nLi4OFZXV6mqqsJms6HT6fjiiy9YWVkB4M2bN1y4
+      cAGDwUBraytffPEFACkpKeqFPikpiZ/97GeMjo4yMzMTEgVApoCE2DspAGFkoxPY4/Fw7tw5
+      ampqqK+v5+jRo2RnZ6ub1tlsNiYmJoiIiGB5eZnr169v2Y4CoKWlhbNnz+JyuXj06BFRUVFb
+      9k96ezM9vV7PixcvWF5eVguOECL8SQEII9t1Ar8tLi6OxMRETp8+zb179975fbvdjqIomM1m
+      IiMj+fnPf87IyAgrKyusra2pzXEbhoaGcLvdVFdXf9Djex8yBSTE3sky0DBy9OjRLfsK5eTk
+      qP9/Y9O3np4enE4nGRkZ1NXVUVpaysjICL29vUxPTzM5OYnVauXMmTMAOBwOHjx4wNTUFMXF
+      xYyMjOD1emlpacHv96vPB+x2O/X19YyPjx/4cf8Y2QtIiL2TRjCxa9IItkkawQLbcyOYdRl+
+      95/7O6iP1a9+DTv4s5cCIHbN6/WyvLwclItMqF3cJO4wMDlHgR10JOSWZwCSCSzex0YmcDC4
+      3e6QKgBChCO5AxC7Fk5TQIp7DXfrP32w8XxqmcC74fP50Go/3XOkP/4lusScbX8mZDOBtVot
+      3d3dABw6dIjjx48fyAC3Mz8/T3x8PB6PB5vNRlJSEh0dHRQXF6PRaJibm+Pw4cNMTk4SFxdH
+      V1cXWq2WU6dO0dnZqf6FLC4uprOzE7fbTVlZGT6fjxcvXpCdna2GocD6ttKZmZl0dnYSHR1N
+      cXExU1NTTE1NERUVRUFBgTq2ubk59Hr9O9nEYn+877d/xbOG+/u//0CjCV0fKhN4t0JtPHBw
+      Y9Im5QUsAAdN99VXX331U785PDxMS0sLcXFxJCQkEB0drQao5OXlHeAwf1xrayvJyck8ePCA
+      /Px83G43dXV1xMTEEB8fz/fff09CQgIvXrwgJSWFhIQEtFot/f395OXlER8fz4sXLzh27BgR
+      EREkJibS0tLC4OAgZ86c4cmTJ2RnZxMbG0tMTAxtbW1qg9TMzAwul4uenh5KSkqIi4tTg98n
+      JydpaWlBq9WSnJy8b8fb3NxMd3c33d3dHD58mD/+8Y/MzMyoBfDJkycMDg6SnZ3N3bt36enp
+      ISIiAofDQV1dHVNTUxw+fJimpiaGhoZYXFwkLS0Nt9vNP/3TP5GXl0dERASKovDo0SN6e3sZ
+      GhoiKiqKhoYG+vr6iIuLw2w2A+tTQD6fLyhzqDab7b3uPBTPGp4PeAcgRCD64zcCFgCfz6em
+      +x2EHWcC63Q6YmNjef36NefPnz+QwQWiKAo1NTXk5+cTFRWlJncNDg4C69/C79y5Q3V1NXFx
+      cfT19fH999+Tn59PTEwM8/PznDhxArPZzPT0NHV1dRQUFODz+XC5XMTExLCwsEBsbCwDAwNU
+      VVWRlJREa2srQ0NDpKWlsba2RktLy5aw9LS0NHWZ5X6STGAhxH56r8fxbrcbp9NJTEzMhxrP
+      e9FoNJSVlTE6OqomZHV0dDAyMoKiKCQkJGCxWJifn0ej0VBeXk5JSQl9fX0oikJ3dzeFhYUA
+      FBUVUVlZSV9fH9XV1QwODrKysoLJZMLn8zE7O0tqaioajYbPPvuMI0eOMDY2xp/8yZ9w5coV
+      Ojo6PvjxSibwJnkALMTe7TgTOCoqit7e3h/N3A0WjUbDkSNHsNlsPH/+nPT0dD7//HNSU1PV
+      i+Lly5f5+uuv1W+vXq+XlJQURkdHyczMRKPRMDExQW9vL1qtlsjISCYmJtR13YmJibx8+ZKS
+      khJgPc/XarVitVpJS0vjwYMHGI1GtFotbrebzs5O9VnEysoKCQkJ+7Z3jmQCb5K9gITYu09q
+      FZDb7Uaj0fzonLXH48Hv96tz4Gtra0RFRb0zF7eRCazX69Vs3p1mBO+VZAJvet9VQH77PPb/
+      funDDUiIAEy3/18Mede2/RmJhBRhI5RD4X9ICoAINikA4qMSTncAH5psBRGYZAIHJpnAQggh
+      DkTotAkK8R5C6VubEHsyOLC+0R37mAm8Q1IARFiSVUDiozE0CCPDwD5mAu+QFIAwIpnAQoj9
+      JAUgjEgm8CaZAhJi76QAhBHJBN4kU0BC7J0UgDAimcBCiP0ky0DDiGQCb5IpICH2ThrBxK5J
+      I9gmaQQLTBrBfsKD++oqoIMmU0BCCBFMVza3h5BOYCF2IOjf2oT4CEgBEGHJ5XIFewhChD0p
+      AEII8YmSZwBhZLtOYIPBQGdnJ3q9nuvXr3Pv3j28Xi8nT54kKiqKpqYmNBoNN2/e5OnTpzid
+      TjQaDZWVlTQ3N+P3+zl+/Dg5OTlqJrDH40Gr1ZKdnc3Q0BCrq6tkZGSoMaHBJFNAQuydFIAw
+      sl0n8N27d7l16xatra1qJnBZWRl1dXVotVpu3LjB6Ogow8PDnDt3Dp1OR01NDfHx8Xz55ZeM
+      jIwwMzNDTk4OGo2Gixcv4nQ6uX//PllZWWRlZVFbW8vx48eDexL+izSCCbF3MgUURnabCez3
+      +zEajRw6dIi1tbUteb+w3hXc0NDAkSNH1M+anp7mD3/4g7o3kM1mU6NBhRAfB7kDCCO7zQQ2
+      mUwsLCwwOjrKkSNHtuT92u12ysvLKSkpoaGhgbi4OCIiIoiOjuYv/uIv+O677/D7/bS0tKgF
+      IxTIFJAQeycFIIxs1wl87tw5njx5QmpqKocPH2Z2dpampibOnTuHXq/nyZMnxMTEkJycTFxc
+      HN9//z16vZ7CwkL1+UBVVRUjIyPk5OTw6tUrnE6nmhl85MiRkJpykSkgIfZOOoHFrkkn8Cbp
+      BA5MOoEDk0YwIXYglP7RChGupACIsCSNYELsnRQAIYT4REkBEGFJpoCE2DtZBRRGdpoJHBcX
+      x/3799FqtSQnJxMVFcXU1BTz8/OUl5ere/4nJSVRWlrKgwcP0Gg0FBQUqHGPb2cCA6ysrPDv
+      //7v/N3f/d2BPaDajqwCEmLv5A4gjGx0Ap8/f35LJ3BeXh4RERFqJrBer+fGjRtcunSJubk5
+      Tpw4waVLl4iKiiIlJQWdTsf169eZnZ1lfHyc5OTkd8Le384EVhSFpqYmMjMzg3XoQogPQApA
+      GNmuEzg2NlZdXqfVapmamuLu3bt8/vnnAMzMzJCUlERkZCRut5u6ujomJydZXl5mbGyMrq4u
+      Ghsb1c96OxO4q6uLY8eOodPp8Pv9B3vQP0GmgITYO5kCCiM7zQR2Op20tLTwy1/+Eq1Wi6Io
+      vHjxgmvXrqHVaqmurkZRFJxOJ8nJyTgcDsrLy3n48OGPZgIbDAbm5uYYGRlhYGAgJPYDkikg
+      IfZOCkAY2Ukm8MaGbmazmYaGBpKSkigoKOD48eMYDAYAWltbWVlZ4dy5c8TGxjI5OUlDQwOV
+      lZWMjIyQm5tLW1ubmglcVVVFfn4+qampHDt27MCPWwjxYUgnsNi1YHYC22y2kLoDkE7gwKQT
+      ODDpBBZiB6QRTIi9kwIghBCfKCkAIiyF0m27EOFKCoAISzIFJMTeySqgMLLTTuCYmBgePnyI
+      RqMhJSWF3Nxc6uvrMZlMnDt3jo6ODpaXl0lISKCioiJgJ/DExARdXV24XC6qqqpITk4O8pkQ
+      QuwHKQBhZLtMYKvVqnYCm0wmbty4wfz8PB0dHbx8+ZKzZ88SGRlJREQEKysrfPnll9y5c0ft
+      BM7MzFTjH2FrJ3B6ejppaWl0dnaytLQUEgVApoCE2DuZAgojO+0EBnj9+jV//OMfSU9PZ3l5
+      mf7+fhoaGhgcHMRoNAKg0+l21AmsKAqPHj2ira2NlJSUgzvgbcgUkBB7J3cAYeR9OoFzc3M5
+      ceIEf/zjHzl8+DCZmZkcO3aM8fFxVldX8fv9uFyuHXUCr66u8sUXX7CyssKrV6/44osvDvKw
+      hRAfiBSAMLLTTuDc3FzevHmDoihUVFSQlJREY2MjiqJw/vx5kpOTqa2tpby8nMOHDwfsBD5y
+      5AjPnj1Dp9Nx9uzZYBz6O2QKSIi9k05gsWuSCbxJOoEDk07gwA66E1juAMSerK2t4fP5Dvxz
+      3W43NpvtwD/3p3i9XrRabUhd3DweD263O9jDUMk5Cszj8aDX66UA/BhFUZiamgr2MMR/8fv9
+      mEymoHz2xoNsIcTuyRSQ2LVwmgJS3Gu4W//pg43H7/eh0WhDIi1tg8/nRacLne94Pp8Prfbj
+      P0eaqASMp/5yV6+VKaD3MDc3h1arJTExkdnZWZKSknj58iUGg4Hjx4+/8+10YWGBnp4eysvL
+      MZlMdHd34/f7KS4uRlEUhoeHOXLkCHq9nsHBQWZnZykrKyMiIoLOzk4cDgelpaV0dHQAYDKZ
+      SExMZGJiAlhfL6/Vaunr66O0tBSz2UxnZydut5uMjAwOHz4MrN/J9Pf3k5eXd7An7BOmeNZw
+      f//3wR7GgTv4ybnthdp4YP/HpE3M3XUBOGhhXQB6enqYm5vjT//0T+no6ODzzz9nfn6e0tJS
+      7t+/z89//nP1Z/1+P48fP6a6upr6+noKCwux2+0YjUb6+vpwuVy0t7fzy1/+ErvdjtvtJi8v
+      j6dPnxIXF0dcXBxZWVnodDpyc3Pxer08efKE3NxcIiMj6evrY3FxkcHBQaqrq6mtreXGjRtM
+      TU1x5syZLcWoubmZvr6+9y4A23UCGwwGOjs70ev1XL9+nXv37uH1ejl58iRGo5Hm5mZiYmKo
+      qqri+fPn+P1+YmJiqKiowO128y//8i/8+Z//OYcOHVLX/TudTrRaLcXFxbS2tgJQVVWlFrJg
+      CqUHd0KEq9B5GrMLGo2G/Px8enp61F/T6/VERES886DJ4/GQkJBATEwMRqOR8fFxiouLKSws
+      ZHJykpMnT6rLKuPi4sjPz6ejo4PMzExGR0cZGRmhubkZgNjYWAYGBqiqqiIiIoKYmBimp6c5
+      fvw4Xq8Xr9eL0+nEbrezsLBAa2srXq9XHcuZM2dIS0t77+PdLhO4t7eXW7dukZSURF9fH0lJ
+      Sdy8eVNdHlpRUcGlS5cwm804HA7Onz9PRUUFiqLQ2NhIVlbWlrjHc+fOce3aNRwOB3Nzc2qo
+      zNzc3HuP+0OQRjAh9i6sCwCsr4UfHBxUL14jIyO8efOG6urqLT+n1Wrxer0oioLf78dgMOBy
+      ufB4PO8UC7/fzx/+8AcKCgrIy8vDbDZz+fJlMjMzGRgYwOfzMTs7S2pqKgCDg4McO3YMvV7P
+      +fPn6evrQ6vVEh8fz1/91V9RVVW1pct2t7brBNbpdGg0GsxmMwsLC8TExKDT6QBIS0tjdHSU
+      3/3udywuLnLkyBGampqoqalhfHyc6OhozGazeg41Gg0ul4uvv/6ayspKkpKSaG9vp6uri8TE
+      xD0fhxAiNIT1FBCsX6zKysr43e9+x8WLF8nJyaGysvKdn9Pr9TidTh4+fMihQ4c4ceIEtbW1
+      aLVaLl68SGdnJ729vdhsNlJSUrDZbHR3d2O1WsnJyeHu3bu4XC4uXbpEe3s7p06dAtbn81+/
+      fs3t27cBGB0dxW63k5GRwczMDK9evQLWL8Ld3d2kpqbS39/PwMAAERERnDlzRo1qDGS7TuCB
+      gQEcDgdTU1MUFRXx+vVr9ZmEXq/n7Nmz9PX1MTc3R2pqKkVFRdTU1KgdwUNDQ+p0j8lkUqew
+      IiMjqa+v5+rVq3i9Xjo7O0NiOwiZAhJi7z7aVUCKotDV1YXD4QDAYrFw9OhRXC6XOh+/cUew
+      kwuw2+1Go9EE/Fmv14vH4yEyMhJYX/ng8/n2ZdniyMgI6enp6PV6FEVhaGiI7OxsAOx2O42N
+      jerFvbOzk5mZGc6dO4fVaqWrq4uoqCjOnDnDq1evWFxcJDs7W339xMQEiYmJDA0NkZOTo3YO
+      6/V6KioqePbsGRqNhrNnz245f+GyCshvn8f+3y99uAEJ8V+0ibmYf/2HXb32oFcBfbQFQHx4
+      UgCEeJcUAPFJkFD4TbIVRGCyFURgEgovxA7IKiAh9i7sHwILIUTYGBwA6/JP/rbO5wOtDg6o
+      WVoKgAhLoXTbLsSODQ3CyPBP/rbu4EYCSAEIKzvNBLZYLDx58gS3283Ro0exWCzU1tZSUlJC
+      dnY2T58+xefzMT4+zu3bt9X/vnjxohoL+XYm8NTUFC9fvsTj8XD69Gk1KjKYXC5XSD0DECIc
+      SQEIIzvNBF5dXQWgvLycuLg4VldXqaqqwmazodPp1HQvgDdv3nDhwgUMBgOtra1q2tfbmcBJ
+      SUn87Gc/Y3R0lJmZmZAoAEKIvZMCEEY2OoE9Hg/nzp2jpqaG+vp6jh49SnZ2tropnc1mY2Ji
+      goiICJaXl7l+/bpaFDa0tLRw9uxZXC4Xjx49Iioqasu+/m9nAuv1el68eMHy8rJacIJNpoCE
+      2DspAGFkp5nAcXFxJCYmcvr0ae7du/fO79vtdhRFwWw2ExkZyc9//nNGRkZYWVn50UzgoaEh
+      3G73O9trBJNMAQmxd7IMNIzsJBO4p6cHp9NJRkYGdXV1lJaWMjIyQm9vL9PT00xOTmK1Wjlz
+      5gwADoeDBw8eMDU1RXFxMSMjI3i9XlpaWtRMYJ/Ph91up76+nvHx8QM/biHEhyGNYGLXpBFs
+      kzSCBSaNYMCD+9uuAjpoUgDErnm9XpaXl4NykQm1UPhQzbvd6UaDB0HOUWBBzQSWzF3xPoKZ
+      CSyE2Du5AxC79jFOAXkHH+Kbef3er5NM4MA+lUzg3djIEQ6pTODl5WW6urpISkoiPz+fqakp
+      hoeHqays3PIwMhgURWF8fJyMjAzcbjfLy8ssLi7icDjIysrasowR1uf6WltbycvLw2KxsLy8
+      TEdHB7m5uSQkJNDZ2QlAQUEBPp+P9vZ2Tp48SXR0NG1tbSiKQk5ODrGxsWp2sMFgYGJigrGx
+      MU6fPs3k5KSamHXkyBH1ganJZKKoqEgd98TEBAkJCUG5cH4sPtQqIO9gA56O/9z39w2WUMvg
+      DbXxQGiMSZuUF5Qc4W0n4xwOB2VlZUxOTjIzM8OzZ8/Iz8/n4cOHBzS8n6bRaJiZmaG/v5/6
+      +npMJhODg4NkZWVRV1e3ZU07QH19PUVFRTx58gSv10tDQwNVVVVER0czPj5OREQEubm5GI1G
+      6uvrOXXqFPX19VitVux2O7m5uWrIe2NjIy6XC5fLxYsXL8jJyeHx48dYLBZyc3NZXFwEIDc3
+      l6ysLPr7+9VxDAwM0NTUxNLS0nsfc3NzM7W1tXz77bcsLy/z+9//nocPH/LmzRuGh4epqanh
+      zp07+P1+7ty5Q01NDSMjI0xNTfH1119TX1+P3W6noaGB+vp6NefX7XbzD//wD9hsNmC9SDU0
+      NHD37l3u37/P1NQUNTU11NTUMDs7u9s/MiFEiNn2a7zFYqGurg6bzYaiKOo361CZNaqoqODf
+      //3fyc/P59ChQ+h0OiIiItQoxA0bwSaxsbGkp6czNjbG8vIyjx49Iicnh9XVVcbHx7FarWpR
+      2IhJtFqtzM/P09bWxmeffcbJkyex2+3A+oPInJwckpKS8Hq9REZGYjAYcLvdJCcnA+sX7Y0l
+      l7BeFDwez66Od7tO4Lt373Lr1i1aW1vVTOCysjLq6upISkqioqKC9PR0NBoNDoeD6upqjEbj
+      tpnAOp2OmpoaNRPY5/MxNzcnofBCfCS2vQPY2DYgLi6O5eVldQvety8UweRyuTAYDOq30sXF
+      Rdrb27lw4cI7RWBjzBuJYPn5+Vy9epWenh5OnTrFrVu3OHz4MD09PerP+nw+srKy+NM//VOK
+      iorUUPgNRqMRp9MJoBbFtrY2SktL1dfPzc3tW4SiZAJvku2ghdi7be8AWltbcblcrKysUFpa
+      Snd3Nw8ePFC/3QaToijU19dz8+ZN+vv76evrw2KxcPbs2Xd+VqPREB8fT11dHXa7nZSUFFpa
+      WmhsbCQqKorXr18zOzvL4uIiFy9eZH5+nocPH6LT6RgeHlbzdouLi+no6FCzg8+cOcPw8DDz
+      8/OkpaXh8/mYnp7m9OnTALx69YqSkhJgvTjNz88D0NHRgclkwmQyvdcFVTKBhRD7adtVQIqi
+      4HQ6MRqN6HQ6FEXZkqkbykZGRtQ7A5PJRHFxsdr0odFoUBQFh8OhbnvgdrvR6XTqcTqdTjXX
+      1+v1Avzog2+/34/b7T6QcyKZwJs+1CogZ+3/+VE9BBbhQZuUh/l/+b1EQorwEUVZzu4AACAA
+      SURBVE6ZwDslBUAEgxQAEXY+xgKwW7IVRGCyFURgkgksxA6E0j9aIcJV8FvghNgF2Q5afBJm
+      Z2Fi7IO9vRQAIYQIVXOz8PLFB3t7KQBhRDKBN8kUkBB7JwUgjEgm8CaZAhJi76QAhBHJBBZC
+      7CcpAGFEMoE3yRSQEHsny0DDiGQCb5K9gITYO2kEE7smjWCbpBEsMGkEC+ydRrCuTnjW9ME+
+      TwqA2LVgZgKH2j9cybsNTM5RYJIJLMJGMDOB3W53SBUAIcKR3AGIXfuUpoAUtx136//3k78v
+      mcCBfYqZwBtZvzsVspnAx48fZ2hoiNnZWSorK98JXAkGRVHUbZ9PnTqF0Wiko6ODkpISFEVR
+      06usVitGo5HZ2VnGxsbIzc0lJSUFh8PB/Pw8GRkZLC4u0t3djcVi4fjx41syg6Ojo+ns7CQ6
+      OpqioiLa29vVv8ynTp3i9evXuFwuMjIy1LQsRVHo7+8nLy8vyGfp43TQ3/4Vtx33939/oJ+5
+      H0Ih7/ZtoTYe+LBj0ibmBiXrd6e2LQAbmcAbe8FPT09TWFjIw4cPuXLlykGN8Sf19vZitVrJ
+      z8/H6/WysLDA8+fPOXLkCLGxsXR0dHDlyhXGxsZITExEo9Fw+vRpvvvuO27fvk1DQwNarZaM
+      jAycTidlZWU0NTWRkJDA06dPuXHjBm63Ww2D6evrY3h4mOzsbPx+Pw8ePKCoqIjJyUnOnDmz
+      ZTqkubmZvr6+fS0A23UCGwwGOjs70ev1XL9+nXv37uH1ejl58iRGo5Hm5mZiYmKoqqri+fPn
+      +P1+YmJiqKiowO128y//8i/8+Z//OYcOHUJRFB49eoTT6VRDYjbyg6uqqkIiElIawYTYu22f
+      xmxsKbC4uEhsbKz6gGIjPDzYRkdHqaqqIi4uDrPZTE9PD3/2Z39GZ2cnAOPj4zx58oSuri4A
+      IiMjuXfvHocPH8ZoNHL9+nX1AZDFYuHx48fYbDb8fr+aGTw3N0dSUhKtra0MDg6SlpZGTEyM
+      mpO7tramFp6N4BiAM2fOkJaWtq/Hu9EJfP78+S2dwHl5efT29nLr1i2SkpLUTOCbN2+qy0Mr
+      Kiq4dOkSZrMZh8PB+fPnqaio2DYT+Nq1azgcDvVYjx8/ztzc3L4ekxAieHacCez3+8nJyWFw
+      cPBHk7GCZeOi6/f7GRsbo62tjZGREWA9C/fMmTPk5+cD61saXLx4kdnZ2XdyjfV6PV988QVm
+      s5nl5WVOnDihZgZrNBo+++wzMjIyGBsbQ1EUenp6KCgoIC4ujr/6q7/i7NmzNDY2ftBjlUzg
+      TfIAWIi923EmsNFo5M2bNzgcDgoKCg5qfNsqLy/nm2++IT4+HovFQllZGSUlJXz//fcsLS2h
+      0+kwGAzo9Xr8fj+1tbVER0ejKAqrq6u8fPmS/v5+Dh8+jN1ux+PxYLPZSEpKoqenh8bGRsxm
+      M52dnSwvL2O1WklPT2dkZISjR4+i0WiYmZnh1atXwPqF9sWLFxQXF9Pe3s7AwAARERFUVVVh
+      NBr3fLySCbxJpoCE2Lv3ygR2uVxoNJp9uZjtF0VR8Hq9O1rL+8Mc4B/+ntPpJCIiAq1Wu+Vn
+      Yf2Co9frf/Tux+fz4fP5Pvh5kUzgTQe9Csi/Oov9f4TOVhgiPGgTczH/+g87/nmJhBRh42MM
+      hf8pUgDEbkgBEB+tT+kOIBDZCiIw2QoiMMkEFkIIcSBCZzmPEO8hlL61CfHeBgfAuvzOL+t8
+      PtDq4ICapaUAiLAkq4BEWBsahJHhd375oPdXkAIQRiQTWAixn6QAhBHJBN4kU0BC7J0UgDAi
+      mcCbZApIiL2TAhBGJBNYCLGfZBloGJFM4E0yBSTE3kkjmNg1aQTbJI1ggUkj2Fse3P/RVUAH
+      TaaAhBDioF259qO/LJ3AQuxAKH2zFSJcSQEQYcnlcgV7CEKEPSkAQgjxiZJnAGFkp5nA1dXV
+      3LlzB5PJRGpqKidPnmR6epr79+/z13/911s6ga9du0Z3dzdut5uIiAguXbr0TibwZ599Rm1t
+      LRqNhmvXrgXloe8PyRSQEHsnBSCMbNcJfPfuXW7dukVra6sa81hRUcHz58/x+Xy8ePGClJSU
+      dzqBU1JSSElJoampidzcXPWzzp07h06no6amhq6uLi5evIjP5+P169ecPn06GIe/hTSCCbF3
+      MgUURnaaCbwRav/48WMsFgstLS2UlpaiKIqa+9vS0kJVVRWwvoRxaWkJi8UCvJsJ7HK5iIqK
+      wmw243Q6g3b8Qoj9JXcAYWS7TuDJyUmGhoYYGhrixIkTxMXFUVBQQFtbG+np6QwNDTEyMsLY
+      2BhmsxmTyYTZbAbWi0FlZSUAo6OjpKam8s0336i/lpaWRnt7O36/PyT2ARJC7A9pBAsjy8vL
+      xMTEqJnFy8vL6p49fr+f7u5uUlJSSExMZHJyksXFRfLz89W85KWlJeLj47FarURFRam//nZT
+      1dzcHPHx8WpHsE6nIycnh+HhYbRaLUePHlXH8ylFQgYijWCBSSNYYBIJKcJGMAvA5OQkaWlp
+      B/65P0UKQGBSAAKTRjAhdiCUvv0LEa6kAAghxCdKCoAISzabLdhDECLsSQEII263G5vNhs/n
+      Q1EU1tbWsNls6tJMj8ejhrr4fD5mZmbweDzA+gNkh8MBrM/dz83NoSgKiqJgt9ux2Wzqz254
+      e8nn2toay8vvhlgHi0wBCbF3uq+++uqrYA9C7Mzjx49ZWFjg1atXmM1mamtr2XiGPzc3xzff
+      fENaWhpms5nvvvsOg8GA2+1mfn6e7u5uOjs7ycjI4N69e2g0Grq6ujhy5Ahff/01fr+fiIgI
+      dWloU1MT9+7d4/Tp04yOjtLR0cHU1BQOh0PtF/D7/fh8PnU10UHa6FwOFX6/H61We2AP73bC
+      5/NtyY8INp/PJ+coAJ/Pp/b0HITQOXIRkFarpby8HJvNxtDQkJr6BaAoCm63G1j/tu/3+1lb
+      W+PYsWM0NTVx5coVJiYm6O/vx2w2U1ZWxt27d7HZbOj1ehITE9ULO8DZs2dZW1sDIDMzk4yM
+      DFpaWjAajQd/4D8i1JaBChGOZAoojGx0And2dlJaWrqlE/jtbwxut5uYmBjy8/Opr68H1rt7
+      9Xo9er2ehIQE6urqmJycJD4+nurqatbW1mhsbFTf4+338/v9/PGPfyQ2NnbLdhHBJBd/IfZO
+      7gDCyHadwFarlaWlJXw+H8eOHWN5eRm3243RaCQ5OZmOjg4mJiY4d+4ca2trWCwWfD4fc3Nz
+      rKysYDAY0Gq1jI6Okp6eztLSEisrK8zMzDA5OUlMTAzR0dGsrq4SHR0d5DMhhNgP0ggWRrbr
+      BJ6ensZqtQKQnp6Oz+djaGiIgoICjEYjb9684dChQ6SmpqoB8IWFhWi1WoaGhvB6veTm5rKw
+      sEBCQgKjo6O43W60Wi3x8fEsLCwAcPjwYfUzpRFskzSCBSaNYIFJJ7AIG7IVxCYpAIFJAQjs
+      oAvAlikgRVFYXV09kA8W4c/n82G1WoOyCijUCkAornDxer0ht8JFztH2Dvochc6Ri7BksVhk
+      Cgi5A9gJuQMILKh3ABqNJqS+VYnQtjEFFAzB/Hvqfv5PeIcatvyaovgBTUh9u/X7/fhC6GLr
+      9/vxaOQcbUdz+u8wZJ09sM8LeAewsrJCS0sL1dXVNDY2YrPZyM3NDfpyQEVRePnyJWVlZSwv
+      L2O1WhkdHcXr9XL48GGKi4u3/Pzs7CwvXrwgPT2doqIimpqasNlsHD9+nPj4eFpaWtS0LIPB
+      QG9vLz6fj4KCAjo7OzEYDJw4cQKA8fFxpqamqKyspKenh4mJCTIzM0lKSnrnfV68eEFiYqK6
+      jbLH4+Hp06ecOnVKfZi6U263Ww1n0Wq1OBwOtRErIiKCpaUloqOjMRqNuN1uVldXSUhIwO/3
+      Y7fbATCbzXg8HtxuNzqdTv32brfbiYyMVL+d+f1+FhcXiY2NxWAwsLKyIl8Q/ot/aRjfeEuw
+      h7EjvmAP4AdC8YFjKJ0jXdF/O9jP264TWFEU6urqAMjOziYqKoqSkhKePXtGXl7eQY3xR2k0
+      GtxuN93d3WpMYX9/P1euXKGtrY2jR4+i0+nUn29oaODLL7/k1atXZGZmEhMTw8mTJ3n27Blz
+      c3OcP38eRVGwWq1ERkby6tUrXC4X8fHxOBwOZmdnOXr0KF6vV83UPXLkCO3t7Vy9epXExEQa
+      Gxu5cOECfr9f3bKhr68PrVarTleMjY1ht9sxm83ExMS81zFv1wk8ODjI9PQ0ra2t5OTkUFNT
+      g8PhYHFxEYfDwcuXL1lbWyMxMZG6ujocDoe6HHRpaYl//Md/pLCwUF1iWl9fj9PppLm5GZ1O
+      R29vL+Pj4/j9fhISEoDgdgIvLCwErRh5Bx/in30dlM8WHzdt7jUMlrzQ2A66o6ODwsJCdW4z
+      NjaWb7/9lqKiogMZXCCZmZn09/eTm5uLTqfDarXy6tUrVldXtzzYURQFo9GIVqslISEBh8OB
+      2WympqaG4uJiTpw4wX/+53/S2NhIZmYmT5484cKFCwDExcWRnZ2tvldjYyOfffYZGo2GpaUl
+      pqenuXfvHs3NzZw4cYLf/va3NDU1ceTIEVpaWjhz5syWMWdlZakX0Pe10Qn82WefMTU1pXYC
+      Z2ZmMj8/z7lz58jLy6Orq4v8/HzOnz/P3Nwcc3NzHDp0iIyMDCIjI9Vv+1lZWfj9fp49e6am
+      f8F6cb1y5QonTpxAr9cTERGBTqdT/38okDsRIfbuJ6eAFEVhenqa5eVlBgYGyM/P5/vvv+fG
+      jRsh849vYWGBlJQUent7KSgowGQykZmZSUlJyZYKqtFo8Hq9wPrqEZPJxDfffMPNmzeJjo7m
+      zp07/M3f/A3z8/O0tLTgcDhoaWlhYGCAyspK9Ruuz+djeXmZjo4OtfBkZWVx4cIF7t+/z+Li
+      Ir/61a+Ym5ujoaEBv99PS0sLCwsLnDp1as+rDTY6gQ0GA+fPn+d//s//SX19PUePHlWPV6fT
+      4XA4iIyMVF9XWlqKzWajra0Nj8fDl19+id1u57vvvlOn8mZmZoiNjSU2NhZYj4Zsa2vjxo0b
+      DAwMEB0drW4vIYT4OPzkFUmj0XD9+nVgfd44ISEBn8/H8+fPiYuLo6ys7MAG+WMURaG7u5vq
+      6mqmpqbo7+8nNTVV/Xb99s6YGo2GvLw8vvvuO2JjY3G73erFOSEhgYKCAu7du4fP5+Pzzz8n
+      JiYGr9dLfHw8drud169fMz8/z/DwML/4xS/w+/3qN+qRkRFqa2tJTU3l0KFD77yPzWZjcnKS
+      lZUV5ufnARgYGMBgMGAymUhMTNzxMW/XCTwxMcHg4CBv3rzh6tWrPHjwAIPBgNlsZnh4mOjo
+      aHQ6HYqi0N/fT1paGlqtlry8PNLT02lvbyc2NlbNBH78+DEXL15kcXERq9VKfHw8Pp8vZLZh
+      DrVloEKEo4+2EWxiYkLtXo2IiCA/Pz/II9q798kEnp+fZ2ZmhoKCArxeL/39/cTGxpKens7C
+      wgITExPk5OSou3+urKwQFRWl5ga/nQmcnZ3NwMAAGo2GnJwc9W7jU20Ec97/Ck/nb4Py2eLj
+      pvvy/yGy4KZ0AovQ96kWgHBaBhpKa+79fj+aEFwGGkrnSHP67zBlnZUCIEKf7AW0SRrBApNG
+      sMAkFF6IHZD5fyH2TraCEEKIUHf/LvwgsnU/SAEII9t1AptMJjweD1qtFp1Oh8/nY35+noSE
+      BAwGAz6fD7/fj16vx263oygKGo0Gs9nM6uoqiqK805jmdDoxmUzAeiaw2+0mLi4uGIf+DlkF
+      JD4pM9PwAbZdkQIQRhobGzEajczPz1NWVsbTp0/Jzc3l8OHDuN1uHj16xM2bN0lOTua7774j
+      KysLp9OJXq/n4cOHlJaWcuLECfr6+vB6vbS3t3P9+nX6+vrUbS8yMzOB9Uzg9vZ2fvOb3zA6
+      OsrAwIC69LSwsDDIZ0KmgITYD1IAwshuM4HNZjPV1dUsLS2h0+koLy9ncnISjUbDzMwMJSUl
+      xMbGqp3QEPqZwEKIvZOHwGFkt5nAP1xRoCgKbW1tlJWVUVJSQnt7O48ePVK7pSH0M4FDpSFN
+      iHAmdwBhZLeZwKurqywsLLC8vMza2hqrq6vEx8ej1+vxer2cPHmS/v5+0tPTwyYTWKaAhNg7
+      uQMIIyUlJVumYDamfwAcDgdJSUnq71dXVzM5OcmlS5dwuVwYDAYsFgtut5uIiAj1tTqdjpmZ
+      GY4ePUpWVpa6h5DNZqOwsJCVlRUyMjKwWCysrq7i+QArEYQQwSGNYGLXpBFskzSCBSaNYIH9
+      ZCPYB1oGGlYFQDKLQ0swM4FDjeTdBibnKDDJBBZhJViZwKHWByB3AIHJHUBgQc0EDnUSSRha
+      gpkJLJvBBRZqebeSCRxYyGUCh6pQyASuqKjg6dOnOJ1OCgoKiImJobGxUX3I2tPTw+LiIkeO
+      HFFT1CQTeH8EcxySCbx7oTjfHErnKKQygUNZKGQCWywWZmZm+OKLL2hqakKr1aqJZBsX5ZMn
+      T/L8+XM1Q1kygffHxmqmYJBMYPGhhFQmcKgLdiZwdHQ0IyMj/Pa3vyUjIwOj0UhXVxc1NTVq
+      8bh37x45OTnq6yUTeH9II5gQexe2U0AQ/EzgxMRETp06RXFxMXfu3OHLL78kNzdX3TtncHCQ
+      8+fPv1fs43YkE3hTqExFCRHOwrYAhEImcEFBAbW1tUxPT5ORkUFfXx9jY2O4XC4uXrxIZ2cn
+      7e3tmM1mcnNzJRNYCBFSwqoP4H1IJvDHnQkczEYwyQQWH4pkAouwIZnAm0J1GWgorbmXTODA
+      JBNYhI1PtQD8GGkEC0wawQKTTGAhdkCeRQixd2H7EFh82kLp278QH5xkAgvJBBbiEyWZwEIy
+      gTeF2jMAIcKRFIAwIpnAm+TiL8TeyUPgMCKZwEKI/SR3AGFEMoE3yRSQEHsndwBhRDKBN8nF
+      X4i9k0YwsWvSCLZJGsECk0awwIKaCSyZu+J9BDMTONQKgOTdBibnKDDJBBZhRTKB18kdQGBy
+      BxBYUDOBQynyT4S+YGYCB5vfsYSz5n9V/ztUN4MLpbxbyQQOzO/349VqgB8/R/rcqxjLfrVv
+      nxfwDmBlZYWWlhauXLmCoig0NTWRk5NDcnLyvg1it3w+H42NjTidTiorKzl06BA1NTX84he/
+      QFEU3rx5Q35+PpOTk5jNZnp6etSc3NLSUgYHB7FarZSXlzM1NUVnZycRERFcuHCBN2/eMD4+
+      TmZmJnl5eTgcDhoaGrhx4wYdHR3Mzs5isVg4ceIET58+xeFwUFFRoZ4Xm83G06dPuXHjxr4d
+      r2QCbwr6HYDPHRa5wKGUdwuSCbwT241Hm3R8Xz9r2wKgKApPnjxRs3XHx8eZm5sjKSkpJApA
+      S0sLOTk5pKam4vf7GRgYQK/XMz4+TlpaGuPj4+Tn57O4uIhGo6G8vBy9Xk9NTQ1FRUXY7Xas
+      VisAbW1tfPnllzQ3NzMzM8Po6CjXrl0DNs+D1+vF7/czNjbGz372M7799ltycnKorKzEaDTS
+      0NCgvmZ0dBS/37+vx7tdJ/D8/DxOp5OpqSlu375NTU0NycnJREdHExMTQ29vL0lJSRQXF1Nf
+      X4/FYsFsNlNYWMjS0hL//M//zN/+7d8SGxurZgLHxsYyMjJCcXExExMT+P1+srKyQqIXIFQK
+      kRDhbNt7n46ODgoLC9W9Zdrb2ykrKzuosQW0srJCWloaGo0GnU7H8PAw165do7e3F1i/CNfX
+      19Pe3g7A0tIS//Zv/0ZsbCxGo5Hi4mL1vbKysviP//gP+vr60Gg0TE9Pc+/ePZ49e8bg4CBp
+      aWmYTCb1s/7whz+g1Woxm834/X6+/fZbysvL1fcrKira97lFyQQWQuynnywAiqIwPT2t7gPT
+      3NyMVqvlxYsXdHV1HeQYf5LRaGRlZQVYnw6anp6msbGRqakpYH0Lg8uXL1NSUgLA4cOH+dWv
+      foXVan3n2/nQ0BB/+Zd/SWVlJfPz82RlZXHt2jWsViujo6MsLCwwMDBAf38/Go2GP/mTP1Gn
+      Ye7evcutW7f2Lfv3p+ykE1in06kPJDds7AHU2dnJ2NgYX375JYmJiXz33XdqcZyZmWF8fFx9
+      zejoKHV1ddy4cYO1tTWio6Mxm80hkwks20ELsXc/OQWk0Wi4fv06sD5vXFFRAaxfKELlwd/Z
+      s2epq6vDYDCQnp7OpUuXyMzMpK+vb0tcotlsRq/Xc+/ePXQ6nboDZltbG/Pz83R1dZGVlcX9
+      +/fxeDxcuXKFlpYWamtrSUlJUQvIRrbv1NQUDx48wGQyMT8/j9Fo5OnTp6Snp7O6ukpxcTHt
+      7e0sLi7y5MkTqqqq9mUPHckE3iRTQELsnTSChRHJBN4U7IfA/tUZ7P/jStA+X3yaDKW/wnT5
+      f9+395MCIHbtUw2Fh/BZBhpKa+4lEziw9fEc3DJQKQBi1z7lO4AfkkawwKQRLDDJBBZCCHEg
+      ZCsIEZZC7Q5AiKAaGoTu1+/9MikAYUQygTfJxV+It6zZYXrqvV8mBSCMSCawEGI/SQEII5IJ
+      vEmmgITYO3kIHEYkE3iTXPyF2Du5AwgjkgkshNhPcgcQRiQTeFOobEkhRDiTRjCxa9IItkka
+      wQKTRrDAdt0ItstloJIJLHZNMoE3Sd5tYHKOApNMYBFWgpUJHOy9gH5I7gACkzuAwCQTWISN
+      YGYCh8LfU/fzf8Q79AgI3c3gQi3vVjKBtxcoE/ht+rxrGEv/ek+ft+NM4OrqahobG3G73aSl
+      pZGfn7+nD94Pe80EbmxsxG638/nnn7O8vExHRwcajYbKykpevnyJoihERERgsViYmJjA7XZT
+      UFCAz+fjzZs35OTkkJmZyePHj/H5fHzxxRfqtwnJBP74+ZeGQz4XONTybkPxgWOonaOdjkdr
+      2fs1+L0ygR0OB1evXt3zh+6XvWQCJycnExkZSUlJCc3NzRQUFHDt2jXa2tpwOBxcvnyZmZkZ
+      hoeHOX78OMePH+fBgwckJCSoHbffffcdKysrFBUVYTQaef78OefPnwckE/hDC7VnAEKEox1n
+      AgNq/GF3d/eBDC6QvWQCLywskJaWhtlsxuv1YrFY6OnpYWZmhpSUFBRFobW1Vc35XVtbw+/3
+      YzKZiIyMRKPREBERQVJSEi0tLbx+/VoNmAfJBP7Q5OIvxN7tOBN4bGyM27dvc/36dYaGhg5y
+      jD9pL5nA0dHRLC0t4fF40Gg0dHd3Y7VauXHjBhqNZsv0B8CzZ884c+YMWq1Wnff2er1kZGRw
+      5coV8vLyiI2N/aDHK5nAQoj9tONMYIvFwp07d9BqtRw7duzABridvWQCHz16lHv37tHf38+F
+      CxdobW1Fp9NRX19PeXk5g4OD6rfijW/+G7tlpqSkcOfOHZKTk1lbW+Pp06d4PB4uX77Mixcv
+      JBP4AMgUkBB7J41gYUQygTeFQgFw3v8/8HT+LqhjEJ8uQ9nfYLr0v+3pPaQAiF371AtAOCwD
+      DaU195IJHFigTOC37ccyUCkAYtc+5VD4H5JGsMCkESwwyQQWYgeC/e1fiI+BbAUhhBAfk/fY
+      GE4KQBiRTOBNofAMQIiQ9B75wFIAwohkAm+Si78QeycFIIxIJrAQYj/JQ+AwIpnAm0KlIU2I
+      cCZ3AGFEMoE3yRSQEHsndwBhRDKBhRD7SRrBxK5JI9gmaQQLTBrBAtuXRjBZBio+djIFJMRP
+      OJa9/r8dCJ1SLIQQ4kBJARBhSVYBCbF3UgDCiNvtxmaz4fP5UBSFtbU1bDYbTqcTRVFYXFxU
+      ewHcbjeLi4vqa5eXl3E4HMD6ss75+Xn1ga7NZmNpaWnLZ3k8HmZnZ/H5fLhcLmw2GzabLWgh
+      8D8kU0BC7J08Awgju80Ejo6OZmRkRE08+/7774mJiWFkZITq6mq6u7tRFEVdHaQoCi0tLURH
+      R/P06VPOnDnDxMQEU1NTZGRkUFZWFuxTIYTYB3IHEEZ2mwk8NDTE5cuXqaysZHh4mOrqajXv
+      Nz4+nry8vC17AWk0GkpLS9Hr9Rw6dIi0tDROnz6NTqfj5MmTQT4L62QKSIi9kwIQRnabCQzr
+      F3W9Xo/f79+S9wuwurqK1+vdssbf4/GwurqK3+9X86EtFgt6fWjcNMoUkBB7JwUgjGx0Al++
+      fBmDwaB2AmdnZ2MymdRM4KKiIvr6+hgYGMBsNpOcnExHRwdtbW2kp6fz+PFjysvLWVxcZGpq
+      So19nJmZYXR0FJfLxejoKNnZ2dhsNhRF4eXLlzL1I8RHRhrBwshuM4E1Gg1v3rzh0KFDJCcn
+      MzQ0pOb9ZmVl0d/fj9/vJz8/n8XFRRISEpiZmWF2dpZjx44RExPD4uIiiYmJW8YjjWCbpBEs
+      MGkEC+ygE8GkAIhd+9Qzgd8mBSAwKQCBSSSkEEKIAyEFQIQlWQUkxN5JARBhKZSmf4QIV1IA
+      wsh2ncCwPg/t8/mA9fn5+fl5FEXB6XSqnbxerxev18vc3Bwbj388Hg8zMzPqazdsvO+Gjexg
+      IcTHQffVV199FexBiJ15/PgxCwsLvHr1CrPZTG1trXpBnpub45tvviEtLQ2DwUBtbS0ul4ve
+      3l6MRiOjo6N8//33REdH09jYiEajoauri4yMDL799lv1QdhG2EtTUxP37t1TcwPGxsb413/9
+      V86ePas+oPL7/Woo/UFbWFgIqbsAv9+PVqs9sId3O+Hz+UKmbwPWxyPnaHs+nw+dTndg5yh0
+      jlwEtNNMYJPJxM9+9jPGx8cZHBwkKyuLzMxMZmZmOHLkCMPDw5SVlXH37l2GhoaIiYnB6XSq
+      S0phayaw1+uls7MzZLqAQaaAhNgPMgUURnaaCbyxl8/Q0BCff/45AP39/eTm5mI0GklISKCu
+      ro7JyUncbjeJiYlkZWXx6NEj9T3efr9Hjx5x6NAhNR5SCPFxkDuAMLLTTGCDwcDg4CAXLlxg
+      cXGR+Ph4ent7uX37NhqNhpSUFCwWCz6fj8zMTB4/fqzGSf5YJnB5eTkeFzd19QAAHv9JREFU
+      j4eFhQV1v6BgC7U+ACHCkTSChZHtOoGnp6exWq0AWCwW5ubmgPU5/ZSUFKxWKwkJCQCMjIyw
+      srJCYWEhOp2Oubk5pqamKCwsZGlpiYSEBEZHR3G73Wi1WrKzs9HpdCwtLREXF6feHUgj2CZp
+      BAtMGsECk05gETakAGySAhCYFIDApBNYiB2QRjAh9k4KgAhLofTtX4hwJQVACCE+UVIAwsj7
+      dAKvra2pncA//O+38349Ho/aJexyubZ83sb7bjxwXllZOcCj3Z5MAQmxd7IMNIxslwnsdrt5
+      9OgRN2/eJD4+npaWFsxmM52dnRQUFPDixQtSU1OJjIykvb0ds9nMkydPuHjxIoODg6ysrKAo
+      ClevXgXWO4Hb29v5zW9+w+TkJBMTE6ysrHD06FHy8vKCfCZkCkiI/SAFIIy8TydwSUkJ/f39
+      xMTE0NHRQXJyMjqdjqioKEpLSxkeHiYmJobExEQSExOpra3l3Llz6me93QmclpaGVqulq6tL
+      3SpCCBH+ZAoojOy0ExjA4XDgcrnUrN+MjAy0Wi0dHR3qVNJG3u/q6iparXbLcs4fvt9GNOQP
+      p4mCRaaAhNg7uQMIIzvtBNZoNKytrZGbm0trayvZ2dmMjIyg1+vVbt+cnBwePnyIoig0NzdT
+      WVkJ8KOdwHa7nejoaP7/9u7uqal73+P4O1lJABMSAVOUSAwgooAUGK3uWh+gaql1uu9Pz0Xv
+      +i+cu9P/5Mx02otenIs9tbb1WGlBUYc+0GytgjxGngIhIQ88JVlrnQs2y1L3JhTYkFW/rxln
+      dCTJWms03/V7+KxvZWUlMzMzBAKBPbwKq2QKSIjtkwJgIk1NTTgcDuPPa9M/sHrHf+DAAQCc
+      TiepVIrZ2VkuX76Mw+FgdHQUVVWpqalhamqK58+fc/nyZaxWK01NTcYXalFREbB6h11fX08i
+      kcDn8zE8PExBQYFRKIQQ5idJYLFl0hT+BUkC5yZJ4NwkCSzEJsgUkBDbJwVACCFeUVIAhCnJ
+      LiAhtk8WgU0knU6zsrLCvn37sFqtLC0tGc//LywsJJPJYLVaURSFxcVFFhcXKSsrA1YfJV1Q
+      UMC+fftYWVkhnU6jKAp2u91I/DocjnXzocvLy8aOo3g8jtVqzZt+ADIFJMT2SQEwka0mgZ1O
+      p9Ek/syZM/zwww94vV6cTifl5eWmTAILIbZPCoCJbDUJ7HA4WFhYwOFwYLfbWVhYwO/3EwgE
+      2LdvnymTwPnWD0AIM5I1ABPZahJ4aWkJl8tFUVERS0tLvPPOO5SVlXHz5k0AUyaB5ctfiO2T
+      EYCJbDUJXFBQQHl5OalUing8zvT0tHFXD5gyCSyE2D4JgpnIZnsCV1RUEA6HWVpa4tixY9hs
+      Nvr7+3E6nRw5coS5uTkmJiaoqanB6XQSiUSMFPHs7OxLPYF/mwQ+evRoXvQEliBYbvkYcpIg
+      2MakJ7AwDekJ/IIUgNykAOQmSWAhhBC7QgqAMCUJggmxfVIAhCnl0/SPEGYlBcBENuoJrOs6
+      0WjUyAKk02mi0Siwun10re+vpmnregLDaoZgLQ28RtM0IpEImUwGWF2AXssFCCH+HGQbqIls
+      lASORCIsLy8zNTXF9evXuXHjBuXl5bhcLtxuN/39/Rw4cICGhgZ++eUXoyfwtWvX+Prrryks
+      LKSjowNYLQidnZ14PB7GxsY4fvw48/PzRCIRLly4YOw82kv5tggshBnJCMBE1pLAf/nLX5ia
+      mjKSwH6/n0gkwptvvkltbS2PHz+mrq6Oc+fOMTs7y+zsLMXFxVRWVho9ge12O263m4KCAt57
+      7z2jEQyshsDefvttjh8/js1mY3p6mlOnTnHx4kX6+/v38Aq8IF/+QmyfjABMZC0JbLfbOXfu
+      HJ9//jmdnZ0cOXLE2DamKApLS0vrvtCbm5tJJpP09fWRyWRwu93GdBC8nPqF1UBYX18fHR0d
+      pNNpvv/+e7LZLKWlpbtzskKIfzsZAZjIWhK4ra0Nu91uJIGrq6spLCxkeHiYZ8+e0dDQwMDA
+      AENDQzidTkZHR1lZWUFRFDRNM3oCJ5NJVlZWCIfDJBIJ5ufnCYVCZDIZuru7aW1tJRqNous6
+      ra2tKIrCsWPH9voyALILSIidIEEwE9koCaxpGk+ePOHgwYOUlZURiUQIh8OcOHGCbDbL4OAg
+      Ho+HiooKpqammJmZoaqqCrvdzvPnz4HVaRW73U5JSQljY2Nks1kURcHn8/H06VMOHz6M1+s1
+      jkeCYC9IECw3CYLlJklgYRpSAF6QApCbFIDcdrsAmGoNQNd1UqnUXh+G+AdVVYnH49jt9l3/
+      7HwrAKqqYrVad+0/7mZks1lstvz5Ly7XKLfdvkb5c+bClLxer4wAkBHAZsgIIDcZAWzAYrHk
+      1X/6V93aFNCrKv3D/5Ad6QJA1zXAkld3t5qmoebRl62maWQsco02omkaWasF+NfXyFZ7BUfz
+      f+zI55mqAPyeqqr09PSwvLzM6dOnKS4u5saNG7z//vvous6zZ8+oq6tjcnISp9PJ06dPSaVS
+      lJaW0tzczPDwMPF4nNbWVrLZLHfv3qWpqQmbzcaPP/6IrusUFBTg9XqZmJggnU5z4sQJSkpK
+      uHfvHh0dHWiaRmdnJ1arldraWg4fPgys3qGu/cxO2agncEFBAbFYDJfLhcPhIJ1OG+eqaRoL
+      CwsAOJ1OMpmM0RN47e59YWGBoqIi4+5M0zSi0Sgejwe73U4ikcirApwPIwAtNoo63runx5CL
+      utcH8Dv5uOCYb9co1/FYvXU79lmmLgC9vb3U1NRw6NAhNE1jaGgIm83G+Pg4FRUVjI+PU1dX
+      RzQaxWKx0Nrais1m48aNGzQ0NLCwsGA8Q398fNxonVhZWUlbWxvhcJjR0VGOHTvGsWPH+Pbb
+      bykrK2N0dNR4jEI6ncbhcHD+/Pl1xxYKhYx99jtlJ5LAjY2NdHZ2Gj2B6+vricVifPLJJ3z4
+      4Yd4PJ6XksCNjY1MTEygaRqBQICjR4/u6HltxV5/+QvxZ5A/Y58tSCQSVFRUYLFYUBSF0dFR
+      rly5YqRVQ6EQnZ2dBINBAGKxGJ999hkejweHw0FjY6PxXoFAgLKyMuPPuq7z448/0traCsDi
+      4iKapuF0OmloaKCwsBBYnfuNx+PcvHmT8fFx4/UNDQ07Pre4E0ngoqIi424/EAigaRoPHz40
+      OoLBy0nggoICFEUxfi+E+HMwdQFwOBwkEglgdTpoenqanp4epqamAPD7/bS1tdHU1ATAa6+9
+      xgcffEA8Hs95d/7b6Q+Ahw8fcubMmZd+zul0cv36da5evcqTJ0928vRespmewIqiGAuSa5qb
+      mzl+/DiPHj3i+fPn63oCrxXHcDi8roCFQiHu3LlDR0cHi4uLuFwunE5n3jwQToJgQmyfqaeA
+      zp49y507d7Db7fh8Pi5duoTf72dgYGBdSMrpdGKz2bh16xaKouB0OkmlUvT19RGJRHj8+DEO
+      h4PBwUEURaGoqIiRkRHjrljTNAoLC3G73cbIIBqNcvfuXaqrqwkGg2iaxuuvv85PP/1EY2Mj
+      wWDQ+Jk33ngDh8Ox7fPdqCfwxMSEkQS+fPky3377LXa73UgCu1wuFEVB13UGBweNnsC1tbX4
+      fD6CwSAej4dQKMShQ4fo7u7m4sWLRKNR4vE4JSUlqKqaN1+8MgUkxPZJEMxEdiIJ7PP5XuoJ
+      DKvTafv27SMWi72UBK6urmZoaAiLxUJNTU1e9ATOh0Xg5f/7bzKP/ndPj0G8euwt/0nhpf/a
+      kfeSAiC27FVvCm+GbaD5tOde0zQsebgNNN+ukXUXt4FKARBb9qqPAH5LgmC5SRAsN2kKL4QQ
+      YleYehFYvLrybQQgxJ4bGYYnv/6hl0gBMJGNksCFhYVkMhmsViuKoqCqKpFIhNLSUux2O6qq
+      omkaNpuNhYUFdF3HYrEYO6J0Xcftdq/7vOXlZSPvsLi4SDqdZv/+/Xtx6i+RL38hfmdxAaan
+      /tBLpACYyEZJ4HQ6TVdXF++++y7l5eXcvHmTQCDA8vIyNpuN7777zsgDDAwMkM1mCQaDXL16
+      lYGBAVRV5cSJE/j9fgDu379PMBjko48+IhQKMTQ0ZGw9ra+v3+MrIYTYCVIATGQtCZxMJhkZ
+      GTGSwLCaXF57MNv8/DyaprG4uEhVVRVOp5P29nZisRiKotDa2srk5CQWi4VwOExTUxMej4ee
+      nh6jAJw9e9YIffn9fiorK+nt7d2RPMNOkCkgIbZPFoFNZDNJYFidKnK73dTV1dHZ2fnSjgJd
+      1+nr66OlpYWmpiaCwSBdXV1ks1njZ377Gk3T+Oqrr/B4PHnxHCCQKSAhdoKMAExkoyRwPB4n
+      FouhqipVVVXMz88bD6pLpVLMzc0xPz/P4uIiqVSKkpISbDYb2WyWkydPMjg4iM/nIxQK4fP5
+      iMViJBIJwuEwk5OTuN1uXC4XqVQKl8u1x1dCCLETZARgIk1NTeumYNamfwCWlpY4cOCA8fft
+      7e1MTk5y6dIlVlZWsNvteL1e0uk0BQUFxmsVRSEcDnPkyBECgQBFRUXA6hRLfX09iUSCyspK
+      vF4vqVSKTCazi2f8r+XLIymEMDMJgoktkyDYCxIEy02CYLltKwgm20CFEOIVVVW9+usPyJ9S
+      LMQfIFNAQmyfFABhSvk0/SOEWUkBMJF0Ok0ymURVVXRdZ3FxkWQyyfLyMrquE41GjSxAOp0m
+      Go0ar52fn2dpaQlY3dYZiUSMBd1kMkksFlv3WZlMhpmZGVRVZWVlhWQySTKZfKWbwAvxZyNr
+      ACay1Z7ALpeLsbEx4vE4HR0dPHjwALfbzdjYGO3t7Tx58gRd143dQbqu09vbi8vl4t69e5w5
+      c4aJiQmmpqaorKykpaVlry9F3i0CC2FGMgIwka32BB4ZGaGtrY3Tp08zOjpKe3u70e+3pKSE
+      2tradc8CslgsNDc3Y7PZKC4upqKiglOnTqEoCidPntzjq7BKvvyF2D4pACay1Z7AsPqlbrPZ
+      0DRtXb9fgFQqRTabXbfHP5PJkEql0DQNXdeZnp7G6/Vis8mgUYg/CykAJrKWBG5ra8NutxtJ
+      4OrqagoLC42ewA0NDQwMDDA0NITT6aS8vJy///3v9PX14fP56O7uprW1lWg0ytTUlNH2MRwO
+      EwqFWFlZIRQKUV1dTTKZRNd1fv7557yY+lkju4CE2D4JgpnIVnsCWywWnj17RnFxMeXl5YyM
+      jBj9fgOBAIODg2iaRl1dHdFolNLSUsLhMDMzM1RVVeF2u4lGo5SVla07HgmCvSBBsNwkCJbb
+      bncEkwIgtkwKwAtSAHKTApCbtIQUYhNkCkiI7ZMCIEwpn+7+hTArKQBCCPGKkgJgIhslgWF1
+      HlpVVWB1fj4SiaDrOsvLy0aSN5vNks1mmZ2dZW35J5PJEA6HjdeuWXvfNWu9g/OBTAEJsX3K
+      xx9//PFeH4TYnO7ububm5vjll19wOp3cvn3b+EKenZ3liy++oKKiArvdzu3bt1lZWaG/vx+H
+      w0EoFOLBgwe4XC56enqwWCw8fvyYyspKvvzyS2MhbK3Zy/3797l165bRN+D58+d8+umnnD17
+      1lig0jTNaEq/F/Jp8U7TNKxW664t3m2Gqqp5ldtQVVWuUQ6qqqIoyq5do/w5c5HTZnsCFxYW
+      cu3aNcbHxxkeHiYQCOD3+wmHwxw+fJjR0VFaWlr45ptvGBkZwe12s7y8bGwphfU9gbPZLI8e
+      PcqbFLAQYmfIFJCJbLYn8NqzfEZGRjh//jwAg4ODHD16FIfDQWlpKXfu3GFycpJ0Ok1ZWRmB
+      QICuri7jPX77fl1dXRQXFxvtIfOBTAEJsX0yAjCRzfYEttvtDA8P89ZbbxGNRikpKaG/v5/r
+      169jsVg4ePAgXq8XVVXx+/10d3cb7ST/WU/g1tZWMpkMc3NzxvOC9prsAhJi+yQIZiIbJYGn
+      p6eJx+MAeL1eZmdngdU5/YMHDxKPxyktLQVgbGyMRCJBfX09iqIwOzvL1NQU9fX1xGIxSktL
+      CYVCpNNprFYr1dXVKIpCLBZj//79xuhAgmAvSBAsNwmC5SZJYGEae1kAJicnqaio2PXP/Vek
+      AOQmBSA3SQILsQn5dPcvhFlJARBCiFeUFABhSrILSIjtkwJgIlvtCaxpmpEE1jRtXb9fwEgL
+      /9bv+wbPz88buYB8IFNAQmyfbAM1ka32BHa73fT393PgwAEaGhqMJPHdu3e5du0aX3/9NYWF
+      hUaHMF3X6ezsxOPxMDY2xvHjx5mfnycSiXDhwoV1gTEhhHnJCMBEttoTeHZ2luLiYiorK9m3
+      bx/Nzc3Y7XbcbjcFBQW89957FBUVGZ9jsVh4++23jb7B09PTnDp1iosXL9Lf37+HV+AFmQIS
+      YvtkBGAia0lgu93OuXPn+Pzzz+ns7OTIkSPregIvLS2t+0Jvbm4mmUzS19dHJpPB7XYb00HA
+      P91yFgqF6Ovro6Ojg3Q6zffff082mzWyBHtNpoCE2D4ZAZjIVnsCj46OsrKygqIoRlP4mpoa
+      kskkKysrhMNhEokE8/PzhEIhMpnMur7Buq7T2tqKoigcO3Zsry+DEGKHSBDMRLbaEzibzTI4
+      OIjH46GiooKpqSmj36/dbuf58+fA6l213W6npKSEsbExo2+wz+fj6dOnHD58GK/XaxyPBMFe
+      kCBYbhIEy02SwMI05FEQL0gByE0KQG67XQBMtQag6zqpVGqvD0P8g6qqxOPxPekHkG8FIB+f
+      dZ/NZvPuWfdyjTa229cof85cmJLX65UpIGQEsBkyAshNRgAbsFgseXXX96pbmwLaC/nw7yD9
+      w/+QHVntoaDrGmDJq7tbTdNQ8+jLVtM0Mha5RhvRNI2s1QL862tkq72Co/k/duTzTFUAfk9V
+      VXp6elheXub06dMUFxdz48YN3n//fXRd59mzZ9TV1TE5OYnT6eTp06ekUilKS0tpbm5meHiY
+      eDxOa2srAwMDhEIhbDYbFy5c4NmzZ4yPj+P3+yksLOTp06dYLBbeeustent7yWazLC4ucvXq
+      Vbq7u1FVlQsXLhh3E8lkknv37hnhqp2QTqdZWVlh3759WK1WlpaWjOf/FxQUEIvFcLlcOBwO
+      0um0ca6aprGwsACA0+kkk8mQTqdRFMW4e19YWKCoqMi4O9M0jWg0isfjwW63k0gkpAD/jhYb
+      RR3v3evD2JCa+0d2VT4uOObbNcp1PFZv3Y59lqkLQG9vLzU1NRw6dAhN0xgaGsJmszE+Pk5F
+      RQXj4+PU1dURjUaxWCy0trZis9m4ceMGDQ0NLCwsGM/Qr6qq4tixY9y7d4+ZmRlCoRBXrlwB
+      Vof3lZWV/Prrr0xMTHD+/Hmy2Sy3bt3i0aNHNDQ04HA4+OGHHzh37hywuo9+bZ/9TtmJJHBj
+      YyOdnZ14vV6cTqfRA+CTTz7hww8/xOPxvJQEbmxsZGJiAk3TCAQCHD16dEfPayvybQ1ACDPK
+      n7HPFiQSCSoqKrBYLCiKwujoKFeuXDHSqqFQiM7OToLBIACxWIzPPvsMj8eDw+GgsbHReC9d
+      1/nb3/7G6OgoVquV6elpbt26xcOHD1EUhVu3bnHv3j0CgQAAP//8My0tLXi9Xnp7e/n111+N
+      YgLQ0NCw43OLO5EELioqMu72A4EAmqbx8OFDTp8+bXzO75PABQUFKIpi/D4fyJe/ENtn6gLg
+      cDhIJBLA6nTQ9PQ0PT09TE1NAeD3+2lra6OpqQmA1157jQ8++IB4PP7S3bnD4eCvf/0rDQ0N
+      RCIRAoEAV65cIR6PY7VauXr1Ku+88w7BYBBVVQmHwxw6dIjDhw/z9ttvU1tbi8fj+bee72Z6
+      AiuKYixIrmlubub48eM8evSI58+f884771BWVsbNmzeN4hgOhxkfHzdeEwqFuHPnDh0dHSwu
+      LuJyuXA6nXn1QDghxPaYegro7Nmz3LlzB7vdjs/n49KlS/j9fgYGBtaFpJxOJzabjVu3bqEo
+      Ck6nk1QqRV9fH5FIhMePH7OwsGAkY9vb24lGo9y+fZuDBw8SDAaZmZkhnU7z5ptvMjExweuv
+      vw7A4uIi9+7dI5PJ0NbWxk8//URjYyPBYJBoNMrdu3d54403cDgc2z7fjXoCT0xMGEngy5cv
+      8+2332K3240ksMvlQlEUdF1ncHCQiooKrFYrtbW1+Hw+gsEgHo+HUCjEoUOH6O7u5uLFi0Sj
+      UeLxOCUlJaiqmjfP4JEpICG2T4JgJrITSWCfz8fc3BwTExPU1NTgdDqB1em0ffv2EYvFXkoC
+      V1dXMzQ0hMVioaamRnoC/8Py//03mUf/u6fHIF499pb/pPDSf+3Ie0kBEFv2qhcAM2wDzac9
+      95qmYcnDbaD5do2su7gNVAqA2DJ5FtALEgTLTYJguUlTeCE2Ya/v/oX4MzD1IrAQQoh/GBmG
+      J7/+oZdIATCRjZLAhYWFZDIZrFYriqKgqiqRSITS0lLsdjuqqqJpGjabjYWFBXRdx2KxGDui
+      dF3H7Xav+7zl5WUKCwuB1d1O6XSa/fv378WpvyQf1gCEyCuLCzA99YdeIgXARDZKAqfTabq6
+      unj33XcpLy/n5s2bBAIBlpeXsdlsfPfdd0YeYGBggGw2SzAY5OrVqwwMDKCqKidOnMDv9wNw
+      //59gsEgH330EaFQiKGhIWPraX19/R5fCZkCEmInSAEwkbUkcDKZZGRkxEgCw2qSee3BbPPz
+      82iaxuLiIlVVVTidTtrb24nFYiiKQmtrK5OTk1gsFsLhME1NTXg8Hnp6eowCcPbsWSP05ff7
+      qayspLe3d0fyDEKI/CCLwCaymSQwrE4Vud1u6urq6OzsfGlHga7r9PX10dLSQlNTE8FgkK6u
+      LrLZrPEzv32Npml89dVXeDyevHgOEEhTeCF2gowATGSjJHA8HicWi6GqKlVVVczPz5NOp3E4
+      HKRSKebm5pifn2dxcZFUKkVJSQk2m41sNsvJkycZHBzE5/MRCoXw+XzEYjESiQThcJjJyUnc
+      bjcul4tUKoXL5drjKyFTQELsBBkBmEhTU9O6KZi16R+ApaUlDhw4YPx9e3s7k5OTXLp0iZWV
+      Fex2O16vl3Q6TUFBgfFaRVEIh8McOXKEQCBAUVERsHqHXV9fTyKRoLKyEq/XSyqVIpPJ7OIZ
+      CyH+nSQIJrZMgmAvSBAsNwmC5batIJhsAxWvCpkCEuJ3qqpXf/0B+VOKhRBC7CopAMKUZBeQ
+      ENsnBcBE0uk0yWQSVVXRdZ3FxUWSySTLy8vouk40GjWyAOl0mmg0arx2fn6epaUlYHVbZyQS
+      MRZ0k8kksVhs3WdlMhlmZmZQVZWVlRWSySTJZHLPmsD/nkwBCbF9sgZgIlvtCexyuRgbGyMe
+      j9PR0cGDBw9wu92MjY3R3t7OkydP0HXd2B2k6zq9vb24XC7u3bvHmTNnmJiYYGpqisrKSlpa
+      Wvb6UgghdoCMAExkqz2BR0ZGaGtr4/Tp04yOjtLe3m70+y0pKaG2tnbds4AsFgvNzc3YbDaK
+      i4upqKjg1KlTKIrCyZMn9/gqrJIpICG2TwqAiWy1JzCsfqnbbDY0TVvX7xcglUqRzWbX7fHP
+      ZDKkUik0TUPXdaanp/F6vdhs+TFolCkgIbZPCoCJrCWB29rasNvtRhK4urqawsJCoydwQ0MD
+      AwMDDA0N4XQ6KS8v5+9//zt9fX34fD66u7tpbW0lGo0yNTVltH0Mh8OEQiFWVlYIhUJUV1eT
+      TCbRdZ2ff/5Zpn6E+JORIJiJbLUnsMVi4dmzZxQXF1NeXs7IyIjR7zcQCDA4OIimadTV1RGN
+      RiktLSUcDjMzM0NVVRVut5toNEpZWdm645Eg2AsSBMtNgmC57XZHMCkAYste9Z7AvyUFIDcp
+      ALlJS0ghhBC7QgqAMCXZBSTE9kkBEKaUT9M/QpiVFAAT2SgJDKvz0KqqAqvz85FIBF3XWV5e
+      NpK82WyWbDbL7Owsa8s/mUyGcDhsvHbN2vuuWesdLIT4c1A+/vjjj/f6IMTmdHd3Mzc3xy+/
+      /ILT6eT27dvGF/Ls7CxffPEFFRUV2O12bt++zcrKCv39/TgcDkKhEA8ePMDlctHT04PFYuHx
+      48dUVlby5ZdfGgtha81e7t+/z61bt4y+Ac+fP+fTTz/l7NmzxgKVpmlGU/rdNjc3l1ejAE3T
+      sFqtu7Z4txmqquZNbgNWj0eu0cZUVUVRlF27Rvlz5iKnzfYELiws5Nq1a4yPjzM8PEwgEMDv
+      9xMOhzl8+DCjo6O0tLTwzTffMDIygtvtZnl52dhSCut7AmezWR49epQ3KWCQKSAhdoJMAZnI
+      ZnsCrz3LZ2RkhPPnzwMwODjI0aNHcTgclJaWcufOHSYnJ0mn05SVlREIBOjq6jLe47fv19XV
+      RXFxsdEeUgjx5yAjABPZbE9gu93O8PAwb731FtFolJKSEvr7+7l+/ToWi4WDBw/i9XpRVRW/
+      3093d7fRTvKf9QRubW0lk8kwNzdnPC9or+VbDkAIM5IgmIlslASenp4mHo8D4PV6mZ2dBVbn
+      9A8ePEg8Hqe0tBSAsbExEokE9fX1KIrC7OwsU1NT1NfXE4vFKC0tJRQKkU6nsVqtVFdXoygK
+      sViM/fv3G6MDCYK9IEGw3CQIlpskgYVpSAF4QQpAblIAcpMksBCbIEEwIbbv/wF/BMrjx313
+      gAAAAABJRU5ErkJggg==
+    </thumbnail>
+    <thumbnail height='384' name='Seed: PF00554 Cnidaria Protein Start' width='384'>
+      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
+    </thumbnail>
+  </thumbnails>
+</workbook>
