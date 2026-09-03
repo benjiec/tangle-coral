@@ -15,17 +15,11 @@ channels = ChannelSet([
     SequenceEntropyChannel("GRR_entropy", radius=16),
     DisorderPropensityChannel("GRR_disorder", radius=16),
 
-    # PEST
-    CompositionBiasChannel("PEST_comp", radius=9, residues="PEDST"),
-    NetChargeChannel("PEST_netcharge", radius=9),
-    HydropathyChannel("PEST_hydropathy", radius=9),
-    DisorderPropensityChannel("PEST_disorder", radius=9),
-
     # TAD
-    CompositionBiasChannel("TAD_comp", radius=14, residues="FLWVDE"),
+    CompositionBiasChannel("TAD_comp", radius=8, residues="FLWV"),
     ShortMotifChannel("TAD_motif", r"[FDAWV]..[ILVWY][FDAWV]..[FDAWV]"),
+    DisorderPropensityChannel("TAD_disorder", radius=14),
     NetChargeChannel("TAD_netcharge", radius=14),
-    HydropathyChannel("TAD_hydropathy", radius=14),
     HydrophobicMomentChannel("TAD_hydrophobic_moment", radius=6),  # radius stays 6 for all hydrophobic moment computations
 
     # NHR

@@ -1,5 +1,5 @@
 {
-  "channel_set_fingerprint": "f89fdac3719a1c7ecc5b5d6182e22383e2a97e9bc42f378dfab92a15457665c2",
+  "channel_set_fingerprint": "93f8cdad2204d3b50b00a5894717a89e834f379fe6c851caf8aff8d91e5ad8d6",
   "channels": [
     {
       "background": {
@@ -100,74 +100,37 @@
     },
     {
       "background": {
-        "bg_mu": 0.31905673731654693,
-        "bg_sigma": 0.13033749298268016
+        "bg_mu": 0.20558599231493566,
+        "bg_sigma": 0.10900983724775488
       },
       "definition": {
         "arguments": {
-          "radius": 9,
-          "residues": "DEPST"
+          "radius": 8,
+          "residues": "FLVW"
         },
-        "short_name": "PEST_comp",
+        "short_name": "TAD_comp",
         "type": "composition_bias"
       }
     },
     {
-      "background": {
-        "bg_mu": -0.004639841568066645,
-        "bg_sigma": 0.12520723145662888
-      },
+      "background": null,
       "definition": {
         "arguments": {
-          "radius": 9
+          "flags": 0,
+          "pattern": "[FDAWV]..[ILVWY][FDAWV]..[FDAWV]"
         },
-        "short_name": "PEST_netcharge",
-        "type": "net_charge"
+        "short_name": "TAD_motif",
+        "type": "short_motif"
       }
     },
     {
       "background": {
-        "bg_mu": -0.42045939507554997,
-        "bg_sigma": 0.8144276236417911
+        "bg_mu": 0.11933611602255266,
+        "bg_sigma": 0.11108829716386914
       },
       "definition": {
         "arguments": {
-          "radius": 9,
-          "scale": {
-            "A": 1.8,
-            "C": 2.5,
-            "D": -3.5,
-            "E": -3.5,
-            "F": 2.8,
-            "G": -0.4,
-            "H": -3.2,
-            "I": 4.5,
-            "K": -3.9,
-            "L": 3.8,
-            "M": 1.9,
-            "N": -3.5,
-            "P": -1.6,
-            "Q": -3.5,
-            "R": -4.5,
-            "S": -0.8,
-            "T": -0.7,
-            "V": 4.2,
-            "W": -0.9,
-            "Y": -1.3
-          }
-        },
-        "short_name": "PEST_hydropathy",
-        "type": "hydropathy"
-      }
-    },
-    {
-      "background": {
-        "bg_mu": 0.11936099664586827,
-        "bg_sigma": 0.1253969113280028
-      },
-      "definition": {
-        "arguments": {
-          "radius": 9,
+          "radius": 14,
           "scale": {
             "A": 0.06,
             "C": 0.02,
@@ -191,33 +154,8 @@
             "Y": -0.51
           }
         },
-        "short_name": "PEST_disorder",
+        "short_name": "TAD_disorder",
         "type": "disorder_propensity"
-      }
-    },
-    {
-      "background": {
-        "bg_mu": 0.3259401268300289,
-        "bg_sigma": 0.10594309161137505
-      },
-      "definition": {
-        "arguments": {
-          "radius": 14,
-          "residues": "DEFLVW"
-        },
-        "short_name": "TAD_comp",
-        "type": "composition_bias"
-      }
-    },
-    {
-      "background": null,
-      "definition": {
-        "arguments": {
-          "flags": 0,
-          "pattern": "[FDAWV]..[ILVWY][FDAWV]..[FDAWV]"
-        },
-        "short_name": "TAD_motif",
-        "type": "short_motif"
       }
     },
     {
@@ -231,41 +169,6 @@
         },
         "short_name": "TAD_netcharge",
         "type": "net_charge"
-      }
-    },
-    {
-      "background": {
-        "bg_mu": -0.4202828548028416,
-        "bg_sigma": 0.7089211853666822
-      },
-      "definition": {
-        "arguments": {
-          "radius": 14,
-          "scale": {
-            "A": 1.8,
-            "C": 2.5,
-            "D": -3.5,
-            "E": -3.5,
-            "F": 2.8,
-            "G": -0.4,
-            "H": -3.2,
-            "I": 4.5,
-            "K": -3.9,
-            "L": 3.8,
-            "M": 1.9,
-            "N": -3.5,
-            "P": -1.6,
-            "Q": -3.5,
-            "R": -4.5,
-            "S": -0.8,
-            "T": -0.7,
-            "V": 4.2,
-            "W": -0.9,
-            "Y": -1.3
-          }
-        },
-        "short_name": "TAD_hydropathy",
-        "type": "hydropathy"
       }
     },
     {
@@ -323,7 +226,7 @@
       "definition": {
         "arguments": {
           "flags": 0,
-          "pattern": "[PV].I.[IT][FD]"
+          "pattern": "[PV].I.[IT]"
         },
         "short_name": "NHR_motif",
         "type": "short_motif"
