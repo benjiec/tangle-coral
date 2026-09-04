@@ -1,11 +1,12 @@
 #                                                                                                        --- full sequence --- -------------- this domain -------------   hmm coord   ali coord   env coord
 # target name                                    accession   tlen query name           accession   qlen   E-value  score  bias   #  of  c-Evalue  i-Evalue  score  bias  from    to  from    to  from    to  acc description of target
 #                            ------------------- ---------- ----- -------------------- ---------- ----- --------- ------ ----- --- --- --------- --------- ------ ----- ----- ----- ----- ----- ----- ----- ---- ---------------------
-pseudodiploria_host_TRINITY_DN200187_c2_g4_i3.p1 -            653 p50-like_cnidaria    -            438  1.6e-216  707.5   0.0   1   1    2e-216    2e-216  707.1   0.0    23   431     2   407     1   434 0.94 -
-a_tenuis_TRINITY_DN17808_c1_g1_i1.p1             -            391 p50-like_cnidaria    -            438  1.3e-209  684.7   0.0   1   1  1.6e-209  1.6e-209  684.4   0.0    51   436     1   381     1   383 0.97 -
-siderastrea_host_TRINITY_DN450483_c1_g1_i4.p1    -            301 p50-like_cnidaria    -            438  2.1e-166  542.3   0.0   1   1  2.3e-166  2.3e-166  542.2   0.0     1   301     1   301     1   301 1.00 -
-siderastrea_host_TRINITY_DN450483_c1_g1_i5.p1    -            300 p50-like_cnidaria    -            438  9.2e-165  536.9   0.0   1   1    1e-164    1e-164  536.7   0.0     1   301     1   300     1   300 0.99 -
-orbicella_host_TRINITY_DN220613_c2_g1_i3.p1      -            264 p50-like_cnidaria    -            438  1.3e-134  437.5   0.0   1   1  1.4e-134  1.4e-134  437.4   0.0     1   260     1   260     1   264 0.98 -
+pseudodiploria_host_TRINITY_DN200187_c2_g4_i3.p1 -            653 p50-like_cnidaria    -            438  1.9e-216  707.5   0.0   1   1  2.4e-216  2.4e-216  707.1   0.0    23   431     2   407     1   434 0.94 -
+a_tenuis_TRINITY_DN17808_c1_g1_i1.p1             -            391 p50-like_cnidaria    -            438  1.5e-209  684.7   0.0   1   1  1.9e-209  1.9e-209  684.4   0.0    51   436     1   381     1   383 0.97 -
+siderastrea_host_TRINITY_DN450483_c1_g1_i4.p1    -            301 p50-like_cnidaria    -            438  2.5e-166  542.3   0.0   1   1  2.8e-166  2.8e-166  542.2   0.0     1   301     1   301     1   301 1.00 -
+siderastrea_host_TRINITY_DN450483_c1_g1_i5.p1    -            300 p50-like_cnidaria    -            438  1.1e-164  536.9   0.0   1   1  1.2e-164  1.2e-164  536.7   0.0     1   301     1   300     1   300 0.99 -
+orbicella_host_TRINITY_DN220613_c2_g1_i3.p1      -            264 p50-like_cnidaria    -            438  1.6e-134  437.5   0.0   1   1  1.7e-134  1.7e-134  437.4   0.0     1   260     1   260     1   264 0.98 -
+siderastrea_host_TRINITY_DN453364_c1_g2_i2.p1    -            507 p50-like_cnidaria    -            438   1.6e-63  203.5   0.0   1   1   2.6e-63   2.6e-63  202.8   0.0   298   424     1   129     1   163 0.89 -
 #
 # Program:         hmmsearch
 # Version:         3.4 (Aug 2023)
@@ -14,5 +15,5 @@ orbicella_host_TRINITY_DN220613_c2_g1_i3.p1      -            264 p50-like_cnida
 # Target file:     rnaseq_sequences.faa
 # Option settings: hmmsearch --domtblout rnaseq_sequences.p50-like.txt p50-like_cnidaria.hmm rnaseq_sequences.faa 
 # Current dir:     /Users/benjie/git/tangle/play
-# Date:            Fri Sep  4 13:51:54 2026
+# Date:            Fri Sep  4 17:21:01 2026
 # [ok]
