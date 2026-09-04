@@ -33,5 +33,25 @@ PYTHONPATH=../coral ../sieve/scripts/compute-protein-channels.py cn_PF00554.faa 
 docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/cn_PF00554.faa /work/cn_PF00554 /tmp -c 0.9
 echo "Cluster Repr\tCluster Member" | cat - cn_PF00554_cluster.tsv > channel_query_clusters.tsv
 
+sieve-py ../sieve/scripts/pfam-find-matches.py PF00554 \
+  --taxon cnidaria \
+  --match-only \
+  -o cn_PF00554_pf.faa
+
+sieve-py ../sieve/scripts/pfam-find-matches.py PF00554 \
+  --taxon "Homo sapiens" \
+  --match-only \
+  -o hs_PF00554_pf.faa
+
+sieve-py ../sieve/scripts/pfam-find-matches.py PF16179 \
+  --taxon cnidaria \
+  --match-only \
+  -o cn_PF16179_pf.faa
+
+sieve-py ../sieve/scripts/pfam-find-matches.py PF16179 \
+  --taxon "Homo sapiens" \
+  --match-only \
+  -o hs_PF16179_pf.faa
+
 docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/x.faa -out /app/x.msa
 
