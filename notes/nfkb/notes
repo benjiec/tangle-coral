@@ -55,3 +55,19 @@ sieve-py ../sieve/scripts/pfam-find-matches.py PF16179 \
 
 docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/x.faa -out /app/x.msa
 
+hmmbuild NFkB1-like_cnidaria.hmm NFkB1-like_cnidaria.msa
+hmmbuild p50-like_cnidaria.hmm p50-like_cnidaria.msa
+
+PYTHONPATH=../coral sieve-py ../sieve/scripts/hmmsearch-threshold.py \
+  --hmm p105-like_cnidaria.hmm \
+  --positive-fasta p105-like_cnidaria.faa \
+  --all-fasta cn_PF00554.faa \
+  --output p105-like_cnidaria_thresholds.tsv
+
+PYTHONPATH=../coral sieve-py ../sieve/scripts/hmmsearch-threshold.py \
+  --hmm p50-like_cnidaria.hmm \
+  --positive-fasta p50-like_cnidaria.faa \
+  --all-fasta cn_PF00554.faa \
+  --output p50-like_cnidaria_thresholds.tsv
+
+
