@@ -1,23 +1,52 @@
+# various possible IkB matches
 sieve-py ../sieve/scripts/ko-find-matches.py K04734 --taxon "Homo sapiens" -o hs_K04734.faa
 sieve-py ../sieve/scripts/ko-find-matches.py K02581 --taxon "Homo sapiens" -o hs_K02581.faa
 sieve-py ../sieve/scripts/ko-find-matches.py K05872 --taxon "Homo sapiens" -o hs_K05872.faa 
 sieve-py ../sieve/scripts/ko-find-matches.py K09258 --taxon "Homo sapiens" -o hs_K09258.faa 
 
+# finding controls for sequences with other KO matches
+sieve-py ../sieve/scripts/ko-find-matches.py K04984 --taxon "Homo sapiens" -o hs_K04984.faa
+
+
+# IkB like
+
 sieve-py ../sieve/scripts/pfam-find-matches.py PF12796 --taxon cnidaria |
   PYTHONPATH=../coral python3 ../sieve/scripts/build-protein-artifacts.py \
-    --rule coral.rules.IkB_discovery.ikb_rule \
+    --rule coral.rules.IkB_discovery.canonical_ikb_rule \
     --artifacts-dir res-IkB-like
 
 PYTHONPATH=../coral python3 ../sieve/scripts/check-artifacts-by-rules.py \
-  --rule coral.rules.IkB_discovery.ikb_rule \
+  --rule coral.rules.IkB_discovery.canonical_ikb_rule \
   --artifacts-dir res-IkB-like \
+  --cpus 8 \
+  --pfam-hmm assets/Pfam-A.hmm
+
+../sieve/scripts/rule-results-to-fasta.py \
+  --artifacts-dir res-IkB-like \
+  --output cn_IkB-like.faa
+
+docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/cn_IkB-like.faa /work/cn_IkB-like /tmp
+echo "Cluster Repr\tCluster Member" | cat - cn_IkB-like_cluster.tsv > cn_IkB-like_cluster.tsv.h; mv cn_IkB-like_cluster.tsv.h cn_IkB-like_cluster.tsv
+
+
+# General possible inhibitors
+
+sieve-py ../sieve/scripts/pfam-find-matches.py PF12796 --taxon cnidaria |
+  PYTHONPATH=../coral python3 ../sieve/scripts/build-protein-artifacts.py \
+    --rule coral.rules.IkB_discovery.inhibitor_rule \
+    --artifacts-dir res-inhibitors
+
+PYTHONPATH=../coral python3 ../sieve/scripts/check-artifacts-by-rules.py \
+  --rule coral.rules.IkB_discovery.inhibitor_rule \
+  --artifacts-dir res-inhibitors \
   --cpus 8 \
   --pfam-hmm assets/Pfam-A.hmm
 
 
 
-docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/hs_K04735.faa /work/hs_K04735_cluster /tmp
 
+
+docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/hs_K04735.faa /work/hs_K04735_cluster /tmp
 docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/x.faa -out /app/x.msa
 
 hmmbuild NFkB1-like_cnidaria.hmm NFkB1-like_cnidaria.msa
