@@ -2,7 +2,7 @@ from sieve.rules import HMMAlignment, Leader, Pfam, Rules, Sequence
 
 βTrCP_pattern = r"[DE][ST]G[LIVMFYWA].{1,2}[ST]"
 
-inhibitor_rule = Rules(
+ank_rule = Rules(
     # anything that matches Ankyrin repeat (3 copies)
     Pfam.matches("PF12796")
 
@@ -23,25 +23,8 @@ canonical_ikb_rule = Rules(
     & ~Pfam.matches("PF01876")
 
     # required IKK phosphorylation and then degradation by βTrCP
-    & Sequence.matches_regex(βTrCP_pattern).relativeToPfam("PF12796", -100, -20)
+    & Sequence.matches_regex(βTrCP_pattern).relativeToPfam("PF12796", -180, -10)
 )
 
-nucleus_inhinitor_rule = Rules(
-    # anything that matches Ankyrin repeat (3 copies)
-    Pfam.matches("PF12796")
-
-    # a few known negatives
-    & ~Pfam.matches("PF00554")
-    & ~Pfam.matches("PF08424")
-    & ~Pfam.matches("PF01876")
-
-    # NLS
-    & (Sequence.matches_regex(
-         r"[KR]{3,5}|P[KR]{3,4}"
-       ).relativeToPfam("PF12796", -90, -20) |
-       Sequence.matches_regex(
-         r"[KR]{2}.{10,14}[KR]{3,5}"
-       ).relativeToPfam("PF12796", -90, -20))
-)
-
+# BCL3 requires localization=nucleus by DeepLoc
 # also BCL3 does not have DSG..S
