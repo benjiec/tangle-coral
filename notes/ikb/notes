@@ -24,8 +24,8 @@ PYTHONPATH=../coral python3 ../sieve/scripts/check-artifacts-by-rules.py \
 
 # submit cn_ank_only.faa to DeepLoc, save results as res-ank-only_deeploc.csv
 
+# can cluster all ANK containing sequences, w/o the filtering rules, for general discovery
 cp res-ank-only/sequences.faa cn_ank-all.faa
-
 docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/cn_ank-all.faa /work/cn_ank-all /tmp
 echo "Cluster Repr\tCluster Member" | cat - cn_ank-all_cluster.tsv > cn_ank-all_cluster.tsv.h; mv cn_ank-all_cluster.tsv.h cn_ank-all_cluster.tsv
 

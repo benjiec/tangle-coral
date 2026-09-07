@@ -7,7 +7,7 @@ from sieve.rules import HMMAlignment, Leader, Pfam, Rules, Sequence
 # all encompassing rule to filter sequences so we can send them to DeepLoc
 no_deeploc_rule = Rules(
 
-    Pfam.matches("PF00023").times(3, 11)
+    Pfam.matches("PF00023").times(4, 9)
     & Sequence.length_between(300, 1000)
     & Pfam.matches_only("PF00023", "PF12796", "PF13606", "PF13637", "PF13857")
 
@@ -18,7 +18,7 @@ no_deeploc_rule = Rules(
 canonical_ikb_rule = Rules(
     Leader().localize_at("Cytoplasm")
 
-    & Pfam.matches("PF00023").times(3, 11)
+    & Pfam.matches("PF00023").times(4, 9)
     & Sequence.length_between(300, 900)
     & Pfam.matches_only("PF00023", "PF12796", "PF13606", "PF13637", "PF13857")
    
@@ -39,7 +39,7 @@ canonical_ikb_rule = Rules(
 canonical_bcl3_rule = Rules(
     Leader().localize_at("Nucleus")
 
-    & Pfam.matches("PF00023").times(3, 11)
+    & Pfam.matches("PF00023").times(4, 9)
     & Sequence.length_between(300, 1000)
     & Pfam.matches_only("PF00023", "PF12796", "PF13606", "PF13637", "PF13857")
 
