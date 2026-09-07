@@ -9,6 +9,11 @@ min_protein_length = 300
 IkB_hypothetical_length = 900
 Bcl3_hypothetical_length = 1000
 
+permissive_ard_rule = Rules(
+    Sequence.length_between(min_protein_length, max(IkB_hypothetical_length, Bcl3_hypothetical_length))
+    & Pfam.matches_only(*All_ANK_PFs)
+    & Pfam.matches(ANK_PF).times(4,9).betweenAA(60, 2000, all_matches=True).spansAA(130,280)
+)
 
 # all encompassing rule to filter sequences so we can send them to DeepLoc
 no_deeploc_rule = Rules(
@@ -19,7 +24,6 @@ no_deeploc_rule = Rules(
 
     & Pfam.matches(ANK_PF).betweenAA(60, max(IkB_hypothetical_length, Bcl3_hypothetical_length)-100, all_matches=True)
 )
-
 
 canonical_ikb_rule = Rules(
     Leader().localize_at("Cytoplasm")
