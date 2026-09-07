@@ -10,9 +10,9 @@ IkB_hypothetical_length = 900
 Bcl3_hypothetical_length = 1000
 
 permissive_ard_rule = Rules(
-    Sequence.length_between(min_protein_length, max(IkB_hypothetical_length, Bcl3_hypothetical_length))
+    Sequence.length_between(min_protein_length, 2000)
     & Pfam.matches_only(*All_ANK_PFs)
-    & Pfam.matches(ANK_PF).times(4,9).betweenAA(60, 2000, all_matches=True).spansAA(130,280)
+    & Pfam.matches(ANK_PF).times(4,9).betweenAA(60, 1800, all_matches=True).spansAA(130,280)
 )
 
 # all encompassing rule to filter sequences so we can send them to DeepLoc
