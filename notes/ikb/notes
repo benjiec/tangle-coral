@@ -22,12 +22,18 @@ PYTHONPATH=../coral python3 ../sieve/scripts/check-artifacts-by-rules.py \
   --artifacts-dir res-ank-only \
   --output cn_ank-only.faa
 
-# submit cn_ank_only.faa to DeepLoc, save results as res-ank-only_deeploc.csv
+# submit cn_ank-only.faa to DeepLoc, save results as res-ank-only_deeploc.csv
 
 # can cluster all ANK containing sequences, w/o the filtering rules, for general discovery
-cp res-ank-only/sequences.faa cn_ank-all.faa
+../sieve/scripts/fasta-remove-x.py res-ank-only/sequences.faa cn_ank-all.faa
 docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/cn_ank-all.faa /work/cn_ank-all /tmp
 echo "Cluster Repr\tCluster Member" | cat - cn_ank-all_cluster.tsv > cn_ank-all_cluster.tsv.h; mv cn_ank-all_cluster.tsv.h cn_ank-all_cluster.tsv
+
+# find repr sequences to run on AF
+../sieve/scripts/pfam-extract-region.py cn_ank-all_rep_seq.fasta protein_pfam.tsv PF00023 4 9 cn_ard.faa
+../sieve/scripts/fasta-filter-length.py cn_ard.faa 130 280 cn_ard_length_filtered.faa
+../sieve/scripts/fasta-filter-accession-prefix.py cn_ank-all_rep_seq.fasta cn_ard_length_filtered.faa cn_ank-all_rep_seq_with_filtered_ard.faa
+../sieve/scripts/fasta-filter-length.py cn_ank-all_rep_seq_with_filtered_ard.faa 300 2000 cn_ank-all_rep_seq_af.faa
 
 
 # IkB like
