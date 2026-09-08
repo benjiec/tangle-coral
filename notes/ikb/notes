@@ -5,7 +5,7 @@ sieve-py ../sieve/scripts/ko-find-matches.py K05872 --taxon "Homo sapiens" -o hs
 sieve-py ../sieve/scripts/ko-find-matches.py K09258 --taxon "Homo sapiens" -o hs_K09258.faa 
 
 
-# Filter for clustering
+# Filter sequences to cluster then binding check on AF
 
 sieve-py ../sieve/scripts/pfam-find-matches.py PF12796 --taxon cnidaria |
   PYTHONPATH=../coral python3 ../sieve/scripts/build-protein-artifacts.py \
