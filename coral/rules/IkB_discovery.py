@@ -11,7 +11,6 @@ Bcl3_hypothetical_length = 1000
 
 permissive_ard_rule = Rules(
     Sequence.length_between(min_protein_length, 2000)
-    & Pfam.matches_only(*All_ANK_PFs)
     & Pfam.matches(ANK_PF).times(4,9).betweenAA(60, 1800, all_matches=True).spansAA(130,280)
 )
 
