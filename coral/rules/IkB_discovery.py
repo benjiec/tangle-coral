@@ -14,16 +14,6 @@ permissive_ard_rule = Rules(
     & Pfam.matches(ANK_PF).times(4,9).betweenAA(60, 1800, all_matches=True).spansAA(130,280)
 )
 
-# all encompassing rule to filter sequences so we can send them to DeepLoc
-no_deeploc_rule = Rules(
-
-    Pfam.matches(ANK_PF).times(4, 9)
-    & Sequence.length_between(min_protein_length, max(IkB_hypothetical_length, Bcl3_hypothetical_length))
-    & Pfam.matches_only(*All_ANK_PFs)
-
-    & Pfam.matches(ANK_PF).betweenAA(60, max(IkB_hypothetical_length, Bcl3_hypothetical_length)-100, all_matches=True)
-)
-
 canonical_ikb_rule = Rules(
     Leader().localize_at("Cytoplasm")
 
@@ -35,7 +25,7 @@ canonical_ikb_rule = Rules(
     # ahead of Ankyrin Repeat 1. Minimum Leader Length: NES+SRD. The SRD needs
     # at least 30 to 70 amino acids to house the target IKK phosphorylation
     # serines and lysine acceptor residues for ubiquitin attachment. Also
-    # leaving room at the end for PEST sequence.
+    # leaving room at the end for PEST sequence, up to 50 AAs.
 
     & Pfam.matches(ANK_PF).betweenAA(60, IkB_hypothetical_length-50, all_matches=True)
 

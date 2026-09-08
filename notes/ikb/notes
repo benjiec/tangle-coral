@@ -4,8 +4,7 @@ sieve-py ../sieve/scripts/ko-find-matches.py K02581 --taxon "Homo sapiens" -o hs
 sieve-py ../sieve/scripts/ko-find-matches.py K05872 --taxon "Homo sapiens" -o hs_K05872.faa 
 sieve-py ../sieve/scripts/ko-find-matches.py K09258 --taxon "Homo sapiens" -o hs_K09258.faa 
 
-
-# Filter sequences to cluster then binding check on AF
+# Find ARD containing sequences to cluster then binding check on AF
 
 sieve-py ../sieve/scripts/pfam-find-matches.py PF12796 --taxon cnidaria |
   PYTHONPATH=../coral python3 ../sieve/scripts/build-protein-artifacts.py \
@@ -27,77 +26,20 @@ docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/cn_ank.
 echo "Cluster Repr\tCluster Member" | cat - cn_ank_cluster.tsv > cn_ank_cluster.tsv.h; mv cn_ank_cluster.tsv.h cn_ank_cluster.tsv
 # use repr sequences to run on AF
 
+# AF found sequences in cn_RHD_bound.faa as those with potential binding to
+# p50x2. The clusters are in cn_RHD_bound_clusters.txt.
 
-# Filter for DeepLoc submission
+# Fishing for more sequences
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/cn_RHD_bound.faa -out /app/x.msa
+hmmbuild ard_fishing.hmm x.msa
+hmmsearch --domtblout x ard_fishing.hmm res-ank-permissive/input.faa
+python3 ../sieve/scripts/domtbl-tsv.py x > ard_fishing.tsv
 
-sieve-py ../sieve/scripts/pfam-find-matches.py PF12796 --taxon cnidaria |
-  PYTHONPATH=../coral python3 ../sieve/scripts/build-protein-artifacts.py \
-    --rule coral.rules.IkB_discovery.no_deeploc_rule \
-    --artifacts-dir res-ank-only
-
-PYTHONPATH=../coral python3 ../sieve/scripts/check-artifacts-by-rules.py \
-  --rule coral.rules.IkB_discovery.no_deeploc_rule \
-  --artifacts-dir res-ank-only \
-  --cpus 8 \
-  --pfam-hmm assets/Pfam-A.hmm
-
-../sieve/scripts/rule-results-to-fasta.py \
-  --artifacts-dir res-ank-only \
-  --output cn_ank-only.faa
-
-# submit cn_ank-only.faa to DeepLoc, save results as res-ank-only_deeploc.csv
-
-
-# IkB like
-
-sieve-py ../sieve/scripts/pfam-find-matches.py PF12796 --taxon cnidaria |
-  PYTHONPATH=../coral python3 ../sieve/scripts/build-protein-artifacts.py \
-    --rule coral.rules.IkB_discovery.canonical_ikb_rule \
-    --artifacts-dir res-IkB-like
-
-PYTHONPATH=../coral python3 ../sieve/scripts/check-artifacts-by-rules.py \
-  --rule coral.rules.IkB_discovery.canonical_ikb_rule \
-  --artifacts-dir res-IkB-like \
-  --cpus 8 \
-  --pfam-hmm assets/Pfam-A.hmm \
-  --deeploc-csv res-ank-only_deeploc.csv
-
-../sieve/scripts/rule-results-to-fasta.py \
-  --artifacts-dir res-IkB-like \
-  --output cn_IkB-like.faa
-
-docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/cn_IkB-like.faa /work/cn_IkB-like /tmp
-echo "Cluster Repr\tCluster Member" | cat - cn_IkB-like_cluster.tsv > cn_IkB-like_cluster.tsv.h; mv cn_IkB-like_cluster.tsv.h cn_IkB-like_cluster.tsv
-
-
-# Bcl3 like
-
-sieve-py ../sieve/scripts/pfam-find-matches.py PF12796 --taxon cnidaria |
-  PYTHONPATH=../coral python3 ../sieve/scripts/build-protein-artifacts.py \
-    --rule coral.rules.IkB_discovery.canonical_bcl3_rule \
-    --artifacts-dir res-Bcl3-like
-
-PYTHONPATH=../coral python3 ../sieve/scripts/check-artifacts-by-rules.py \
-  --rule coral.rules.IkB_discovery.canonical_bcl3_rule \
-  --artifacts-dir res-Bcl3-like \
-  --cpus 8 \
-  --pfam-hmm assets/Pfam-A.hmm \
-  --deeploc-csv res-ank-only_deeploc.csv
-
-../sieve/scripts/rule-results-to-fasta.py \
-  --artifacts-dir res-Bcl3-like \
-  --output cn_Bcl3-like.faa
-
-docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/cn_Bcl3-like.faa /work/cn_Bcl3-like /tmp
-echo "Cluster Repr\tCluster Member" | cat - cn_Bcl3-like_cluster.tsv > cn_Bcl3-like_cluster.tsv.h; mv cn_Bcl3-like_cluster.tsv.h cn_Bcl3-like_cluster.tsv
 
 
 
 
 docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/x.faa -out /app/x.msa
-
-hmmbuild NFkB1-like_cnidaria.hmm NFkB1-like_cnidaria.msa
-hmmbuild p50-like_cnidaria.hmm p50-like_cnidaria.msa
 
 PYTHONPATH=../coral sieve-py ../sieve/scripts/hmmsearch-threshold.py \
   --hmm p105-like_cnidaria.hmm \
