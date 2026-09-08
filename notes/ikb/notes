@@ -21,21 +21,20 @@ PYTHONPATH=../coral python3 ../sieve/scripts/check-artifacts-by-rules.py \
   --artifacts-dir res-ank-permissive \
   --output cn_ank.faa
 
-# can cluster all ANK containing sequences, for general discovery
+# cluster
 docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/cn_ank.faa /work/cn_ank /tmp
 echo "Cluster Repr\tCluster Member" | cat - cn_ank_cluster.tsv > cn_ank_cluster.tsv.h; mv cn_ank_cluster.tsv.h cn_ank_cluster.tsv
-# use repr sequences to run on AF
+# use repr sequences to run on AF to screen for RHD binding sequences
 
-# AF found sequences in cn_RHD_bound.faa as those with potential binding to
-# p50x2. The clusters are in cn_RHD_bound_clusters.txt.
+# AF found sequences in cn_RHD-binding.faa as those with potential binding to
+# p50x2. The clusters are in cn_RHD-binding_clusters.txt.
 
-# Fishing for more sequences
-docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/cn_RHD_bound.faa -out /app/x.msa
-hmmbuild ard_fishing.hmm x.msa
-hmmsearch --domtblout x ard_fishing.hmm res-ank-permissive/input.faa
+# fishing for more sequences
+../sieve/scripts/pfam-extract-region.py cn_RHD-binding.faa protein_pfam.tsv PF12796 1 5 cn_RHD-binding_ARD.faa
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/cn_RHD-binding_ARD.faa -out /app/cn_RHD-binding_ARD.msa
+hmmbuild cn_RHD-binding_ARD.hmm cn_RHD-binding_ARD.msa
+hmmsearch --domtblout x cn_RHD-binding_ARD.hmm res-ank-permissive/input.faa
 python3 ../sieve/scripts/domtbl-tsv.py x > ard_fishing.tsv
-
-
 
 
 
