@@ -29,6 +29,16 @@ echo "Cluster Repr\tCluster Member" | cat - cn_ank_cluster.tsv > cn_ank_cluster.
 # AF found sequences in cn_RHD-binding.faa as those with potential binding to
 # p50x2. The clusters are in cn_RHD-binding_clusters.txt.
 
+
+# scoring the AF models, with .zip files in folds/, and assuming multi-mer mode
+# with two copies of Nv p50, and single copy of candidate as chain C
+#
+../sieve/scripts/alphafold-pdockq2-directory.py \
+  folds/ \
+  --region A:270-400 \
+  --region B:270-400 > z.txt
+
+
 # fishing for more sequences
 ../sieve/scripts/pfam-extract-region.py cn_RHD-binding.faa protein_pfam.tsv PF12796 1 5 cn_RHD-binding_ARD.faa
 docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/cn_RHD-binding_ARD.faa -out /app/cn_RHD-binding_ARD.msa
