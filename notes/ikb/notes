@@ -36,7 +36,8 @@ echo "Cluster Repr\tCluster Member" | cat - cn_ank_cluster.tsv > cn_ank_cluster.
 ../sieve/scripts/alphafold-pdockq2-directory.py \
   folds/ \
   --region A:265-405 \
-  --region B:265-405 > alphafold_docking_scores.txt
+  --region B:265-405 \
+  --output alphafold_docking_scores.txt
 
 
 # Download top hits from Tableau into cn_RHD-binding.txt
