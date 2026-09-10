@@ -39,7 +39,10 @@ echo "Cluster Repr\tCluster Member" | cat - cn_ank_cluster.tsv > cn_ank_cluster.
   --region B:270-400 > alphafold_docking_scores.txt
 
 
+# Download top hits from Tableau into cn_RHD-binding.txt
+
 # fishing for more sequences
+python3 ../tangle/scripts/fasta-emit.py res-ank-permissive/input.faa cn_RHD-binding.txt > cn_RHD-binding.faa
 ../sieve/scripts/pfam-extract-region.py cn_RHD-binding.faa protein_pfam.tsv PF12796 1 5 cn_RHD-binding_ARD.faa
 docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/cn_RHD-binding_ARD.faa -out /app/cn_RHD-binding_ARD.msa
 hmmbuild cn_RHD-binding_ARD.hmm cn_RHD-binding_ARD.msa
