@@ -50,6 +50,9 @@ hmmbuild cn_RHD-binding_ARD.hmm cn_RHD-binding_ARD.msa
 hmmsearch --domtblout x cn_RHD-binding_ARD.hmm res-ank-permissive/input.faa
 python3 ../sieve/scripts/domtbl-tsv.py x > ard_fishing.tsv
 
+hmmsearch --domtblout x ko_ikb.hmm cn_RHD-binding.faa
+python3 ../sieve/scripts/domtbl-tsv.py x > cn_RHD-binding.ko.tsv
+
 
 
 docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/x.faa -out /app/x.msa
@@ -59,4 +62,3 @@ PYTHONPATH=../coral sieve-py ../sieve/scripts/hmmsearch-threshold.py \
   --positive-fasta p105-like_cnidaria.faa \
   --all-fasta cn_PF00554.faa \
   --output p105-like_cnidaria_thresholds.tsv
-
