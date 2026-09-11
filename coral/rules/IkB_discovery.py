@@ -15,15 +15,15 @@ permissive_ard_rule = Rules(
 )
 
 ikb_like_rule = Rules(
-    Leader().localize_at("Cytoplasm")
+    # export bound RHD-containing dimers back out
+    Leader().is_NES()
 
     # required IKK phosphorylation and then degradation by βTrCP
     & Sequence.matches_regex(βTrCP_pattern).relativeToPfam("PF00023", -200, -10)
 )
 
 canonical_ikb_rule = Rules(
-    Leader().localize_at("Cytoplasm")
-
+    Leader().is_NES()
     & Pfam.matches(ANK_PF).times(4, 9)
     & Sequence.length_between(min_protein_length, IkB_hypothetical_length)
     & Pfam.matches_only(*All_ANK_PFs)
@@ -41,8 +41,7 @@ canonical_ikb_rule = Rules(
 )
 
 canonical_bcl3_rule = Rules(
-    Leader().localize_at("Nucleus")
-
+    Leader().is_NLS()
     & Pfam.matches(ANK_PF).times(4, 9)
     & Sequence.length_between(min_protein_length, Bcl3_hypothetical_length)
     & Pfam.matches_only(*All_ANK_PFs)

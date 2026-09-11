@@ -1,4 +1,4 @@
-# various possible IkB matches
+# Various possible IkB matches
 sieve-py ../sieve/scripts/ko-find-matches.py K04734 --taxon "Homo sapiens" -o hs_K04734.faa
 sieve-py ../sieve/scripts/ko-find-matches.py K02581 --taxon "Homo sapiens" -o hs_K02581.faa
 sieve-py ../sieve/scripts/ko-find-matches.py K05872 --taxon "Homo sapiens" -o hs_K05872.faa 
@@ -21,13 +21,13 @@ PYTHONPATH=../coral python3 ../sieve/scripts/check-artifacts-by-rules.py \
   --artifacts-dir res-ank-permissive \
   --output cn_ank.faa
 
-# cluster
+# Cluster
 docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/cn_ank.faa /work/cn_ank /tmp \
     -c 0.8 --cov-mode 0 -a --cluster-mode 0
 echo "Cluster Repr\tCluster Member" | cat - cn_ank_cluster.tsv > cn_ank_cluster.tsv.h; mv cn_ank_cluster.tsv.h cn_ank_cluster.tsv
-# use repr sequences to run on AF to screen for RHD binding sequences
+# Use repr sequences to run on AF to screen for RHD binding sequences
 
-# scoring the AF models, with .zip files in folds/, and assuming multi-mer mode
+# Scoring the AF models, with .zip files in folds/, and assuming multi-mer mode
 # with two copies of Nv p50, and single copy of candidate as chain C
 #
 ../sieve/scripts/alphafold-pdockq2-directory.py \
@@ -38,16 +38,33 @@ echo "Cluster Repr\tCluster Member" | cat - cn_ank_cluster.tsv > cn_ank_cluster.
 
 # Download top hits from Tableau into cn_RHD-binding.txt
 
-# fishing for more sequences
+
+# Fishing for more sequences, then assess hits against KO
 python3 ../tangle/scripts/fasta-emit.py res-ank-permissive/input.faa cn_RHD-binding.txt > cn_RHD-binding.faa
 ../sieve/scripts/pfam-extract-region.py cn_RHD-binding.faa protein_pfam.tsv PF12796 1 5 cn_RHD-binding_ARD.faa
 docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/cn_RHD-binding_ARD.faa -out /app/cn_RHD-binding_ARD.msa
 hmmbuild cn_RHD-binding_ARD.hmm cn_RHD-binding_ARD.msa
 hmmsearch --domtblout x cn_RHD-binding_ARD.hmm res-ank-permissive/input.faa
 python3 ../sieve/scripts/domtbl-tsv.py x > ard_fishing.tsv
-# assess hits against KO
 hmmsearch --domtblout x ko_ikb.hmm cn_RHD-binding.faa
 python3 ../sieve/scripts/domtbl-tsv.py x > cn_RHD-binding.ko.tsv
+
+
+# Build an artifacts using the hits, then we can use our other rules
+grep -F -f cn_RHD-binding.txt /Volumes/Extreme_Pro/areas/coral/genomics/sequences.tsv | cut -f1,2 |
+  PYTHONPATH=../coral python3 ../sieve/scripts/build-protein-artifacts.py \
+    --rule coral.rules.IkB_discovery.ikb_like_rule \
+    --artifacts-dir res-ikb
+
+# Submit sequences.faa to DeepLoc, save results to cn_RHD-binding.deeploc.csv
+
+PYTHONPATH=../coral python3 ../sieve/scripts/check-artifacts-by-rules.py \
+  --rule coral.rules.IkB_discovery.ikb_like_rule \
+  --artifacts-dir res-ikb \
+  --deeploc-csv cn_RHD-binding.deeploc.csv \
+  --cpus 8 \
+  --pfam-hmm assets/Pfam-A.hmm
+cp res-ikb/rule-results.tsv cn_RHD-binding.rules.tsv
 
 
 
