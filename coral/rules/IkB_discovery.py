@@ -14,6 +14,13 @@ permissive_ard_rule = Rules(
     & Pfam.matches(ANK_PF).times(4,9).betweenAA(60, 1800, all_matches=True).spansAA(130,280)
 )
 
+ikb_like_rule = Rules(
+    Leader().localize_at("Cytoplasm")
+
+    # required IKK phosphorylation and then degradation by βTrCP
+    & Sequence.matches_regex(βTrCP_pattern).relativeToPfam("PF00023", -200, -10)
+)
+
 canonical_ikb_rule = Rules(
     Leader().localize_at("Cytoplasm")
 
