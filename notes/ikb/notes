@@ -22,13 +22,10 @@ PYTHONPATH=../coral python3 ../sieve/scripts/check-artifacts-by-rules.py \
   --output cn_ank.faa
 
 # cluster
-docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/cn_ank.faa /work/cn_ank /tmp
+docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/cn_ank.faa /work/cn_ank /tmp \
+    -c 0.8 --cov-mode 0 -a --cluster-mode 0
 echo "Cluster Repr\tCluster Member" | cat - cn_ank_cluster.tsv > cn_ank_cluster.tsv.h; mv cn_ank_cluster.tsv.h cn_ank_cluster.tsv
 # use repr sequences to run on AF to screen for RHD binding sequences
-
-# AF found sequences in cn_RHD-binding.faa as those with potential binding to
-# p50x2. The clusters are in cn_RHD-binding_clusters.txt.
-
 
 # scoring the AF models, with .zip files in folds/, and assuming multi-mer mode
 # with two copies of Nv p50, and single copy of candidate as chain C
@@ -39,7 +36,6 @@ echo "Cluster Repr\tCluster Member" | cat - cn_ank_cluster.tsv > cn_ank_cluster.
   --region B:265-405 \
   --output alphafold_docking_scores.txt
 
-
 # Download top hits from Tableau into cn_RHD-binding.txt
 
 # fishing for more sequences
@@ -49,7 +45,7 @@ docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/cn_RHD-b
 hmmbuild cn_RHD-binding_ARD.hmm cn_RHD-binding_ARD.msa
 hmmsearch --domtblout x cn_RHD-binding_ARD.hmm res-ank-permissive/input.faa
 python3 ../sieve/scripts/domtbl-tsv.py x > ard_fishing.tsv
-
+# assess hits against KO
 hmmsearch --domtblout x ko_ikb.hmm cn_RHD-binding.faa
 python3 ../sieve/scripts/domtbl-tsv.py x > cn_RHD-binding.ko.tsv
 
