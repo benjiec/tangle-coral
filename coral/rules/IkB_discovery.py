@@ -23,7 +23,7 @@ kb_rule = Rules(
     # regulatory mechanism
     TFMotifs.has(
         "GM.5.0.Rel",
-    ).betweenBED(-1500, 500)
+    ).between(-1500, 500)
 )
 
 ikb_like_rule = Rules(
@@ -33,7 +33,7 @@ ikb_like_rule = Rules(
     # regulatory mechanism
     & TFMotifs.has(
         "GM.5.0.Rel",
-    ).betweenBED(-1500, 500)
+    ).between(-1500, 500)
 )
 
 canonical_ikb_rule = Rules(
