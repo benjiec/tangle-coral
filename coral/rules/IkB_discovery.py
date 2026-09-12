@@ -21,7 +21,7 @@ ikb_like_leader_rule = Rules(
 
 kb_rule = Rules(
     # regulatory mechanism
-    & TFMotifs.has(
+    TFMotifs.has(
         "GM.5.0.Rel",
     ).betweenBED(-1500, 500)
 )
