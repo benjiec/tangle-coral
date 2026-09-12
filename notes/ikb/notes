@@ -1,8 +1,9 @@
-# Various possible IkB matches
+# Various references
 sieve-py ../sieve/scripts/ko-find-matches.py K04734 --taxon "Homo sapiens" -o hs_K04734.faa
 sieve-py ../sieve/scripts/ko-find-matches.py K02581 --taxon "Homo sapiens" -o hs_K02581.faa
 sieve-py ../sieve/scripts/ko-find-matches.py K05872 --taxon "Homo sapiens" -o hs_K05872.faa 
 sieve-py ../sieve/scripts/ko-find-matches.py K09258 --taxon "Homo sapiens" -o hs_K09258.faa 
+
 
 # Find ARD containing sequences to cluster then binding check on AF
 
@@ -49,10 +50,12 @@ hmmsearch --domtblout x ko_ikb.hmm cn_RHD-binding.faa
 python3 ../sieve/scripts/domtbl-tsv.py x > cn_RHD-binding.ko.tsv
 
 
-# Build an artifacts using the hits, then we can use our other rules
+# Build an artifacts using the hits, then we can use leader rules. Note that we
+# will re-build this artifact later.
+
 grep -F -f cn_RHD-binding.txt /Volumes/Extreme_Pro/areas/coral/genomics/sequences.tsv | cut -f1,2 |
   PYTHONPATH=../coral python3 ../sieve/scripts/build-protein-artifacts.py \
-    --rule coral.rules.IkB_discovery.ikb_like_rule \
+    --rule coral.rules.IkB_discovery.ikb_like_leader_rule \
     --artifacts-dir res-ikb
 
 # Submit sequences.faa to DeepLoc, save results to cn_RHD-binding.deeploc.csv
@@ -64,6 +67,7 @@ PYTHONPATH=../coral python3 ../sieve/scripts/check-artifacts-by-rules.py \
   --cpus 8 \
   --pfam-hmm assets/Pfam-A.hmm
 cp res-ikb/rule-results.tsv cn_RHD-binding.rules.tsv
+# The above file is only needed for ard_fishing.twb workbook
 
 
 # Generate a candidate list, based on AF scores, of all sequences that either
@@ -72,11 +76,29 @@ cp res-ikb/rule-results.tsv cn_RHD-binding.rules.tsv
 # Combine cn_candidates.txt and p105-like and p50-like sequences from nfkb work
 # into a single cn_nfkb_and_ikb.txt file. Also create a cn_p105_p50.txt sequence list.
 
+# Generate a loci list for both NFkB and IkB proteins
 grep -F -f cn_nfkb_and_ikb.txt /Volumes/Extreme_Pro/areas/coral/genomics/sequences.tsv | cut -f1,2 |
   PYTHONPATH=../coral python3 ../sieve/scripts/build-protein-artifacts.py \
     --rule coral.rules.IkB_discovery.kb_rule \
     --artifacts-dir res-nfkb-ikb
 cp res-nfkb-ikb/genomic_loci.tsv cn_nfkb_and_ikb_loci.tsv 
+
+
+# Generate .faa for DeepLoc, using candidates, but substitute truncated
+# sequences for longer sequences. This is cn_deeploc_inputs.faa. Submit to
+# DeepLoc and save outputs to cn_ikb.deeploc.csv
+
+# Build an artifacts using the hits, then we can use our other rules
+grep -F -f cn_candidates.txt /Volumes/Extreme_Pro/areas/coral/genomics/sequences.tsv | cut -f1,2 |
+  PYTHONPATH=../coral python3 ../sieve/scripts/build-protein-artifacts.py \
+    --rule coral.rules.IkB_discovery.ikb_like_rule \
+    --artifacts-dir res-ikb
+
+PYTHONPATH=../coral python3 ../sieve/scripts/check-artifacts-by-rules.py \
+  --rule coral.rules.IkB_discovery.ikb_like_rule \
+  --artifacts-dir res-ikb \
+  --deeploc-csv cn_ikb.deeploc.csv
+cp res-ikb/rule-results.tsv cn_ikb.rules.tsv
 
 
 
