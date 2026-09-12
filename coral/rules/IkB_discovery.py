@@ -22,6 +22,19 @@ ikb_like_rule = Rules(
     & Sequence.matches_regex(βTrCP_pattern).relativeToPfam("PF00023", -200, -10)
 )
 
+ikb_like_with_kb_rule = Rules(
+    # export bound RHD-containing dimers back out
+    Leader().is_NES()
+
+    # required IKK phosphorylation and then degradation by βTrCP
+    & Sequence.matches_regex(βTrCP_pattern).relativeToPfam("PF00023", -200, -10)
+
+    # regulatory mechanism
+    & TFMotifs.has(
+        "GM.5.0.Rel",
+    ).between(-1000, 200)
+)
+
 canonical_ikb_rule = Rules(
     Leader().is_NES()
     & Pfam.matches(ANK_PF).times(4, 9)
