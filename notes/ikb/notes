@@ -85,7 +85,7 @@ cp res-nfkb-ikb/genomic_loci.tsv cn_nfkb_and_ikb_loci.tsv
 
 
 # Generate .faa for DeepLoc, using candidates, but substitute truncated
-# sequences for longer sequences. This is cn_deeploc_inputs.faa. Submit to
+# sequences for longer sequences. This is cn_ikb.deeploc.faa. Submit to
 # DeepLoc and save outputs to cn_ikb.deeploc.csv
 
 # Build an artifacts using the hits, then we can use our other rules
