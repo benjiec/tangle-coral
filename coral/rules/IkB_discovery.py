@@ -14,25 +14,26 @@ permissive_ard_rule = Rules(
     & Pfam.matches(ANK_PF).times(4,9).betweenAA(60, 1800, all_matches=True).spansAA(130,280)
 )
 
+ikb_like_leader_rule = Rules(
+    # export bound RHD-containing dimers back out
+    Leader().is_NES()
+)
+
+kb_rule = Rules(
+    # regulatory mechanism
+    & TFMotifs.has(
+        "GM.5.0.Rel",
+    ).betweenBED(-1500, 500)
+)
+
 ikb_like_rule = Rules(
     # export bound RHD-containing dimers back out
     Leader().is_NES()
 
-    # required IKK phosphorylation and then degradation by βTrCP
-    & Sequence.matches_regex(βTrCP_pattern).relativeToPfam("PF00023", -200, -10)
-)
-
-ikb_like_with_kb_rule = Rules(
-    # export bound RHD-containing dimers back out
-    Leader().is_NES()
-
-    # required IKK phosphorylation and then degradation by βTrCP
-    & Sequence.matches_regex(βTrCP_pattern).relativeToPfam("PF00023", -200, -10)
-
     # regulatory mechanism
     & TFMotifs.has(
         "GM.5.0.Rel",
-    ).between(-1000, 200)
+    ).betweenBED(-1500, 500)
 )
 
 canonical_ikb_rule = Rules(
