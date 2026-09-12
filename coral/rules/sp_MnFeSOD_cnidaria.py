@@ -22,6 +22,5 @@ rule = Rules(
         20,
         "GM.5.0.Rel",
         "GM.5.0.bZIP",
-        min_score_threshold=8,
     )
 )

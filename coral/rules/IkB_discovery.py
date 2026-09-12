@@ -23,7 +23,6 @@ kb_rule = Rules(
     # regulatory mechanism
     TFMotifs.has(
         "GM.5.0.Rel",
-        min_score_threshold=8,
     ).between(-1500, 500)
 )
 
@@ -34,7 +33,6 @@ ikb_like_rule = Rules(
     # regulatory mechanism
     & TFMotifs.has(
         "GM.5.0.Rel",
-        min_score_threshold=8,
     ).between(-1500, 500)
 )
 
