@@ -76,6 +76,8 @@ grep -F -f cn_nfkb_and_ikb.txt /Volumes/Extreme_Pro/areas/coral/genomics/sequenc
   PYTHONPATH=../coral python3 ../sieve/scripts/build-protein-artifacts.py \
     --rule coral.rules.IkB_discovery.kb_rule \
     --artifacts-dir res-nfkb-ikb
+cp res-nfkb-ikb/genomic_loci.tsv cn_nfkb_and_ikb_loci.tsv 
+
 
 
 

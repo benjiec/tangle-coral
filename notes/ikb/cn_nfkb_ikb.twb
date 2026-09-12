@@ -1,0 +1,1838 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20261.26.0512.1636                               -->
+<workbook original-version='18.1' source-build='2026.1.2 (20261.26.0512.1636)' source-platform='mac' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <AnimationOnByDefault />
+    <MarkAnimation />
+    <ObjectModelEncapsulateLegacy />
+    <ObjectModelTableType />
+    <RelationshipCalculations />
+    <SchemaViewerObjectModel />
+    <SheetIdentifierTracking />
+    <SortTagCleanup />
+    <WindowsPersistSimpleIdentifiers />
+  </document-format-change-manifest>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='cn_nfkb_and_ikb_loci+' inline='true' name='federated.04raq4h0p8o7il1g9dy7m0a6x09f' version='18.1'>
+      <connection class='federated'>
+        <named-connections>
+          <named-connection caption='cn_nfkb_and_ikb_loci' name='textscan.07qbvch1jk0ng818xdqab07fj2sr'>
+            <connection class='textscan' directory='/Users/benjie/git/tangle/play' filename='cn_nfkb_and_ikb_loci.tsv' password='' server='' />
+          </named-connection>
+        </named-connections>
+        <relation type='collection'>
+          <relation connection='textscan.07qbvch1jk0ng818xdqab07fj2sr' name='cn_nfkb_and_ikb_loci.tsv' table='[cn_nfkb_and_ikb_loci#tsv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
+              <column datatype='string' name='protein accession' ordinal='0' />
+              <column datatype='string' name='genome accession' ordinal='1' />
+              <column datatype='string' name='contig accession' ordinal='2' />
+              <column datatype='string' name='sequence accession' ordinal='3' />
+              <column datatype='integer' name='locus start 1b' ordinal='4' />
+              <column datatype='integer' name='locus end 1b' ordinal='5' />
+              <column datatype='string' name='strand' ordinal='6' />
+              <column datatype='integer' name='sequence length' ordinal='7' />
+              <column datatype='string' name='feature type' ordinal='8' />
+              <column datatype='integer' name='feature index' ordinal='9' />
+              <column datatype='integer' name='feature position 1b' ordinal='10' />
+              <column datatype='string' name='error' ordinal='11' />
+            </columns>
+          </relation>
+          <relation connection='textscan.07qbvch1jk0ng818xdqab07fj2sr' name='genomes.tsv' table='[genomes#tsv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
+              <column datatype='string' name='Genome Accession' ordinal='0' />
+              <column datatype='string' name='Genome Name' ordinal='1' />
+              <column datatype='integer' name='TaxID' ordinal='2' />
+              <column datatype='string' name='Organism' ordinal='3' />
+              <column datatype='string' name='Domain' ordinal='4' />
+              <column datatype='string' name='Kingdom' ordinal='5' />
+              <column datatype='string' name='Phylum' ordinal='6' />
+              <column datatype='string' name='Class' ordinal='7' />
+              <column datatype='string' name='Order' ordinal='8' />
+              <column datatype='string' name='Family' ordinal='9' />
+              <column datatype='string' name='Genus' ordinal='10' />
+              <column datatype='string' name='Species' ordinal='11' />
+            </columns>
+          </relation>
+          <relation connection='textscan.07qbvch1jk0ng818xdqab07fj2sr' name='protein_pfam.tsv' table='[protein_pfam#tsv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
+              <column datatype='string' name='detection_type' ordinal='0' />
+              <column datatype='string' name='detection_method' ordinal='1' />
+              <column datatype='string' name='batch' ordinal='2' />
+              <column datatype='string' name='query_accession' ordinal='3' />
+              <column datatype='string' name='query_database' ordinal='4' />
+              <column datatype='string' name='query_type' ordinal='5' />
+              <column datatype='string' name='target_accession' ordinal='6' />
+              <column datatype='string' name='target_database' ordinal='7' />
+              <column datatype='string' name='target_type' ordinal='8' />
+              <column datatype='string' name='target_model' ordinal='9' />
+              <column datatype='integer' name='query_start' ordinal='10' />
+              <column datatype='integer' name='query_end' ordinal='11' />
+              <column datatype='integer' name='target_start' ordinal='12' />
+              <column datatype='integer' name='target_end' ordinal='13' />
+              <column datatype='real' name='evalue' ordinal='14' />
+              <column datatype='real' name='bitscore' ordinal='15' />
+              <column datatype='string' name='bitscore_threshold' ordinal='16' />
+              <column datatype='string' name='custom_metric_name' ordinal='17' />
+              <column datatype='string' name='custom_metric_value' ordinal='18' />
+            </columns>
+          </relation>
+          <relation connection='textscan.07qbvch1jk0ng818xdqab07fj2sr' name='Pfam-A.clans.tsv' table='[Pfam-A.clans#tsv]' type='table'>
+            <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
+              <column datatype='string' name='Pfam ID' ordinal='0' />
+              <column datatype='string' name='Clan ID' ordinal='1' />
+              <column datatype='string' name='Name1' ordinal='2' />
+              <column datatype='string' name='Name2' ordinal='3' />
+              <column datatype='string' name='Description' ordinal='4' />
+            </columns>
+          </relation>
+        </relation>
+        <metadata-records>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[cn_nfkb_and_ikb_loci.tsv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;\\t&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;\\t&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;\\t&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[Pfam-A.clans.tsv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;\\t&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>protein accession</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[protein accession]</local-name>
+            <parent-name>[cn_nfkb_and_ikb_loci.tsv]</parent-name>
+            <remote-alias>protein accession</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[cn_nfkb_and_ikb_loci.tsv_D054768E1AFF42D09858046C98B0CB5A]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>genome accession</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[genome accession]</local-name>
+            <parent-name>[cn_nfkb_and_ikb_loci.tsv]</parent-name>
+            <remote-alias>genome accession</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[cn_nfkb_and_ikb_loci.tsv_D054768E1AFF42D09858046C98B0CB5A]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>contig accession</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[contig accession]</local-name>
+            <parent-name>[cn_nfkb_and_ikb_loci.tsv]</parent-name>
+            <remote-alias>contig accession</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[cn_nfkb_and_ikb_loci.tsv_D054768E1AFF42D09858046C98B0CB5A]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>sequence accession</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[sequence accession]</local-name>
+            <parent-name>[cn_nfkb_and_ikb_loci.tsv]</parent-name>
+            <remote-alias>sequence accession</remote-alias>
+            <ordinal>3</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <approx-count>1</approx-count>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[cn_nfkb_and_ikb_loci.tsv_D054768E1AFF42D09858046C98B0CB5A]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>locus start 1b</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[locus start 1b]</local-name>
+            <parent-name>[cn_nfkb_and_ikb_loci.tsv]</parent-name>
+            <remote-alias>locus start 1b</remote-alias>
+            <ordinal>4</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[cn_nfkb_and_ikb_loci.tsv_D054768E1AFF42D09858046C98B0CB5A]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>locus end 1b</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[locus end 1b]</local-name>
+            <parent-name>[cn_nfkb_and_ikb_loci.tsv]</parent-name>
+            <remote-alias>locus end 1b</remote-alias>
+            <ordinal>5</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[cn_nfkb_and_ikb_loci.tsv_D054768E1AFF42D09858046C98B0CB5A]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>strand</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[strand]</local-name>
+            <parent-name>[cn_nfkb_and_ikb_loci.tsv]</parent-name>
+            <remote-alias>strand</remote-alias>
+            <ordinal>6</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[cn_nfkb_and_ikb_loci.tsv_D054768E1AFF42D09858046C98B0CB5A]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>sequence length</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[sequence length]</local-name>
+            <parent-name>[cn_nfkb_and_ikb_loci.tsv]</parent-name>
+            <remote-alias>sequence length</remote-alias>
+            <ordinal>7</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[cn_nfkb_and_ikb_loci.tsv_D054768E1AFF42D09858046C98B0CB5A]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>feature type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[feature type]</local-name>
+            <parent-name>[cn_nfkb_and_ikb_loci.tsv]</parent-name>
+            <remote-alias>feature type</remote-alias>
+            <ordinal>8</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[cn_nfkb_and_ikb_loci.tsv_D054768E1AFF42D09858046C98B0CB5A]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>feature index</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[feature index]</local-name>
+            <parent-name>[cn_nfkb_and_ikb_loci.tsv]</parent-name>
+            <remote-alias>feature index</remote-alias>
+            <ordinal>9</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[cn_nfkb_and_ikb_loci.tsv_D054768E1AFF42D09858046C98B0CB5A]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>feature position 1b</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[feature position 1b]</local-name>
+            <parent-name>[cn_nfkb_and_ikb_loci.tsv]</parent-name>
+            <remote-alias>feature position 1b</remote-alias>
+            <ordinal>10</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[cn_nfkb_and_ikb_loci.tsv_D054768E1AFF42D09858046C98B0CB5A]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>error</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[error]</local-name>
+            <parent-name>[cn_nfkb_and_ikb_loci.tsv]</parent-name>
+            <remote-alias>error</remote-alias>
+            <ordinal>11</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <approx-count>1</approx-count>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[cn_nfkb_and_ikb_loci.tsv_D054768E1AFF42D09858046C98B0CB5A]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Genome Accession</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Genome Accession]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>Genome Accession</remote-alias>
+            <ordinal>12</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[genomes.tsv_C54CE41BFC884A93B8E5634C99A743AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Genome Name</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Genome Name]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>Genome Name</remote-alias>
+            <ordinal>13</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[genomes.tsv_C54CE41BFC884A93B8E5634C99A743AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>TaxID</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[TaxID]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>TaxID</remote-alias>
+            <ordinal>14</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[genomes.tsv_C54CE41BFC884A93B8E5634C99A743AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Organism</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Organism]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>Organism</remote-alias>
+            <ordinal>15</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[genomes.tsv_C54CE41BFC884A93B8E5634C99A743AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Domain</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Domain]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>Domain</remote-alias>
+            <ordinal>16</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[genomes.tsv_C54CE41BFC884A93B8E5634C99A743AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Kingdom</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Kingdom]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>Kingdom</remote-alias>
+            <ordinal>17</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[genomes.tsv_C54CE41BFC884A93B8E5634C99A743AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Phylum</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Phylum]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>Phylum</remote-alias>
+            <ordinal>18</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[genomes.tsv_C54CE41BFC884A93B8E5634C99A743AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Class</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Class]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>Class</remote-alias>
+            <ordinal>19</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[genomes.tsv_C54CE41BFC884A93B8E5634C99A743AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Order</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Order]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>Order</remote-alias>
+            <ordinal>20</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[genomes.tsv_C54CE41BFC884A93B8E5634C99A743AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Family</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Family]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>Family</remote-alias>
+            <ordinal>21</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[genomes.tsv_C54CE41BFC884A93B8E5634C99A743AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Genus</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Genus]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>Genus</remote-alias>
+            <ordinal>22</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[genomes.tsv_C54CE41BFC884A93B8E5634C99A743AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Species</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Species]</local-name>
+            <parent-name>[genomes.tsv]</parent-name>
+            <remote-alias>Species</remote-alias>
+            <ordinal>23</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[genomes.tsv_C54CE41BFC884A93B8E5634C99A743AE]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>detection_type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[detection_type]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>detection_type</remote-alias>
+            <ordinal>24</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_70CE155AD7784DBEBBF15AFBAE6DCA6F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>detection_method</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[detection_method]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>detection_method</remote-alias>
+            <ordinal>25</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_70CE155AD7784DBEBBF15AFBAE6DCA6F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>batch</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[batch]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>batch</remote-alias>
+            <ordinal>26</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_70CE155AD7784DBEBBF15AFBAE6DCA6F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_accession</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[query_accession]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>query_accession</remote-alias>
+            <ordinal>27</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_70CE155AD7784DBEBBF15AFBAE6DCA6F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_database</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[query_database]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>query_database</remote-alias>
+            <ordinal>28</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_70CE155AD7784DBEBBF15AFBAE6DCA6F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[query_type]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>query_type</remote-alias>
+            <ordinal>29</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_70CE155AD7784DBEBBF15AFBAE6DCA6F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_accession</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[target_accession]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>target_accession</remote-alias>
+            <ordinal>30</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_70CE155AD7784DBEBBF15AFBAE6DCA6F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_database</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[target_database]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>target_database</remote-alias>
+            <ordinal>31</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_70CE155AD7784DBEBBF15AFBAE6DCA6F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_type</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[target_type]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>target_type</remote-alias>
+            <ordinal>32</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_70CE155AD7784DBEBBF15AFBAE6DCA6F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_model</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[target_model]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>target_model</remote-alias>
+            <ordinal>33</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <approx-count>1</approx-count>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_70CE155AD7784DBEBBF15AFBAE6DCA6F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_start</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[query_start]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>query_start</remote-alias>
+            <ordinal>34</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_pfam.tsv_70CE155AD7784DBEBBF15AFBAE6DCA6F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>query_end</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[query_end]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>query_end</remote-alias>
+            <ordinal>35</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_pfam.tsv_70CE155AD7784DBEBBF15AFBAE6DCA6F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_start</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[target_start]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>target_start</remote-alias>
+            <ordinal>36</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_pfam.tsv_70CE155AD7784DBEBBF15AFBAE6DCA6F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>target_end</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[target_end]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>target_end</remote-alias>
+            <ordinal>37</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_pfam.tsv_70CE155AD7784DBEBBF15AFBAE6DCA6F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>evalue</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[evalue]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>evalue</remote-alias>
+            <ordinal>38</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_pfam.tsv_70CE155AD7784DBEBBF15AFBAE6DCA6F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bitscore</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[bitscore]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>bitscore</remote-alias>
+            <ordinal>39</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[protein_pfam.tsv_70CE155AD7784DBEBBF15AFBAE6DCA6F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>bitscore_threshold</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[bitscore_threshold]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>bitscore_threshold</remote-alias>
+            <ordinal>40</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <approx-count>1</approx-count>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_70CE155AD7784DBEBBF15AFBAE6DCA6F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>custom_metric_name</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[custom_metric_name]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>custom_metric_name</remote-alias>
+            <ordinal>41</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <approx-count>1</approx-count>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_70CE155AD7784DBEBBF15AFBAE6DCA6F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>custom_metric_value</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[custom_metric_value]</local-name>
+            <parent-name>[protein_pfam.tsv]</parent-name>
+            <remote-alias>custom_metric_value</remote-alias>
+            <ordinal>42</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <approx-count>1</approx-count>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[protein_pfam.tsv_70CE155AD7784DBEBBF15AFBAE6DCA6F]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Pfam ID</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Pfam ID]</local-name>
+            <parent-name>[Pfam-A.clans.tsv]</parent-name>
+            <remote-alias>Pfam ID</remote-alias>
+            <ordinal>43</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[Pfam-A.clans.tsv_B040B4076FD64A1A8BD43E8D98C6A567]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Clan ID</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Clan ID]</local-name>
+            <parent-name>[Pfam-A.clans.tsv]</parent-name>
+            <remote-alias>Clan ID</remote-alias>
+            <ordinal>44</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[Pfam-A.clans.tsv_B040B4076FD64A1A8BD43E8D98C6A567]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Name1</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Name1]</local-name>
+            <parent-name>[Pfam-A.clans.tsv]</parent-name>
+            <remote-alias>Name1</remote-alias>
+            <ordinal>45</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[Pfam-A.clans.tsv_B040B4076FD64A1A8BD43E8D98C6A567]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Name2</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Name2]</local-name>
+            <parent-name>[Pfam-A.clans.tsv]</parent-name>
+            <remote-alias>Name2</remote-alias>
+            <ordinal>46</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[Pfam-A.clans.tsv_B040B4076FD64A1A8BD43E8D98C6A567]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>Description</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[Description]</local-name>
+            <parent-name>[Pfam-A.clans.tsv]</parent-name>
+            <remote-alias>Description</remote-alias>
+            <ordinal>47</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <object-id>[Pfam-A.clans.tsv_B040B4076FD64A1A8BD43E8D98C6A567]</object-id>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column caption='Match Length' datatype='integer' name='[Calculation_1665186084921345]' role='measure' type='quantitative'>
+        <calculation class='tableau' formula='[query_end]-[query_start]+1' />
+      </column>
+      <column caption='Genome Accession1' datatype='string' name='[Genome Accession]' role='dimension' type='nominal' />
+      <column caption='Tax ID' datatype='integer' name='[TaxID]' role='dimension' type='ordinal' />
+      <column caption='Pfam-A.clans.tsv' datatype='table' name='[__tableau_internal_object_id__].[Pfam-A.clans.tsv_B040B4076FD64A1A8BD43E8D98C6A567]' role='measure' type='quantitative' />
+      <column caption='cn_nfkb_and_ikb_loci.tsv' datatype='table' name='[__tableau_internal_object_id__].[cn_nfkb_and_ikb_loci.tsv_D054768E1AFF42D09858046C98B0CB5A]' role='measure' type='quantitative' />
+      <column caption='genomes.tsv' datatype='table' name='[__tableau_internal_object_id__].[genomes.tsv_C54CE41BFC884A93B8E5634C99A743AE]' role='measure' type='quantitative' />
+      <column caption='protein_pfam.tsv' datatype='table' name='[__tableau_internal_object_id__].[protein_pfam.tsv_70CE155AD7784DBEBBF15AFBAE6DCA6F]' role='measure' type='quantitative' />
+      <column caption='Batch' datatype='string' name='[batch]' role='dimension' type='nominal' />
+      <column caption='Bitscore' datatype='real' name='[bitscore]' role='measure' type='quantitative' />
+      <column caption='Bitscore Threshold' datatype='string' name='[bitscore_threshold]' role='dimension' type='nominal' />
+      <column caption='Contig Accession' datatype='string' name='[contig accession]' role='dimension' type='nominal' />
+      <column caption='Custom Metric Name' datatype='string' name='[custom_metric_name]' role='dimension' type='nominal' />
+      <column caption='Custom Metric Value' datatype='string' name='[custom_metric_value]' role='dimension' type='nominal' />
+      <column caption='Detection Method' datatype='string' name='[detection_method]' role='dimension' type='nominal' />
+      <column caption='Detection Type' datatype='string' name='[detection_type]' role='dimension' type='nominal' />
+      <column caption='Error' datatype='string' name='[error]' role='dimension' type='nominal' />
+      <column caption='Evalue' datatype='real' name='[evalue]' role='measure' type='quantitative' />
+      <column caption='Feature Index' datatype='integer' name='[feature index]' role='measure' type='quantitative' />
+      <column caption='Feature Position 1B' datatype='integer' name='[feature position 1b]' role='measure' type='quantitative' />
+      <column caption='Feature Type' datatype='string' name='[feature type]' role='dimension' type='nominal' />
+      <column caption='Genome Accession' datatype='string' name='[genome accession]' role='dimension' type='nominal' />
+      <column caption='Locus End 1B' datatype='integer' name='[locus end 1b]' role='measure' type='quantitative' />
+      <column caption='Locus Start 1B' datatype='integer' name='[locus start 1b]' role='measure' type='quantitative' />
+      <column caption='Protein Accession' datatype='string' name='[protein accession]' role='dimension' type='nominal' />
+      <column caption='Query Accession' datatype='string' name='[query_accession]' role='dimension' type='nominal' />
+      <column caption='Query Database' datatype='string' name='[query_database]' role='dimension' type='nominal' />
+      <column caption='Query End' datatype='integer' name='[query_end]' role='measure' type='quantitative' />
+      <column caption='Query Start' datatype='integer' name='[query_start]' role='measure' type='quantitative' />
+      <column caption='Query Type' datatype='string' name='[query_type]' role='dimension' type='nominal' />
+      <column caption='Sequence Accession' datatype='string' name='[sequence accession]' role='dimension' type='nominal' />
+      <column caption='Sequence Length' datatype='integer' name='[sequence length]' role='measure' type='quantitative' />
+      <column caption='Strand' datatype='string' name='[strand]' role='dimension' type='nominal' />
+      <column caption='Target Accession' datatype='string' name='[target_accession]' role='dimension' type='nominal' />
+      <column caption='Target Database' datatype='string' name='[target_database]' role='dimension' type='nominal' />
+      <column caption='Target End' datatype='integer' name='[target_end]' role='measure' type='quantitative' />
+      <column caption='Target Model' datatype='string' name='[target_model]' role='dimension' type='nominal' />
+      <column caption='Target Start' datatype='integer' name='[target_start]' role='measure' type='quantitative' />
+      <column caption='Target Type' datatype='string' name='[target_type]' role='dimension' type='nominal' />
+      <column-instance column='[target_accession]' derivation='None' name='[none:target_accession:nk]' pivot='key' type='nominal' />
+      <layout dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+      <style>
+        <style-rule element='mark'>
+          <encoding attr='color' field='[none:target_accession:nk]' type='palette'>
+            <map to='#499894'>
+              <bucket>&quot;PF13637.13&quot;</bucket>
+            </map>
+            <map to='#4e79a7'>
+              <bucket>&quot;PF00023.37&quot;</bucket>
+            </map>
+            <map to='#59a14f'>
+              <bucket>&quot;PF08424.16&quot;</bucket>
+            </map>
+            <map to='#86bcb6'>
+              <bucket>&quot;PF13857.13&quot;</bucket>
+            </map>
+            <map to='#8cd17d'>
+              <bucket>&quot;PF12770.13&quot;</bucket>
+            </map>
+            <map to='#a0cbe8'>
+              <bucket>&quot;PF00531.29&quot;</bucket>
+            </map>
+            <map to='#b6992d'>
+              <bucket>&quot;PF12796.14&quot;</bucket>
+            </map>
+            <map to='#e15759'>
+              <bucket>&quot;PF15882.11&quot;</bucket>
+            </map>
+            <map to='#f1ce63'>
+              <bucket>&quot;PF13606.13&quot;</bucket>
+            </map>
+            <map to='#f28e2b'>
+              <bucket>&quot;PF00554.28&quot;</bucket>
+            </map>
+            <map to='#ff9d9a'>
+              <bucket>&quot;PF16179.12&quot;</bucket>
+            </map>
+            <map to='#ffbe7d'>
+              <bucket>&quot;PF00579.32&quot;</bucket>
+            </map>
+          </encoding>
+        </style-rule>
+      </style>
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+      <field-sort-info field-sort-order-type='custom-order'>
+        <field-sort-custom-order field='Pfam ID' />
+        <field-sort-custom-order field='Clan ID' />
+        <field-sort-custom-order field='Name1' />
+        <field-sort-custom-order field='Name2' />
+        <field-sort-custom-order field='Description' />
+      </field-sort-info>
+      <object-graph>
+        <objects>
+          <object caption='Pfam-A.clans.tsv' id='Pfam-A.clans.tsv_B040B4076FD64A1A8BD43E8D98C6A567'>
+            <properties context=''>
+              <relation connection='textscan.07qbvch1jk0ng818xdqab07fj2sr' name='Pfam-A.clans.tsv' table='[Pfam-A.clans#tsv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
+                  <column datatype='string' name='Pfam ID' ordinal='0' />
+                  <column datatype='string' name='Clan ID' ordinal='1' />
+                  <column datatype='string' name='Name1' ordinal='2' />
+                  <column datatype='string' name='Name2' ordinal='3' />
+                  <column datatype='string' name='Description' ordinal='4' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+          <object caption='cn_nfkb_and_ikb_loci.tsv' id='cn_nfkb_and_ikb_loci.tsv_D054768E1AFF42D09858046C98B0CB5A'>
+            <properties context=''>
+              <relation connection='textscan.07qbvch1jk0ng818xdqab07fj2sr' name='cn_nfkb_and_ikb_loci.tsv' table='[cn_nfkb_and_ikb_loci#tsv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
+                  <column datatype='string' name='protein accession' ordinal='0' />
+                  <column datatype='string' name='genome accession' ordinal='1' />
+                  <column datatype='string' name='contig accession' ordinal='2' />
+                  <column datatype='string' name='sequence accession' ordinal='3' />
+                  <column datatype='integer' name='locus start 1b' ordinal='4' />
+                  <column datatype='integer' name='locus end 1b' ordinal='5' />
+                  <column datatype='string' name='strand' ordinal='6' />
+                  <column datatype='integer' name='sequence length' ordinal='7' />
+                  <column datatype='string' name='feature type' ordinal='8' />
+                  <column datatype='integer' name='feature index' ordinal='9' />
+                  <column datatype='integer' name='feature position 1b' ordinal='10' />
+                  <column datatype='string' name='error' ordinal='11' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+          <object caption='genomes.tsv' id='genomes.tsv_C54CE41BFC884A93B8E5634C99A743AE'>
+            <properties context=''>
+              <relation connection='textscan.07qbvch1jk0ng818xdqab07fj2sr' name='genomes.tsv' table='[genomes#tsv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
+                  <column datatype='string' name='Genome Accession' ordinal='0' />
+                  <column datatype='string' name='Genome Name' ordinal='1' />
+                  <column datatype='integer' name='TaxID' ordinal='2' />
+                  <column datatype='string' name='Organism' ordinal='3' />
+                  <column datatype='string' name='Domain' ordinal='4' />
+                  <column datatype='string' name='Kingdom' ordinal='5' />
+                  <column datatype='string' name='Phylum' ordinal='6' />
+                  <column datatype='string' name='Class' ordinal='7' />
+                  <column datatype='string' name='Order' ordinal='8' />
+                  <column datatype='string' name='Family' ordinal='9' />
+                  <column datatype='string' name='Genus' ordinal='10' />
+                  <column datatype='string' name='Species' ordinal='11' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+          <object caption='protein_pfam.tsv' id='protein_pfam.tsv_70CE155AD7784DBEBBF15AFBAE6DCA6F'>
+            <properties context=''>
+              <relation connection='textscan.07qbvch1jk0ng818xdqab07fj2sr' name='protein_pfam.tsv' table='[protein_pfam#tsv]' type='table'>
+                <columns character-set='UTF-8' header='yes' locale='en_US' separator='&#9;'>
+                  <column datatype='string' name='detection_type' ordinal='0' />
+                  <column datatype='string' name='detection_method' ordinal='1' />
+                  <column datatype='string' name='batch' ordinal='2' />
+                  <column datatype='string' name='query_accession' ordinal='3' />
+                  <column datatype='string' name='query_database' ordinal='4' />
+                  <column datatype='string' name='query_type' ordinal='5' />
+                  <column datatype='string' name='target_accession' ordinal='6' />
+                  <column datatype='string' name='target_database' ordinal='7' />
+                  <column datatype='string' name='target_type' ordinal='8' />
+                  <column datatype='string' name='target_model' ordinal='9' />
+                  <column datatype='integer' name='query_start' ordinal='10' />
+                  <column datatype='integer' name='query_end' ordinal='11' />
+                  <column datatype='integer' name='target_start' ordinal='12' />
+                  <column datatype='integer' name='target_end' ordinal='13' />
+                  <column datatype='real' name='evalue' ordinal='14' />
+                  <column datatype='real' name='bitscore' ordinal='15' />
+                  <column datatype='string' name='bitscore_threshold' ordinal='16' />
+                  <column datatype='string' name='custom_metric_name' ordinal='17' />
+                  <column datatype='string' name='custom_metric_value' ordinal='18' />
+                </columns>
+              </relation>
+            </properties>
+          </object>
+        </objects>
+        <relationships>
+          <relationship>
+            <expression op='='>
+              <expression op='LEFT([target_accession],7)' />
+              <expression op='[Pfam ID]' />
+            </expression>
+            <first-end-point object-id='protein_pfam.tsv_70CE155AD7784DBEBBF15AFBAE6DCA6F' />
+            <second-end-point object-id='Pfam-A.clans.tsv_B040B4076FD64A1A8BD43E8D98C6A567' />
+          </relationship>
+          <relationship>
+            <expression op='='>
+              <expression op='[genome accession]' />
+              <expression op='[Genome Accession]' />
+            </expression>
+            <first-end-point object-id='cn_nfkb_and_ikb_loci.tsv_D054768E1AFF42D09858046C98B0CB5A' />
+            <second-end-point object-id='genomes.tsv_C54CE41BFC884A93B8E5634C99A743AE' />
+          </relationship>
+          <relationship>
+            <expression op='AND'>
+              <expression op='='>
+                <expression op='[protein accession]' />
+                <expression op='[query_accession]' />
+              </expression>
+              <expression op='='>
+                <expression op='[genome accession]' />
+                <expression op='[query_database]' />
+              </expression>
+            </expression>
+            <first-end-point object-id='cn_nfkb_and_ikb_loci.tsv_D054768E1AFF42D09858046C98B0CB5A' />
+            <second-end-point object-id='protein_pfam.tsv_70CE155AD7784DBEBBF15AFBAE6DCA6F' />
+          </relationship>
+        </relationships>
+      </object-graph>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='Proteins'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='cn_nfkb_and_ikb_loci+' name='federated.04raq4h0p8o7il1g9dy7m0a6x09f' />
+          </datasources>
+          <datasource-dependencies datasource='federated.04raq4h0p8o7il1g9dy7m0a6x09f'>
+            <column caption='Match Length' datatype='integer' name='[Calculation_1665186084921345]' role='measure' type='quantitative'>
+              <calculation class='tableau' formula='[query_end]-[query_start]+1' />
+            </column>
+            <column datatype='string' name='[Class]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Description]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Family]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Genus]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Order]' role='dimension' type='nominal' />
+            <column datatype='string' name='[Organism]' role='dimension' type='nominal' />
+            <column caption='Contig Accession' datatype='string' name='[contig accession]' role='dimension' type='nominal' />
+            <column caption='Genome Accession' datatype='string' name='[genome accession]' role='dimension' type='nominal' />
+            <column caption='Locus End 1B' datatype='integer' name='[locus end 1b]' role='measure' type='quantitative' />
+            <column caption='Locus Start 1B' datatype='integer' name='[locus start 1b]' role='measure' type='quantitative' />
+            <column-instance column='[query_start]' derivation='Min' name='[min:query_start:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Calculation_1665186084921345]' derivation='None' name='[none:Calculation_1665186084921345:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[Class]' derivation='None' name='[none:Class:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Description]' derivation='None' name='[none:Description:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Family]' derivation='None' name='[none:Family:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Genus]' derivation='None' name='[none:Genus:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Order]' derivation='None' name='[none:Order:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Organism]' derivation='None' name='[none:Organism:nk]' pivot='key' type='nominal' />
+            <column-instance column='[contig accession]' derivation='None' name='[none:contig accession:nk]' pivot='key' type='nominal' />
+            <column-instance column='[genome accession]' derivation='None' name='[none:genome accession:nk]' pivot='key' type='nominal' />
+            <column-instance column='[locus end 1b]' derivation='None' name='[none:locus end 1b:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[locus start 1b]' derivation='None' name='[none:locus start 1b:ok]' pivot='key' type='ordinal' />
+            <column-instance column='[protein accession]' derivation='None' name='[none:protein accession:nk]' pivot='key' type='nominal' />
+            <column-instance column='[query_start]' derivation='None' name='[none:query_start:qk]' pivot='key' type='quantitative' />
+            <column-instance column='[target_accession]' derivation='None' name='[none:target_accession:nk]' pivot='key' type='nominal' />
+            <column caption='Protein Accession' datatype='string' name='[protein accession]' role='dimension' type='nominal' />
+            <column caption='Query End' datatype='integer' name='[query_end]' role='measure' type='quantitative' />
+            <column caption='Query Start' datatype='integer' name='[query_start]' role='measure' type='quantitative' />
+            <column caption='Target Accession' datatype='string' name='[target_accession]' role='dimension' type='nominal' />
+          </datasource-dependencies>
+          <filter class='categorical' column='[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Class:nk]'>
+            <groupfilter function='except' user:ui-domain='relevant' user:ui-enumeration='exclusive' user:ui-marker='enumerate'>
+              <groupfilter function='level-members' level='[none:Class:nk]' />
+              <groupfilter function='member' level='[none:Class:nk]' member='&quot;Scyphozoa&quot;' />
+            </groupfilter>
+          </filter>
+          <computed-sort column='[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:target_accession:nk]' direction='ASC' using='[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[min:query_start:qk]' />
+          <slices>
+            <column>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Class:nk]</column>
+          </slices>
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane selection-relaxation-option='selection-relaxation-allow'>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:target_accession:nk]' />
+              <size column='[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Calculation_1665186084921345:qk]' />
+              <lod column='[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:target_accession:nk]' />
+              <lod column='[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Description:nk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Class:nk] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Order:nk] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Family:nk] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Genus:nk] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Organism:nk] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:genome accession:nk] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:contig accession:nk] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:protein accession:nk] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:locus start 1b:ok] / [federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:locus end 1b:ok])))))))))</rows>
+        <cols>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:query_start:qk]</cols>
+      </table>
+      <simple-id uuid='{85057BE7-23E0-4720-A6A8-CCA7C2E04E20}' />
+    </worksheet>
+  </worksheets>
+  <windows source-height='30'>
+    <window class='worksheet' maximized='true' name='Proteins'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+          <strip size='31'>
+            <card type='title' />
+          </strip>
+        </edge>
+        <edge name='right'>
+          <strip size='160'>
+            <card pane-specification-id='0' param='[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:target_accession:nk]' type='color' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Class:nk]</field>
+            <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Description:nk]</field>
+            <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Family:nk]</field>
+            <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Genus:nk]</field>
+            <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Order:nk]</field>
+            <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Organism:nk]</field>
+            <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Species:nk]</field>
+            <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:contig accession:nk]</field>
+            <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:genome accession:nk]</field>
+            <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:protein accession:nk]</field>
+            <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:target_accession:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+      <simple-id uuid='{F7264FCB-D623-4384-BC41-1CCD09EDB130}' />
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='384' name='Proteins' width='384'>
+      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
+      MD4+zuDgILlcjqamJp4+fYqmaTx+/JjPP/+cixcv0tDQQFdXF+Pj48TjcQ4fPszS0hLXrl3j
+      1KlTFItFnj17xsrKCn19fWSzWS5cuEA6ncbpdPL5559LAAghxPsik8nQ2Niovw6Hw1itVlKp
+      FIVCAUVRXpg2NBwO85e//IUjR45gMBgIBAJks1kcDgcAt2/fJhgMommaPoFMbaKZmZkZCQAh
+      hHhf+Hw+IpEIxWKRTCZDLBbD6/Vy5MgRFhcXsVgsbG9vk8lkqFar9Pf3MzIywt7eHplMhmg0
+      yvDwMHNzcwD88Y9/ZH19nVQqRS6Xo1AokMvlSCQSxGIxGQUkhBDvk+3tbZaXl+no6EBRFLq6
+      ulBVlc3NTQKBANPT05RKJUZHR0mn0/j9fhYXF1EUhba2Nmw2G4uLi3g8HjweD4qi8PTpU+x2
+      O+FwmMHBQTRNIxwOSwAIIUS9kiYgIYSoUxIAQghRpyQAhBCiTkkACCFEnZIAEEKIOiUBIIQQ
+      dUoCQAgh6pQEgBBC1CkJACGEqFMSAEIIUackAIQQok7JhDDvsXK5zO7u7rsuhhDi/yl5GJwQ
+      QtQpaQL6QNTm9Xz55x9a9vm5Qmvy+TzvOu+fL/vL5fuxZT9Uv6S+qqr+z/XVNI1SqfSrvM8/
+      VZ5KpUK5XNb3WywW9f3WzsHa/La1P/9NuWpz2Var1VdeP7/912375fWKxeJrf4+eL7+qqvo2
+      a+tWKhX9uKqq+sIxLpVK+nLPr/tyHX7Oe1s7brVtPb9erb4/tK3n91s7D2rL1f6vts3acTB+
+      9dVXX/1kqcQ7p2kaV65cobe3lzt37uB2u7FarWiahsFgeGHZQqHA9vY2uVwOg8GAxWIBYGpq
+      ip6enleWf9023pRqtcrVq1fp6+tjYmICn8+nz1T0chkODg5IJpO4XK63UrY3IZ/PMzU1RXd3
+      Nzdu3CAYDOozOr1c33g8TqVSwWaz/Vf7qlQqXL58mXg8jqZpNDU1/az1ah9kL5fn2bNn+uxS
+      L58j6+vrPHjwgPn5edxuN0+ePGFtbY2NjQ06Ozu5ceMGy8vLHD58mMePH7O8vMytW7fo7++n
+      oaHhZ9dJ0zTu3LnDysqK/oz82dlZ5ufnicfjGI1GJiYm2Nvbo6WlBbPZrK+7tbXFt99+y8LC
+      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
+    </thumbnail>
+  </thumbnails>
+</workbook>
