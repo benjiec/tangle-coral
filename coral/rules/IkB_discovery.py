@@ -1,4 +1,4 @@
-from sieve.rules import HMMAlignment, Leader, Pfam, Rules, Sequence
+from sieve.rules import HMMAlignment, Leader, Pfam, Rules, Sequence, TFMotifs
 
 # lysine (K) within 40 AAs upstream of a DSG(\phi).S degron motif
 βTrCP_pattern = r"K.{1,40}?[DEST][ST]G[LIVMFYWA].{1,2}[ST]"
