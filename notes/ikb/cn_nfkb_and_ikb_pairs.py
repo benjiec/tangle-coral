@@ -211,7 +211,7 @@ def main():
                          "NFkB chain contact coordinate"])
         for row, records in groups:
             writer.writerow(row)
-            fasta.write(f">pair {row[0]} {' '.join(accession for accession, _ in records)}\n")
+            fasta.write(f">pair {row[0]} {'-'.join(accession.replace(".","_") for accession, _ in records)}\n")
             for accession, sequence in records:
                 fasta.write(f">{accession}\n{sequence}\n")
     print(f"Wrote {len(groups)} groups from {len(candidates)} retained candidates")
