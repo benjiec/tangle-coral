@@ -80,6 +80,18 @@ cp res-nfkb-ikb/rule-results.tsv cn_nfkb_ikb.rules.tsv
 touch cn_ikb.deeploc.csv
 
 
+# Generate worklist for intra-species AlphaFold screening
+python3 cn_nfkb_and_ikb_pairs.py
+
+# Use the generated cn_nfkb_and_ikb_pairs.faa to setup AF runs, with each run name like CAH3027709_1_CAH3197536_1
+
+# Then use this to score them
+python3 cn_nfkb_and_ikb_score.py
+
+
+
+
+
 docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/x.faa -out /app/x.msa
 
 PYTHONPATH=../coral sieve-py ../sieve/scripts/hmmsearch-threshold.py \

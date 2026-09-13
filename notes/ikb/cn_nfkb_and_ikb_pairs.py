@@ -29,7 +29,7 @@
 #   truncation FASTA when present, otherwise its original sequence/accession.
 # Contacts:
 #   NFkB must have exactly one distinct PF16179 interval. Its contact window is
-#   one inclusive, 1-based AA interval: domain start - 5 through domain end + 5.
+#   one inclusive, 1-based AA interval: domain start - 15 through domain end + 25.
 #   Do not clip the window. Error if it extends outside the selected sequence,
 #   including a paired p105 truncated at GGG. Duplicate identical hits are allowed.
 # Outputs:
@@ -177,7 +177,7 @@ def generate_groups(sequences, truncations, domains):
             if len(contacts) != 1:
                 raise ValueError(f"{genome}/{nfkb}: expected one PF16179 interval, got {sorted(contacts)}")
             start, end = next(iter(contacts))
-            start, end = start - 5, end + 5
+            start, end = start - 15, end + 25
             p105 = "PF12796" in hits
             partners = ([None] if p105 else []) + classes["ikb"]
             for ikb in partners:
