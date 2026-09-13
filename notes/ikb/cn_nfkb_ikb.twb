@@ -71,27 +71,7 @@
               <column datatype='string' name='genome accession' ordinal='2' />
               <column datatype='string' name='contig accession' ordinal='3' />
               <column datatype='string' name='pass all' ordinal='4' />
-              <column datatype='string' name='Leader().betweenAA(-30, 3).is_NES()' ordinal='5' />
-              <column datatype='string' name='TFMotifs.has(&apos;GM.5.0.Rel&apos;, min_score_threshold=None, fpr=0.01).between(-1500, 500)' ordinal='6' />
-              <column datatype='integer' name='Leader.call(&apos;mTP&apos;)' ordinal='7' />
-              <column datatype='integer' name='Leader.call(&apos;SP&apos;)' ordinal='8' />
-              <column datatype='integer' name='Leader.call(&apos;NLS&apos;)' ordinal='9' />
-              <column datatype='integer' name='Leader.call(&apos;NES&apos;)' ordinal='10' />
-              <column datatype='string' name='Leader.localization' ordinal='11' />
-              <column datatype='integer' name='Leader.call(&apos;Cell membrane&apos;)' ordinal='12' />
-              <column datatype='integer' name='Leader.call(&apos;Cytoplasm&apos;)' ordinal='13' />
-              <column datatype='integer' name='Leader.call(&apos;Endoplasmic reticulum&apos;)' ordinal='14' />
-              <column datatype='integer' name='Leader.call(&apos;Extracellular&apos;)' ordinal='15' />
-              <column datatype='integer' name='Leader.call(&apos;Golgi apparatus&apos;)' ordinal='16' />
-              <column datatype='integer' name='Leader.call(&apos;Lipid anchor&apos;)' ordinal='17' />
-              <column datatype='integer' name='Leader.call(&apos;Lysosome/Vacuole&apos;)' ordinal='18' />
-              <column datatype='integer' name='Leader.call(&apos;Mitochondrion&apos;)' ordinal='19' />
-              <column datatype='integer' name='Leader.call(&apos;Nucleus&apos;)' ordinal='20' />
-              <column datatype='integer' name='Leader.call(&apos;Peripheral&apos;)' ordinal='21' />
-              <column datatype='integer' name='Leader.call(&apos;Peroxisome&apos;)' ordinal='22' />
-              <column datatype='integer' name='Leader.call(&apos;Plastid&apos;)' ordinal='23' />
-              <column datatype='integer' name='Leader.call(&apos;Soluble&apos;)' ordinal='24' />
-              <column datatype='integer' name='Leader.call(&apos;Transmembrane&apos;)' ordinal='25' />
+              <column datatype='string' name='TFMotifs.has(&apos;GM.5.0.Rel&apos;, min_score_threshold=None, fpr=0.01).between(-1500, 500)' ordinal='5' />
             </columns>
           </relation>
           <relation connection='textscan.07qbvch1jk0ng818xdqab07fj2sr' name='genomes.tsv' table='[genomes#tsv]' type='table'>
@@ -158,26 +138,6 @@
           <map key='[Genus]' value='[genomes.tsv].[Genus]' />
           <map key='[Golgi apparatus]' value='[cn_ikb.deeploc.csv].[Golgi apparatus]' />
           <map key='[Kingdom]' value='[genomes.tsv].[Kingdom]' />
-          <map key='[Leader().betweenAA(-30, 3).is_NES()]' value='[cn_nfkb_ikb.rules.tsv].[Leader().betweenAA(-30, 3).is_NES()]' />
-          <map key='[Leader.call(&apos;Cell membrane&apos;)]' value='[cn_nfkb_ikb.rules.tsv].[Leader.call(&apos;Cell membrane&apos;)]' />
-          <map key='[Leader.call(&apos;Cytoplasm&apos;)]' value='[cn_nfkb_ikb.rules.tsv].[Leader.call(&apos;Cytoplasm&apos;)]' />
-          <map key='[Leader.call(&apos;Endoplasmic reticulum&apos;)]' value='[cn_nfkb_ikb.rules.tsv].[Leader.call(&apos;Endoplasmic reticulum&apos;)]' />
-          <map key='[Leader.call(&apos;Extracellular&apos;)]' value='[cn_nfkb_ikb.rules.tsv].[Leader.call(&apos;Extracellular&apos;)]' />
-          <map key='[Leader.call(&apos;Golgi apparatus&apos;)]' value='[cn_nfkb_ikb.rules.tsv].[Leader.call(&apos;Golgi apparatus&apos;)]' />
-          <map key='[Leader.call(&apos;Lipid anchor&apos;)]' value='[cn_nfkb_ikb.rules.tsv].[Leader.call(&apos;Lipid anchor&apos;)]' />
-          <map key='[Leader.call(&apos;Lysosome/Vacuole&apos;)]' value='[cn_nfkb_ikb.rules.tsv].[Leader.call(&apos;Lysosome/Vacuole&apos;)]' />
-          <map key='[Leader.call(&apos;Mitochondrion&apos;)]' value='[cn_nfkb_ikb.rules.tsv].[Leader.call(&apos;Mitochondrion&apos;)]' />
-          <map key='[Leader.call(&apos;NES&apos;)]' value='[cn_nfkb_ikb.rules.tsv].[Leader.call(&apos;NES&apos;)]' />
-          <map key='[Leader.call(&apos;NLS&apos;)]' value='[cn_nfkb_ikb.rules.tsv].[Leader.call(&apos;NLS&apos;)]' />
-          <map key='[Leader.call(&apos;Nucleus&apos;)]' value='[cn_nfkb_ikb.rules.tsv].[Leader.call(&apos;Nucleus&apos;)]' />
-          <map key='[Leader.call(&apos;Peripheral&apos;)]' value='[cn_nfkb_ikb.rules.tsv].[Leader.call(&apos;Peripheral&apos;)]' />
-          <map key='[Leader.call(&apos;Peroxisome&apos;)]' value='[cn_nfkb_ikb.rules.tsv].[Leader.call(&apos;Peroxisome&apos;)]' />
-          <map key='[Leader.call(&apos;Plastid&apos;)]' value='[cn_nfkb_ikb.rules.tsv].[Leader.call(&apos;Plastid&apos;)]' />
-          <map key='[Leader.call(&apos;SP&apos;)]' value='[cn_nfkb_ikb.rules.tsv].[Leader.call(&apos;SP&apos;)]' />
-          <map key='[Leader.call(&apos;Soluble&apos;)]' value='[cn_nfkb_ikb.rules.tsv].[Leader.call(&apos;Soluble&apos;)]' />
-          <map key='[Leader.call(&apos;Transmembrane&apos;)]' value='[cn_nfkb_ikb.rules.tsv].[Leader.call(&apos;Transmembrane&apos;)]' />
-          <map key='[Leader.call(&apos;mTP&apos;)]' value='[cn_nfkb_ikb.rules.tsv].[Leader.call(&apos;mTP&apos;)]' />
-          <map key='[Leader.localization]' value='[cn_nfkb_ikb.rules.tsv].[Leader.localization]' />
           <map key='[Lipid anchor]' value='[cn_ikb.deeploc.csv].[Lipid anchor]' />
           <map key='[Localizations]' value='[cn_ikb.deeploc.csv].[Localizations]' />
           <map key='[Lysosome/Vacuole]' value='[cn_ikb.deeploc.csv].[Lysosome/Vacuole]' />
@@ -805,11 +765,11 @@
             <object-id>[cn_nfkb_ikb.rules.tsv_5098FBCD0D2A4DCDAEF1AA9358C4A2B3]</object-id>
           </metadata-record>
           <metadata-record class='column'>
-            <remote-name>Leader().betweenAA(-30, 3).is_NES()</remote-name>
+            <remote-name>TFMotifs.has(&apos;GM.5.0.Rel&apos;, min_score_threshold=None, fpr=0.01).between(-1500, 500)</remote-name>
             <remote-type>129</remote-type>
-            <local-name>[Leader().betweenAA(-30, 3).is_NES()]</local-name>
+            <local-name>[TFMotifs.has(&apos;GM.5.0.Rel&apos;, min_score_threshold=None, fpr=0.01).between(-1500, 500)]</local-name>
             <parent-name>[cn_nfkb_ikb.rules.tsv]</parent-name>
-            <remote-alias>Leader().betweenAA(-30, 3).is_NES()</remote-alias>
+            <remote-alias>TFMotifs.has(&apos;GM.5.0.Rel&apos;, min_score_threshold=None, fpr=0.01).between(-1500, 500)</remote-alias>
             <ordinal>35</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
@@ -820,258 +780,12 @@
             <object-id>[cn_nfkb_ikb.rules.tsv_5098FBCD0D2A4DCDAEF1AA9358C4A2B3]</object-id>
           </metadata-record>
           <metadata-record class='column'>
-            <remote-name>TFMotifs.has(&apos;GM.5.0.Rel&apos;, min_score_threshold=None, fpr=0.01).between(-1500, 500)</remote-name>
-            <remote-type>129</remote-type>
-            <local-name>[TFMotifs.has(&apos;GM.5.0.Rel&apos;, min_score_threshold=None, fpr=0.01).between(-1500, 500)]</local-name>
-            <parent-name>[cn_nfkb_ikb.rules.tsv]</parent-name>
-            <remote-alias>TFMotifs.has(&apos;GM.5.0.Rel&apos;, min_score_threshold=None, fpr=0.01).between(-1500, 500)</remote-alias>
-            <ordinal>36</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <scale>1</scale>
-            <width>1073741823</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LEN_RUS' />
-            <object-id>[cn_nfkb_ikb.rules.tsv_5098FBCD0D2A4DCDAEF1AA9358C4A2B3]</object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Leader.call(&apos;mTP&apos;)</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Leader.call(&apos;mTP&apos;)]</local-name>
-            <parent-name>[cn_nfkb_ikb.rules.tsv]</parent-name>
-            <remote-alias>Leader.call(&apos;mTP&apos;)</remote-alias>
-            <ordinal>37</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <object-id>[cn_nfkb_ikb.rules.tsv_5098FBCD0D2A4DCDAEF1AA9358C4A2B3]</object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Leader.call(&apos;SP&apos;)</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Leader.call(&apos;SP&apos;)]</local-name>
-            <parent-name>[cn_nfkb_ikb.rules.tsv]</parent-name>
-            <remote-alias>Leader.call(&apos;SP&apos;)</remote-alias>
-            <ordinal>38</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <object-id>[cn_nfkb_ikb.rules.tsv_5098FBCD0D2A4DCDAEF1AA9358C4A2B3]</object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Leader.call(&apos;NLS&apos;)</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Leader.call(&apos;NLS&apos;)]</local-name>
-            <parent-name>[cn_nfkb_ikb.rules.tsv]</parent-name>
-            <remote-alias>Leader.call(&apos;NLS&apos;)</remote-alias>
-            <ordinal>39</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <object-id>[cn_nfkb_ikb.rules.tsv_5098FBCD0D2A4DCDAEF1AA9358C4A2B3]</object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Leader.call(&apos;NES&apos;)</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Leader.call(&apos;NES&apos;)]</local-name>
-            <parent-name>[cn_nfkb_ikb.rules.tsv]</parent-name>
-            <remote-alias>Leader.call(&apos;NES&apos;)</remote-alias>
-            <ordinal>40</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <object-id>[cn_nfkb_ikb.rules.tsv_5098FBCD0D2A4DCDAEF1AA9358C4A2B3]</object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Leader.localization</remote-name>
-            <remote-type>129</remote-type>
-            <local-name>[Leader.localization]</local-name>
-            <parent-name>[cn_nfkb_ikb.rules.tsv]</parent-name>
-            <remote-alias>Leader.localization</remote-alias>
-            <ordinal>41</ordinal>
-            <local-type>string</local-type>
-            <aggregation>Count</aggregation>
-            <scale>1</scale>
-            <width>1073741823</width>
-            <contains-null>true</contains-null>
-            <collation flag='0' name='LEN_RUS' />
-            <object-id>[cn_nfkb_ikb.rules.tsv_5098FBCD0D2A4DCDAEF1AA9358C4A2B3]</object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Leader.call(&apos;Cell membrane&apos;)</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Leader.call(&apos;Cell membrane&apos;)]</local-name>
-            <parent-name>[cn_nfkb_ikb.rules.tsv]</parent-name>
-            <remote-alias>Leader.call(&apos;Cell membrane&apos;)</remote-alias>
-            <ordinal>42</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <object-id>[cn_nfkb_ikb.rules.tsv_5098FBCD0D2A4DCDAEF1AA9358C4A2B3]</object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Leader.call(&apos;Cytoplasm&apos;)</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Leader.call(&apos;Cytoplasm&apos;)]</local-name>
-            <parent-name>[cn_nfkb_ikb.rules.tsv]</parent-name>
-            <remote-alias>Leader.call(&apos;Cytoplasm&apos;)</remote-alias>
-            <ordinal>43</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <object-id>[cn_nfkb_ikb.rules.tsv_5098FBCD0D2A4DCDAEF1AA9358C4A2B3]</object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Leader.call(&apos;Endoplasmic reticulum&apos;)</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Leader.call(&apos;Endoplasmic reticulum&apos;)]</local-name>
-            <parent-name>[cn_nfkb_ikb.rules.tsv]</parent-name>
-            <remote-alias>Leader.call(&apos;Endoplasmic reticulum&apos;)</remote-alias>
-            <ordinal>44</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <object-id>[cn_nfkb_ikb.rules.tsv_5098FBCD0D2A4DCDAEF1AA9358C4A2B3]</object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Leader.call(&apos;Extracellular&apos;)</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Leader.call(&apos;Extracellular&apos;)]</local-name>
-            <parent-name>[cn_nfkb_ikb.rules.tsv]</parent-name>
-            <remote-alias>Leader.call(&apos;Extracellular&apos;)</remote-alias>
-            <ordinal>45</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <object-id>[cn_nfkb_ikb.rules.tsv_5098FBCD0D2A4DCDAEF1AA9358C4A2B3]</object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Leader.call(&apos;Golgi apparatus&apos;)</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Leader.call(&apos;Golgi apparatus&apos;)]</local-name>
-            <parent-name>[cn_nfkb_ikb.rules.tsv]</parent-name>
-            <remote-alias>Leader.call(&apos;Golgi apparatus&apos;)</remote-alias>
-            <ordinal>46</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <object-id>[cn_nfkb_ikb.rules.tsv_5098FBCD0D2A4DCDAEF1AA9358C4A2B3]</object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Leader.call(&apos;Lipid anchor&apos;)</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Leader.call(&apos;Lipid anchor&apos;)]</local-name>
-            <parent-name>[cn_nfkb_ikb.rules.tsv]</parent-name>
-            <remote-alias>Leader.call(&apos;Lipid anchor&apos;)</remote-alias>
-            <ordinal>47</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <object-id>[cn_nfkb_ikb.rules.tsv_5098FBCD0D2A4DCDAEF1AA9358C4A2B3]</object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Leader.call(&apos;Lysosome/Vacuole&apos;)</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Leader.call(&apos;Lysosome/Vacuole&apos;)]</local-name>
-            <parent-name>[cn_nfkb_ikb.rules.tsv]</parent-name>
-            <remote-alias>Leader.call(&apos;Lysosome/Vacuole&apos;)</remote-alias>
-            <ordinal>48</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <object-id>[cn_nfkb_ikb.rules.tsv_5098FBCD0D2A4DCDAEF1AA9358C4A2B3]</object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Leader.call(&apos;Mitochondrion&apos;)</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Leader.call(&apos;Mitochondrion&apos;)]</local-name>
-            <parent-name>[cn_nfkb_ikb.rules.tsv]</parent-name>
-            <remote-alias>Leader.call(&apos;Mitochondrion&apos;)</remote-alias>
-            <ordinal>49</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <object-id>[cn_nfkb_ikb.rules.tsv_5098FBCD0D2A4DCDAEF1AA9358C4A2B3]</object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Leader.call(&apos;Nucleus&apos;)</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Leader.call(&apos;Nucleus&apos;)]</local-name>
-            <parent-name>[cn_nfkb_ikb.rules.tsv]</parent-name>
-            <remote-alias>Leader.call(&apos;Nucleus&apos;)</remote-alias>
-            <ordinal>50</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <object-id>[cn_nfkb_ikb.rules.tsv_5098FBCD0D2A4DCDAEF1AA9358C4A2B3]</object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Leader.call(&apos;Peripheral&apos;)</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Leader.call(&apos;Peripheral&apos;)]</local-name>
-            <parent-name>[cn_nfkb_ikb.rules.tsv]</parent-name>
-            <remote-alias>Leader.call(&apos;Peripheral&apos;)</remote-alias>
-            <ordinal>51</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <object-id>[cn_nfkb_ikb.rules.tsv_5098FBCD0D2A4DCDAEF1AA9358C4A2B3]</object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Leader.call(&apos;Peroxisome&apos;)</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Leader.call(&apos;Peroxisome&apos;)]</local-name>
-            <parent-name>[cn_nfkb_ikb.rules.tsv]</parent-name>
-            <remote-alias>Leader.call(&apos;Peroxisome&apos;)</remote-alias>
-            <ordinal>52</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <object-id>[cn_nfkb_ikb.rules.tsv_5098FBCD0D2A4DCDAEF1AA9358C4A2B3]</object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Leader.call(&apos;Plastid&apos;)</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Leader.call(&apos;Plastid&apos;)]</local-name>
-            <parent-name>[cn_nfkb_ikb.rules.tsv]</parent-name>
-            <remote-alias>Leader.call(&apos;Plastid&apos;)</remote-alias>
-            <ordinal>53</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <object-id>[cn_nfkb_ikb.rules.tsv_5098FBCD0D2A4DCDAEF1AA9358C4A2B3]</object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Leader.call(&apos;Soluble&apos;)</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Leader.call(&apos;Soluble&apos;)]</local-name>
-            <parent-name>[cn_nfkb_ikb.rules.tsv]</parent-name>
-            <remote-alias>Leader.call(&apos;Soluble&apos;)</remote-alias>
-            <ordinal>54</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <object-id>[cn_nfkb_ikb.rules.tsv_5098FBCD0D2A4DCDAEF1AA9358C4A2B3]</object-id>
-          </metadata-record>
-          <metadata-record class='column'>
-            <remote-name>Leader.call(&apos;Transmembrane&apos;)</remote-name>
-            <remote-type>20</remote-type>
-            <local-name>[Leader.call(&apos;Transmembrane&apos;)]</local-name>
-            <parent-name>[cn_nfkb_ikb.rules.tsv]</parent-name>
-            <remote-alias>Leader.call(&apos;Transmembrane&apos;)</remote-alias>
-            <ordinal>55</ordinal>
-            <local-type>integer</local-type>
-            <aggregation>Sum</aggregation>
-            <contains-null>true</contains-null>
-            <object-id>[cn_nfkb_ikb.rules.tsv_5098FBCD0D2A4DCDAEF1AA9358C4A2B3]</object-id>
-          </metadata-record>
-          <metadata-record class='column'>
             <remote-name>Genome Accession</remote-name>
             <remote-type>129</remote-type>
             <local-name>[Genome Accession]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>Genome Accession</remote-alias>
-            <ordinal>56</ordinal>
+            <ordinal>36</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1086,7 +800,7 @@
             <local-name>[Genome Name]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>Genome Name</remote-alias>
-            <ordinal>57</ordinal>
+            <ordinal>37</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1101,7 +815,7 @@
             <local-name>[TaxID]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>TaxID</remote-alias>
-            <ordinal>58</ordinal>
+            <ordinal>38</ordinal>
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
@@ -1113,7 +827,7 @@
             <local-name>[Organism]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>Organism</remote-alias>
-            <ordinal>59</ordinal>
+            <ordinal>39</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1128,7 +842,7 @@
             <local-name>[Domain]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>Domain</remote-alias>
-            <ordinal>60</ordinal>
+            <ordinal>40</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1143,7 +857,7 @@
             <local-name>[Kingdom]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>Kingdom</remote-alias>
-            <ordinal>61</ordinal>
+            <ordinal>41</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1158,7 +872,7 @@
             <local-name>[Phylum]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>Phylum</remote-alias>
-            <ordinal>62</ordinal>
+            <ordinal>42</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1173,7 +887,7 @@
             <local-name>[Class]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>Class</remote-alias>
-            <ordinal>63</ordinal>
+            <ordinal>43</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1188,7 +902,7 @@
             <local-name>[Order]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>Order</remote-alias>
-            <ordinal>64</ordinal>
+            <ordinal>44</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1203,7 +917,7 @@
             <local-name>[Family]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>Family</remote-alias>
-            <ordinal>65</ordinal>
+            <ordinal>45</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1218,7 +932,7 @@
             <local-name>[Genus]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>Genus</remote-alias>
-            <ordinal>66</ordinal>
+            <ordinal>46</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1233,7 +947,7 @@
             <local-name>[Species]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>Species</remote-alias>
-            <ordinal>67</ordinal>
+            <ordinal>47</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1248,7 +962,7 @@
             <local-name>[detection_type]</local-name>
             <parent-name>[protein_pfam.tsv]</parent-name>
             <remote-alias>detection_type</remote-alias>
-            <ordinal>68</ordinal>
+            <ordinal>48</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1263,7 +977,7 @@
             <local-name>[detection_method]</local-name>
             <parent-name>[protein_pfam.tsv]</parent-name>
             <remote-alias>detection_method</remote-alias>
-            <ordinal>69</ordinal>
+            <ordinal>49</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1278,7 +992,7 @@
             <local-name>[batch]</local-name>
             <parent-name>[protein_pfam.tsv]</parent-name>
             <remote-alias>batch</remote-alias>
-            <ordinal>70</ordinal>
+            <ordinal>50</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1293,7 +1007,7 @@
             <local-name>[query_accession]</local-name>
             <parent-name>[protein_pfam.tsv]</parent-name>
             <remote-alias>query_accession</remote-alias>
-            <ordinal>71</ordinal>
+            <ordinal>51</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1308,7 +1022,7 @@
             <local-name>[query_database]</local-name>
             <parent-name>[protein_pfam.tsv]</parent-name>
             <remote-alias>query_database</remote-alias>
-            <ordinal>72</ordinal>
+            <ordinal>52</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1323,7 +1037,7 @@
             <local-name>[query_type]</local-name>
             <parent-name>[protein_pfam.tsv]</parent-name>
             <remote-alias>query_type</remote-alias>
-            <ordinal>73</ordinal>
+            <ordinal>53</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1338,7 +1052,7 @@
             <local-name>[target_accession]</local-name>
             <parent-name>[protein_pfam.tsv]</parent-name>
             <remote-alias>target_accession</remote-alias>
-            <ordinal>74</ordinal>
+            <ordinal>54</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1353,7 +1067,7 @@
             <local-name>[target_database]</local-name>
             <parent-name>[protein_pfam.tsv]</parent-name>
             <remote-alias>target_database</remote-alias>
-            <ordinal>75</ordinal>
+            <ordinal>55</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1368,7 +1082,7 @@
             <local-name>[target_type]</local-name>
             <parent-name>[protein_pfam.tsv]</parent-name>
             <remote-alias>target_type</remote-alias>
-            <ordinal>76</ordinal>
+            <ordinal>56</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1383,7 +1097,7 @@
             <local-name>[target_model]</local-name>
             <parent-name>[protein_pfam.tsv]</parent-name>
             <remote-alias>target_model</remote-alias>
-            <ordinal>77</ordinal>
+            <ordinal>57</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <approx-count>1</approx-count>
@@ -1399,7 +1113,7 @@
             <local-name>[query_start]</local-name>
             <parent-name>[protein_pfam.tsv]</parent-name>
             <remote-alias>query_start</remote-alias>
-            <ordinal>78</ordinal>
+            <ordinal>58</ordinal>
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
@@ -1411,7 +1125,7 @@
             <local-name>[query_end]</local-name>
             <parent-name>[protein_pfam.tsv]</parent-name>
             <remote-alias>query_end</remote-alias>
-            <ordinal>79</ordinal>
+            <ordinal>59</ordinal>
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
@@ -1423,7 +1137,7 @@
             <local-name>[target_start]</local-name>
             <parent-name>[protein_pfam.tsv]</parent-name>
             <remote-alias>target_start</remote-alias>
-            <ordinal>80</ordinal>
+            <ordinal>60</ordinal>
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
@@ -1435,7 +1149,7 @@
             <local-name>[target_end]</local-name>
             <parent-name>[protein_pfam.tsv]</parent-name>
             <remote-alias>target_end</remote-alias>
-            <ordinal>81</ordinal>
+            <ordinal>61</ordinal>
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
@@ -1447,7 +1161,7 @@
             <local-name>[evalue]</local-name>
             <parent-name>[protein_pfam.tsv]</parent-name>
             <remote-alias>evalue</remote-alias>
-            <ordinal>82</ordinal>
+            <ordinal>62</ordinal>
             <local-type>real</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
@@ -1459,7 +1173,7 @@
             <local-name>[bitscore]</local-name>
             <parent-name>[protein_pfam.tsv]</parent-name>
             <remote-alias>bitscore</remote-alias>
-            <ordinal>83</ordinal>
+            <ordinal>63</ordinal>
             <local-type>real</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
@@ -1471,7 +1185,7 @@
             <local-name>[bitscore_threshold]</local-name>
             <parent-name>[protein_pfam.tsv]</parent-name>
             <remote-alias>bitscore_threshold</remote-alias>
-            <ordinal>84</ordinal>
+            <ordinal>64</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <approx-count>1</approx-count>
@@ -1487,7 +1201,7 @@
             <local-name>[custom_metric_name]</local-name>
             <parent-name>[protein_pfam.tsv]</parent-name>
             <remote-alias>custom_metric_name</remote-alias>
-            <ordinal>85</ordinal>
+            <ordinal>65</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <approx-count>1</approx-count>
@@ -1503,7 +1217,7 @@
             <local-name>[custom_metric_value]</local-name>
             <parent-name>[protein_pfam.tsv]</parent-name>
             <remote-alias>custom_metric_value</remote-alias>
-            <ordinal>86</ordinal>
+            <ordinal>66</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <approx-count>1</approx-count>
@@ -1519,7 +1233,7 @@
             <local-name>[Pfam ID]</local-name>
             <parent-name>[Pfam-A.clans.tsv]</parent-name>
             <remote-alias>Pfam ID</remote-alias>
-            <ordinal>87</ordinal>
+            <ordinal>67</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1534,7 +1248,7 @@
             <local-name>[Clan ID]</local-name>
             <parent-name>[Pfam-A.clans.tsv]</parent-name>
             <remote-alias>Clan ID</remote-alias>
-            <ordinal>88</ordinal>
+            <ordinal>68</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1549,7 +1263,7 @@
             <local-name>[Name1]</local-name>
             <parent-name>[Pfam-A.clans.tsv]</parent-name>
             <remote-alias>Name1</remote-alias>
-            <ordinal>89</ordinal>
+            <ordinal>69</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1564,7 +1278,7 @@
             <local-name>[Name2]</local-name>
             <parent-name>[Pfam-A.clans.tsv]</parent-name>
             <remote-alias>Name2</remote-alias>
-            <ordinal>90</ordinal>
+            <ordinal>70</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1579,7 +1293,7 @@
             <local-name>[Description]</local-name>
             <parent-name>[Pfam-A.clans.tsv]</parent-name>
             <remote-alias>Description</remote-alias>
-            <ordinal>91</ordinal>
+            <ordinal>71</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1603,8 +1317,13 @@
       <column caption='Rel TF Motif' datatype='string' name='[Calculation_1665186344370180]' role='dimension' type='nominal'>
         <calculation class='tableau' formula='CASE [TFMotifs.has(&apos;GM.5.0.Rel&apos;, min_score_threshold=None, fpr=0.01).between(-1500, 500)]&#10;WHEN &quot;yes&quot;&#10;  THEN &quot;Rel Motif&quot;&#10;ELSE&#10;  &quot;&quot;&#10;END' />
       </column>
+      <column aggregation='Sum' caption='Protein Gene Locus  Left' datatype='integer' name='[Calculation_1665186374017030]' role='dimension' type='ordinal'>
+        <calculation class='tableau' formula='{FIXED [protein accession],[contig accession]: MIN(MIN([locus start 1b],[locus end 1b]))}' />
+      </column>
       <column caption='Genome Accession1' datatype='string' name='[Genome Accession]' role='dimension' type='nominal' />
-      <column caption='Leader().betweenAA(-30, 3).is NES()' datatype='string' name='[Leader().betweenAA(-30, 3).is_NES()]' role='dimension' type='nominal' />
+      <column aggregation='Sum' caption='Protein Gene Locus Right' datatype='integer' name='[Protein Gene Locus  Left (copy)_1665186374324231]' role='dimension' type='ordinal'>
+        <calculation class='tableau' formula='{FIXED [protein accession],[contig accession]: MAX(MAX([locus start 1b],[locus end 1b]))}' />
+      </column>
       <column caption='Locus Rel Motif' datatype='string' name='[Protein Signal (copy)_1665186344824837]' role='dimension' type='nominal'>
         <calculation class='tableau' formula='{FIXED [protein accession]: IFNULL(MAX([Calculation_1665186344370180]), &quot;&quot;)}' />
       </column>
@@ -1808,27 +1527,7 @@
                   <column datatype='string' name='genome accession' ordinal='2' />
                   <column datatype='string' name='contig accession' ordinal='3' />
                   <column datatype='string' name='pass all' ordinal='4' />
-                  <column datatype='string' name='Leader().betweenAA(-30, 3).is_NES()' ordinal='5' />
-                  <column datatype='string' name='TFMotifs.has(&apos;GM.5.0.Rel&apos;, min_score_threshold=None, fpr=0.01).between(-1500, 500)' ordinal='6' />
-                  <column datatype='integer' name='Leader.call(&apos;mTP&apos;)' ordinal='7' />
-                  <column datatype='integer' name='Leader.call(&apos;SP&apos;)' ordinal='8' />
-                  <column datatype='integer' name='Leader.call(&apos;NLS&apos;)' ordinal='9' />
-                  <column datatype='integer' name='Leader.call(&apos;NES&apos;)' ordinal='10' />
-                  <column datatype='string' name='Leader.localization' ordinal='11' />
-                  <column datatype='integer' name='Leader.call(&apos;Cell membrane&apos;)' ordinal='12' />
-                  <column datatype='integer' name='Leader.call(&apos;Cytoplasm&apos;)' ordinal='13' />
-                  <column datatype='integer' name='Leader.call(&apos;Endoplasmic reticulum&apos;)' ordinal='14' />
-                  <column datatype='integer' name='Leader.call(&apos;Extracellular&apos;)' ordinal='15' />
-                  <column datatype='integer' name='Leader.call(&apos;Golgi apparatus&apos;)' ordinal='16' />
-                  <column datatype='integer' name='Leader.call(&apos;Lipid anchor&apos;)' ordinal='17' />
-                  <column datatype='integer' name='Leader.call(&apos;Lysosome/Vacuole&apos;)' ordinal='18' />
-                  <column datatype='integer' name='Leader.call(&apos;Mitochondrion&apos;)' ordinal='19' />
-                  <column datatype='integer' name='Leader.call(&apos;Nucleus&apos;)' ordinal='20' />
-                  <column datatype='integer' name='Leader.call(&apos;Peripheral&apos;)' ordinal='21' />
-                  <column datatype='integer' name='Leader.call(&apos;Peroxisome&apos;)' ordinal='22' />
-                  <column datatype='integer' name='Leader.call(&apos;Plastid&apos;)' ordinal='23' />
-                  <column datatype='integer' name='Leader.call(&apos;Soluble&apos;)' ordinal='24' />
-                  <column datatype='integer' name='Leader.call(&apos;Transmembrane&apos;)' ordinal='25' />
+                  <column datatype='string' name='TFMotifs.has(&apos;GM.5.0.Rel&apos;, min_score_threshold=None, fpr=0.01).between(-1500, 500)' ordinal='5' />
                 </columns>
               </relation>
             </properties>
@@ -2010,12 +1709,18 @@
             <column caption='Rel TF Motif' datatype='string' name='[Calculation_1665186344370180]' role='dimension' type='nominal'>
               <calculation class='tableau' formula='CASE [TFMotifs.has(&apos;GM.5.0.Rel&apos;, min_score_threshold=None, fpr=0.01).between(-1500, 500)]&#10;WHEN &quot;yes&quot;&#10;  THEN &quot;Rel Motif&quot;&#10;ELSE&#10;  &quot;&quot;&#10;END' />
             </column>
+            <column aggregation='Sum' caption='Protein Gene Locus  Left' datatype='integer' name='[Calculation_1665186374017030]' role='dimension' type='ordinal'>
+              <calculation class='tableau' formula='{FIXED [protein accession],[contig accession]: MIN(MIN([locus start 1b],[locus end 1b]))}' />
+            </column>
             <column datatype='string' name='[Class]' role='dimension' type='nominal' />
             <column datatype='string' name='[Description]' role='dimension' type='nominal' />
             <column datatype='string' name='[Family]' role='dimension' type='nominal' />
             <column datatype='string' name='[Genus]' role='dimension' type='nominal' />
             <column datatype='string' name='[Order]' role='dimension' type='nominal' />
             <column datatype='string' name='[Organism]' role='dimension' type='nominal' />
+            <column aggregation='Sum' caption='Protein Gene Locus Right' datatype='integer' name='[Protein Gene Locus  Left (copy)_1665186374324231]' role='dimension' type='ordinal'>
+              <calculation class='tableau' formula='{FIXED [protein accession],[contig accession]: MAX(MAX([locus start 1b],[locus end 1b]))}' />
+            </column>
             <column caption='Locus Rel Motif' datatype='string' name='[Protein Signal (copy)_1665186344824837]' role='dimension' type='nominal'>
               <calculation class='tableau' formula='{FIXED [protein accession]: IFNULL(MAX([Calculation_1665186344370180]), &quot;&quot;)}' />
             </column>
@@ -2028,17 +1733,17 @@
             <column-instance column='[query_start]' derivation='Min' name='[min:query_start:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Calculation_1665186084921345]' derivation='None' name='[none:Calculation_1665186084921345:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Calculation_1665186343124995]' derivation='None' name='[none:Calculation_1665186343124995:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Calculation_1665186374017030]' derivation='None' name='[none:Calculation_1665186374017030:ok]' pivot='key' type='ordinal' />
             <column-instance column='[Class]' derivation='None' name='[none:Class:nk]' pivot='key' type='nominal' />
             <column-instance column='[Description]' derivation='None' name='[none:Description:nk]' pivot='key' type='nominal' />
             <column-instance column='[Family]' derivation='None' name='[none:Family:nk]' pivot='key' type='nominal' />
             <column-instance column='[Genus]' derivation='None' name='[none:Genus:nk]' pivot='key' type='nominal' />
             <column-instance column='[Order]' derivation='None' name='[none:Order:nk]' pivot='key' type='nominal' />
             <column-instance column='[Organism]' derivation='None' name='[none:Organism:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Protein Gene Locus  Left (copy)_1665186374324231]' derivation='None' name='[none:Protein Gene Locus  Left (copy)_1665186374324231:ok]' pivot='key' type='ordinal' />
             <column-instance column='[Protein Signal (copy)_1665186344824837]' derivation='None' name='[none:Protein Signal (copy)_1665186344824837:nk]' pivot='key' type='nominal' />
             <column-instance column='[contig accession]' derivation='None' name='[none:contig accession:nk]' pivot='key' type='nominal' />
             <column-instance column='[genome accession]' derivation='None' name='[none:genome accession:nk]' pivot='key' type='nominal' />
-            <column-instance column='[locus end 1b]' derivation='None' name='[none:locus end 1b:ok]' pivot='key' type='ordinal' />
-            <column-instance column='[locus start 1b]' derivation='None' name='[none:locus start 1b:ok]' pivot='key' type='ordinal' />
             <column-instance column='[protein accession]' derivation='None' name='[none:protein accession:nk]' pivot='key' type='nominal' />
             <column-instance column='[query_start]' derivation='None' name='[none:query_start:qk]' pivot='key' type='quantitative' />
             <column-instance column='[target_accession]' derivation='None' name='[none:target_accession:nk]' pivot='key' type='nominal' />
@@ -2074,7 +1779,7 @@
             </encodings>
           </pane>
         </panes>
-        <rows>([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Order:nk] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Family:nk] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Genus:nk] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Organism:nk] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:genome accession:nk] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:contig accession:nk] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:protein accession:nk] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:locus start 1b:ok] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:locus end 1b:ok] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Calculation_1665186343124995:nk] / [federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Protein Signal (copy)_1665186344824837:nk]))))))))))</rows>
+        <rows>([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Order:nk] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Family:nk] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Genus:nk] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Organism:nk] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:genome accession:nk] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:contig accession:nk] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:protein accession:nk] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Calculation_1665186374017030:ok] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Protein Gene Locus  Left (copy)_1665186374324231:ok] / ([federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Calculation_1665186343124995:nk] / [federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Protein Signal (copy)_1665186344824837:nk]))))))))))</rows>
         <cols>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:query_start:qk]</cols>
       </table>
       <simple-id uuid='{85057BE7-23E0-4720-A6A8-CCA7C2E04E20}' />
@@ -2112,12 +1817,14 @@
           <color-one-way>
             <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Calculation_1665186343124995:nk]</field>
             <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Calculation_1665186344370180:nk]</field>
+            <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Calculation_1665186374017030:ok]</field>
             <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Class:nk]</field>
             <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Description:nk]</field>
             <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Family:nk]</field>
             <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Genus:nk]</field>
             <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Order:nk]</field>
             <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Organism:nk]</field>
+            <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Protein Gene Locus  Left (copy)_1665186374324231:ok]</field>
             <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Protein Signal (copy)_1665186344824837:nk]</field>
             <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:Species:nk]</field>
             <field>[federated.04raq4h0p8o7il1g9dy7m0a6x09f].[none:contig accession:nk]</field>
