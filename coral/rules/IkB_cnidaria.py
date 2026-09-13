@@ -14,11 +14,6 @@ permissive_ard_rule = Rules(
     & Pfam.matches(ANK_PF).times(4,9).betweenAA(60, 1800, all_matches=True).spansAA(130,280)
 )
 
-ikb_like_leader_rule = Rules(
-    # export bound RHD-containing dimers back out
-    Leader().is_NES()
-)
-
 kb_rule = Rules(
     # regulatory mechanism
     TFMotifs.has(
@@ -27,16 +22,6 @@ kb_rule = Rules(
 )
 
 ikb_like_rule = Rules(
-    # export bound RHD-containing dimers back out
-    Leader().is_NES()
-
-    # regulatory mechanism
-    & TFMotifs.has(
-        "GM.5.0.Rel",
-    ).between(-1500, 500)
-)
-
-canonical_ikb_rule = Rules(
     Leader().is_NES()
     & Pfam.matches(ANK_PF).times(4, 9)
     & Sequence.length_between(min_protein_length, IkB_hypothetical_length)
@@ -47,14 +32,15 @@ canonical_ikb_rule = Rules(
     # at least 30 to 70 amino acids to house the target IKK phosphorylation
     # serines and lysine acceptor residues for ubiquitin attachment. Also
     # leaving room at the end for PEST sequence, up to 50 AAs.
-
     & Pfam.matches(ANK_PF).betweenAA(60, IkB_hypothetical_length-50, all_matches=True)
 
-    # required IKK phosphorylation and then degradation by βTrCP
-    & Sequence.matches_regex(βTrCP_pattern).relativeToPfam("PF00023", -200, -10)
+    # Transcriptionally activated by NFkB in negative feedback loop
+    & TFMotifs.has(
+        "GM.5.0.Rel",
+    ).between(-1500, 500)
 )
 
-canonical_bcl3_rule = Rules(
+bcl3_like_rule = Rules(
     Leader().is_NLS()
     & Pfam.matches(ANK_PF).times(4, 9)
     & Sequence.length_between(min_protein_length, Bcl3_hypothetical_length)
@@ -65,9 +51,10 @@ canonical_bcl3_rule = Rules(
     # contains its basic Nuclear Localization Signal (NLS) and
     # proline/serine-rich regulation sites. Conservating setting start of ANK
     # at 80. Also leaving room at the end to allow for a TAD.
-
     & Pfam.matches(ANK_PF).betweenAA(80, Bcl3_hypothetical_length-150, all_matches=True)
 
-    # Does not have a DSG..S site
-    & ~Sequence.matches_regex(βTrCP_pattern).relativeToPfam("PF00023", -200, -10)
+    # Transcriptionally activated by NFkB in negative feedback loop
+    & TFMotifs.has(
+        "GM.5.0.Rel",
+    ).between(-1500, 500)
 )
