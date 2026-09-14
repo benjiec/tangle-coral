@@ -19,6 +19,8 @@
 # of the existing maximum of the two directional pDockQ2 scores (8-Angstrom cutoff).
 # Preserve TSV rows/order and original columns, appending six paired score columns,
 # A_region_A_Cterm_pDockQ2_max, and zipfile/zipfile_sha256/scoring_signature.
+# For standalone output rows, list the NFkB accession in both candidate columns;
+# keep the input's blank IkB field for filename matching and scoring selection.
 # Leave inapplicable scores and rows without a current ZIP blank (zero means a
 # computed zero). Rebuild from current inputs, replacing output atomically only
 # after success. Cache hits require ZIP content hash and scoring signature to
@@ -150,6 +152,9 @@ def run(directory):
         if all(key):
             cache[key] = row
     output_rows = [dict(row) for row in pairs]
+    for row in output_rows:
+        if not row["IkB candidate"]:
+            row["IkB candidate"] = row["NFkB candidate"]
     for path, index, config in jobs:
         digest = sha256_file(path)
         signature = hashlib.sha256(json.dumps(config, sort_keys=True).encode()).hexdigest()
