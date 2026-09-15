@@ -17,8 +17,11 @@
 # this does not establish scientific calibration for intramolecular interactions.
 # Require five models. Each output score is the maximum across all five models
 # of the existing maximum of the two directional pDockQ2 scores (8-Angstrom cutoff).
-# Preserve TSV rows/order and original columns, appending six paired score columns,
-# A_region_A_Cterm_pDockQ2_max, and zipfile/zipfile_sha256/scoring_signature.
+# Preserve TSV pair order and original columns, emitting six rows per paired fold
+# and one per standalone fold. Replace the seven score columns with pDockQ2 region
+# (the old column name without _pDockQ2_max) and pDockQ2 score. Each row repeats
+# zipfile/zipfile_sha256/scoring_signature. Missing ZIPs have blank scores in their
+# applicable region rows. Read both legacy wide caches and new tall caches.
 # For standalone output rows, list the NFkB accession in both candidate columns;
 # keep the input's blank IkB field for filename matching and scoring selection.
 # Leave inapplicable scores and rows without a current ZIP blank (zero means a
@@ -144,13 +147,24 @@ def run(directory):
             raise ValueError(f"multiple ZIPs match TSV row {index + 2}")
         matched.add(index)
         jobs.append((path, index, configuration(pairs[index], lengths)))
-    output_columns = columns + SCORE_COLUMNS + META_COLUMNS
-    cached_columns, cached_rows = read_cache(OUTPUT, output_columns)
+    output_columns = columns + ["pDockQ2 region", "pDockQ2 score"] + META_COLUMNS
+    cached_columns, cached_rows = read_cache(OUTPUT, columns + META_COLUMNS)
+    tall_cache = cached_columns is not None and "pDockQ2 region" in cached_columns
+    if cached_columns is not None:
+        required = ["pDockQ2 region", "pDockQ2 score"] if tall_cache else SCORE_COLUMNS
+        if not set(required) <= set(cached_columns):
+            raise ValueError("cache TSV lacks expected score columns")
     cache = {}
     for row in cached_rows:
         key = (row["zipfile_sha256"], row["scoring_signature"])
         if all(key):
-            cache[key] = row
+            if tall_cache:
+                column = row["pDockQ2 region"] + "_pDockQ2_max"
+                if column not in SCORE_COLUMNS:
+                    raise ValueError(f"unknown cached region: {row['pDockQ2 region']}")
+                cache.setdefault(key, {})[column] = row["pDockQ2 score"]
+            else:
+                cache[key] = row
     output_rows = [dict(row) for row in pairs]
     for row in output_rows:
         if not row["IkB candidate"]:
@@ -174,7 +188,15 @@ def run(directory):
             scores = aggregate(score_zip(path, **options), paired)
         output_rows[index].update(scores, zipfile=path.name, zipfile_sha256=digest,
                                   scoring_signature=signature)
-    write_cache(OUTPUT, output_columns, output_rows)
+    tall_rows = []
+    for original, row in zip(pairs, output_rows):
+        expected = PAIRED_COLUMNS if original["IkB candidate"] else [SINGLE_COLUMN]
+        metadata = {column: row.get(column, "") for column in columns + META_COLUMNS}
+        for column in expected:
+            tall_rows.append({**metadata,
+                              "pDockQ2 region": column.removesuffix("_pDockQ2_max"),
+                              "pDockQ2 score": row.get(column, "")})
+    write_cache(OUTPUT, output_columns, tall_rows)
     print(f"Wrote {OUTPUT}: {len(jobs)} folds, {len(pairs) - len(jobs)} rows without ZIPs")
 
 
