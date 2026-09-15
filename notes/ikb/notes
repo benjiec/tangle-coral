@@ -91,9 +91,10 @@ python3 cn_nfkb_and_ikb_score.py
 
 # Build a tree and save groups to cn_ikb_groups.txt
 cp cn_ikb.deeploc.faa x.faa
-docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/x.faa -out /app/x.msa\n
+# remove XP_065056061.1 from x.faa
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/x.faa -out /app/x.msa
 ~/iqtree-3.1.3-macOS/bin/iqtree3 -s x.msa -B 1000 --alrt 1000
-
+mv x.msa.contree cn_ikb_tree.contree
 
 
 
