@@ -40,14 +40,6 @@ sieve-py ../sieve/scripts/pfam-find-matches.py PF16179 \
 # Running MSA
 docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/x.faa -out /app/x.msa
 
-# Fixing XP_073232074.1
-sieve-py ../sieve/scripts/protein-exons.py XP_073232074.1
-
-# Fixing XP_020612557.1
-sieve-py ../sieve/scripts/protein-exons.py XP_020612557.1
-
-# See fixes in fixed.faa, add these to cn_PF00554.aa
-
 # Building HMM profiles
 
 hmmbuild p105-like_cnidaria.hmm p105-like_cnidaria.msa
