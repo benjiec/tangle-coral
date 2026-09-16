@@ -107,11 +107,38 @@ docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/x.faa -o
 mv x.msa.contree cn_ikb_tree.contree
 
 
+# Building profiles
 
-docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/x.faa -out /app/x.msa
+# Note that cn_ikb.deeploc.faa should have truncated sequences where that's appropriate
 
-PYTHONPATH=../coral sieve-py ../sieve/scripts/hmmsearch-threshold.py \
-  --hmm p105-like_cnidaria.hmm \
-  --positive-fasta p105-like_cnidaria.faa \
-  --all-fasta cn_PF00554.faa \
-  --output p105-like_cnidaria_thresholds.tsv
+tangle-py ~/git/tangle/tangle/scripts/fasta-emit.py cn_ikb.deeploc.faa group1 > IkB-like-1_cnidaria.faa
+tangle-py ~/git/tangle/tangle/scripts/fasta-emit.py cn_ikb.deeploc.faa group2 > IkB-like-2_cnidaria.faa
+tangle-py ~/git/tangle/tangle/scripts/fasta-emit.py cn_ikb.deeploc.faa group4 > IkBa-like_cnidaria.faa
+
+cat IkB-like-1_cnidaria.faa IkB-like-2_cnidaria.faa IkBa-like_cnidaria.faa > cn_ikb_all.faa
+
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/IkB-like-1_cnidaria.faa -out /app/IkB-like-1_cnidaria.msa
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/IkB-like-2_cnidaria.faa -out /app/IkB-like-2_cnidaria.msa
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/IkBa-like_cnidaria.faa -out /app/IkBa-like_cnidaria.msa
+
+hmmbuild IkB-like-1_cnidaria.hmm IkB-like-1_cnidaria.msa
+hmmbuild IkB-like-2_cnidaria.hmm IkB-like-2_cnidaria.msa
+hmmbuild IkBa-like_cnidaria.hmm IkBa-like_cnidaria.msa
+
+sieve-py ~/git/tangle/sieve/scripts/hmmsearch-threshold.py \
+  --hmm IkBa-like_cnidaria.hmm \
+  --positive-fasta IkBa-like_cnidaria.faa \
+  --all-fasta cn_ikb_all.faa \
+  --output x_ikba
+
+sieve-py ~/git/tangle/sieve/scripts/hmmsearch-threshold.py \
+  --hmm IkB-like-1_cnidaria.hmm \
+  --positive-fasta IkB-like-1_cnidaria.faa \
+  --all-fasta cn_ikb_all.faa \
+  --output x_ikb-1
+
+sieve-py ~/git/tangle/sieve/scripts/hmmsearch-threshold.py \
+  --hmm IkB-like-2_cnidaria.hmm \
+  --positive-fasta IkB-like-2_cnidaria.faa \
+  --all-fasta cn_ikb_all.faa \
+  --output x_ikb-2
