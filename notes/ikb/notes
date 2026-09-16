@@ -97,6 +97,16 @@ docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/x.faa -o
 mv x.msa.contree cn_ikb_tree.contree
 
 
+# Build a tree of ARD region
+# cat cn_ikb.deeploc.faa and p105-like faa together, but now use non-truncated
+# sequences rather than those in cn_truncations.faa, this creates ard_containing.faa
+
+../sieve/scripts/pfam-extract-region.py ard_containing.faa protein_pfam.tsv PF12796 1 5 x.faa
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/x.faa -out /app/x.msa
+~/iqtree-3.1.3-macOS/bin/iqtree3 -s x.msa -B 1000 --alrt 1000
+mv x.msa.contree cn_ikb_tree.contree
+
+
 
 docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/x.faa -out /app/x.msa
 
