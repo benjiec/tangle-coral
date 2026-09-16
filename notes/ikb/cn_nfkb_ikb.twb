@@ -22,7 +22,7 @@
       <connection class='federated'>
         <named-connections>
           <named-connection caption='cn_nfkb_and_ikb_loci' name='textscan.07qbvch1jk0ng818xdqab07fj2sr'>
-            <connection class='textscan' directory='/Users/benjie/git/tangle/play' filename='cn_nfkb_and_ikb_loci.tsv' password='' server='' />
+            <connection class='textscan' directory='/Users/benjie/git/tangle/coral/notes/ikb' filename='cn_nfkb_and_ikb_loci.tsv' password='' server='' />
           </named-connection>
           <named-connection caption='Pfam-A.clans' name='textscan.0owofop0t19w811ejtos20bdk3r6'>
             <connection class='textscan' directory='/Users/benjie/git/tangle/play/assets' filename='Pfam-A.clans.tsv' password='' server='' />

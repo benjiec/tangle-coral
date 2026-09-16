@@ -25,7 +25,7 @@
       <connection class='federated'>
         <named-connections>
           <named-connection caption='ard_fishing' name='textscan.08ynmle1a71xrj1ejhq2o1k9k2qe'>
-            <connection class='textscan' directory='/Users/benjie/git/tangle/play' filename='ard_fishing.tsv' password='' server='' />
+            <connection class='textscan' directory='/Users/benjie/git/coral/notes/ikb' filename='ard_fishing.tsv' password='' server='' />
           </named-connection>
         </named-connections>
         <relation type='collection'>

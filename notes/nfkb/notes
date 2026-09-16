@@ -10,29 +10,12 @@ sieve-py ../sieve/scripts/ko-find-matches.py K17333 --taxon "Homo sapiens" -o hs
 sieve-py ../sieve/scripts/ko-find-matches.py K17334 --taxon "Homo sapiens" -o hs_K17334.faa
 sieve-py ../sieve/scripts/ko-find-matches.py K17335 --taxon "Homo sapiens" -o hs_K17335.faa
 
-PYTHONPATH=../coral ../sieve/scripts/compute-channel-backgrounds.py human.faa \
-  -c coral.channels.NFkB.channels \
-  -o hs_NFkB_channel_backgrounds.json
-
-PYTHONPATH=../coral ../sieve/scripts/compute-protein-channels.py hs_K02580.faa \
-  -c coral.channels.NFkB.channels \
-  -b hs_NFkB_channel_backgrounds.json \
-  -o channels.tsv
-
-docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/hs_K04735.faa /work/hs_K04735_cluster /tmp
-
+# find all Cnidaria PF00554 containing sequences
 sieve-py ../sieve/scripts/pfam-find-matches.py PF00554 \
   --taxon cnidaria \
   -o cn_PF00554.faa
 
-PYTHONPATH=../coral ../sieve/scripts/compute-protein-channels.py cn_PF00554.faa \
-  -c coral.channels.NFkB.channels \
-  -b hs_NFkB_channel_backgrounds.json \
-  -o channel_query.tsv
-
-docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/cn_PF00554.faa /work/cn_PF00554 /tmp -c 0.9
-echo "Cluster Repr\tCluster Member" | cat - cn_PF00554_cluster.tsv > channel_query_clusters.tsv
-
+# Generate PF00554 MSA
 sieve-py ../sieve/scripts/pfam-find-matches.py PF00554 \
   --taxon cnidaria \
   --match-only \
@@ -43,6 +26,7 @@ sieve-py ../sieve/scripts/pfam-find-matches.py PF00554 \
   --match-only \
   -o hs_PF00554_pf.faa
 
+# Generate PF16179 MSA
 sieve-py ../sieve/scripts/pfam-find-matches.py PF16179 \
   --taxon cnidaria \
   --match-only \
@@ -53,9 +37,20 @@ sieve-py ../sieve/scripts/pfam-find-matches.py PF16179 \
   --match-only \
   -o hs_PF16179_pf.faa
 
+# Running MSA
 docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/x.faa -out /app/x.msa
 
-hmmbuild NFkB1-like_cnidaria.hmm NFkB1-like_cnidaria.msa
+# Fixing XP_073232074.1
+sieve-py ../sieve/scripts/protein-exons.py XP_073232074.1
+
+# Fixing XP_020612557.1
+sieve-py ../sieve/scripts/protein-exons.py XP_020612557.1
+
+# See fixes in fixed.faa, add these to cn_PF00554.aa
+
+# Building HMM profiles
+
+hmmbuild p105-like_cnidaria.hmm p105-like_cnidaria.msa
 hmmbuild p50-like_cnidaria.hmm p50-like_cnidaria.msa
 
 PYTHONPATH=../coral sieve-py ../sieve/scripts/hmmsearch-threshold.py \
@@ -69,5 +64,3 @@ PYTHONPATH=../coral sieve-py ../sieve/scripts/hmmsearch-threshold.py \
   --positive-fasta p50-like_cnidaria.faa \
   --all-fasta cn_PF00554.faa \
   --output p50-like_cnidaria_thresholds.tsv
-
-
