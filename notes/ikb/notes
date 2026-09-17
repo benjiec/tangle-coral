@@ -225,6 +225,6 @@ tangle-py ~/git/tangle/tangle/scripts/filter-proteins.py \
   detected_new/*
 
 cat detected_new/GC*/proteins.tsv > needle_protein_fragments.tsv
-cat detected_new/GC*/proteins.faa > needle_protein_fragments.faa
+cat detected_new/GC*/proteins.faa > needle_proteins.faa
 # then remove duplicated headers from new_protein_fragments.tsv
 
