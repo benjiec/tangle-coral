@@ -228,3 +228,16 @@ cat detected_new/GC*/proteins.tsv > needle_protein_fragments.tsv
 cat detected_new/GC*/proteins.faa > needle_proteins.faa
 # then remove duplicated headers from new_protein_fragments.tsv
 
+# After putting together a needle_curated.faa
+
+heap-py ~/git/tangle/heap/scripts/hmmscan.py \
+  --query-database-name _ \
+  --target-database-name _ \
+  nfkb_ikb.hmm needle_curated.faa needle_curated_hmm.tsv
+
+heap-py ~/git/tangle/heap/scripts/ko-assign.py \
+  --threshold-file nfkb_ikb_thresholds_low.csv \
+  needle_curated_hmm_assigned.tsv needle_curated_hmm.tsv
+mv needle_curated_hmm_assigned.tsv needle_curated_hmm.tsv
+
+
