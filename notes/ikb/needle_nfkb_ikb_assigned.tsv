@@ -376,3 +376,4 @@ sequence	hmm	20260917_cb95902e	NC_133210.1_p105-like_cnidaria_040c9026	GCF_95829
 sequence	hmm	20260917_cb95902e	NC_133210.1_p105-like_cnidaria_e2e900c4	GCF_958299795.1	protein	IkB-like-1_cnidaria	sieve_nfkb_ikb	protein		1	195	218	412	1.3e-126	822.8	400.0	evalue-rank	1.0
 sequence	hmm	20260917_cb95902e	NC_133210.1_p105-like_cnidaria_e2e900c4	GCF_958299795.1	protein	IkB-like-2_cnidaria	sieve_nfkb_ikb	protein		2	191	153	347	1.7e-73	472.0	300.0	evalue-rank	2.0
 sequence	hmm	20260917_cb95902e	NC_133210.1_p105-like_cnidaria_e2e900c4	GCF_958299795.1	protein	IkBa-like_cnidaria	sieve_nfkb_ikb	protein		1	192	137	342	2.6e-66	424.2	350.0	evalue-rank	3.0
+sequence        hmm     20260917_177b32c2       NW_018149324.1_p105-like_cnidaria_989546e4      GCF_002042975.1 protein p105-like_cnidaria      sieve_nfkb_ikb  protein         1       918     1       910     0.0     1572.4                  
