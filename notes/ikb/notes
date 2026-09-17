@@ -142,3 +142,89 @@ sieve-py ~/git/tangle/sieve/scripts/hmmsearch-threshold.py \
   --positive-fasta IkB-like-2_cnidaria.faa \
   --all-fasta cn_ikb_all.faa \
   --output x_ikb-2
+
+
+# Detect proteins using new profiles
+
+cat needle_genome_list_1 | \
+  tangle-py ~/git/tangle/tangle/scripts/defaults.py -f -m ncbi_genome_fna - | \
+  xargs ~/git/tangle/venv-tangle/bin/python3 ~/git/tangle/tangle/scripts/pool-contigs.py needle_pooled_1.fna
+
+cat needle_genome_list_2 | \
+  tangle-py ~/git/tangle/tangle/scripts/defaults.py -f -m ncbi_genome_fna - | \
+  xargs ~/git/tangle/venv-tangle/bin/python3 ~/git/tangle/tangle/scripts/pool-contigs.py needle_pooled_2.fna
+
+cat needle_genome_list_3 | \
+  tangle-py ~/git/tangle/tangle/scripts/defaults.py -f -m ncbi_genome_fna - | \
+  xargs ~/git/tangle/venv-tangle/bin/python3 ~/git/tangle/tangle/scripts/pool-contigs.py needle_pooled_3.fna
+
+cat needle_genome_list_4 | \
+  tangle-py ~/git/tangle/tangle/scripts/defaults.py -f -m ncbi_genome_fna - | \
+  xargs ~/git/tangle/venv-tangle/bin/python3 ~/git/tangle/tangle/scripts/pool-contigs.py needle_pooled_4.fna
+
+# put p105-like, IkBa-like, IkB-like-1, and IkB-like-2 into a single HMM, plus
+# a low threshold file (since we are fishing)
+
+needle-py ~/git/tangle/needle/scripts/hmmsearch-genome.py nfkb_ikb.hmm needle_pooled_1.fna needle_search_output_1.tsv
+needle-py ~/git/tangle/needle/scripts/hmmsearch-genome.py nfkb_ikb.hmm needle_pooled_2.fna needle_search_output_2.tsv
+needle-py ~/git/tangle/needle/scripts/hmmsearch-genome.py nfkb_ikb.hmm needle_pooled_3.fna needle_search_output_3.tsv
+needle-py ~/git/tangle/needle/scripts/hmmsearch-genome.py nfkb_ikb.hmm needle_pooled_4.fna needle_search_output_4.tsv
+
+needle-py ~/git/tangle/needle/scripts/export-protein-results.py \
+  --query-database-name _ \
+  nfkb_ikb.hmm needle_pooled_1.fna needle_search_output_1.tsv \
+  needle_proteins_1.tsv needle_proteins_1.faa
+
+needle-py ~/git/tangle/needle/scripts/export-protein-results.py \
+  --query-database-name _ \
+  nfkb_ikb.hmm needle_pooled_2.fna needle_search_output_2.tsv \
+  needle_proteins_2.tsv needle_proteins_2.faa
+
+needle-py ~/git/tangle/needle/scripts/export-protein-results.py \
+  --query-database-name _ \
+  nfkb_ikb.hmm needle_pooled_3.fna needle_search_output_3.tsv \
+  needle_proteins_3.tsv needle_proteins_3.faa
+
+needle-py ~/git/tangle/needle/scripts/export-protein-results.py \
+  --query-database-name _ \
+  nfkb_ikb.hmm needle_pooled_4.fna needle_search_output_4.tsv \
+  needle_proteins_4.tsv needle_proteins_4.faa
+
+cat needle_proteins_*.tsv > needle_proteins.tsv
+cat needle_proteins_*.faa > needle_proteins.faa
+# then remove all duplicated headers form the .tsv file
+
+# Match to HMM profile and find those above a low threshold (since we are fishing)
+
+heap-py ~/git/tangle/heap/scripts/hmmscan.py \
+  --query-database-name _ \
+  --target-database-name sieve_nfkb_ikb \
+  nfkb_ikb.hmm needle_proteins.faa needle_nfkb_ikb.tsv
+
+heap-py ~/git/tangle/heap/scripts/ko-assign.py \
+  --threshold-file nfkb_ikb_thresholds_low.csv \
+  needle_nfkb_ikb_assigned.tsv needle_nfkb_ikb.tsv
+
+# Demux to individual genomes and filter down to those we want to keep
+
+# demux the assignment file
+tangle-py ~/git/tangle/tangle/scripts/demux-detected.py \
+  --set-batch \
+  --forget-original \
+  needle_nfkb_ikb_assigned.tsv
+
+tangle-py ~/git/tangle/tangle/scripts/demux-detected.py \
+  --forget-original \
+  --set-batch \
+  --pooled-target-fasta-suffix .faa \
+  --demuxed-parent-dir detected_new \
+  needle_proteins.tsv
+
+tangle-py ~/git/tangle/tangle/scripts/filter-proteins.py \
+  --filter-targets-with-queries-from needle_nfkb_ikb_assigned.tsv \
+  detected_new/*
+
+cat detected_new/GC*/proteins.tsv > needle_protein_fragments.tsv
+cat detected_new/GC*/proteins.faa > needle_protein_fragments.faa
+# then remove duplicated headers from new_protein_fragments.tsv
+
