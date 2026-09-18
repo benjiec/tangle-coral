@@ -247,6 +247,7 @@ mv needle_curated_hmm_assigned.tsv needle_curated_hmm.tsv
 
 # Generate HMM scores for all "hits"
 
+cat IkB*.hmm ../nfkb/p*.hmm > nfkb_ikb.hmm
 cat cn_ikb_all.faa ../nfkb/p50-like_cnidaria.faa ../nfkb/p105-like_cnidaria.faa needle_curated.faa > z.faa
 hmmsearch --domtblout x nfkb_ikb.hmm z.faa
 python3 ~/git/tangle/sieve/scripts/domtbl-tsv.py x > cn_ikb_hmm.tsv
