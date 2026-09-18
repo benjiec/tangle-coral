@@ -228,6 +228,7 @@ cat detected_new/GC*/proteins.tsv > needle_protein_fragments.tsv
 cat detected_new/GC*/proteins.faa > needle_proteins.faa
 # then remove duplicated headers from new_protein_fragments.tsv
 
+
 # After putting together a needle_curated.faa
 
 heap-py ~/git/tangle/heap/scripts/hmmscan.py \
@@ -241,3 +242,9 @@ heap-py ~/git/tangle/heap/scripts/ko-assign.py \
 mv needle_curated_hmm_assigned.tsv needle_curated_hmm.tsv
 
 
+# Generate HMM scores for all "hits"
+
+cat cn_ikb_all.faa ../nfkb/p50-like_cnidaria.faa ../nfkb/p105-like_cnidaria.faa needle_curated.faa > z.faa
+hmmsearch --domtblout x nfkb_ikb.hmm z.faa
+python3 ~/git/tangle/sieve/scripts/domtbl-tsv.py x > cn_ikb_hmm.tsv
+rm x z.faa
