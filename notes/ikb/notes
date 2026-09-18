@@ -117,6 +117,9 @@ tangle-py ~/git/tangle/tangle/scripts/fasta-emit.py cn_ikb.deeploc.faa group4 > 
 
 cat IkB-like-1_cnidaria.faa IkB-like-2_cnidaria.faa IkBa-like_cnidaria.faa > cn_ikb_all.faa
 
+# IMPORTANT - remove sequences that should not be used to build HMM profile,
+# e.g. very clearly truncated sequences
+
 docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/IkB-like-1_cnidaria.faa -out /app/IkB-like-1_cnidaria.msa
 docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/IkB-like-2_cnidaria.faa -out /app/IkB-like-2_cnidaria.msa
 docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/IkBa-like_cnidaria.faa -out /app/IkBa-like_cnidaria.msa
