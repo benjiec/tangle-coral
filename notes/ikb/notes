@@ -232,17 +232,25 @@ cat detected_new/GC*/proteins.faa > needle_proteins.faa
 # then remove duplicated headers from new_protein_fragments.tsv
 
 
-# After putting together a needle_curated.faa
+# Use the following to generate a report of which proteins matched well if you
+# don't have the assignment file anymore
 
 heap-py ~/git/tangle/heap/scripts/hmmscan.py \
   --query-database-name _ \
   --target-database-name _ \
-  nfkb_ikb.hmm needle_curated.faa needle_curated_hmm.tsv
+  nfkb_ikb.hmm new_proteins.faa new_hmm.tsv
 
 heap-py ~/git/tangle/heap/scripts/ko-assign.py \
   --threshold-file nfkb_ikb_thresholds_low.csv \
-  needle_curated_hmm_assigned.tsv needle_curated_hmm.tsv
-mv needle_curated_hmm_assigned.tsv needle_curated_hmm.tsv
+  new_hmm_assigned.tsv new_hmm.tsv
+
+
+# After putting together a needle_curated.faa, needle_curated_loci.tsv, and
+# needle_curated.tsv
+
+heap-py ~/git/tangle/heap/scripts/hmmscan-pfam.py \
+  --query-database-name Needle \
+  needle_curated.faa needle_curated_pfam.tsv
 
 
 # Generate HMM scores for all "hits"
@@ -256,7 +264,11 @@ rm x z.faa
 
 # Mapping transcript sequences to genomic CDS
 
-sieve-py ~/git/tangle/sieve/scripts/protein-exons.py XP_020604255.1 XP_020612557.1 XP_020614015.1 XP_020614060.1 --dna --fasta > loci_orbi.fna
+sieve-py ~/git/tangle/sieve/scripts/protein-exons.py --fasta --dna \
+  XP_020604255.1 \
+  XP_020612557.1 \
+  XP_020614015.1 \
+  XP_020614060.1 > loci_orbi.fna
 # manually adjust the p105 loci to remove duplicated exons
 
 sieve-py ~/git/tangle/sieve/scripts/protein-exons.py \
@@ -265,6 +277,27 @@ sieve-py ~/git/tangle/sieve/scripts/protein-exons.py \
   BLAZ01001464.1_IkB-like-1_cnidaria_4841c60e \
   BLAZ01001464.1_IkB-like-2_cnidaria_6fa67b39 \
   BLAZ01000634.1_p105-like_cnidaria_42ec6be3 > loci_aten.fna
+
+sieve-py ~/git/tangle/sieve/scripts/protein-exons.py \
+  --fragments-tsv needle_protein_fragments.tsv --fasta --dna \
+  OZ210541.1_p105-like_cnidaria_cc72bb95 \
+  OZ210546.1_IkBa-like_cnidaria_d20d51b0 \
+  OZ210550.1_IkB-like-1_cnidaria_f1fc1ca4 \
+  OZ210550.1_IkB-like-2_cnidaria_27849994 > loci_ocul.fna
+
+sieve-py ~/git/tangle/sieve/scripts/protein-exons.py \
+  --fragments-tsv needle_protein_fragments.tsv --fasta --dna \
+  OZ024890.1_p105-like_cnidaria_78e5b665 \
+  OZ024892.1_IkBa-like_cnidaria_d48b2e17 \
+  OZ024895.1_IkB-like-1_cnidaria_8b187540 \
+  OZ024895.1_IkB-like-2_cnidaria_fe93e4fc > loci_side.fna
+
+sieve-py ~/git/tangle/sieve/scripts/protein-exons.py \
+  --fragments-tsv needle_protein_fragments.tsv --fasta --dna \
+  CDRNSK010000150.1_p105-like_cnidaria_c3a4b3b9 \
+  CDRNSK010000247.1_IkBa-like_cnidaria_2f11850d \
+  CDRNSK010000283.1_IkB-like-1_cnidaria_15b94c4d \
+  CDRNSK010000283.1_IkB-like-2_cnidaria_d33dc3b5 > loci_pseu.fna
 
 python3 ~/git/tangle/pile/scripts/extract-transcript-dna.py \
   /Volumes/Extreme_Pro/rnaseq/ocul_transcripts.fna \
@@ -291,9 +324,8 @@ python3 ~/git/tangle/pile/scripts/extract-transcript-dna.py \
   /Volumes/Extreme_Pro/rnaseq/pseu_detected.tsv \
   rnaseq_pseu_transcripts.csv > rnaseq_pseu_cds.fna
 
-sieve-py ~/git/tangle/sieve/scripts/align-transcripts-to-loci.py loci_orbi.fna rnaseq_orbi_cds.fna loci_mapping_orbi.tsv
-sieve-py ~/git/tangle/sieve/scripts/align-transcripts-to-loci.py loci_aten.fna rnaseq_aten_cds.fna loci_mapping_aten.tsv
-sieve-py ~/git/tangle/sieve/scripts/align-transcripts-to-loci.py loci_aten.fna rnaseq_ocul_cds.fna loci_mapping_ocul.tsv
-sieve-py ~/git/tangle/sieve/scripts/align-transcripts-to-loci.py loci_orbi.fna rnaseq_ocul_cds.fna loci_mapping_ocul.tsv
-sieve-py ~/git/tangle/sieve/scripts/align-transcripts-to-loci.py loci_orbi.fna rnaseq_pseu_cds.fna loci_mapping_pseu.tsv
-sieve-py ~/git/tangle/sieve/scripts/align-transcripts-to-loci.py loci_orbi.fna rnaseq_side_cds.fna loci_mapping_side.tsv
+sieve-py ~/git/tangle/sieve/scripts/align-transcripts-to-loci.py loci_orbi.fna rnaseq_orbi_cds.fna rnaseq_loci_mapping.tsv
+sieve-py ~/git/tangle/sieve/scripts/align-transcripts-to-loci.py loci_aten.fna rnaseq_aten_cds.fna rnaseq_loci_mapping.tsv
+sieve-py ~/git/tangle/sieve/scripts/align-transcripts-to-loci.py loci_ocul.fna rnaseq_ocul_cds.fna rnaseq_loci_mapping.tsv
+sieve-py ~/git/tangle/sieve/scripts/align-transcripts-to-loci.py loci_pseu.fna rnaseq_pseu_cds.fna rnaseq_loci_mapping.tsv
+sieve-py ~/git/tangle/sieve/scripts/align-transcripts-to-loci.py loci_side.fna rnaseq_side_cds.fna rnaseq_loci_mapping.tsv
