@@ -291,4 +291,9 @@ python3 ~/git/tangle/pile/scripts/extract-transcript-dna.py \
   /Volumes/Extreme_Pro/rnaseq/pseu_detected.tsv \
   rnaseq_pseu_transcripts.csv > rnaseq_pseu_cds.fna
 
-
+sieve-py ~/git/tangle/sieve/scripts/align-transcripts-to-loci.py loci_orbi.fna rnaseq_orbi_cds.fna loci_mapping_orbi.tsv
+sieve-py ~/git/tangle/sieve/scripts/align-transcripts-to-loci.py loci_aten.fna rnaseq_aten_cds.fna loci_mapping_aten.tsv
+sieve-py ~/git/tangle/sieve/scripts/align-transcripts-to-loci.py loci_aten.fna rnaseq_ocul_cds.fna loci_mapping_ocul.tsv
+sieve-py ~/git/tangle/sieve/scripts/align-transcripts-to-loci.py loci_orbi.fna rnaseq_ocul_cds.fna loci_mapping_ocul.tsv
+sieve-py ~/git/tangle/sieve/scripts/align-transcripts-to-loci.py loci_orbi.fna rnaseq_pseu_cds.fna loci_mapping_pseu.tsv
+sieve-py ~/git/tangle/sieve/scripts/align-transcripts-to-loci.py loci_orbi.fna rnaseq_side_cds.fna loci_mapping_side.tsv
