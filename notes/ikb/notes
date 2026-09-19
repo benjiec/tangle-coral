@@ -167,6 +167,8 @@ cat needle_genome_list_4 | \
 
 # put p105-like, IkBa-like, IkB-like-1, and IkB-like-2 into a single HMM, plus
 # a low threshold file (since we are fishing)
+cat IkB*.hmm ../nfkb/p*.hmm > nfkb_ikb.hmm
+hmmpress nfkb_ikb.hmm
 
 needle-py ~/git/tangle/needle/scripts/hmmsearch-genome.py nfkb_ikb.hmm needle_pooled_1.fna needle_search_output_1.tsv
 needle-py ~/git/tangle/needle/scripts/hmmsearch-genome.py nfkb_ikb.hmm needle_pooled_2.fna needle_search_output_2.tsv
@@ -281,6 +283,7 @@ sieve-py ~/git/tangle/sieve/scripts/protein-exons.py \
 sieve-py ~/git/tangle/sieve/scripts/protein-exons.py \
   --fragments-tsv needle_protein_fragments.tsv --fasta --dna \
   OZ210541.1_p105-like_cnidaria_cc72bb95 \
+  OZ210548.1_p50-like_cnidaria_4a4f5cc6 \
   OZ210546.1_IkBa-like_cnidaria_d20d51b0 \
   OZ210550.1_IkB-like-1_cnidaria_f1fc1ca4 \
   OZ210550.1_IkB-like-2_cnidaria_27849994 > loci_ocul.fna
@@ -324,6 +327,7 @@ python3 ~/git/tangle/pile/scripts/extract-transcript-dna.py \
   /Volumes/Extreme_Pro/rnaseq/pseu_detected.tsv \
   rnaseq_pseu_transcripts.csv > rnaseq_pseu_cds.fna
 
+rm rnaseq_loci_mapping.tsv 
 sieve-py ~/git/tangle/sieve/scripts/align-transcripts-to-loci.py loci_orbi.fna rnaseq_orbi_cds.fna rnaseq_loci_mapping.tsv
 sieve-py ~/git/tangle/sieve/scripts/align-transcripts-to-loci.py loci_aten.fna rnaseq_aten_cds.fna rnaseq_loci_mapping.tsv
 sieve-py ~/git/tangle/sieve/scripts/align-transcripts-to-loci.py loci_ocul.fna rnaseq_ocul_cds.fna rnaseq_loci_mapping.tsv
