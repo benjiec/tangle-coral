@@ -256,11 +256,39 @@ rm x z.faa
 
 # Mapping transcript sequences to genomic CDS
 
-sieve-py ~/git/tangle/sieve/scripts/protein-exons.py XP_020614015.1 --dna > locus_ikb2_orbi.fna
-sieve-py ~/git/tangle/sieve/scripts/protein-exons.py XP_020604255.1 --dna > z
-sieve-py ~/git/tangle/sieve/scripts/protein-exons.py XP_020614060.1 --dna > z
-sieve-py ~/git/tangle/sieve/scripts/protein-exons.py XP_020612557.1 --dna > z
+sieve-py ~/git/tangle/sieve/scripts/protein-exons.py XP_020604255.1 XP_020612557.1 XP_020614015.1 XP_020614060.1 --dna --fasta > loci_orbi.fna
+# manually adjust the p105 loci to remove duplicated exons
 
-python3 ~/git/tangle/pile/scripts/extract-protein-dna.py orbi_transcripts.fna.gz orbi_detected.tsv orbicella_host_TRINITY_DN213606_c2_g3_i2.p1 3 288 > x.fna
-docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/x.fna -out /app/x.msa
+sieve-py ~/git/tangle/sieve/scripts/protein-exons.py \
+  --fragments-tsv needle_protein_fragments.tsv --fasta --dna \
+  BLAZ01000379.1_IkBa-like_cnidaria_d4087f07 \
+  BLAZ01001464.1_IkB-like-1_cnidaria_4841c60e \
+  BLAZ01001464.1_IkB-like-2_cnidaria_6fa67b39 \
+  BLAZ01000634.1_p105-like_cnidaria_42ec6be3 > loci_aten.fna
+
+python3 ~/git/tangle/pile/scripts/extract-transcript-dna.py \
+  /Volumes/Extreme_Pro/rnaseq/ocul_transcripts.fna \
+  /Volumes/Extreme_Pro/rnaseq/ocul_detected.tsv \
+  rnaseq_ocul_transcripts.csv > rnaseq_ocul_cds.fna
+
+python3 ~/git/tangle/pile/scripts/extract-transcript-dna.py \
+  /Volumes/Extreme_Pro/rnaseq/aten_transcripts.fna.gz \
+  /Volumes/Extreme_Pro/rnaseq/aten_detected.tsv \
+  rnaseq_aten_transcripts.csv > rnaseq_aten_cds.fna
+
+python3 ~/git/tangle/pile/scripts/extract-transcript-dna.py \
+  /Volumes/Extreme_Pro/rnaseq/side_transcripts.fna.gz \
+  /Volumes/Extreme_Pro/rnaseq/side_detected.tsv \
+  rnaseq_side_transcripts.csv > rnaseq_side_cds.fna
+
+python3 ~/git/tangle/pile/scripts/extract-transcript-dna.py \
+  /Volumes/Extreme_Pro/rnaseq/orbi_transcripts.fna.gz \
+  /Volumes/Extreme_Pro/rnaseq/orbi_detected.tsv \
+  rnaseq_orbi_transcripts.csv > rnaseq_orbi_cds.fna
+
+python3 ~/git/tangle/pile/scripts/extract-transcript-dna.py \
+  /Volumes/Extreme_Pro/rnaseq/pseu_transcripts.fna.gz \
+  /Volumes/Extreme_Pro/rnaseq/pseu_detected.tsv \
+  rnaseq_pseu_transcripts.csv > rnaseq_pseu_cds.fna
+
 
