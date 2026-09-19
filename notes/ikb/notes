@@ -252,3 +252,15 @@ cat cn_ikb_all.faa ../nfkb/p50-like_cnidaria.faa ../nfkb/p105-like_cnidaria.faa 
 hmmsearch --domtblout x nfkb_ikb.hmm z.faa
 python3 ~/git/tangle/sieve/scripts/domtbl-tsv.py x > cn_ikb_hmm.tsv
 rm x z.faa
+
+
+# Mapping transcript sequences to genomic CDS
+
+sieve-py ~/git/tangle/sieve/scripts/protein-exons.py XP_020614015.1 --dna > locus_ikb2_orbi.fna
+sieve-py ~/git/tangle/sieve/scripts/protein-exons.py XP_020604255.1 --dna > z
+sieve-py ~/git/tangle/sieve/scripts/protein-exons.py XP_020614060.1 --dna > z
+sieve-py ~/git/tangle/sieve/scripts/protein-exons.py XP_020612557.1 --dna > z
+
+python3 ~/git/tangle/pile/scripts/extract-protein-dna.py orbi_transcripts.fna.gz orbi_detected.tsv orbicella_host_TRINITY_DN213606_c2_g3_i2.p1 3 288 > x.fna
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/x.fna -out /app/x.msa
+
