@@ -264,6 +264,21 @@ python3 ~/git/tangle/sieve/scripts/domtbl-tsv.py x > cn_ikb_hmm.tsv
 rm x z.faa
 
 
+# RNAseq
+
+# Use hmmsearch or hmmscan to search RNAseq transcript protein FASTAs against nfkb_ikb.hmm
+# Convert domtblout format to detected TSV format using sieve/scripts/domtbl-tsv.py
+# Save top hits to
+rnaseq_protein_hmm_hits.tsv
+
+# For each top hits, save the transcript id and ali from, ali to into CSV
+# format that pile/scripts/extract-transcript-dna.py can use
+rnaseq_ocul_transcripts.csv
+rnaseq_aten_transcripts.csv
+rnaseq_orbi_transcripts.csv
+rnaseq_pseu_transcripts.csv
+rnaseq_side_transcripts.csv
+
 # Mapping transcript sequences to genomic CDS
 
 sieve-py ~/git/tangle/sieve/scripts/protein-exons.py --fasta --dna \
@@ -326,6 +341,9 @@ python3 ~/git/tangle/pile/scripts/extract-transcript-dna.py \
   /Volumes/Extreme_Pro/rnaseq/pseu_transcripts.fna.gz \
   /Volumes/Extreme_Pro/rnaseq/pseu_detected.tsv \
   rnaseq_pseu_transcripts.csv > rnaseq_pseu_cds.fna
+
+# edit the loci*_cds.fna files to add _IkBa-like, etc suffixes ot make them
+# easier to use in Tableau
 
 rm rnaseq_loci_mapping.tsv 
 sieve-py ~/git/tangle/sieve/scripts/align-transcripts-to-loci.py loci_orbi.fna rnaseq_orbi_cds.fna rnaseq_loci_mapping.tsv
