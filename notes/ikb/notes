@@ -263,36 +263,22 @@ hmmsearch --domtblout x nfkb_ikb.hmm z.faa
 python3 ~/git/tangle/sieve/scripts/domtbl-tsv.py x > cn_ikb_hmm.tsv
 rm x z.faa
 
-
-# RNAseq
-
-# Use hmmsearch or hmmscan to search RNAseq transcript protein FASTAs against nfkb_ikb.hmm
-# Convert domtblout format to detected TSV format using sieve/scripts/domtbl-tsv.py
-# Save top hits to
-rnaseq_protein_hmm_hits.tsv
-
-# For each top hits, save the transcript id and ali from, ali to into CSV
-# format that pile/scripts/extract-transcript-dna.py can use
-rnaseq_ocul_transcripts.csv
-rnaseq_aten_transcripts.csv
-rnaseq_orbi_transcripts.csv
-rnaseq_pseu_transcripts.csv
-rnaseq_side_transcripts.csv
-
 # Mapping transcript sequences to genomic CDS
 
 sieve-py ~/git/tangle/sieve/scripts/protein-exons.py --fasta --dna \
   XP_020604255.1 \
-  XP_020612557.1 \
   XP_020614015.1 \
   XP_020614060.1 > loci_orbi.fna
-# manually adjust the p105 loci to remove duplicated exons
 
 sieve-py ~/git/tangle/sieve/scripts/protein-exons.py \
   --fragments-tsv needle_protein_fragments.tsv --fasta --dna \
-  BLAZ01000379.1_IkBa-like_cnidaria_d4087f07 \
-  BLAZ01001464.1_IkB-like-1_cnidaria_4841c60e \
-  BLAZ01001464.1_IkB-like-2_cnidaria_6fa67b39 \
+  NW_018149324.1_p105-like_cnidaria_1c4b0771 >> loci_orbi.fna
+
+sieve-py ~/git/tangle/sieve/scripts/protein-exons.py \
+  --fragments-tsv needle_protein_fragments.tsv --fasta --dna \
+  BLAZ01000379.1_IkBa-like_cnidaria_1b49cc6e \
+  BLAZ01001464.1_IkB-like-2_cnidaria_5d8c002b \
+  BLAZ01001464.1_IkB-like-1_cnidaria_06ab4a1a \
   BLAZ01000634.1_p105-like_cnidaria_42ec6be3 > loci_aten.fna
 
 sieve-py ~/git/tangle/sieve/scripts/protein-exons.py \
@@ -316,6 +302,22 @@ sieve-py ~/git/tangle/sieve/scripts/protein-exons.py \
   CDRNSK010000247.1_IkBa-like_cnidaria_2f11850d \
   CDRNSK010000283.1_IkB-like-1_cnidaria_15b94c4d \
   CDRNSK010000283.1_IkB-like-2_cnidaria_d33dc3b5 > loci_pseu.fna
+
+
+# RNAseq
+
+# Use hmmsearch or hmmscan to search RNAseq transcript protein FASTAs against nfkb_ikb.hmm
+# Convert domtblout format to detected TSV format using sieve/scripts/domtbl-tsv.py
+# Save top hits to
+rnaseq_protein_hmm_hits.tsv
+
+# For each top hits, save the transcript id and ali from, ali to into CSV
+# format that pile/scripts/extract-transcript-dna.py can use
+rnaseq_ocul_transcripts.csv
+rnaseq_aten_transcripts.csv
+rnaseq_orbi_transcripts.csv
+rnaseq_pseu_transcripts.csv
+rnaseq_side_transcripts.csv
 
 python3 ~/git/tangle/pile/scripts/extract-transcript-dna.py \
   /Volumes/Extreme_Pro/rnaseq/ocul_transcripts.fna \
