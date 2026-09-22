@@ -1,33 +1,66 @@
-target name	accession	tlen	query name	accession	qlen	dom score	hmm from	hmm to	ali from	ali to
-IkB-like-1_cnidaria	-	448	Oarb_148322_c2_g1_i6.p1	-	258	482.8	190	446	1	255
-IkB-like-1_cnidaria	-	448	Oarb_148322_c2_g1_i6.p2	-	164	103	1	166	1	160
-IkB-like-1_cnidaria	-	448	a_tenuis_TRINITY_DN25922_c0_g1_i1.p1	-	179	343.2	168	347	3	175
-IkB-like-1_cnidaria	-	448	siderastrea_host_TRINITY_DN444826_c1_g4_i2.p1	-	348	503.2	1	366	1	348
-IkB-like-1_cnidaria	-	448	orbicella_host_TRINITY_DN213606_c2_g3_i2.p1	-	291	515.5	144	446	3	288
-IkB-like-1_cnidaria	-	448	pseudodiploria_host_TRINITY_DN178043_c0_g1_i1.p1	-	247	466.6	190	415	1	226
-IkB-like-2_cnidaria	-	385	Oarb_104540_c2_g2_i4.p1	-	190	370.5	196	385	1	189
-IkB-like-2_cnidaria	-	385	siderastrea_host_TRINITY_DN442751_c0_g3_i5.p1	-	269	492.6	126	371	3	247
-IkB-like-2_cnidaria	-	385	orbicella_host_TRINITY_DN213606_c2_g3_i2.p1	-	291	263.1	144	344	59	253
-IkB-like-2_cnidaria	-	385	pseudodiploria_host_TRINITY_DN189231_c0_g2_i1.p1	-	157	285.3	230	384	1	155
-IkB-like-2_cnidaria	-	385	pseudodiploria_host_TRINITY_DN187230_c1_g2_i2.p1	-	109	218	128	235	2	109
-IkBa-like_cnidaria	-	376	Oarb_139262_c0_g1_i2.p1	-	292	465.7	1	279	1	277
-IkBa-like_cnidaria	-	376	a_tenuis_TRINITY_DN335_c0_g1_i28.p1	-	195	355.2	186	374	1	189
-IkBa-like_cnidaria	-	376	a_tenuis_TRINITY_DN335_c0_g1_i14.p3	-	114	196.9	145	250	1	106
-IkBa-like_cnidaria	-	376	a_tenuis_TRINITY_DN335_c0_g1_i19.p1	-	165	223.6	249	374	34	159
-IkBa-like_cnidaria	-	376	a_tenuis_TRINITY_DN335_c0_g1_i2.p1	-	260	388.6	1	250	1	252
-IkBa-like_cnidaria	-	376	siderastrea_host_TRINITY_DN451935_c2_g2_i5.p1	-	370	653.5	2	369	2	367
-IkBa-like_cnidaria	-	376	orbicella_host_TRINITY_DN221067_c44_g7_i2.p1	-	377	654.8	2	374	2	371
-IkBa-like_cnidaria	-	376	pseudodiploria_host_TRINITY_DN190911_c0_g2_i5.p1	-	206	395.4	171	373	1	203
-IkBa-like_cnidaria	-	376	pseudodiploria_host_TRINITY_DN190911_c0_g2_i11.p2	-	133	158.3	2	136	2	132
-p105-like_cnidaria	-	910	Oarb_154257_c8_g1_i3.p1	-	917	1754.9	1	910	1	916
-p105-like_cnidaria	-	910	a_tenuis_TRINITY_DN17808_c1_g1_i1.p1	-	391	819.8	51	440	1	389
-p105-like_cnidaria	-	910	a_tenuis_TRINITY_DN42964_c0_g1_i1.p1	-	164	321.2	464	624	4	164
-p105-like_cnidaria	-	910	siderastrea_host_TRINITY_DN453364_c1_g2_i2.p1	-	507	969.9	299	798	1	507
-p105-like_cnidaria	-	910	siderastrea_host_TRINITY_DN450483_c1_g1_i4.p1	-	301	642.4	1	302	1	301
-p105-like_cnidaria	-	910	pseudodiploria_host_TRINITY_DN200187_c2_g4_i3.p1	-	653	1312.2	22	675	1	653
-p105-like_cnidaria	-	910	pseudodiploria_host_TRINITY_DN202411_c1_g2_i2.p2	-	297	488.9	622	910	1	296
-p105-like_cnidaria	-	910	orbicella_host_TRINITY_DN220613_c2_g1_i3.p1	-	265	535.4	1	262	1	261
-p105-like_cnidaria	-	910	orbicella_host_TRINITY_DN206725_c0_g2_i7.p1	-	291	519	426	704	13	291
-p105-like_cnidaria	-	910	orbicella_host_TRINITY_DN189929_c2_g1_i5.p1	-	134	301.2	233	366	1	134
-p105-like_cnidaria	-	910	Oarb_96189_c0_g1_i1.p1	-	229	464.9	480	708	1	229
-p105-like_cnidaria	-	910	Oarb_129275_c3_g2_i1.p1	-	247	430.5	91	344	1	247
+target name	accession	tlen	query name	accession	qlen	seq e-value	seq score	seq bias	dom #	dom total	dom c-Evalue	dom i-Evalue	dom score	dom bias	hmm from	hmm to	ali from	ali to	env from	env to	acc	description
+p105-like_cnidaria	-	910	orbicella_host_TRINITY_DN189929_c2_g1_i5.p1	-	134	3.30E-93	301.3	0.2	1	1	1.50E-93	3.70E-93	301.2	0.2	233	366	1	134	1	134	1	-
+p105-like_cnidaria	-	910	pseudodiploria_host_TRINITY_DN200187_c2_g4_i1.p1	-	140	2.20E-75	242.3	0.2	1	1	1.00E-75	2.60E-75	242.1	0.2	218	330	1	113	1	123	0.98	-
+p105-like_cnidaria	-	910	siderastrea_host_TRINITY_DN450483_c1_g1_i4.p1	-	301	2.50E-196	642.5	0.1	1	1	1.10E-196	2.80E-196	642.4	0.1	1	302	1	301	1	301	1	-
+p105-like_cnidaria	-	910	siderastrea_host_TRINITY_DN450483_c1_g1_i5.p1	-	300	1.00E-194	637.2	0.4	1	1	4.60E-195	1.10E-194	637.1	0.4	1	302	1	300	1	300	0.99	-
+p105-like_cnidaria	-	910	a_tenuis_TRINITY_DN17808_c1_g1_i1.p1	-	391	5.90E-250	820	0.4	1	1	2.60E-250	6.60E-250	819.8	0.4	51	440	1	389	1	390	1	-
+IkB-like-1_cnidaria	-	442	pseudodiploria_host_TRINITY_DN178043_c0_g1_i6.p1	-	169	2.20E-102	331.8	5.6	1	1	2.00E-102	2.50E-102	331.6	5.6	184	341	1	158	1	159	1	-
+p105-like_cnidaria	-	910	orbicella_host_TRINITY_DN220613_c2_g1_i3.p1	-	265	5.40E-164	535.6	0.2	1	1	2.40E-164	5.90E-164	535.4	0.2	1	262	1	261	1	264	0.99	-
+IkB-like-1_cnidaria	-	442	siderastrea_host_TRINITY_DN444826_c1_g4_i3.p2	-	129	9.30E-82	263.8	2.6	1	1	8.20E-82	1.00E-81	263.6	2.6	232	360	1	129	1	129	0.99	-
+IkB-like-1_cnidaria	-	442	pseudodiploria_host_TRINITY_DN178043_c0_g1_i1.p1	-	247	3.80E-141	459.5	7	1	1	3.50E-141	4.30E-141	459.3	7	184	408	1	225	1	242	0.96	-
+p50-like_cnidaria	-	438	orbicella_host_TRINITY_DN189929_c2_g1_i5.p1	-	134	1.10E-84	273	0	1	1	5.00E-85	1.20E-84	272.8	0	232	365	1	134	1	134	1	-
+IkB-like-1_cnidaria	-	442	orbicella_host_TRINITY_DN213606_c2_g3_i5.p1	-	157	5.20E-82	264.6	5.3	1	1	4.80E-82	6.00E-82	264.4	5.3	212	341	1	130	1	131	1	-
+IkB-like-1_cnidaria	-	442	a_tenuis_TRINITY_DN25922_c0_g1_i2.p1	-	114	1.30E-69	223.7	0.6	1	1	1.20E-69	1.50E-69	223.6	0.6	232	341	1	110	1	113	0.99	-
+p105-like_cnidaria	-	910	pseudodiploria_host_TRINITY_DN200187_c2_g4_i4.p1	-	432	1.60E-259	851.7	0.2	1	1	7.80E-260	1.90E-259	851.4	0.2	22	441	1	419	1	423	0.97	-
+p105-like_cnidaria	-	910	Oarb_96189_c0_g1_i1.p1	-	229	1.10E-142	465.1	7.2	1	1	9.70E-143	1.20E-142	464.9	7.2	480	708	1	229	1	229	1	-
+p105-like_cnidaria	-	910	pseudodiploria_host_TRINITY_DN200187_c2_g4_i2.p1	-	219	2.30E-133	434.2	1.5	1	1	9.90E-134	2.50E-133	434.1	1.5	79	298	1	215	1	218	0.99	-
+IkB-like-1_cnidaria	-	442	a_tenuis_TRINITY_DN25922_c0_g1_i1.p1	-	179	5.50E-104	337	1.6	1	1	5.20E-104	6.50E-104	336.8	1.6	168	341	9	175	2	178	0.97	-
+p105-like_cnidaria	-	910	pseudodiploria_host_TRINITY_DN200187_c2_g4_i3.p1	-	653	0	1312.3	0.2	1	1	0	0	1312.2	0.2	22	675	1	653	1	653	0.97	-
+p105-like_cnidaria	-	910	Oarb_154257_c8_g1_i1.p1	-	240	6.20E-148	482.4	0.5	1	1	2.80E-148	7.00E-148	482.2	0.5	95	335	1	240	1	240	1	-
+IkB-like-2_cnidaria	-	383	siderastrea_host_TRINITY_DN442751_c0_g3_i5.p1	-	269	1.60E-149	486.6	4.3	1	1	1.60E-149	1.90E-149	486.3	4.3	125	368	4	246	1	251	0.98	-
+IkB-like-2_cnidaria	-	383	pseudodiploria_host_TRINITY_DN187230_c1_g2_i2.p1	-	109	2.70E-67	215.9	1.6	1	1	2.40E-67	3.00E-67	215.8	1.6	126	233	2	109	1	109	0.99	-
+p105-like_cnidaria	-	910	a_tenuis_TRINITY_DN42964_c0_g1_i1.p1	-	164	3.00E-99	321.3	2.1	1	1	2.60E-99	3.30E-99	321.2	2.1	464	624	4	164	1	164	0.99	-
+p105-like_cnidaria	-	910	orbicella_host_TRINITY_DN206725_c0_g2_i4.p1	-	140	2.30E-86	278.7	5.5	1	1	2.00E-86	2.60E-86	278.5	5.5	565	704	1	140	1	140	0.99	-
+p105-like_cnidaria	-	910	pseudodiploria_host_TRINITY_DN202411_c1_g2_i5.p1	-	114	1.60E-68	219.6	6.1	1	1	1.40E-68	1.80E-68	219.5	6.1	622	732	1	111	1	113	0.99	-
+IkBa-like_cnidaria	-	374	pseudodiploria_host_TRINITY_DN190911_c0_g2_i11.p1	-	156	1.60E-70	226.4	0	1	1	1.70E-70	2.10E-70	226	0	137	251	31	145	25	151	0.98	-
+IkBa-like_cnidaria	-	374	Oarb_139262_c0_g1_i3.p3	-	108	5.50E-65	208.2	0.1	1	1	4.80E-65	6.00E-65	208.1	0.1	146	251	1	106	1	107	0.99	-
+IkBa-like_cnidaria	-	374	pseudodiploria_host_TRINITY_DN190911_c0_g2_i5.p1	-	206	4.00E-122	396.2	0.2	1	1	3.60E-122	4.40E-122	396.1	0.2	172	373	1	202	1	203	0.99	-
+p105-like_cnidaria	-	910	siderastrea_host_TRINITY_DN453364_c1_g2_i10.p1	-	391	1.20E-228	749.5	5.9	1	1	1.20E-228	1.50E-228	749.2	5.9	485	867	1	384	1	388	0.99	-
+IkB-like-1_cnidaria	-	442	orbicella_host_TRINITY_DN213606_c2_g3_i8.p1	-	204	1.90E-107	348.4	3.2	1	1	1.70E-107	2.10E-107	348.3	3.2	232	410	1	179	1	202	0.94	-
+IkB-like-2_cnidaria	-	383	Oarb_104540_c2_g2_i4.p1	-	190	5.40E-113	366.4	3.3	1	1	4.70E-113	5.90E-113	366.2	3.3	194	383	1	189	1	189	0.99	-
+p105-like_cnidaria	-	910	Oarb_154257_c8_g1_i3.p1	-	917	0	1755.1	0.2	1	1	0	0	1754.9	0.2	1	910	1	916	1	916	0.98	-
+IkBa-like_cnidaria	-	374	a_tenuis_TRINITY_DN335_c0_g1_i28.p1	-	195	5.90E-110	356.2	0	1	1	5.20E-110	6.50E-110	356	0	187	372	1	186	1	188	0.99	-
+p105-like_cnidaria	-	910	siderastrea_host_TRINITY_DN453364_c1_g2_i2.p1	-	507	2.60E-295	970.1	0.9	1	1	2.90E-295	2.90E-295	969.9	0.9	299	798	1	507	1	507	0.99	-
+p50-like_cnidaria	-	438	pseudodiploria_host_TRINITY_DN200187_c2_g4_i1.p1	-	140	3.80E-67	215.2	0.1	1	1	1.80E-67	4.50E-67	215	0.1	217	329	1	113	1	118	0.98	-
+IkBa-like_cnidaria	-	374	Oarb_139262_c0_g1_i3.p2	-	135	1.50E-69	223.2	0.3	1	1	1.40E-69	1.80E-69	223	0.3	251	369	13	131	10	134	0.97	-
+IkB-like-2_cnidaria	-	383	pseudodiploria_host_TRINITY_DN189231_c0_g2_i5.p1	-	109	1.20E-62	200.6	0.8	1	1	1.10E-62	1.30E-62	200.5	0.8	277	382	1	107	1	108	0.96	-
+p105-like_cnidaria	-	910	orbicella_host_TRINITY_DN206725_c0_g2_i7.p1	-	291	4.90E-159	519.2	7.5	1	1	4.20E-159	5.30E-159	519	7.5	426	704	13	291	1	291	0.95	-
+IkB-like-1_cnidaria	-	442	Oarb_148322_c2_g1_i6.p1	-	258	2.60E-145	473.2	7.3	1	1	2.30E-145	2.90E-145	473.1	7.3	184	440	1	255	1	257	0.95	-
+IkB-like-2_cnidaria	-	383	siderastrea_host_TRINITY_DN442751_c0_g3_i11.p1	-	180	4.80E-92	297.4	1.5	1	1	4.50E-92	5.60E-92	297.2	1.5	125	286	4	164	1	166	0.98	-
+IkB-like-2_cnidaria	-	383	siderastrea_host_TRINITY_DN442751_c0_g3_i9.p1	-	138	3.00E-76	245.4	0.2	1	1	2.60E-76	3.20E-76	245.3	0.2	123	256	4	136	1	137	0.97	-
+IkBa-like_cnidaria	-	374	pseudodiploria_host_TRINITY_DN190911_c0_g2_i6.p1	-	132	2.30E-70	225.9	0.7	1	1	2.00E-70	2.50E-70	225.7	0.7	251	373	2	124	1	125	0.98	-
+IkB-like-2_cnidaria	-	383	pseudodiploria_host_TRINITY_DN189231_c0_g2_i1.p1	-	157	2.30E-87	282	1.1	1	1	2.00E-87	2.50E-87	281.9	1.1	228	382	1	155	1	156	0.97	-
+IkBa-like_cnidaria	-	374	a_tenuis_TRINITY_DN335_c0_g1_i19.p1	-	165	1.50E-69	223.2	0	1	1	1.50E-69	1.90E-69	222.9	0	250	372	34	156	32	158	0.98	-
+IkB-like-2_cnidaria	-	383	siderastrea_host_TRINITY_DN442751_c0_g3_i8.p1	-	132	1.40E-65	210.3	3	1	1	1.30E-65	1.70E-65	210	3	170	286	1	116	1	118	0.98	-
+IkBa-like_cnidaria	-	374	siderastrea_host_TRINITY_DN451935_c2_g2_i5.p1	-	370	2.00E-202	660.5	0.7	1	1	1.80E-202	2.30E-202	660.3	0.7	2	370	2	367	1	369	0.99	-
+p50-like_cnidaria	-	438	siderastrea_host_TRINITY_DN450483_c1_g1_i4.p1	-	301	2.10E-166	542.3	0	1	1	9.20E-167	2.30E-166	542.2	0	1	301	1	301	1	301	1	-
+IkB-like-1_cnidaria	-	442	orbicella_host_TRINITY_DN213606_c2_g3_i2.p1	-	291	8.00E-158	514.5	1.7	1	1	7.10E-158	8.80E-158	514.3	1.7	143	440	3	288	1	290	0.97	-
+p50-like_cnidaria	-	438	a_tenuis_TRINITY_DN17808_c1_g1_i1.p1	-	391	1.30E-209	684.7	0	1	1	6.30E-210	1.60E-209	684.4	0	51	436	1	381	1	383	0.97	-
+IkBa-like_cnidaria	-	374	orbicella_host_TRINITY_DN221067_c44_g7_i2.p1	-	377	2.20E-202	660.3	0.7	1	1	2.00E-202	2.50E-202	660.2	0.7	2	373	2	369	1	370	0.98	-
+p105-like_cnidaria	-	910	pseudodiploria_host_TRINITY_DN202411_c1_g2_i3.p1	-	147	4.50E-80	257.8	7.3	1	1	4.00E-80	4.90E-80	257.7	7.3	622	763	1	144	1	146	0.98	-
+p50-like_cnidaria	-	438	siderastrea_host_TRINITY_DN450483_c1_g1_i5.p1	-	300	9.20E-165	536.9	0	1	1	4.10E-165	1.00E-164	536.7	0	1	301	1	300	1	300	0.99	-
+p50-like_cnidaria	-	438	Oarb_154257_c8_g1_i3.p1	-	917	9.30E-229	747.8	0	1	1	1.40E-228	1.40E-228	747.1	0	1	421	1	419	1	443	0.96	-
+IkB-like-1_cnidaria	-	442	orbicella_host_TRINITY_DN213606_c2_g3_i7.p1	-	205	4.60E-110	357.1	1.2	1	1	4.10E-110	5.10E-110	356.9	1.2	232	440	1	202	1	204	0.98	-
+p50-like_cnidaria	-	438	pseudodiploria_host_TRINITY_DN200187_c2_g4_i4.p1	-	432	1.10E-216	708	0	1	1	5.00E-217	1.30E-216	707.8	0	23	431	2	407	1	417	0.94	-
+p105-like_cnidaria	-	910	Oarb_129275_c3_g2_i1.p1	-	247	2.70E-132	430.7	0.2	1	1	1.20E-132	3.00E-132	430.5	0.2	91	344	1	247	1	247	0.98	-
+p50-like_cnidaria	-	438	pseudodiploria_host_TRINITY_DN200187_c2_g4_i3.p1	-	653	1.60E-216	707.5	0	1	1	2.00E-216	2.00E-216	707.1	0	23	431	2	407	1	434	0.94	-
+p105-like_cnidaria	-	910	pseudodiploria_host_TRINITY_DN202411_c1_g2_i4.p3	-	272	1.10E-135	441.9	1.7	1	1	1.00E-135	1.30E-135	441.7	1.7	622	869	1	255	1	265	0.97	-
+p50-like_cnidaria	-	438	pseudodiploria_host_TRINITY_DN200187_c2_g4_i2.p1	-	219	1.20E-114	371.8	0.3	1	1	5.10E-115	1.30E-114	371.7	0.3	79	297	1	215	1	218	0.97	-
+p50-like_cnidaria	-	438	Oarb_154257_c8_g1_i1.p1	-	240	9.50E-128	414.9	0.1	1	1	4.20E-128	1.10E-127	414.7	0.1	95	334	1	240	1	240	0.98	-
+IkBa-like_cnidaria	-	374	Oarb_139262_c0_g1_i2.p1	-	292	2.80E-145	472.4	0.2	1	1	2.60E-145	3.30E-145	472.2	0.2	1	280	1	277	1	280	0.98	-
+IkBa-like_cnidaria	-	374	siderastrea_host_TRINITY_DN451935_c2_g2_i9.p1	-	250	1.30E-128	417.5	0.5	1	1	1.20E-128	1.50E-128	417.4	0.5	2	251	2	248	1	249	0.99	-
+p50-like_cnidaria	-	438	orbicella_host_TRINITY_DN220613_c2_g1_i3.p1	-	265	1.30E-134	437.5	0	1	1	5.80E-135	1.50E-134	437.4	0	1	260	1	260	1	264	0.98	-
+p105-like_cnidaria	-	910	pseudodiploria_host_TRINITY_DN202411_c1_g2_i2.p2	-	297	6.20E-150	489	3	1	1	5.50E-150	6.90E-150	488.9	3	622	910	1	296	1	296	0.98	-
+p50-like_cnidaria	-	438	Oarb_129275_c3_g2_i1.p1	-	247	2.10E-120	390.7	0	1	1	9.30E-121	2.30E-120	390.6	0	91	343	1	247	1	247	0.98	-
+p50-like_cnidaria	-	438	siderastrea_host_TRINITY_DN453364_c1_g2_i2.p1	-	507	1.30E-63	203.5	0	1	1	2.10E-63	2.10E-63	202.8	0	298	424	1	129	1	163	0.89	-
+IkBa-like_cnidaria	-	374	a_tenuis_TRINITY_DN335_c0_g1_i2.p1	-	260	3.00E-121	393.3	0	1	1	2.90E-121	3.60E-121	393.1	0	1	251	1	252	1	255	0.99	-

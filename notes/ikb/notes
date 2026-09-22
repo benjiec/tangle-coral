@@ -306,9 +306,10 @@ sieve-py ~/git/tangle/sieve/scripts/protein-exons.py \
 
 # RNAseq
 
-# Use hmmsearch or hmmscan to search RNAseq transcript protein FASTAs against nfkb_ikb.hmm
-# Convert domtblout format to detected TSV format using sieve/scripts/domtbl-tsv.py
-# Save top hits to
+# Use hmmsearch or hmmscan to search RNAseq transcript protein FASTAs against
+# nfkb_ikb.hmm Convert domtblout format to detected TSV format using
+# sieve/scripts/domtbl-tsv.py Save top hits -- min HMM score of 200 and scoring
+# ratio of 1.5 -- to
 rnaseq_protein_hmm_hits.tsv
 
 # For each top hits, save the transcript id and ali from, ali to into CSV

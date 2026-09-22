@@ -1,8 +1,10 @@
 protein_accession,start,stop
+a_tenuis_TRINITY_DN17808_c1_g1_i1.p1,1,381
 a_tenuis_TRINITY_DN17808_c1_g1_i1.p1,1,389
-a_tenuis_TRINITY_DN42964_c0_g1_i1.p1,4,164
-a_tenuis_TRINITY_DN25922_c0_g1_i1.p1,3,175
-a_tenuis_TRINITY_DN335_c0_g1_i28.p1,1,189
-a_tenuis_TRINITY_DN335_c0_g1_i14.p3,1,106
-a_tenuis_TRINITY_DN335_c0_g1_i19.p1,34,159
+a_tenuis_TRINITY_DN25922_c0_g1_i1.p1,9,175
+a_tenuis_TRINITY_DN25922_c0_g1_i2.p1,1,110
+a_tenuis_TRINITY_DN335_c0_g1_i19.p1,34,156
 a_tenuis_TRINITY_DN335_c0_g1_i2.p1,1,252
+a_tenuis_TRINITY_DN335_c0_g1_i28.p1,1,186
+a_tenuis_TRINITY_DN42964_c0_g1_i1.p1,4,164
+

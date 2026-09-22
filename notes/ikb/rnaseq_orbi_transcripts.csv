@@ -1,7 +1,12 @@
 protein_accession,start,stop
-orbicella_host_TRINITY_DN213606_c2_g3_i2.p1,3,288
-orbicella_host_TRINITY_DN221067_c44_g7_i2.p1,2,371
-orbicella_host_TRINITY_DN213606_c2_g3_i2.p1,59,253
-orbicella_host_TRINITY_DN220613_c2_g1_i3.p1,1,261
-orbicella_host_TRINITY_DN206725_c0_g2_i7.p1,13,291
 orbicella_host_TRINITY_DN189929_c2_g1_i5.p1,1,134
+orbicella_host_TRINITY_DN189929_c2_g1_i5.p1,1,134
+orbicella_host_TRINITY_DN206725_c0_g2_i4.p1,1,140
+orbicella_host_TRINITY_DN206725_c0_g2_i7.p1,13,291
+orbicella_host_TRINITY_DN213606_c2_g3_i2.p1,3,288
+orbicella_host_TRINITY_DN213606_c2_g3_i5.p1,1,130
+orbicella_host_TRINITY_DN213606_c2_g3_i7.p1,1,202
+orbicella_host_TRINITY_DN213606_c2_g3_i8.p1,1,179
+orbicella_host_TRINITY_DN220613_c2_g1_i3.p1,1,260
+orbicella_host_TRINITY_DN220613_c2_g1_i3.p1,1,261
+orbicella_host_TRINITY_DN221067_c44_g7_i2.p1,2,369
