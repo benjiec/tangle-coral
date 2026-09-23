@@ -1,6 +1,6 @@
 model,threshold,score_type,profile_type,f_measure,nseq,nseq_used,alen,mlen,eff_nseq,re_pos,definition
-p50-like_cnidaria,400,,,,,,,,,,
-p105-like_cnidaria,1000,,,,,,,,,,
-IkB-like-1_cnidaria,350,,,,,,,,,,
-IkB-like-2_cnidaria,325,,,,,,,,,,
-IkBa-like_cnidaria,325,,,,,,,,,,
+p50-like_anthozoa,400,,,,,,,,,,
+p105-like_anthozoa,1000,,,,,,,,,,
+IkB-like-1_anthozoa,350,,,,,,,,,,
+IkB-like-2_anthozoa,325,,,,,,,,,,
+IkBa-like_anthozoa,325,,,,,,,,,,

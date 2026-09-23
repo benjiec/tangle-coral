@@ -111,38 +111,38 @@ mv x.msa.contree cn_ikb_tree.contree
 
 # Note that cn_ikb.deeploc.faa should have truncated sequences where that's appropriate
 
-tangle-py ~/git/tangle/tangle/scripts/fasta-emit.py cn_ikb.deeploc.faa group1 > IkB-like-1_cnidaria.faa
-tangle-py ~/git/tangle/tangle/scripts/fasta-emit.py cn_ikb.deeploc.faa group2 > IkB-like-2_cnidaria.faa
-tangle-py ~/git/tangle/tangle/scripts/fasta-emit.py cn_ikb.deeploc.faa group4 > IkBa-like_cnidaria.faa
+tangle-py ~/git/tangle/tangle/scripts/fasta-emit.py cn_ikb.deeploc.faa group1 > IkB-like-1_anthozoa.faa
+tangle-py ~/git/tangle/tangle/scripts/fasta-emit.py cn_ikb.deeploc.faa group2 > IkB-like-2_anthozoa.faa
+tangle-py ~/git/tangle/tangle/scripts/fasta-emit.py cn_ikb.deeploc.faa group4 > IkBa-like_anthozoa.faa
 
-cat IkB-like-1_cnidaria.faa IkB-like-2_cnidaria.faa IkBa-like_cnidaria.faa > cn_ikb_all.faa
+cat IkB-like-1_anthozoa.faa IkB-like-2_anthozoa.faa IkBa-like_anthozoa.faa > cn_ikb_all.faa
 
 # IMPORTANT - remove sequences that should not be used to build HMM profile,
 # e.g. very clearly truncated sequences
 
-docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/IkB-like-1_cnidaria.faa -out /app/IkB-like-1_cnidaria.msa
-docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/IkB-like-2_cnidaria.faa -out /app/IkB-like-2_cnidaria.msa
-docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/IkBa-like_cnidaria.faa -out /app/IkBa-like_cnidaria.msa
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/IkB-like-1_anthozoa.faa -out /app/IkB-like-1_anthozoa.msa
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/IkB-like-2_anthozoa.faa -out /app/IkB-like-2_anthozoa.msa
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/IkBa-like_anthozoa.faa -out /app/IkBa-like_anthozoa.msa
 
-hmmbuild IkB-like-1_cnidaria.hmm IkB-like-1_cnidaria.msa
-hmmbuild IkB-like-2_cnidaria.hmm IkB-like-2_cnidaria.msa
-hmmbuild IkBa-like_cnidaria.hmm IkBa-like_cnidaria.msa
+hmmbuild IkB-like-1_anthozoa.hmm IkB-like-1_anthozoa.msa
+hmmbuild IkB-like-2_anthozoa.hmm IkB-like-2_anthozoa.msa
+hmmbuild IkBa-like_anthozoa.hmm IkBa-like_anthozoa.msa
 
 sieve-py ~/git/tangle/sieve/scripts/hmmsearch-threshold.py \
-  --hmm IkBa-like_cnidaria.hmm \
-  --positive-fasta IkBa-like_cnidaria.faa \
+  --hmm IkBa-like_anthozoa.hmm \
+  --positive-fasta IkBa-like_anthozoa.faa \
   --all-fasta cn_ikb_all.faa \
   --output x_ikba
 
 sieve-py ~/git/tangle/sieve/scripts/hmmsearch-threshold.py \
-  --hmm IkB-like-1_cnidaria.hmm \
-  --positive-fasta IkB-like-1_cnidaria.faa \
+  --hmm IkB-like-1_anthozoa.hmm \
+  --positive-fasta IkB-like-1_anthozoa.faa \
   --all-fasta cn_ikb_all.faa \
   --output x_ikb-1
 
 sieve-py ~/git/tangle/sieve/scripts/hmmsearch-threshold.py \
-  --hmm IkB-like-2_cnidaria.hmm \
-  --positive-fasta IkB-like-2_cnidaria.faa \
+  --hmm IkB-like-2_anthozoa.hmm \
+  --positive-fasta IkB-like-2_anthozoa.faa \
   --all-fasta cn_ikb_all.faa \
   --output x_ikb-2
 
@@ -258,7 +258,7 @@ heap-py ~/git/tangle/heap/scripts/hmmscan-pfam.py \
 # Generate HMM scores for all "hits"
 
 cat IkB*.hmm ../nfkb/p*.hmm > nfkb_ikb.hmm
-cat cn_ikb_all.faa ../nfkb/p50-like_cnidaria.faa ../nfkb/p105-like_cnidaria.faa needle_curated.faa > z.faa
+cat cn_ikb_all.faa ../nfkb/p50-like_anthozoa.faa ../nfkb/p105-like_anthozoa.faa needle_curated.faa > z.faa
 hmmsearch --domtblout x nfkb_ikb.hmm z.faa
 python3 ~/git/tangle/sieve/scripts/domtbl-tsv.py x > cn_ikb_hmm.tsv
 rm x z.faa
@@ -272,36 +272,36 @@ sieve-py ~/git/tangle/sieve/scripts/protein-exons.py --fasta --dna \
 
 sieve-py ~/git/tangle/sieve/scripts/protein-exons.py \
   --fragments-tsv needle_protein_fragments.tsv --fasta --dna \
-  NW_018149324.1_p105-like_cnidaria_1c4b0771 >> loci_orbi.fna
+  NW_018149324.1_p105-like_anthozoa_1c4b0771 >> loci_orbi.fna
 
 sieve-py ~/git/tangle/sieve/scripts/protein-exons.py \
   --fragments-tsv needle_protein_fragments.tsv --fasta --dna \
-  BLAZ01000379.1_IkBa-like_cnidaria_1b49cc6e \
-  BLAZ01001464.1_IkB-like-2_cnidaria_5d8c002b \
-  BLAZ01001464.1_IkB-like-1_cnidaria_06ab4a1a \
-  BLAZ01000634.1_p105-like_cnidaria_42ec6be3 > loci_aten.fna
+  BLAZ01000379.1_IkBa-like_anthozoa_1b49cc6e \
+  BLAZ01001464.1_IkB-like-2_anthozoa_5d8c002b \
+  BLAZ01001464.1_IkB-like-1_anthozoa_06ab4a1a \
+  BLAZ01000634.1_p105-like_anthozoa_42ec6be3 > loci_aten.fna
 
 sieve-py ~/git/tangle/sieve/scripts/protein-exons.py \
   --fragments-tsv needle_protein_fragments.tsv --fasta --dna \
-  OZ210541.1_p105-like_cnidaria_cc72bb95 \
-  OZ210548.1_p50-like_cnidaria_4a4f5cc6 \
-  OZ210546.1_IkBa-like_cnidaria_d20d51b0 \
-  OZ210550.1_IkB-like-1_cnidaria_f1fc1ca4 \
-  OZ210550.1_IkB-like-2_cnidaria_27849994 > loci_ocul.fna
+  OZ210541.1_p105-like_anthozoa_cc72bb95 \
+  OZ210548.1_p50-like_anthozoa_4a4f5cc6 \
+  OZ210546.1_IkBa-like_anthozoa_d20d51b0 \
+  OZ210550.1_IkB-like-1_anthozoa_f1fc1ca4 \
+  OZ210550.1_IkB-like-2_anthozoa_27849994 > loci_ocul.fna
 
 sieve-py ~/git/tangle/sieve/scripts/protein-exons.py \
   --fragments-tsv needle_protein_fragments.tsv --fasta --dna \
-  OZ024890.1_p105-like_cnidaria_78e5b665 \
-  OZ024892.1_IkBa-like_cnidaria_d48b2e17 \
-  OZ024895.1_IkB-like-1_cnidaria_8b187540 \
-  OZ024895.1_IkB-like-2_cnidaria_fe93e4fc > loci_side.fna
+  OZ024890.1_p105-like_anthozoa_78e5b665 \
+  OZ024892.1_IkBa-like_anthozoa_d48b2e17 \
+  OZ024895.1_IkB-like-1_anthozoa_8b187540 \
+  OZ024895.1_IkB-like-2_anthozoa_fe93e4fc > loci_side.fna
 
 sieve-py ~/git/tangle/sieve/scripts/protein-exons.py \
   --fragments-tsv needle_protein_fragments.tsv --fasta --dna \
-  CDRNSK010000150.1_p105-like_cnidaria_c3a4b3b9 \
-  CDRNSK010000247.1_IkBa-like_cnidaria_2f11850d \
-  CDRNSK010000283.1_IkB-like-1_cnidaria_15b94c4d \
-  CDRNSK010000283.1_IkB-like-2_cnidaria_d33dc3b5 > loci_pseu.fna
+  CDRNSK010000150.1_p105-like_anthozoa_c3a4b3b9 \
+  CDRNSK010000247.1_IkBa-like_anthozoa_2f11850d \
+  CDRNSK010000283.1_IkB-like-1_anthozoa_15b94c4d \
+  CDRNSK010000283.1_IkB-like-2_anthozoa_d33dc3b5 > loci_pseu.fna
 
 
 # RNAseq
