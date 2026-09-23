@@ -34,16 +34,35 @@ docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/cn_PF183
 ~/iqtree-3.1.3-macOS/bin/iqtree3 -s cn_PF18397_hs_ref.msa -B 1000 --alrt 1000
 ~/iqtree-3.1.3-macOS/bin/iqtree3 -s cn_PF18394_hs_ref.msa -B 1000 --alrt 1000
 
-# PF18394 HMM - TBK1-like
 
-docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/cn_PF18394.faa -out /app/TBK1-like_cnidaria.msa
-hmmbuild TBK1-like_cnidaria.hmm TBK1-like_cnidaria.msa
+# protein names
+python3 ~/git/tangle/sieve/scripts/protein-names.py cn_PF18397.txt
+
+
+# make a full list for HMM threshold testing
 
 cat cn_PF18397.faa cn_PF18394.faa > cn_IKK.faa
 
+
+# PF18394 HMM - TBK1-like
+
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/cn_PF18394.faa -out /app/TBK1-like_anthozoa.msa
+hmmbuild TBK1-like_anthozoa.hmm TBK1-like_anthozoa.msa
+
 sieve-py ~/git/tangle/sieve/scripts/hmmsearch-threshold.py \
-  --hmm TBK1-like_cnidaria.hmm \
+  --hmm TBK1-like_anthozoa.hmm \
   --positive-fasta cn_PF18394.faa \
   --all-fasta cn_IKK.faa \
   --output x_tbk1
+
+# PF18397 HMM - IKK-like
+
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/cn_PF18397.faa -out /app/IKK-like_anthozoa.msa
+hmmbuild IKK-like_anthozoa.hmm IKK-like_anthozoa.msa
+
+sieve-py ~/git/tangle/sieve/scripts/hmmsearch-threshold.py \
+  --hmm IKK-like_anthozoa.hmm \
+  --positive-fasta cn_PF18397.faa \
+  --all-fasta cn_IKK.faa \
+  --output x_ikk
 
