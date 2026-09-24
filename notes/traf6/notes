@@ -1,0 +1,3 @@
+sieve-py ~/git/tangle/sieve/scripts/ko-find-matches.py K03175 --taxon homo -o res-k03175_hs.faa
+sieve-py ~/git/tangle/sieve/scripts/ko-find-matches.py K09848 --taxon homo -o res-k09848_hs.faa
+sieve-py ~/git/tangle/sieve/scripts/ko-find-matches.py K10580 --taxon homo -o res-k10580_hs.faa
