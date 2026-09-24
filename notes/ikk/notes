@@ -66,3 +66,32 @@ sieve-py ~/git/tangle/sieve/scripts/hmmsearch-threshold.py \
   --all-fasta cn_IKK.faa \
   --output x_ikk
 
+
+# bTrCP
+
+sieve-py ~/git/tangle/sieve/scripts/ko-find-matches.py K03362 --taxon anthozoa |
+  PYTHONPATH=~/git/tangle/coral sieve-py ~/git/tangle/sieve/scripts/build-protein-artifacts.py \
+    --rule coral.rules.generic.nothing \
+    --artifacts-dir res-k03362
+
+sieve-py ~/git/tangle/sieve/scripts/ko-find-matches.py K10260 --taxon anthozoa |
+  PYTHONPATH=~/git/tangle/coral sieve-py ~/git/tangle/sieve/scripts/build-protein-artifacts.py \
+    --rule coral.rules.generic.nothing \
+    --artifacts-dir res-k10260
+
+# separately, cn_K03362 and combined cn_K03362_K10260, removing elongated
+# proteins from both sets as they should not count as positives or negatives
+
+tangle-py ~/git/tangle/tangle/scripts/fasta-emit.py res-k03362/sequences.faa cn_K03362.txt > cn_K03362.faa
+tangle-py ~/git/tangle/tangle/scripts/fasta-emit.py res-k10260/sequences.faa cn_K03362_K10260.txt > cn_K10260.faa
+
+cat cn_K03362.faa cn_K10260.faa > cn_K03362_K10260.faa
+
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/cn_K03362.faa -out /app/BTRC_anthozoa.msa
+hmmbuild BTRC_anthozoa.hmm BTRC_anthozoa.msa
+
+sieve-py ~/git/tangle/sieve/scripts/hmmsearch-threshold.py \
+  --hmm BTRC_anthozoa.hmm \
+  --positive-fasta cn_K03362.faa \
+  --all-fasta cn_K03362_K10260.faa \
+  --output x_btrc
