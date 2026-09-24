@@ -1,0 +1,55 @@
+# TAK1
+
+sieve-py ~/git/tangle/sieve/scripts/pfam-find-matches.py PF00069 --taxon anthozoa |
+  PYTHONPATH=~/git/tangle/coral sieve-py ~/git/tangle/sieve/scripts/build-protein-artifacts.py \
+    --rule coral.rules.generic.nothing \
+    --artifacts-dir res-pf00069
+
+sieve-py ~/git/tangle/sieve/scripts/ko-find-matches.py K04427 --taxon anthozoa |
+  PYTHONPATH=~/git/tangle/coral sieve-py ~/git/tangle/sieve/scripts/build-protein-artifacts.py \
+    --rule coral.rules.generic.nothing \
+    --artifacts-dir res-k04427
+
+# create cn_K04427_related.txt from Tableau, using it as positives and negatives
+# removing clear truncations
+
+tangle-py ~/git/tangle/tangle/scripts/fasta-emit.py res-k04427/sequences.faa cn_K04427_related.txt > cn_K04427.faa
+tangle-py ~/git/tangle/tangle/scripts/fasta-emit.py res-pf00069/sequences.faa cn_K04427_related.txt > cn_K04427_related.faa
+
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/cn_K04427.faa -out /app/TAK1_anthozoa.msa
+hmmbuild TAK1_anthozoa.hmm TAK1_anthozoa.msa
+
+sieve-py ~/git/tangle/sieve/scripts/hmmsearch-threshold.py \
+  --hmm TAK1_anthozoa.hmm \
+  --positive-fasta cn_K04427.faa \
+  --all-fasta cn_K04427_related.faa \
+  --output x
+
+
+# TAB1
+
+sieve-py ~/git/tangle/sieve/scripts/pfam-find-matches.py PF00481 --taxon anthozoa |
+  PYTHONPATH=~/git/tangle/coral sieve-py ~/git/tangle/sieve/scripts/build-protein-artifacts.py \
+    --rule coral.rules.generic.nothing \
+    --artifacts-dir res-pf00481
+
+grep ">" res-pf00481/input.faa | grep -v _K > cn_PF00481.txt
+# remove leading ">" from cn_PF00481.txt
+
+# create cn_K04403.txt from Tableau and remove isoforms and clear truncations
+# also remove truncations from cn_PF00481.txt - just CAB3998147.1
+
+tangle-py ~/git/tangle/tangle/scripts/fasta-emit.py res-pf00481/sequences.faa cn_K04403.txt > cn_K04403.faa
+tangle-py ~/git/tangle/tangle/scripts/fasta-emit.py res-pf00481/sequences.faa cn_PF00481.txt > cn_PF00481.faa
+
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/cn_K04403.faa -out /app/TAB1_anthozoa.msa
+hmmbuild TAB1_anthozoa.hmm TAB1_anthozoa.msa
+
+sieve-py ~/git/tangle/sieve/scripts/hmmsearch-threshold.py \
+  --hmm TAB1_anthozoa.hmm \
+  --positive-fasta cn_K04403.faa \
+  --all-fasta cn_PF00481.faa \
+  --output x
+
+
+
