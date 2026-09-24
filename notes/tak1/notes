@@ -48,12 +48,20 @@ sieve-py ~/git/tangle/sieve/scripts/hmmsearch-threshold.py \
 # find tab2/3 cluster, filter those that are cnidaria
 # confirm zf sequence on https://prosite.expasy.org/
 
-sieve-py ~/git/tangle/sieve/scripts/pfam-find-matches.py PF02845 --match-only -o res-pf02845_domain.faa
-grep ">" res-pf02845_domain.faa | grep -v _K > cn_PF02845_domain.txt
+sieve-py ~/git/tangle/sieve/scripts/pfam-find-matches.py PF02845 --match-only --taxon homo -o res-pf02845_domain_hs.faa
+grep ">" res-pf02845_domain_hs.faa | grep -v _K > hs_PF02845_domain.txt
+# remove leading ">" from hs_PF02845_domain.txt
+# keep only NP_ sequences
+
+sieve-py ~/git/tangle/sieve/scripts/pfam-find-matches.py PF02845 --match-only --taxon anthozoa -o res-pf02845_domain_cn.faa
+grep ">" res-pf02845_domain_cn.faa | grep -v _K > cn_PF02845_domain.txt
 # remove leading ">" from cn_PF02845_domain.txt
 
-tangle-py ~/git/tangle/tangle/scripts/fasta-emit.py res-pf02845_domain.faa cn_PF02845_domain.txt > cn_PF02845_domain.faa
-docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/cn_PF02845_domain.faa -out /app/cn_PF02845_domain.msa
-~/iqtree-3.1.3-macOS/bin/iqtree3 -s cn_PF02845_domain.msa -B 1000 --alrt 1000
+tangle-py ~/git/tangle/tangle/scripts/fasta-emit.py res-pf02845_domain_cn.faa cn_PF02845_domain.txt > cn_PF02845_domain.faa
+tangle-py ~/git/tangle/tangle/scripts/fasta-emit.py res-pf02845_domain_hs.faa hs_PF02845_domain.txt > hs_PF02845_domain.faa
+
+cat cn_PF02845_domain.faa hs_PF02845_domain.faa > cn_hs_PF02845_domain.faa
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/cn_hs_PF02845_domain.faa -out /app/cn_hs_PF02845_domain.msa
+~/iqtree-3.1.3-macOS/bin/iqtree3 -s cn_hs_PF02845_domain.msa -B 1000 --alrt 1000
 
 
