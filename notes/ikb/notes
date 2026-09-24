@@ -28,7 +28,7 @@ echo "Cluster Repr\tCluster Member" | cat - cn_ank_cluster.tsv > cn_ank_cluster.
 # Use repr sequences to run on AF to screen for RHD binding sequences
 
 # Scoring the AF models, with .zip files in nv-folds/, and assuming multi-mer mode
-# with two copies of Nv p50, and single copy of candidate as chain C
+# with two copies of Nv p52, and single copy of candidate as chain C
 #
 ../sieve/scripts/alphafold-pdockq2-directory.py \
   nv-folds/ \
@@ -58,8 +58,8 @@ touch cn_RHD-binding.deeploc.csv
 # Generate a candidate list, based on AF scores, of all sequences that either
 # passed AF thresholds or are likely to, save to cn_candidates.txt
 
-# Combine cn_candidates.txt and p105-like and p50-like sequences from nfkb work
-# into a single cn_nfkb_and_ikb.txt file. Also create a cn_p105_p50.txt sequence list.
+# Combine cn_candidates.txt and p100-like and p52-like sequences from nfkb work
+# into a single cn_nfkb_and_ikb.txt file. Also create a cn_p100_p52.txt sequence list.
 
 # Generate a loci list for both NFkB and IkB proteins
 grep -F -f cn_nfkb_and_ikb.txt /Volumes/Extreme_Pro/areas/coral/genomics/sequences.tsv | cut -f1,2 |
@@ -98,7 +98,7 @@ mv x.msa.contree cn_ikb_tree.contree
 
 
 # Build a tree of ARD region
-# cat cn_ikb.deeploc.faa and p105-like faa together, but now use non-truncated
+# cat cn_ikb.deeploc.faa and p100-like faa together, but now use non-truncated
 # sequences rather than those in cn_truncations.faa, this creates ard_containing.faa
 
 ../sieve/scripts/pfam-extract-region.py ard_containing.faa protein_pfam.tsv PF12796 1 5 x.faa
@@ -165,7 +165,7 @@ cat needle_genome_list_4 | \
   tangle-py ~/git/tangle/tangle/scripts/defaults.py -f -m ncbi_genome_fna - | \
   xargs ~/git/tangle/venv-tangle/bin/python3 ~/git/tangle/tangle/scripts/pool-contigs.py needle_pooled_4.fna
 
-# put p105-like, IkBa-like, IkB-like-1, and IkB-like-2 into a single HMM, plus
+# put p100-like, IkBa-like, IkB-like-1, and IkB-like-2 into a single HMM, plus
 # a low threshold file (since we are fishing)
 cat IkB*.hmm ../nfkb/p*.hmm > nfkb_ikb.hmm
 hmmpress nfkb_ikb.hmm
@@ -258,7 +258,7 @@ heap-py ~/git/tangle/heap/scripts/hmmscan-pfam.py \
 # Generate HMM scores for all "hits"
 
 cat IkB*.hmm ../nfkb/p*.hmm > nfkb_ikb.hmm
-cat cn_ikb_all.faa ../nfkb/p50-like_anthozoa.faa ../nfkb/p105-like_anthozoa.faa needle_curated.faa > z.faa
+cat cn_ikb_all.faa ../nfkb/p52-like_anthozoa.faa ../nfkb/p100-like_anthozoa.faa needle_curated.faa > z.faa
 hmmsearch --domtblout x nfkb_ikb.hmm z.faa
 python3 ~/git/tangle/sieve/scripts/domtbl-tsv.py x > cn_ikb_hmm.tsv
 rm x z.faa
@@ -272,33 +272,33 @@ sieve-py ~/git/tangle/sieve/scripts/protein-exons.py --fasta --dna \
 
 sieve-py ~/git/tangle/sieve/scripts/protein-exons.py \
   --fragments-tsv needle_protein_fragments.tsv --fasta --dna \
-  NW_018149324.1_p105-like_anthozoa_1c4b0771 >> loci_orbi.fna
+  NW_018149324.1_p100-like_anthozoa_1c4b0771 >> loci_orbi.fna
 
 sieve-py ~/git/tangle/sieve/scripts/protein-exons.py \
   --fragments-tsv needle_protein_fragments.tsv --fasta --dna \
   BLAZ01000379.1_IkBa-like_anthozoa_1b49cc6e \
   BLAZ01001464.1_IkB-like-2_anthozoa_5d8c002b \
   BLAZ01001464.1_IkB-like-1_anthozoa_06ab4a1a \
-  BLAZ01000634.1_p105-like_anthozoa_42ec6be3 > loci_aten.fna
+  BLAZ01000634.1_p100-like_anthozoa_42ec6be3 > loci_aten.fna
 
 sieve-py ~/git/tangle/sieve/scripts/protein-exons.py \
   --fragments-tsv needle_protein_fragments.tsv --fasta --dna \
-  OZ210541.1_p105-like_anthozoa_cc72bb95 \
-  OZ210548.1_p50-like_anthozoa_4a4f5cc6 \
+  OZ210541.1_p100-like_anthozoa_cc72bb95 \
+  OZ210548.1_p52-like_anthozoa_4a4f5cc6 \
   OZ210546.1_IkBa-like_anthozoa_d20d51b0 \
   OZ210550.1_IkB-like-1_anthozoa_f1fc1ca4 \
   OZ210550.1_IkB-like-2_anthozoa_27849994 > loci_ocul.fna
 
 sieve-py ~/git/tangle/sieve/scripts/protein-exons.py \
   --fragments-tsv needle_protein_fragments.tsv --fasta --dna \
-  OZ024890.1_p105-like_anthozoa_78e5b665 \
+  OZ024890.1_p100-like_anthozoa_78e5b665 \
   OZ024892.1_IkBa-like_anthozoa_d48b2e17 \
   OZ024895.1_IkB-like-1_anthozoa_8b187540 \
   OZ024895.1_IkB-like-2_anthozoa_fe93e4fc > loci_side.fna
 
 sieve-py ~/git/tangle/sieve/scripts/protein-exons.py \
   --fragments-tsv needle_protein_fragments.tsv --fasta --dna \
-  CDRNSK010000150.1_p105-like_anthozoa_c3a4b3b9 \
+  CDRNSK010000150.1_p100-like_anthozoa_c3a4b3b9 \
   CDRNSK010000247.1_IkBa-like_anthozoa_2f11850d \
   CDRNSK010000283.1_IkB-like-1_anthozoa_15b94c4d \
   CDRNSK010000283.1_IkB-like-2_anthozoa_d33dc3b5 > loci_pseu.fna

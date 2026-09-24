@@ -42,17 +42,17 @@ docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/x.faa -o
 
 # Building HMM profiles
 
-hmmbuild p105-like_anthozoa.hmm p105-like_anthozoa.msa
-hmmbuild p50-like_anthozoa.hmm p50-like_anthozoa.msa
+hmmbuild p100-like_anthozoa.hmm p100-like_anthozoa.msa
+hmmbuild p52-like_anthozoa.hmm p52-like_anthozoa.msa
 
 PYTHONPATH=../coral sieve-py ../sieve/scripts/hmmsearch-threshold.py \
-  --hmm p105-like_anthozoa.hmm \
-  --positive-fasta p105-like_anthozoa.faa \
+  --hmm p100-like_anthozoa.hmm \
+  --positive-fasta p100-like_anthozoa.faa \
   --all-fasta cn_PF00554.faa \
-  --output p105-like_anthozoa_thresholds.tsv
+  --output p100-like_anthozoa_thresholds.tsv
 
 PYTHONPATH=../coral sieve-py ../sieve/scripts/hmmsearch-threshold.py \
-  --hmm p50-like_anthozoa.hmm \
-  --positive-fasta p50-like_anthozoa.faa \
+  --hmm p52-like_anthozoa.hmm \
+  --positive-fasta p52-like_anthozoa.faa \
   --all-fasta cn_PF00554.faa \
-  --output p50-like_anthozoa_thresholds.tsv
+  --output p52-like_anthozoa_thresholds.tsv
