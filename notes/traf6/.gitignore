@@ -1,3 +1,7 @@
 res-*
 cn_PF02845_domain.msa.*
 cn_hs_PF02845_domain*
+cn_PF21355_domain_cluster.tsv
+cn_hs_PF21355_domain.faa
+*.msa.*
+protein_pfam.tsv
