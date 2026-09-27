@@ -64,3 +64,6 @@ docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/cn_hs_PF
 cp cn_hs_PF00097_domain.msa.contree cn_hs_PF00097_domain.contree
 
 
+# alphafold Ubc13 binding N-terminal
+~/git/tangle/sieve/scripts/alphafold-pdockq2-directory.py --region A:1-300 . --output x
+
