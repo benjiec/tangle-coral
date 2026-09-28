@@ -1,0 +1,23 @@
+
+# on Tableau, filter for all PF00653 containing sequences, then exclude those
+# that have been assigned K08731 (BIRC5) or K10586 (BIRC6), or contains PF00179
+# or PF12356 -- both domains for BIRC6.
+
+sieve-py ~/git/tangle/sieve/scripts/pfam-find-matches.py PF00653 --taxon anthozoa -o res-pf00653.faa
+
+# manually inspect remaining sequences and remove those that do not have
+# PF13920, put the rest of the accessions into cn_PF00653_PF13920.txt
+
+tangle-py ~/git/tangle/tangle/scripts/fasta-emit.py res-pf00653.faa cn_PF00653_PF13920.txt > cn_PF00653_PF13920.faa
+
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/cn_PF00653_PF13920.faa -out /app/BIRC2-like_anthozoa.msa
+
+hmmbuild BIRC2-like_anthozoa.hmm BIRC2-like_anthozoa.msa
+
+sieve-py ~/git/tangle/sieve/scripts/hmmsearch-threshold.py \
+  --hmm BIRC2-like_anthozoa.hmm \
+  --positive-fasta cn_PF00653_PF13920.faa \
+  --all-fasta res-pf00653.faa \
+  --output x
+
+
