@@ -20,4 +20,8 @@ sieve-py ~/git/tangle/sieve/scripts/hmmsearch-threshold.py \
   --all-fasta res-pf00653.faa \
   --output x
 
+# extract BIR1 region for AF binding check for TRAFs
+
+sieve-py ~/git/tangle/sieve/scripts/pfam-extract-region.py \
+  cn_PF00653_PF13920.faa protein_pfam.tsv PF00653 1 3 cn_PF00653_domain.faa
 
