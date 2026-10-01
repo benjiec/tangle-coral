@@ -35,5 +35,5 @@ rm candidate_inside_hs.faa
 
 docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/candidate_inside.faa /work/candidate_inside /tmp
 echo "Cluster Repr\tCluster Member" | cat - candidate_inside_cluster.tsv > candidate_inside_cluster.tsv.h
-mv candidate_inside_cluster.tsv.h candidate_inside_cluster.tsv
-
+mv candidate_inside_cluster.tsv.h candidate_cluster.tsv
+rm candidate_inside_*
