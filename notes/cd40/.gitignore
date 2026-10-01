@@ -1,0 +1,6 @@
+res-*
+protein_pfam.tsv
+folds
+fold-*
+fold
+candidates_all_seqs.fasta

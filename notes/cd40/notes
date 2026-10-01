@@ -1,0 +1,11 @@
+
+sieve-py ~/git/tangle/sieve/scripts/pfam-find-matches.py PF00020 --taxon homo -o res-pf00020_hs.faa
+sieve-py ~/git/tangle/sieve/scripts/pfam-find-matches.py PF00020 --taxon anthozoa -o res-pf00020.faa
+
+cat res-pf00020_hs.faa res-pf00020.faa > x.faa
+docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/x.faa /work/candidates /tmp
+echo "Cluster Repr\tCluster Member" | cat - candidates_cluster.tsv > candidates_cluster.tsv.h
+mv candidates_cluster.tsv.h candidates_cluster.tsv
+rm x.faa
+
+cut -f 2 candidates_cluster.tsv | grep -v "_K" | grep -v "Cluster Member" | sieve-py ~/git/tangle/sieve/scripts/protein-names.py - > candidate_names.tsv
