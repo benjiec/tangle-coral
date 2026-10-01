@@ -21,7 +21,6 @@ def main(argv=None):
     args = parser.parse_args(argv)
 
     sequences = read_fasta_as_dict(args.input)
-    print(len(sequences))
     batch = unique_batch()
 
     motifs = [(re.compile(pat), motif) for pat, motif in MOTIFS]
@@ -33,7 +32,7 @@ def main(argv=None):
             for start, end, matched in matches:
                 row = dict(
                   detection_type="sequence",
-                  detection_method="hmm",
+                  detection_method="other",
                   batch=batch,
                   query_accession=acc,
                   query_database="_",
