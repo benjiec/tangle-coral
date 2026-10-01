@@ -37,7 +37,7 @@ sieve-py ~/git/tangle/sieve/scripts/pfam-find-matches.py PF21355 --taxon anthozo
 mv res-pf21355/genomic_loci.tsv cn_PF21355_loci.tsv
 
 # RING domain
-sieve-py ~/git/tangle/sieve/scripts/pfam-extract-region.py \
+sieve-py ~/git/tangle/sieve/scripts/detected-extract-region.py \
   res-pf21355/input.faa protein_pfam.tsv PF00097 1 1 cn_PF21355_PF00097_domain.faa
 
 # human refs
@@ -46,7 +46,7 @@ sieve-py ~/git/tangle/sieve/scripts/pfam-find-matches.py PF21355 --taxon homo | 
     --rule coral.rules.generic.nothing \
     --artifacts-dir res-pf21355_hs
 
-sieve-py ~/git/tangle/sieve/scripts/pfam-extract-region.py \
+sieve-py ~/git/tangle/sieve/scripts/detected-extract-region.py \
   res-pf21355_hs/input.faa protein_pfam.tsv PF00097 1 1 hs_PF21355_PF00097_domain.faa
 # remove non NP_ entries
 
