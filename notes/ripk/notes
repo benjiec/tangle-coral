@@ -9,7 +9,18 @@ sieve-py ~/git/tangle/sieve/scripts/pfam-find-matches.py PF00069 PF00531 \
   --taxon homo \
   -o res-pf00069_pf00531_hs.faa
 
+sieve-py ~/git/tangle/sieve/scripts/pfam-find-matches.py PF00069 PF00619 \
+  --sequence-source ncbi \
+  --taxon anthozoa \
+  -o res-pf00069_pf00619.faa
+
+sieve-py ~/git/tangle/sieve/scripts/pfam-find-matches.py PF00069 PF00619 \
+  --sequence-source ncbi \
+  --taxon homo \
+  -o res-pf00069_pf00619_hs.faa
+
 cat res-pf00069_pf00531.faa res-pf00069_pf00531_hs.faa > x.faa
+cat res-pf00069_pf00619.faa res-pf00069_pf00619_hs.faa >> x.faa
 
 tangle-py ../traf6/motifs.py x.faa candidate_motifs.tsv
 
