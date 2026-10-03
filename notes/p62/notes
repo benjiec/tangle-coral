@@ -1,0 +1,13 @@
+
+sieve-py ~/git/tangle/sieve/scripts/pfam-find-matches.py PF16577 --taxon anthozoa -o res-pf16577.faa
+sieve-py ~/git/tangle/sieve/scripts/pfam-find-matches.py PF16577 --taxon homo -o res-pf16577_hs.faa
+sieve-py ~/git/tangle/sieve/scripts/ko-find-matches.py K14381 --taxon anthozoa -o res-k14381.faa
+sieve-py ~/git/tangle/sieve/scripts/ko-find-matches.py K14381 --taxon homo -o res-k14381_hs.faa
+
+cat res-*.faa > cn_all.faa
+docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/cn_all.faa /work/candidate /tmp
+echo "Cluster Repr\tCluster Member" | cat - candidate_cluster.tsv > candidate_cluster.tsv.h
+mv candidate_cluster.tsv.h candidate_cluster.tsv
+rm candidate_*.fasta
+
+tangle-py ../traf6/motifs.py cn_all.faa candidate_motifs.tsv

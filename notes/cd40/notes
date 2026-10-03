@@ -13,8 +13,8 @@ rm x.faa
 
 cut -f 2 candidate_cluster.tsv | grep -v "_K" | grep -v "Cluster Member" | sieve-py ~/git/tangle/sieve/scripts/protein-names.py - > candidate_names.tsv
 
-sieve-py motifs.py res-pf00020.faa - > candidate_motifs.tsv
-sieve-py motifs.py res-pf00020_hs.faa - | grep -v detection_type >> candidate_motifs.tsv
+sieve-py ../traf6/motifs.py res-pf00020.faa - > candidate_motifs.tsv
+sieve-py ../traf6/motifs.py res-pf00020_hs.faa - | grep -v detection_type >> candidate_motifs.tsv
 
 # make 4 .faa files for submisson to DeepTHHMM, no _K sequences, max 250 sequences each file
 # include both _hs references and anthozoa sequences

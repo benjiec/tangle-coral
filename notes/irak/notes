@@ -17,7 +17,7 @@ sieve-py ~/git/tangle/sieve/scripts/hmmsearch-threshold.py \
   --all-fasta res-pf01335.faa \
   --output x
 
-tangle-py ../cd40/motifs.py cn_IRAK.faa candidate_motifs.tsv
+tangle-py ../traf6/motifs.py cn_IRAK.faa candidate_motifs.tsv
 
 docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/cn_IRAK.faa /work/candidate /tmp
 echo "Cluster Repr\tCluster Member" | cat - candidate_cluster.tsv > candidate_cluster.tsv.h
