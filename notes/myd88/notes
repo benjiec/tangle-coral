@@ -1,0 +1,34 @@
+
+sieve-py ~/git/tangle/sieve/scripts/ko-find-matches.py K04729 \
+  --sequence-source ncbi \
+  --taxon anthozoa -o res-k04729.faa
+
+sieve-py ~/git/tangle/sieve/scripts/ko-find-matches.py K04729 \
+  --sequence-source ncbi \
+  --taxon homo -o res-k04729_hs.faa
+
+cat res-k04729.faa res-k04729_hs.faa > x.faa
+
+tangle-py ../traf6/motifs.py x.faa candidate_motifs.tsv
+
+docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/x.faa /work/candidate /tmp
+echo "Cluster Repr\tCluster Member" | cat - candidate_cluster.tsv > candidate_cluster.tsv.h
+mv candidate_cluster.tsv.h candidate_cluster.tsv
+
+rm x.faa
+
+# MyD88_anthozoa.txt
+
+tangle-py ~/git/tangle/tangle/scripts/fasta-emit.py res-k04729.faa MyD88_anthozoa.txt > MyD88_anthozoa.faa
+
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/MyD88_anthozoa.faa -out /app/MyD88_anthozoa.msa
+hmmbuild MyD88_anthozoa.hmm MyD88_anthozoa.msa
+
+# XXX build FPs
+
+sieve-py ~/git/tangle/sieve/scripts/hmmsearch-threshold.py \
+  --hmm MyD88_anthozoa.hmm \
+  --positive-fasta MyD88_anthozoa.faa \
+  --all-fasta XXX.faa \
+  --output x
+
