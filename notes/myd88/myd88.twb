@@ -1090,6 +1090,9 @@
         </metadata-records>
       </connection>
       <aliases enabled='yes' />
+      <column caption='Feature Description' datatype='string' name='[Calculation_0819876187881473]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='{FIXED [target_accession]: MAX(IFNULL([Description],[Name1]))}' />
+      </column>
       <column caption='Protein Match Length' datatype='integer' name='[Calculation_4407924460019712]' role='measure' type='quantitative'>
         <calculation class='tableau' formula='[query_end]-[query_start]+1' />
       </column>
@@ -16792,6 +16795,9 @@
             <datasource caption='candidate_cluster.tsv+ (Multiple Connections)' name='federated.078l4cf02qne3x1elwm2318jvpf3' />
           </datasources>
           <datasource-dependencies datasource='federated.078l4cf02qne3x1elwm2318jvpf3'>
+            <column caption='Feature Description' datatype='string' name='[Calculation_0819876187881473]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='{FIXED [target_accession]: MAX(IFNULL([Description],[Name1]))}' />
+            </column>
             <column caption='Protein Match Length' datatype='integer' name='[Calculation_4407924460019712]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='[query_end]-[query_start]+1' />
             </column>
@@ -16804,7 +16810,9 @@
             <column caption='Class1' datatype='string' name='[Class]' role='dimension' type='nominal' />
             <column datatype='string' name='[Cluster Member (candidate_cluster.tsv)]' role='dimension' type='nominal' />
             <column datatype='string' name='[Cluster Repr]' role='dimension' type='nominal' />
+            <column caption='Description1' datatype='string' name='[Description]' role='dimension' type='nominal' />
             <column datatype='string' name='[Genus]' role='dimension' type='nominal' />
+            <column caption='Name11' datatype='string' name='[Name1]' role='dimension' type='nominal' />
             <column datatype='string' name='[Order]' role='dimension' type='nominal' />
             <column caption='Organism1' datatype='string' name='[Organism]' role='dimension' type='nominal' />
             <column caption='Taxa - Order' datatype='string' name='[Taxa - Class (copy)_5263688543281152]' role='dimension' type='nominal'>
@@ -16817,6 +16825,7 @@
               <calculation class='tableau' formula='{FIXED [Cluster Member (candidate_cluster.tsv)]: MAX([Genus])}' />
             </column>
             <column caption='Custom Metric Value (Protein Ko Assigned.Tsv)' datatype='real' name='[custom_metric_value (protein_ko_assigned.tsv)]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_0819876187881473]' derivation='None' name='[none:Calculation_0819876187881473:nk]' pivot='key' type='nominal' />
             <column-instance column='[Calculation_4407924460019712]' derivation='None' name='[none:Calculation_4407924460019712:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Calculation_4407924461039619]' derivation='None' name='[none:Calculation_4407924461039619:nk]' pivot='key' type='nominal' />
             <column-instance column='[Calculation_4407924494729225]' derivation='None' name='[none:Calculation_4407924494729225:nk]' pivot='key' type='nominal' />
@@ -16865,6 +16874,7 @@
               <color column='[federated.078l4cf02qne3x1elwm2318jvpf3].[none:target_accession:nk]' />
               <size column='[federated.078l4cf02qne3x1elwm2318jvpf3].[none:Calculation_4407924460019712:qk]' />
               <lod column='[federated.078l4cf02qne3x1elwm2318jvpf3].[none:target_model:nk]' />
+              <lod column='[federated.078l4cf02qne3x1elwm2318jvpf3].[none:Calculation_0819876187881473:nk]' />
             </encodings>
           </pane>
         </panes>
@@ -16906,6 +16916,7 @@
         <highlight>
           <color-one-way>
             <field>[federated.078l4cf02qne3x1elwm2318jvpf3].[Feature Type (group)]</field>
+            <field>[federated.078l4cf02qne3x1elwm2318jvpf3].[none:Calculation_0819876187881473:nk]</field>
             <field>[federated.078l4cf02qne3x1elwm2318jvpf3].[none:Calculation_4407924460019712:qk]</field>
             <field>[federated.078l4cf02qne3x1elwm2318jvpf3].[none:Calculation_4407924461039619:nk]</field>
             <field>[federated.078l4cf02qne3x1elwm2318jvpf3].[none:Calculation_4407924463046660:nk]</field>
