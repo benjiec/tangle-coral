@@ -12,7 +12,7 @@ docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/res-pf0
 echo "Cluster Repr\tCluster Member" | cat - candidate_cluster.tsv > candidate_cluster.tsv.h
 mv candidate_cluster.tsv.h candidate_cluster.tsv
 
-docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/dd.faa /work/dd /tmp
+docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/dd.faa /work/dd /tmp --min-seq-id 0.9 -c 0.9 --cov-mode 0
 echo "Cluster Repr\tCluster Member" | cat - dd_cluster.tsv > dd_cluster.tsv.h
 mv dd_cluster.tsv.h dd_cluster.tsv
 
