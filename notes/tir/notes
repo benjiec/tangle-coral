@@ -1,0 +1,10 @@
+
+sieve-py ~/git/tangle/sieve/scripts/pfam-find-matches.py PF13676 \
+  --sequence-source ncbi \
+  --taxon anthozoa \
+  -o res-pf13676.faa
+
+docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/res-pf13676.faa /work/candidate /tmp
+echo "Cluster Repr\tCluster Member" | cat - candidate_cluster.tsv > candidate_cluster.tsv.h
+mv candidate_cluster.tsv.h candidate_cluster.tsv
+
