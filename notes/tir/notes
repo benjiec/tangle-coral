@@ -8,3 +8,10 @@ docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/res-pf1
 echo "Cluster Repr\tCluster Member" | cat - candidate_cluster.tsv > candidate_cluster.tsv.h
 mv candidate_cluster.tsv.h candidate_cluster.tsv
 
+sieve-py ~/git/tangle/sieve/scripts/detected-extract-region.py \
+  res-pf13676.faa protein_pfam.tsv PF13676 1 2 tir.faa --domain-only
+
+sieve-py ~/git/tangle/tangle/scripts/fasta-emit.py res-pf13676.faa nv_tir.txt > nv_tir.faa
+mv ~/Downloads/predicted_topologies.3line nv_tir.3line
+sieve-py ~/git/tangle/sieve/scripts/deeptm-to-detected.py nv_tir.3line - > candidate_deeptm.tsv
+
