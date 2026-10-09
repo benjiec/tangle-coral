@@ -32,3 +32,18 @@ sieve-py ~/git/tangle/sieve/scripts/hmmsearch-threshold.py \
   --all-fasta XXX.faa \
   --output x
 
+
+# This is how you submit custom MSAs to AF, didn't help, but FYI
+#
+# BLAST NCBI blastp with XP_032222159.1 sequence, limit taxon to Cnidaria,
+# download fasta, align with Muscle to x.msa, then move XP_032222159.1 to be
+# the first sequence, then run the following
+
+docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/x.faa -out /app/x.msa
+# edit x.msa to move query to first sequence
+sieve-py ~/git/tangle/sieve/scripts/fa-a3m.py x.msa x.a3m --left 79 --right 175
+sieve-py ~/git/tangle/sieve/scripts/fasta-unique-sequences.py x.a3m x.a3m.u
+mv x.a3m.u x.a3m
+docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/x.a3m /work/x /tmp --min-seq-id 0.9 -c 0.8 --cov-mode 0
+mv x_rep_seq.fasta blastp_myd88_metazoa_1000_dd.a3m
+rm x_all_seqs.fasta x_cluster.tsv
