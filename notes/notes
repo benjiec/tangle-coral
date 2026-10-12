@@ -1,3 +1,7 @@
 
-sieve-py ~/git/tangle/sieve/scripts/alphafold-manifest.py /Volumes/Extreme_Pro/folds af_candidates.faa af_manifest.tsv 2>&1| tee x
+sieve-py ~/git/tangle/sieve/scripts/alphafold-manifest.py /Volumes/Extreme_Pro/folds af_candidates.faa af_manifest.tsv
+
+sieve-py ~/git/tangle/sieve/scripts/alphafold-list-results.py ~/git/tangle/coral/notes/af_manifest.tsv \
+  b911edee --highest | \
+  sieve-py ~/git/tangle/sieve/scripts/alphafold-pdockq2-patches.py --distance-cutoff 10 -
 
