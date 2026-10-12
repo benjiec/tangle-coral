@@ -5,3 +5,10 @@ sieve-py ~/git/tangle/sieve/scripts/alphafold-list-results.py ~/git/tangle/coral
   b911edee --highest | \
   sieve-py ~/git/tangle/sieve/scripts/alphafold-pdockq2-patches.py --distance-cutoff 10 -
 
+sieve-py ~/git/tangle/sieve/scripts/alphafold-list-results.py ~/git/tangle/coral/notes/af_manifest.tsv \
+  b911edee --highest | \
+  sieve-py ~/git/tangle/sieve/scripts/alphafold-rosetta-interface.py - --interface A:B
+
+sieve-py ~/git/tangle/sieve/scripts/alphafold-list-results.py ~/git/tangle/coral/notes/af_manifest.tsv \
+  b911edee --highest | \
+  sieve-py ~/git/tangle/sieve/scripts/alphafold-rosetta-integrity.py -
