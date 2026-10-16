@@ -1,0 +1,18 @@
+
+sieve-py ~/git/tangle/sieve/scripts/pfam-find-matches.py PF01335 \
+  --sequence-source ncbi \
+  --taxon anthozoa \
+  -o res-pf01335.faa
+
+tangle-py ../traf6/motifs.py res-pf01335.faa candidate_motifs.tsv
+
+sieve-py ~/git/tangle/sieve/scripts/detected-extract-region.py res-pf01335.faa protein_pfam.tsv PF01335 1 2 ded.faa --domain-only
+
+docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/res-pf01335.faa /work/candidate /tmp
+echo "Cluster Repr\tCluster Member" | cat - candidate_cluster.tsv > candidate_cluster.tsv.h
+mv candidate_cluster.tsv.h candidate_cluster.tsv
+
+docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/ded.faa /work/ded /tmp --min-seq-id 0.9 -c 0.9 --cov-mode 0
+echo "Cluster Repr\tCluster Member" | cat - ded_cluster.tsv > ded_cluster.tsv.h
+mv ded_cluster.tsv.h ded_cluster.tsv
+
