@@ -12,3 +12,5 @@ sieve-py ~/git/tangle/sieve/scripts/alphafold-list-results.py ~/git/tangle/coral
 sieve-py ~/git/tangle/sieve/scripts/alphafold-list-results.py ~/git/tangle/coral/notes/af_manifest.tsv \
   b911edee --highest | \
   sieve-py ~/git/tangle/sieve/scripts/alphafold-rosetta-integrity.py -
+
+sieve-py af_cross.py dd_cross_x.faa dd_cross_y.faa dd_cross.json --x XP_032233730_DD_structured
