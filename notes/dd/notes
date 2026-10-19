@@ -17,6 +17,9 @@ echo "Cluster Repr\tCluster Member" | cat - dd_cluster.tsv > dd_cluster.tsv.h
 mv dd_cluster.tsv.h dd_cluster.tsv
 
 
+sieve-py ~/git/tangle/sieve/scripts/deeptm-to-detected.py nv_dth.3line - > candidate_deeptm.tsv
+
+
 sieve-py ~/git/tangle/sieve/scripts/pfam-find-matches.py PF00531 \
   --sequence-source ncbi \
   --taxon homo \
