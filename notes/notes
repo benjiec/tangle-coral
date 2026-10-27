@@ -9,6 +9,8 @@ sieve-py ~/git/tangle/sieve/scripts/alphafold-list-results.py ~/git/tangle/coral
   b911edee --highest | \
   sieve-py ~/git/tangle/sieve/scripts/alphafold-rosetta-interface.py - --interface A:B
 
-sieve-py ~/git/tangle/sieve/scripts/alphafold-list-results.py ~/git/tangle/coral/notes/af_manifest.tsv \
-  b911edee --highest | \
-  sieve-py ~/git/tangle/sieve/scripts/alphafold-rosetta-integrity.py -
+sieve-py ~/git/tangle/sieve/scripts/alphafold-overlap.py \
+  folds_2026_10_26_11_50.zip::folds_2026_10_26_11_50/26980_18487_s2 \
+  folds_2026_10_26_12_11.zip::folds_2026_10_26_12_11/18487_39936_r2 \
+  --output x --all-models
+
