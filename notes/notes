@@ -14,3 +14,8 @@ sieve-py ~/git/tangle/sieve/scripts/alphafold-overlap.py \
   folds_2026_10_26_12_11.zip::folds_2026_10_26_12_11/18487_39936_r2 \
   --output x --all-models
 
+sieve-py ~/git/tangle/sieve/scripts/alphafold-overlap.py \
+  /Volumes/Extreme_Pro/folds/folds_2026_10_20_14_10.zip::folds_2026_10_20_14_10/33730_26980_1_1 \
+  /Volumes/Extreme_Pro/folds/folds_2026_10_27_10_44.zip::folds_2026_10_27_10_44/26980_dd_dd2_trunc_2x \
+  --output x --all-models \
+  --sequence GTLLNDLLGTRLLQEISVSLDRKMAFGNDWRQLSSVFGYKMAQIRCWERQPSPTAAMLDRLAEERPSITTNELVNTLSGIDRNDVAVLLQEGLCASQTT
