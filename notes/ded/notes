@@ -16,3 +16,6 @@ docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/ded.faa
 echo "Cluster Repr\tCluster Member" | cat - ded_cluster.tsv > ded_cluster.tsv.h
 mv ded_cluster.tsv.h ded_cluster.tsv
 
+
+sieve-py ../af_cross.py ded_cross_x.faa ded_cross_y.faa x.json
+
