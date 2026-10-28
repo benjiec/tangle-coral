@@ -44,3 +44,10 @@ sieve-py ../af_cross.py dd_tradd_x.faa dd_tradd_y.faa dd_tradd.json
 sieve-py ~/git/tangle/sieve/scripts/alphafold-find.py \
   ../af_manifest.tsv dd_proteins.txt \
   --cross --max-chains 2 --max-unique-inputs 2 --highest
+
+cut -f 1 dd_proteins.tsv | grep -v Sequence\ Name |\
+  sieve-py ~/git/tangle/sieve/scripts/alphafold-find.py \
+    ../af_manifest.tsv - \
+    --cross --max-chains 2 --max-unique-inputs 2 --highest |\
+  sieve-py ~/git/tangle/sieve/scripts/alphafold-pdockq2-patches.py - \
+    --distance-cutoff 8 --dd --output dd_interactome.tsv --silent
