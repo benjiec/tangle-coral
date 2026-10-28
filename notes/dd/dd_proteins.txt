@@ -1,33 +1,33 @@
-Nv_MyD88_DD_structured
-XP_001624845_DD_Caspase_recruit_structured
-XP_001625762_DD_structured
-XP_001634900_DD_IG_structured
-XP_001635820_DD_Ras_Roc_structured
-XP_001635901_DD_Trypsin_structured
-XP_001636280_DD_structured
-XP_032217899_DD_short_UPA_structured
+Nv MyD88 DD structured
+XP_001624845 DD Caspase_recruit_structured
+XP_001625762 DD structured
+XP_001634900 DD IG_structured
+XP_001635820 DD Ras/Roc structured
+XP_001635901 DD Trypsin_structured
+XP_001636280 DD structured
+XP_032217899 DD short_UPA_structured
 XP_032218487 DD longer flanking used in many screens
-XP_032218487_DD_structured
-XP_032219199_DD_structured
-XP_032219266_DD_structured
-XP_032219877_DD_TIR_Ras_structured
-XP_032222781_DD_Caspase_structured
-XP_032224621_DD_structured
+XP_032218487 DD structured
+XP_032219199 DD structured
+XP_032219266 DD structured
+XP_032219877 DD TIR Ras structured
+XP_032222781 DD Caspase structured
+XP_032224621 DD structured
 XP_032226980 DD TRADD structured less disordered
-XP_032226980_DD_TRADD_structured
-XP_032226980_DD2_structured
-XP_032228033_DD_structured
-XP_032228658_DD_structured
-XP_032229980_DD_ATPase_structured
-XP_032230406_DD_structured
-XP_032233730_DD_structured
-XP_032234174_DD_Caspase_structured
-XP_032235104_DD_ZU5_LEU_structured
-XP_032239936_DD_structured
-XP_032241888_DD_structured
-XP_032242740_DD_structured
-XP_048575654_DD_structured
-XP_048576594_DD_ATPase_structured
-XP_048577266_DD_structured
-XP_048577715_DD_structured
-XP_048590151_DD_structured
+XP_032226980 DD TRADD structured
+XP_032226980 DD2 structured
+XP_032228033 DD structured
+XP_032228658 DD structured
+XP_032229980 DD ATPase structured
+XP_032230406 DD structured
+XP_032233730 DD structured
+XP_032234174 DD Caspase structured
+XP_032235104 DD ZU5 LEU structured
+XP_032239936 DD structured
+XP_032241888 DD structured
+XP_032242740 DD structured
+XP_048575654 DD structured
+XP_048576594 DD ATPase structured
+XP_048577266 DD structured
+XP_048577715 DD structured
+XP_048590151 DD structured

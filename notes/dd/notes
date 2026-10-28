@@ -40,3 +40,7 @@ docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/dd_tree_
 
 sieve-py ../af_cross.py dd_cross_x.faa dd_cross_y.faa dd_cross.json --x XP_032233730_DD_structured
 sieve-py ../af_cross.py dd_tradd_x.faa dd_tradd_y.faa dd_tradd.json
+
+sieve-py ~/git/tangle/sieve/scripts/alphafold-find.py \
+  ../af_manifest.tsv dd_proteins.txt \
+  --cross --max-chains 2 --max-unique-inputs 2 --highest
