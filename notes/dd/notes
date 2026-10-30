@@ -59,3 +59,7 @@ cut -f 1 dd_proteins.tsv | grep -v Sequence\ Name |\
     --rules dd_face_rules.tsv \
     --domains dd_proteins.tsv \
     --output dd_interactome_faces.tsv
+
+cut -f 2 dd_proteins.tsv | grep -v Protein | sieve-py ~/git/tangle/sieve/scripts/protein-names.py --allow-multiple - > dd_protein_names.tsv
+
+
