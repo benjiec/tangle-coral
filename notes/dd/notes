@@ -2,7 +2,14 @@
 sieve-py ~/git/tangle/sieve/scripts/pfam-find-matches.py PF00531 \
   --sequence-source ncbi \
   --taxon anthozoa \
-  -o res-pf00531.faa
+  -o res-pf00531_an.faa
+
+sieve-py ~/git/tangle/sieve/scripts/pfam-find-matches.py PF00531 \
+  --sequence-source ncbi \
+  --taxon homo \
+  -o res-pf00531_hs.faa
+
+cat res-pf00531_an.faa res-pf00531_hs.faa > res-pf00531.faa
 
 tangle-py ../traf6/motifs.py res-pf00531.faa candidate_motifs.tsv
 
