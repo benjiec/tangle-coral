@@ -1,0 +1,53 @@
+NP_000034.1 (FAS) ↔ NP_003815.1 (FADD)
+Validation: Structurally determined by X-ray crystallography (PDB: 3OQ9).
+Interface Architecture: Asymmetric oligomerization utilizing canonical Type I, Type II, and Type III DD–DD contact surfaces to form the core of the Death-Inducing Signaling Complex (DISC).
+Confidence/feasibility/interface call: Reject, False, Canonical
+
+NP_001056.1 (TNFRSF1A / TNFR1) ↔ NP_003780.1 (TRADD)
+Validation: Structurally and biochemically validated (PDB: 1ICH; extensive mutagenesis of receptor/adaptor DD surfaces).
+Interface Architecture: TNFR1 DD directly recruits TRADD DD to initiate Complex I.
+Confidence/feasibility/interface call: Medium, False, Variant
+
+NP_003781.1 (TNFRSF25 / DR3) ↔ NP_003780.1 (TRADD)
+Validation: Biochemically validated by direct DD–DD binding and co-immunoprecipitation. DR3 DD directly binds the DD of TRADD.
+Confidence/feasibility/interface call: Reject, False, Variant
+
+NP_003780.1 (TRADD) ↔ NP_003795.2 (RIPK1 isoform 1)
+Validation: Validated via biophysical binding assays and mutational analysis. TRADD DD recruits RIPK1 via its C-terminal DD into Complex I.
+Confidence/feasibility/interface call: Reject, False, Variant
+
+NP_003780.1 (TRADD) ↔ NP_003815.1 (FADD)
+Validation: Validated in cytoplasmic apoptotic Complex II. TRADD DD binds FADD DD to mediate caspase-8 recruitment when Complex I dissociates.
+Confidence/feasibility/interface call: Reject, True (Hydrophobic dominant), Variant
+
+NP_003795.2 (RIPK1 isoform 1) ↔ NP_003815.1 (FADD)
+Validation: Validated structurally and biochemically during ripoptosome and Complex IIb assembly. Direct engagement occurs between the C-terminal DD of RIPK1 and the C-terminal DD of FADD.
+Confidence/feasibility/interface call: Reject (Cooperative), True, Canonical
+
+NP_003780.1 ↔ NP_003780.1
+TRADD ↔ TRADD
+Homooligomeric scaffold (PDB: 1ICH)
+Confidence/feasibility/interface call: Reject, False, Variant
+
+
+
+
+NP_002459.3 (MyD88 isoform 2) ↔ NP_001561.3 (IRAK2)
+Validation: Structurally determined by X-ray crystallography (PDB: 3MOP).
+Interface Architecture: In the helical Myddosome assembly, MyD88 DD forms direct Type I/II/III heterotypic contacts with IRAK DDs, including IRAK2.
+Confidence/feasibility/interface call: Low, True (Cooperative), Variant
+
+NP_002459.3 (MyD88 isoform 2) ↔ NP_001560.2 (IRAK1 isoform 1)
+Validation: Validated in vitro and in vivo. The N-terminal DD of MyD88 directly associates with the N-terminal DD of full-length IRAK1 to propagate kinase activation.
+Confidence/feasibility/interface call: Reject, False, Variant
+
+NP_002459.3 ↔ NP_002459.3
+MyD88 ↔ MyD88
+Hexameric seed in Myddosome (PDB: 3MOP)
+Confidence/feasibility/interface call: Reject, True (Hydrophobic dominant), Variant
+
+NP_001561.3 ↔ NP_001561.3
+IRAK2 ↔ IRAK2
+Tetrameric cap in Myddosome (PDB: 3MOP)
+Confidence/feasibility/interface call: Reject, True (Homodimer clamp), Variant
+
