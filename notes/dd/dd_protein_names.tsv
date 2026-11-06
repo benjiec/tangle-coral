@@ -30,6 +30,7 @@ XP_048576594.1	uncharacterized protein LOC5518589 isoform X1
 XP_048577266.1	uncharacterized protein LOC116614957 isoform X1
 XP_048577715.1	FAS-associated death domain protein-like isoform X1
 XP_048590151.1	uncharacterized protein LOC116607750 isoform X4
+XP_001639065.2	uncharacterized protein LOC5519162
 XP_001626560.2	caspase-8
 XP_001626560.2	caspase-8
 XP_032217782.1	protein fem-1 homolog A
@@ -47,19 +48,10 @@ XP_032239936.1	serine/threonine-protein kinase PAK 1-like isoform X1
 XP_048575654.1	serine/threonine-protein kinase BCK1/SLK1/SSP31 isoform X1
 XP_032226980.1	uncharacterized protein LOC5502777
 XP_048577715.1	FAS-associated death domain protein-like isoform X1
-NP_002459.3	myeloid differentiation primary response protein MyD88 isoform 2
-NP_003780.1	tumor necrosis factor receptor type 1-associated DEATH domain protein
-NP_003815.1	FAS-associated death domain protein
-NP_001561.3	interleukin-1 receptor-associated kinase-like 2
-NP_000028.3	ankyrin-1 isoform 3
-NP_000034.1	tumor necrosis factor receptor superfamily member 6 isoform 1 precursor
 NP_001056.1	tumor necrosis factor receptor superfamily member 1A isoform 1 precursor
-NP_001191332.1	ankyrin-3 isoform 3
-NP_001397630.1	interleukin-1 receptor-associated kinase 1 isoform 4
-NP_001560.2	interleukin-1 receptor-associated kinase 1 isoform 1
-NP_002498.1	tumor necrosis factor receptor superfamily member 16 precursor
-NP_003719.3	netrin receptor UNC5C precursor
-NP_003781.1	tumor necrosis factor receptor superfamily member 25 isoform 2 precursor
+NP_003780.1	tumor necrosis factor receptor type 1-associated DEATH domain protein
 NP_003795.2	receptor-interacting serine/threonine-protein kinase 1 isoform 1
-NP_003796.1	death domain-containing protein CRADD isoform 1
+NP_003815.1	FAS-associated death domain protein
+NP_002459.3	myeloid differentiation primary response protein MyD88 isoform 2
 NP_057207.2	interleukin-1 receptor-associated kinase 4 isoform a
+NP_001561.3	interleukin-1 receptor-associated kinase-like 2
