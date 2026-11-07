@@ -69,4 +69,4 @@ cut -f 1 dd_proteins.tsv | grep -v Sequence\ Name |\
 
 cut -f 2 dd_proteins.tsv | grep -v Protein | sieve-py ~/git/tangle/sieve/scripts/protein-names.py --allow-multiple - > dd_protein_names.tsv
 
-
+sieve-py ../af_select.py ../af_candidates.faa dd_select_1 x.reps_1.json

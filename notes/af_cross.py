@@ -12,8 +12,8 @@ def main(argv=None):
     parser.add_argument("--x", nargs="*", type=str)
     args = parser.parse_args(argv)
 
-    seqs_x = read_fasta_as_dict(args.fasta_x)
-    seqs_y = read_fasta_as_dict(args.fasta_y)
+    seqs_x = read_fasta_as_dict(args.fasta_x, preserve_full_accession=True)
+    seqs_y = read_fasta_as_dict(args.fasta_y, preserve_full_accession=True)
     if args.x:
         seqs_x = {k:v for k,v in seqs_x.items() if k in args.x}
 
