@@ -4,3 +4,4 @@ protein_pfam.tsv
 *all_seqs.fasta
 pf*.faa
 dd_tradd.json
+*.json*

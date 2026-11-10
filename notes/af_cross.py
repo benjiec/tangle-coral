@@ -10,6 +10,7 @@ def main(argv=None):
     parser.add_argument("fasta_y")
     parser.add_argument("json_output")
     parser.add_argument("--x", nargs="*", type=str)
+    parser.add_argument("--n", default=0, type=int)
     args = parser.parse_args(argv)
 
     seqs_x = read_fasta_as_dict(args.fasta_x, preserve_full_accession=True)
@@ -29,8 +30,18 @@ def main(argv=None):
                        version=1)
             jobs.append(job)
 
-    with open_file_to_write(args.json_output, "wt") as f:
-        f.write(json.dumps(jobs))
+    if args.n == 0:
+        with open_file_to_write(args.json_output, "wt") as f:
+            f.write(json.dumps(jobs))
+
+    else:
+        i = 0
+        while len(jobs) > 0:
+            i += 1
+            with open_file_to_write(args.json_output+f".{i}", "wt") as f:
+                f.write(json.dumps(jobs[0:args.n]))
+            jobs = jobs[args.n:]
+
 
 if __name__ == "__main__":
     sys.exit(main())
