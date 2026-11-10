@@ -30,3 +30,18 @@ DED	IIIa	alpha3	1	alternative_or	min 1 on alpha3 OR min 2 on loop2-3
 DED	IIIa	loop2-3	2	alternative_or	min 2 on loop2-3 OR min 1 on alpha3
 DED	IIIb	loop1-2	1	mandatory	core loop
 DED	IIIb	loop3-4	1	mandatory	core loop
+CARD	Ia	alpha1	3	mandatory	core helix (predominantly alpha1b)
+CARD	Ia	alpha4	3	mandatory	core helix
+CARD	Ia	loop1-2	0	optional	supporting loop
+CARD	Ib	alpha2	3	mandatory	core helix containing acidic/polar patch
+CARD	Ib	alpha3	2	mandatory	core helix
+CARD	Ib	loop2-3	0	optional	supporting loop
+CARD	IIa	alpha4	2	mandatory	core helix
+CARD	IIa	loop4-5	1	mandatory	anchoring loop
+CARD	IIb	alpha6	2	alternative_or	min 2 on alpha6 OR min 2 on loop5-6
+CARD	IIb	loop5-6	2	alternative_or	min 2 on alpha6 OR min 2 on loop5-6
+CARD	IIb	loop1-2	1	alternative_or	at least 1 residue from loop1-2 OR loop5-6
+CARD	IIIa	alpha3	2	mandatory	core helix
+CARD	IIIa	loop2-3	1	mandatory	supporting loop
+CARD	IIIb	loop1-2	1	mandatory	core loop (loop after alpha1b)
+CARD	IIIb	loop3-4	1	mandatory	core loop

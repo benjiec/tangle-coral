@@ -62,6 +62,9 @@ cut -f 1 dd_proteins.tsv | grep -v Sequence\ Name |\
     --cross --max-chains 2 --max-unique-inputs 2 --highest |\
   sieve-py ~/git/tangle/sieve/scripts/alphafold-death-faces.py - \
     --distance-cutoff 10 \
+    --merge-kinked-helices \
+    --kink-connector-length 1 \
+    --kink-angle 70 \
     --manifest ../af_manifest.tsv \
     --rules dd_face_rules.tsv \
     --domains dd_proteins.tsv \
