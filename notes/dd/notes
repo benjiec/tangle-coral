@@ -64,7 +64,7 @@ cut -f 1 dd_proteins.tsv | grep -v Sequence\ Name |\
     --distance-cutoff 10 \
     --merge-kinked-helices \
     --kink-connector-length 1 \
-    --kink-angle 70 \
+    --kink-angle 75 \
     --manifest ../af_manifest.tsv \
     --rules dd_face_rules.tsv \
     --domains dd_proteins.tsv \
