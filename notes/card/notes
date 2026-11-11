@@ -39,15 +39,14 @@ docker run --rm -v .:/work ghcr.io/soedinglab/mmseqs2 easy-cluster /work/card.fa
 echo "Cluster Repr\tCluster Member" | cat - card_cluster.tsv > card_cluster.tsv.h
 mv card_cluster.tsv.h card_cluster.tsv
 
-sieve-py ~/git/tangle/sieve/scripts/alphafold-death-faces.py \
+afl 83f745b6 --highest |\
+sieve-py ~/git/tangle/sieve/scripts/alphafold-death-faces.py - \
   --manifest ~/git/tangle/coral/notes/af_manifest.tsv \
   --domains ~/git/tangle/coral/notes/dd/dd_proteins.tsv \
   --rules ~/git/tangle/coral/notes/dd/dd_face_rules.tsv \
   --merge-kinked-helices \
   --kink-connector-length 1 \
   --kink-angle 75 \
-  --output x.tsv \
-  /Volumes/Extreme_Pro/folds/folds_2026_11_11_11_54.zip::folds_2026_11_11_11_54/xp_032241932_card_structured_mda5_xp_032230667_card_structured
-
+  --output x.tsv
 
 
