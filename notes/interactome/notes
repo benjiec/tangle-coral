@@ -1,0 +1,23 @@
+
+cut -f 1 sequences.tsv | grep -v Sequence\ Name |\
+  sieve-py ~/git/tangle/sieve/scripts/alphafold-find.py \
+    ../af_manifest.tsv - \
+    --cross --max-chains 2 --max-unique-inputs 2 --highest |\
+  sieve-py ~/git/tangle/sieve/scripts/alphafold-pdockq2-patches.py - \
+    --distance-cutoff 10 --output interactome.tsv --silent
+
+cut -f 1 sequences.tsv | grep -v Sequence\ Name |\
+  sieve-py ~/git/tangle/sieve/scripts/alphafold-find.py \
+    ../af_manifest.tsv - \
+    --cross --max-chains 2 --max-unique-inputs 2 --highest |\
+  sieve-py ~/git/tangle/sieve/scripts/alphafold-death-faces.py - \
+    --distance-cutoff 10 \
+    --merge-kinked-helices \
+    --kink-connector-length 1 \
+    --kink-angle 75 \
+    --manifest ../af_manifest.tsv \
+    --rules dd_face_rules.tsv \
+    --domains sequences.tsv \
+    --output interactome_dd_faces.tsv
+
+cut -f 2 sequences.tsv | grep -v Protein | sieve-py ~/git/tangle/sieve/scripts/protein-names.py --allow-multiple - > protein_names.tsv
