@@ -1,5 +1,5 @@
 
-sieve-py ~/git/tangle/sieve/scripts/merge-cluster-tsvs.py --output clusters.tsv clusters/*.tsv
+sieve-py ~/git/tangle/sieve/scripts/merge-cluster-tsvs.py --output clusters.tsv clusters/*.tsv --cluster-fasta clusters/*_all_seqs.fasta
 
 cut -f 2 sequences.tsv | grep -v Protein | sieve-py ~/git/tangle/sieve/scripts/protein-names.py --allow-multiple - > protein_names.tsv
 
