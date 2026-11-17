@@ -48,29 +48,4 @@ docker run --platform linux/amd64 --rm -v .:/app pegi3s/muscle -in /app/dd_tree_
 
 sieve-py ../af_cross.py dd_cross_x.faa dd_cross_y.faa dd_cross.json --x XP_032233730_DD_structured
 sieve-py ../af_cross.py dd_tradd_x.faa dd_tradd_y.faa dd_tradd.json
-
-
-cut -f 1 dd_proteins.tsv | grep -v Sequence\ Name |\
-  sieve-py ~/git/tangle/sieve/scripts/alphafold-find.py \
-    ../af_manifest.tsv - \
-    --cross --max-chains 2 --max-unique-inputs 2 --highest |\
-  sieve-py ~/git/tangle/sieve/scripts/alphafold-pdockq2-patches.py - \
-    --distance-cutoff 10 --output dd_interactome.tsv --silent
-
-cut -f 1 dd_proteins.tsv | grep -v Sequence\ Name |\
-  sieve-py ~/git/tangle/sieve/scripts/alphafold-find.py \
-    ../af_manifest.tsv - \
-    --cross --max-chains 2 --max-unique-inputs 2 --highest |\
-  sieve-py ~/git/tangle/sieve/scripts/alphafold-death-faces.py - \
-    --distance-cutoff 10 \
-    --merge-kinked-helices \
-    --kink-connector-length 1 \
-    --kink-angle 75 \
-    --manifest ../af_manifest.tsv \
-    --rules dd_face_rules.tsv \
-    --domains dd_proteins.tsv \
-    --output dd_interactome_faces.tsv
-
-cut -f 2 dd_proteins.tsv | grep -v Protein | sieve-py ~/git/tangle/sieve/scripts/protein-names.py --allow-multiple - > dd_protein_names.tsv
-
 sieve-py ../af_select.py ../af_candidates.faa dd_select_1 x.reps_1.json
