@@ -1980,6 +1980,12 @@
       <column caption='Chain A Protein Accession' datatype='string' name='[Chain A Sequence Name (copy)_0798931436421122]' role='dimension' type='nominal'>
         <calculation class='tableau' formula='{FIXED [fold_id]: MAX(&#10;  IF [chain] == &apos;A&apos; THEN [Protein Accession] ELSE NULL END&#10;)}' />
       </column>
+      <column caption='Chain A Protein Name' datatype='string' name='[Chain B Protein Name (copy)_1161426968408066]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='{FIXED [fold_id]: MAX(&#10;  IF [chain] == &apos;A&apos; THEN [protein_name] ELSE NULL END&#10;)}' />
+      </column>
+      <column caption='Chain B Protein Name' datatype='string' name='[Chain B Sequence Name (copy)_1161426968301569]' role='dimension' type='nominal'>
+        <calculation class='tableau' formula='{FIXED [fold_id]: MAX(&#10;  IF [chain] == &apos;B&apos; THEN [protein_name] ELSE NULL END&#10;)}' />
+      </column>
       <column datatype='string' name='[Confidence, Chemically Feasible, Candidate Interface (group)]' role='dimension' type='nominal'>
         <calculation class='categorical-bin' column='[Confidence, Chemically Feasible, Candidate Interface (Combined)]' default='&quot;Other&quot;' new-bin='true'>
           <bin default-name='false' value='&quot;Likely&quot;'>
@@ -2592,6 +2598,9 @@
             <datasource caption='interactome.tsv+ (Multiple Connections)' name='federated.10di9cr07j6tjc0zjee0y1nyf76b' />
           </datasources>
           <datasource-dependencies datasource='federated.10di9cr07j6tjc0zjee0y1nyf76b'>
+            <column caption='Chain A Sequence Name' datatype='string' name='[Calculation_0798931436064768]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='{FIXED [fold_id]: MAX(&#10;  IF [chain] == &apos;A&apos; THEN [Sequence Name] ELSE NULL END&#10;)}' />
+            </column>
             <column caption='Normalized PAE' datatype='real' name='[Calculation_0798931453329412]' role='measure' type='quantitative'>
               <calculation class='tableau' formula='{FIXED [fold_id]: MIN([normalized PAE to partner])}' />
             </column>
@@ -2655,8 +2664,17 @@
             <column caption='Chain B Sequence Feature' datatype='string' name='[Chain A Sequence Feature (copy)_0798931461484571]' role='dimension' type='nominal'>
               <calculation class='tableau' formula='{FIXED [fold_id]: MAX(&#10;IF [chain] == &quot;B&quot; THEN [Calculation_0798931461115929] ELSE NULL END&#10;)}' />
             </column>
+            <column caption='Chain B Sequence Name' datatype='string' name='[Chain A Sequence Name (copy)_0798931436232705]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='{FIXED [fold_id]: MAX(&#10;  IF [chain] == &apos;B&apos; THEN [Sequence Name] ELSE NULL END&#10;)}' />
+            </column>
             <column caption='Chain A Protein Accession' datatype='string' name='[Chain A Sequence Name (copy)_0798931436421122]' role='dimension' type='nominal'>
               <calculation class='tableau' formula='{FIXED [fold_id]: MAX(&#10;  IF [chain] == &apos;A&apos; THEN [Protein Accession] ELSE NULL END&#10;)}' />
+            </column>
+            <column caption='Chain A Protein Name' datatype='string' name='[Chain B Protein Name (copy)_1161426968408066]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='{FIXED [fold_id]: MAX(&#10;  IF [chain] == &apos;A&apos; THEN [protein_name] ELSE NULL END&#10;)}' />
+            </column>
+            <column caption='Chain B Protein Name' datatype='string' name='[Chain B Sequence Name (copy)_1161426968301569]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='{FIXED [fold_id]: MAX(&#10;  IF [chain] == &apos;B&apos; THEN [protein_name] ELSE NULL END&#10;)}' />
             </column>
             <column datatype='string' name='[Confidence, Chemically Feasible, Candidate Interface (group)]' role='dimension' type='nominal'>
               <calculation class='categorical-bin' column='[Confidence, Chemically Feasible, Candidate Interface (Combined)]' default='&quot;Other&quot;' new-bin='true'>
@@ -2695,6 +2713,7 @@
             <column caption='Fold Id' datatype='string' name='[fold_id]' role='dimension' type='nominal' />
             <column datatype='real' name='[interchain CA distance min]' role='measure' type='quantitative' />
             <column caption='Nominal Patch Charge Difference' datatype='real' name='[nominal patch charge difference]' role='measure' type='quantitative' />
+            <column-instance column='[Calculation_0798931436064768]' derivation='None' name='[none:Calculation_0798931436064768:nk]' pivot='key' type='nominal' />
             <column-instance column='[Calculation_0798931453329412]' derivation='None' name='[none:Calculation_0798931453329412:qk]' pivot='key' type='quantitative' />
             <column-instance column='[Calculation_0798931453603845]' derivation='None' name='[none:Calculation_0798931453603845:nk]' pivot='key' type='nominal' />
             <column-instance column='[Calculation_0798931454504967]' derivation='None' name='[none:Calculation_0798931454504967:qk]' pivot='key' type='quantitative' />
@@ -2712,6 +2731,9 @@
             <column-instance column='[Chain A Protein Acc (copy)_0798931460632598]' derivation='None' name='[none:Chain A Protein Acc (copy)_0798931460632598:nk]' pivot='key' type='nominal' />
             <column-instance column='[Chain A Protein Accession (copy)_0798931457515537]' derivation='None' name='[none:Chain A Protein Accession (copy)_0798931457515537:nk]' pivot='key' type='nominal' />
             <column-instance column='[Chain A Sequence Feature (copy)_0798931461484571]' derivation='None' name='[none:Chain A Sequence Feature (copy)_0798931461484571:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Chain A Sequence Name (copy)_0798931436232705]' derivation='None' name='[none:Chain A Sequence Name (copy)_0798931436232705:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Chain B Protein Name (copy)_1161426968408066]' derivation='None' name='[none:Chain B Protein Name (copy)_1161426968408066:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Chain B Sequence Name (copy)_1161426968301569]' derivation='None' name='[none:Chain B Sequence Name (copy)_1161426968301569:nk]' pivot='key' type='nominal' />
             <column-instance column='[candidate interface]' derivation='None' name='[none:candidate interface:nk]' pivot='key' type='nominal' />
             <column-instance column='[interchain CA distance min]' derivation='None' name='[none:interchain CA distance min:qk]' pivot='key' type='quantitative' />
             <column-instance column='[pDockQ2 max]' derivation='None' name='[none:pDockQ2 max:qk]' pivot='key' type='quantitative' />
@@ -2723,6 +2745,7 @@
             <column datatype='real' name='[normalized PAE to partner]' role='measure' type='quantitative' />
             <column datatype='real' name='[pDockQ2 max]' role='measure' type='quantitative' />
             <column caption='Patch Id (Interactome Dd Faces.Tsv)' datatype='string' name='[patch_id (interactome_dd_faces.tsv)]' role='dimension' type='nominal' />
+            <column caption='Protein Name' datatype='string' name='[protein_name]' role='dimension' type='nominal' />
             <column caption='Salt Bridge Candidate Heavy-Atom Distance Min' datatype='string' name='[salt bridge candidate heavy-atom distance min]' role='dimension' type='nominal' />
             <column caption='Salt Bridge Candidates' datatype='integer' name='[salt bridge candidates]' role='measure' type='quantitative' />
             <column caption='Steric Overlap Candidates' datatype='integer' name='[steric overlap candidates]' role='measure' type='quantitative' />
@@ -2786,6 +2809,10 @@
               <lod column='[federated.10di9cr07j6tjc0zjee0y1nyf76b].[none:candidate interface:nk]' />
               <lod column='[federated.10di9cr07j6tjc0zjee0y1nyf76b].[none:Calculation_0798931459219474:nk]' />
               <lod column='[federated.10di9cr07j6tjc0zjee0y1nyf76b].[none:Chain A Face (copy)_0798931459395603:nk]' />
+              <lod column='[federated.10di9cr07j6tjc0zjee0y1nyf76b].[none:Calculation_0798931436064768:nk]' />
+              <lod column='[federated.10di9cr07j6tjc0zjee0y1nyf76b].[none:Chain B Protein Name (copy)_1161426968408066:nk]' />
+              <lod column='[federated.10di9cr07j6tjc0zjee0y1nyf76b].[none:Chain A Sequence Name (copy)_0798931436232705:nk]' />
+              <lod column='[federated.10di9cr07j6tjc0zjee0y1nyf76b].[none:Chain B Sequence Name (copy)_1161426968301569:nk]' />
             </encodings>
             <style>
               <style-rule element='mark'>
@@ -3343,7 +3370,7 @@
       </viewpoint>
       <simple-id uuid='{979F3EFB-632A-4332-BFFA-133D71C40B28}' />
     </window>
-    <window class='worksheet' name='Grid'>
+    <window class='worksheet' maximized='true' name='Grid'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -3378,6 +3405,7 @@
             <field>[federated.10di9cr07j6tjc0zjee0y1nyf76b].[Chemically Feasible &amp; Candidate Interface (Combined)]</field>
             <field>[federated.10di9cr07j6tjc0zjee0y1nyf76b].[Confidence, Chemically Feasible, Candidate Interface (Combined)]</field>
             <field>[federated.10di9cr07j6tjc0zjee0y1nyf76b].[Confidence, Chemically Feasible, Candidate Interface (group)]</field>
+            <field>[federated.10di9cr07j6tjc0zjee0y1nyf76b].[none:Calculation_0798931436064768:nk]</field>
             <field>[federated.10di9cr07j6tjc0zjee0y1nyf76b].[none:Calculation_0798931453329412:qk]</field>
             <field>[federated.10di9cr07j6tjc0zjee0y1nyf76b].[none:Calculation_0798931453603845:nk]</field>
             <field>[federated.10di9cr07j6tjc0zjee0y1nyf76b].[none:Calculation_0798931454959625:nk]</field>
@@ -3397,7 +3425,10 @@
             <field>[federated.10di9cr07j6tjc0zjee0y1nyf76b].[none:Chain A Protein Accession (copy)_0798931436572675:nk]</field>
             <field>[federated.10di9cr07j6tjc0zjee0y1nyf76b].[none:Chain A Protein Accession (copy)_0798931457515537:nk]</field>
             <field>[federated.10di9cr07j6tjc0zjee0y1nyf76b].[none:Chain A Sequence Feature (copy)_0798931461484571:nk]</field>
+            <field>[federated.10di9cr07j6tjc0zjee0y1nyf76b].[none:Chain A Sequence Name (copy)_0798931436232705:nk]</field>
             <field>[federated.10di9cr07j6tjc0zjee0y1nyf76b].[none:Chain A Sequence Name (copy)_0798931436421122:nk]</field>
+            <field>[federated.10di9cr07j6tjc0zjee0y1nyf76b].[none:Chain B Protein Name (copy)_1161426968408066:nk]</field>
+            <field>[federated.10di9cr07j6tjc0zjee0y1nyf76b].[none:Chain B Sequence Name (copy)_1161426968301569:nk]</field>
             <field>[federated.10di9cr07j6tjc0zjee0y1nyf76b].[none:candidate interface:nk]</field>
             <field>[federated.10di9cr07j6tjc0zjee0y1nyf76b].[none:pDockQ2 max:qk]</field>
           </color-one-way>
@@ -3490,7 +3521,7 @@
       </viewpoint>
       <simple-id uuid='{470E495E-273B-4DEE-9F31-287CD1E184E9}' />
     </window>
-    <window class='worksheet' maximized='true' name='Hit Clusters with Sequence Variations'>
+    <window class='worksheet' name='Hit Clusters with Sequence Variations'>
       <cards>
         <edge name='left'>
           <strip size='160'>

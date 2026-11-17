@@ -24,3 +24,14 @@ cut -f 1 sequences.tsv | grep -v Sequence\ Name |\
     --domains sequences.tsv \
     --output interactome_dd_faces.tsv
 
+afl 83f745b6 --highest |\
+sieve-py ~/git/tangle/sieve/scripts/alphafold-death-faces.py - \
+  --manifest ~/git/tangle/coral/notes/af_manifest.tsv \
+  --domains sequences.tsv \
+  --rules dd_face_rules.tsv \
+  --merge-kinked-helices \
+  --kink-connector-length 1 \
+  --kink-angle 75 \
+  --output x.tsv
+
+
