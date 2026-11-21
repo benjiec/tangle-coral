@@ -75,21 +75,22 @@
               <column datatype='string' name='salt bridge candidate heavy-atom distance min' ordinal='39' />
               <column datatype='string' name='salt bridge residues' ordinal='40' />
               <column datatype='real' name='nominal patch charge difference' ordinal='41' />
-              <column datatype='string' name='confidence origin' ordinal='42' />
-              <column datatype='string' name='sequence name' ordinal='43' />
-              <column datatype='string' name='domain' ordinal='44' />
-              <column datatype='string' name='candidate face' ordinal='45' />
-              <column datatype='string' name='face status' ordinal='46' />
-              <column datatype='real' name='iptm' ordinal='47' />
-              <column datatype='real' name='ptm' ordinal='48' />
-              <column datatype='string' name='interface_family' ordinal='49' />
-              <column datatype='string' name='rules_id' ordinal='50' />
-              <column datatype='boolean' name='merge kinked helices' ordinal='51' />
-              <column datatype='integer' name='kink connector length' ordinal='52' />
-              <column datatype='integer' name='kink angle' ordinal='53' />
-              <column datatype='string' name='confidence' ordinal='54' />
-              <column datatype='boolean' name='chemical feasibility' ordinal='55' />
-              <column datatype='string' name='interface' ordinal='56' />
+              <column datatype='integer' name='hydrogen-bond candidates' ordinal='42' />
+              <column datatype='string' name='confidence origin' ordinal='43' />
+              <column datatype='string' name='sequence name' ordinal='44' />
+              <column datatype='string' name='domain' ordinal='45' />
+              <column datatype='string' name='candidate face' ordinal='46' />
+              <column datatype='string' name='face status' ordinal='47' />
+              <column datatype='real' name='iptm' ordinal='48' />
+              <column datatype='real' name='ptm' ordinal='49' />
+              <column datatype='string' name='interface_family' ordinal='50' />
+              <column datatype='string' name='rules_id' ordinal='51' />
+              <column datatype='boolean' name='merge kinked helices' ordinal='52' />
+              <column datatype='integer' name='kink connector length' ordinal='53' />
+              <column datatype='integer' name='kink angle' ordinal='54' />
+              <column datatype='string' name='confidence' ordinal='55' />
+              <column datatype='boolean' name='chemical feasibility' ordinal='56' />
+              <column datatype='string' name='interface' ordinal='57' />
             </columns>
           </relation>
           <relation connection='textscan.04unf97011ib5s14n29650ym4tyn' name='af_manifest.tsv' table='[af_manifest#tsv]' type='table'>
@@ -204,6 +205,7 @@
           <map key='[fold_id]' value='[interactome.tsv].[fold_id]' />
           <map key='[fold_locator]' value='[af_manifest.tsv].[fold_locator]' />
           <map key='[fold_path]' value='[af_manifest.tsv].[fold_path]' />
+          <map key='[hydrogen-bond candidates]' value='[interactome.tsv].[hydrogen-bond candidates]' />
           <map key='[input chain]' value='[af_manifest.tsv].[input chain]' />
           <map key='[input description]' value='[af_manifest.tsv].[input description]' />
           <map key='[interchain CA distance max]' value='[interactome.tsv].[interchain CA distance max]' />
@@ -934,12 +936,24 @@
             <object-id>[interactome.tsv_D009046FA35545C1A2EACF87B5DC5055]</object-id>
           </metadata-record>
           <metadata-record class='column'>
+            <remote-name>hydrogen-bond candidates</remote-name>
+            <remote-type>20</remote-type>
+            <local-name>[hydrogen-bond candidates]</local-name>
+            <parent-name>[interactome.tsv]</parent-name>
+            <remote-alias>hydrogen-bond candidates</remote-alias>
+            <ordinal>42</ordinal>
+            <local-type>integer</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <object-id>[interactome.tsv_D009046FA35545C1A2EACF87B5DC5055]</object-id>
+          </metadata-record>
+          <metadata-record class='column'>
             <remote-name>confidence origin</remote-name>
             <remote-type>129</remote-type>
             <local-name>[confidence origin]</local-name>
             <parent-name>[interactome.tsv]</parent-name>
             <remote-alias>confidence origin</remote-alias>
-            <ordinal>42</ordinal>
+            <ordinal>43</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -954,7 +968,7 @@
             <local-name>[sequence name]</local-name>
             <parent-name>[interactome.tsv]</parent-name>
             <remote-alias>sequence name</remote-alias>
-            <ordinal>43</ordinal>
+            <ordinal>44</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -969,7 +983,7 @@
             <local-name>[domain]</local-name>
             <parent-name>[interactome.tsv]</parent-name>
             <remote-alias>domain</remote-alias>
-            <ordinal>44</ordinal>
+            <ordinal>45</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -984,7 +998,7 @@
             <local-name>[candidate face]</local-name>
             <parent-name>[interactome.tsv]</parent-name>
             <remote-alias>candidate face</remote-alias>
-            <ordinal>45</ordinal>
+            <ordinal>46</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -999,7 +1013,7 @@
             <local-name>[face status]</local-name>
             <parent-name>[interactome.tsv]</parent-name>
             <remote-alias>face status</remote-alias>
-            <ordinal>46</ordinal>
+            <ordinal>47</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1014,7 +1028,7 @@
             <local-name>[iptm]</local-name>
             <parent-name>[interactome.tsv]</parent-name>
             <remote-alias>iptm</remote-alias>
-            <ordinal>47</ordinal>
+            <ordinal>48</ordinal>
             <local-type>real</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
@@ -1026,7 +1040,7 @@
             <local-name>[ptm]</local-name>
             <parent-name>[interactome.tsv]</parent-name>
             <remote-alias>ptm</remote-alias>
-            <ordinal>48</ordinal>
+            <ordinal>49</ordinal>
             <local-type>real</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
@@ -1038,7 +1052,7 @@
             <local-name>[interface_family]</local-name>
             <parent-name>[interactome.tsv]</parent-name>
             <remote-alias>interface_family</remote-alias>
-            <ordinal>49</ordinal>
+            <ordinal>50</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1053,7 +1067,7 @@
             <local-name>[rules_id]</local-name>
             <parent-name>[interactome.tsv]</parent-name>
             <remote-alias>rules_id</remote-alias>
-            <ordinal>50</ordinal>
+            <ordinal>51</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1068,7 +1082,7 @@
             <local-name>[merge kinked helices]</local-name>
             <parent-name>[interactome.tsv]</parent-name>
             <remote-alias>merge kinked helices</remote-alias>
-            <ordinal>51</ordinal>
+            <ordinal>52</ordinal>
             <local-type>boolean</local-type>
             <aggregation>Count</aggregation>
             <contains-null>true</contains-null>
@@ -1080,7 +1094,7 @@
             <local-name>[kink connector length]</local-name>
             <parent-name>[interactome.tsv]</parent-name>
             <remote-alias>kink connector length</remote-alias>
-            <ordinal>52</ordinal>
+            <ordinal>53</ordinal>
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
@@ -1092,7 +1106,7 @@
             <local-name>[kink angle]</local-name>
             <parent-name>[interactome.tsv]</parent-name>
             <remote-alias>kink angle</remote-alias>
-            <ordinal>53</ordinal>
+            <ordinal>54</ordinal>
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
@@ -1104,7 +1118,7 @@
             <local-name>[confidence]</local-name>
             <parent-name>[interactome.tsv]</parent-name>
             <remote-alias>confidence</remote-alias>
-            <ordinal>54</ordinal>
+            <ordinal>55</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1119,7 +1133,7 @@
             <local-name>[chemical feasibility]</local-name>
             <parent-name>[interactome.tsv]</parent-name>
             <remote-alias>chemical feasibility</remote-alias>
-            <ordinal>55</ordinal>
+            <ordinal>56</ordinal>
             <local-type>boolean</local-type>
             <aggregation>Count</aggregation>
             <contains-null>true</contains-null>
@@ -1131,7 +1145,7 @@
             <local-name>[interface]</local-name>
             <parent-name>[interactome.tsv]</parent-name>
             <remote-alias>interface</remote-alias>
-            <ordinal>56</ordinal>
+            <ordinal>57</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1146,7 +1160,7 @@
             <local-name>[source_path]</local-name>
             <parent-name>[af_manifest.tsv]</parent-name>
             <remote-alias>source_path</remote-alias>
-            <ordinal>57</ordinal>
+            <ordinal>58</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1161,7 +1175,7 @@
             <local-name>[fold_path]</local-name>
             <parent-name>[af_manifest.tsv]</parent-name>
             <remote-alias>fold_path</remote-alias>
-            <ordinal>58</ordinal>
+            <ordinal>59</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1176,7 +1190,7 @@
             <local-name>[fold_locator]</local-name>
             <parent-name>[af_manifest.tsv]</parent-name>
             <remote-alias>fold_locator</remote-alias>
-            <ordinal>59</ordinal>
+            <ordinal>60</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1191,7 +1205,7 @@
             <local-name>[fold_id (af_manifest.tsv)]</local-name>
             <parent-name>[af_manifest.tsv]</parent-name>
             <remote-alias>fold_id</remote-alias>
-            <ordinal>60</ordinal>
+            <ordinal>61</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1206,7 +1220,7 @@
             <local-name>[sequence_id (af_manifest.tsv)]</local-name>
             <parent-name>[af_manifest.tsv]</parent-name>
             <remote-alias>sequence_id</remote-alias>
-            <ordinal>61</ordinal>
+            <ordinal>62</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1221,7 +1235,7 @@
             <local-name>[timestamp]</local-name>
             <parent-name>[af_manifest.tsv]</parent-name>
             <remote-alias>timestamp</remote-alias>
-            <ordinal>62</ordinal>
+            <ordinal>63</ordinal>
             <local-type>datetime</local-type>
             <aggregation>Year</aggregation>
             <contains-null>true</contains-null>
@@ -1233,7 +1247,7 @@
             <local-name>[source_type]</local-name>
             <parent-name>[af_manifest.tsv]</parent-name>
             <remote-alias>source_type</remote-alias>
-            <ordinal>63</ordinal>
+            <ordinal>64</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1248,7 +1262,7 @@
             <local-name>[input description]</local-name>
             <parent-name>[af_manifest.tsv]</parent-name>
             <remote-alias>input description</remote-alias>
-            <ordinal>64</ordinal>
+            <ordinal>65</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1263,7 +1277,7 @@
             <local-name>[input chain]</local-name>
             <parent-name>[af_manifest.tsv]</parent-name>
             <remote-alias>input chain</remote-alias>
-            <ordinal>65</ordinal>
+            <ordinal>66</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1278,7 +1292,7 @@
             <local-name>[Sequence Name]</local-name>
             <parent-name>[sequences.tsv]</parent-name>
             <remote-alias>Sequence Name</remote-alias>
-            <ordinal>66</ordinal>
+            <ordinal>67</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1293,7 +1307,7 @@
             <local-name>[Protein Accession]</local-name>
             <parent-name>[sequences.tsv]</parent-name>
             <remote-alias>Protein Accession</remote-alias>
-            <ordinal>67</ordinal>
+            <ordinal>68</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1308,7 +1322,7 @@
             <local-name>[Domain Type]</local-name>
             <parent-name>[sequences.tsv]</parent-name>
             <remote-alias>Domain Type</remote-alias>
-            <ordinal>68</ordinal>
+            <ordinal>69</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1323,7 +1337,7 @@
             <local-name>[Domain Accession]</local-name>
             <parent-name>[sequences.tsv]</parent-name>
             <remote-alias>Domain Accession</remote-alias>
-            <ordinal>69</ordinal>
+            <ordinal>70</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1338,7 +1352,7 @@
             <local-name>[Cluster Repr]</local-name>
             <parent-name>[clusters.tsv]</parent-name>
             <remote-alias>Cluster Repr</remote-alias>
-            <ordinal>70</ordinal>
+            <ordinal>71</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1353,7 +1367,7 @@
             <local-name>[Cluster Member]</local-name>
             <parent-name>[clusters.tsv]</parent-name>
             <remote-alias>Cluster Member</remote-alias>
-            <ordinal>71</ordinal>
+            <ordinal>72</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1368,7 +1382,7 @@
             <local-name>[Protein Accession (clusters.tsv)]</local-name>
             <parent-name>[clusters.tsv]</parent-name>
             <remote-alias>Protein Accession</remote-alias>
-            <ordinal>72</ordinal>
+            <ordinal>73</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1383,7 +1397,7 @@
             <local-name>[Same as Cluster Repr]</local-name>
             <parent-name>[clusters.tsv]</parent-name>
             <remote-alias>Same as Cluster Repr</remote-alias>
-            <ordinal>73</ordinal>
+            <ordinal>74</ordinal>
             <local-type>boolean</local-type>
             <aggregation>Count</aggregation>
             <contains-null>true</contains-null>
@@ -1395,7 +1409,7 @@
             <local-name>[Contained]</local-name>
             <parent-name>[clusters.tsv]</parent-name>
             <remote-alias>Contained</remote-alias>
-            <ordinal>74</ordinal>
+            <ordinal>75</ordinal>
             <local-type>boolean</local-type>
             <aggregation>Count</aggregation>
             <contains-null>true</contains-null>
@@ -1407,7 +1421,7 @@
             <local-name>[Cluster Repr (clusters.tsv1)]</local-name>
             <parent-name>[clusters.tsv1]</parent-name>
             <remote-alias>Cluster Repr</remote-alias>
-            <ordinal>75</ordinal>
+            <ordinal>76</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1422,7 +1436,7 @@
             <local-name>[Cluster Member (clusters.tsv1)]</local-name>
             <parent-name>[clusters.tsv1]</parent-name>
             <remote-alias>Cluster Member</remote-alias>
-            <ordinal>76</ordinal>
+            <ordinal>77</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1437,7 +1451,7 @@
             <local-name>[Protein Accession (clusters.tsv1)]</local-name>
             <parent-name>[clusters.tsv1]</parent-name>
             <remote-alias>Protein Accession</remote-alias>
-            <ordinal>77</ordinal>
+            <ordinal>78</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1452,7 +1466,7 @@
             <local-name>[Same as Cluster Repr (clusters.tsv1)]</local-name>
             <parent-name>[clusters.tsv1]</parent-name>
             <remote-alias>Same as Cluster Repr</remote-alias>
-            <ordinal>78</ordinal>
+            <ordinal>79</ordinal>
             <local-type>boolean</local-type>
             <aggregation>Count</aggregation>
             <contains-null>true</contains-null>
@@ -1464,7 +1478,7 @@
             <local-name>[Contained (clusters.tsv1)]</local-name>
             <parent-name>[clusters.tsv1]</parent-name>
             <remote-alias>Contained</remote-alias>
-            <ordinal>79</ordinal>
+            <ordinal>80</ordinal>
             <local-type>boolean</local-type>
             <aggregation>Count</aggregation>
             <contains-null>true</contains-null>
@@ -1476,7 +1490,7 @@
             <local-name>[sequence_accession]</local-name>
             <parent-name>[sequences.tsv1]</parent-name>
             <remote-alias>sequence_accession</remote-alias>
-            <ordinal>80</ordinal>
+            <ordinal>81</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1491,7 +1505,7 @@
             <local-name>[sequence_database]</local-name>
             <parent-name>[sequences.tsv1]</parent-name>
             <remote-alias>sequence_database</remote-alias>
-            <ordinal>81</ordinal>
+            <ordinal>82</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1506,7 +1520,7 @@
             <local-name>[sequence_type]</local-name>
             <parent-name>[sequences.tsv1]</parent-name>
             <remote-alias>sequence_type</remote-alias>
-            <ordinal>82</ordinal>
+            <ordinal>83</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1521,7 +1535,7 @@
             <local-name>[sequence_source]</local-name>
             <parent-name>[sequences.tsv1]</parent-name>
             <remote-alias>sequence_source</remote-alias>
-            <ordinal>83</ordinal>
+            <ordinal>84</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1536,7 +1550,7 @@
             <local-name>[sequence_length]</local-name>
             <parent-name>[sequences.tsv1]</parent-name>
             <remote-alias>sequence_length</remote-alias>
-            <ordinal>84</ordinal>
+            <ordinal>85</ordinal>
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
@@ -1548,7 +1562,7 @@
             <local-name>[Genome Accession]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>Genome Accession</remote-alias>
-            <ordinal>85</ordinal>
+            <ordinal>86</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1563,7 +1577,7 @@
             <local-name>[Genome Name]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>Genome Name</remote-alias>
-            <ordinal>86</ordinal>
+            <ordinal>87</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1578,7 +1592,7 @@
             <local-name>[TaxID]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>TaxID</remote-alias>
-            <ordinal>87</ordinal>
+            <ordinal>88</ordinal>
             <local-type>integer</local-type>
             <aggregation>Sum</aggregation>
             <contains-null>true</contains-null>
@@ -1590,7 +1604,7 @@
             <local-name>[Organism]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>Organism</remote-alias>
-            <ordinal>88</ordinal>
+            <ordinal>89</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1605,7 +1619,7 @@
             <local-name>[Domain]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>Domain</remote-alias>
-            <ordinal>89</ordinal>
+            <ordinal>90</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1620,7 +1634,7 @@
             <local-name>[Kingdom]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>Kingdom</remote-alias>
-            <ordinal>90</ordinal>
+            <ordinal>91</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1635,7 +1649,7 @@
             <local-name>[Phylum]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>Phylum</remote-alias>
-            <ordinal>91</ordinal>
+            <ordinal>92</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1650,7 +1664,7 @@
             <local-name>[Class]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>Class</remote-alias>
-            <ordinal>92</ordinal>
+            <ordinal>93</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1665,7 +1679,7 @@
             <local-name>[Order]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>Order</remote-alias>
-            <ordinal>93</ordinal>
+            <ordinal>94</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1680,7 +1694,7 @@
             <local-name>[Family]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>Family</remote-alias>
-            <ordinal>94</ordinal>
+            <ordinal>95</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1695,7 +1709,7 @@
             <local-name>[Genus]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>Genus</remote-alias>
-            <ordinal>95</ordinal>
+            <ordinal>96</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1710,7 +1724,7 @@
             <local-name>[Species]</local-name>
             <parent-name>[genomes.tsv]</parent-name>
             <remote-alias>Species</remote-alias>
-            <ordinal>96</ordinal>
+            <ordinal>97</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1725,7 +1739,7 @@
             <local-name>[accession_id]</local-name>
             <parent-name>[protein_names.tsv]</parent-name>
             <remote-alias>accession_id</remote-alias>
-            <ordinal>97</ordinal>
+            <ordinal>98</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -1740,7 +1754,7 @@
             <local-name>[protein_name]</local-name>
             <parent-name>[protein_names.tsv]</parent-name>
             <remote-alias>protein_name</remote-alias>
-            <ordinal>98</ordinal>
+            <ordinal>99</ordinal>
             <local-type>string</local-type>
             <aggregation>Count</aggregation>
             <scale>1</scale>
@@ -2074,21 +2088,22 @@
                   <column datatype='string' name='salt bridge candidate heavy-atom distance min' ordinal='39' />
                   <column datatype='string' name='salt bridge residues' ordinal='40' />
                   <column datatype='real' name='nominal patch charge difference' ordinal='41' />
-                  <column datatype='string' name='confidence origin' ordinal='42' />
-                  <column datatype='string' name='sequence name' ordinal='43' />
-                  <column datatype='string' name='domain' ordinal='44' />
-                  <column datatype='string' name='candidate face' ordinal='45' />
-                  <column datatype='string' name='face status' ordinal='46' />
-                  <column datatype='real' name='iptm' ordinal='47' />
-                  <column datatype='real' name='ptm' ordinal='48' />
-                  <column datatype='string' name='interface_family' ordinal='49' />
-                  <column datatype='string' name='rules_id' ordinal='50' />
-                  <column datatype='boolean' name='merge kinked helices' ordinal='51' />
-                  <column datatype='integer' name='kink connector length' ordinal='52' />
-                  <column datatype='integer' name='kink angle' ordinal='53' />
-                  <column datatype='string' name='confidence' ordinal='54' />
-                  <column datatype='boolean' name='chemical feasibility' ordinal='55' />
-                  <column datatype='string' name='interface' ordinal='56' />
+                  <column datatype='integer' name='hydrogen-bond candidates' ordinal='42' />
+                  <column datatype='string' name='confidence origin' ordinal='43' />
+                  <column datatype='string' name='sequence name' ordinal='44' />
+                  <column datatype='string' name='domain' ordinal='45' />
+                  <column datatype='string' name='candidate face' ordinal='46' />
+                  <column datatype='string' name='face status' ordinal='47' />
+                  <column datatype='real' name='iptm' ordinal='48' />
+                  <column datatype='real' name='ptm' ordinal='49' />
+                  <column datatype='string' name='interface_family' ordinal='50' />
+                  <column datatype='string' name='rules_id' ordinal='51' />
+                  <column datatype='boolean' name='merge kinked helices' ordinal='52' />
+                  <column datatype='integer' name='kink connector length' ordinal='53' />
+                  <column datatype='integer' name='kink angle' ordinal='54' />
+                  <column datatype='string' name='confidence' ordinal='55' />
+                  <column datatype='boolean' name='chemical feasibility' ordinal='56' />
+                  <column datatype='string' name='interface' ordinal='57' />
                 </columns>
               </relation>
             </properties>
@@ -2327,6 +2342,7 @@
             <column caption='Confidence' datatype='string' name='[confidence]' role='dimension' type='nominal' />
             <column caption='Domain' datatype='string' name='[domain]' role='dimension' type='nominal' />
             <column caption='Fold Id' datatype='string' name='[fold_id]' role='dimension' type='nominal' />
+            <column datatype='integer' name='[hydrogen-bond candidates]' role='measure' type='quantitative' />
             <column datatype='real' name='[interchain CA distance min]' role='measure' type='quantitative' />
             <column caption='Interface' datatype='string' name='[interface]' role='dimension' type='nominal' />
             <column caption='Interface Family' datatype='string' name='[interface_family]' role='dimension' type='nominal' />
@@ -2341,6 +2357,7 @@
             <column-instance column='[chemical feasibility]' derivation='None' name='[none:chemical feasibility:nk]' pivot='key' type='nominal' />
             <column-instance column='[confidence]' derivation='None' name='[none:confidence:nk]' pivot='key' type='nominal' />
             <column-instance column='[fold_id]' derivation='None' name='[none:fold_id:nk]' pivot='key' type='nominal' />
+            <column-instance column='[hydrogen-bond candidates]' derivation='None' name='[none:hydrogen-bond candidates:qk]' pivot='key' type='quantitative' />
             <column-instance column='[interchain CA distance min]' derivation='None' name='[none:interchain CA distance min:qk]' pivot='key' type='quantitative' />
             <column-instance column='[interface]' derivation='None' name='[none:interface:nk]' pivot='key' type='nominal' />
             <column-instance column='[interface_family]' derivation='None' name='[none:interface_family:nk]' pivot='key' type='nominal' />
@@ -2411,6 +2428,7 @@
               <lod column='[federated.12p5ut1091majs191isgv0yco15l].[none:total buried surface area:qk]' />
               <lod column='[federated.12p5ut1091majs191isgv0yco15l].[none:total C/S contribution percent:qk]' />
               <lod column='[federated.12p5ut1091majs191isgv0yco15l].[none:nonpolar contacts:qk]' />
+              <lod column='[federated.12p5ut1091majs191isgv0yco15l].[none:hydrogen-bond candidates:qk]' />
               <lod column='[federated.12p5ut1091majs191isgv0yco15l].[none:steric overlap candidates:qk]' />
               <lod column='[federated.12p5ut1091majs191isgv0yco15l].[none:fold_id:nk]' />
               <lod column='[federated.12p5ut1091majs191isgv0yco15l].[none:sequence_id:nk]' />
@@ -2895,6 +2913,7 @@
             <field>[federated.12p5ut1091majs191isgv0yco15l].[none:confidence:nk]</field>
             <field>[federated.12p5ut1091majs191isgv0yco15l].[none:domain:nk]</field>
             <field>[federated.12p5ut1091majs191isgv0yco15l].[none:fold_id:nk]</field>
+            <field>[federated.12p5ut1091majs191isgv0yco15l].[none:hydrogen-bond candidates:qk]</field>
             <field>[federated.12p5ut1091majs191isgv0yco15l].[none:interface:nk]</field>
             <field>[federated.12p5ut1091majs191isgv0yco15l].[none:interface_family:nk]</field>
             <field>[federated.12p5ut1091majs191isgv0yco15l].[none:pDockQ2 max:qk]</field>
