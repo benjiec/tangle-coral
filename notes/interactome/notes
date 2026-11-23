@@ -1,14 +1,31 @@
 
 sieve-py ~/git/tangle/sieve/scripts/merge-cluster-tsvs.py --output clusters.tsv clusters/*.tsv --cluster-fasta clusters/*_all_seqs.fasta
 
-cut -f 2 sequences.tsv | grep -v Protein | sieve-py ~/git/tangle/sieve/scripts/protein-names.py --allow-multiple - > protein_names.tsv
-
-cut -f 1 sequences.tsv | grep -v Sequence\ Name |\
+cut -f 1 sequence_death.tsv | grep -v Sequence\ Name |\
   sieve-py ~/git/tangle/sieve/scripts/alphafold-find.py \
     ../af_manifest.tsv - \
     --cross --max-chains 2 --max-unique-inputs 2 --highest |\
   sieve-py ~/git/tangle/sieve/scripts/alphafold-interface.py - \
-    --domain-file sequences.tsv \
+    --domain-file sequence_death.tsv \
     --manifest ../af_manifest.tsv \
-    --output interactome.tsv
+    --output interactome_death.tsv
+
+cut -f 1 sequence_traf_slim.tsv | grep -v Sequence\ Name |\
+  sieve-py ~/git/tangle/sieve/scripts/alphafold-find.py \
+    ../af_manifest.tsv - \
+    --cross --max-chains 6 --max-unique-inputs 2 --highest |\
+  sieve-py ~/git/tangle/sieve/scripts/alphafold-interface.py - \
+    --domain-file sequence_traf_slim.tsv \
+    --manifest ../af_manifest.tsv \
+    --output interactome_traf_slim.tsv
+
+head -1 interactome_death.tsv > interactome.tsv
+grep -v "fold_id" interactome_death.tsv >> interactome.tsv
+grep -v "fold_id" interactome_traf_slim.tsv >> interactome.tsv
+
+head -1 sequence_death.tsv > sequences.tsv
+grep -v "Sequence Name" sequence_death.tsv >> sequences.tsv
+grep -v "Sequence Name" sequence_traf_slim.tsv >> sequences.tsv
+
+cut -f 2 sequences.tsv | grep -v Protein | sieve-py ~/git/tangle/sieve/scripts/protein-names.py --allow-multiple - > protein_names.tsv
 
