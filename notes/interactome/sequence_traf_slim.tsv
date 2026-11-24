@@ -9,3 +9,6 @@ Nv XP_032235505 coil_MATH	XP_032235505.1	TRAF_MATH		MATH
 Nv XP_032222159 motif	XP_032222159.1	SLIM		N-term motif1
 Nv XP_001639077 motif iso	XP_001639077.1	SLIM		Intermediary motif1
 Nv XP_032226394 DD_PK_intermediary_iso	XP_048575654.1	SLIM		Intermediary motif1
+Nv XP_032218137 tail motif 1	XP_032218137.1	SLIM		Tail motif1
+Nv XP_032218137 tail motif 2	XP_032218137.1	SLIM		Tail motif2
+Nv XP_032218137 tail motif 3	XP_032218137.1	SLIM		Tail motif3
