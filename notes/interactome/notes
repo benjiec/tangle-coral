@@ -19,13 +19,7 @@ cut -f 1 sequence_traf_slim.tsv | grep -v Sequence\ Name |\
     --manifest ../af_manifest.tsv \
     --output interactome_traf_slim.tsv
 
-head -1 interactome_death.tsv > interactome.tsv
-grep -v "fold_id" interactome_death.tsv >> interactome.tsv
-grep -v "fold_id" interactome_traf_slim.tsv >> interactome.tsv
-
-head -1 sequence_death.tsv > sequences.tsv
-grep -v "Sequence Name" sequence_death.tsv >> sequences.tsv
-grep -v "Sequence Name" sequence_traf_slim.tsv >> sequences.tsv
-
-cut -f 2 sequences.tsv | grep -v Protein | sieve-py ~/git/tangle/sieve/scripts/protein-names.py --allow-multiple - > protein_names.tsv
+rm protein_names.tsv
+cut -f 2 sequence_death.tsv | grep -v Protein | sieve-py ~/git/tangle/sieve/scripts/protein-names.py --allow-multiple - >> protein_names.tsv
+cut -f 2 sequence_traf_slim.tsv | grep -v Protein | sieve-py ~/git/tangle/sieve/scripts/protein-names.py --allow-multiple - >> protein_names.tsv
 
