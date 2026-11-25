@@ -12,6 +12,9 @@ sieve-py ~/git/tangle/sieve/scripts/pfam-find-matches.py PF00531 \
 cat res-pf00531_an.faa res-pf00531_hs.faa > res-pf00531.faa
 
 tangle-py ../traf6/motifs.py res-pf00531.faa candidate_motifs.tsv
+tangle-py ../traf6/motifs.py custom.faa x
+cat x >> candidate_motifs.tsv
+rm x
 
 sieve-py ~/git/tangle/sieve/scripts/detected-extract-region.py res-pf00531.faa protein_pfam.tsv PF00531 1 1 dd.faa
 
