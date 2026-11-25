@@ -3698,6 +3698,12 @@
             <column caption='Chain 2 Protein Acc' datatype='string' name='[Calculation_3975215999807497]' role='dimension' type='nominal'>
               <calculation class='tableau' formula='&quot;..&quot;+RIGHT([Chain A Protein Accession (copy)_3975215988932609],9)' />
             </column>
+            <column caption='Chain 1 Protein Name' datatype='string' name='[Chain 1 Face (copy)_4155811906863106]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='{FIXED [patch_id]: MAX(&#10;  IF [sequence_index] == 1 THEN [protein_name] ELSE NULL END&#10;)}' />
+            </column>
+            <column caption='Chain 2 Protein Name' datatype='string' name='[Chain 1 Protein Name (copy)_4155811906949123]' role='dimension' type='nominal'>
+              <calculation class='tableau' formula='{FIXED [patch_id]: MAX(&#10;  IF [sequence_index] == 2 THEN [protein_name] ELSE NULL END&#10;)}' />
+            </column>
             <column caption='Chain 2 Domain' datatype='string' name='[Chain A Domain (copy)_3975215989526531]' role='dimension' type='nominal'>
               <calculation class='tableau' formula='{FIXED [patch_id]: MAX(&#10;  IF [sequence_index] == 2 THEN [domain] ELSE NULL END&#10;)}' />
             </column>
@@ -3754,6 +3760,8 @@
             <column-instance column='[Calculation_3975215989600260]' derivation='None' name='[none:Calculation_3975215989600260:nk]' pivot='key' type='nominal' />
             <column-instance column='[Calculation_3975215989977093]' derivation='None' name='[none:Calculation_3975215989977093:nk]' pivot='key' type='nominal' />
             <column-instance column='[Calculation_3975215999807497]' derivation='None' name='[none:Calculation_3975215999807497:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Chain 1 Face (copy)_4155811906863106]' derivation='None' name='[none:Chain 1 Face (copy)_4155811906863106:nk]' pivot='key' type='nominal' />
+            <column-instance column='[Chain 1 Protein Name (copy)_4155811906949123]' derivation='None' name='[none:Chain 1 Protein Name (copy)_4155811906949123:nk]' pivot='key' type='nominal' />
             <column-instance column='[Chain A Domain (copy)_3975216000770060]' derivation='None' name='[none:Chain A Domain (copy)_3975216000770060:nk]' pivot='key' type='nominal' />
             <column-instance column='[Chain A Feature (copy)_3975216000847885]' derivation='None' name='[none:Chain A Feature (copy)_3975216000847885:nk]' pivot='key' type='nominal' />
             <column-instance column='[Chain B Protein Acc (copy)_3975215999864842]' derivation='None' name='[none:Chain B Protein Acc (copy)_3975215999864842:nk]' pivot='key' type='nominal' />
@@ -3764,6 +3772,7 @@
             <column-instance column='[sequence_id]' derivation='None' name='[none:sequence_id:nk]' pivot='key' type='nominal' />
             <column datatype='real' name='[pDockQ2 max]' role='measure' type='quantitative' />
             <column caption='Patch Id' datatype='string' name='[patch_id]' role='dimension' type='nominal' />
+            <column caption='Protein Name' datatype='string' name='[protein_name]' role='dimension' type='nominal' />
             <column caption='Sequence Id' datatype='string' name='[sequence_id]' role='dimension' type='nominal' />
             <column aggregation='Sum' caption='Sequence Index' datatype='integer' name='[sequence_index]' role='dimension' type='ordinal' />
           </datasource-dependencies>
@@ -3817,6 +3826,8 @@
               <lod column='[federated.12p5ut1091majs191isgv0yco15l].[none:fold_id:nk]' />
               <lod column='[federated.12p5ut1091majs191isgv0yco15l].[none:sequence_id:nk]' />
               <lod column='[federated.12p5ut1091majs191isgv0yco15l].[none:patch_id:nk]' />
+              <lod column='[federated.12p5ut1091majs191isgv0yco15l].[none:Chain 1 Face (copy)_4155811906863106:nk]' />
+              <lod column='[federated.12p5ut1091majs191isgv0yco15l].[none:Chain 1 Protein Name (copy)_4155811906949123:nk]' />
             </encodings>
             <style>
               <style-rule element='mark'>
@@ -4070,7 +4081,7 @@
       </viewpoint>
       <simple-id uuid='{5AE8278B-ADF8-4FAA-8D20-9FCC598607BE}' />
     </window>
-    <window class='worksheet' name='Network'>
+    <window class='worksheet' maximized='true' name='Network'>
       <cards>
         <edge name='left'>
           <strip size='160'>
@@ -4109,6 +4120,8 @@
             <field>[federated.12p5ut1091majs191isgv0yco15l].[none:Calculation_3975215989600260:nk]</field>
             <field>[federated.12p5ut1091majs191isgv0yco15l].[none:Calculation_3975215989977093:nk]</field>
             <field>[federated.12p5ut1091majs191isgv0yco15l].[none:Calculation_3975215999807497:nk]</field>
+            <field>[federated.12p5ut1091majs191isgv0yco15l].[none:Chain 1 Face (copy)_4155811906863106:nk]</field>
+            <field>[federated.12p5ut1091majs191isgv0yco15l].[none:Chain 1 Protein Name (copy)_4155811906949123:nk]</field>
             <field>[federated.12p5ut1091majs191isgv0yco15l].[none:Chain A Domain (copy)_3975215989526531:nk]</field>
             <field>[federated.12p5ut1091majs191isgv0yco15l].[none:Chain A Domain (copy)_3975216000770060:nk]</field>
             <field>[federated.12p5ut1091majs191isgv0yco15l].[none:Chain A Feature (copy)_3975216000847885:nk]</field>
@@ -4323,7 +4336,7 @@
       </viewpoint>
       <simple-id uuid='{0FAD5083-D7EE-4A24-A33A-AA643CB31F11}' />
     </window>
-    <window class='worksheet' maximized='true' name='TRAF-SLIM'>
+    <window class='worksheet' name='TRAF-SLIM'>
       <cards>
         <edge name='left'>
           <strip size='160'>
