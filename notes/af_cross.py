@@ -9,6 +9,7 @@ def main(argv=None):
     parser.add_argument("fasta_x")
     parser.add_argument("fasta_y")
     parser.add_argument("json_output")
+    parser.add_argument("--c", type=int, default=1)
     parser.add_argument("--x", nargs="*", type=str)
     parser.add_argument("--n", default=0, type=int)
     args = parser.parse_args(argv)
@@ -22,10 +23,12 @@ def main(argv=None):
 
     for x_name, x_sequence in seqs_x.items():
         for y_name, y_sequence in seqs_y.items():
-            job = dict(name=f"{x_name} {y_name}",
+            x_name_esc = x_name.replace(".", "_")
+            y_name_esc = y_name.replace(".", "_")
+            job = dict(name=f"{x_name_esc} {y_name_esc}",
                        modelSeeds=[],
-                       sequences=[dict(proteinChain=dict(sequence=x_sequence, count=1)),
-                                  dict(proteinChain=dict(sequence=y_sequence, count=1))],
+                       sequences=[dict(proteinChain=dict(sequence=x_sequence, count=args.c)),
+                                  dict(proteinChain=dict(sequence=y_sequence, count=args.c))],
                        dialect="alphafoldserver",
                        version=1)
             jobs.append(job)
